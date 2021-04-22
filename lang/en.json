@@ -1,0 +1,30 @@
+{
+    "WITCHER.Weapon.Type": "Type",
+    "WITCHER.Weapon.WeaponAccuracy": "WA",
+    "WITCHER.Weapon.Availability": "Avail.",
+    "WITCHER.Weapon.Damage": "DMG",
+    "WITCHER.Weapon.Reliability": "Rel.",
+    "WITCHER.Weapon.Hands": "Hands",
+    "WITCHER.Weapon.Effect": "Effect",
+    "WITCHER.Weapon.Concealement": "Conc.",
+    "WITCHER.Weapon.Enhancement": "EN",
+    "WITCHER.Weapon.Weight": "Weight",
+    "WITCHER.Weapon.Cost": "Cost",
+    "WITCHER.Weapon.Elderfolk": "Eld.",
+
+    "WITCHER.Armor.StoppingPower": "SP",
+    "WITCHER.Armor.Availability": "Avail.",
+    "WITCHER.Armor.Enhancement": "AE",
+    "WITCHER.Armor.Reliable": "Rel.",
+    "WITCHER.Armor.Effect": "Effect",
+    "WITCHER.Armor.EncumbranceValue": "EV",
+    "WITCHER.Armor.Weight": "Weight",
+    "WITCHER.Armor.Cost": "Cost",
+    "WITCHER.Armor.Elderfolk": "Eld.",
+
+    "WITCHER.Component.Rarity": "Rarity",
+    "WITCHER.Component.Location": "Location.",
+    "WITCHER.Component.Quantity": "Quantity",
+    "WITCHER.Component.Forage": "Forage DC",
+    "WITCHER.Component.Cost": "Cost"
+}

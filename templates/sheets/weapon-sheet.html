@@ -1,0 +1,66 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <div class="resource">
+                <label>Quantity</label>
+                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+            </div>
+            <div class="resource">
+                <label>Weight</label>
+                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+            </div>
+            
+            <div class="checkbox">
+                <label>Elderfolk</label>
+                <input type="checkbox" name="data.isElderfolk" value="{{data.isElderfolk}}"/>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="attributes">Attributes</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            <textarea>Test</textarea>
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            <table>
+                <tr>
+                    <th>{{localize "WITCHER.Weapon.Type"}}</th>
+                    <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Availability"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Damage"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Hands"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Effect"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
+                    <th>{{localize "WITCHER.Weapon.Cost"}}</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="data.type" value="{{data.type}}"/></td>
+                    <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.damage" value="{{data.damage}}"/></td>
+                    <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.hands" value="{{data.hands}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.range" value="{{data.range}}"/></td>
+                    <td><input type="text" name="data.effect" value="{{data.effect}}"/></td>
+                    <td><input type="text" name="data.conceal" value="{{data.conceal}}"/></td>
+                    <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</form>

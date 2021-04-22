@@ -1,0 +1,33 @@
+{
+    "name": "TheWitcherTRPG",
+    "title": "TheWithcherTRPG - fvtt",
+    "description": "Many details here.",
+    "version": 0.01,
+    "author": "TechAntho",
+    "scripts": [
+    ],
+    "esmodules": [
+      "scripts/TheWitcherTRPG.js"
+    ],
+    "styles": [
+      "styles/system-styles.css"
+    ],
+    "packs": [
+    ],
+    "languages": [
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      }
+    ],
+    "socket": false,
+    "initiative": "1d10",
+    "gridDistance": 2,
+    "gridUnits": "m",
+    "primaryTokenAttribute": "resources.health",
+    "secondaryTokenAttribute": "resources.power",
+    "url": "",
+    "manifest": "",
+    "download": ""
+  }

@@ -1,0 +1,31 @@
+/* Navigation tabs */
+.sheet nav.sheet-tabs { 
+  height: 32px;
+  flex: 0 0 32px;
+  margin: 4px 0;
+  line-height: 32px;
+  border-top: 1px solid #06171E;
+  border-bottom: 1px solid #06171E;
+  background-color:#1C6888;
+  color: white;
+}
+
+/* Sheet min widths */
+.wtrpg.sheet.actor {
+  min-width: 750px;
+  min-height: 800px;
+}
+.wtrpg.sheet.item {
+  min-width: 460px;
+  min-height: 400px;
+}
+
+/* App theme edits */
+.window-app .window-header {
+  flex: 0 0 30px;
+  overflow: hidden;
+  padding: 0 8px;
+  line-height: 30px;
+  border-bottom: 1px solid #000;
+  background-color: #1C6888;
+}

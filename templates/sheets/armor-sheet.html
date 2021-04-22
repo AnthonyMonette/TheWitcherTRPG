@@ -1,0 +1,55 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <div class="resource">
+                <label>Quantity</label>
+                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+            </div>
+            <div class="resource">
+                <label>Weight</label>
+                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="attributes">Attributes</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab" data-group="primary" data-tab="description">
+            <textarea>Test</textarea>
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            <table>
+                <tr>
+                    <th>{{localize "WITCHER.Armor.StoppingPower"}}</th>
+                    <th>{{localize "WITCHER.Armor.Availability"}}</th>
+                    <th>{{localize "WITCHER.Armor.Enhancement"}}</th>
+                    <th>{{localize "WITCHER.Armor.Reliable"}}</th>
+                    <th>{{localize "WITCHER.Armor.Effect"}}</th>
+                    <th>{{localize "WITCHER.Armor.EncumbranceValue"}}</th>
+                    <th>{{localize "WITCHER.Armor.Cost"}}</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="data.stopping" value="{{data.stopping}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.avail" value="{{data.avail}}"/></td>
+                    <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.effect" value="{{data.effect}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.encumb" value="{{data.encumb}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</form>
