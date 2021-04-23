@@ -11,6 +11,17 @@
                 <label>Weight</label>
                 <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
             </div>
+            <div class="resource">
+                <label>type</label>
+                <select name="data.type" id="type-select">
+                    {{#select data.type}}
+                    <option value="crafting-material">Crafting Material</option>
+                    <option value="animal-parts">Hides & Animal Parts</option>
+                    <option value="alchemical">Alchemical Treatments</option>
+                    <option value="minerals">Ingots & Minerals</option>
+                    {{/select}}
+                </select>
+            </div>
         </div>
     </header>
 
@@ -25,7 +36,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            <textarea>Test</textarea>
+            <textarea name="data.description">{{data.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}
@@ -36,7 +47,7 @@
                     <th>{{localize "WITCHER.Component.Location"}}</th>
                     <th>{{localize "WITCHER.Component.Quantity"}}</th>
                     <th>{{localize "WITCHER.Component.Forage"}}</th>
-                    <th>{{localize "WITCHER.Component.Cost"}}</th>
+                    <th>{{localize "WITCHER.Item.Cost"}}</th>
                 </tr>
                 <tr>
                     <td><input type="text" name="data.rarity" value="{{data.rarity}}"/></td>

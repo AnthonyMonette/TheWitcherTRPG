@@ -21,11 +21,23 @@
 }
 
 /* App theme edits */
-.window-app .window-header {
+.window-header {
   flex: 0 0 30px;
   overflow: hidden;
   padding: 0 8px;
   line-height: 30px;
   border-bottom: 1px solid #000;
   background-color: #1C6888;
+}
+.item-spell .window-header{
+  background-color: #AB0D55;
+}
+.item-diagrams .window-header{
+  background-color: #80471B;
+}
+.item-component .window-header{
+  background-color: #80471B;
+}
+.item-mutagen .window-header{
+  background-color: #2A4E0A;
 }

@@ -11,14 +11,8 @@
                 <label>Weight</label>
                 <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
             </div>
-            
-            <div class="checkbox">
-                <label>Elderfolk</label>
-                <input type="checkbox" name="data.isElderfolk" value="{{data.isElderfolk}}"/>
-            </div>
         </div>
     </header>
-
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="description">Description</a>
@@ -30,7 +24,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            <textarea>Test</textarea>
+            <textarea name="data.description">{{data.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}
@@ -39,14 +33,14 @@
                 <tr>
                     <th>{{localize "WITCHER.Weapon.Type"}}</th>
                     <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Availability"}}</th>
+                    <th>{{localize "WITCHER.Item.Availability"}}</th>
                     <th>{{localize "WITCHER.Weapon.Damage"}}</th>
                     <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
                     <th>{{localize "WITCHER.Weapon.Hands"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Effect"}}</th>
+                    <th>{{localize "WITCHER.Item.Effect"}}</th>
                     <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
                     <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Cost"}}</th>
+                    <th>{{localize "WITCHER.Item.Cost"}}</th>
                 </tr>
                 <tr>
                     <td><input type="text" name="data.type" value="{{data.type}}"/></td>

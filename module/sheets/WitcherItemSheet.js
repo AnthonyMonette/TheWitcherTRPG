@@ -11,4 +11,11 @@ export default class WitcherItemSheet extends ItemSheet {
     get template() {
         return `systems/TheWitcherTRPG/templates/sheets/${this.item.data.type}-sheet.html`;
     }
-}
+
+    /** @override */
+    getData() {
+      const data = super.getData();
+      this.options.classes.push(`item-${this.item.data.type}`)
+      return data;
+    }
+  }

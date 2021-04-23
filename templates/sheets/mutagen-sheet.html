@@ -1,0 +1,36 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <div class="resource">
+                <label>Quantity</label>
+                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+            </div>
+            <div class="resource">
+                <label>type</label>
+                <select name="data.type" id="type-select">
+                    {{#select data.type}}
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </header>
+    <table>
+        <tr>
+            <th>{{localize "WITCHER.Mutagen.Source"}}</th>
+            <th>{{localize "WITCHER.Item.Effect"}}</th>
+            <th>{{localize "WITCHER.Mutagen.AlchemyDC"}}</th>
+            <th>{{localize "WITCHER.Mutagen.MinorMutation"}}</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="data.source" value="{{data.source}}"/></td>
+            <td><input type="text" name="data.effect" value="{{data.effect}}"/></td>
+            <td><input type="text" name="data.alchemyDC" value="{{data.alchemyDC}}"/></td>
+            <td><input type="text" name="data.minorMutation" value="{{data.minorMutation}}"/></td>
+        </tr>
+    </table>
+</form>

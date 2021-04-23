@@ -13,6 +13,13 @@
       "styles/system-styles.css"
     ],
     "packs": [
+      {
+        "name": "item",
+        "label": "Items",
+        "system": "The Witcher TRPG",
+        "path": "./packs/item.db",
+        "entity": "Item"
+      }
     ],
     "languages": [
       {

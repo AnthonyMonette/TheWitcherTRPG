@@ -520,6 +520,13 @@
         "cost": 0
       }
     },
+    "valuable": {
+      "type": "",
+      "avail": "",
+      "effect":"",
+      "conceal": "",
+      "quality": ""
+    },
     "weapon": {
       "type": "",
       "accuracy": 0,
@@ -530,11 +537,7 @@
       "range": "",
       "effect": "",
       "conceal": "",
-      "enhancements": 0,
-      "craftingDC": 0,
-      "time": "",
-      "components": "",
-      "investment": 0
+      "enhancements": 0
     },
     "armor": {
       "stopping": 0,
@@ -542,11 +545,7 @@
       "avail": "",
       "enhancements": 0,
       "effect": "",
-      "encumb": 0,
-      "craftingDC": 0,
-      "time": "",
-      "components": "",
-      "investment": 0
+      "encumb": 0
     },
     "enhancement": {
       "avail": "",
@@ -566,10 +565,8 @@
       "type": "",
       "avail": "",
       "effect": "",
-      "alchemyDC": 0,
-      "craftingDC": 0,
       "time": "",
-      "components": ""
+      "toxicity": ""
     },
     "component": {
       "type": "",
@@ -579,8 +576,11 @@
       "forage": ""
     },
     "diagrams": {
+      "type": "",
+      "level": "",
       "craftingDC": 0,
-      "time": "",
+      "alchemyDC": 0,
+      "craftingTime": "",
       "components": "",
       "investment": 0
     },
@@ -593,8 +593,9 @@
     },
     "spell": {
       "class": "",
-      "type": "",
       "level": "",
+      "source": "",
+      "domain": "",
       "stamina": 0,
       "effect": "",
       "range": "",

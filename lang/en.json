@@ -1,30 +1,54 @@
 {
+    
+    "WITCHER.Item.Availability": "Avail.",
+    "WITCHER.Item.Weight": "Weight",
+    "WITCHER.Item.Cost": "Cost",
+    "WITCHER.Item.Effect": "Effect",
+
     "WITCHER.Weapon.Type": "Type",
     "WITCHER.Weapon.WeaponAccuracy": "WA",
-    "WITCHER.Weapon.Availability": "Avail.",
     "WITCHER.Weapon.Damage": "DMG",
     "WITCHER.Weapon.Reliability": "Rel.",
     "WITCHER.Weapon.Hands": "Hands",
-    "WITCHER.Weapon.Effect": "Effect",
     "WITCHER.Weapon.Concealement": "Conc.",
     "WITCHER.Weapon.Enhancement": "EN",
-    "WITCHER.Weapon.Weight": "Weight",
-    "WITCHER.Weapon.Cost": "Cost",
     "WITCHER.Weapon.Elderfolk": "Eld.",
 
     "WITCHER.Armor.StoppingPower": "SP",
-    "WITCHER.Armor.Availability": "Avail.",
     "WITCHER.Armor.Enhancement": "AE",
     "WITCHER.Armor.Reliable": "Rel.",
-    "WITCHER.Armor.Effect": "Effect",
     "WITCHER.Armor.EncumbranceValue": "EV",
-    "WITCHER.Armor.Weight": "Weight",
-    "WITCHER.Armor.Cost": "Cost",
-    "WITCHER.Armor.Elderfolk": "Eld.",
 
     "WITCHER.Component.Rarity": "Rarity",
     "WITCHER.Component.Location": "Location.",
     "WITCHER.Component.Quantity": "Quantity",
     "WITCHER.Component.Forage": "Forage DC",
-    "WITCHER.Component.Cost": "Cost"
+
+    
+    "WITCHER.Enhancement.Stopping": "Stopping",
+    "WITCHER.Enhancement.Bludgeoning": "B",
+    "WITCHER.Enhancement.Slashing": "S",
+    "WITCHER.Enhancement.Percing": "P",
+
+    "WITCHER.Mount.Dex": "Dex + Atl",
+    "WITCHER.Mount.Control": "Control Mod",
+    "WITCHER.Mount.Speed": "Speed",
+    "WITCHER.Mount.Hp": "HP",
+    
+    "WITCHER.Alchemy.Duration": "Dura.",
+    "WITCHER.Alchemy.Toxicity": "Tox.",
+
+    
+    "WITCHER.Diagram.alchemyDC": "Alch DC.",
+    "WITCHER.Diagram.craftingDC": "Craft DC.",
+    "WITCHER.Diagram.craftingTime": "Time",
+    "WITCHER.Diagram.components": "Components",
+    "WITCHER.Diagram.investment": "Investment",
+    
+    "WITCHER.Mutagen.Source": "Mutagen Source",
+    "WITCHER.Mutagen.AlchemyDC": "Alchemy DC",
+    "WITCHER.Mutagen.MinorMutation": "Minor Mutation",
+
+    "WITCHER.Valuable.Conceal": "Conceal",
+    "WITCHER.Valuable.Quality": "Quality"
 }
