@@ -1,0 +1,104 @@
+<div class="skills-row">
+    <div class="skill-column">
+        <h1>Intelligence</h1>
+        <table class="table-skills">
+            {{#each data.skills.int as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="skill-column">
+        <h1>Reflex</h1>
+        <table class="table-skills">
+            {{#each data.skills.ref as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <h1>Will</h1>
+        <table class="table-skills">
+            {{#each data.skills.will as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="skill-column">
+        <h1>Dexterity</h1>
+        <table class="table-skills">
+            {{#each data.skills.dex as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <h1>Crafting</h1>
+        <table class="table-skills">
+            {{#each data.skills.cra as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="skill-column">
+        <h1>Body</h1>
+        <table class="table-skills">
+            {{#each data.skills.body as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <h1>Empaty</h1>
+        <table class="table-skills">
+            {{#each data.skills.emp as |skill st|}}
+            <tr>
+                <td class="{{st}} skill">
+                    <span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span>
+                </td>
+                <td class="input-skill">
+                    <input class="stats {{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <div>
+            <b>Total Skill <input name="total_skills" type="number" value="{{skill.value}}" placeholder="0" readonly/> </b>
+        </div>
+    </div>
+</div>

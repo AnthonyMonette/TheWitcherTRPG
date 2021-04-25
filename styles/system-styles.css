@@ -11,11 +11,11 @@
 }
 
 /* Sheet min widths */
-.wtrpg.sheet.actor {
-  min-width: 750px;
-  min-height: 800px;
+.witcher.sheet.actor {
+  min-width: 805px;
+  min-height: 400px;
 }
-.wtrpg.sheet.item {
+.witcher.sheet.item {
   min-width: 460px;
   min-height: 400px;
 }
@@ -40,4 +40,130 @@
 }
 .item-mutagen .window-header{
   background-color: #2A4E0A;
+}
+
+.header-layout{
+  display: flex;
+}
+.header-center {
+  flex: 1;
+}
+.stat-display {
+  display: flex;
+  width: 250px;
+}
+.stat-display input {
+  width: 25px;
+}
+.stat-display label {
+  padding: 5px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actor-img {
+  height: 200px;
+  width: 200px;
+}
+
+.skills-row {
+  display: flex;
+}
+.skill-column {
+  margin: 5px;
+}
+.table-skills {
+  width: 175px;
+}
+.input-skill {
+  width: 25px;
+}
+
+.profession-card {
+  width: 250px;
+  margin: 5px;
+}
+
+.profession-card-header {
+  display: flex;
+}
+
+.profession-layout {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+input.profession-level {
+  color: white;
+  width: 35px;
+}
+
+input.profession-skill-input {
+  color: white;
+}
+
+.defining-skill-select{
+  background-color: grey;
+  color: white;
+}
+
+.defining-skill-header {
+  background-color: grey;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.defining-skill {
+  background-color: lightgrey;
+}
+
+.first-path-select{
+  background-color: blue;
+  color: white;
+}
+
+.first-path-header {
+  background-color: blue;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.first-path {
+  background-color: lightskyblue;
+}
+
+.second-path-select{
+  background-color: green;
+  color: white;
+}
+
+.second-path-header {
+  background-color: green;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.second-path {
+  background-color: lightgreen;
+}
+
+.third-path-select{
+  background-color: red;
+  color: white;
+}
+.third-path-header {
+  background-color: red;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.third-path {
+  background-color: lightcoral;
 }

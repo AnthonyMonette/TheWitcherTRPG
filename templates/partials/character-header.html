@@ -1,0 +1,140 @@
+    <div class="left-sidebar">
+        <div class="stat-display">
+            <label>{{localize data.stats.int.label}}</label> 
+            <input class="header-stat" name="data.stats.int.max" type="text" value="{{data.stats.int.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.int.current" type="text" value="{{data.stats.int.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.ref.label}}</label> 
+            <input class="header-stat" name="data.stats.ref.max" type="text" value="{{data.stats.ref.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.ref.current" type="text" value="{{data.stats.ref.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.dex.label}}</label> 
+            <input class="header-stat" name="data.stats.dex.max" type="text" value="{{data.stats.dex.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.dex.current" type="text" value="{{data.stats.dex.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.body.label}}</label> 
+            <input class="header-stat" name="data.stats.bdy.max" type="text" value="{{data.stats.bdy.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.bdy.current" type="text" value="{{data.stats.bdy.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.spd.label}}</label> 
+            <input class="header-stat" name="data.stats.spd.max" type="text" value="{{data.stats.spd.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.spd.current" type="text" value="{{data.stats.spd.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.emp.label}}</label> 
+            <input class="header-stat" name="data.stats.emp.max" type="text" value="{{data.stats.emp.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.emp.current" type="text" value="{{data.stats.emp.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.cra.label}}</label> 
+            <input class="header-stat" name="data.stats.cra.max" type="text" value="{{data.stats.cra.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.cra.current" type="text" value="{{data.stats.cra.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.will.label}}</label> 
+            <input class="header-stat" name="data.stats.will.max" type="text" value="{{data.stats.will.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.will.current" type="text" value="{{data.stats.will.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.stats.luck.label}}</label> 
+            <input class="header-stat" name="data.stats.luck.max" type="text" value="{{data.stats.luck.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.luck.current" type="text" value="{{data.stats.luck.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+
+        <!-- {{#each data.stats as |details stat|}}
+        <div class="stat-display">
+            <label>{{localize details.label}}</label> 
+            <input class="header-stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0"/>
+            <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0"/>
+        </div>
+        {{/each}} -->
+    </div>
+    <div class="header-center">
+        <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="flexrow">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1> 
+            <div>
+                <label>Age</label>
+                <input name="data.age" type="text" value="{{data.age}}" placeholder="0" data-dtype="Number"/>
+            </div>
+        </div>
+        <div class="flexrow">
+            <label>Race</label>
+            <input name="data.race" type="text" value="{{data.race}}" placeholder=""/>
+            <label>Gender</label>
+            <input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/>
+        </div>
+        <div class="flexrow">
+            <label>profession</label>
+            <input name="data.profession.professionName" type="text" value="{{data.profession.professionName}}" placeholder=""/>
+            <label>Origin</label>
+            <input name="data.origin" type="text" value="{{data.origin}}" placeholder=""/>
+        </div>
+    </div>    
+    <div class="right-sidebar">
+        <div class="stat-display">
+            <label>{{localize data.coreStats.stun.label}}</label> 
+            <input class="header-stat" name="data.coreStats.stun.value" type="text" value="{{data.coreStats.stun.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.coreStats.run.label}}</label> 
+            <input class="header-stat" name="data.coreStats.run.value" type="text" value="{{data.coreStats.run.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.coreStats.leap.label}}</label> 
+            <input class="header-stat" name="data.coreStats.leap.value" type="text" value="{{data.coreStats.leap.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.coreStats.enc.label}}</label> 
+            <input class="header-stat" name="data.coreStats.enc.value" type="text" value="{{data.coreStats.enc.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.coreStats.rec.label}}</label> 
+            <input class="header-stat" name="data.coreStats.rec.value" type="text" value="{{data.coreStats.rec.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <!-- {{#each data.coreStats as |details coreStat|}}
+        <div class="stat-display">
+            <label>{{localize details.label}}</label> 
+            <input class="header-stat" name="data.stats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        {{/each}} -->
+        <hr />
+        <div class="stat-display">
+            <label>{{localize data.derivedStats.hp.label}}</label> 
+            <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.derivedStats.sta.label}}</label> 
+            <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.derivedStats.sta.current" type="text" value="{{data.derivedStats.sta.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.derivedStats.resolve.label}}</label> 
+            <input class="header-stat" name="data.derivedStats.resolve.max" type="text" value="{{data.derivedStats.resolve.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.derivedStats.resolve.current" type="text" value="{{data.derivedStats.resolve.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <div class="stat-display">
+            <label>{{localize data.derivedStats.focus.label}}</label> 
+            <input class="header-stat" name="data.derivedStats.focus.max" type="text" value="{{data.derivedStats.focus.max}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.derivedStats.focus.current" type="text" value="{{data.derivedStats.focus.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <!-- {{#each data.derivedStats as |details derivedStat|}}
+        <div class="stat-display">
+            <label>{{localize details.label}}</label> 
+            <input class="header-stat" name="data.stats.{{derivedStat}}.max" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
+            <input class="header-stat" name="data.stats.{{derivedStat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        {{/each}}
+        {{#each data.attackStats as |details attackStat|}}
+        <div class="stat-display">
+            <label>{{localize details.label}}</label> 
+            <input class="header-stat" name="data.stats.{{attackStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        {{/each}} -->
+    </div>    
+  

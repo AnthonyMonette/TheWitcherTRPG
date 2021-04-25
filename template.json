@@ -2,7 +2,8 @@
   "Actor": {
     "types": [
       "character",
-      "npc"
+      "npc",
+      "monster"
     ],
     "character": {
       "config": {
@@ -80,7 +81,78 @@
         "race": "",
         "gender": "",
         "age": 0,
-        "profession": "",
+        "profession": {
+          "professionName": "",
+          "definingSkill": {
+            "skillName": "",
+            "stat": "",
+            "definition": "",
+            "level": ""
+          },
+          "skillPath1": {
+            "pathName": "",
+            "skill1": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill2": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill3": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            }
+          },
+          "skillPath2": {
+            "pathName": "",
+            "skill1": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill2": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill3": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            }
+          },
+          "skillPath3": {
+            "pathName": "",
+            "skill1": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill2": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            },
+            "skill3": {
+              "skillName": "",
+              "stat": "",
+              "definition": "",
+              "level": ""
+            }
+          }
+        },
         "crowns": 0,
         "lifeEvents": {
           "10": {
@@ -165,112 +237,110 @@
           }
         }
       },
-      "core": {
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "abbr": "WITCHER.AbbrHP",
-          "label": "WITCHER.DerHP"
-        },
-        "sta": {
-          "value": 0,
-          "max": 0,
-          "abbr": "WITCHER.AbbrSta",
-          "label": "WITCHER.DerSta"
-        },
-        "vigor": {
-          "value": 0,
-          "abbr": "WITCHER.AbbrVigor",
-          "label": "WITCHER.StVigor"
-        },
-        "spd": {
-          "value": 0,
-          "label": "WITCHER.StSpd",
-          "abbr": "WITCHER.AbbrSpd"
-        },
-        "luck": {
-          "value": 0,
-          "label": "WITCHER.StLuck",
-          "abbr": "WITCHER.AbbrLuck"
-        }
-      },
       "stats": {
         "int": {
-          "value": 0,
-          "label": "WITCHER.StInt",
-          "abbr": "WITCHER.AbbrInt"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Int"
         },
         "ref": {
-          "value": 0,
-          "label": "WITCHER.StRef",
-          "abbr": "WITCHER.AbbrRef"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Ref"
         },
         "dex": {
-          "value": 0,
-          "label": "WITCHER.StDex",
-          "abbr": "WITCHER.AbbrDex"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Dex"
         },
         "body": {
-          "value": 0,
-          "label": "WITCHER.StBody",
-          "abbr": "WITCHER.AbbrBody"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Body"
+        },
+        "spd": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Spd"
         },
         "emp": {
-          "value": 0,
-          "label": "WITCHER.StEmp",
-          "abbr": "WITCHER.AbbrEmp"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Emp"
         },
         "cra": {
-          "value": 0,
-          "label": "WITCHER.StCra",
-          "abbr": "WITCHER.AbbrCra"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Cra"
         },
         "will": {
-          "value": 0,
-          "label": "WITCHER.StWill",
-          "abbr": "WITCHER.AbbrWill"
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Will"
+        },
+        "luck": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.Stat.Luck"
         }
       },
-      "derivedstats": {
+      "coreStats": {
         "stun": {
           "value": 0,
-          "label": "WITCHER.DerStun",
-          "abbr": "WITCHER.AbbrStun",
-          "dtype": "Number"
+          "label": "WITCHER.Actor.CoreStat.Stun"
         },
         "run": {
           "value": 0,
-          "label": "WITCHER.DerRun",
-          "abbr": "WITCHER.AbbrRun",
-          "dtype": "Number"
+          "label": "WITCHER.Actor.CoreStat.Run"
         },
         "leap": {
           "value": 0,
-          "label": "WITCHER.DerLeap",
-          "abbr": "WITCHER.AbbrLeap",
-          "dtype": "Number"
+          "label": "WITCHER.Actor.CoreStat.Leap"
         },
         "enc": {
           "value": 0,
-          "label": "WITCHER.DerEnc",
-          "abbr": "WITCHER.AbbrEnc",
-          "dtype": "Number"
+          "label": "WITCHER.Actor.CoreStat.Enc"
         },
         "rec": {
           "value": 0,
-          "label": "WITCHER.DerRec",
-          "abbr": "WITCHER.AbbrRec",
-          "dtype": "Number"
+          "label": "WITCHER.Actor.CoreStat.Rec"
+        }
+      },
+      "derivedStats": {
+        "hp": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.DerStat.HP"
         },
+        "sta": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.DerStat.Sta"
+        },
+        "resolve": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.DerStat.Resolve"
+        },
+        "focus": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.DerStat.Focus"
+        },
+        "vigor": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.DerStat.Vigor"
+        }
+      },
+      "attackStats": {
         "punch": {
           "value": "",
-          "abbr": "WITCHER.AbbrPunch",
-          "dtype": "String"
+          "label": "WITCHER.Actor.DerStat.Punch"
         },
         "kick": {
           "value": "",
-          "abbr": "WITCHER.AbbrKick",
-          "dtype": "String"
+          "label": "WITCHER.Actor.DerStat.Kick"
         }
       },
       "skills": {
