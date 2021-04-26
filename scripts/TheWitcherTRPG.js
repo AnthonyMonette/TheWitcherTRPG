@@ -8,7 +8,10 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/character-header.html",
         "systems/TheWitcherTRPG/templates/partials/tab-skills.html",
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
-        "systems/TheWitcherTRPG/templates/partials/profession-card.html"
+        "systems/TheWitcherTRPG/templates/partials/tab-background.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
+        "systems/TheWitcherTRPG/templates/partials/weapon-card.html",
+        "systems/TheWitcherTRPG/templates/partials/armor-card.html"
     ];
     return loadTemplates(templatePath); 
 }

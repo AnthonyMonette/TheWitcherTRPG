@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
     {{! Sheet Header }}
-    <header class="sheet-header flexrow">
+    <header class="actor-sheet-header">
       {{> "systems/TheWitcherTRPG/templates/partials/character-header.html"}}
     </header>
   
@@ -21,13 +21,13 @@
         {{> "systems/TheWitcherTRPG/templates/partials/tab-profession.html"}}
       </div>
       <div class="tab" data-group="primary" data-tab="inventory">
-        <div>Test inventory</div>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory.html"}}
       </div>
       <div class="tab" data-group="primary" data-tab="magic">
         <div>Test magic</div>
       </div>
       <div class="tab" data-group="primary" data-tab="background">
-        <div>Test background</div>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-background.html"}}
       </div>
     </section>
 </form>

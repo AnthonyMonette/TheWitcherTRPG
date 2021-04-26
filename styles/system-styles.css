@@ -42,6 +42,16 @@
   background-color: #2A4E0A;
 }
 
+.actor-sheet-header {
+  display: flex;
+}
+.left-sidebar {
+  width: 150px;
+  flex: none;
+}
+.right-sidebar {
+  width: 150px;
+}
 .header-layout{
   display: flex;
 }
@@ -64,8 +74,8 @@
 }
 
 .actor-img {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 .skills-row {
@@ -166,4 +176,32 @@ input.profession-skill-input {
 
 .third-path {
   background-color: lightcoral;
+}
+
+input.item-quantity{
+  width: 30px;
+}
+
+.armor-item {
+  display: flex;
+}
+
+.weapon-item {
+  display: flex;
+}
+
+.valuable-item {
+  display: flex;
+}
+
+.diagram-item {
+  display: flex;
+}
+
+.lifeEvents {
+  margin: 10px;
+}
+
+.events {
+  width: 45px;
 }

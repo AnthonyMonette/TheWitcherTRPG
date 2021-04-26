@@ -1,0 +1,68 @@
+<div class="tab body background">
+    <div class="flexrow">
+        <div class="flexcol background scrollable">
+            <table class="details">
+                <tr class="details">
+                    <th class="details">
+                        {{localize "WITCHER.Homeland"}}
+                    </th>
+                </tr>
+                <tr class="details inputrow">
+                    <td>
+                        <select name="data.general.homeland.value" id="homeland-select">
+                        {{#select data.general.homeland.value}}
+                        {{#each data.config.homelands as |name value|}}
+                                <option value="{{value}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+    
+            {{#each data.general.details as |details dt|}}
+            <table class="details {{dt}}">
+                <tr class="{{dt}}-headerrow">
+                    <th class="details header {{dt}}">
+                        {{localize details.label}}
+                    </th>
+                </tr>
+                <tr class="details input row">
+                    <td>
+                        <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text"
+                            value="{{details.value}}" />
+                    </td>
+                </tr>
+            </table>
+            {{/each}}
+        </div>
+        
+        <div class="lifeEvents background">
+            <textarea rows=36 name="data.general.background.value">{{data.general.background.value}}</textarea>
+        </div>    
+    </div>
+    <div class="flexcol background">
+        <div class="lifeEvents scrollable" id="lifeEvents">
+            <table class="lifevents">
+                <tr class="headerrow lifeEvents">
+                    <th class="header lifeEvents" colspan="2">
+                        {{localize "WITCHER.LifeEvents"}}
+                    </th>
+                </tr>
+                <tr class="titlerow lifeEvents">
+                    <th>{{localize "WITCHER.Decade"}}</th>
+                    <th>{{localize "WITCHER.Event"}}</th>
+                </tr>
+                {{#each data.general.lifeEvents as |events ev|}}
+                <tr class="tablerow lifeEvents {{ev}}">
+                    <td class="{{ev}} events">{{ev}}</td>
+                    <td>
+                        <input class="input lifeEvents" name="data.general.lifeEvents.{{ev}}.value" type="text"
+                            value="{{events.value}}"/>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>

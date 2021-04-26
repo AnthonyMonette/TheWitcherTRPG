@@ -1,0 +1,34 @@
+<h2>Equipped weapons</h2>
+{{#each weapons as |weapon id|}}
+<div class="weapon-item item" data-item-id="{{weapon._id}}">
+    <input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{weapon.data.quantity}}" placeholder="quantity" />
+    <input class="inline-edit" data-field="name" type="text" value="{{weapon.name}}" placeholder="name" />
+    <a class="item-edit"><i class="fas fa-edit"></i></a>
+</div>
+{{/each}}
+
+<h2>Equipped Armor</h2>
+{{#each armors as |armor id|}}
+<div class="armor-item item" data-item-id="{{armor._id}}">
+    <input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" placeholder="quantity" />
+    <input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" />
+    <a class="item-edit"><i class="fas fa-edit"></i></a>
+</div>
+{{/each}}
+
+<h2>Valuables</h2>
+{{#each valuables as |valuable id|}}
+<div class="valuable-item item" data-item-id="{{valuable._id}}">
+    <input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{valuable.data.quantity}}" placeholder="quantity" />
+    <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" />
+    <a class="item-edit"><i class="fas fa-edit"></i></a>
+</div>
+{{/each}}
+<h2>Diagrams & Formulae</h2>
+{{#each diagrams as |diagram id|}}
+<div class="diagram-item item" data-item-id="{{diagram._id}}">
+    <input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{diagram.data.quantity}}" placeholder="quantity" />
+    <input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" />
+    <a class="item-edit"><i class="fas fa-edit"></i></a>
+</div>
+{{/each}}

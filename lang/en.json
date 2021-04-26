@@ -134,5 +134,21 @@
     "WITCHER.SkWillSpellcast": "Spell Casting",
     "WITCHER.SkWillResistMag": "Resist Magic",
     "WITCHER.SkWillResistCoer": "Resist Coercion",
-    "WITCHER.SkWillRitCraft": "Ritual Crafting"
+    "WITCHER.SkWillRitCraft": "Ritual Crafting",
+
+
+    "WITCHER.SocialStanding": "Social Standing",
+    "WITCHER.Profession": "Profession",
+    "WITCHER.Reputation": "Reputation",
+    "WITCHER.Homeland": "Homeland",
+    "WITCHER.Value": "Value",
+    "WITCHER.ValuedPerson": "Valued Person",
+    "WITCHER.Affectations": "Affectations",
+    "WITCHER.Hair": "Hair Style",
+    "WITCHER.Personality": "Personality",
+    "WITCHER.Clothing": "Clothing",
+    "WITCHER.FeelingsOnPeople": "Feelings On People",
+    "WITCHER.LifeEvents": "Life Events",
+    "WITCHER.Decade": "Decade",
+    "WITCHER.Event": "Event"
 }
