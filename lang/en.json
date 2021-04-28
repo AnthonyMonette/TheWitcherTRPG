@@ -53,6 +53,16 @@
     "WITCHER.Valuable.Conceal": "Conceal",
     "WITCHER.Valuable.Quality": "Quality",
 
+    "WITCHER.StInt": "Intelligence",
+    "WITCHER.StRef": "Reflex",
+    "WITCHER.StDex": "Dexterity",
+    "WITCHER.StBody": "Body",
+    "WITCHER.StEmp": "Empathy",
+    "WITCHER.StCra": "Craft",
+    "WITCHER.StWill": "Will",
+    "WITCHER.StLuck": "Luck",
+    "WITCHER.StSpd": "Speed",
+    "WITCHER.StVigor": "Vigor",
 
     "WITCHER.Actor.Stat.Int": "Int",
     "WITCHER.Actor.Stat.Ref": "REF",

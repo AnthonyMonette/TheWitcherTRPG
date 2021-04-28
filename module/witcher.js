@@ -8,17 +8,16 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 function updateDerived(actor){
 
     let thisActor = actor;
-
-    let base = Math.floor((thisActor.data.data.stats.body.value+thisActor.data.data.stats.will.value)/2);
-    let currentBody = thisActor.data.data.stats.body.value;
+    let base = Math.floor((thisActor.data.data.stats.body.max + thisActor.data.data.stats.will.max)/2);
+    let currentBody = thisActor.data.data.stats.body.max;
 
     let newHP = base*5;
     let newSta = base*5;
     let newRec = base;
     let newStun = base;
-    let newEnc = thisActor.data.data.stats.body.value*10;
-    let newRun = thisActor.data.data.core.spd.value*3;
-    let newLeap = Math.floor(thisActor.data.data.derivedstats.run.value/5);
+    let newEnc = thisActor.data.data.stats.body.max*10;
+    let newRun = thisActor.data.data.stats.spd.max*3;
+    let newLeap = Math.floor(newRun/5);
 
     let pBonus = 0;
     let kBonus = 0;
@@ -65,26 +64,29 @@ function updateDerived(actor){
     if(newStun > 10){
         newStun = 10;
     }
+    
+    let newResolve = Math.floor((thisActor.data.data.stats.will.max + thisActor.data.data.stats.int.max)/2*5);
 
     thisActor.update({ 
-        'data.core.hp.max': newHP,
-        'data.core.sta.max': newSta,
-        'data.derivedstats.rec.value': newRec,
-        'data.derivedstats.stun.value': newStun,
-        'data.derivedstats.enc.value': newEnc,
-        'data.derivedstats.run.value': newRun,
-        'data.derivedstats.leap.value': newLeap,
-        'data.derivedstats.punch.value': `1d6+${pBonus}`,
-        'data.derivedstats.kick.value': `1d6+${kBonus}`
+        'data.derivedStats.hp.max': newHP,
+        'data.derivedStats.sta.max': newSta,
+        'data.derivedStats.resolve.max': newResolve,
+        'data.coreStats.rec.value': newRec,
+        'data.coreStats.stun.value': newStun,
+        'data.coreStats.enc.value': newEnc,
+        'data.coreStats.run.value': newRun,
+        'data.coreStats.leap.value': newLeap,
+        'data.attackStats.punch.value': `1d6+${pBonus}`,
+        'data.attackStats.kick.value': `1d6+${kBonus}`,
      });
 
 }
 
-function rollSkillCheck(actor, statNum, skillNum){
-    let thisActor = actor;
+function rollSkillCheck(thisActor, statNum, skillNum){
     let parentStat = "";
     let skillName = "";
-    let base = 0;
+    let stat = 0;
+    let skill = 0;
     let array;
 
     switch(statNum){
@@ -92,43 +94,50 @@ function rollSkillCheck(actor, statNum, skillNum){
             parentStat = game.i18n.localize("WITCHER.StInt");
             array = getIntSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.int.max;
+            skill = array[1];
             break;
         case 1:
             parentStat = game.i18n.localize("WITCHER.StRef");
             array = getRefSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.ref.max;
+            skill = array[1];
             break;
         case 2:
             parentStat = game.i18n.localize("WITCHER.StDex");
             array = getDexSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.dex.max;
+            skill = array[1];
             break;
         case 3:
             parentStat = game.i18n.localize("WITCHER.StBody");
             array = getBodySkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.body.max;
+            skill = array[1];
             break;
         case 4:
             parentStat = game.i18n.localize("WITCHER.StEmp");
             array = getEmpSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.emp.max;
+            skill = array[1];
             break;
         case 5:
             parentStat = game.i18n.localize("WITCHER.StCra");
             array = getCraSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.cra.max;
+            skill = array[1];
             break;
         case 6:
             parentStat = game.i18n.localize("WITCHER.StWill");
             array = getWillSkillMod(thisActor, skillNum);
             skillName = array[0];
-            base = array[1];
+            stat = thisActor.data.data.stats.will.max;
+            skill = array[1];
             break;
     }
 
@@ -139,13 +148,13 @@ function rollSkillCheck(actor, statNum, skillNum){
           rollCheck: {
             label: "Roll Check", 
             callback: (html) => {
-              let roll = new Roll(`1d10+${base}`).roll();
+              let roll = new Roll(`1d10+${stat}+${skill}`).roll();
               roll.toMessage({
                 rollMode: 'roll',
                 speaker: {alias: thisActor.data.data.general.name},
                 flavor: `${parentStat}: ${skillName} Check`,
               })      
-            }//end callback for rollCheck
+            }
           },
           close: {
             label: "Close"
@@ -156,294 +165,142 @@ function rollSkillCheck(actor, statNum, skillNum){
 }
 
 function getIntSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.int.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkIntAwareness");
-            totalBase = statVal + actor.data.data.skills.int.awareness.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntAwareness"), actor.data.data.skills.int.awareness.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkIntBusiness");
-            totalBase = statVal + actor.data.data.skills.int.business.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntBusiness"), actor.data.data.skills.int.business.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkIntDeduction");
-            totalBase = statVal + actor.data.data.skills.int.deduction.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkIntDeduction"), actor.data.data.skills.int.deduction.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkIntEducation");
-            totalBase = statVal + actor.data.data.skills.int.education.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntEducation"), actor.data.data.skills.int.education.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkIntCommon");
-            totalBase = statVal + actor.data.data.skills.int.commonsp.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntCommon"), actor.data.data.skills.int.commonsp.value]
         case 5:
-            skillName = game.i18n.localize("WITCHER.SkIntElder");
-            totalBase = statVal + actor.data.data.skills.int.eldersp.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntElder"), actor.data.data.skills.int.eldersp.value]
         case 6:
-            skillName = game.i18n.localize("WITCHER.SkIntDwarven");
-            totalBase = statVal + actor.data.data.skills.int.dwarven.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntDwarven"), actor.data.data.skills.int.dwarven.value]
         case 7:
-            skillName = game.i18n.localize("WITCHER.SkIntMonster");
-            totalBase = statVal + actor.data.data.skills.int.monster.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkIntMonster"), actor.data.data.skills.int.monster.value]
         case 8:
-            skillName = game.i18n.localize("WITCHER.SkIntSocialEt");
-            totalBase = statVal + actor.data.data.skills.int.socialetq.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntSocialEt"), actor.data.data.skills.int.socialetq.value]
         case 9:
-            skillName = game.i18n.localize("WITCHER.SkIntStreet");
-            totalBase = statVal + actor.data.data.skills.int.streetwise.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntStreet"), actor.data.data.skills.int.streetwise.value]
         case 10:
-            skillName = game.i18n.localize("WITCHER.SkIntTactics");
-            totalBase = statVal + actor.data.data.skills.int.tactics.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntTactics"), actor.data.data.skills.int.tactics.value]
         case 11:
-            skillName = game.i18n.localize("WITCHER.SkIntTeaching");
-            totalBase = statVal + actor.data.data.skills.int.teaching.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkIntTeaching"), actor.data.data.skills.int.teaching.value]
         case 12:
-            skillName = game.i18n.localize("WITCHER.SkIntWilderness");
-            totalBase = statVal + actor.data.data.skills.int.wilderness.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkIntWilderness"), actor.data.data.skills.int.wilderness.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getRefSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.ref.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkRefBrawling");
-            totalBase = statVal + actor.data.data.skills.ref.brawling.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefBrawling"), actor.data.data.skills.ref.brawling.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkRefDodge");
-            totalBase = statVal + actor.data.data.skills.ref.dodge.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefDodge"), actor.data.data.skills.ref.dodge.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkRefMelee");
-            totalBase = statVal + actor.data.data.skills.ref.melee.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkRefMelee"), actor.data.data.skills.ref.melee.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkRefRiding");
-            totalBase = statVal + actor.data.data.skills.ref.riding.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefRiding"), actor.data.data.skills.ref.riding.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkRefSailing");
-            totalBase = statVal + actor.data.data.skills.ref.sailing.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefSailing"), actor.data.data.skills.ref.sailing.value]
         case 5:
-            skillName = game.i18n.localize("WITCHER.SkRefSmall");
-            totalBase = statVal + actor.data.data.skills.ref.smallblades.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefSmall"), actor.data.data.skills.ref.smallblades.value]
         case 6:
-            skillName = game.i18n.localize("WITCHER.SkRefStaff");
-            totalBase = statVal + actor.data.data.skills.ref.staffspear.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefStaff"), actor.data.data.skills.ref.staffspear.value]
         case 7:
-            skillName = game.i18n.localize("WITCHER.SkRefSwordmanship");
-            totalBase = statVal + actor.data.data.skills.ref.swordsmanship.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkRefSwordmanship"), actor.data.data.skills.ref.swordsmanship.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getDexSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.dex.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkDexArchery");
-            totalBase = statVal + actor.data.data.skills.dex.archery.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkDexArchery"), actor.data.data.skills.dex.archery.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkDexAthletics");
-            totalBase = statVal + actor.data.data.skills.dex.athletics.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkDexAthletics"), actor.data.data.skills.dex.athletics.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkDexCrossbow");
-            totalBase = statVal + actor.data.data.skills.dex.crossbow.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkDexCrossbow"), actor.data.data.skills.dex.crossbow.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkDexSleight");
-            totalBase = statVal + actor.data.data.skills.dex.sleight.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkDexSleight"), actor.data.data.skills.dex.sleight.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkDexStealth");
-            totalBase = statVal + actor.data.data.skills.dex.stealth.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkDexStealth"), actor.data.data.skills.dex.stealth.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getBodySkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.body.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkBodyPhys");
-            totalBase = statVal + actor.data.data.skills.body.physique.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkBodyPhys"), actor.data.data.skills.body.physique.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkBodyEnd");
-            totalBase = statVal + actor.data.data.skills.body.endurance.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkBodyEnd"), actor.data.data.skills.body.endurance.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getEmpSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.emp.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkEmpCharisma");
-            totalBase = statVal + actor.data.data.skills.emp.charisma.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpCharisma"), actor.data.data.skills.emp.charisma.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkEmpDeceit");
-            totalBase = statVal + actor.data.data.skills.emp.deceit.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpDeceit"), actor.data.data.skills.emp.deceit.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkEmpArts");
-            totalBase = statVal + actor.data.data.skills.emp.finearts.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkEmpArts"), actor.data.data.skills.emp.finearts.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkEmpGambling");
-            totalBase = statVal + actor.data.data.skills.emp.gambling.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpGambling"), actor.data.data.skills.emp.gambling.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkEmpGrooming");
-            totalBase = statVal + actor.data.data.skills.emp.grooming.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpGrooming"), actor.data.data.skills.emp.grooming.value]
         case 5:
-            skillName = game.i18n.localize("WITCHER.SkEmpHumanPerc");
-            totalBase = statVal + actor.data.data.skills.emp.perception.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpHumanPerc"), actor.data.data.skills.emp.perception.value]
         case 6:
-            skillName = game.i18n.localize("WITCHER.SkEmpLeadership");
-            totalBase = statVal + actor.data.data.skills.emp.leadership.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpLeadership"), actor.data.data.skills.emp.leadership.value]
         case 7:
-            skillName = game.i18n.localize("WITCHER.SkEmpPersuasion");
-            totalBase = statVal + actor.data.data.skills.emp.persuasion.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkEmpPersuasion"), actor.data.data.skills.emp.persuasion.value]
         case 8:
-            skillName = game.i18n.localize("WITCHER.SkEmpPerformance");
-            totalBase = statVal + actor.data.data.skills.emp.performance.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpPerformance"), actor.data.data.skills.emp.performance.value]
         case 9:
-            skillName = game.i18n.localize("WITCHER.SkEmpSeduction");
-            totalBase = statVal + actor.data.data.skills.emp.seduction.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkEmpSeduction"), actor.data.data.skills.emp.seduction.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getCraSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.cra.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkCraAlchemy");
-            totalBase = statVal + actor.data.data.skills.cra.alchemy.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraAlchemy"), actor.data.data.skills.cra.alchemy.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkCraCrafting");
-            totalBase = statVal + actor.data.data.skills.cra.crafting.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraCrafting"), actor.data.data.skills.cra.crafting.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkCraDisguise");
-            totalBase = statVal + actor.data.data.skills.cra.disguise.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkCraDisguise"), actor.data.data.skills.cra.disguise.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkCraAid");
-            totalBase = statVal + actor.data.data.skills.cra.firstaid.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraAid"), actor.data.data.skills.cra.firstaid.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkCraForge");
-            totalBase = statVal + actor.data.data.skills.cra.forgery.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraForge"), actor.data.data.skills.cra.forgery.value]
         case 5:
-            skillName = game.i18n.localize("WITCHER.SkCraPick");
-            totalBase = statVal + actor.data.data.skills.cra.picklock.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraPick"), actor.data.data.skills.cra.picklock.value]
         case 6:
-            skillName = game.i18n.localize("WITCHER.SkCraTrapCraft");
-            totalBase = statVal + actor.data.data.skills.cra.trapcraft.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkCraTrapCraft"), actor.data.data.skills.cra.trapcraft.value]
     }
-
-    return [skillName, totalBase];
 }
 
 function getWillSkillMod(actor, skillNum){
-
-    let statVal = actor.data.data.stats.will.value;
-    let skillName = ``;
-    let totalBase = 0;
-
     switch(skillNum){
         case 0:
-            skillName = game.i18n.localize("WITCHER.SkWillCourage");
-            totalBase = statVal + actor.data.data.skills.will.courage.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillCourage"), actor.data.data.skills.will.courage.value]
         case 1:
-            skillName = game.i18n.localize("WITCHER.SkWillHex");
-            totalBase = statVal + actor.data.data.skills.will.hexweave.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillHex"), actor.data.data.skills.will.hexweave.value]
         case 2:
-            skillName = game.i18n.localize("WITCHER.SkWillIntim");
-            totalBase = statVal + actor.data.data.skills.will.intimidation.value;
-            break;  
+            return [game.i18n.localize("WITCHER.SkWillIntim"), actor.data.data.skills.will.intimidation.value]
         case 3:
-            skillName = game.i18n.localize("WITCHER.SkWillSpellcast");
-            totalBase = statVal + actor.data.data.skills.will.spellcast.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillSpellcast"), actor.data.data.skills.will.spellcast.value]
         case 4:
-            skillName = game.i18n.localize("WITCHER.SkWillResistMag");
-            totalBase = statVal + actor.data.data.skills.will.resistmagic.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillResistMag"), actor.data.data.skills.will.resistmagic.value]
         case 5:
-            skillName = game.i18n.localize("WITCHER.SkWillResistCoer");
-            totalBase = statVal + actor.data.data.skills.will.resistcoerc.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillResistCoer"), actor.data.data.skills.will.resistcoerc.value]
         case 6:
-            skillName = game.i18n.localize("WITCHER.SkWillRitCraft");
-            totalBase = statVal + actor.data.data.skills.will.ritcraft.value;
-            break;
+            return [game.i18n.localize("WITCHER.SkWillRitCraft"), actor.data.data.skills.will.ritcraft.value]
     }
-
-    return [skillName, totalBase];
 }
+
 export { updateDerived, rollSkillCheck };

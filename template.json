@@ -344,8 +344,7 @@
           "label": "WITCHER.Actor.DerStat.Focus"
         },
         "vigor": {
-          "max": 0,
-          "current": 0,
+          "value": 0,
           "label": "WITCHER.Actor.DerStat.Vigor"
         }
       },
