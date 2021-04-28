@@ -1,3 +1,7 @@
+.flex {
+  display: flex;
+}
+
 /* Navigation tabs */
 .sheet nav.sheet-tabs { 
   height: 32px;
@@ -52,9 +56,6 @@
 .right-sidebar {
   width: 150px;
 }
-.header-layout{
-  display: flex;
-}
 .header-center {
   flex: 1;
 }
@@ -78,9 +79,6 @@
   width: 150px;
 }
 
-.skills-row {
-  display: flex;
-}
 .skill-column {
   margin: 5px;
 }
@@ -94,10 +92,6 @@
 .profession-card {
   width: 250px;
   margin: 5px;
-}
-
-.profession-card-header {
-  display: flex;
 }
 
 .profession-layout {
@@ -182,26 +176,166 @@ input.item-quantity{
   width: 30px;
 }
 
-.armor-item {
-  display: flex;
-}
-
-.weapon-item {
-  display: flex;
-}
-
-.valuable-item {
-  display: flex;
-}
-
-.diagram-item {
-  display: flex;
-}
-
 .lifeEvents {
   margin: 10px;
 }
 
 .events {
   width: 45px;
+}
+
+.weapon-item {
+  width: 380px;
+}
+.weapon-section {
+  width:450px;
+}
+
+.item-info {
+  width: 380px;
+  background-color: lightgray;
+}
+
+.label-info {
+  margin-left: 5px;
+}
+
+.fa-info {
+  margin: 5px;
+  width: 10px;
+}
+.item-delete {
+  margin: 5px;
+}
+.item-edit {
+  margin: 5px;
+}
+.fa-info {
+  margin: 5px;
+  width: 10px;
+}
+.info-filler {
+  width: 45px;
+}
+.qty-filler {
+  width: 20px;
+}
+.weapon-name-header {
+  width: 170px;
+}
+.damage-header {
+  width: 50px;
+}
+.range-header {
+  width: 50px;
+}
+input.range-info {
+  width: 90px;
+}
+input.damage-info {
+  width: 100px;
+}
+input.reliable-info {
+  width: 35px;
+}
+
+.armor-section {
+  margin-left: 10px;
+  width: 380px;
+}
+
+.armor-name-header {
+  width: 230px;
+}
+
+.stopping-header {
+  width: 30px;
+}
+
+input.stopping-info {
+  width: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.valuable-section {
+  margin-right: 10px;
+}
+.valuable-table {
+  width: 500px;
+}
+
+.substance-img {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+.substance-header {
+  display: flex;
+  align-items: center;
+}
+.substance-header label {
+  width: 100px;
+  margin-right: 5px;
+  text-align: end;
+}
+
+.item-substance-display {
+  margin-left: 5px;
+}
+
+.component-section {
+  width: 300px;
+}
+
+input.weight-data {
+  width: 30px;
+}
+
+.components-display input{
+  width: 25px;
+}
+input.sta-input {
+  width: 25px;
+}
+
+.magic-info {
+  width: 250px;
+  background-color: lightslategray;
+  margin: auto;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+.skill-info {
+  background-color: lightslategray;
+  margin: auto;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+
+input.focus-value {
+  background-color: lightsteelblue;
+  width: 25px;
+}
+
+input.focus {
+  background-color: lightsteelblue;
+}
+
+.spell-section {
+  width: 450px;
+  margin-right: 10px;
+}
+
+.magic-section {
+  width: 400px;
+}
+
+.magic-value-display {
+  margin-right: 10px;
+  margin-left: 20px;
 }

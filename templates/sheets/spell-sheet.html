@@ -14,81 +14,86 @@
                     <option value="Hexes">Hexes</option>
                     {{/select}}
                 </select>
+                <label>Sta cost</label>
+                <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
+
+                {{#if (eq data.class "Hexes")}}
+                <label>Danger</label>
+                <select name="data.danger" id="level-select">
+                    {{#select data.danger}}
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    {{/select}}
+                </select>
+                {{/if}}
+                {{#unless (eq data.class "Hexes")}}
+                <select name="data.level" id="level-select">
+                    {{#select data.level}}
+                    <option value="novice">Novice</option>
+                    <option value="journeyman">Journeyman</option>
+                    <option value="master">Master</option>
+                    {{/select}}
+                </select>
+                {{/unless}}
             </div>
         </div>
-    </header> 
-    <label>Sta cost</label>
-    <input name="stamina" type="text" value="{{data.stamina}}"/>
-    {{#if (eq data.class "Mage")}}
-        <select name="data.level" id="level-select">
-            {{#select data.level}}
-            <option value="novice">Novice</option>
-            <option value="Journeyman">Journeyman</option>
-            <option value="master">Master</option>
-            {{/select}}
-        </select>
-        <select name="data.source" id="source-select">
-            {{#select data.source}}
-            <option value="mixedElements">Mixed Elements</option>
-            <option value="earth">Earth</option>
-            <option value="air">Air</option>
-            <option value="fire">Fire</option>
-            <option value="wather">Wather</option>
-            {{/select}}
-        </select>
-    {{/if}}
-    {{#if (eq data.class "Priest")}}
-        <select name="data.level" id="level-select">
-            {{#select data.level}}
-            <option value="novice">Novice</option>
-            <option value="Journeyman">Journeyman</option>
-            <option value="master">Master</option>
-            {{/select}}
-        </select>
-        <select name="data.source" id="source-select">
-            {{#select data.source}}
-            <option value="druid">Druid</option>
-            <option value="preacher">Preacher</option>
-            <option value="arch priest">Arch priest</option>
-            {{/select}}
-        </select>
-    {{/if}}
-    {{#if (eq data.class "Witcher")}}
-        <select name="data.level" id="level-select">
-            {{#select data.level}}
-            <option value="basic">Basic Sign</option>
-            <option value="Alternate">Alternate Sign Forms</option>
-            {{/select}}
-        </select>
-    {{/if}}
-    {{#if (eq data.class "Rituals")}}
-        <select name="data.level" id="level-select">
-            {{#select data.level}}
-            <option value="novice">Novice</option>
-            <option value="Journeyman">Journeyman</option>
-            <option value="master">Master</option>
-            {{/select}}
-        </select>
-    {{/if}}
-        <textarea name="effect" value="{{data.effect}}">effect</textarea>
-        <label>Range</label>
-        <input name="range" type="text" value="{{data.range}}"/>
-        <label>Duration</label>
-        <input name="duration" type="text" value="{{data.duration}}"/>
-        <label>Defence</label>
-        <input name="defence" type="text" value="{{data.defence}}"/>
-    {{#if (eq data.class "Rituals")}}
+    </header>
+    <div>
+        {{#if (eq data.class "Mage")}}
+            <select name="data.source" id="source-select">
+                {{#select data.source}}
+                <option value="mixedElements">Mixed Elements</option>
+                <option value="earth">Earth</option>
+                <option value="air">Air</option>
+                <option value="fire">Fire</option>
+                <option value="wather">Wather</option>
+                {{/select}}
+            </select>
+        {{/if}}
+        {{#if (eq data.class "Priest")}}
+            <select name="data.source" id="source-select">
+                {{#select data.source}}
+                <option value="druid">Druid</option>
+                <option value="preacher">Preacher</option>
+                <option value="arch priest">Arch priest</option>
+                {{/select}}
+            </select>
+        {{/if}}
+        {{#if (eq data.class "Witcher")}}
+            <select name="data.level" id="level-select">
+                {{#select data.level}}
+                <option value="basic">Basic Sign</option>
+                <option value="Alternate">Alternate Sign Forms</option>
+                {{/select}}
+            </select>
+        {{/if}}
+        <label>Effect</label>
+        <textarea rows="5" name="data.effect">{{data.effect}}</textarea>
+        
+        {{#unless (eq data.class "Rituals")}}
+        {{#unless (eq data.class "Hexes")}}
+        <div class="flex">
+            <label>Range</label>
+            <input name="data.range" type="text" value="{{data.range}}"/>
+            <label>Duration</label>
+            <input name="data.duration" type="text" value="{{data.duration}}"/>
+            <label>Defence</label>
+            <input name="data.defence" type="text" value="{{data.defence}}"/>
+        </div>
+        {{/unless}}
+        {{/unless}}
+        {{#if (eq data.class "Rituals")}}
         <label>Preparation Time</label>
-        <input name="preparationTime" type="text" value="{{data.preparationTime}}"/>
+        <input name="data.preparationTime" type="text" value="{{data.preparationTime}}"/>
         <label>Dificulty Check</label>
-        <input name="dificultyCheck" type="text" value="{{data.dificultyCheck}}"/>
+        <input name="data.dificultyCheck" type="text" value="{{data.dificultyCheck}}"/>
         <label>Components</label>
-        <input name="components" type="text" value="{{data.components}}"/>
-    {{/if}}
-    {{#if (eq data.class "Hexes")}}
-        <label>Danger</label>
-        <input name="danger" type="text" value="{{data.danger}}"/>
+        <input name="data.components" type="text" value="{{data.components}}"/>
+        {{/if}}
+        {{#if (eq data.class "Hexes")}}
         <label>Requirements To Lift</label>
-        <input name="liftRequirement" type="text" value="{{data.liftRequirement}}"/>
-    {{/if}}
+        <textarea rows="5" name="data.liftRequirement">{{data.liftRequirement}}</textarea>
+        {{/if}}
+    </div>
 </form>

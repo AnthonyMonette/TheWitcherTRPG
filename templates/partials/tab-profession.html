@@ -1,7 +1,7 @@
 <h1>{{data.profession.professionName}}</h1>
 <div class="profession-layout">
     <div class="profession-card defining-skill">
-        <div class="profession-card-header defining-skill-header">
+        <div class="flex defining-skill-header">
             <input class="profession-skill-input" name="data.profession.definingSkill.skillName" type="text" value="{{data.profession.definingSkill.skillName}}" placeholder=""/>
             <select class="defining-skill-select" name="data.profession.definingSkill.stat">
                 {{#select data.profession.definingSkill.stat}}
@@ -19,7 +19,7 @@
         <div>
             <input name="data.profession.skillPath1.pathName" type="text" value="{{data.profession.skillPath1.pathName}}" placeholder=""/>
             <div class="profession-card first-path">
-                <div class="profession-card-header first-path-header">
+                <div class="flex first-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath1.skill1.skillName" type="text" value="{{data.profession.skillPath1.skill1.skillName}}" placeholder=""/>
                     <select class="first-path-select" name="data.profession.skillPath1.skill1.stat">
                         {{#select data.profession.skillPath1.skill1.stat}}
@@ -34,7 +34,7 @@
                 <textarea rows="10" name="data.profession.skillPath1.skill1.definition">{{data.profession.skillPath1.skill1.definition}}</textarea>
             </div>
             <div class="profession-card first-path">
-                <div class="profession-card-header first-path-header">
+                <div class="flex first-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath1.skill2.skillName" type="text" value="{{data.profession.skillPath1.skill2.skillName}}" placeholder=""/>
                     <select class="first-path-select" name="data.profession.skillPath1.skill2.stat">
                         {{#select data.profession.skillPath1.skill2.stat}}
@@ -49,7 +49,7 @@
                 <textarea rows="10" name="data.profession.skillPath1.skill2.definition">{{data.profession.skillPath1.skill2.definition}}</textarea>
             </div>
             <div class="profession-card first-path">
-                <div class="profession-card-header first-path-header">
+                <div class="flex first-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath1.skill3.skillName" type="text" value="{{data.profession.skillPath1.skill3.skillName}}" placeholder=""/>
                     <select class="first-path-select" name="data.profession.skillPath1.skill3.stat">
                         {{#select data.profession.skillPath1.skill3.stat}}
@@ -67,7 +67,7 @@
         <div>
             <input name="data.profession.skillPath2.pathName" type="text" value="{{data.profession.skillPath2.pathName}}" placeholder=""/>
             <div class="profession-card second-path">
-                <div class="profession-card-header second-path-header">
+                <div class="flex second-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath2.skill1.skillName" type="text" value="{{data.profession.skillPath2.skill1.skillName}}" placeholder=""/>
                     <select class="second-path-select" name="data.profession.skillPath2.skill1.stat">
                         {{#select data.profession.skillPath2.skill1.stat}}
@@ -82,7 +82,7 @@
                 <textarea rows="10" name="data.profession.skillPath2.skill1.definition">{{data.profession.skillPath2.skill1.definition}}</textarea>
             </div>
             <div class="profession-card second-path">
-                <div class="profession-card-header second-path-header">
+                <div class="flex second-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath2.skill2.skillName" type="text" value="{{data.profession.skillPath2.skill2.skillName}}" placeholder=""/>
                     <select class="second-path-select" name="data.profession.skillPath2.skill2.stat">
                         {{#select data.profession.skillPath2.skill2.stat}}
@@ -97,7 +97,7 @@
                 <textarea rows="10" name="data.profession.skillPath2.skill2.definition">{{data.profession.skillPath2.skill2.definition}}</textarea>
             </div>
             <div class="profession-card second-path">
-                <div class="profession-card-header second-path-header">
+                <div class="flex second-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath2.skill3.skillName" type="text" value="{{data.profession.skillPath2.skill3.skillName}}" placeholder=""/>
                     <select class="second-path-select" name="data.profession.skillPath2.skill3.stat">
                         {{#select data.profession.skillPath2.skill3.stat}}
@@ -115,7 +115,7 @@
         <div>
             <input name="data.profession.skillPath3.pathName" type="text" value="{{data.profession.skillPath3.pathName}}" placeholder=""/>
             <div class="profession-card third-path">
-                <div class="profession-card-header third-path-header">
+                <div class="flex third-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath3.skill1.skillName" type="text" value="{{data.profession.skillPath3.skill1.skillName}}" placeholder=""/>
                     <select class="third-path-select" name="data.profession.skillPath3.skill1.stat">
                         {{#select data.profession.skillPath3.skill1.stat}}
@@ -130,7 +130,7 @@
                 <textarea rows="10" name="data.profession.skillPath3.skill1.definition">{{data.profession.skillPath3.skill1.definition}}</textarea>
             </div>
             <div class="profession-card third-path">
-                <div class="profession-card-header third-path-header">
+                <div class="flex third-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath3.skill2.skillName" type="text" value="{{data.profession.skillPath3.skill2.skillName}}" placeholder=""/>
                     <select class="third-path-select" name="data.profession.skillPath3.skill2.stat">
                         {{#select data.profession.skillPath3.skill2.stat}}
@@ -145,7 +145,7 @@
                 <textarea rows="10" name="data.profession.skillPath3.skill2.definition">{{data.profession.skillPath3.skill2.definition}}</textarea>
             </div>
             <div class="profession-card third-path">
-                <div class="profession-card-header third-path-header">
+                <div class="flex third-path-header">
                     <input class="profession-skill-input" name="data.profession.skillPath3.skill3.skillName" type="text" value="{{data.profession.skillPath3.skill3.skillName}}" placeholder=""/>
                     <select class="third-path-select" name="data.profession.skillPath3.skill3.stat">
                         {{#select data.profession.skillPath3.skill3.stat}}

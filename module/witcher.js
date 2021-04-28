@@ -78,13 +78,8 @@ function updateDerived(actor){
         'data.derivedstats.kick.value': `1d6+${kBonus}`
      });
 
-} //end updateDerived function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} statNum
-@param {Integer} skillNum 
-*/
 function rollSkillCheck(actor, statNum, skillNum){
     let thisActor = actor;
     let parentStat = "";
@@ -158,12 +153,8 @@ function rollSkillCheck(actor, statNum, skillNum){
         }
       }).render(true)  
     
-}//end SkillCheck function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getIntSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.int.value;
@@ -226,12 +217,8 @@ function getIntSkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getIntSkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getRefSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.ref.value;
@@ -274,12 +261,8 @@ function getRefSkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getRefSkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getDexSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.dex.value;
@@ -310,12 +293,8 @@ function getDexSkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getDexSkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getBodySkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.body.value;
@@ -334,12 +313,8 @@ function getBodySkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getBodySkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getEmpSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.emp.value;
@@ -390,12 +365,8 @@ function getEmpSkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getEmpSkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getCraSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.cra.value;
@@ -434,12 +405,8 @@ function getCraSkillMod(actor, skillNum){
     }
 
     return [skillName, totalBase];
-}// end getCraSkillMod function
+}
 
-/*
-@param {Actor} actor
-@param {Integer} skillNum 
-*/
 function getWillSkillMod(actor, skillNum){
 
     let statVal = actor.data.data.stats.will.value;
@@ -479,5 +446,4 @@ function getWillSkillMod(actor, skillNum){
 
     return [skillName, totalBase];
 }
-
 export { updateDerived, rollSkillCheck };

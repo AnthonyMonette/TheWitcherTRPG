@@ -16,6 +16,7 @@ export default class WitcherItemSheet extends ItemSheet {
     /** @override */
     getData() {
       const data = super.getData();
+      data.config = CONFIG.witcher;
       this.options.classes.push(`item-${this.item.data.type}`)
       return data;
     }

@@ -36,16 +36,17 @@
         <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
     </div>
     {{/each}}
+    
+    <div class="stat-display">
+        <label>{{localize data.derivedStats.sta.label}}</label> 
+        <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}" placeholder="0" data-dtype="Number"/>
+    </div>
+
     <hr />
     <div class="stat-display">
         <label>{{localize data.derivedStats.hp.label}}</label> 
         <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}" placeholder="0" data-dtype="Number"/>
         <input class="header-stat" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
-    </div>
-    <div class="stat-display">
-        <label>{{localize data.derivedStats.sta.label}}</label> 
-        <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}" placeholder="0" data-dtype="Number"/>
-        <input class="header-stat" name="data.derivedStats.sta.current" type="text" value="{{data.derivedStats.sta.current}}" placeholder="0" data-dtype="Number"/>
     </div>
     <div class="stat-display">
         <label>{{localize data.derivedStats.resolve.label}}</label> 

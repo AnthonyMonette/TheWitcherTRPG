@@ -1,0 +1,162 @@
+<div class=substances-section>
+    <h2>Substances</h2>
+    <div class="substance vitriol">
+        <div class="substance-header">
+            <label>Vitriol</label>
+            <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
+            <span>{{vitriolCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-vitriol-table">
+                {{#each substancesVitriol as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" type="number" data-field="data.quantity" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance rebis">
+        <div class="substance-header">
+            <label>Rebis</label>
+            <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
+            <span>{{rebisCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-rebis-table">
+                {{#each substancesRebis as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance aether"> 
+        <div class="substance-header">
+            <label>Aether</label>
+            <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
+            <span>{{aetherCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-aether-table">
+                {{#each substancesAether as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance hydragenum">
+        <div class="substance-header">
+            <label>Hydragenum</label>
+            <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
+            <span>{{hydragenumCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-hydragenum-table">
+                {{#each substancesHydragenum as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance vermilion">
+        <div class="substance-header">
+            <label>Vermilion</label>
+            <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
+            <span>{{vermilionCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-vermilion-table">
+                {{#each substancesVermilion as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance sol">
+        <div class="substance-header">
+            <label>Sol</label>
+            <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
+            <span>{{solCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-sol-table">
+                {{#each substancesSol as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance caelum">
+        <div class="substance-header">
+            <label>Caelum</label>
+            <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
+            <span>{{caelumCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-caelum-table">
+                {{#each substancesCaelum as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
+    <div class="substance fulgur">
+        <div class="substance-header">
+            <label>Fulgur</label>
+            <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
+            <span>{{fulgurCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-fulgur-table">
+                {{#each substancesFulgur as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>

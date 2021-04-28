@@ -1,44 +1,24 @@
 <div class="tab body background">
     <div class="flexrow">
         <div class="flexcol background scrollable">
-            <table class="details">
-                <tr class="details">
-                    <th class="details">
-                        {{localize "WITCHER.Homeland"}}
-                    </th>
-                </tr>
-                <tr class="details inputrow">
-                    <td>
-                        <select name="data.general.homeland.value" id="homeland-select">
-                        {{#select data.general.homeland.value}}
-                        {{#each data.config.homelands as |name value|}}
-                                <option value="{{value}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                        </select>
-                    </td>
-                </tr>
-            </table>
-    
+            {{localize "WITCHER.Homeland"}}
+            
+            <select name="data.general.homeland.value" id="homeland-select">
+            {{#select data.general.homeland.value}}
+            {{#each data.config.homelands as |name value|}}
+                    <option value="{{value}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
             {{#each data.general.details as |details dt|}}
-            <table class="details {{dt}}">
-                <tr class="{{dt}}-headerrow">
-                    <th class="details header {{dt}}">
-                        {{localize details.label}}
-                    </th>
-                </tr>
-                <tr class="details input row">
-                    <td>
-                        <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text"
-                            value="{{details.value}}" />
-                    </td>
-                </tr>
-            </table>
+            {{localize details.label}}
+            <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text"
+                value="{{details.value}}" />
             {{/each}}
         </div>
         
         <div class="lifeEvents background">
-            <textarea rows=36 name="data.general.background.value">{{data.general.background.value}}</textarea>
+            <textarea rows=25 name="data.general.background.value">{{data.general.background.value}}</textarea>
         </div>    
     </div>
     <div class="flexcol background">

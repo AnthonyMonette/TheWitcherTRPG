@@ -237,6 +237,22 @@
           }
         }
       },
+      "focus1": {
+        "name": "",
+        "value": 0
+      },
+      "focus2": {
+        "name": "",
+        "value": 0
+      },
+      "focus3": {
+        "name": "",
+        "value": 0
+      },
+      "focus4": {
+        "name": "",
+        "value": 0
+      },
       "stats": {
         "int": {
           "max": 0,
@@ -342,6 +358,23 @@
           "value": "",
           "label": "WITCHER.Actor.DerStat.Kick"
         }
+      },
+      "improvementPoints": 0,
+      "skillTraining1": {
+        "name": "",
+        "value": 0
+      },
+      "skillTraining2": {
+        "name": "",
+        "value": 0
+      },
+      "skillTraining3": {
+        "name": "",
+        "value": 0
+      },
+      "skillTraining4": {
+        "name": "",
+        "value": 0
       },
       "skills": {
         "int": {
@@ -583,7 +616,7 @@
       "spell"
     ],
     "templates":{
-      "baseItem": {
+      "base": {
         "description": "",
         "quantity": 1,
         "weight": 0,
@@ -591,6 +624,7 @@
       }
     },
     "valuable": {
+      "templates": ["base"],
       "type": "",
       "avail": "",
       "effect":"",
@@ -598,6 +632,7 @@
       "quality": ""
     },
     "weapon": {
+      "templates": ["base"],
       "type": "",
       "accuracy": 0,
       "avail": "",
@@ -610,6 +645,7 @@
       "enhancements": 0
     },
     "armor": {
+      "templates": ["base"],
       "stopping": 0,
       "reliable": 0,
       "avail": "",
@@ -618,6 +654,7 @@
       "encumb": 0
     },
     "enhancement": {
+      "templates": ["base"],
       "avail": "",
       "effect": "",
       "stopping": 0,
@@ -626,12 +663,14 @@
       "percing": false
     },
     "mount": {
+      "templates": ["base"],
       "dex": "",
       "control": "",
       "speed": "",
       "hp": 0
     },
     "alchemical": {
+      "templates": ["base"],
       "type": "",
       "avail": "",
       "effect": "",
@@ -639,22 +678,38 @@
       "toxicity": ""
     },
     "component": {
+      "templates": ["base"],
       "type": "",
       "rarity": "",
       "location": "",
       "quantityObtainable": "",
-      "forage": ""
+      "forage": "",
+      "substanceType": ""
     },
     "diagrams": {
+      "templates": ["base"],
       "type": "",
       "level": "",
+      "isFormulae": false, 
       "craftingDC": 0,
       "alchemyDC": 0,
       "craftingTime": "",
       "components": "",
-      "investment": 0
+      "investment": 0,
+      "learned": false,
+      "alchemyComponents": {
+        "vitriol": 0,
+        "rebis": 0,
+        "aether": 0,
+        "hydragenum": 0,
+        "vermilion": 0,
+        "sol": 0,
+        "caelum": 0,
+        "fulgur": 0
+      }
     },
     "mutagen": {
+      "templates": ["base"],
       "type": "",
       "source": "",
       "effect": "",

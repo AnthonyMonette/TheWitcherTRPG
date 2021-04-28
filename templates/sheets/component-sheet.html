@@ -12,15 +12,26 @@
                 <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
             </div>
             <div class="resource">
-                <label>type</label>
+                <label>Type</label>
                 <select name="data.type" id="type-select">
                     {{#select data.type}}
                     <option value="crafting-material">Crafting Material</option>
                     <option value="animal-parts">Hides & Animal Parts</option>
                     <option value="alchemical">Alchemical Treatments</option>
                     <option value="minerals">Ingots & Minerals</option>
+                    <option value="substances">Substances</option>
                     {{/select}}
                 </select>
+                {{#if (eq data.type "substances")}}
+                    <label>Substance Type :</label>
+                    <select name="data.substanceType" id="substanceType-select">
+                        {{#select data.substanceType}}
+                        {{#each config.substanceTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/if}}
             </div>
         </div>
     </header>

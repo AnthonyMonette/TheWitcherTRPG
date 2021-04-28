@@ -1,0 +1,227 @@
+<div class="flex">
+    <div class="spell-section">
+        <h2> Novice - Spells, Invocation, Sings </h2>
+        <table class="novice-spell-table">
+            <tr> 
+                <td></td> 
+                <td><b>name</b></td>
+                <td><b>STA Cost</b></td>
+                <td></td> 
+            </tr>
+            {{#each noviceSpells as |noviceSpell id|}}
+            <tbody class="item" data-item-id="{{noviceSpell._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{noviceSpell.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.stamina" type="text" value="{{noviceSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info hidden">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>Effect :</b></label> {{noviceSpell.data.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Source :</b></label> {{noviceSpell.data.source}}
+                                <label><b>Range :</b></label> {{noviceSpell.data.range}}
+                                <label><b>Duration :</b></label> {{noviceSpell.data.duration}}
+                                <label><b>Defense :</b></label> {{noviceSpell.data.defense}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+        
+        <h2> Journeyman - Spells, Invocation, Sings </h2>
+        <table class="journeyman-spell-table">
+            <tr> 
+                <td></td> 
+                <td><b>name</b></td>
+                <td><b>STA Cost</b></td>
+                <td></td> 
+            </tr>
+            {{#each journeymanSpells as |journeymanSpell id|}}
+            <tbody class="item" data-item-id="{{journeymanSpell._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{journeymanSpell.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.stamina" type="text" value="{{journeymanSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info hidden">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>Effect :</b></label> {{journeymanSpell.data.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Source :</b></label> {{journeymanSpell.data.source}}
+                                <label><b>Range :</b></label> {{journeymanSpell.data.range}}
+                                <label><b>Duration :</b></label> {{journeymanSpell.data.duration}}
+                                <label><b>Defense :</b></label> {{journeymanSpell.data.defense}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+
+        
+        <h2> Master - Spells, Invocation, Sings </h2>
+        <table class="master-spell-table">
+            <tr> 
+                <td></td> 
+                <td><b>name</b></td>
+                <td><b>STA Cost</b></td>
+                <td></td> 
+            </tr>
+            {{#each masterSpells as |masterSpell id|}}
+            <tbody class="item" data-item-id="{{masterSpell._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{masterSpell.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.stamina" type="text" value="{{masterSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info hidden">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>Effect :</b></label> {{masterSpell.data.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Source :</b></label> {{masterSpell.data.source}}
+                                <label><b>Range :</b></label> {{masterSpell.data.range}}
+                                <label><b>Duration :</b></label> {{masterSpell.data.duration}}
+                                <label><b>Defense :</b></label> {{masterSpell.data.defense}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+    <div class="magic-section">
+        <div class="magic-info">
+            <div class="flex">
+                <label>Vigor:</label> <div class="magic-value-display">{{data.derivedStats.vigor.current}}</div>
+                <label>Current STA:</label> <input class="focus-value" name="data.derivedStats.sta.current" type="text" value="{{data.derivedStats.sta.current}}" placeholder="0" data-dtype="Number"/>
+            </div>
+            <div class="flex">
+                <input class="focus" name="data.focus1.name" type="text" value="{{data.focus1.name}}" placeholder="First Focus" />
+                <input class="focus-value" name="data.focus1.value" type="text" value="{{data.focus1.value}}" placeholder="0" />
+            </div>
+            <div class="flex">
+                <input class="focus" name="data.focus2.name" type="text" value="{{data.focus2.name}}" placeholder="Second Focus" />
+                <input class="focus-value" name="data.focus2.value" type="text" value="{{data.focus2.value}}" placeholder="0" />
+            </div>
+            <div class="flex">
+                <input class="focus" name="data.focus3.name" type="text" value="{{data.focus3.name}}" placeholder="Third Focus" />
+                <input class="focus-value" name="data.focus3.value" type="text" value="{{data.focus3.value}}" placeholder="0" />
+            </div>
+            <div class="flex">
+                <input class="focus" name="data.focus4.name" type="text" value="{{data.focus4.name}}" placeholder="Fourth Focus" />
+                <input class="focus-value" name="data.v.value" type="text" value="{{data.focus4.value}}" placeholder="0" />
+            </div>
+        </div>
+        <h2> Rituals </h2>
+        <table class="hexes-table">
+            <tr> 
+                <td></td> 
+                <td><b>name</b></td>
+                <td><b>STA Cost</b></td>
+                <td></td> 
+            </tr>
+            {{#each rituals as |ritual id|}}
+            <tbody class="item" data-item-id="{{ritual._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{ritual.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.stamina" type="text" value="{{ritual.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info hidden">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>Effect :</b></label> {{ritual.data.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Components :</b></label> {{ritual.data.components}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Prep Time :</b></label> {{ritual.data.preparationTime}}
+                                <label><b>DC :</b></label> {{ritual.data.dificultyCheck}}
+                                <label><b>Duration :</b></label> {{ritual.data.duration}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+        <h2> Hexes </h2>
+        <table class="hexes-table">
+            <tr> 
+                <td></td> 
+                <td><b>name</b></td>
+                <td><b>STA Cost</b></td>
+                <td><b>Danger</b></td>
+                <td></td> 
+            </tr>
+            {{#each hexes as |hex id|}}
+            <tbody class="item" data-item-id="{{hex._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{hex.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.stamina" type="text" value="{{hex.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit" data-field="data.danger" type="text" value="{{hex.data.danger}}"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info hidden">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>Effect :</b></label> {{hex.data.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>Requirement To Lift :</b></label> {{hex.data.liftRequirement}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+</div>
