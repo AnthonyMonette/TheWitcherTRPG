@@ -3,13 +3,18 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="resource">
+            <div class="flex">
                 <label>Quantity</label>
                 <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                <label>Weight</label>
+                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                <label>Cost</label>
+                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
             </div>
-            <label>Is a Formulae </label><input type="checkbox" name="data.isFormulae" {{checked data.isFormulae}}/>
-            <div class="resource">
-                <label>type</label>
+            <div class="resource flex">
+                <label>Formulae </label>
+                <input type="checkbox" name="data.isFormulae" {{checked data.isFormulae}}/>
+                <label>Type</label>
                 <select name="data.type" id="type-select">
                     {{#select data.type}}
                     {{#if data.isFormulae}}
@@ -26,18 +31,6 @@
                     <option value="elderfolk-armor">Elderfolk Armor</option>
                     <option value="Ammunition">Ammunitionr</option>
                     {{/unless}}
-                    {{/select}}
-                </select>
-            </div>
-            <div class="resource">
-                <label>level</label>
-                <select name="data.level" id="type-select">
-                    {{#select data.level}}
-                    <option value="novice">Novice</option>
-                    <option value="journeyman">Journeyman</option>
-                    <option value="master">Master</option>
-                    <option value="grand-master">Grand Master</option>
-                    <option value="witcher">Witcher</option>
                     {{/select}}
                 </select>
             </div>
@@ -62,31 +55,27 @@
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             <table>
                 <tr> 
-                    {{#if data.isFormulae}}
-                    <th>{{localize "WITCHER.Diagram.alchemyDC"}}</th>
-                    {{/if}}
-                    {{#unless data.isFormulae}}
+                    <th>Level</th>
                     <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
-                    {{/unless}}
                     <th>{{localize "WITCHER.Diagram.craftingTime"}}</th>
                     <th>{{localize "WITCHER.Diagram.investment"}}</th>
-                    <th>{{localize "WITCHER.Item.Cost"}}</th>
                 </tr>
                 <tr>
-                    {{#if data.isFormulae}}
-                    <td><input type="text" name="data.alchemyDC" value="{{data.alchemyDC}}" data-dtype="Number"/></td>
-                    {{/if}}
-                    {{#unless data.isFormulae}}
+                    <td>
+                        <select name="data.level" id="type-select">
+                            {{#select data.level}}
+                            <option value="novice">Novice</option>
+                            <option value="journeyman">Journeyman</option>
+                            <option value="master">Master</option>
+                            <option value="grand-master">Grand Master</option>
+                            <option value="witcher">Witcher</option>
+                            {{/select}}
+                        </select>
+                    </td>
                     <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
-                    {{/unless}}
                     <td><input type="text" name="data.craftingTime" value="{{data.craftingTime}}"/></td>
                     <td><input type="text" name="data.investment" value="{{data.investment}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/></td>
                 </tr>
-                <tr>
-                    <td colspan="5"><input type="text" name="data.components" value="{{data.components}}"/></td>
-                </tr>
-                
                 {{#if data.isFormulae}}
                 <tr>
                     <td colspan="5">
@@ -97,6 +86,8 @@
                             <input type="number" name="data.alchemyComponents.rebis" value="{{data.alchemyComponents.rebis}}"/>
                             <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
                             <input type="number" name="data.alchemyComponents.aether" value="{{data.alchemyComponents.aether}}"/>
+                            <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
+                            <input type="number" name="data.alchemyComponents.quebrith" value="{{data.alchemyComponents.quebrith}}"/>
                             <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
                             <input type="number" name="data.alchemyComponents.hydragenum" value="{{data.alchemyComponents.hydragenum}}"/>
                             <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
@@ -111,6 +102,12 @@
                     </td>
                 </tr>
                 {{/if}}
+                <tr>
+                    <td colspan="5">
+                        <label>Components</label>
+                        <textarea rows=5 name="data.components">{{data.components}}</textarea>
+                    </td>
+                </tr>
             </table>
         </div>
     </section>

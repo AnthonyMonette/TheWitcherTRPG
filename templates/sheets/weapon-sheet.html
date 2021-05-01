@@ -3,13 +3,15 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="resource">
-                <label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-            </div>
-            <div class="resource">
-                <label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+            <div class="resource flex">
+                <div class="flex">
+                    <label>Quantity</label>
+                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                    <label>Weight</label>
+                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <label>Cost</label>
+                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                </div>
             </div>
         </div>
     </header>
@@ -24,7 +26,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            <textarea name="data.description">{{data.description}}</textarea>
+            <textarea rows=10 name="data.description">{{data.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}
@@ -32,29 +34,51 @@
             <table>
                 <tr>
                     <th>{{localize "WITCHER.Weapon.Type"}}</th>
+                    <th>Melee</th>
                     <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
                     <th>{{localize "WITCHER.Item.Availability"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Damage"}}</th>
                     <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
                     <th>{{localize "WITCHER.Weapon.Hands"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Range"}}</th>
-                    <th>{{localize "WITCHER.Item.Effect"}}</th>
                     <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
                     <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
-                    <th>{{localize "WITCHER.Item.Cost"}}</th>
                 </tr>
                 <tr>
                     <td><input type="text" name="data.type" value="{{data.type}}"/></td>
+                    <td><input type="checkbox" name="data.isMelee"  {{checked data.isMelee}}/></td>
                     <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.avail" value="{{data.avail}}"/></td>
-                    <td><input type="text" name="data.damage" value="{{data.damage}}"/></td>
+                    <td>
+                        <select name="data.avail" id="avail-select">
+                        {{#select data.avail}}
+                        {{#each config.Avalability as |value name|}}
+                                <option value="{{value}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                        </select>
+                    </td>
                     <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.hands" value="{{data.hands}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.range" value="{{data.range}}"/></td>
-                    <td><input type="text" name="data.effect" value="{{data.effect}}"/></td>
-                    <td><input type="text" name="data.conceal" value="{{data.conceal}}"/></td>
+                    <td>
+                        <select name="data.hands" id="hands-select">
+                            {{#select data.hands}}
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                {{/select}}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="data.conceal" id="avail-select">
+                            {{#select data.conceal}}
+                            {{#each config.Concealment as |value name|}}
+                                    <option value="{{value}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </td>
                     <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><label>{{localize "WITCHER.Weapon.Range"}}</label><input type="text" name="data.range" value="{{data.range}}"/></td>
+                    <td colspan="2"><label>{{localize "WITCHER.Weapon.Damage"}}</label><input type="text" name="data.damage" value="{{data.damage}}"/></td>
+                    <td colspan="5"><label>{{localize "WITCHER.Item.Effect"}}</label><input type="text" name="data.effect" value="{{data.effect}}"/></td>
                 </tr>
             </table>
         </div>

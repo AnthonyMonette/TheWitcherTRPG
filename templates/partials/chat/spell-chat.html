@@ -1,0 +1,18 @@
+<div class="dice-roll chat-message">
+    <h2>{{title}}</h2>
+    <div><label>Sta Cost: </label>{{staCost}}</div>
+    <hr />
+    <div><label>Effet: </label>{{effet}}</div>
+    <hr />
+    <div><label>Range: </label>{{range}}</div>
+    <hr />
+    <div><label>Duration: </label>{{duration}}</div>
+    <hr />
+    <div><label>Defence: </label>{{defence}}</div>
+    {{#unless (eq roll.total 0)}}
+    <hr />
+    <div  class="dice-display">
+        <b>{{tooltip}}</b>
+    </div>
+    {{/unless}}
+</div>

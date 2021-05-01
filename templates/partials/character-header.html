@@ -1,13 +1,35 @@
 <div class="left-sidebar">
     {{#each data.stats as |details stat|}}
-    <div class="stat-display">
-        <label class="stat-label">{{localize details.label}}</label> 
+    <div class="stat-display" data-stat="{{stat}}">
+        <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
         <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
     </div>
     {{/each}}
 </div>
 <div class="header-center">
-    <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="flex">
+        <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        <div class="magic-info">
+            <div class="flexrow">
+                <div>
+                    <label>HP:</label> 
+                    <input class="focus-value" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
+                </div>
+                <div>
+                    <label>Death:</label> 
+                    <input class="focus-value" name="data.derivedStats.stun.current" type="text" value="{{data.derivedStats.stun.current}}" placeholder="0" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="flexrow">
+                <div>
+                    <label>Primary weapon:</label> 
+                </div>
+                <div>
+                    <label>Secondary Weapon:</label> 
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="flexrow">
         <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
         <div class="flexrow">
@@ -45,7 +67,6 @@
     <div class="stat-display">
         <label>{{localize data.derivedStats.hp.label}}</label> 
         <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}" placeholder="0" data-dtype="Number" readonly/>
-        <input class="header-stat" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
     </div>
     <div class="stat-display">
         <label>{{localize data.derivedStats.resolve.label}}</label> 

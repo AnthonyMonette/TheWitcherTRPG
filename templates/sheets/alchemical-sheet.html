@@ -3,23 +3,15 @@
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="resource">
-                <label>Quantity</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-            </div>
-            <div class="resource">
-                <label>Weight</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
-            </div>
-            <div class="resource">
-                <label>type</label>
-                <select name="data.type" id="type-select">
-                    {{#select data.type}}
-                    <option value="potion">Potion</option>
-                    <option value="decoction">Decoction</option>
-                    <option value="oil">Oil</option>
-                    {{/select}}
-                </select>
+            <div class="resource flex">
+                <div class="flex">
+                    <label>Quantity</label>
+                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                    <label>Weight</label>
+                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                    <label>Cost</label>
+                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                </div>
             </div>
         </div>
     </header>
@@ -35,25 +27,48 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            <textarea name="data.description">{{data.description}}</textarea>
+            <textarea rows=10 name="data.description">{{data.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             <table>
                 <tr>
+                    <th>Type</th>
                     <th>{{localize "WITCHER.Item.Availability"}}</th>
-                    <th>{{localize "WITCHER.Item.Effect"}}</th>
                     <th>{{localize "WITCHER.Alchemy.Duration"}}</th>
                     <th>{{localize "WITCHER.Alchemy.Toxicity"}}</th>
-                    <th>{{localize "WITCHER.Item.Cost"}}</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="data.avail" value="{{data.avail}}"/></td>
-                    <td><input type="text" name="data.effect" value="{{data.effect}}"/></td>
+                    <td>    
+                        <select name="data.type" id="type-select">
+                            {{#select data.type}}
+                            <option value="potion">Potion</option>
+                            <option value="decoction">Decoction</option>
+                            <option value="oil">Oil</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="data.avail" id="avail-select">
+                        {{#select data.avail}}
+                        {{#each config.Avalability as |value name|}}
+                            <option value="{{value}}">{{name}}</option>
+                        {{/each}}
+                            <option value="Witcher">W</option>
+                        {{/select}}
+                        </select>
+                    </td>
                     <td><input type="text" name="data.time" value="{{data.time}}"/></td>
                     <td><input type="text" name="data.toxicity" value="{{data.toxicity}}"/></td>
-                    <td><input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div>
+                            <label>{{localize "WITCHER.Item.Effect"}}</label>
+                            <textarea rows=10 name="data.effect">{{data.effect}}</textarea>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>

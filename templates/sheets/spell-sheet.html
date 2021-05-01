@@ -4,11 +4,11 @@
         <div class="header-fields">
             <h1 class="spellname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
             <div class="resource">
-                <label>Class</label>
+                <label>Type</label>
                 <select name="data.class" id="profession-select">
                     {{#select data.class}}
-                    <option value="Mage">Mage</option>
-                    <option value="Priest">Priest</option>
+                    <option value="Spells">Spells</option>
+                    <option value="Invocations">Invocations</option>
                     <option value="Witcher">Witcher Signs</option>
                     <option value="Rituals">Rituals</option>
                     <option value="Hexes">Hexes</option>
@@ -40,34 +40,39 @@
         </div>
     </header>
     <div>
-        {{#if (eq data.class "Mage")}}
-            <select name="data.source" id="source-select">
-                {{#select data.source}}
-                <option value="mixedElements">Mixed Elements</option>
-                <option value="earth">Earth</option>
-                <option value="air">Air</option>
-                <option value="fire">Fire</option>
-                <option value="wather">Wather</option>
-                {{/select}}
-            </select>
-        {{/if}}
-        {{#if (eq data.class "Priest")}}
-            <select name="data.source" id="source-select">
-                {{#select data.source}}
-                <option value="druid">Druid</option>
-                <option value="preacher">Preacher</option>
-                <option value="arch priest">Arch priest</option>
-                {{/select}}
-            </select>
-        {{/if}}
-        {{#if (eq data.class "Witcher")}}
-            <select name="data.level" id="level-select">
-                {{#select data.level}}
-                <option value="basic">Basic Sign</option>
-                <option value="Alternate">Alternate Sign Forms</option>
-                {{/select}}
-            </select>
-        {{/if}}
+        <div class="flex">
+            {{#if (eq data.class "Spells")}}
+                <select name="data.source" id="source-select">
+                    {{#select data.source}}
+                    <option value="mixedElements">Mixed Elements</option>
+                    <option value="earth">Earth</option>
+                    <option value="air">Air</option>
+                    <option value="fire">Fire</option>
+                    <option value="wather">Wather</option>
+                    {{/select}}
+                </select>
+            {{/if}}
+            {{#if (eq data.class "Invocations")}}
+                <select name="data.source" id="source-select">
+                    {{#select data.source}}
+                    <option value="druid">Druid</option>
+                    <option value="preacher">Preacher</option>
+                    <option value="arch priest">Arch priest</option>
+                    {{/select}}
+                </select>
+            {{/if}}
+            {{#if (eq data.class "Witcher")}}
+                <select name="data.level" id="level-select">
+                    {{#select data.level}}
+                    <option value="basic">Basic Sign</option>
+                    <option value="Alternate">Alternate Sign Forms</option>
+                    {{/select}}
+                </select>
+            {{/if}}
+
+            <label>Roll :</label>
+            <input class="spell-roll-value" name="data.roll" type="text" value="{{data.roll}}"/>
+        </div>
         <label>Effect</label>
         <textarea rows="5" name="data.effect">{{data.effect}}</textarea>
         

@@ -1,3 +1,8 @@
+export function getRandomInt(max) {
+    return Math.floor(Math.random() * (max + 1)) + 1;
+}
+
+
 /*
 On any change to the Stats, the Derived Stats need to be updated appropriately. The base = Will+Body/2. HP and Stamina = base * 5.
 Recovery and Stun = base. Stun can be a maximum of 10. Encumbrance = Body*10. Run = Speed*3. Leap = Run/5. Punch and Kick bonuses are determined 
@@ -19,44 +24,53 @@ function updateDerived(actor){
     let newRun = thisActor.data.data.stats.spd.max*3;
     let newLeap = Math.floor(newRun/5);
 
+    let meleeBonus = 0;
     let pBonus = 0;
     let kBonus = 0;
 
     switch(currentBody){
         case 1:
         case 2:
+            meleeBonus = "-4"
             pBonus = -4;
             break;
         case 3:
         case 4:
+            meleeBonus = "-2"
             pBonus = -2;
             kBonus = 2;
             break;
         case 5:
         case 6:
+            meleeBonus = "+0"
             pBonus = 0;
             kBonus = 4;
             break;
         case 7:
         case 8:
+            meleeBonus = "+2"
             pBonus = 2;
             kBonus = 6;
             break;
         case 9:
         case 10:
+            meleeBonus = "+4"
             pBonus = 4;
             kBonus = 8;
             break;
         case 11:
         case 12:
+            meleeBonus = "+6"
             pBonus = 6;
             kBonus = 10;
             break;
         case 13:
+            meleeBonus = "+8"
             pBonus = 8;
             kBonus = 12;
             break;
         default:
+            meleeBonus = "+0"
             pBonus = 0;
             kBonus = 0;
     }
@@ -76,6 +90,7 @@ function updateDerived(actor){
         'data.coreStats.enc.value': newEnc,
         'data.coreStats.run.value': newRun,
         'data.coreStats.leap.value': newLeap,
+        'data.attackStats.meleeBonus': meleeBonus,
         'data.attackStats.punch.value': `1d6+${pBonus}`,
         'data.attackStats.kick.value': `1d6+${kBonus}`,
      });
@@ -141,27 +156,12 @@ function rollSkillCheck(thisActor, statNum, skillNum){
             break;
     }
 
-    new Dialog({
-        title: `Skill Check`, 
-        content: `${parentStat}: ${skillName} Check`,
-        buttons: {
-          rollCheck: {
-            label: "Roll Check", 
-            callback: (html) => {
-              let roll = new Roll(`1d10+${stat}+${skill}`).roll();
-              roll.toMessage({
-                rollMode: 'roll',
-                speaker: {alias: thisActor.data.data.general.name},
-                flavor: `${parentStat}: ${skillName} Check`,
-              })      
-            }
-          },
-          close: {
-            label: "Close"
-          }
-        }
-      }).render(true)  
-    
+    let messageData = {
+        speaker: {alias: thisActor.data.data.general.name},
+        flavor: `${parentStat}: ${skillName} Check`,
+    }
+    let rollFormula = `1d10+${stat}+${skill}`
+    new Roll(rollFormula).roll().toMessage(messageData)
 }
 
 function getIntSkillMod(actor, skillNum){

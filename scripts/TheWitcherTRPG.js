@@ -1,6 +1,7 @@
 import {witcher} from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
 import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
+import WitcherItem from "../module/witcherItem.js";
 
 
 async function preloadHandlebarsTemplates(){
@@ -12,6 +13,10 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
+
+        "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html",
+        "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html",
+        "templates/dice/roll.html",
     ];
     return loadTemplates(templatePath); 
 }
@@ -21,6 +26,7 @@ Hooks.once("init", function () {
     console.log("TheWItcherTRPG | init system");
 
     CONFIG.witcher = witcher
+    CONFIG.Item.entityClass = WitcherItem;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("witcher", WitcherItemSheet, {makeDefault: true});
@@ -30,3 +36,5 @@ Hooks.once("init", function () {
 
     preloadHandlebarsTemplates();
 });
+
+Hooks.on("renderCharLog", (app, html, data) => CharacterData.addChatListeners(html));

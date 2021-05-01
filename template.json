@@ -349,6 +349,7 @@
         }
       },
       "attackStats": {
+        "meleeBonus": "",
         "punch": {
           "value": "",
           "label": "WITCHER.Actor.DerStat.Punch"
@@ -633,6 +634,7 @@
     "weapon": {
       "templates": ["base"],
       "type": "",
+      "isMelee": false,
       "accuracy": 0,
       "avail": "",
       "damage": "",
@@ -721,6 +723,7 @@
       "source": "",
       "domain": "",
       "stamina": 0,
+      "roll": "",
       "effect": "",
       "range": "",
       "duration": "",

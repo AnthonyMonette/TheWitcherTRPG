@@ -23,3 +23,17 @@ witcher.substanceTypes = {
     caelum: "Caelum",
     fulgur: "Fulgur"
 }
+
+witcher.Avalability = {
+    E: "Everywhere",
+    C: "Common",
+    P: "Poor",
+    R: "Rare",
+}
+
+witcher.Concealment = {
+    T: "Tiny",
+    S: "Small",
+    L: "Large",
+    NA: "CantHide",
+}

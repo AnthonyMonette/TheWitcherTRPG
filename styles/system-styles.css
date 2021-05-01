@@ -339,3 +339,37 @@ input.focus {
   margin-right: 10px;
   margin-left: 20px;
 }
+
+.dice-sucess{
+  background-color: lightgreen;
+  text-align: center;
+}
+.dice-fail{
+  background-color: lightpink;
+  text-align: center;
+}
+
+.profession-card i {
+  margin: 5px;
+}
+
+.dice-display {
+  text-align: center;
+}
+.item-delete {
+  width: 15px;
+}
+input.spell-sta {
+width: 25px;
+}
+input.spell-roll-value {
+  width: 200px;
+}
+
+.chat-message{
+  flex-direction: column;
+}
+
+.resource label{
+  margin-left: 10px;
+}

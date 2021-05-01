@@ -1,5 +1,6 @@
 
-import { updateDerived, rollSkillCheck } from "../witcher.js";
+import { RollCustomMessage } from "../chat.js";
+import { getRandomInt, updateDerived, rollSkillCheck } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -37,10 +38,10 @@ export default class WitcherActorSheet extends ActorSheet {
         var total = 0
         for ( var i = 0, _len = this.length; i < _len; i++ ) {
             if (this[i]["data"]["weight"] && this[i]["data"]["quantity"]){
-              total += Number(this[i]["data"]["quantity"]) *Number(this[i]["data"]["weight"])
+              total += Number(this[i]["data"]["quantity"]) * Number(this[i]["data"]["weight"])
             }
         }
-        return total
+        return Math.ceil(total)
       }
 
       data.totalSkills = this.calc_total_skills(data)
@@ -71,8 +72,6 @@ export default class WitcherActorSheet extends ActorSheet {
       data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Mage" || item.data.class=="Priest" || item.data.class=="witcher")});
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Rituals"});
-      console.log(data)
-
       return data;
     }
 
@@ -80,7 +79,6 @@ export default class WitcherActorSheet extends ActorSheet {
       super.activateListeners(html);
       
       html.find("input.stats").on("change", updateDerived(this.actor));
-
 
       let thisActor = this.actor;
       
@@ -94,7 +92,13 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".item-spell-display").on("click", this._onItemDisplayInfo.bind(this));
 
-      
+
+      html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
+      html.find(".item-roll").on("click", this._onItemRoll.bind(this));
+      html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
+      html.find(".spell-roll").on("click", this._onSpellRoll.bind(this));
+    
+
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
       html.find("#deduction-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 2)});
@@ -155,6 +159,133 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find("#ritcraft-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 6)});
     }
 
+    async _onSpellRoll(event) {
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let spellItem = this.actor.getOwnedItem(itemId);
+      let roll = "0"
+      if (spellItem.data.data.roll){
+        roll = spellItem.data.data.roll
+      }
+
+      let rollResult = new Roll(roll).roll()
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", {
+        type: "Spell Roll",
+        title: spellItem.name,
+        staCost: spellItem.data.data.stamina,
+        effet: spellItem.data.data.effect,
+        range:spellItem.data.data.range,
+        duration:spellItem.data.data.duration,
+        defence:spellItem.data.data.defence
+      })
+    }
+
+    async _onProfessionRoll(event) {
+      console.log("profession roll")
+      let stat = event.currentTarget.closest(".profession-display").dataset.stat;
+      let level = event.currentTarget.closest(".profession-display").dataset.level;
+      let name = event.currentTarget.closest(".profession-display").dataset.name;
+      let effet = event.currentTarget.closest(".profession-display").dataset.effet;
+      let statValue = 0
+      let statName = 0
+      switch(stat){
+        case "int":
+            statValue = this.actor.data.data.stats.int.max;
+            statName = "WITCHER.StInt";
+            break;
+        case "ref":
+            statValue = this.actor.data.data.stats.ref.max;
+            statName = "WITCHER.StRef";
+            break;
+        case "dex":
+            statValue = this.actor.data.data.stats.dex.max;
+            statName = "WITCHER.StDex";
+            break;
+        case "body":
+            statValue = this.actor.data.data.stats.body.max;
+            statName = "WITCHER.StBody";
+            break;
+        case "spd":
+            statValue = this.actor.data.data.stats.spd.max;
+            statName = "WITCHER.StSpd";
+            break;
+        case "emp":
+            statValue = this.actor.data.data.stats.emp.max;
+            statName = "WITCHER.StEmp";
+            break;
+        case "cra":
+            statValue = this.actor.data.data.stats.cra.max;
+            statName = "WITCHER.StCra";
+            break;
+        case "will":
+            statValue = this.actor.data.data.stats.will.max;
+            statName = "WITCHER.StWill";
+            break;
+        case "luck":
+            statValue = this.actor.data.data.stats.int.max;
+            statName = "WITCHER.StLuck";
+            break;
+      }
+
+      let rollResult = new Roll(`1d10+${statValue}+${level}`).roll()
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html", {
+        type: "Stats Roll",
+        title: name,
+        effet: effet,
+        statName: statName,
+        difficulty: statValue
+      })
+    }
+
+    async _onStatSaveRoll(event) {
+      let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      let statValue = 0
+      let statName = 0
+      switch(stat){
+        case "int":
+            statValue = this.actor.data.data.stats.int.max;
+            statName = "WITCHER.StInt";
+            break;
+        case "ref":
+            statValue = this.actor.data.data.stats.ref.max;
+            statName = "WITCHER.StRef";
+            break;
+        case "dex":
+            statValue = this.actor.data.data.stats.dex.max;
+            statName = "WITCHER.StDex";
+            break;
+        case "body":
+            statValue = this.actor.data.data.stats.body.max;
+            statName = "WITCHER.StBody";
+            break;
+        case "spd":
+            statValue = this.actor.data.data.stats.spd.max;
+            statName = "WITCHER.StSpd";
+            break;
+        case "emp":
+            statValue = this.actor.data.data.stats.emp.max;
+            statName = "WITCHER.StEmp";
+            break;
+        case "cra":
+            statValue = this.actor.data.data.stats.cra.max;
+            statName = "WITCHER.StCra";
+            break;
+        case "will":
+            statValue = this.actor.data.data.stats.will.max;
+            statName = "WITCHER.StWill";
+            break;
+        case "luck":
+            statValue = this.actor.data.data.stats.int.max;
+            statName = "WITCHER.StLuck";
+            break;
+      }
+
+      let rollResult = new Roll("1d10").roll()
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", {
+        type: "Stats Roll",
+        statName: statName,
+        difficulty: statValue
+      })
+    }
 
     _onInlineEdit(event) {
       event.preventDefault();
@@ -167,8 +298,7 @@ export default class WitcherActorSheet extends ActorSheet {
     
     _onItemEdit(event) {
       event.preventDefault(); 
-      let element = event.currentTarget;
-      let itemId = element.closest(".item").dataset.itemId;
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.getOwnedItem(itemId);
 
       item.sheet.render(true)
@@ -176,8 +306,7 @@ export default class WitcherActorSheet extends ActorSheet {
     
     _onItemDelete(event) {
       event.preventDefault(); 
-      let element = event.currentTarget;
-      let itemId = element.closest(".item").dataset.itemId;
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
       return this.actor.deleteOwnedItem(itemId);
     }
 
@@ -186,6 +315,139 @@ export default class WitcherActorSheet extends ActorSheet {
       let section = event.currentTarget.closest(".item");
       let editor = $(section).find(".item-info")
       editor.toggleClass("hidden");
+    }
+
+    _onItemRoll(event) {
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.getOwnedItem(itemId);
+      let formula = item.data.data.damage
+
+      if (item.data.data.isMelee){
+        console.log(this.actor.data.data.attackStats.meleeBonus)
+        formula += this.actor.data.data.attackStats.meleeBonus
+        console.log(formula)
+      }
+
+      let messageData = {
+        speaker: {alias: this.actor.data.data.general.name},
+        flavor: `<h1>Attack: ${item.name}</h1>`,
+      }
+
+      new Dialog({
+        title: `Performing an Attack with: ${item.name}`, 
+        content: `<h2>${item.name} damage: ${formula}</h2>`,
+        buttons: {
+          LocationRandomHuman: {
+            label: "Human", 
+            callback: (html) => {
+              let location = getRandomInt(10)
+              switch(location){
+                case 1:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`;
+                  formula = `(${formula})*3`;
+                  break;
+                case 2:
+                case 3:
+                case 4:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  break;
+                case 5:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Arm`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                case 6:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: L Arm`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                case 7:
+                case 8:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Leg`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                case 9:
+                case 10:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Leg`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                default:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+              }
+              new Roll(formula).roll().toMessage(messageData)
+            }
+          },
+          LocationRandomMonster: {
+            label: "Monster", 
+            callback: (html) => {
+              let location = getRandomInt(10)
+              switch(location){
+                case 1:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`;
+                  formula = `(${formula})*3`;
+                  break;
+                case 2:
+                case 3:
+                case 4:
+                  case 5:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  break;
+                case 6:
+                case 7:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Limb`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                case 8:
+                  case 9:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: L Limb`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                case 10:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Tail or Wing`;
+                  formula = `(${formula})*0.5`;
+                  break;
+                default:
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+              }
+              new Roll(formula).roll().toMessage(messageData)
+            }
+          },
+          LocationHead: {
+            label: "Head", 
+            callback: (html) => {
+              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`,
+              new Roll(`(${formula})*3`).roll().toMessage(messageData)
+            }
+          },
+          LocationTorso: {
+            label: "Torso", 
+            callback: (html) => {
+              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`,
+              new Roll(formula).roll().toMessage(messageData)
+            }
+          },
+          LocationArm: {
+            label: "Arm", 
+            callback: (html) => {
+              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Arm`,
+              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
+            }
+          },
+          LocationLeg: {
+            label: "Leg", 
+            callback: (html) => {
+              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Leg`,
+              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
+            }
+          },
+          LocationTail: {
+            label: "Tail", 
+            callback: (html) => {
+              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Tail or Wing`,
+              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
+            }
+          }
+        }
+      }).render(true)  
+    
     }
 
     _onSubstanceDisplay(event) {

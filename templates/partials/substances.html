@@ -60,6 +60,26 @@
         </div>
     </div>
 
+    <div class="substance quebrith"> 
+        <div class="substance-header">
+            <label>Quebrith</label>
+            <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
+            <span>{{quebrithCount}}</span> 
+            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
+        <div class="substance-list hidden">
+            <table class="substances-quebrith-table">
+                {{#each substancesQuebrith as |substance id|}}
+                    <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+
     <div class="substance hydragenum">
         <div class="substance-header">
             <label>Hydragenum</label>
