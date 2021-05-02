@@ -81,78 +81,6 @@
         "race": "",
         "gender": "",
         "age": 0,
-        "profession": {
-          "professionName": "",
-          "definingSkill": {
-            "skillName": "",
-            "stat": "",
-            "definition": "",
-            "level": ""
-          },
-          "skillPath1": {
-            "pathName": "",
-            "skill1": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill2": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill3": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            }
-          },
-          "skillPath2": {
-            "pathName": "",
-            "skill1": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill2": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill3": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            }
-          },
-          "skillPath3": {
-            "pathName": "",
-            "skill1": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill2": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            },
-            "skill3": {
-              "skillName": "",
-              "stat": "",
-              "definition": "",
-              "level": ""
-            }
-          }
-        },
         "crowns": 0,
         "lifeEvents": {
           "10": {
@@ -613,7 +541,8 @@
       "component",
       "diagrams",
       "mutagen",
-      "spell"
+      "spell",
+      "profession"
     ],
     "templates":{
       "base": {
@@ -733,6 +662,77 @@
       "dificultyCheck": "",
       "danger": "",
       "liftRequirement": ""
+    },
+    "profession": {
+      "definingSkill": {
+        "skillName": "",
+        "stat": "",
+        "definition": "",
+        "level": ""
+      },
+      "skillPath1": {
+        "pathName": "",
+        "skill1": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill2": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill3": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        }
+      },
+      "skillPath2": {
+        "pathName": "",
+        "skill1": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill2": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill3": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        }
+      },
+      "skillPath3": {
+        "pathName": "",
+        "skill1": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill2": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        },
+        "skill3": {
+          "skillName": "",
+          "stat": "",
+          "definition": "",
+          "level": ""
+        }
+      }
     }
   }
 }

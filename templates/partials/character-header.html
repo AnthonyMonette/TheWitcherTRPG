@@ -33,21 +33,21 @@
     <div class="flexrow">
         <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
         <div class="flexrow">
-            <label>Age</label>
+            <label><b>Age</b></label>
             <input name="data.age" type="text" value="{{data.age}}" placeholder="0" data-dtype="Number"/>
+            <label><b>Gender</b></label>
+            <input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/>
         </div>
     </div>
     <div class="flexrow">
-        <label>Race</label>
+        <label><b>Race</b></label>
         <input name="data.race" type="text" value="{{data.race}}" placeholder=""/>
-        <label>Gender</label>
-        <input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/>
+        <label><b>profession</b></label>
+        {{profession.name}}
+        <label><b>Origin</b></label>
+        <input name="data.origin" type="text" value="{{data.origin}}" placeholder=""/>
     </div>
     <div class="flexrow">
-        <label>profession</label>
-        <input name="data.profession.professionName" type="text" value="{{data.profession.professionName}}" placeholder=""/>
-        <label>Origin</label>
-        <input name="data.origin" type="text" value="{{data.origin}}" placeholder=""/>
     </div>
 </div>    
 <div class="right-sidebar">

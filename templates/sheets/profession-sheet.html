@@ -1,0 +1,171 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+        </div>
+    </header>
+    <div class="profession-layout">
+        <div class="profession-card defining-skill">
+            <div class="flex defining-skill-header">
+                <input class="profession-skill-input" name="data.definingSkill.skillName" type="text" value="{{data.definingSkill.skillName}}" placeholder=""/>
+                <select class="defining-skill-select" name="data.definingSkill.stat">
+                    {{#select data.definingSkill.stat}}
+                    {{#each config.statTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select> 
+                <label>level</label>
+                <input class="profession-level" name="data.definingSkill.level" type="number" value="{{data.definingSkill.level}}" placeholder=""/>
+            </div>
+            <textarea rows="10" name="data.definingSkill.definition">{{data.definingSkill.definition}}</textarea>
+        </div>
+        <div class="profession-path flexrow">
+            <div>
+                <input name="data.skillPath1.pathName" type="text" value="{{data.skillPath1.pathName}}" placeholder=""/>
+                <div class="profession-card first-path">
+                    <div class="flex first-path-header">
+                        <input class="profession-skill-input" name="data.skillPath1.skill1.skillName" type="text" value="{{data.skillPath1.skill1.skillName}}" placeholder=""/>
+                        <select class="first-path-select" name="data.skillPath1.skill1.stat">
+                            {{#select data.skillPath1.skill1.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath1.skill1.level" type="number" value="{{data.skillPath1.skill1.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath1.skill1.definition">{{data.skillPath1.skill1.definition}}</textarea>
+                </div>
+                <div class="profession-card first-path">
+                    <div class="flex first-path-header">
+                        <input class="profession-skill-input" name="data.skillPath1.skill2.skillName" type="text" value="{{data.skillPath1.skill2.skillName}}" placeholder=""/>
+                        <select class="first-path-select" name="data.skillPath1.skill2.stat">
+                            {{#select data.skillPath1.skill2.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath1.skill2.level" type="number" value="{{data.skillPath1.skill2.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath1.skill2.definition">{{data.skillPath1.skill2.definition}}</textarea>
+                </div>
+                <div class="profession-card first-path">
+                    <div class="flex first-path-header">
+                        <input class="profession-skill-input" name="data.skillPath1.skill3.skillName" type="text" value="{{data.skillPath1.skill3.skillName}}" placeholder=""/>
+                        <select class="first-path-select" name="data.skillPath1.skill3.stat">
+                            {{#select data.skillPath1.skill3.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath1.skill3.level" type="number" value="{{data.skillPath1.skill3.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath1.skill3.definition">{{data.skillPath1.skill3.definition}}</textarea>
+                </div>
+            </div>
+            <div>
+                <input name="data.skillPath2.pathName" type="text" value="{{data.skillPath2.pathName}}" placeholder=""/>
+                <div class="profession-card second-path">
+                    <div class="flex second-path-header">
+                        <input class="profession-skill-input" name="data.skillPath2.skill1.skillName" type="text" value="{{data.skillPath2.skill1.skillName}}" placeholder=""/>
+                        <select class="second-path-select" name="data.skillPath2.skill1.stat">
+                            {{#select data.skillPath2.skill1.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath2.skill1.level" type="number" value="{{data.skillPath2.skill1.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath2.skill1.definition">{{data.skillPath2.skill1.definition}}</textarea>
+                </div>
+                <div class="profession-card second-path">
+                    <div class="flex second-path-header">
+                        <input class="profession-skill-input" name="data.skillPath2.skill2.skillName" type="text" value="{{data.skillPath2.skill2.skillName}}" placeholder=""/>
+                        <select class="second-path-select" name="data.skillPath2.skill2.stat">
+                            {{#select data.skillPath2.skill2.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath2.skill2.level" type="number" value="{{data.skillPath2.skill2.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath2.skill2.definition">{{data.skillPath2.skill2.definition}}</textarea>
+                </div>
+                <div class="profession-card second-path">
+                    <div class="flex second-path-header">
+                        <input class="profession-skill-input" name="data.skillPath2.skill3.skillName" type="text" value="{{data.skillPath2.skill3.skillName}}" placeholder=""/>
+                        <select class="second-path-select" name="data.skillPath2.skill3.stat">
+                            {{#select data.skillPath2.skill3.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath2.skill3.level" type="number" value="{{data.skillPath2.skill3.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath2.skill3.definition">{{data.skillPath2.skill3.definition}}</textarea>
+                </div>
+            </div>
+            <div>
+                <input name="data.skillPath3.pathName" type="text" value="{{data.skillPath3.pathName}}" placeholder=""/>
+                <div class="profession-card third-path">
+                    <div class="flex third-path-header">
+                        <input class="profession-skill-input" name="data.skillPath3.skill1.skillName" type="text" value="{{data.skillPath3.skill1.skillName}}" placeholder=""/>
+                        <select class="third-path-select" name="data.skillPath3.skill1.stat">
+                            {{#select data.skillPath3.skill1.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath3.skill1.level" type="number" value="{{data.skillPath3.skill1.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath3.skill1.definition">{{data.skillPath3.skill1.definition}}</textarea>
+                </div>
+                <div class="profession-card third-path">
+                    <div class="flex third-path-header">
+                        <input class="profession-skill-input" name="data.skillPath3.skill2.skillName" type="text" value="{{data.skillPath3.skill2.skillName}}" placeholder=""/>
+                        <select class="third-path-select" name="data.skillPath3.skill2.stat">
+                            {{#select data.skillPath3.skill2.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath3.skill2.level" type="number" value="{{data.skillPath3.skill2.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath3.skill2.definition">{{data.skillPath3.skill2.definition}}</textarea>
+                </div>
+                <div class="profession-card third-path">
+                    <div class="flex third-path-header">
+                        <input class="profession-skill-input" name="data.skillPath3.skill3.skillName" type="text" value="{{data.skillPath3.skill3.skillName}}" placeholder=""/>
+                        <select class="third-path-select" name="data.skillPath3.skill3.stat">
+                            {{#select data.skillPath3.skill3.stat}}
+                            {{#each config.statTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select> 
+                        <label>level</label>
+                        <input class="profession-level" name="data.skillPath3.skill3.level" type="number" value="{{data.skillPath3.skill3.level}}" placeholder=""/>
+                    </div>
+                    <textarea rows="10" name="data.skillPath3.skill3.definition">{{data.skillPath3.skill3.definition}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

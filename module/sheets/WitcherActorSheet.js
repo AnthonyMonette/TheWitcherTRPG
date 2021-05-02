@@ -24,7 +24,8 @@ export default class WitcherActorSheet extends ActorSheet {
       data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" });
       data.diagrams = data.items.filter(function(item) {return item.type=="diagrams"});
       data.spells = data.items.filter(function(item) {return item.type=="spell"});
-      
+      data.professions = data.items.filter(function(item) {return item.type=="profession"});
+      data.profession = data.professions[0];
       Array.prototype.sum = function (prop) {
         var total = 0
         for ( var i = 0, _len = this.length; i < _len; i++ ) {
@@ -72,6 +73,8 @@ export default class WitcherActorSheet extends ActorSheet {
       data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Mage" || item.data.class=="Priest" || item.data.class=="witcher")});
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Rituals"});
+
+      
       return data;
     }
 
@@ -292,7 +295,10 @@ export default class WitcherActorSheet extends ActorSheet {
       let element = event.currentTarget;
       let itemId = element.closest(".item").dataset.itemId;
       let item = this.actor.getOwnedItem(itemId);
+      console.log(item)
       let field = element.dataset.field;
+      
+      console.log(field)
       return item.update({[field]: element.value});
     }
     
