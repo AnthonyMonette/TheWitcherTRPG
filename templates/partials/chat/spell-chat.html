@@ -11,8 +11,15 @@
     <div><label>Defence: </label>{{defence}}</div>
     {{#unless (eq roll.total 0)}}
     <hr />
+    <div class="roll-summary">
+        <div class="dice-formula">
+            <b>{{roll.formula}}</b>
+        </div>
+    </div>
+    {{> "templates/dice/roll.html"}}
+    
     <div  class="dice-display">
-        <b>{{tooltip}}</b>
+        <b>{{roll.total}}</b>
     </div>
     {{/unless}}
 </div>

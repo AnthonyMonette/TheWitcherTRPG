@@ -68,9 +68,9 @@ export default class WitcherActorSheet extends ActorSheet {
 
       data.TotalWeight =  data.items.weight();
 
-      data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Mage" || item.data.class=="Priest" || item.data.class=="Witcher")});
-      data.journeymanSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="journeyman" && (item.data.class=="Mage" || item.data.class=="Priest" || item.data.class=="witcher")});
-      data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Mage" || item.data.class=="Priest" || item.data.class=="witcher")});
+      data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
+      data.journeymanSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="journeyman" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="witcher")});
+      data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="witcher")});
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Rituals"});
 
@@ -95,7 +95,10 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".item-spell-display").on("click", this._onItemDisplayInfo.bind(this));
 
+    
 
+      html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
+      html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
       html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
@@ -169,7 +172,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (spellItem.data.data.roll){
         roll = spellItem.data.data.roll
       }
-
+      
       let rollResult = new Roll(roll).roll()
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", {
         type: "Spell Roll",
@@ -239,6 +242,22 @@ export default class WitcherActorSheet extends ActorSheet {
       })
     }
 
+    async _onCritRoll(event) {
+      let rollResult = new Roll("1d10x10").roll()
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html", {
+        type: "Stats Roll",
+      })
+    }
+
+    async _onDeathSaveRoll(event) {
+      let rollResult = new Roll("1d10").roll()
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", {
+        type: "Stats Roll",
+        statName: "WITCHER.DeathSave",
+        difficulty: this.actor.data.data.coreStats.stun.value
+      })
+    }
+
     async _onStatSaveRoll(event) {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let statValue = 0
@@ -298,8 +317,16 @@ export default class WitcherActorSheet extends ActorSheet {
       console.log(item)
       let field = element.dataset.field;
       
-      console.log(field)
-      return item.update({[field]: element.value});
+      // Edit checkbox values
+      let value = element.value
+      if(value == "false") { 
+        value = true
+      }
+      if(value == "true") { 
+        value = false
+      }
+      
+      return item.update({[field]: value});
     }
     
     _onItemEdit(event) {
@@ -329,9 +356,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let formula = item.data.data.damage
 
       if (item.data.data.isMelee){
-        console.log(this.actor.data.data.attackStats.meleeBonus)
         formula += this.actor.data.data.attackStats.meleeBonus
-        console.log(formula)
       }
 
       let messageData = {

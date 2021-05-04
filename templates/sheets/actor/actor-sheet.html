@@ -1,34 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
-    {{! Sheet Header }}
-    <header class="actor-sheet-header">
-      {{> "systems/TheWitcherTRPG/templates/partials/character-header.html"}}
-    </header>
-  
-    {{! Sheet Tab Navigation }}
-    <nav class="sheet-tabs tabs flexrow" data-group="primary">
-      <a class="item" data-tab="skills"> Skills & Modifiers </a>
-      <a class="item" data-tab="profession"> Profession </a>
-      <a class="item" data-tab="inventory"> Gear & inventory </a>
-      <a class="item" data-tab="magic"> Magic and Spells </a>
-      <a class="item" data-tab="background"> Background </a>
-    </nav>
-    {{! Sheet Body }}
-    <section class="sheet-body">
-      <div class="tab" data-group="primary" data-tab="skills">
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-skills.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="profession">
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-profession.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="inventory">
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="magic">
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-magic.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="background">
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-background.html"}}
-      </div>
-    </section>
+  {{#if (eq actor.type "character")}}
+    {{> "systems/TheWitcherTRPG/templates/sheets/actor/character-sheet.html"}}
+  {{/if}}
 </form>
   

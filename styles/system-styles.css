@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.text-centered {
+  align-items: center;
+  justify-content: center;
+}
+
 /* Navigation tabs */
 .sheet nav.sheet-tabs { 
   height: 32px;
@@ -389,4 +394,8 @@ input.spell-roll-value {
 }
 .prof-item-delete{
   float: right;
+}
+
+.stat-title {
+  margin-left: 50px;
 }

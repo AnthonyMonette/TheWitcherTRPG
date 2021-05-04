@@ -6,6 +6,7 @@ import WitcherItem from "../module/witcherItem.js";
 
 async function preloadHandlebarsTemplates(){
     const templatePath =[
+        "systems/TheWitcherTRPG/templates/sheets/actor/character-sheet.html",
         "systems/TheWitcherTRPG/templates/partials/character-header.html",
         "systems/TheWitcherTRPG/templates/partials/tab-skills.html",
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
@@ -16,6 +17,7 @@ async function preloadHandlebarsTemplates(){
 
         "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html",
         "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html",
+        "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html",
         "templates/dice/roll.html",
     ];
     return loadTemplates(templatePath); 

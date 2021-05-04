@@ -1,8 +1,13 @@
 <div class="left-sidebar">
+    <div class="flex stat-title" >
+        <label>Max</label>
+        <label>/Current</label>
+    </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display" data-stat="{{stat}}">
         <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
         <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+        <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
     </div>
     {{/each}}
 </div>
@@ -15,17 +20,13 @@
                     <label>HP:</label> 
                     <input class="focus-value" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
                 </div>
-                <div>
-                    <label>Death:</label> 
-                    <input class="focus-value" name="data.derivedStats.stun.current" type="text" value="{{data.derivedStats.stun.current}}" placeholder="0" data-dtype="Number"/>
+                <div class="flex text-centered">
+                    <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
                 </div>
             </div>
             <div class="flexrow">
                 <div>
-                    <label>Primary weapon:</label> 
-                </div>
-                <div>
-                    <label>Secondary Weapon:</label> 
+                    <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
                 </div>
             </div>
         </div>
