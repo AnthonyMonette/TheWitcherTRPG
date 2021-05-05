@@ -37,3 +37,20 @@ witcher.Concealment = {
     L: "Large",
     NA: "CantHide",
 }
+
+
+
+witcher.MonsterTypes = {
+    Humanoids: "Humanoids",
+    Necrophages: "Necrophages",
+    Specters: "Specters",
+    Beasts: "Beasts",
+    CursedOnes: "CursedOnes",
+    Hybrids: "Hybrids",
+    Insectoids: "Insectoids",
+    Elementa: "Elementa",
+    Relicts: "Relicts",
+    Ogroids: "Ogroids",
+    Draconids: "Draconids",
+    Vampires: "Vampires",
+}

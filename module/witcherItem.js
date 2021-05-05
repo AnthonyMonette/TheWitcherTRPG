@@ -13,7 +13,7 @@ export default class WitcherItem extends Item {
         }
   
         let messageData = {
-          speaker: {alias: this.actor.data.data.general.name},
+          speaker: {alias: this.actor.name},
           flavor: `<h1>Attack: ${item.name}</h1>`,
         }
   

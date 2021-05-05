@@ -66,6 +66,10 @@ export default class WitcherActorSheet extends ActorSheet {
       data.substancesFulgur = data.items.filter(function(item) {return item.type=="component" &&  item.data.type=="substances" && item.data.substanceType=="fulgur" });
       data.fulgurCount =  data.substancesFulgur.sum("quantity");
 
+
+      data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical"});
+      data.notes =  data.items.filter(function(item) {return item.type=="note"});
+
       data.TotalWeight =  data.items.weight();
 
       data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
@@ -91,11 +95,11 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-armor-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
+      html.find(".add-item").on("click", this._onItemAdd.bind(this));
 
+      html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".item-spell-display").on("click", this._onItemDisplayInfo.bind(this));
-
-    
 
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
@@ -104,7 +108,6 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
       html.find(".spell-roll").on("click", this._onSpellRoll.bind(this));
     
-
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
       html.find("#deduction-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 2)});
@@ -164,6 +167,15 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find("#resistcoerc-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 5)});
       html.find("#ritcraft-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 6)});
     }
+    
+    async _onItemAdd(event) {
+      let element = event.currentTarget
+      let itemData = {
+        name: `new ${element.dataset.itemtype}`, 
+        type: element.dataset.itemtype
+      }
+      this.actor.createOwnedItem(itemData)
+    }
 
     async _onSpellRoll(event) {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
@@ -186,7 +198,6 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _onProfessionRoll(event) {
-      console.log("profession roll")
       let stat = event.currentTarget.closest(".profession-display").dataset.stat;
       let level = event.currentTarget.closest(".profession-display").dataset.level;
       let name = event.currentTarget.closest(".profession-display").dataset.name;
@@ -195,39 +206,39 @@ export default class WitcherActorSheet extends ActorSheet {
       let statName = 0
       switch(stat){
         case "int":
-            statValue = this.actor.data.data.stats.int.max;
+            statValue = this.actor.data.data.stats.int.current;
             statName = "WITCHER.StInt";
             break;
         case "ref":
-            statValue = this.actor.data.data.stats.ref.max;
+            statValue = this.actor.data.data.stats.ref.current;
             statName = "WITCHER.StRef";
             break;
         case "dex":
-            statValue = this.actor.data.data.stats.dex.max;
+            statValue = this.actor.data.data.stats.dex.current;
             statName = "WITCHER.StDex";
             break;
         case "body":
-            statValue = this.actor.data.data.stats.body.max;
+            statValue = this.actor.data.data.stats.body.current;
             statName = "WITCHER.StBody";
             break;
         case "spd":
-            statValue = this.actor.data.data.stats.spd.max;
+            statValue = this.actor.data.data.stats.spd.current;
             statName = "WITCHER.StSpd";
             break;
         case "emp":
-            statValue = this.actor.data.data.stats.emp.max;
+            statValue = this.actor.data.data.stats.emp.current;
             statName = "WITCHER.StEmp";
             break;
         case "cra":
-            statValue = this.actor.data.data.stats.cra.max;
+            statValue = this.actor.data.data.stats.cra.current;
             statName = "WITCHER.StCra";
             break;
         case "will":
-            statValue = this.actor.data.data.stats.will.max;
+            statValue = this.actor.data.data.stats.will.current;
             statName = "WITCHER.StWill";
             break;
         case "luck":
-            statValue = this.actor.data.data.stats.int.max;
+            statValue = this.actor.data.data.stats.int.current;
             statName = "WITCHER.StLuck";
             break;
       }
@@ -264,39 +275,39 @@ export default class WitcherActorSheet extends ActorSheet {
       let statName = 0
       switch(stat){
         case "int":
-            statValue = this.actor.data.data.stats.int.max;
+            statValue = this.actor.data.data.stats.int.current;
             statName = "WITCHER.StInt";
             break;
         case "ref":
-            statValue = this.actor.data.data.stats.ref.max;
+            statValue = this.actor.data.data.stats.ref.current;
             statName = "WITCHER.StRef";
             break;
         case "dex":
-            statValue = this.actor.data.data.stats.dex.max;
+            statValue = this.actor.data.data.stats.dex.current;
             statName = "WITCHER.StDex";
             break;
         case "body":
-            statValue = this.actor.data.data.stats.body.max;
+            statValue = this.actor.data.data.stats.body.current;
             statName = "WITCHER.StBody";
             break;
         case "spd":
-            statValue = this.actor.data.data.stats.spd.max;
+            statValue = this.actor.data.data.stats.spd.current;
             statName = "WITCHER.StSpd";
             break;
         case "emp":
-            statValue = this.actor.data.data.stats.emp.max;
+            statValue = this.actor.data.data.stats.emp.current;
             statName = "WITCHER.StEmp";
             break;
         case "cra":
-            statValue = this.actor.data.data.stats.cra.max;
+            statValue = this.actor.data.data.stats.cra.current;
             statName = "WITCHER.StCra";
             break;
         case "will":
-            statValue = this.actor.data.data.stats.will.max;
+            statValue = this.actor.data.data.stats.will.current;
             statName = "WITCHER.StWill";
             break;
         case "luck":
-            statValue = this.actor.data.data.stats.int.max;
+            statValue = this.actor.data.data.stats.int.current;
             statName = "WITCHER.StLuck";
             break;
       }
@@ -360,7 +371,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let messageData = {
-        speaker: {alias: this.actor.data.data.general.name},
+        speaker: {alias: this.actor.name},
         flavor: `<h1>Attack: ${item.name}</h1>`,
       }
 
@@ -479,6 +490,17 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }).render(true)  
     
+    }
+
+    _onSkillDisplay(event) {
+      event.preventDefault(); 
+      let section = event.currentTarget.closest(".skill");
+      let editor = $(section).find(".skill-list")
+      editor.toggleClass("hidden");
+      
+      let chevronEditor = $(section).find(".fas")
+      chevronEditor.toggleClass("fa-chevron-right");
+      chevronEditor.toggleClass("fa-chevron-down");
     }
 
     _onSubstanceDisplay(event) {

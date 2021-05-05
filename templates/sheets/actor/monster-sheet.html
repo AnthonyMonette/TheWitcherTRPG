@@ -1,0 +1,224 @@
+<div class="flex">
+    <div>
+        <div class="flex">
+            <div class="left-sidebar">
+                <div class="flex stat-title" >
+                    <label>Max</label>
+                </div>
+                {{#each data.stats as |details stat|}}
+                    {{#unless (eq stat "luck")}}
+                    <div class="stat-display" data-stat="{{stat}}">
+                        <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
+                        <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+                    </div>
+                    {{/unless}}
+                {{/each}}
+                <hr />
+                
+                {{#each data.coreStats as |details coreStat|}}
+                <div class="stat-display">
+                    <label>{{localize details.label}}</label> 
+                    <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number" readonly/>
+                </div>
+                {{/each}}
+                <hr />
+                
+                <div class="stat-display">
+                    <label>Armor</label> 
+                    <input class="header-stat" name="data.armor" type="text" value="{{data.armor}}" placeholder="0" data-dtype="Number"/>
+                </div>
+                <div class="stat-display">
+                    <label>HP</label> 
+                    <input class="header-stat" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}"/>
+                    /
+                    <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}"/>
+                </div>
+                <div class="stat-display">
+                    <label>Vigor</label> 
+                    <input class="header-stat" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}"/>
+                </div>
+                <div class="stat-display">
+                    <label>STA:</label> 
+                    <input class="header-stat" name="data.derivedStats.sta.current" type="text" value="{{data.derivedStats.sta.current}}"/>
+                    /
+                    <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}"/>
+
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="category-img">
+                    {{#if (eq data.category "Humanoids")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Humanoids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Necrophages")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Necrophages.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Specters")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Specters.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Beasts")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Beasts.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "CursedOnes")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/CursedOnes.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Hybrids")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Hybrids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Insectoids")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Insectoids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Elementa")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Elementa.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Relicts")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Relicts.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Ogroids")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Ogroids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Draconids")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Draconids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Vampires")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Vampires.png" class="cat-img" /> 
+                    {{/if}}
+                </div>
+                <div class="flex">
+                    <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                </div>
+                <table class="monster-info">
+                    <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
+                    <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
+                    <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
+                    <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
+                    <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="monster-knowledge">
+            <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+            <label>Commoner Supperstition (Education DV: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
+            <textarea rows=10 name="data.common">{{data.common}}</textarea>
+            <label>Witcher Knowledge (Monster Lore DC: <input class="skill-value" name="data.monsterLoreSkillValue" type="text" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/>)</label>
+            <textarea rows=25 name="data.monsterLore">{{data.monsterLore}}</textarea>
+        </div>
+    </div>
+    <div class="monster-right-sidebar">
+        <div class="flex">
+            <div>
+                <div class="flex">
+                    <label>Category</label> 
+                    <select name="data.category">
+                        {{#select data.category}}
+                        {{#each config.MonsterTypes as |value name|}}
+                                <option value="{{value}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="flex">
+                    <select name="data.threat">
+                        {{#select data.threat}}
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        {{/select}}
+                    </select>
+                    <select name="data.difficulty">
+                        {{#select data.difficulty}}
+                            <option value="simple">Simple</option>
+                            <option value="complex">Complex</option>
+                            <option value="difficult">Difficult</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
+                <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
+            </div>
+        </div>
+        
+        
+        <div class="flex">
+            <label>Bounty</label> 
+            <input name="data.bounty" type="text" value="{{data.bounty}}"/>
+        </div>
+        
+        <nav class="sheet-tabs tabs flexrow" data-group="primary">
+            <a class="item" data-tab="skills"> Skills</a>
+            <a class="item" data-tab="inventory">Attacks/Loot </a>
+            <a class="item" data-tab="details"> Details</a>
+        </nav>
+
+        {{! Sheet Body }}
+        <section class="sheet-body">
+            <div class="tab" data-group="primary" data-tab="skills">
+                {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html"}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="inventory">
+                <h2>Weapons <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
+                <table class="weapon-table">
+                    <tr>
+                        <td></td>
+                        <td><b>Name</b></td>
+                        <td><b>DMG</b></td>
+                        <td><b>ROF</b></td>
+                    </tr>
+                    {{#each weapons as |weapon id|}}
+                    <tbody class="item" data-item-id="{{weapon._id}}">
+                        <tr>
+                            <td>
+                                <a class="item-weapon-display"><i class="fas fa-info"></i></a>
+                            </td>
+                            <td><a class="item-roll">{{weapon.name}}</a></td>
+                            <td><input class="inline-edit" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
+                            <td><input class="inline-edit small" data-field="data.rateOfFire" type="text" value="{{weapon.data.rateOfFire}}" data-dtype="Number"/></td>
+                        </tr>
+                        <tr class="item-info hidden" >
+                            <td>
+                                <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td colspan="3">
+                                <div class="flex"><b>Effect :</b></label>{{weapon.data.effect}}
+                                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {{/each}}
+                </table>
+                <h2>Loot <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
+                <table>
+                    {{#each loots as |valuable id|}}
+                    <tr class="item" data-item-id="{{valuable._id}}">
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+            <div class="tab" data-group="primary" data-tab="details">
+                <label>Resistances</label>
+                <input type="text" name="data.resistances" value="{{data.resistances}}" placeholder="" />
+                <label>Immunities</label>
+                <input type="text" name="data.immunities" value="{{data.immunities}}" placeholder="" />
+                <label>Susceptibilities</label>
+                <input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
+                
+                <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+                
+                {{#each notes as |note id|}}
+                <div class="item" data-item-id="{{note._id}}">
+                    <div class="flex">
+                        <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
+                        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                    <textarea class="inline-edit" rows="4" data-field="data.description">{{data.description}}</textarea>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+</div>

@@ -537,13 +537,17 @@
       "templates": ["baseActor"],
       "category": "",
       "threat": "",
+      "difficulty": "",
       "bounty":0,
       "armor":0,
       "regen": 0,
       "resistances": "",
       "immunities": "",
-      "commonSuperstition": "",
-      "monsterLore": ""
+      "susceptibilities": "",
+      "common": "",
+      "commonSkillValue": "",
+      "monsterLore": "",
+      "monsterLoreSkillValue": ""
     }
   },
   "Item": {
@@ -558,7 +562,8 @@
       "diagrams",
       "mutagen",
       "spell",
-      "profession"
+      "profession",
+      "note"
     ],
     "templates":{
       "base": {
@@ -588,7 +593,8 @@
       "range": "",
       "effect": "",
       "conceal": "",
-      "enhancements": 0
+      "enhancements": 0,
+      "rateOfFire":1
     },
     "armor": {
       "templates": ["base"],
@@ -749,6 +755,9 @@
           "level": ""
         }
       }
+    },
+    "note": {
+      "description": ""
     }
   }
 }

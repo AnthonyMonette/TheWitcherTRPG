@@ -13,15 +13,15 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 function updateDerived(actor){
 
     let thisActor = actor;
-    let base = Math.floor((thisActor.data.data.stats.body.max + thisActor.data.data.stats.will.max)/2);
-    let currentBody = thisActor.data.data.stats.body.max;
+    let base = Math.floor((thisActor.data.data.stats.body.current + thisActor.data.data.stats.will.current)/2);
+    let currentBody = thisActor.data.data.stats.body.current;
 
     let newHP = base*5;
     let newSta = base*5;
     let newRec = base;
     let newStun = base;
-    let newEnc = thisActor.data.data.stats.body.max*10;
-    let newRun = thisActor.data.data.stats.spd.max*3;
+    let newEnc = thisActor.data.data.stats.body.current*10;
+    let newRun = thisActor.data.data.stats.spd.current*3;
     let newLeap = Math.floor(newRun/5);
 
     let meleeBonus = 0;
@@ -79,8 +79,8 @@ function updateDerived(actor){
         newStun = 10;
     }
     
-    let newResolve = Math.floor((thisActor.data.data.stats.will.max + thisActor.data.data.stats.int.max)/2*5);
-
+    let newResolve = Math.floor((thisActor.data.data.stats.will.current + thisActor.data.data.stats.int.current)/2*5);
+    console.log(meleeBonus)
     thisActor.update({ 
         'data.derivedStats.hp.max': newHP,
         'data.derivedStats.sta.max': newSta,
@@ -98,6 +98,7 @@ function updateDerived(actor){
 }
 
 function rollSkillCheck(thisActor, statNum, skillNum){
+    console.log("coucou")
     let parentStat = "";
     let skillName = "";
     let stat = 0;
@@ -109,55 +110,55 @@ function rollSkillCheck(thisActor, statNum, skillNum){
             parentStat = game.i18n.localize("WITCHER.StInt");
             array = getIntSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.int.max;
+            stat = thisActor.data.data.stats.int.current;
             skill = array[1];
             break;
         case 1:
             parentStat = game.i18n.localize("WITCHER.StRef");
             array = getRefSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.ref.max;
+            stat = thisActor.data.data.stats.ref.current;
             skill = array[1];
             break;
         case 2:
             parentStat = game.i18n.localize("WITCHER.StDex");
             array = getDexSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.dex.max;
+            stat = thisActor.data.data.stats.dex.current;
             skill = array[1];
             break;
         case 3:
             parentStat = game.i18n.localize("WITCHER.StBody");
             array = getBodySkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.body.max;
+            stat = thisActor.data.data.stats.body.current;
             skill = array[1];
             break;
         case 4:
             parentStat = game.i18n.localize("WITCHER.StEmp");
             array = getEmpSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.emp.max;
+            stat = thisActor.data.data.stats.emp.current;
             skill = array[1];
             break;
         case 5:
             parentStat = game.i18n.localize("WITCHER.StCra");
             array = getCraSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.cra.max;
+            stat = thisActor.data.data.stats.cra.current;
             skill = array[1];
             break;
         case 6:
             parentStat = game.i18n.localize("WITCHER.StWill");
             array = getWillSkillMod(thisActor, skillNum);
             skillName = array[0];
-            stat = thisActor.data.data.stats.will.max;
+            stat = thisActor.data.data.stats.will.current;
             skill = array[1];
             break;
     }
 
     let messageData = {
-        speaker: {alias: thisActor.data.data.general.name},
+        speaker: {alias: thisActor.name},
         flavor: `${parentStat}: ${skillName} Check`,
     }
     let rollFormula = `1d10+${stat}+${skill}`

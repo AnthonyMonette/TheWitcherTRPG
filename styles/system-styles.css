@@ -55,15 +55,13 @@
   display: flex;
 }
 .left-sidebar {
-  width: 150px;
+  width: 130px;
   flex: none;
 }
 .right-sidebar {
-  width: 150px;
+  margin-left: 10px;
 }
-.header-center {
-  flex: 1;
-}
+
 .stat-display {
   display: flex;
   width: 250px;
@@ -364,9 +362,15 @@ input.focus {
 .item-delete {
   width: 15px;
 }
-input.spell-sta {
-width: 25px;
+
+input.small {
+  width: 25px;
 }
+
+input.spell-sta {
+  width: 25px;
+}
+
 input.spell-roll-value {
   width: 200px;
 }
@@ -398,4 +402,48 @@ input.spell-roll-value {
 
 .stat-title {
   margin-left: 50px;
+}
+
+.monster-img {
+  width: 400px;
+  height: 500px;
+}
+
+.category-img {
+  position: relative;
+  left: 20px;
+  top: 100px;
+}
+.cat-img{
+  height: 75px;
+  width: 75px;
+  margin-top: -150px;
+  border: none;
+}
+
+.monster-info {
+  position: relative;
+  top: -135px;
+  left: 10px;
+  width: 250px;
+  background-color: silver;
+  font-size: 12px;
+}
+
+.monster-info input {
+  height: 18px;
+}
+
+.monster-right-sidebar {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.monster-knowledge {
+  width: 535px;
+  position: relative;
+  top: -130px;
+}
+input.skill-value {
+  width: 25px;
 }
