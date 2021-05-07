@@ -22,6 +22,7 @@
 /* Sheet min widths */
 .witcher.sheet.actor {
   min-width: 805px;
+  max-width: 805px;
   min-height: 400px;
 }
 .witcher.sheet.item {
@@ -55,7 +56,7 @@
   display: flex;
 }
 .left-sidebar {
-  width: 130px;
+  width: 140px;
   flex: none;
 }
 .right-sidebar {
@@ -66,8 +67,9 @@
   display: flex;
   width: 250px;
 }
+
 .stat-display input {
-  width: 25px;
+  width: 35px;
 }
 .stat-display label {
   padding: 5px;
@@ -78,16 +80,18 @@
 }
 
 .actor-img {
-  height: 150px;
-  width: 150px;
+  height: 175px;
+  width: 175px;
 }
 
 .skill-column {
   margin: 5px;
 }
+
 .table-skills {
   width: 175px;
 }
+
 .input-skill {
   width: 25px;
 }
@@ -312,6 +316,17 @@ input.sta-input {
   padding: 10px;
   color: white;
 }
+
+.char-info {
+  padding: 10px;
+  width: 250px;
+  background-color: lightslategray;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+
 .skill-info {
   background-color: lightslategray;
   margin: auto;
@@ -364,7 +379,11 @@ input.focus {
 }
 
 input.small {
-  width: 25px;
+  width: 30px;
+}
+
+input.medium {
+  width: 100px;
 }
 
 input.spell-sta {
@@ -405,7 +424,7 @@ input.spell-roll-value {
 }
 
 .monster-img {
-  width: 400px;
+  width: 375px;
   height: 500px;
 }
 
@@ -440,10 +459,38 @@ input.spell-roll-value {
 }
 
 .monster-knowledge {
-  width: 535px;
+  width: 515px;
   position: relative;
   top: -130px;
 }
 input.skill-value {
   width: 25px;
+}
+
+.ressource {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ressource label{
+  margin-right: 10px;
+}
+
+.hp-img {
+  height: 60px;
+  width: 60px;
+  border: none;
+}
+
+input.hp-value {
+  position: relative;
+  top: -50px;
+  left: 11px;
+  border: none;
+  width: 40px;
+  background: none;
+  font-size: 30px;
+}
+input.hp-value:focus {
+  border: none;
 }

@@ -186,7 +186,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       
       let rollResult = new Roll(roll).roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", {
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", this.actor, {
         type: "Spell Roll",
         title: spellItem.name,
         staCost: spellItem.data.data.stamina,
@@ -244,7 +244,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = new Roll(`1d10+${statValue}+${level}`).roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html", {
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html", this.actor, {
         type: "Stats Roll",
         title: name,
         effet: effet,
@@ -255,14 +255,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onCritRoll(event) {
       let rollResult = new Roll("1d10x10").roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html", {
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html", this.actor, {
         type: "Stats Roll",
       })
     }
 
     async _onDeathSaveRoll(event) {
       let rollResult = new Roll("1d10").roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", {
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
         type: "Stats Roll",
         statName: "WITCHER.DeathSave",
         difficulty: this.actor.data.data.coreStats.stun.value
@@ -313,7 +313,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = new Roll("1d10").roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", {
+      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
         type: "Stats Roll",
         statName: statName,
         difficulty: statValue
@@ -380,74 +380,74 @@ export default class WitcherActorSheet extends ActorSheet {
         content: `<h2>${item.name} damage: ${formula}</h2>`,
         buttons: {
           LocationRandomHuman: {
-            label: "Human", 
+            label: "Random Human", 
             callback: (html) => {
               let location = getRandomInt(10)
               switch(location){
                 case 1:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*3`;
                   break;
                 case 2:
                 case 3:
                 case 4:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
                   break;
                 case 5:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Arm`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Arm</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 case 6:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: L Arm`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: L Arm</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 case 7:
                 case 8:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Leg`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Leg</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 case 9:
                 case 10:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Leg`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Leg</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 default:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
               }
               new Roll(formula).roll().toMessage(messageData)
             }
           },
           LocationRandomMonster: {
-            label: "Monster", 
+            label: "Random Monster", 
             callback: (html) => {
               let location = getRandomInt(10)
               switch(location){
                 case 1:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*3`;
                   break;
                 case 2:
                 case 3:
                 case 4:
                   case 5:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
                   break;
                 case 6:
                 case 7:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: R Limb`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Limb</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 case 8:
                   case 9:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: L Limb`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: L Limb</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 case 10:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Tail or Wing`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Tail or Wing</div><div>Effect: ${item.data.data.effect}</div>`;
                   formula = `(${formula})*0.5`;
                   break;
                 default:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`;
+                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
               }
               new Roll(formula).roll().toMessage(messageData)
             }
@@ -455,35 +455,35 @@ export default class WitcherActorSheet extends ActorSheet {
           LocationHead: {
             label: "Head", 
             callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Head`,
+              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`,
               new Roll(`(${formula})*3`).roll().toMessage(messageData)
             }
           },
           LocationTorso: {
             label: "Torso", 
             callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Torso`,
+              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`,
               new Roll(formula).roll().toMessage(messageData)
             }
           },
           LocationArm: {
             label: "Arm", 
             callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Arm`,
+              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Arm</div><div>Effect: ${item.data.data.effect}</div>`,
               new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
             }
           },
           LocationLeg: {
             label: "Leg", 
             callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Leg`,
+              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Leg</div><div>Effect: ${item.data.data.effect}</div>`,
               new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
             }
           },
           LocationTail: {
             label: "Tail", 
             callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1>Location: Tail or Wing`,
+              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Tail or Wing</div><div>Effect: ${item.data.data.effect}</div>`,
               new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
             }
           }

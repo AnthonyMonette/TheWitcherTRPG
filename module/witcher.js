@@ -11,7 +11,10 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-
+    if (actor.data.data.customStats){
+        return null;
+    }
+    console.log(actor.data.data.customStats)
     let thisActor = actor;
     let base = Math.floor((thisActor.data.data.stats.body.current + thisActor.data.data.stats.will.current)/2);
     let currentBody = thisActor.data.data.stats.body.current;
@@ -80,7 +83,6 @@ function updateDerived(actor){
     }
     
     let newResolve = Math.floor((thisActor.data.data.stats.will.current + thisActor.data.data.stats.int.current)/2*5);
-    console.log(meleeBonus)
     thisActor.update({ 
         'data.derivedStats.hp.max': newHP,
         'data.derivedStats.sta.max': newSta,

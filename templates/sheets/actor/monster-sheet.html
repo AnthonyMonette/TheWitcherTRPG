@@ -18,7 +18,7 @@
                 {{#each data.coreStats as |details coreStat|}}
                 <div class="stat-display">
                     <label>{{localize details.label}}</label> 
-                    <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 {{/each}}
                 <hr />
@@ -29,7 +29,7 @@
                 </div>
                 <div class="stat-display">
                     <label>HP</label> 
-                    <input class="header-stat" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}"/>
+                    <input class="header-stat" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}"/>
                     /
                     <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}"/>
                 </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="stat-display">
                     <label>STA:</label> 
-                    <input class="header-stat" name="data.derivedStats.sta.current" type="text" value="{{data.derivedStats.sta.current}}"/>
+                    <input class="header-stat" name="data.derivedStats.sta.value" type="text" value="{{data.derivedStats.sta.value}}"/>
                     /
                     <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}"/>
 
@@ -146,6 +146,10 @@
             <label>Bounty</label> 
             <input name="data.bounty" type="text" value="{{data.bounty}}"/>
         </div>
+        <div class="flex">
+            <label>Custom stats:</label> 
+            <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+        </div>
         
         <nav class="sheet-tabs tabs flexrow" data-group="primary">
             <a class="item" data-tab="skills"> Skills</a>
@@ -215,7 +219,7 @@
                         <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
                         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </div>
-                    <textarea class="inline-edit" rows="4" data-field="data.description">{{data.description}}</textarea>
+                    <textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
                 </div>
                 {{/each}}
             </div>

@@ -78,12 +78,12 @@
         "derivedStats": {
           "hp": {
             "max": 0,
-            "current": 0,
+            "value": 0,
             "label": "WITCHER.Actor.DerStat.HP"
           },
           "sta": {
             "max": 0,
-            "current": 0,
+            "value": 0,
             "label": "WITCHER.Actor.DerStat.Sta"
           },
           "resolve": {
@@ -544,10 +544,16 @@
       "resistances": "",
       "immunities": "",
       "susceptibilities": "",
+      "height": "",
+      "weight": "",
+      "environment": "",
+      "intelligence": "",
+      "organization": "",
       "common": "",
       "commonSkillValue": "",
       "monsterLore": "",
-      "monsterLoreSkillValue": ""
+      "monsterLoreSkillValue": "",
+      "customStat": false
     }
   },
   "Item": {
@@ -680,6 +686,7 @@
       "duration": "",
       "defence": "",
       "components": "",
+      "alternateComponents": "",
       "preparationTime": "",
       "dificultyCheck": "",
       "danger": "",

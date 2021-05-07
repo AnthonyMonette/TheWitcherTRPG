@@ -81,7 +81,7 @@
     "WITCHER.Actor.CoreStat.Rec": "REC",
 
     "WITCHER.Actor.DerStat.Vigor": "VIGOR",
-    "WITCHER.Actor.DerStat.HP": "HP",
+    "WITCHER.Actor.DerStat.HP": "Max HP",
     "WITCHER.Actor.DerStat.Sta": "STA",
     "WITCHER.Actor.DerStat.Resolve": "RESOLVE",
     "WITCHER.Actor.DerStat.Focus": "FOCUS",

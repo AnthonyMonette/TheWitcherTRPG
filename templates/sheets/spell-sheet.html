@@ -62,10 +62,10 @@
                 </select>
             {{/if}}
             {{#if (eq data.class "Witcher")}}
-                <select name="data.level" id="level-select">
-                    {{#select data.level}}
+                <select name="data.source" id="level-select">
+                    {{#select data.source}}
                     <option value="basic">Basic Sign</option>
-                    <option value="Alternate">Alternate Sign Forms</option>
+                    <option value="alternate">Alternate Sign Forms</option>
                     {{/select}}
                 </select>
             {{/if}}
@@ -74,7 +74,7 @@
             <input class="spell-roll-value" name="data.roll" type="text" value="{{data.roll}}"/>
         </div>
         <label>Effect</label>
-        <textarea rows="5" name="data.effect">{{data.effect}}</textarea>
+        <textarea rows="10" name="data.effect">{{data.effect}}</textarea>
         
         {{#unless (eq data.class "Rituals")}}
         {{#unless (eq data.class "Hexes")}}
@@ -94,7 +94,7 @@
         <label>Dificulty Check</label>
         <input name="data.dificultyCheck" type="text" value="{{data.dificultyCheck}}"/>
         <label>Components</label>
-        <input name="data.components" type="text" value="{{data.components}}"/>
+        <textarea rows="4" name="data.components">{{data.components}}</textarea>
         {{/if}}
         {{#if (eq data.class "Hexes")}}
         <label>Requirements To Lift</label>

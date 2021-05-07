@@ -12,43 +12,51 @@
     {{/each}}
 </div>
 <div class="header-center">
-    <div class="flex">
+    <div class="flex ressource">
         <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-        <div class="magic-info">
+        <div class="char-info">
             <div class="flexrow">
                 <div>
-                    <label>HP:</label> 
-                    <input class="focus-value" name="data.derivedStats.hp.current" type="text" value="{{data.derivedStats.hp.current}}" placeholder="0" data-dtype="Number"/>
+                    <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/hearth.png"/>
+                    <input class="hp-value" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
-                <div class="flex text-centered">
-                    <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
-                </div>
-            </div>
-            <div class="flexrow">
-                <div>
-                    <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
+                <div class="text-centered">
+                    <div class="ressource">
+                        <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
+                    </div>
+                    <div class="ressource">
+                        <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="flexrow">
         <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
-        <div class="flexrow">
-            <label><b>Age</b></label>
-            <input name="data.age" type="text" value="{{data.age}}" placeholder="0" data-dtype="Number"/>
+    </div>
+    <div class="flex ressource">
+        <div class="flex">
+            <label><b>Race</b></label>
+            <input name="data.race" type="text" value="{{data.race}}" placeholder=""/>
+        </div>
+        <div class="flex">
             <label><b>Gender</b></label>
             <input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/>
         </div>
+        <div class="flex">
+            <label><b>Age</b></label>
+            <input class="small" name="data.age" type="text" value="{{data.age}}" placeholder="0" data-dtype="Number"/>
+        </div>
     </div>
-    <div class="flexrow">
-        <label><b>Race</b></label>
-        <input name="data.race" type="text" value="{{data.race}}" placeholder=""/>
-        <label><b>profession</b></label>
-        {{profession.name}}
-        <label><b>Origin</b></label>
-        <input name="data.origin" type="text" value="{{data.origin}}" placeholder=""/>
-    </div>
-    <div class="flexrow">
+    <div class="flexrow ressource">
+        <div class="flex">
+            <label><b>profession</b></label>
+            {{profession.name}}
+        </div>
+        <div class="flex">
+            <label><b>Origin</b></label>
+            {{data.general.homeland.value}}
+        </div>
     </div>
 </div>    
 <div class="right-sidebar">
@@ -71,8 +79,9 @@
     </div>
     <div class="stat-display">
         <label>{{localize data.derivedStats.resolve.label}}</label> 
-        <input class="header-stat" name="data.derivedStats.resolve.max" type="text" value="{{data.derivedStats.resolve.max}}" placeholder="0" data-dtype="Number" readonly/>
         <input class="header-stat" name="data.derivedStats.resolve.current" type="text" value="{{data.derivedStats.resolve.current}}" placeholder="0" data-dtype="Number"/>
+        /
+        <input class="header-stat" name="data.derivedStats.resolve.max" type="text" value="{{data.derivedStats.resolve.max}}" placeholder="0" data-dtype="Number" readonly/> 
     </div>
     <!-- {{#each data.derivedStats as |details derivedStat|}}
     <div class="stat-display">
