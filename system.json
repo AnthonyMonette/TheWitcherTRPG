@@ -83,7 +83,7 @@
     "gridUnits": "m",
     "primaryTokenAttribute": "resources.health",
     "secondaryTokenAttribute": "resources.power",
-    "url": "",
-    "manifest": "",
-    "download": ""
+    "url": "https://github.com/AnthonyMonette/TheWitcherTRPG",
+    "manifest": "https://github.com/AnthonyMonette/TheWitcherTRPG/releases/latest/download/system.json",
+    "download": "https://github.com/AnthonyMonette/TheWitcherTRPG/releases/latest/download/system.zip"
   }
