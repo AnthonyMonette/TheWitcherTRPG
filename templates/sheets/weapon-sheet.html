@@ -15,74 +15,56 @@
             </div>
         </div>
     </header>
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="attributes">Attributes</a>
-    </nav>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            <textarea rows=10 name="data.description">{{data.description}}</textarea>
-        </div>
-
-        {{!-- Attributes Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="attributes">
-            <table>
-                <tr>
-                    <th>{{localize "WITCHER.Weapon.Type"}}</th>
-                    <th>Melee</th>
-                    <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
-                    <th>{{localize "WITCHER.Item.Availability"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Hands"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
-                    <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
-                    <th>ROF</th>
-                </tr>
-                <tr>
-                    <td><input type="text" name="data.type" value="{{data.type}}"/></td>
-                    <td><input type="checkbox" name="data.isMelee"  {{checked data.isMelee}}/></td>
-                    <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
-                    <td>
-                        <select name="data.avail" id="avail-select">
-                        {{#select data.avail}}
-                        {{#each config.Avalability as |value name|}}
-                                <option value="{{value}}">{{name}}</option>
-                        {{/each}}
+    <table>
+        <tr>
+            <th>{{localize "WITCHER.Weapon.Type"}}</th>
+            <th>Melee</th>
+            <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
+            <th>{{localize "WITCHER.Item.Availability"}}</th>
+            <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
+            <th>{{localize "WITCHER.Weapon.Hands"}}</th>
+            <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
+            <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
+            <th>ROF</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="data.type" value="{{data.type}}"/></td>
+            <td><input type="checkbox" name="data.isMelee"  {{checked data.isMelee}}/></td>
+            <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
+            <td>
+                <select name="data.avail" id="avail-select">
+                {{#select data.avail}}
+                {{#each config.Avalability as |value name|}}
+                        <option value="{{value}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+                </select>
+            </td>
+            <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
+            <td>
+                <select name="data.hands" id="hands-select">
+                    {{#select data.hands}}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                         {{/select}}
-                        </select>
-                    </td>
-                    <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
-                    <td>
-                        <select name="data.hands" id="hands-select">
-                            {{#select data.hands}}
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                {{/select}}
-                        </select>
-                    </td>
-                    <td>
-                        <select name="data.conceal" id="avail-select">
-                            {{#select data.conceal}}
-                            {{#each config.Concealment as |value name|}}
-                                    <option value="{{value}}">{{name}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </td>
-                    <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><label>{{localize "WITCHER.Weapon.Range"}}</label><input type="text" name="data.range" value="{{data.range}}"/></td>
-                    <td colspan="2"><label>{{localize "WITCHER.Weapon.Damage"}}</label><input type="text" name="data.damage" value="{{data.damage}}"/></td>
-                    <td colspan="5"><label>{{localize "WITCHER.Item.Effect"}}</label><input type="text" name="data.effect" value="{{data.effect}}"/></td>
-                </tr>
-            </table>
-        </div>
-    </section>
+                </select>
+            </td>
+            <td>
+                <select name="data.conceal" id="avail-select">
+                    {{#select data.conceal}}
+                    {{#each config.Concealment as |value name|}}
+                            <option value="{{value}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </td>
+            <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+            <td><input type="text" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><label>{{localize "WITCHER.Weapon.Range"}}</label><input type="text" name="data.range" value="{{data.range}}"/></td>
+            <td colspan="2"><label>{{localize "WITCHER.Weapon.Damage"}}</label><input type="text" name="data.damage" value="{{data.damage}}"/></td>
+            <td colspan="5"><label>{{localize "WITCHER.Item.Effect"}}</label><input type="text" name="data.effect" value="{{data.effect}}"/></td>
+        </tr>
+    </table>
 </form>

@@ -36,79 +36,60 @@
             </div>
         </div>
     </header>
-
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="attributes">Attributes</a>
-    </nav>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            <textarea name="data.description">{{data.description}}</textarea>
-        </div>
-
-        {{!-- Attributes Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="attributes">
-            <table>
-                <tr> 
-                    <th>Level</th>
-                    <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
-                    <th>{{localize "WITCHER.Diagram.craftingTime"}}</th>
-                    <th>{{localize "WITCHER.Diagram.investment"}}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="data.level" id="type-select">
-                            {{#select data.level}}
-                            <option value="novice">Novice</option>
-                            <option value="journeyman">Journeyman</option>
-                            <option value="master">Master</option>
-                            <option value="grand-master">Grand Master</option>
-                            <option value="witcher">Witcher</option>
-                            {{/select}}
-                        </select>
-                    </td>
-                    <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
-                    <td><input type="text" name="data.craftingTime" value="{{data.craftingTime}}"/></td>
-                    <td><input type="text" name="data.investment" value="{{data.investment}}" data-dtype="Number"/></td>
-                </tr>
-                {{#if data.isFormulae}}
-                <tr>
-                    <td colspan="5">
-                        <div class="flex components-display">
-                            <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.vitriol" value="{{data.alchemyComponents.vitriol}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.rebis" value="{{data.alchemyComponents.rebis}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.aether" value="{{data.alchemyComponents.aether}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.quebrith" value="{{data.alchemyComponents.quebrith}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.hydragenum" value="{{data.alchemyComponents.hydragenum}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.vermilion" value="{{data.alchemyComponents.vermilion}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.sol" value="{{data.alchemyComponents.sol}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.caelum" value="{{data.alchemyComponents.caelum}}"/>
-                            <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
-                            <input type="number" name="data.alchemyComponents.fulgur" value="{{data.alchemyComponents.fulgur}}"/>
-                        </div>
-                    </td>
-                </tr>
-                {{/if}}
-                <tr>
-                    <td colspan="5">
-                        <label>Components</label>
-                        <textarea rows=5 name="data.components">{{data.components}}</textarea>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </section>
+    <table>
+        <tr> 
+            <th>Level</th>
+            <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
+            <th>{{localize "WITCHER.Diagram.craftingTime"}}</th>
+            <th>{{localize "WITCHER.Diagram.investment"}}</th>
+        </tr>
+        <tr>
+            <td>
+                <select name="data.level" id="type-select">
+                    {{#select data.level}}
+                    <option value="novice">Novice</option>
+                    <option value="journeyman">Journeyman</option>
+                    <option value="master">Master</option>
+                    <option value="grand-master">Grand Master</option>
+                    <option value="witcher">Witcher</option>
+                    {{/select}}
+                </select>
+            </td>
+            <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
+            <td><input type="text" name="data.craftingTime" value="{{data.craftingTime}}"/></td>
+            <td><input type="text" name="data.investment" value="{{data.investment}}" data-dtype="Number"/></td>
+        </tr>
+        {{#if data.isFormulae}}
+        <tr>
+            <td colspan="5">
+                <div class="flex components-display">
+                    <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.vitriol" value="{{data.alchemyComponents.vitriol}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.rebis" value="{{data.alchemyComponents.rebis}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.aether" value="{{data.alchemyComponents.aether}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.quebrith" value="{{data.alchemyComponents.quebrith}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.hydragenum" value="{{data.alchemyComponents.hydragenum}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.vermilion" value="{{data.alchemyComponents.vermilion}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.sol" value="{{data.alchemyComponents.sol}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.caelum" value="{{data.alchemyComponents.caelum}}"/>
+                    <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
+                    <input type="number" name="data.alchemyComponents.fulgur" value="{{data.alchemyComponents.fulgur}}"/>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+        <tr>
+            <td colspan="5">
+                <label>Components</label>
+                <textarea rows=5 name="data.components">{{data.components}}</textarea>
+            </td>
+        </tr>
+    </table>
 </form>

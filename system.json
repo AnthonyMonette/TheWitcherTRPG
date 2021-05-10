@@ -13,62 +13,6 @@
       "styles/system-styles.css"
     ],
     "packs": [
-      {
-        "name": "rewards",
-        "label": "Rewards",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/rewards.db",
-        "entity": "RollTable"
-      },
-      {
-        "name": "monsters",
-        "label": "Monsters",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/monsters.db",
-        "entity": "Actor"
-      },
-      {
-        "name": "professions",
-        "label": "Professions",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/professions.db",
-        "entity": "Item"
-      },
-      {
-        "name": "diagrams & formulae",
-        "label": "Diagrams & Formulae",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/diagrams-and-formulae.db",
-        "entity": "Item"
-      },
-      {
-        "name": "weapons",
-        "label": "Weapons",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/weapons.db",
-        "entity": "Item"
-      },
-      {
-        "name": "armors",
-        "label": "Armors",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/armors.db",
-        "entity": "Item"
-      },
-      {
-        "name": "components",
-        "label": "Components",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/components.db",
-        "entity": "Item"
-      },
-      {
-        "name": "magic",
-        "label": "Magic",
-        "system": "TheWitcherTRPG",
-        "path": "./packs/magic.db",
-        "entity": "Item"
-      }
     ],
     "languages": [
       {
