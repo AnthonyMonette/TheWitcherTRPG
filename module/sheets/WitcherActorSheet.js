@@ -174,6 +174,25 @@ export default class WitcherActorSheet extends ActorSheet {
         name: `new ${element.dataset.itemtype}`, 
         type: element.dataset.itemtype
       }
+
+      switch(element.dataset.spelltype){
+        case  "spellNovice":
+          itemData.data={ class: "Spells", level:"novice"}
+          break;
+        case  "spellJourneyman":
+          itemData.data={ class: "Spells", level:"journeyman"}
+          break;
+        case  "spellMaster":
+          itemData.data={ class: "Spells", level:"master"}
+          break;
+        case  "rituals":
+          itemData.data={ class: "Rituals"}
+          break;
+        case  "hexes":
+          itemData.data={ class: "Hexes"}
+          break;
+      }
+      console.log(itemData)
       this.actor.createOwnedItem(itemData)
     }
 
