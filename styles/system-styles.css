@@ -494,3 +494,11 @@ input.hp-value {
 input.hp-value:focus {
   border: none;
 }
+
+.perk {
+  margin:5px
+}
+
+.flex-header {
+    align-items: center;
+}

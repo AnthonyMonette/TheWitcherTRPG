@@ -569,7 +569,8 @@
       "mutagen",
       "spell",
       "profession",
-      "note"
+      "note",
+      "race"
     ],
     "templates":{
       "base": {
@@ -765,6 +766,25 @@
     },
     "note": {
       "description": ""
+    },
+    "race": {
+      "descriotion": "",
+      "perk1": {
+        "name": "",
+        "description": ""
+      },
+      "perk2": {
+        "name": "",
+        "description": ""
+      },
+      "perk3": {
+        "name": "",
+        "description": ""
+      },
+      "perk4": {
+        "name": "",
+        "description": ""
+      }
     }
   }
 }

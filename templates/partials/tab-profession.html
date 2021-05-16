@@ -1,8 +1,9 @@
 
 {{#if profession}}
 <div class="item" data-item-id="{{profession._id}}">
-    <h1 class="flex" >
-        <input name="profession.name" type="text" value="{{profession.name}}" placeholder="Name" />
+    <h1 class="flex flex-header" >
+        <label>Prefession:</label>
+        <input class="inline-edit" data-field="name" type="text" value="{{profession.name}}" placeholder="Name" />
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
     </h1>
     <div class="profession-layout">
@@ -221,5 +222,39 @@
 </div>
 {{/if}}
 {{#unless profession}}
-<h1>Add a Proffession <a class="add-item" data-itemType="profession"><i class="fas fa-plus"></i></a> </h1>
+<h1>Add a Profession <a class="add-item" data-itemType="profession"><i class="fas fa-plus"></i></a> </h1>
+{{/unless}}
+
+{{#if race}}
+<div class="item" data-item-id="{{race._id}}">
+    <h1 class="flex flex-header" >
+        <label>Race:</label>
+        <input  class="inline-edit"  data-field="name" type="text" value="{{race.name}}"/>
+        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+    </h1>
+    <h2>Perks</h2>
+    <div class="flexrow">
+        <div class="perk">
+            <h3><input  class="inline-edit"  data-field="data.perk1.name" type="text" value="{{race.data.perk1.name}}"/></h3>
+            <textarea class="inline-edit" rows=7 data-field="data.perk1.description">{{race.data.perk1.description}}</textarea>
+        </div>
+        <div class="perk">
+            <h3><input  class="inline-edit"  data-field="data.perk2.name" type="text" value="{{race.data.perk2.name}}"/></h3>
+            <textarea class="inline-edit" rows=7 data-field="data.perk2.description">{{race.data.perk2.description}}</textarea>
+        </div>
+    </div>
+    <div class="flexrow">
+        <div class="perk">
+            <h3><input  class="inline-edit"  data-field="data.perk3.name" type="text" value="{{race.data.perk3.name}}"/></h3>
+            <textarea class="inline-edit" rows=7 data-field="data.perk3.description">{{race.data.perk3.description}}</textarea>
+        </div>
+        <div class="perk">
+            <h3><input  class="inline-edit"  data-field="data.perk4.name" type="text" value="{{race.data.perk4.name}}"/></h3>
+            <textarea class="inline-edit" rows=7 data-field="data.perk4.description">{{race.data.perk4.description}}</textarea>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#unless race}}
+<h1>Add a Race <a class="add-item" data-itemType="race"><i class="fas fa-plus"></i></a> </h1>
 {{/unless}}

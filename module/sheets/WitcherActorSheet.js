@@ -24,8 +24,13 @@ export default class WitcherActorSheet extends ActorSheet {
       data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" });
       data.diagrams = data.items.filter(function(item) {return item.type=="diagrams"});
       data.spells = data.items.filter(function(item) {return item.type=="spell"});
+      
       data.professions = data.items.filter(function(item) {return item.type=="profession"});
       data.profession = data.professions[0];
+      
+      data.races = data.items.filter(function(item) {return item.type=="race"});
+      data.race = data.races[0];
+
       Array.prototype.sum = function (prop) {
         var total = 0
         for ( var i = 0, _len = this.length; i < _len; i++ ) {
@@ -343,10 +348,13 @@ export default class WitcherActorSheet extends ActorSheet {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".item").dataset.itemId;
+      console.log("ITEM ID:" + itemId)
       let item = this.actor.getOwnedItem(itemId);
-      console.log(item)
       let field = element.dataset.field;
-      
+      console.log("ITEM:")
+      console.log(item)
+      console.log("dataset field:")
+      console.log(field)
       // Edit checkbox values
       let value = element.value
       if(value == "false") { 

@@ -20,4 +20,17 @@ export default class WitcherItemSheet extends ItemSheet {
       this.options.classes.push(`item-${this.item.data.type}`)
       return data;
     }
+
+    
+    activateListeners(html) {
+      super.activateListeners(html);
+
+      html.find(".add-perk").on("click", this._onAddPerk.bind(this));
+    }
+
+
+    _onAddPerk(event) {
+      event.preventDefault();
+      this.item.data.data.perks.push({name: "new Perk", description: ""})
+    }
   }
