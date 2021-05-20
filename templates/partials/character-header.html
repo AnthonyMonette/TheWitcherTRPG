@@ -27,6 +27,9 @@
                     <div class="ressource">
                         <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
                     </div>
+                    <div class="ressource">
+                        <label class="stat-label"><a class="defence-roll">Defense</a></label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,17 +86,4 @@
         /
         <input class="header-stat" name="data.derivedStats.resolve.max" type="text" value="{{data.derivedStats.resolve.max}}" placeholder="0" data-dtype="Number" readonly/> 
     </div>
-    <!-- {{#each data.derivedStats as |details derivedStat|}}
-    <div class="stat-display">
-        <label>{{localize details.label}}</label> 
-        <input class="header-stat" name="data.stats.{{derivedStat}}.max" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
-        <input class="header-stat" name="data.stats.{{derivedStat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-    </div>
-    {{/each}}
-    {{#each data.attackStats as |details attackStat|}}
-    <div class="stat-display">
-        <label>{{localize details.label}}</label> 
-        <input class="header-stat" name="data.stats.{{attackStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
-    </div>
-    {{/each}} -->
 </div>    

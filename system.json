@@ -2,7 +2,7 @@
     "name": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "Many details here.",
-    "version": 0.06,
+    "version": 0.07,
     "author": "TechAntho",
     "scripts": [
     ],
@@ -13,6 +13,36 @@
       "styles/system-styles.css"
     ],
     "packs": [
+      {
+        "name": "Character-gen",
+        "label": "Character Generator",
+        "path": "packs/witcher-character-generator.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Combat",
+        "label": "Combat",
+        "path": "packs/witcher-ttrpg-combat.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Lifepath",
+        "label": "Lifepath",
+        "path": "packs/witcher-ttrpg-lifepath.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Style",
+        "label": "Style",
+        "path": "packs/witcher-ttrpg-style.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Components",
+        "label": "Components",
+        "path": "packs/components.db",
+        "entity": "Item"
+      }
     ],
     "languages": [
       {

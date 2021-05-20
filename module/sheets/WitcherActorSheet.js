@@ -108,6 +108,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
+      html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
+      
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
       html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
@@ -293,6 +295,122 @@ export default class WitcherActorSheet extends ActorSheet {
       })
     }
 
+    async _onDefenceRoll(event) {
+
+      const options = `
+      <option value="brawling"> Brawling </option>
+      <option value="melee"> Melee </option>
+      <option value="smallblades"> Small Blades </option>
+      <option value="staffspear"> Staff/Spear </option>
+      <option value="swordsmanship"> Swordsmanship </option>
+      `;
+      const content = `<label>Defense with: </label><select name="form">${options}</select>`;
+
+      let messageData = {
+        speaker: {alias: this.actor.name},
+        flavor: `<h1>Defense</h1>`,
+      }
+
+      new Dialog({
+        title: `Performing a defense action`, 
+        content,
+        buttons: {
+          Dodge: {
+            label: "Dodge", 
+            callback: (html) => {
+              let stat = this.actor.data.data.stats.ref.current;
+              let skill = this.actor.data.data.skills.ref.dodge.value;
+              let displayFormula = `1d10 + Ref + Dodge/Escape`;
+              messageData.flavor = `<h1>Defense: Dodge</h1><p>${displayFormula}</p>`;
+              let rollFormula = `1d10+${stat}+${skill}`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          },
+          Reposition: {
+            label: "Reposition",
+            callback: (html) => {
+              let stat = this.actor.data.data.stats.dex.current;
+              let skill = this.actor.data.data.skills.dex.athletics.value;
+              let displayFormula = `1d10 + Dex + Athletics`;
+              messageData.flavor = `<h1>Defense: Reposition</h1><p>${displayFormula}</p>`;
+              let rollFormula = `1d10+${stat}+${skill}`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          },
+          Block: {
+            label: "Block",
+            callback: (html) => {
+              let defense = html.find("[name=form]")[0].value;
+              let stat = this.actor.data.data.stats.ref.current;
+              let skill = 0;
+              let displayFormula = `1d10 + Ref + Defense`;
+              switch(defense){
+                case "brawling":
+                  skill = this.actor.data.data.skills.ref.brawling.value;
+                  displayFormula = `1d10 + Ref + Brawling`;
+                  break;
+                case "melee":
+                  skill = this.actor.data.data.skills.ref.melee.value;
+                  displayFormula = `1d10 + Ref + Melee`;
+                  break;
+                case "smallblades":
+                  skill = this.actor.data.data.skills.ref.smallblades.value;
+                  displayFormula = `1d10 + Ref + Small Blades`;
+                  break;
+                case "staffspear":
+                  skill = this.actor.data.data.skills.ref.staffspear.value;
+                  displayFormula = `1d10 + Ref + Staff/Spear`;
+                  break;
+                case "swordsmanship":
+                  skill = this.actor.data.data.skills.ref.swordsmanship.value;
+                  displayFormula = `1d10 + Ref + Swordsmanship`;
+                  break;
+              }
+
+              messageData.flavor = `<h1>Defense: Block</h1><p>${displayFormula}</p>`;
+              let rollFormula = `1d10+${stat}+${skill}`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          },
+          Parry: {
+            label: "Parry",
+            callback: (html) => {
+              let defense = html.find("[name=form]")[0].value;
+              let stat = this.actor.data.data.stats.ref.current;
+              let skill = 0;
+              let displayFormula = `1d10 + Ref + Parry`;
+              switch(defense){
+                case "brawling":
+                  skill = this.actor.data.data.skills.ref.brawling.value;
+                  displayFormula = `1d10 + Ref + Brawling`;
+                  break;
+                case "melee":
+                  skill = this.actor.data.data.skills.ref.melee.value;
+                  displayFormula = `1d10 + Ref + Melee`;
+                  break;
+                case "smallblades":
+                  skill = this.actor.data.data.skills.ref.smallblades.value;
+                  displayFormula = `1d10 + Ref + Small Blades`;
+                  break;
+                case "staffspear":
+                  skill = this.actor.data.data.skills.ref.staffspear.value;
+                  displayFormula = `1d10 + Ref + Staff/Spear`;
+                  break;
+                case "swordsmanship":
+                  skill = this.actor.data.data.skills.ref.swordsmanship.value;
+                  displayFormula = `1d10 + Ref + Swordsmanship`;
+                  break;
+              }
+
+              messageData.flavor = `<h1>Defense: Parry</h1><p>${displayFormula}</p>`;
+              let rollFormula = `1d10+${stat}+${skill}`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          }
+        }
+      }).render(true)  
+    }
+    
     async _onStatSaveRoll(event) {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let statValue = 0
