@@ -519,117 +519,301 @@ export default class WitcherActorSheet extends ActorSheet {
         speaker: {alias: this.actor.name},
         flavor: `<h1>Attack: ${item.name}</h1>`,
       }
+      const locationOptions = `
+      <option value="randomHuman"> Random Human </option>
+      <option value="randomMonster"> Random Monster </option>
+      <option value="head"> Head </option>
+      <option value="torso"> Torso </option>
+      <option value="arm"> Arm </option>
+      <option value="leg"> Leg </option>
+      <option value="tail"> Tail/wing </option>
+      `;
+      const AttackModifierOptions = `
+      <option value="none"> None </option>
+      <option value="pinned"> Target pinned </option>
+      <option value="activelyDodging"> Target actively dodging </option>
+      <option value="movingTarget"> Moving target REF > 10 </option>
+      <option value="fastDraw"> Fast draw </option>
+      <option value="ambush"> Ambush </option>
+      <option value="ricochet"> Ricochet shot </option>
+      <option value="blinded"> Blinded by light or dust </option>
+      <option value="silhouetted"> Target silhouetted </option>
+      <option value="aiming"> Aiming (per round) </option>
+      `;
+      const opponentSizeOptions = `
+      <option value="medium"> Medium </option>
+      <option value="small"> Small</option>
+      <option value="large"> Large </option>
+      <option value="huge"> Huge </option>
+      `;
+      const rangeOptions = `
+      <option value="none"> None </option>
+      <option value="pointBlank"> Point Blank </option>
+      <option value="close"> Close</option>
+      <option value="medium"> Medium </option>
+      <option value="long"> Long </option>
+      <option value="extreme"> Extreme </option>
+      `;
+      const StrikeOptions = `
+      <option value="normal"> Normal Strike </option>
+      <option value="fast"> Fast Strike </option>
+      <option value="strong"> Strong Strike </option>
+      `;
+
+
+      let content = `<h2>${item.name} Attack will use: ${item.data.data.attackSkill}</h2> 
+                     <label>Hit Location: <select name="location">${locationOptions}</select></label> <br />
+                     <label>Attack Modifiers: <select name="attack">${AttackModifierOptions}</select></label> <br />
+                     <label>Opponent Size Modifiers: <select name="size">${opponentSizeOptions}</select></label> <br />
+                     <label>Range Modifiers: <select name="range">${rangeOptions}</select></label> <br />
+                     <label>Custom Modifiers: <input name="customAtt" value=0></label> <br />
+                     <label>Strike type: <select name="strike">${StrikeOptions}</select></label> <br /><br />
+                     <h2>${item.name} damage: ${formula}</h2> 
+                     <label>Melee Bonus: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
+                     <label>Custom Damage Modifiers: <input name="customDmg" value=0></label> <br /><br />
+                     `;
+
 
       new Dialog({
         title: `Performing an Attack with: ${item.name}`, 
-        content: `<h2>${item.name} damage: ${formula}</h2>`,
+        content,
         buttons: {
-          LocationRandomHuman: {
-            label: "Random Human", 
+          Roll: {
+            label: "Roll",
             callback: (html) => {
-              let location = getRandomInt(10)
-              switch(location){
-                case 1:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*3`;
-                  break;
-                case 2:
-                case 3:
-                case 4:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
-                  break;
-                case 5:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Arm</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                case 6:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: L Arm</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                case 7:
-                case 8:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Leg</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                case 9:
-                case 10:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Leg</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                default:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
+              let location = html.find("[name=location]")[0].value;
+              let attack = html.find("[name=attack]")[0].value;
+              let size = html.find("[name=size]")[0].value;
+              let range = html.find("[name=range]")[0].value;
+              let customAtt = html.find("[name=customAtt]")[0].value;
+              let strike = html.find("[name=strike]")[0].value;
+
+              let customDmg = html.find("[name=customDmg]")[0].value;
+              let attacknumber = 1;
+
+              if (strike == "fast") {
+                attacknumber = 2;
               }
-              new Roll(formula).roll().toMessage(messageData)
-            }
-          },
-          LocationRandomMonster: {
-            label: "Random Monster", 
-            callback: (html) => {
-              let location = getRandomInt(10)
-              switch(location){
-                case 1:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*3`;
-                  break;
-                case 2:
-                case 3:
-                case 4:
-                  case 5:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
-                  break;
-                case 6:
-                case 7:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: R Limb</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                case 8:
-                  case 9:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: L Limb</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                case 10:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Tail or Wing</div><div>Effect: ${item.data.data.effect}</div>`;
-                  formula = `(${formula})*0.5`;
-                  break;
-                default:
-                  messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`;
+              for (let i=0; i < attacknumber; i++){
+                let attFormula = "1d10"
+                let damageFormula = formula;
+
+
+                if (item.data.data.isMelee){
+                  attFormula += `+${this.actor.data.data.stats.ref.current}`;
+                  switch(item.data.data.attackSkill){
+                    case "Brawling":
+                      attFormula += `+${this.actor.data.data.skills.ref.brawling.value}`;
+                      break;
+                    case "Melee":
+                      attFormula += `+${this.actor.data.data.skills.ref.melee.value}`;
+                      break;
+                    case "Small Blades":
+                      attFormula += `+${this.actor.data.data.skills.ref.smallblades.value}`;
+                      break;
+                    case "Staff/Spear":
+                      attFormula += `+${this.actor.data.data.skills.ref.staffspear.value}`;
+                      break;
+                    case "Swordsmanship":
+                      attFormula += `+${this.actor.data.data.skills.ref.swordsmanship.value}`;
+                      break;
+                  }
+                } 
+                else { 
+                  attFormula += `+${this.actor.data.data.stats.dex.current}`;
+                  switch(item.data.data.attackSkill){
+                    case "Archery":
+                      attFormula += `+${this.actor.data.data.skills.dex.archery.value}`;
+                      break;
+                    case "Crossbow":
+                      attFormula += `+${this.actor.data.data.skills.dex.crossbow.value}`;
+                      break;
+                  }
+                }
+
+                if (customAtt != "0") {
+                  attFormula += "+"+customAtt;
+                }
+                console.log(range)
+                switch(range){
+                  case "pointBlank":
+                    attFormula = `${attFormula}+5`;
+                    break;
+                  case "medium":
+                    attFormula = `${attFormula}-2`;
+                    break;
+                  case "long":
+                    attFormula = `${attFormula}-4`;
+                    break;
+                  case "extreme":
+                    attFormula = `${attFormula}-6`;
+                    break;
+                }
+
+                switch(size){
+                  case "small":
+                    attFormula = `${attFormula}+2`;
+                    break;
+                  case "large":
+                    attFormula = `${attFormula}-2`;
+                    break;
+                  case "huge":
+                    attFormula = `${attFormula}-4`;
+                    break;
+                }
+
+                switch(attack){
+                  case "pinned":
+                    attFormula = `${attFormula}+4`;
+                    break;
+                  case "activelyDodging":
+                    attFormula = `${attFormula}-2`;
+                    break;
+                  case "movingTarget":
+                    attFormula = `${attFormula}-3`;
+                    break;
+                  case "fastDraw":
+                    attFormula = `${attFormula}-3`;
+                    break;
+                  case "ambush":
+                    attFormula = `${attFormula}+5`;
+                    break;
+                  case "ricochet":
+                    attFormula = `${attFormula}-5`;
+                    break;
+                  case "blinded":
+                    attFormula = `${attFormula}-3`;
+                    break;
+                  case "silhouetted":
+                    attFormula = `${attFormula}+2`;
+                    break;
+                  case "aiming":
+                    attFormula = `${attFormula}+1`;
+                    break;
+                }
+                
+                if (customDmg != "0") {
+                  damageFormula += "+"+customDmg;
+                }
+                if (item.data.data.isMelee) {
+                  damageFormula += this.actor.data.data.attackStats.meleeBonus;
+                }
+                
+                let touchedLocation = ""
+                switch(location){
+                  case "randomHuman":
+                    let randomHumanLocation = getRandomInt(10)
+                    switch(randomHumanLocation){
+                      case 1:
+                        touchedLocation = "Head";
+                        damageFormula = `(${damageFormula})*3`;
+                        break;
+                      case 2:
+                      case 3:
+                      case 4:
+                        touchedLocation = "Torso";
+                        break;
+                      case 5:
+                        touchedLocation = "R Arm";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      case 6:
+                        touchedLocation = "L Arm";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      case 7:
+                      case 8:
+                        touchedLocation = "R Leg";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      case 9:
+                      case 10:
+                        touchedLocation = "L Leg";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      default:
+                        touchedLocation = "Torso";
+                    }
+                    break;
+                  case "randomMonster":
+                    let randomMonsterLocation = getRandomInt(10)
+                    switch(randomMonsterLocation){
+                      case 1:
+                        touchedLocation = "Head";
+                        damageFormula = `(${damageFormula})*3`;
+                        break;
+                      case 2:
+                      case 3:
+                      case 4:
+                      case 5:
+                        touchedLocation = "Torso";
+                      break;
+                      case 6:
+                      case 7:
+                        touchedLocation = "R Limb";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      case 8:
+                      case 9:
+                        touchedLocation = "L Limb";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      case 10:
+                        touchedLocation = "Tail or Wing";
+                        damageFormula = `(${damageFormula})*0.5`;
+                        break;
+                      default:
+                        touchedLocation = "Torso";
+                    }
+                    break;
+                  case "head":
+                    touchedLocation = "Head";
+                    attFormula = `${attFormula}-6`;
+                    damageFormula = `(${damageFormula})*3`;
+                    break;
+                  case "torso":
+                    touchedLocation = "Torso";
+                    attFormula = `${attFormula}-1`;
+                    break;
+                  case "arm":
+                    touchedLocation = "Arm";
+                    attFormula = `${attFormula}-3`;
+                    damageFormula = `(${damageFormula})*0.5`;
+                    break;
+                  case "leg":
+                    touchedLocation = "Leg";
+                    attFormula = `${attFormula}-2`;
+                    damageFormula = `(${damageFormula})*0.5`;
+                    break;
+                  case "tail":
+                    touchedLocation = "Tail or Wing";
+                    attFormula = `${attFormula}-2`;
+                    damageFormula = `(${damageFormula})*0.5`;
+                    break;
+                }
+
+                messageData.flavor = `<h1>Attack: ${item.name}</h1>`;
+                console.log(attFormula)
+                new Roll(attFormula).roll().toMessage(messageData)
+
+                
+                messageData.flavor = `<h1>${item.name} Damage</h1>`;
+
+                if (strike == "strong") {
+                  damageFormula = `(${damageFormula})*2`;
+                  messageData.flavor += `<div>Strong Attack</div>`;
+                }
+                else if(strike == "fast"){
+                  messageData.flavor += `<div>Fast Attack${i + 1}</div>`;
+                }
+                messageData.flavor += `<div>Location: ${touchedLocation}</div>`;
+                if (item.data.data.effect) {
+                  messageData.flavor += `<div>Effect: ${item.data.data.effect}</div>`;
+                }
+                console.log(damageFormula)
+                console.log( messageData.flavor)
+                new Roll(damageFormula).roll().toMessage(messageData)
               }
-              new Roll(formula).roll().toMessage(messageData)
-            }
-          },
-          LocationHead: {
-            label: "Head", 
-            callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Head</div><div>Effect: ${item.data.data.effect}</div>`,
-              new Roll(`(${formula})*3`).roll().toMessage(messageData)
-            }
-          },
-          LocationTorso: {
-            label: "Torso", 
-            callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Torso</div><div>Effect: ${item.data.data.effect}</div>`,
-              new Roll(formula).roll().toMessage(messageData)
-            }
-          },
-          LocationArm: {
-            label: "Arm", 
-            callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Arm</div><div>Effect: ${item.data.data.effect}</div>`,
-              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
-            }
-          },
-          LocationLeg: {
-            label: "Leg", 
-            callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Leg</div><div>Effect: ${item.data.data.effect}</div>`,
-              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
-            }
-          },
-          LocationTail: {
-            label: "Tail", 
-            callback: (html) => {
-              messageData.flavor= `<h1>Attack: ${item.name}</h1><div>Location: Tail or Wing</div><div>Effect: ${item.data.data.effect}</div>`,
-              new Roll(`(${formula})*0.5`).roll().toMessage(messageData)
             }
           }
         }

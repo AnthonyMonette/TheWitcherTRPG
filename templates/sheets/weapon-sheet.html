@@ -15,6 +15,20 @@
             </div>
         </div>
     </header>
+    <div class="flex-header">
+        <label>Attack Skill:</label>
+        <select name="data.attackSkill" id="hands-select">
+            {{#select data.attackSkill}}
+                <option value="Brawling"> Brawling </option>
+                <option value="Melee"> Melee </option>
+                <option value="Small Blades"> Small Blades </option>
+                <option value="Staff/Spear"> Staff/Spear </option>
+                <option value="Swordsmanship"> Swordsmanship </option>
+                <option value="Archery"> Archery </option>
+                <option value="Crossbow"> Crossbow </option>
+            {{/select}}
+        </select>
+    </div>
     <table>
         <tr>
             <th>{{localize "WITCHER.Weapon.Type"}}</th>

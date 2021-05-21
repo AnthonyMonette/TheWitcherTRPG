@@ -601,7 +601,8 @@
       "effect": "",
       "conceal": "",
       "enhancements": 0,
-      "rateOfFire":1
+      "rateOfFire":1,
+      "attackSkill": ""
     },
     "armor": {
       "templates": ["base"],
