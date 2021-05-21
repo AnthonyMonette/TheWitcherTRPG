@@ -502,3 +502,9 @@ input.hp-value:focus {
 .flex-header {
     align-items: center;
 }
+
+.bg-note {
+  width: 32%;
+  float: left;
+  margin-right: 5px;
+}

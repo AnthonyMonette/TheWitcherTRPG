@@ -78,8 +78,8 @@ export default class WitcherActorSheet extends ActorSheet {
       data.TotalWeight =  data.items.weight();
 
       data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
-      data.journeymanSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="journeyman" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="witcher")});
-      data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="witcher")});
+      data.journeymanSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="journeyman" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
+      data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="master" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Rituals"});
 
@@ -206,16 +206,46 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onSpellRoll(event) {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let spellItem = this.actor.getOwnedItem(itemId);
-      let roll = "0"
-      if (spellItem.data.data.roll){
-        roll = spellItem.data.data.roll
+      let formula = `1d10`
+      console.log(spellItem)
+      formula += `+${this.actor.data.data.stats.will.current}`
+      switch(spellItem.data.data.class) {
+        case "Witcher":
+        case "Invocations":
+        case "Spells":
+          formula += `+${this.actor.data.data.skills.will.spellcast.value}`;
+          break;
+        case "Rituals":
+          formula += `+${this.actor.data.data.skills.will.ritcraft.value}`;
+          break;
+        case "Hexes":
+          formula += `+${this.actor.data.data.skills.will.hexweave.value}`;
+          break;
       }
+      let staCostTotal = spellItem.data.data.stamina;
+      let staCostdisplay = spellItem.data.data.stamina;
+      if (staCostTotal != "V" || staCostTotal != "Varivable"){
+        let staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
+
+        staCostTotal -= staFocus
+        if (staCostTotal < 0) {
+          staCostTotal = 0
+        }
+
+        let newSta = this.actor.data.data.derivedStats.sta.value - staCostTotal
+        this.actor.update({ 
+          'data.derivedStats.sta.value': newSta
+        });
+        staCostdisplay += `-${staFocus}[Focus]`
+      }
+
       
-      let rollResult = new Roll(roll).roll()
+
+      let rollResult = new Roll(formula).roll()
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", this.actor, {
         type: "Spell Roll",
         title: spellItem.name,
-        staCost: spellItem.data.data.stamina,
+        staCost: staCostdisplay,
         effet: spellItem.data.data.effect,
         range:spellItem.data.data.range,
         duration:spellItem.data.data.duration,
@@ -624,6 +654,9 @@ export default class WitcherActorSheet extends ActorSheet {
                   switch(item.data.data.attackSkill){
                     case "Archery":
                       attFormula += `+${this.actor.data.data.skills.dex.archery.value}`;
+                      break;
+                    case "Athletics":
+                      attFormula += `+${this.actor.data.data.skills.dex.athletics.value}`;
                       break;
                     case "Crossbow":
                       attFormula += `+${this.actor.data.data.skills.dex.crossbow.value}`;

@@ -45,4 +45,17 @@
             </table>
         </div>
     </div>
+    <div>
+        <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+                
+        {{#each notes as |note id|}}
+        <div class="item bg-note" data-item-id="{{note._id}}">
+            <div class="flex">
+                <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
+                <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </div>
+            <textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
+        </div>
+        {{/each}}
+    </div>
 </div>

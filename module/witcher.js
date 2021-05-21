@@ -14,7 +14,6 @@ function updateDerived(actor){
     if (actor.data.data.customStats){
         return null;
     }
-    console.log(actor.data.data.customStats)
     let thisActor = actor;
     let base = Math.floor((thisActor.data.data.stats.body.current + thisActor.data.data.stats.will.current)/2);
     let currentBody = thisActor.data.data.stats.body.current;
