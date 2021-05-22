@@ -1,0 +1,116 @@
+
+<div class="skill">
+    <h3>Spells - Novice <a class="skill-display"><i class="fas fa-chevron-right"></i></a></h3>
+    <table class="skill-list hidden">
+        <tr> 
+            <td></td> 
+            <td><b>name</b></td>
+            <td><b>STA Cost</b></td>
+            <td></td> 
+        </tr>
+        {{#each noviceSpells as |spell id|}}
+        <tbody class="item" data-item-id="{{spell._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a class="spell-roll">{{spell.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>
+<div class="skill">
+    <h3>Spells - Journeyman <a class="skill-display"><i class="fas fa-chevron-right"></i></a></h3>
+    <table class="skill-list hidden">
+        <tr> 
+            <td></td> 
+            <td><b>name</b></td>
+            <td><b>STA Cost</b></td>
+            <td></td> 
+        </tr>
+        {{#each journeymanSpells as |spell id|}}
+        <tbody class="item" data-item-id="{{spell._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a class="spell-roll">{{spell.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>
+<div class="skill">
+    <h3>Spells - Master <a class="skill-display"><i class="fas fa-chevron-right"></i></a></h3>
+    <table class="skill-list hidden">
+        <tr> 
+            <td></td> 
+            <td><b>name</b></td>
+            <td><b>STA Cost</b></td>
+            <td></td> 
+        </tr>
+        {{#each masterSpells as |spell id|}}
+        <tbody class="item" data-item-id="{{spell._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a class="spell-roll">{{spell.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>
+<div class="skill">
+    <h3>Rituals <a class="skill-display"><i class="fas fa-chevron-right"></i></a></h3>
+    <table class="skill-list hidden">
+        <tr> 
+            <td></td> 
+            <td><b>name</b></td>
+            <td><b>STA Cost</b></td>
+            <td></td> 
+        </tr>
+        {{#each rituals as |ritual id|}}
+        <tbody class="item" data-item-id="{{ritual._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a class="spell-roll">{{ritual.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{ritual.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>
+<div class="skill">
+    <h3>Hexes <a class="skill-display"><i class="fas fa-chevron-right"></i></a></h3>
+    <table class="skill-list hidden">
+        <tr> 
+            <td></td> 
+            <td><b>name</b></td>
+            <td><b>STA Cost</b></td>
+            <td></td> 
+        </tr>
+        {{#each hexes as |hex id|}}
+        <tbody class="item" data-item-id="{{hex._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><a class="spell-roll">{{hex.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{hex.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>

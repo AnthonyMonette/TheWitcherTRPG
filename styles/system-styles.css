@@ -508,3 +508,9 @@ input.hp-value:focus {
   float: left;
   margin-right: 5px;
 }
+.add-item {
+  margin-right: 5px;
+}
+.substance-img {
+  border: none;
+}

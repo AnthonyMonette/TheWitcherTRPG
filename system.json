@@ -42,6 +42,12 @@
         "label": "Components",
         "path": "packs/components.db",
         "entity": "Item"
+      },
+      {
+        "name": "Valuables",
+        "label": "Valuables",
+        "path": "packs/valuables.db",
+        "entity": "Item"
       }
     ],
     "languages": [

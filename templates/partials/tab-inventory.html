@@ -207,24 +207,42 @@
                             </div>
 
                             <div class="flex components-display">
-                                <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.vitriol}}
-                                <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.rebis}}
-                                <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.aether}}
-                                <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.quebrith}}
-                                <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.hydragenum}}
-                                <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.vermilion}}
-                                <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.sol}}
-                                <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.caelum}}
-                                <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
-                                {{diagram.data.alchemyComponents.fulgur}}
+                                {{#if (gt diagram.data.alchemyComponents.vitriol 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.vitriol}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.rebis 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.rebis}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.aether 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.aether}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.quebrith 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.quebrith}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.hydragenum 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.hydragenum}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.vermilion 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.vermilion}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.sol 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.sol}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.caelum 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.caelum}}
+                                {{/if}}
+                                {{#if (gt diagram.data.alchemyComponents.fulgur 0)}}
+                                    <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
+                                    {{diagram.data.alchemyComponents.fulgur}}
+                                {{/if}}
                             </div>
                             <div class="flex">
                                 <label class="label-info"><b>Other Components :</b>{{diagram.data.components}}
@@ -232,6 +250,9 @@
                         </div>
                     </td> 
                     <td><div>
+                        {{#if diagram.data.isFormulae}}
+                            <a class="alchemy-potion"><i class="fas fa-vial"></i></a>
+                        {{/if}}
                         <a class="item-edit"><i class="fas fa-edit"></i></a>
                         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </div></td>

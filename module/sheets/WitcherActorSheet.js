@@ -114,6 +114,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
       html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
       html.find(".spell-roll").on("click", this._onSpellRoll.bind(this));
+      html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
+      
     
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
@@ -199,15 +201,56 @@ export default class WitcherActorSheet extends ActorSheet {
           itemData.data={ class: "Hexes"}
           break;
       }
+
+      if (element.dataset.itemtype == "component") {
+        console.log("testing testing")
+        itemData.data = { type: "substances", substanceType: element.dataset.subtype}
+      }
+
       console.log(itemData)
       this.actor.createOwnedItem(itemData)
     }
+    
+    async _alchemyCraft(event) {
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.getOwnedItem(itemId);
+
+      const content = `<label>Crafting a ${item.data.name}</label> <br /> Work in progress`;
+
+      let messageData = {
+        speaker: {alias: this.actor.name},
+        flavor: `<h1>Crafting</h1>`,
+      }
+
+      new Dialog({
+        title: `Performing an alchemy action`, 
+        content,
+        buttons: {
+          Craft: {
+            label: "Craft", 
+            callback: (html) => {
+              let stat = this.actor.data.data.stats.cra.current;
+              let skill = this.actor.data.data.skills.cra.alchemy.value;
+              messageData.flavor = `<h1>Crafting an alchemical</h1>`,
+              messageData.flavor += `Alchemy DC: ${item.data.data.alchemyDC}`;
+
+              if (!item.data.data.alchemyDC || item.data.data.alchemyDC == 0){
+                stat = this.actor.data.data.stats.cra.current;
+                skill = this.actor.data.data.skills.cra.crafting.value;
+                messageData.flavor = `Crafting DC: ${item.data.data.craftingDC}`;
+              }
+              let rollFormula = `1d10+${stat}+${skill}`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          }
+        }}).render(true) 
+    }
+
 
     async _onSpellRoll(event) {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let spellItem = this.actor.getOwnedItem(itemId);
       let formula = `1d10`
-      console.log(spellItem)
       formula += `+${this.actor.data.data.stats.will.current}`
       switch(spellItem.data.data.class) {
         case "Witcher":
@@ -225,8 +268,11 @@ export default class WitcherActorSheet extends ActorSheet {
       let staCostTotal = spellItem.data.data.stamina;
       let staCostdisplay = spellItem.data.data.stamina;
       if (staCostTotal != "V" || staCostTotal != "Varivable"){
-        let staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
-
+        let staFocus = 0 
+        if (this.actor.data.data.focus1) {
+          staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
+        }
+        
         staCostTotal -= staFocus
         if (staCostTotal < 0) {
           staCostTotal = 0
@@ -238,8 +284,6 @@ export default class WitcherActorSheet extends ActorSheet {
         });
         staCostdisplay += `-${staFocus}[Focus]`
       }
-
-      
 
       let rollResult = new Roll(formula).roll()
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", this.actor, {
