@@ -83,7 +83,9 @@ export default class WitcherActorSheet extends ActorSheet {
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.data.class=="Rituals"});
 
-      
+      if (this.actor.data.data.pannels == undefined){
+        this.actor.update({ 'data.pannels':{}});
+      }
       return data;
     }
 
@@ -901,23 +903,64 @@ export default class WitcherActorSheet extends ActorSheet {
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");
-      let editor = $(section).find(".skill-list")
-      editor.toggleClass("hidden");
-      
-      let chevronEditor = $(section).find(".fas")
-      chevronEditor.toggleClass("fa-chevron-right");
-      chevronEditor.toggleClass("fa-chevron-down");
+      switch(section.dataset.skilltype) {
+        case "int":
+          this.actor.update({ 'data.pannels.intIsOpen': this.actor.data.data.pannels.intIsOpen ? false : true});
+          break;
+        case "ref":
+          this.actor.update({ 'data.pannels.refIsOpen': this.actor.data.data.pannels.refIsOpen ? false : true});
+          break;
+        case "dex":
+          this.actor.update({ 'data.pannels.dexIsOpen': this.actor.data.data.pannels.dexIsOpen ? false : true});
+          break;
+        case "body":
+          this.actor.update({ 'data.pannels.bodyIsOpen': this.actor.data.data.pannels.bodyIsOpen ? false : true});
+          break;
+        case "emp":
+          this.actor.update({ 'data.pannels.empIsOpen': this.actor.data.data.pannels.empIsOpen ? false : true});
+          break;
+        case "cra":
+          this.actor.update({ 'data.pannels.craIsOpen': this.actor.data.data.pannels.craIsOpen ? false : true});
+          break;
+        case "will":
+          this.actor.update({ 'data.pannels.willIsOpen': this.actor.data.data.pannels.willIsOpen ? false : true});
+          break;
+      }
     }
 
     _onSubstanceDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".substance");
-      let editor = $(section).find(".substance-list")
-      editor.toggleClass("hidden");
-      
-      let chevronEditor = $(section).find(".fas")
-      chevronEditor.toggleClass("fa-chevron-right");
-      chevronEditor.toggleClass("fa-chevron-down");
+
+      switch(section.dataset.subtype) {
+        case "vitriol":
+          this.actor.update({ 'data.pannels.vitriolIsOpen': this.actor.data.data.pannels.vitriolIsOpen ? false : true});
+          break;
+        case "rebis":
+          this.actor.update({ 'data.pannels.rebisIsOpen': this.actor.data.data.pannels.rebisIsOpen ? false : true});
+          break;
+        case "aether":
+          this.actor.update({ 'data.pannels.aetherIsOpen': this.actor.data.data.pannels.aetherIsOpen ? false : true});
+          break;
+        case "quebrith":
+          this.actor.update({ 'data.pannels.quebrithIsOpen': this.actor.data.data.pannels.quebrithIsOpen ? false : true});
+          break;
+        case "hydragenum":
+          this.actor.update({ 'data.pannels.hydragenumIsOpen': this.actor.data.data.pannels.hydragenumIsOpen ? false : true});
+          break;
+        case "vermilion":
+          this.actor.update({ 'data.pannels.vermilionIsOpen': this.actor.data.data.pannels.vermilionIsOpen ? false : true});
+          break;
+        case "sol":
+          this.actor.update({ 'data.pannels.solIsOpen': this.actor.data.data.pannels.solIsOpen ? false : true});
+          break;
+        case "caelum":
+          this.actor.update({ 'data.pannels.caelumIsOpen': this.actor.data.data.pannels.caelumIsOpen ? false : true});
+          break;
+        case "fulgur":
+          this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
+          break;
+      }
     }
 
     calc_total_skills(data) {

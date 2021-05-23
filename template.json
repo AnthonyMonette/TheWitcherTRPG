@@ -358,6 +358,24 @@
           "vicovaro": "Vicovaro"
         }
       },
+      "pannels": {
+        "vitriolIsOpen": false,
+        "rebisIsOpen": false,
+        "aetherIsOpen": false,
+        "hydragenumIsOpen": false,
+        "vermilionIsOpen": false,
+        "solIsOpen": false,
+        "caelumIsOpen": false,
+        "fulgurIsOpen": false,
+
+        "intIsOpen": false,
+        "refIsOpen": false,
+        "dexIsOpen": false,
+        "bodyIsOpen": false,
+        "empIsOpen": false,
+        "craIsOpen": false,
+        "willIsOpen": false
+      },
       "general": {
         "background": {
           "value": "..."
@@ -404,7 +422,6 @@
         "race": "",
         "gender": "",
         "age": 0,
-        "crowns": 0,
         "lifeEvents": {
           "10": {
             "decade": 1,
@@ -661,6 +678,7 @@
         "vitriol": 0,
         "rebis": 0,
         "aether": 0,
+        "quebrith": 0,
         "hydragenum": 0,
         "vermilion": 0,
         "sol": 0,

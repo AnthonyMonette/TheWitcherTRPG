@@ -514,3 +514,7 @@ input.hp-value:focus {
 .substance-img {
   border: none;
 }
+
+.skill-display {
+  margin-left: 10px;
+}
