@@ -2,9 +2,6 @@
     <div>
         <div class="flex">
             <div class="left-sidebar">
-                <div class="flex stat-title" >
-                    <label>Max</label>
-                </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display" data-stat="{{stat}}">
@@ -23,9 +20,22 @@
                 {{/each}}
                 <hr />
                 
-                <div class="stat-display">
-                    <label>Armor</label> 
-                    <input class="header-stat" name="data.armor" type="text" value="{{data.armor}}" placeholder="0" data-dtype="Number"/>
+                <div class="armor-display">
+                    <div>
+                        <div class="flex"> 
+                            <label>Armor Head</label> 
+                            <input class="header-stat" name="data.armorHead" type="text" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
+                        </div>
+                        <div class="flex"> 
+                            <label>Armor Upper</label> 
+                            <input class="header-stat" name="data.armorUpper" type="text" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
+                        </div>
+                        <div class="flex"> 
+                            <label>Armor Lower</label> 
+                            <input class="header-stat" name="data.armorLower" type="text" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="stat-display">
                     <label>HP</label> 
@@ -46,6 +56,24 @@
                 </div>
             </div>
             <div class="header-center">
+                <div class="flex">
+                    <select name="data.threat">
+                        {{#select data.threat}}
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        {{/select}}
+                    </select>
+                    <select name="data.difficulty">
+                        {{#select data.difficulty}}
+                            <option value="simple">Simple</option>
+                            <option value="complex">Complex</option>
+                            <option value="difficult">Difficult</option>
+                        {{/select}}
+                    </select>
+                    <label>Bounty</label> 
+                    <input name="data.bounty" type="text" value="{{data.bounty}}"/>
+                </div>
                 <div class="category-img">
                     {{#if (eq data.category "Humanoids")}}
                     <img src="systems/TheWitcherTRPG/assets/images/monsters/Humanoids.png" class="cat-img" /> 
@@ -119,37 +147,15 @@
                     </select>
                 </div>
                 <div class="flex">
-                    <select name="data.threat">
-                        {{#select data.threat}}
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        {{/select}}
-                    </select>
-                    <select name="data.difficulty">
-                        {{#select data.difficulty}}
-                            <option value="simple">Simple</option>
-                            <option value="complex">Complex</option>
-                            <option value="difficult">Difficult</option>
-                        {{/select}}
-                    </select>
+                    <label>Custom stats:</label> 
+                    <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
                 </div>
             </div>
-            <div>
+            <div class="actions">
                 <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
                 <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
                 <label class="stat-label"><a class="defence-roll">Defense</a></label>
             </div>
-        </div>
-        
-        
-        <div class="flex">
-            <label>Bounty</label> 
-            <input name="data.bounty" type="text" value="{{data.bounty}}"/>
-        </div>
-        <div class="flex">
-            <label>Custom stats:</label> 
-            <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
         </div>
         
         <nav class="sheet-tabs tabs flexrow" data-group="primary">

@@ -17,8 +17,15 @@
         <div class="char-info">
             <div class="flexrow">
                 <div>
-                    <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/hearth.png"/>
-                    <input class="hp-value" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}" placeholder="0" data-dtype="Number"/>
+                    <label>Current HP</label>
+                    <div class="hp-content"> 
+                        <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/hearth.png"/>
+                        <input class="hp-value" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}" placeholder="0" data-dtype="Number"/>
+                    </div>
+                    <label>Current Sta</label>
+                    <div class="stamina">
+                        <input class="sta-value" name="data.derivedStats.sta.value" type="text" value="{{data.derivedStats.sta.value}}" placeholder="0" data-dtype="Number"/>
+                    </div>
                 </div>
                 <div class="text-centered">
                     <div class="ressource">
@@ -82,8 +89,11 @@
     </div>
     <div class="stat-display">
         <label>{{localize data.derivedStats.resolve.label}}</label> 
-        <input class="header-stat" name="data.derivedStats.resolve.current" type="text" value="{{data.derivedStats.resolve.current}}" placeholder="0" data-dtype="Number"/>
+        <input class="header-stat" name="data.derivedStats.resolve.value" type="text" value="{{data.derivedStats.resolve.value}}" placeholder="0" data-dtype="Number"/>
         /
         <input class="header-stat" name="data.derivedStats.resolve.max" type="text" value="{{data.derivedStats.resolve.max}}" placeholder="0" data-dtype="Number" readonly/> 
+    </div>
+    <div class="stat-display">
+        <label>Vigor:</label> <input name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
     </div>
 </div>    

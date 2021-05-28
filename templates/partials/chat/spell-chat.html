@@ -1,25 +1,37 @@
 <div class="dice-roll chat-message">
     <h2>{{title}}</h2>
-    <div><label>Sta Cost: </label>{{staCost}}</div>
-    <hr />
-    <div><label>Effet: </label>{{effet}}</div>
-    <hr />
-    <div><label>Range: </label>{{range}}</div>
-    <hr />
-    <div><label>Duration: </label>{{duration}}</div>
-    <hr />
-    <div><label>Defence: </label>{{defence}}</div>
-    {{#unless (eq roll.total 0)}}
-    <hr />
-    <div class="roll-summary">
-        <div class="dice-formula">
-            <b>{{roll.formula}}</b>
-        </div>
-    </div>
-    {{> "templates/dice/roll.html"}}
+    <div><b>Sta Cost: </b>{{staCost}}</div>
+    {{#if effet}}
+    <div><b>Effet: </b>{{effet}}</div>
+    {{/if}}
+    {{#if range}}
+    <div><b>Range: </b>{{range}}</div>
+    {{/if}}
+    {{#if duration}}
+    <div><b>Duration: </b>{{duration}}</div>
+    {{/if}}
+    {{#if defence}}
+    <div><b>Defence: </b>{{defence}}</div>
+    {{/if}}
+    {{#if preparationTime}}
+    <div><b>Preparation Time: </b>{{preparationTime}}</div>
+    {{/if}}
+    {{#if dificultyCheck}}
+    <div><b>DC: </b>{{dificultyCheck}}</div>
+    {{/if}}
+    {{#if components}}
+    <div><b>Components: </b>{{components}}</div>
+    {{/if}}
+    {{#if alternateComponents}}
+    <div><b>Alternate Components: </b>{{alternateComponents}}</div>
+    {{/if}}
     
+    {{#if liftRequirement}}
+    <div><b>Requirement To Lift: </b>{{liftRequirement}}</div>
+    {{/if}}
+
+    {{> "templates/dice/roll.html"}}
     <div  class="dice-display">
         <b>{{roll.total}}</b>
     </div>
-    {{/unless}}
 </div>

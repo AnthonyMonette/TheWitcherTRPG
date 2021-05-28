@@ -106,7 +106,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
-      html.find(".item-spell-display").on("click", this._onItemDisplayInfo.bind(this));
+      html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
 
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
@@ -295,7 +295,12 @@ export default class WitcherActorSheet extends ActorSheet {
         effet: spellItem.data.data.effect,
         range:spellItem.data.data.range,
         duration:spellItem.data.data.duration,
-        defence:spellItem.data.data.defence
+        defence:spellItem.data.data.defence,
+        preparationTime:spellItem.data.data.preparationTime,
+        components:spellItem.data.data.components,
+        alternateComponents:spellItem.data.data.alternateComponents,
+        dificultyCheck:spellItem.data.data.dificultyCheck,
+        liftRequirement:spellItem.data.data.liftRequirement
       })
     }
 
@@ -899,6 +904,29 @@ export default class WitcherActorSheet extends ActorSheet {
       }).render(true)  
     
     }
+
+    _onSpellDisplay(event) {
+      event.preventDefault(); 
+      let section = event.currentTarget.closest(".spell");
+      switch(section.dataset.spelltype) {
+        case "noviceSpell":
+          this.actor.update({ 'data.pannels.noviceSpellIsOpen': this.actor.data.data.pannels.noviceSpellIsOpen ? false : true});
+          break;
+        case "journeymanSpell":
+          this.actor.update({ 'data.pannels.journeymanSpellIsOpen': this.actor.data.data.pannels.journeymanSpellIsOpen ? false : true});
+          break;
+        case "masterSpell":
+          this.actor.update({ 'data.pannels.masterSpellIsOpen': this.actor.data.data.pannels.masterSpellIsOpen ? false : true});
+          break;
+        case "ritual":
+          this.actor.update({ 'data.pannels.ritualIsOpen': this.actor.data.data.pannels.ritualIsOpen ? false : true});
+          break;
+        case "hex":
+          this.actor.update({ 'data.pannels.hexIsOpen': this.actor.data.data.pannels.hexIsOpen ? false : true});
+          break;
+      }
+    }
+
 
     _onSkillDisplay(event) {
       event.preventDefault(); 

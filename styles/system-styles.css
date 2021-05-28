@@ -78,6 +78,30 @@
   align-items: center;
   justify-content: center;
 }
+.hp-content{
+  margin-bottom: -30px;
+}
+
+
+.armor-display {
+  display: flex;
+  width: 250px;
+}
+
+.armor-display input {
+  width: 35px;
+}
+.armor-display label {
+  padding: 5px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  margin-left: 10px;
+}
 
 .actor-img {
   height: 175px;
@@ -494,6 +518,28 @@ input.hp-value {
 input.hp-value:focus {
   border: none;
 }
+
+.stamina{
+  margin-left: 5px;
+  height: 50px;
+  width: 50px;
+  background-color: yellow;
+  border-radius: 100%;
+  border:white solid 5px;
+}
+
+input.sta-value {
+  top: 5px;
+  position: relative;
+  border: none;
+  width: 40px;
+  background: none;
+  font-size: 30px;
+}
+input.sta-value:focus {
+  border: none;
+}
+
 
 .perk {
   margin:5px

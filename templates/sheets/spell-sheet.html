@@ -16,6 +16,8 @@
                 </select>
                 <label>Sta cost</label>
                 <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
+                <label>Var</label>
+                <input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/>
 
                 {{#if (eq data.class "Hexes")}}
                 <label>Danger</label>
@@ -41,7 +43,8 @@
     </header>
     <div>
         <div class="flex">
-            {{#if (eq data.class "Spells")}}
+            {{#if (or (eq data.class "Spells") 
+                      (eq data.class "Witcher"))}}
                 <select name="data.source" id="source-select">
                     {{#select data.source}}
                     <option value="mixedElements">Mixed Elements</option>
@@ -72,14 +75,17 @@
         </div>
         <label>Effect</label>
         <textarea rows="10" name="data.effect">{{data.effect}}</textarea>
-        
+
+        {{#unless (eq data.class "Hexes")}}
+        <label>Duration</label>
+        <input name="data.duration" type="text" value="{{data.duration}}"/>
+        {{/unless}}
+
         {{#unless (eq data.class "Rituals")}}
         {{#unless (eq data.class "Hexes")}}
         <div class="flex">
             <label>Range</label>
             <input name="data.range" type="text" value="{{data.range}}"/>
-            <label>Duration</label>
-            <input name="data.duration" type="text" value="{{data.duration}}"/>
             <label>Defence</label>
             <input name="data.defence" type="text" value="{{data.defence}}"/>
         </div>

@@ -88,7 +88,7 @@
           },
           "resolve": {
             "max": 0,
-            "current": 0,
+            "value": 0,
             "label": "WITCHER.Actor.DerStat.Resolve"
           },
           "focus": {
@@ -368,6 +368,12 @@
         "caelumIsOpen": false,
         "fulgurIsOpen": false,
 
+        "noviceSpellIsOpen": false,
+        "journeymanSpellIsOpen": false,
+        "masterSpellIsOpen": false,
+        "ritualIsOpen": false,
+        "hexIsOpen": false,
+
         "intIsOpen": false,
         "refIsOpen": false,
         "dexIsOpen": false,
@@ -556,7 +562,9 @@
       "threat": "",
       "difficulty": "",
       "bounty":0,
-      "armor":0,
+      "armorHead":0,
+      "armorUpper":0,
+      "armorLower":0,
       "regen": 0,
       "resistances": "",
       "immunities": "",
@@ -700,6 +708,7 @@
       "source": "",
       "domain": "",
       "stamina": 0,
+      "staminaIsVar": false,
       "effect": "",
       "range": "",
       "duration": "",
