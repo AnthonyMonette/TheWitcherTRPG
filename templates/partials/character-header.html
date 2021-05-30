@@ -12,6 +12,9 @@
     {{/each}}
 </div>
 <div class="header-center">
+    <div class="flexrow">
+        <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+    </div>
     <div class="flex ressource">
         <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
         <div class="char-info">
@@ -40,9 +43,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="flexrow">
-        <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
     </div>
     <div class="flexrow ressource">
         <div class="flex">

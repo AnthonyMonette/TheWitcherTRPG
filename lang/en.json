@@ -64,7 +64,7 @@
     "WITCHER.StSpd": "Speed",
     "WITCHER.StVigor": "Vigor",
 
-    "WITCHER.Actor.Stat.Int": "Int",
+    "WITCHER.Actor.Stat.Int": "INT",
     "WITCHER.Actor.Stat.Ref": "REF",
     "WITCHER.Actor.Stat.Dex": "DEX",
     "WITCHER.Actor.Stat.Body": "BODY",

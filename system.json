@@ -2,7 +2,7 @@
     "name": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "Many details here.",
-    "version": 0.11,
+    "version": 0.12,
     "author": "TechAntho",
     "scripts": [
     ],
@@ -35,6 +35,12 @@
         "name": "Style",
         "label": "Style",
         "path": "packs/witcher-ttrpg-style.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Witcher Lifepath",
+        "label": "Witcher Lifepath",
+        "path": "packs/witcher-ttrpg-witcher-lifepath.db",
         "entity": "RollTable"
       },
       {
