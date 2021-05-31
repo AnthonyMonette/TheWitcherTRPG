@@ -205,8 +205,11 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       if (element.dataset.itemtype == "component") {
-        console.log("testing testing")
-        itemData.data = { type: "substances", substanceType: element.dataset.subtype}
+        if (element.dataset.subtype) {
+          itemData.data = { type: "substances", substanceType: element.dataset.subtype}
+        }else{
+          itemData.data = { type: "component", substanceType: element.dataset.subtype}
+        }
       }
 
       console.log(itemData)

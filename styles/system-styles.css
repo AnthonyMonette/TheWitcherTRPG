@@ -252,7 +252,7 @@ input.item-quantity{
   width: 20px;
 }
 .weapon-name-header {
-  width: 170px;
+  width: 190px;
 }
 .damage-header {
   width: 50px;
@@ -261,10 +261,10 @@ input.item-quantity{
   width: 50px;
 }
 input.range-info {
-  width: 90px;
+  width: 70px;
 }
 input.damage-info {
-  width: 100px;
+  width: 55px;
 }
 input.reliable-info {
   width: 35px;
@@ -295,7 +295,7 @@ input.stopping-info {
   margin-right: 10px;
 }
 .valuable-table {
-  width: 500px;
+  width: 450px;
 }
 
 .substance-img {
@@ -318,7 +318,14 @@ input.stopping-info {
 }
 
 .component-section {
-  width: 300px;
+  width: 500px;
+}
+
+.alchemical-effect {
+  width: 330px;
+}
+.learned-data {
+  width: 75px
 }
 
 input.weight-data {
@@ -563,4 +570,9 @@ input.sta-value:focus {
 
 .skill-display {
   margin-left: 10px;
+}
+
+.item-img{
+  width: 25px;
+  height: 25px;
 }

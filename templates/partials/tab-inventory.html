@@ -5,6 +5,7 @@
         <table class="weapon-table">
             <tr>
                 <td></td> 
+                <td></td> 
                 <td><b>Qty</b></td>
                 <td><b>Name</b></td>
                 <td><b>Range</b></td>
@@ -17,6 +18,7 @@
                     <td>
                         <a class="item-weapon-display"><i class="fas fa-info"></i></a>
                     </td>
+                    <td><img src="{{weapon.img}}" class="item-img" /></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{weapon.data.quantity}}" data-dtype="Number"/></td>
                     <td><a class="item-roll">{{weapon.name}}</a></td>
                     <td><input class="inline-edit range-info" data-field="data.range" type="text" value="{{weapon.data.range}}" placeholder="" /></td>
@@ -24,9 +26,10 @@
                     <td><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/></td>
                 </tr>
                 <tr class="item-info hidden" >
-                    <td colspan="6">
+                    <td colspan="7">
                         <table>
                             <tr>
+                                <td></td> 
                                 <td><div class="flex"><label class="label-info"><b>Type :</b></label>{{weapon.data.type}}</div></td>
                                 <td><div class="flex"><label class="label-info"><b>Hands :</b></label>{{weapon.data.hands}}</div></td>
                                 <td><div class="flex"><label class="label-info"><b>Conc :</b></label>{{weapon.data.conceal}}</div></td>
@@ -35,10 +38,10 @@
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
                             <tr >
-                                <td colspan="5">
+                                <td colspan="6">
+                                    <div class="flex">
                                     <b>Effect :</b>
 
-                                    <div class="flex">
                                     {{#each weapon.data.effects as |effect id|}}
                                         <div class="flex">
                                         {{effect.name}}
@@ -65,6 +68,7 @@
         <table class="armor-table">
             <tr>
                 <td></td> 
+                <td></td> 
                 <td><b>Qty</b></td>
                 <td><b>Name</b></td>
                 <td><b>Stp</b></td>
@@ -76,6 +80,7 @@
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
+                    <td><img src="{{armor.img}}" class="item-img" /></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
                     <td><input class="inlinefas--edit stopping-info" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/></td>
@@ -126,6 +131,7 @@
         <table class="valuable-table">
             <tr>
                 <td></td> 
+                <td></td> 
                 <td><b>Qty</b></td>
                 <td><b>Name</b></td>
                 <td><b>Weight</b></td>
@@ -137,9 +143,10 @@
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
+                    <td><img src="{{valuable.img}}" class="item-img" /></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{valuable.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
+                    <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
                 </tr>
                 <tr class="item-info hidden">
                     {{#if (eq type "valuable")}}
@@ -149,7 +156,9 @@
                     <td colspan="4">
                             <div class="flex"><label class="label-info"><b>Time :</b></label>{{valuable.data.time}}</div>
                             <label class="label-info"><b>Effect :</b></label>
-                            {{valuable.data.effect}}
+                            <div class="alchemical-effect">
+                                {{valuable.data.effect}}
+                            </div>
                     </td>
                     {{/if}}
                     {{#if (eq type "mount")}}
@@ -163,13 +172,15 @@
                     </td>
                     {{/if}}
                     {{#if (eq type "mutagen")}}
-                    <td colspan="2"><div class="flex"><label class="label-info"><b>Type :</b></label> <div>{{valuable.data.type}}</div></div></td>
-                    <td colspan="3"><div class="flex"><label class="label-info"><b>source :</b></label> <div>{{valuable.data.source}}</div></div></td>
+                    <td colspan="3"><div class="flex"><label class="label-info"><b>Type :</b></label> <div>{{valuable.data.type}}</div></div></td>
+                    <td><div class="flex"><label class="label-info"><b>source :</b></label> <div>{{valuable.data.source}}</div></div></td>
                     {{/if}}
-                    <td><div>
-                        <a class="item-edit"><i class="fas fa-edit"></i></a>
-                        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                    </div></td>
+                    <td>
+                        <div>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             {{/each}}
@@ -178,9 +189,10 @@
         <table class="diagram-table">
             <tr> 
                 <td></td> 
-                <td><b>Learned</b></td>
+                <td></td> 
                 <td><b>Qty</b></td>
                 <td><b>Name</b></td>
+                <td><b>Learned</b></td>
                 <td></td> 
             </tr>
             {{#each diagrams as |diagram id|}}
@@ -191,24 +203,27 @@
                             <a class="item-armor-display"><i class="fas fa-info"></i></a>
                         </div>
                     </td>
-                    <td><input class="inline-edit" data-field="data.learned" type="checkbox" value="{{data.learned}}" {{checked data.learned}}/>
+                    <td><img src="{{diagram.img}}" class="item-img" /></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{diagram.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="data.learned" type="checkbox" value="{{data.learned}}" {{checked data.learned}}/>
                 </tr>
                 <tr class="item-info hidden">
                     {{#unless diagram.data.isFormulae}}
                     <td colspan="4">
                         <div>
-                            <div class="flexrow">
-                                <label class="label-info"><b>CraftingDC :</b></label>{{diagram.data.craftingDc}}
-                                <label class="label-info"><b>Time :</b></label>{{diagram.data.craftingTime}}
-                                <label class="label-info"><b>Investement :</b></label>{{diagram.data.investement}}
-                                <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                            <div class="flexrow">
-                                <label class="label-info"><b>Components :</b>{{diagram.data.components}}
-                                <a class="item-edit"><i class="fas fa-edit"></i></a>
-                            </div>
+                            <label class="label-info"><b>CraftingDC :</b></label>{{diagram.data.craftingDc}}
+                            <label class="label-info"><b>Time :</b></label>{{diagram.data.craftingTime}}
+                            <label class="label-info"><b>Investement :</b></label>{{diagram.data.investement}}
+                        </div>
+                        <div>
+                            <label class="label-info"><b>Components :</b>{{diagram.data.components}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="learned-data">
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
                     {{/unless}}
@@ -290,21 +305,14 @@
                     <td><b>Weight</b></td>
                     <td></td> 
                 </tr>
-                {{#each components as |valuable id|}}
-                <tbody class="item" data-item-id="{{valuable._id}}">
+                {{#each components as |component id|}}
+                <tbody class="item" data-item-id="{{component._id}}">
                     <tr>
-                        <td>
-                            <div class="flex">
-                                <a class="item-armor-display"><i class="fas fa-info"></i></a>
-                            </div>
-                        </td>
-                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{valuable.data.quantity}}" data-dtype="Number"/></td>
-                        <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
-                        <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
+                        <td><img src="{{component.img}}" class="item-img" /></td>
+                        <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{component.data.quantity}}" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}" placeholder="name" /></td>
+                        <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{component.data.weight}}" data-dtype="Number"/></td>
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                    </tr>
-                    <tr class="item-info hidden">
-                        <td colspan="4"><div class="flex"><label class="label-info"><b>Type :</b></label> <div>{{valuable.data.type}}</div></div></td>
                     </tr>
                 </tbody>
                 {{/each}}
