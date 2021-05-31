@@ -9,8 +9,8 @@
         <div class="profession-card defining-skill">
             <div class="flex defining-skill-header">
                 <input class="profession-skill-input" name="data.definingSkill.skillName" type="text" value="{{data.definingSkill.skillName}}" placeholder=""/>
-                <select class="defining-skill-select" name="data.definingSkill.stat">
-                    {{#select data.definingSkill.stat}}
+                <select class="defining-skill-select"  data-field="data.definingSkill.stat">
+                    {{#select profession.data.definingSkill.stat}}
                     {{#each config.statTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}

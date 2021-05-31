@@ -1,6 +1,7 @@
 export const witcher = {};
 
 witcher.statTypes = {
+    none: "",
     int: "int",
     ref: "ref",
     dex: "dex",

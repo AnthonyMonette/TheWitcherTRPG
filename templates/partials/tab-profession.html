@@ -13,7 +13,9 @@
             data-level="{{profession.data.definingSkill.level}}"
             data-name="{{profession.data.definingSkill.skillName}}"
             data-effet="{{profession.data.definingSkill.definition}}">
+                {{#unless (eq profession.data.definingSkill.stat "none")}}    
                 <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                {{/unless}}
                 <input class="inline-edit profession-skill-input"  data-field="data.definingSkill.skillName" type="text" value="{{profession.data.definingSkill.skillName}}" placeholder=""/>
                 <select class="inline-edit defining-skill-select"  data-field="data.definingSkill.stat">
                     {{#select profession.data.definingSkill.stat}}
@@ -36,7 +38,9 @@
                     data-level="{{profession.data.skillPath1.skill1.level}}"
                     data-name="{{profession.data.skillPath1.skill1.skillName}}"
                     data-effet="{{profession.data.skillPath1.skill1.definition}}">
+                        {{#unless (eq profession.data.skillPath1.skill1.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath1.skill1.skillName" type="text" value="{{profession.data.skillPath1.skill1.skillName}}" placeholder=""/>
                         <select class="inline-edit first-path-select" data-field="data.skillPath1.skill1.stat">
                             {{#select profession.data.skillPath1.skill1.stat}}
@@ -56,7 +60,9 @@
                     data-level="{{profession.data.skillPath1.skill2.level}}"
                     data-name="{{profession.data.skillPath1.skill2.skillName}}"
                     data-effet="{{profession.data.skillPath1.skill2.definition}}">
-                        <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                    {{#unless (eq profession.data.skillPath1.skill2.stat "none")}}    
+                    <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                    {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath1.skill2.skillName" type="text" value="{{profession.data.skillPath1.skill2.skillName}}" placeholder=""/>
                         <select class="inline-edit first-path-select" data-field="data.skillPath1.skill2.stat">
                             {{#select profession.data.skillPath1.skill2.stat}}
@@ -76,7 +82,9 @@
                     data-level="{{profession.data.skillPath1.skill3.level}}"
                     data-name="{{profession.data.skillPath1.skill3.skillName}}"
                     data-effet="{{profession.data.skillPath1.skill3.definition}}">
+                        {{#unless (eq profession.data.skillPath1.skill3.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath1.skill3.skillName" type="text" value="{{profession.data.skillPath1.skill3.skillName}}" placeholder=""/>
                         <select class="inline-edit first-path-select" data-field="data.skillPath1.skill3.stat">
                             {{#select profession.data.skillPath1.skill3.stat}}
@@ -99,7 +107,9 @@
                     data-level="{{profession.data.skillPath2.skill1.level}}"
                     data-name="{{profession.data.skillPath2.skill1.skillName}}"
                     data-effet="{{profession.data.skillPath2.skill1.definition}}">
+                        {{#unless (eq profession.data.skillPath2.skill1.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath2.skill1.skillName" type="text" value="{{profession.data.skillPath2.skill1.skillName}}" placeholder=""/>
                         <select class="inline-edit second-path-select" data-field="data.skillPath2.skill1.stat">
                             {{#select profession.data.skillPath2.skill1.stat}}
@@ -119,7 +129,9 @@
                     data-level="{{profession.data.skillPath2.skill2.level}}"
                     data-name="{{profession.data.skillPath2.skill2.skillName}}"
                     data-effet="{{profession.data.skillPath2.skill2.definition}}">
+                        {{#unless (eq profession.data.skillPath2.skill2.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath2.skill2.skillName" type="text" value="{{profession.data.skillPath2.skill2.skillName}}" placeholder=""/>
                         <select class="inline-edit second-path-select" data-field="data.skillPath2.skill2.stat">
                             {{#select profession.data.skillPath2.skill2.stat}}
@@ -139,7 +151,9 @@
                     data-level="{{profession.data.skillPath2.skill3.level}}"
                     data-name="{{profession.data.skillPath2.skill3.skillName}}"
                     data-effet="{{profession.data.skillPath2.skill3.definition}}">
+                        {{#unless (eq profession.data.skillPath2.skill3.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath2.skill3.skillName" type="text" value="{{profession.data.skillPath2.skill3.skillName}}" placeholder=""/>
                         <select class="inline-edit second-path-select" data-field="data.skillPath2.skill3.stat">
                             {{#select profession.data.skillPath2.skill3.stat}}
@@ -162,7 +176,9 @@
                     data-level="{{profession.data.skillPath3.skill1.level}}"
                     data-name="{{profession.data.skillPath3.skill1.skillName}}"
                     data-effet="{{profession.data.skillPath3.skill1.definition}}">
+                        {{#unless (eq profession.data.skillPath3.skill1.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath3.skill1.skillName" type="text" value="{{profession.data.skillPath3.skill1.skillName}}" placeholder=""/>
                         <select class="inline-edit third-path-select" data-field="data.skillPath3.skill1.stat">
                             {{#select profession.data.skillPath3.skill1.stat}}
@@ -182,7 +198,9 @@
                     data-level="{{profession.data.skillPath3.skill2.level}}"
                     data-name="{{profession.data.skillPath3.skill2.skillName}}"
                     data-effet="{{profession.data.skillPath3.skill2.definition}}">
+                        {{#unless (eq profession.data.skillPath3.skill2.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath3.skill2.skillName" type="text" value="{{profession.data.skillPath3.skill2.skillName}}" placeholder=""/>
                         <select class="inline-edit third-path-select" data-field="data.skillPath3.skill2.stat">
                             {{#select profession.data.skillPath3.skill2.stat}}
@@ -202,7 +220,9 @@
                     data-level="{{profession.data.skillPath3.skill3.level}}"
                     data-name="{{profession.data.skillPath3.skill3.skillName}}"
                     data-effet="{{profession.data.skillPath3.skill3.definition}}">
+                        {{#unless (eq profession.data.skillPath3.skill3.stat "none")}}    
                         <a class="profession-roll"><i class="fas fa-dice-d6"></i></a>
+                        {{/unless}}
                         <input class="inline-edit profession-skill-input" data-field="data.skillPath3.skill3.skillName" type="text" value="{{profession.data.skillPath3.skill3.skillName}}" placeholder=""/>
                         <select class="inline-edit third-path-select" data-field="data.skillPath3.skill3.stat">
                             {{#select profession.data.skillPath3.skill3.stat}}
