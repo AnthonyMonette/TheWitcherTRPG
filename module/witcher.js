@@ -98,6 +98,33 @@ function updateDerived(actor){
 
 }
 
+function removeWoundTreshold(actor){
+    console.log("removing wound treshold")
+    actor.update({ 
+        'data.woundTresholdApplied': false,
+        'data.stats.ref.current': actor.data.data.stats.ref.max,
+        'data.stats.dex.current': actor.data.data.stats.dex.max,
+        'data.stats.int.current': actor.data.data.stats.int.max,
+        'data.stats.will.current': actor.data.data.stats.will.max,
+     });
+}
+
+function applyWoundTreshold(actor){
+    console.log("applying wound treshold")
+    let newRef = Math.floor(actor.data.data.stats.ref.max/2);
+    let newDex= Math.floor(actor.data.data.stats.dex.max/2);
+    let newInt = Math.floor(actor.data.data.stats.int.max/2);
+    let newWill = Math.floor(actor.data.data.stats.will.max/2);
+
+    actor.update({ 
+        'data.woundTresholdApplied': true,
+        'data.stats.ref.current': newRef,
+        'data.stats.dex.current': newDex,
+        'data.stats.int.current': newInt,
+        'data.stats.will.current': newWill,
+     });
+}
+
 function rollSkillCheck(thisActor, statNum, skillNum){
     console.log("coucou")
     let parentStat = "";
@@ -312,4 +339,4 @@ function genId() {
     return '_' + Math.random().toString(36).substr(2, 9);
   };
 
-export { updateDerived, rollSkillCheck, genId };
+export { updateDerived, rollSkillCheck, genId, applyWoundTreshold, removeWoundTreshold };

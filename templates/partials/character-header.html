@@ -1,7 +1,6 @@
 <div class="left-sidebar">
-    <div class="flex stat-title" >
-        <label>Max</label>
-        <label>/Current</label>
+    <div class="stat-title">
+        <label>Max/Current</label>
     </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display" data-stat="{{stat}}">
@@ -22,7 +21,12 @@
                 <div>
                     <label>Current HP</label>
                     <div class="hp-content"> 
-                        <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/hearth.png"/>
+                        {{#if data.woundTresholdApplied}}
+                        <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
+                        {{/if}}
+                        {{#unless data.woundTresholdApplied}}
+                        <img class="hp-img" src="systems/TheWitcherTRPG/assets/images/health.png"/>
+                        {{/unless}}
                         <input class="hp-value" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <label>Current Sta</label>
@@ -86,6 +90,8 @@
     <div class="stat-display">
         <label>{{localize data.derivedStats.hp.label}}</label> 
         <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}" placeholder="0" data-dtype="Number" readonly/>
+        <label>Treshold</label> 
+        <input class="header-stat" type="text" value="{{woundTreshold}}" placeholder="0" data-dtype="Number" readonly/>
     </div>
     <div class="stat-display">
         <label>{{localize data.derivedStats.resolve.label}}</label> 

@@ -1,6 +1,6 @@
 
 import { RollCustomMessage } from "../chat.js";
-import { getRandomInt, updateDerived, rollSkillCheck } from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -18,6 +18,17 @@ export default class WitcherActorSheet extends ActorSheet {
     getData() {
       const data = super.getData();
       data.config = CONFIG.witcher;
+
+      data.woundTreshold = this.actor.data.data.derivedStats.hp.max / 5
+      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < data.woundTreshold) {
+        applyWoundTreshold(this.actor)
+      }
+
+      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= data.woundTreshold) {
+        removeWoundTreshold(this.actor)
+      }
+
+
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
       data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
       data.components = data.items.filter(function(item) {return item.type=="component" &&  item.data.type!="substances"});

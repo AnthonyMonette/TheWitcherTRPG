@@ -6,6 +6,7 @@
     ],
     "templates":{
       "baseActor": {
+        "woundTresholdApplied": false,
         "stats": {
           "int": {
             "max": 0,

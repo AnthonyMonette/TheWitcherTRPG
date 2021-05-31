@@ -2,10 +2,14 @@
     <div>
         <div class="flex">
             <div class="left-sidebar">
+                <div class="stat-title">
+                    <label>Max/Current</label>
+                </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display" data-stat="{{stat}}">
                         <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
+                        <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                         <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     {{/unless}}
