@@ -16,7 +16,19 @@
       {
         "name": "Character-gen",
         "label": "Character Generator",
-        "path": "packs/witcher-character-generator.db",
+        "path": "packs/character-generator.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Character-gen Sub-tables",
+        "label": "Character Generator  Sub-tables",
+        "path": "packs/character-generator-sub-tables.db",
+        "entity": "RollTable"
+      },
+      {
+        "name": "Witcher Lifepath",
+        "label": "Witcher Lifepath",
+        "path": "packs/witcher-lifepath.db",
         "entity": "RollTable"
       },
       {
@@ -28,19 +40,13 @@
       {
         "name": "Lifepath",
         "label": "Lifepath",
-        "path": "packs/witcher-ttrpg-lifepath.db",
+        "path": "packs/lifepath.db",
         "entity": "RollTable"
       },
       {
         "name": "Style",
         "label": "Style",
-        "path": "packs/witcher-ttrpg-style.db",
-        "entity": "RollTable"
-      },
-      {
-        "name": "Witcher Lifepath",
-        "label": "Witcher Lifepath",
-        "path": "packs/witcher-ttrpg-witcher-lifepath.db",
+        "path": "packs/style.db",
         "entity": "RollTable"
       },
       {
