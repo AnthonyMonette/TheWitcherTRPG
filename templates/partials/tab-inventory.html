@@ -35,7 +35,21 @@
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
                             <tr >
-                                <td colspan="5"><div><b>Effect :</b></label>{{weapon.data.effect}}</div></td>
+                                <td colspan="5">
+                                    <b>Effect :</b>
+
+                                    <div class="flex">
+                                    {{#each weapon.data.effects as |effect id|}}
+                                        <div class="flex">
+                                        {{effect.name}}
+                                        {{#if effect.percentage}}
+                                            ({{effect.percentage}})%   
+                                        {{/if}}
+                                        ,
+                                        </div>
+                                    {{/each}}
+                                    </div>
+                                </td>
                                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         </table>

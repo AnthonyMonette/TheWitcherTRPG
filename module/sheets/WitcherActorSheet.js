@@ -547,13 +547,8 @@ export default class WitcherActorSheet extends ActorSheet {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".item").dataset.itemId;
-      console.log("ITEM ID:" + itemId)
       let item = this.actor.getOwnedItem(itemId);
       let field = element.dataset.field;
-      console.log("ITEM:")
-      console.log(item)
-      console.log("dataset field:")
-      console.log(field)
       // Edit checkbox values
       let value = element.value
       if(value == "false") { 
@@ -778,11 +773,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 
                 if (customDmg != "0") {
                   damageFormula += "+"+customDmg;
-                }
-                if (item.data.data.isMelee) {
-                  damageFormula += this.actor.data.data.attackStats.meleeBonus;
-                }
-                
+                }                
                 let touchedLocation = ""
                 switch(location){
                   case "randomHuman":
@@ -877,7 +868,6 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 messageData.flavor = `<h1>Attack: ${item.name}</h1>`;
-                console.log(attFormula)
                 new Roll(attFormula).roll().toMessage(messageData)
 
                 
@@ -888,14 +878,21 @@ export default class WitcherActorSheet extends ActorSheet {
                   messageData.flavor += `<div>Strong Attack</div>`;
                 }
                 else if(strike == "fast"){
-                  messageData.flavor += `<div>Fast Attack${i + 1}</div>`;
+                  messageData.flavor += `<div>Fast Attack ${i + 1}</div>`;
                 }
-                messageData.flavor += `<div>Location: ${touchedLocation}</div>`;
-                if (item.data.data.effect) {
-                  messageData.flavor += `<div>Effect: ${item.data.data.effect}</div>`;
+                messageData.flavor += `<div><b>Location:</b> ${touchedLocation}</div>`;
+                if (item.data.data.effects) {
+                  messageData.flavor += `<b>Effects:</b>`;
+                  item.data.data.effects.forEach(element => {
+                    messageData.flavor += `<div class="flex">${element.name}`;
+                    if (element.percentage) {
+                      let rollPercentage = getRandomInt(100);
+                      messageData.flavor += `<div>(${element.percentage}%) <b>Rolled:</b> ${rollPercentage}</div>`;
+                    }
+                    messageData.flavor += `</div>`;
+                  });
                 }
                 console.log(damageFormula)
-                console.log( messageData.flavor)
                 new Roll(damageFormula).roll().toMessage(messageData)
               }
             }

@@ -623,7 +623,12 @@
       "reliable": 0,
       "hands": 0,
       "range": "",
-      "effect": "",
+      "effects": [{
+          "id": "first",
+          "name": "effect",
+          "percentage": ""
+        }
+      ],
       "conceal": "",
       "enhancements": 0,
       "rateOfFire":1,

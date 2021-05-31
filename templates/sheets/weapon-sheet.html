@@ -76,10 +76,31 @@
             <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
             <td><input type="text" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
         </tr>
-        <tr>
-            <td colspan="2"><label>{{localize "WITCHER.Weapon.Range"}}</label><input type="text" name="data.range" value="{{data.range}}"/></td>
-            <td colspan="2"><label>{{localize "WITCHER.Weapon.Damage"}}</label><input type="text" name="data.damage" value="{{data.damage}}"/></td>
-            <td colspan="5"><label>{{localize "WITCHER.Item.Effect"}}</label><input type="text" name="data.effect" value="{{data.effect}}"/></td>
-        </tr>
     </table>
+    <div class="flex">
+        <div class="flex">
+            <div>
+                <b>{{localize "WITCHER.Weapon.Damage"}}</b><input type="text" name="data.damage" value="{{data.damage}}"/>
+            </div>
+            <div>
+                <b>{{localize "WITCHER.Weapon.Range"}}</b><input type="text" name="data.range" value="{{data.range}}"/>
+            </div>
+        </div>
+        <div>
+            <div class="flex">
+                <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
+            </div>
+            {{#each data.effects as |effect name|}}
+            <div class="flex list-item"  data-id="{{effect.id}}">
+                <a class="remove-effect"><i class="fas fa-minus"></i></a>
+                <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
+                <div  class="flex">
+                    <label>Percentage:</label>
+                    <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
+                    %
+                </div>
+            </div>
+            {{/each}}
+        </div>        
+    </div>
 </form>
