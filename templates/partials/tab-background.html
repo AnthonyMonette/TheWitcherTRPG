@@ -21,6 +21,15 @@
             <textarea rows=25 name="data.general.background.value">{{data.general.background.value}}</textarea>
         </div>    
     </div>
+    <div class="flex">
+        <div class="crit-wounds">
+            <h2>Crit Wounds <a class="add"><i class="fas fa-plus"></i></a></h2>
+            WIP
+            {{#each data.critWounds as |crit value|}}
+            Crit
+            {{/each}}
+        </div>
+    </div>
     <div class="flexcol background">
         <div class="lifeEvents scrollable" id="lifeEvents">
             <table class="lifevents">
