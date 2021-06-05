@@ -6,6 +6,7 @@
     ],
     "templates":{
       "baseActor": {
+        "woundTreshold": 0,
         "woundTresholdApplied": false,
         "stats": {
           "int": {
@@ -330,6 +331,13 @@
     },
     "character": {
       "templates": ["baseActor"],
+      "critWounds": [{
+        "id": "first",
+        "gravity": "",
+        "name": "",
+        "effect": "",
+        "status": ""
+      }],
       "config": {
         "homelands":{
           "aedirn": "Aedirn",

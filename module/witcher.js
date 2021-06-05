@@ -67,7 +67,26 @@ function updateDerived(actor){
             kBonus = 10;
             break;
         case 13:
+        case 14:
             meleeBonus = "+8"
+            pBonus = 8;
+            kBonus = 12;
+            break;
+        case 15:
+        case 16:
+            meleeBonus = "+10"
+            pBonus = 8;
+            kBonus = 12;
+            break;
+        case 17:
+        case 18:
+            meleeBonus = "+12"
+            pBonus = 8;
+            kBonus = 12;
+            break;
+        case 19:
+        case 20:
+            meleeBonus = "+14"
             pBonus = 8;
             kBonus = 12;
             break;

@@ -2,6 +2,7 @@ import {witcher} from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
 import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
+import * as Chat from "../module/chat.js";
 
 
 async function preloadHandlebarsTemplates(){
@@ -42,4 +43,4 @@ Hooks.once("init", function () {
     preloadHandlebarsTemplates();
 });
 
-Hooks.on("renderCharLog", (app, html, data) => CharacterData.addChatListeners(html));
+Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));

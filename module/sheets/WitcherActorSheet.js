@@ -1,6 +1,6 @@
 
 import { RollCustomMessage } from "../chat.js";
-import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold } from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold, genId } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -19,15 +19,13 @@ export default class WitcherActorSheet extends ActorSheet {
       const data = super.getData();
       data.config = CONFIG.witcher;
 
-      data.woundTreshold = this.actor.data.data.derivedStats.hp.max / 5
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < data.woundTreshold) {
+      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.woundTreshold) {
         applyWoundTreshold(this.actor)
       }
 
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= data.woundTreshold) {
+      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.woundTreshold) {
         removeWoundTreshold(this.actor)
       }
-
 
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
       data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
@@ -128,6 +126,9 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".profession-roll").on("click", this._onProfessionRoll.bind(this));
       html.find(".spell-roll").on("click", this._onSpellRoll.bind(this));
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
+
+      html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      
       
     
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
@@ -189,6 +190,17 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find("#resistcoerc-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 5)});
       html.find("#ritcraft-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 6)});
     }
+    
+    async _onCritAdd(event) {
+      event.preventDefault();
+      let newCritList  = []
+      if (this.actor.data.data.critWounds){
+        newCritList = this.actor.data.data.critWounds
+      }
+      newCritList.push({id: genId()})
+      this.actor.update({'data.critWounds': newCritList});
+    }
+    
     
     async _onItemAdd(event) {
       let element = event.currentTarget
@@ -477,28 +489,63 @@ export default class WitcherActorSheet extends ActorSheet {
               switch(defense){
                 case "brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
-                  displayFormula = `1d10 + Ref + Brawling`;
+                  displayFormula = `1d10 + Ref + Brawling - 3`;
                   break;
                 case "melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
-                  displayFormula = `1d10 + Ref + Melee`;
+                  displayFormula = `1d10 + Ref + Melee - 3`;
                   break;
                 case "smallblades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
-                  displayFormula = `1d10 + Ref + Small Blades`;
+                  displayFormula = `1d10 + Ref + Small Blades - 3`;
                   break;
                 case "staffspear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
-                  displayFormula = `1d10 + Ref + Staff/Spear`;
+                  displayFormula = `1d10 + Ref + Staff/Spear - 3`;
                   break;
                 case "swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
-                  displayFormula = `1d10 + Ref + Swordsmanship`;
+                  displayFormula = `1d10 + Ref + Swordsmanship - 3`;
                   break;
               }
 
               messageData.flavor = `<h1>Defense: Parry</h1><p>${displayFormula}</p>`;
-              let rollFormula = `1d10+${stat}+${skill}`;
+              let rollFormula = `1d10+${stat}+${skill}-3`;
+              new Roll(rollFormula).roll().toMessage(messageData);
+            }
+          },
+          ParryAgainstThrown: {
+            label: "Parry Thrown weapon",
+            callback: (html) => {
+              let defense = html.find("[name=form]")[0].value;
+              let stat = this.actor.data.data.stats.ref.current;
+              let skill = 0;
+              let displayFormula = `1d10 + Ref + Parry`;
+              switch(defense){
+                case "brawling":
+                  skill = this.actor.data.data.skills.ref.brawling.value;
+                  displayFormula = `1d10 + Ref + Brawling - 5`;
+                  break;
+                case "melee":
+                  skill = this.actor.data.data.skills.ref.melee.value;
+                  displayFormula = `1d10 + Ref + Melee - 5`;
+                  break;
+                case "smallblades":
+                  skill = this.actor.data.data.skills.ref.smallblades.value;
+                  displayFormula = `1d10 + Ref + Small Blades - 5`;
+                  break;
+                case "staffspear":
+                  skill = this.actor.data.data.skills.ref.staffspear.value;
+                  displayFormula = `1d10 + Ref + Staff/Spear - 5`;
+                  break;
+                case "swordsmanship":
+                  skill = this.actor.data.data.skills.ref.swordsmanship.value;
+                  displayFormula = `1d10 + Ref + Swordsmanship - 5`;
+                  break;
+              }
+
+              messageData.flavor = `<h1>Defense: Parry</h1><p>${displayFormula}</p>`;
+              let rollFormula = `1d10+${stat}+${skill}-5`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
           }
@@ -881,11 +928,12 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                 }
 
-                messageData.flavor = `<h1>Attack: ${item.name}</h1>`;
+                messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
+                // messageData.flavor += `<button class="damage" data-id="${item.id} data-dmg="${damageFormula}" data-strike="${strike}" >Damage</button>`;
                 new Roll(attFormula).roll().toMessage(messageData)
 
                 
-                messageData.flavor = `<h1>${item.name} Damage</h1>`;
+                messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Damage:${item.name} </h1>`;
 
                 if (strike == "strong") {
                   damageFormula = `(${damageFormula})*2`;

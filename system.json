@@ -2,7 +2,7 @@
     "name": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "Many details here.",
-    "version": 0.13,
+    "version": 0.14,
     "author": "TechAntho",
     "scripts": [
     ],
@@ -21,13 +21,13 @@
       },
       {
         "name": "Character-gen Sub-tables",
-        "label": "Character Generator  Sub-tables",
+        "label": "Character Generator Sub-tables",
         "path": "packs/character-generator-sub-tables.db",
         "entity": "RollTable"
       },
       {
-        "name": "Witcher Lifepath",
-        "label": "Witcher Lifepath",
+        "name": "Witcher Lifepath and BG Sub-tables",
+        "label": "Witcher Lifepath and BG Sub-tables",
         "path": "packs/witcher-lifepath.db",
         "entity": "RollTable"
       },
@@ -38,14 +38,14 @@
         "entity": "RollTable"
       },
       {
-        "name": "Lifepath",
-        "label": "Lifepath",
+        "name": "Life Event Sub-tables",
+        "label": "Life Event Sub-tables",
         "path": "packs/lifepath.db",
         "entity": "RollTable"
       },
       {
-        "name": "Style",
-        "label": "Style",
+        "name": "Style and Values Sub-tables",
+        "label": "Style and Values Sub-tables",
         "path": "packs/style.db",
         "entity": "RollTable"
       },

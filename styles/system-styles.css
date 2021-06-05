@@ -576,3 +576,19 @@ input.sta-value:focus {
   width: 25px;
   height: 25px;
 }
+
+.crit-wounds {
+  background-color: red;
+  width: 450px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+.weight-value {
+  margin: auto;
+  width: min-content;
+  position: relative;
+  top: 16px;
+  color: white;
+}
