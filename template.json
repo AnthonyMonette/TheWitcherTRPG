@@ -52,6 +52,7 @@
           "luck": {
             "max": 0,
             "current": 0,
+            "total": 0,
             "label": "WITCHER.Actor.Stat.Luck"
           }
         },

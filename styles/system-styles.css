@@ -79,7 +79,7 @@
   justify-content: center;
 }
 .hp-content{
-  margin-bottom: -30px;
+  margin-bottom: -20px;
 }
 
 
@@ -493,6 +493,7 @@ input.spell-roll-value {
   width: 515px;
   position: relative;
   top: -130px;
+  margin-top: 10px;
 }
 input.skill-value {
   width: 25px;
@@ -515,15 +516,21 @@ input.skill-value {
 
 input.hp-value {
   position: relative;
-  top: -50px;
-  left: 11px;
+  top: -25px;
+  left: -50px;
   border: none;
   width: 40px;
   background: none;
-  font-size: 30px;
+  font-size: 25px;
 }
 input.hp-value:focus {
   border: none;
+}
+
+.hp-max {
+  position: relative;
+  top: -25px;
+  left: 50px;
 }
 
 .stamina{
@@ -541,10 +548,32 @@ input.sta-value {
   border: none;
   width: 40px;
   background: none;
-  font-size: 30px;
+  font-size: 25px;
 }
 input.sta-value:focus {
   border: none;
+}
+
+.sta-max{
+  position: relative;
+  left: 40px;
+}
+
+
+input.resolve-value {
+  top: 5px;
+  position: relative;
+  border: none;
+  width: 40px;
+  background: none;
+  font-size: 25px;
+}
+input.resolve-value:focus {
+  border: none;
+}
+.resolve-max{
+  position: relative;
+  left: 40px;
 }
 
 
@@ -591,4 +620,44 @@ input.sta-value:focus {
   position: relative;
   top: 16px;
   color: white;
+}
+
+.wound {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.luck-img{
+  width: 70px;
+  border: none;
+  margin-left: -5px;
+}
+
+input.luck-value {    
+  left: -58px;
+  top: -20px;
+  position: relative;
+  border: none;
+  width: 40px;
+  background: none;
+  font-size: 25px;
+}
+
+.luck-max{
+  position: relative;
+  left: 45px;
+  top: -18px;
+}
+
+.luck{
+  margin-bottom: -20px;
+}
+
+.resolve{
+  margin-left: 5px;
+  height: 50px;
+  width: 50px;
+  background-color: red;
+  border-radius: 100%;
+  border:white solid 5px;
 }

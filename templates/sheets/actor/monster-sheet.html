@@ -1,16 +1,18 @@
 <div class="flex">
     <div>
+        <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+
         <div class="flex">
             <div class="left-sidebar">
                 <div class="stat-title">
-                    <label>Max/Current</label>
+                    <label>Current/Max</label>
                 </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display" data-stat="{{stat}}">
                         <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
-                        <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                         <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+                        <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     {{/unless}}
                 {{/each}}
@@ -22,6 +24,10 @@
                     <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 {{/each}}
+                <div class="stat-display">
+                    <label>VIGOR</label> 
+                    <input class="header-stat" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}"/>
+                </div>
                 <hr />
                 
                 <div class="armor-display">
@@ -46,10 +52,6 @@
                     <input class="header-stat" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}"/>
                     /
                     <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}"/>
-                </div>
-                <div class="stat-display">
-                    <label>Vigor</label> 
-                    <input class="header-stat" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}"/>
                 </div>
                 <div class="stat-display">
                     <label>STA:</label> 
@@ -130,8 +132,7 @@
         </div>
 
         <div class="monster-knowledge">
-            <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-            <label>Commoner Supperstition (Education DV: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
+            <label>Commoner Supperstition (Education DC: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
             <textarea rows=10 name="data.common">{{data.common}}</textarea>
             <label>Witcher Knowledge (Monster Lore DC: <input class="skill-value" name="data.monsterLoreSkillValue" type="text" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/>)</label>
             <textarea rows=25 name="data.monsterLore">{{data.monsterLore}}</textarea>
@@ -156,6 +157,7 @@
                 </div>
             </div>
             <div class="actions">
+                <label class="stat-label"><a class="init-roll">Initiative</a></label>
                 <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
                 <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
                 <label class="stat-label"><a class="defence-roll">Defense</a></label>
