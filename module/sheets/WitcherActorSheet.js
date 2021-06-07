@@ -18,6 +18,7 @@ export default class WitcherActorSheet extends ActorSheet {
     getData() {
       const data = super.getData();
       data.config = CONFIG.witcher;
+      CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
       if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.woundTreshold) {
         applyWoundTreshold(this.actor)
@@ -59,6 +60,7 @@ export default class WitcherActorSheet extends ActorSheet {
         return Math.ceil(total)
       }
 
+      data.totalStats = this.calc_total_stats(data)
       data.totalSkills = this.calc_total_skills(data)
 
       data.substancesVitriol = data.items.filter(function(item) {return item.type=="component" &&  item.data.type=="substances" && item.data.substanceType=="vitriol" });
@@ -117,6 +119,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
 
+      html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
@@ -130,7 +133,6 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
       
       
-    
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
       html.find("#deduction-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 2)});
@@ -386,6 +388,10 @@ export default class WitcherActorSheet extends ActorSheet {
       })
     }
 
+    async _onInitRoll(event) {
+      this.actor.rollInitiative({createCombatants: true, rerollInitiative: true})
+    }
+
     async _onCritRoll(event) {
       let rollResult = new Roll("1d10x10").roll()
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html", this.actor, {
@@ -403,7 +409,6 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _onDefenceRoll(event) {
-
       const options = `
       <option value="brawling"> Brawling </option>
       <option value="melee"> Melee </option>
@@ -1058,5 +1063,13 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }
       return totalSkills;
+    }
+
+    calc_total_stats(data) {
+      let totalStats = 0;
+      for (let element in data.data.stats) {
+        totalStats += data.data.stats[element].max;
+      }
+      return totalStats;
     }
 }
