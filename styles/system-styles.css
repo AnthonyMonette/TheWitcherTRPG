@@ -577,6 +577,32 @@ input.resolve-value:focus {
 }
 
 
+.stat-focus{
+  margin-left: 5px;
+  height: 50px;
+  width: 50px;
+  background-color: lightgray;
+  border-radius: 100%;
+  border:white solid 5px;
+}
+
+input.stat-focus-value {
+  top: 5px;
+  position: relative;
+  border: none;
+  width: 40px;
+  background: none;
+  font-size: 25px;
+}
+input.stat-focus-value:focus {
+  border: none;
+}
+.stat-focus-max{
+  position: relative;
+  left: 40px;
+}
+
+
 .perk {
   margin:5px
 }
@@ -660,4 +686,8 @@ input.luck-value {
   background-color: red;
   border-radius: 100%;
   border:white solid 5px;
+}
+
+.spacer {
+  height: 55px;
 }

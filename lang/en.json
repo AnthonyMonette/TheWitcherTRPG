@@ -84,7 +84,7 @@
     "WITCHER.Actor.DerStat.HP": "Max HP",
     "WITCHER.Actor.DerStat.Sta": "STA",
     "WITCHER.Actor.DerStat.Resolve": "Resolve",
-    "WITCHER.Actor.DerStat.Focus": "FOCUS",
+    "WITCHER.Actor.DerStat.Focus": "Focus",
     "WITCHER.Actor.DerStat.Punch": "Punch",
     "WITCHER.Actor.DerStat.Kick": "Kick",
 
@@ -92,13 +92,13 @@
     "WITCHER.SkIntBusiness": "Business",
     "WITCHER.SkIntDeduction": "Deduction",
     "WITCHER.SkIntEducation": "Education",
-    "WITCHER.SkIntCommon": "Common Speech",
-    "WITCHER.SkIntElder": "Elder Speech",
-    "WITCHER.SkIntDwarven": "Dwarven",
-    "WITCHER.SkIntMonster": "Monster Lore",
+    "WITCHER.SkIntCommon": "Common Speech (2)",
+    "WITCHER.SkIntElder": "Elder Speech (2)",
+    "WITCHER.SkIntDwarven": "Dwarven (2)",
+    "WITCHER.SkIntMonster": "Monster Lore (2)",
     "WITCHER.SkIntSocialEt": "Social Etiquette",
     "WITCHER.SkIntStreet": "Streetwise",
-    "WITCHER.SkIntTactics": "Tactics",
+    "WITCHER.SkIntTactics": "Tactics (2)",
     "WITCHER.SkIntTeaching": "Teaching",
     "WITCHER.SkIntWilderness": "Wilderness Survival",
 
@@ -131,21 +131,21 @@
     "WITCHER.SkEmpPerformance": "Performance",
     "WITCHER.SkEmpSeduction": "Seduction",
 
-    "WITCHER.SkCraAlchemy": "Alchemy",
-    "WITCHER.SkCraCrafting": "Crafting",
+    "WITCHER.SkCraAlchemy": "Alchemy (2)",
+    "WITCHER.SkCraCrafting": "Crafting (2)",
     "WITCHER.SkCraDisguise": "Disguise",
     "WITCHER.SkCraAid": "First Aid",
     "WITCHER.SkCraForge": "Forgery",
     "WITCHER.SkCraPick": "Pick Lock",
-    "WITCHER.SkCraTrapCraft": "Trap Crafting",
+    "WITCHER.SkCraTrapCraft": "Trap Crafting (2)",
 
     "WITCHER.SkWillCourage": "Courage",
-    "WITCHER.SkWillHex": "Hex Weaving",
+    "WITCHER.SkWillHex": "Hex Weaving (2)",
     "WITCHER.SkWillIntim": "Intimidation",
-    "WITCHER.SkWillSpellcast": "Spell Casting",
-    "WITCHER.SkWillResistMag": "Resist Magic",
+    "WITCHER.SkWillSpellcast": "Spell Casting (2)",
+    "WITCHER.SkWillResistMag": "Resist Magic (2)",
     "WITCHER.SkWillResistCoer": "Resist Coercion",
-    "WITCHER.SkWillRitCraft": "Ritual Crafting",
+    "WITCHER.SkWillRitCraft": "Ritual Crafting (2)",
 
 
     "WITCHER.SocialStanding": "Social Standing",
@@ -162,5 +162,5 @@
     "WITCHER.LifeEvents": "Life Events",
     "WITCHER.Decade": "Decade",
     "WITCHER.Event": "Event",
-    "WITCHER.DeathSave": "Stun/Death"
+    "WITCHER.DeathSave": "Stun/Death Save"
 }

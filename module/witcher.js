@@ -11,7 +11,7 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-    if (actor.data.data.customStats){
+    if (actor.data.data.customStat === true){
         return null;
     }
     let thisActor = actor;
@@ -101,10 +101,12 @@ function updateDerived(actor){
     }
     
     let newResolve = Math.floor((thisActor.data.data.stats.will.current + thisActor.data.data.stats.int.current)/2*5);
+    let newFocus = Math.floor((thisActor.data.data.stats.will.current + thisActor.data.data.stats.int.current)/2*3);
     thisActor.update({ 
         'data.derivedStats.hp.max': newHP,
         'data.derivedStats.sta.max': newSta,
         'data.derivedStats.resolve.max': newResolve,
+        'data.derivedStats.focus.max': newFocus,
         'data.coreStats.rec.value': newRec,
         'data.coreStats.stun.value': newStun,
         'data.coreStats.enc.value': newEnc,
@@ -114,7 +116,6 @@ function updateDerived(actor){
         'data.attackStats.punch.value': `1d6+${pBonus}`,
         'data.attackStats.kick.value': `1d6+${kBonus}`,
      });
-
 }
 
 function removeWoundTreshold(actor){

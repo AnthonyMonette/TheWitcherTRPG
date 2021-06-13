@@ -743,43 +743,41 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 if (item.data.data.isMelee){
                   attFormula += `+${this.actor.data.data.stats.ref.current}`;
-                  switch(item.data.data.attackSkill){
-                    case "Brawling":
-                      attFormula += `+${this.actor.data.data.skills.ref.brawling.value}`;
-                      break;
-                    case "Melee":
-                      attFormula += `+${this.actor.data.data.skills.ref.melee.value}`;
-                      break;
-                    case "Small Blades":
-                      attFormula += `+${this.actor.data.data.skills.ref.smallblades.value}`;
-                      break;
-                    case "Staff/Spear":
-                      attFormula += `+${this.actor.data.data.skills.ref.staffspear.value}`;
-                      break;
-                    case "Swordsmanship":
-                      attFormula += `+${this.actor.data.data.skills.ref.swordsmanship.value}`;
-                      break;
-                  }
                 } 
                 else { 
                   attFormula += `+${this.actor.data.data.stats.dex.current}`;
-                  switch(item.data.data.attackSkill){
-                    case "Archery":
-                      attFormula += `+${this.actor.data.data.skills.dex.archery.value}`;
-                      break;
-                    case "Athletics":
-                      attFormula += `+${this.actor.data.data.skills.dex.athletics.value}`;
-                      break;
-                    case "Crossbow":
-                      attFormula += `+${this.actor.data.data.skills.dex.crossbow.value}`;
-                      break;
-                  }
+                }
+                
+                switch(item.data.data.attackSkill){
+                  case "Brawling":
+                    attFormula += `+${this.actor.data.data.skills.ref.brawling.value}`;
+                    break;
+                  case "Melee":
+                    attFormula += `+${this.actor.data.data.skills.ref.melee.value}`;
+                    break;
+                  case "Small Blades":
+                    attFormula += `+${this.actor.data.data.skills.ref.smallblades.value}`;
+                    break;
+                  case "Staff/Spear":
+                    attFormula += `+${this.actor.data.data.skills.ref.staffspear.value}`;
+                    break;
+                  case "Swordsmanship":
+                    attFormula += `+${this.actor.data.data.skills.ref.swordsmanship.value}`;
+                    break;
+                  case "Archery":
+                    attFormula += `+${this.actor.data.data.skills.dex.archery.value}`;
+                    break;
+                  case "Athletics":
+                    attFormula += `+${this.actor.data.data.skills.dex.athletics.value}`;
+                    break;
+                  case "Crossbow":
+                    attFormula += `+${this.actor.data.data.skills.dex.crossbow.value}`;
+                    break;
                 }
 
                 if (customAtt != "0") {
                   attFormula += "+"+customAtt;
                 }
-                console.log(range)
                 switch(range){
                   case "pointBlank":
                     attFormula = `${attFormula}+5`;
@@ -933,34 +931,10 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                 }
 
+                let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
-                // messageData.flavor += `<button class="damage" data-id="${item.id} data-dmg="${damageFormula}" data-strike="${strike}" >Damage</button>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
                 new Roll(attFormula).roll().toMessage(messageData)
-
-                
-                messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Damage:${item.name} </h1>`;
-
-                if (strike == "strong") {
-                  damageFormula = `(${damageFormula})*2`;
-                  messageData.flavor += `<div>Strong Attack</div>`;
-                }
-                else if(strike == "fast"){
-                  messageData.flavor += `<div>Fast Attack ${i + 1}</div>`;
-                }
-                messageData.flavor += `<div><b>Location:</b> ${touchedLocation}</div>`;
-                if (item.data.data.effects) {
-                  messageData.flavor += `<b>Effects:</b>`;
-                  item.data.data.effects.forEach(element => {
-                    messageData.flavor += `<div class="flex">${element.name}`;
-                    if (element.percentage) {
-                      let rollPercentage = getRandomInt(100);
-                      messageData.flavor += `<div>(${element.percentage}%) <b>Rolled:</b> ${rollPercentage}</div>`;
-                    }
-                    messageData.flavor += `</div>`;
-                  });
-                }
-                console.log(damageFormula)
-                new Roll(damageFormula).roll().toMessage(messageData)
               }
             }
           }
@@ -1059,7 +1033,13 @@ export default class WitcherActorSheet extends ActorSheet {
       let totalSkills = 0;
       for (let element in data.data.skills) {
         for (let skill in data.data.skills[element]) {
-          totalSkills += data.data.skills[element][skill].value;
+          let skillLabel = game.i18n.localize(data.data.skills[element][skill].label)
+          if (skillLabel.includes("(2)")){
+            totalSkills += data.data.skills[element][skill].value * 2;
+          }
+          else{
+            totalSkills += data.data.skills[element][skill].value;
+          }
         }
       }
       return totalSkills;

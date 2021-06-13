@@ -25,7 +25,7 @@
             {{#each data.coreStats as |details coreStat|}}
             <div class="stat-display">
                 <label>{{localize details.label}}</label> 
-                <input class="header-stat" type="text" placeholder="0" data-dtype="Number" readonly/>
+                <input class="header-stat" value="{{details.value}}" type="text" placeholder="0" data-dtype="Number" readonly/>
             </div>
             {{/each}}
             <hr />
@@ -109,13 +109,22 @@
                     <label class="stat-label"><a class="init-roll">Initiative</a></label>
                 </div>
                 <div class="ressource">
-                    <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
+                    <label class="stat-label"><a class="death-roll">Stun/Death Save</a></label>
                 </div>
                 <div class="ressource">
                     <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
                 </div>
                 <div class="ressource">
                     <label class="stat-label"><a class="defence-roll">Defense</a></label>
+                </div>
+                <div class="spacer"></div>
+                <label>{{localize data.derivedStats.focus.label}}</label> 
+                <div class="stat-focus">
+                    <input class="stat-focus-value" name="data.derivedStats.focus.value" type="text" value="{{data.derivedStats.focus.value}}" placeholder="0" data-dtype="Number"/>
+                    <div class="stat-focus-max">
+                        /
+                        {{data.derivedStats.focus.max}}
+                    </div>
                 </div>
             </div>
         </div>
