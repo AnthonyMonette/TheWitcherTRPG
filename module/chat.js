@@ -38,9 +38,6 @@ function onDamage(event) {
       damageFormula = `(${damageFormula})*2`;
       messageData.flavor += `<div>Strong Attack</div>`;
     }
-    else if(strike == "fast"){
-      messageData.flavor += `<div>Fast Attack ${i + 1}</div>`;
-    }
     messageData.flavor += `<div><b>Location:</b> ${location}</div>`;
     console.log(effects)
     if (effects) {
