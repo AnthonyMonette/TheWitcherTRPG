@@ -39,7 +39,6 @@ function onDamage(event) {
       messageData.flavor += `<div>Strong Attack</div>`;
     }
     messageData.flavor += `<div><b>Location:</b> ${location}</div>`;
-    console.log(effects)
     if (effects) {
       messageData.flavor += `<b>Effects:</b>`;
       effects.forEach(element => {

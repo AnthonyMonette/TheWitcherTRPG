@@ -20,6 +20,7 @@ export default class WitcherItemSheet extends ItemSheet {
     getData() {
       const data = super.getData();
       data.config = CONFIG.witcher;
+      data.data = data.data.data
       this.options.classes.push(`item-${this.item.data.type}`)
 
       if (this.item.type == "weapon") {
