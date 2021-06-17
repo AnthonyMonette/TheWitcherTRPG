@@ -17,7 +17,9 @@ export default class WitcherActorSheet extends ActorSheet {
     /** @override */
     getData() {
       const data = super.getData();
-      data.data = data.data.data
+      if (data.data.data) {
+        data.data = data.data.data
+      }
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
