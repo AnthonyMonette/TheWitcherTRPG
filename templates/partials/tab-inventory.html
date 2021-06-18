@@ -322,12 +322,12 @@
 </div>
 
 <div class="weight-value">
-    <span>{{TotalWeight}}/{{data.coreStats.enc.value}} </span>
+    <span>{{totalWeight}}/{{data.coreStats.enc.value}} </span>
 </div>
 
-{{#if (gte TotalWeight data.coreStats.enc.value)}}
+{{#if (gte totalWeight data.coreStats.enc.value)}}
 <div class="weightbar-overweight"></div>
 {{/if}}    
-{{#if (lt TotalWeight data.coreStats.enc.value)}}
-<progress class="weightbar" value="{{TotalWeight}}" max="{{data.coreStats.enc.value}}"></progress>
+{{#if (lt totalWeight data.coreStats.enc.value)}}
+<progress class="weightbar" value="{{totalWeight}}" max="{{data.coreStats.enc.value}}"></progress>
 {{/if}}    

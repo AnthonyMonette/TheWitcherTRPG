@@ -2,7 +2,8 @@
   "Actor": {
     "types": [
       "character",
-      "monster"
+      "monster",
+      "loot"
     ],
     "templates":{
       "baseActor": {
@@ -589,6 +590,10 @@
       "monsterLore": "",
       "monsterLoreSkillValue": "",
       "customStat": false
+    },
+    "loot": {
+      "templates": ["baseActor"],
+      "description":""
     }
   },
   "Item": {

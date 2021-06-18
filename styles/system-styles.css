@@ -691,3 +691,9 @@ input.luck-value {
 .spacer {
   height: 55px;
 }
+
+.left-loot-border {
+  border-right: solid 1px;
+  width: 150px;
+  height: 100%;
+}

@@ -34,6 +34,7 @@ export default class WitcherActorSheet extends ActorSheet {
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
       data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
       data.components = data.items.filter(function(item) {return item.type=="component" &&  item.data.type!="substances"});
+      data.allComponents = data.items.filter(function(item) {return item.type=="component"});
       data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" });
       data.diagrams = data.items.filter(function(item) {return item.type=="diagrams"});
       data.spells = data.items.filter(function(item) {return item.type=="spell"});
@@ -58,6 +59,15 @@ export default class WitcherActorSheet extends ActorSheet {
         for ( var i = 0, _len = this.length; i < _len; i++ ) {
             if (this[i]["data"]["weight"] && this[i]["data"]["quantity"]){
               total += Number(this[i]["data"]["quantity"]) * Number(this[i]["data"]["weight"])
+            }
+        }
+        return Math.ceil(total)
+      }
+      Array.prototype.cost = function () {
+        var total = 0
+        for ( var i = 0, _len = this.length; i < _len; i++ ) {
+            if (this[i]["data"]["cost"] && this[i]["data"]["quantity"]){
+              total += Number(this[i]["data"]["quantity"]) * Number(this[i]["data"]["cost"])
             }
         }
         return Math.ceil(total)
@@ -89,7 +99,8 @@ export default class WitcherActorSheet extends ActorSheet {
       data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
 
-      data.TotalWeight =  data.items.weight();
+      data.totalWeight =  data.items.weight();
+      data.totalCost =  data.items.cost();
 
       data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});
       data.journeymanSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="journeyman" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});

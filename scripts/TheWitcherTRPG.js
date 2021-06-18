@@ -9,6 +9,7 @@ async function preloadHandlebarsTemplates(){
     const templatePath =[
         "systems/TheWitcherTRPG/templates/sheets/actor/character-sheet.html",
         "systems/TheWitcherTRPG/templates/sheets/actor/monster-sheet.html",
+        "systems/TheWitcherTRPG/templates/sheets/actor/loot-sheet.html",
         "systems/TheWitcherTRPG/templates/partials/character-header.html",
         "systems/TheWitcherTRPG/templates/partials/tab-skills.html",
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
