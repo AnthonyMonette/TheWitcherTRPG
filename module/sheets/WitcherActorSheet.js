@@ -145,6 +145,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
@@ -660,6 +661,10 @@ export default class WitcherActorSheet extends ActorSheet {
       let section = event.currentTarget.closest(".item");
       let editor = $(section).find(".item-info")
       editor.toggleClass("hidden");
+    }
+
+    _onFocusIn(event) {
+      event.currentTarget.select();
     }
 
     _onItemRoll(event) {
