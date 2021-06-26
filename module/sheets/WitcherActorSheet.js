@@ -430,7 +430,11 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="staffspear"> Staff/Spear </option>
       <option value="swordsmanship"> Swordsmanship </option>
       `;
-      const content = `<label>Defense with: </label><select name="form">${options}</select>`;
+      const content = `
+      <div class="flex">
+       <label>Extra defense: <input type="checkbox" name="isExtraDefense"></label> <br />
+      </div>
+      <label>Defense with: </label><select name="form">${options}</select>`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
@@ -444,6 +448,13 @@ export default class WitcherActorSheet extends ActorSheet {
           Dodge: {
             label: "Dodge", 
             callback: (html) => {
+              let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              if (isExtraDefense) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
               let stat = this.actor.data.data.stats.ref.current;
               let skill = this.actor.data.data.skills.ref.dodge.value;
               let displayFormula = `1d10 + Ref + Dodge/Escape`;
@@ -455,6 +466,13 @@ export default class WitcherActorSheet extends ActorSheet {
           Reposition: {
             label: "Reposition",
             callback: (html) => {
+              let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              if (isExtraDefense) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
               let stat = this.actor.data.data.stats.dex.current;
               let skill = this.actor.data.data.skills.dex.athletics.value;
               let displayFormula = `1d10 + Dex + Athletics`;
@@ -466,6 +484,13 @@ export default class WitcherActorSheet extends ActorSheet {
           Block: {
             label: "Block",
             callback: (html) => {
+              let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              if (isExtraDefense) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
@@ -501,6 +526,13 @@ export default class WitcherActorSheet extends ActorSheet {
           Parry: {
             label: "Parry",
             callback: (html) => {
+              let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              if (isExtraDefense) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
@@ -536,6 +568,13 @@ export default class WitcherActorSheet extends ActorSheet {
           ParryAgainstThrown: {
             label: "Parry Thrown weapon",
             callback: (html) => {
+              let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              if (isExtraDefense) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
@@ -685,16 +724,22 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="tail"> Tail/wing </option>
       `;
       const AttackModifierOptions = `
-      <option value="none"> None </option>
-      <option value="pinned"> Target pinned </option>
-      <option value="activelyDodging"> Target actively dodging </option>
-      <option value="movingTarget"> Moving target REF > 10 </option>
-      <option value="fastDraw"> Fast draw </option>
-      <option value="ambush"> Ambush </option>
-      <option value="ricochet"> Ricochet shot </option>
-      <option value="blinded"> Blinded by light or dust </option>
-      <option value="silhouetted"> Target silhouetted </option>
-      <option value="aiming"> Aiming (per round) </option>
+      <div class="flex">
+        <div>
+          <label><input type="checkbox" name="isFastDraw"> Fast Draw</label> <br />
+          <label><input type="checkbox" name="isProne"> You are prone</label> <br />
+          <label><input type="checkbox" name="isPinned"> Target pinned</label> <br />
+          <label><input type="checkbox" name="isActivelyDodging"> Target actively dodging</label> <br />
+          <label><input type="checkbox" name="isMoving"> Moving target REF > 10</label> <br />
+        </div>
+        <div>
+          <label><input type="checkbox" name="isAmbush"> Ambush</label> <br />
+          <label><input type="checkbox" name="isRicochet"> Ricochet</label> <br />
+          <label><input type="checkbox" name="isBlinded"> You are blinded</label> <br />
+          <label><input type="checkbox" name="isSilhouetted"> Silhouetted</label> <br />
+          <label><input type="checkbox" name="isAiming"> Aiming rounds: </label> <input class="small" name="customAim" value=0> <br />
+        </div>
+      </div>
       `;
       const opponentSizeOptions = `
       <option value="medium"> Medium </option>
@@ -714,12 +759,16 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="normal"> Normal Strike </option>
       <option value="fast"> Fast Strike </option>
       <option value="strong"> Strong Strike </option>
+      <option value="joint"> Joint Strike </option>
       `;
 
 
       let content = `<h2>${item.name} Attack will use: ${item.data.data.attackSkill}</h2> 
+                     <div class="flex">
+                      <label>Extra attack: <input type="checkbox" name="isExtraAttack"></label> <br />
+                     </div>
                      <label>Hit Location: <select name="location">${locationOptions}</select></label> <br />
-                     <label>Attack Modifiers: <select name="attack">${AttackModifierOptions}</select></label> <br />
+                     <label>Attack Modifiers:</label> <br />${AttackModifierOptions}
                      <label>Opponent Size Modifiers: <select name="size">${opponentSizeOptions}</select></label> <br />
                      <label>Range Modifiers: <select name="range">${rangeOptions}</select></label> <br />
                      <label>Custom Modifiers: <input name="customAtt" value=0></label> <br />
@@ -737,8 +786,22 @@ export default class WitcherActorSheet extends ActorSheet {
           Roll: {
             label: "Roll",
             callback: (html) => {
+              let isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
+
               let location = html.find("[name=location]")[0].value;
-              let attack = html.find("[name=attack]")[0].value;
+
+              let isFastDraw = html.find("[name=isFastDraw]").prop("checked");
+              let isProne = html.find("[name=isProne]").prop("checked");
+              let isPinned = html.find("[name=isPinned]").prop("checked");
+              let isActivelyDodging = html.find("[name=isActivelyDodging]").prop("checked");
+              let isMoving = html.find("[name=isMoving]").prop("checked");
+              let isAmbush = html.find("[name=isAmbush]").prop("checked");
+              let isRicochet = html.find("[name=isRicochet]").prop("checked");
+              let isBlinded = html.find("[name=isBlinded]").prop("checked");
+              let isSilhouetted = html.find("[name=isSilhouetted]").prop("checked");
+              let isAiming = html.find("[name=isAiming]").prop("checked");
+              let customAim = html.find("[name=customAim]")[0].value;
+
               let size = html.find("[name=size]")[0].value;
               let range = html.find("[name=range]")[0].value;
               let customAtt = html.find("[name=customAtt]")[0].value;
@@ -746,6 +809,13 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let customDmg = html.find("[name=customDmg]")[0].value;
               let attacknumber = 1;
+              
+              if (isExtraAttack) {
+                let newSta = this.actor.data.data.derivedStats.sta.value - 3
+                this.actor.update({ 
+                  'data.derivedStats.sta.value': newSta
+                });
+              }
 
               if (strike == "fast") {
                 attacknumber = 2;
@@ -754,6 +824,16 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (isFastDraw) { attFormula += "-3"; }
+                if (isProne) { attFormula += "-2"; }
+                if (isPinned) { attFormula += "+4"; }
+                if (isActivelyDodging) { attFormula += "-2"; }
+                if (isMoving) { attFormula += "-3"; }
+                if (isAmbush) { attFormula += "+5"; }
+                if (isRicochet) { attFormula += "-5"; }
+                if (isBlinded) { attFormula += "-3"; }
+                if (isSilhouetted) { attFormula += "+2"; }
+                if (isAiming) { attFormula += `+${customAim}`}
 
                 if (item.data.data.isMelee){
                   attFormula += `+${this.actor.data.data.stats.ref.current}`;
@@ -819,35 +899,6 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                 }
 
-                switch(attack){
-                  case "pinned":
-                    attFormula = `${attFormula}+4`;
-                    break;
-                  case "activelyDodging":
-                    attFormula = `${attFormula}-2`;
-                    break;
-                  case "movingTarget":
-                    attFormula = `${attFormula}-3`;
-                    break;
-                  case "fastDraw":
-                    attFormula = `${attFormula}-3`;
-                    break;
-                  case "ambush":
-                    attFormula = `${attFormula}+5`;
-                    break;
-                  case "ricochet":
-                    attFormula = `${attFormula}-5`;
-                    break;
-                  case "blinded":
-                    attFormula = `${attFormula}-3`;
-                    break;
-                  case "silhouetted":
-                    attFormula = `${attFormula}+2`;
-                    break;
-                  case "aiming":
-                    attFormula = `${attFormula}+1`;
-                    break;
-                }
                 
                 if (customDmg != "0") {
                   damageFormula += "+"+customDmg;
@@ -943,6 +994,9 @@ export default class WitcherActorSheet extends ActorSheet {
                     attFormula = `${attFormula}-2`;
                     damageFormula = `(${damageFormula})*0.5`;
                     break;
+                }
+                if (strike == "joint" || strike == "strong") {
+                  attFormula = `${attFormula}-3`;
                 }
 
                 let effects = JSON.stringify(item.data.data.effects)
