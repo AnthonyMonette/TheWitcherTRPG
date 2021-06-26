@@ -15,6 +15,24 @@
             </div>
         </div>
     </header>
+    <div>
+        <div>
+            <label>{{localize "WITCHER.Component.Location"}}:</label>
+            <select name="data.location" id="location-select">
+            {{#select data.location}}
+                <option value="Head">Head</option>
+                <option value="Torso">Torso</option>
+                <option value="Leg">Leg</option>
+            {{/select}}
+            </select>
+        </div>
+        <div>
+            <label>{{localize "WITCHER.Armor.Resistances"}}:</label>
+            <label>{{localize "WITCHER.Armor.Bludgeoning"}}</label><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/>
+            <label>{{localize "WITCHER.Armor.Slashing"}}</label><input type="checkbox" name="data.slashing" {{checked data.slashing}} />
+            <label>{{localize "WITCHER.Armor.Percing"}}</label><input type="checkbox" name="data.percing" {{checked data.percing}} />
+        </div>
+    </div>
         {{!-- Attributes Tab --}}
     <table>
         <tr>
