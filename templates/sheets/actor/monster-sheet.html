@@ -200,7 +200,16 @@
                                 <a class="item-edit"><i class="fas fa-edit"></i></a>
                             </td>
                             <td colspan="3">
-                                <div class="flex"><b>Effect :</b></label>{{weapon.data.effect}}
+                                <div class="flex"><b>Effect :</b></label>
+                                    {{#each weapon.data.effects as |effect id|}}
+                                        <div class="flex">
+                                        {{effect.name}}
+                                        {{#if effect.percentage}}
+                                            ({{effect.percentage}})%   
+                                        {{/if}}
+                                        ,
+                                        </div>
+                                    {{/each}}
                                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                             </td>
                         </tr>
