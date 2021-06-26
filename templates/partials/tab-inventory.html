@@ -41,7 +41,6 @@
                                 <td colspan="6">
                                     <div class="flex">
                                     <b>Effect :</b>
-
                                     {{#each weapon.data.effects as |effect id|}}
                                         <div class="flex">
                                         {{effect.name}}
@@ -72,6 +71,9 @@
                 <td><b>Qty</b></td>
                 <td><b>Name</b></td>
                 <td><b>Stp</b></td>
+                <td><b>B</b></td>
+                <td><b>S</b></td>
+                <td><b>P</b></td>
                 <td></td> 
             </tr>
             {{#each armors as |armor id|}}
@@ -84,9 +86,13 @@
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
                     <td><input class="inlinefas--edit stopping-info" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/></td>
+                    <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled /></td>
+                    <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} disabled /></td>
+                    <td><input type="checkbox" name="data.percing" {{checked data.percing}} disabled /></td>
+                    
                 </tr>
                 <tr class="item-info hidden">
-                    <td colspan="6">
+                    <td colspan="9">
                         <table>
                             {{#if (eq type "armor")}}
                                 <tr>

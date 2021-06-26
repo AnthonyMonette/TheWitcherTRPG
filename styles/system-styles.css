@@ -412,6 +412,9 @@ input.focus {
 input.small {
   width: 30px;
 }
+input.small-medium {
+  width: 50px;
+}
 
 input.medium {
   width: 100px;
