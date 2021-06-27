@@ -78,9 +78,9 @@
             "value": 0,
             "label": "WITCHER.Actor.CoreStat.Rec"
           },
-          "wt": {
+          "woundTreshold": {
             "value": 0,
-            "lable": "WITCHER.Actor.CoreStat.WT"
+            "lable": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },
         "derivedStats": {
