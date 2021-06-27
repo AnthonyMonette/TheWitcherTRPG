@@ -647,6 +647,7 @@
       "reliable": 0,
       "hands": 0,
       "range": "",
+      "equiped": false,
       "effects": [{
           "id": "first",
           "name": "effect",
@@ -665,7 +666,12 @@
       "avail": "",
       "enhancements": 0,
       "effect": "",
-      "encumb": 0
+      "encumb": 0,
+      "location":"",
+      "equiped": false,
+      "bludgeoning": false,
+      "slashing": false,
+      "percing": false
     },
     "enhancement": {
       "templates": ["base"],

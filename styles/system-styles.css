@@ -372,6 +372,10 @@ input.focus {
   width: 15px;
 }
 
+input.small-medium {
+  width: 50px;
+}
+
 input.medium {
   width: 100px;
 }

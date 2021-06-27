@@ -208,6 +208,7 @@ function rollSkillCheck(thisActor, statNum, skillNum){
             break;
     }
 
+    skillName = skillName.replace(" (2)", "");
     let messageData = {
         speaker: {alias: thisActor.name},
         flavor: `${parentStat}: ${skillName} Check`,

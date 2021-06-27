@@ -19,9 +19,13 @@
     "WITCHER.Armor.Enhancement": "AE",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Encumbrance",
+    "WITCHER.Armor.Resistances": "Resistances",
+    "WITCHER.Armor.Bludgeoning": "Bludgeoning",
+    "WITCHER.Armor.Slashing": "Slashing",
+    "WITCHER.Armor.Percing": "Percing",
 
     "WITCHER.Component.Rarity": "Rarity",
-    "WITCHER.Component.Location": "Location.",
+    "WITCHER.Component.Location": "Location",
     "WITCHER.Component.Quantity": "Quantity",
     "WITCHER.Component.Forage": "Forage DC",
 
