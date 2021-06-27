@@ -10,7 +10,7 @@
       "scripts/TheWitcherTRPG.js"
     ],
     "styles": [
-      "styles/system-styles.css"
+      "styles/witcher-styles.css"
     ],
     "packs": [
       {

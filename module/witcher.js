@@ -16,12 +16,14 @@ function updateDerived(actor){
     }
     let thisActor = actor;
     let base = Math.floor((thisActor.data.data.stats.body.current + thisActor.data.data.stats.will.current)/2);
+	let baseMax = Math.floor((thisActor.data.data.stats.body.max + thisActor.data.data.stats.will.max)/2);
     let currentBody = thisActor.data.data.stats.body.current;
 
     let newHP = base*5;
     let newSta = base*5;
     let newRec = base;
     let newStun = base;
+	let newWT = baseMax+1
     let newEnc = thisActor.data.data.stats.body.current*10;
     let newRun = thisActor.data.data.stats.spd.current*3;
     let newLeap = Math.floor(newRun/5);
@@ -112,6 +114,7 @@ function updateDerived(actor){
         'data.coreStats.enc.value': newEnc,
         'data.coreStats.run.value': newRun,
         'data.coreStats.leap.value': newLeap,
+		'data.coreStats.wt.value': newWT,
         'data.attackStats.meleeBonus': meleeBonus,
         'data.attackStats.punch.value': `1d6+${pBonus}`,
         'data.attackStats.kick.value': `1d6+${kBonus}`,

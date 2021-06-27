@@ -1,0 +1,62 @@
+.monster-flex {
+    display: flex;
+}
+
+.monster-left-sidebar {
+    width: 140px;
+    flex: none;
+}
+
+.monster-stat-title {
+    margin-left: 55px;
+}
+
+.monster-stat-display {
+  display: flex;
+  width: 140px;
+}
+
+.monster-stat-display input {
+  width: 35px;
+}
+.monster-stat-display label {
+  padding: 5px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input.small {
+    width: 30px;
+}
+
+.monster-img {
+  width: 375px;
+  height: 500px;
+}
+
+.monster-info {
+  position: relative;
+  top: -135px;
+  left: 10px;
+  width: 250px;
+  background-color: silver;
+  font-size: 12px;
+}
+
+.monster-info input {
+  height: 18px;
+}
+
+.monster-right-sidebar {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.monster-knowledge {
+  width: 515px;
+  position: relative;
+  top: -130px;
+  margin-top: 10px;
+}

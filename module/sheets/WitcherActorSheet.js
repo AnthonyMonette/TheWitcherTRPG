@@ -23,11 +23,11 @@ export default class WitcherActorSheet extends ActorSheet {
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.woundTreshold) {
+      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.coreStats.wt.value) {
         applyWoundTreshold(this.actor)
       }
 
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.woundTreshold) {
+      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.coreStats.wt.value) {
         removeWoundTreshold(this.actor)
       }
 
