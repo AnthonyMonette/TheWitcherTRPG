@@ -2,7 +2,7 @@ import {witcher} from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
 import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
-import WitcherActor from "../module/WitcherActor.js";
+import WitcherActor from "../module/witcherActor.js";
 import * as Chat from "../module/chat.js";
 
 
