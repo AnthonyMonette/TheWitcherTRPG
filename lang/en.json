@@ -16,7 +16,7 @@
     "WITCHER.Weapon.Elderfolk": "Eld.",
 
     "WITCHER.Armor.StoppingPower": "SP",
-    "WITCHER.Armor.Enhancement": "Armor EN",
+    "WITCHER.Armor.Enhancement": "AE",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Encumbrance",
     "WITCHER.Armor.Resistances": "Resistances",
@@ -83,6 +83,7 @@
     "WITCHER.Actor.CoreStat.Leap": "LEAP",
     "WITCHER.Actor.CoreStat.Enc": "ENC",
     "WITCHER.Actor.CoreStat.Rec": "REC",
+    "WITCHER.Actor.CoreStat.woundTreshold": "WT",
 
     "WITCHER.Actor.DerStat.Vigor": "VIGOR",
     "WITCHER.Actor.DerStat.HP": "Max HP",
@@ -91,6 +92,10 @@
     "WITCHER.Actor.DerStat.Focus": "Focus",
     "WITCHER.Actor.DerStat.Punch": "Punch",
     "WITCHER.Actor.DerStat.Kick": "Kick",
+
+    "WITCHER.Actor.Adrenaline": "Adrenaline",
+    "WITCHER.Actor.Stamina": "Stamina",
+    "WITCHER.Actor.Hp": "HP",
 
     "WITCHER.SkIntAwareness": "Awareness",
     "WITCHER.SkIntBusiness": "Business",

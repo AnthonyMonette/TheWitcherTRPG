@@ -45,7 +45,7 @@
         <div class="flex">
             {{#if (or (eq data.class "Spells") 
                       (eq data.class "Witcher"))}}
-                <select name="data.source" id="source-select">
+                <select name="data.source">
                     {{#select data.source}}
                     <option value="mixedElements">Mixed Elements</option>
                     <option value="earth">Earth</option>
@@ -56,7 +56,7 @@
                 </select>
             {{/if}}
             {{#if (eq data.class "Invocations")}}
-                <select name="data.source" id="source-select">
+                <select name="data.source">
                     {{#select data.source}}
                     <option value="druid">Druid</option>
                     <option value="preacher">Preacher</option>
@@ -65,8 +65,8 @@
                 </select>
             {{/if}}
             {{#if (eq data.class "Witcher")}}
-                <select name="data.source" id="level-select">
-                    {{#select data.source}}
+                <select name="data.domain">
+                    {{#select data.domain}}
                     <option value="basic">Basic Sign</option>
                     <option value="alternate">Alternate Sign Forms</option>
                     {{/select}}

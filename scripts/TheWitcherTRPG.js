@@ -2,6 +2,7 @@ import {witcher} from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
 import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
+import WitcherActor from "../module/WitcherActor.js";
 import * as Chat from "../module/chat.js";
 
 
@@ -34,6 +35,7 @@ Hooks.once("init", function () {
 
     CONFIG.witcher = witcher
     CONFIG.Item.entityClass = WitcherItem;
+    CONFIG.Actor.entityClass = WitcherActor;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("witcher", WitcherItemSheet, {makeDefault: true});
@@ -45,3 +47,106 @@ Hooks.once("init", function () {
 });
 
 Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
+
+
+/* -------------------------------------------- */
+/*  Hotbar Macros                               */
+/* -------------------------------------------- */
+
+
+Hooks.once("ready", async function() {
+    // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+    Hooks.on("hotbarDrop", (bar, data, slot) => createBoilerplateMacro(data, slot));
+  });
+
+/**
+ * Create a Macro from an Item drop.
+ * Get an existing item macro if one exists, otherwise create a new one.
+ * @param {Object} data     The dropped data
+ * @param {number} slot     The hotbar slot to use
+ * @returns {Promise}
+ */
+async function createBoilerplateMacro(data, slot) { 
+    console.log(data)
+    if (data.type == 'Actor') {
+        const actor = game.actors.get(data.id);
+        if (!actor) {
+            return;
+        }
+        const command = `game.actors.get('${data.id}')?.sheet.render(true)`;
+        let macro =
+            game.macros.entities.find(macro => macro.name === actor.name && macro.command === command);
+    
+        if (!macro) {
+            macro = await Macro.create({
+                name: actor.name,
+                type: 'script',
+                img: actor.data.img,
+                command: command
+            }, {renderSheet: false});
+        }
+        game.user.assignHotbarMacro(macro, slot);
+        return false;
+    }
+    else if (!("item" in data)) {
+        return ui.notifications.warn("You can only create macro buttons for owned Items");
+    }
+    else if(data.item.type == 'weapon'){
+        const item = data.item;
+        let foundActor = null
+        game.actors.forEach(actor => {
+            actor.items.forEach(item => {
+                if(data.item._id == item._id) {
+                    foundActor = actor
+                }
+            });
+        });
+        if (!foundActor) {
+            return ui.notifications.warn("You can only create macro buttons with the original character");
+        }
+        const command = 
+`let actor = game.actors.get('${foundActor._id}');
+actor.rollItem("${item._id}")`;
+        let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+        if (!macro) {
+            macro = await Macro.create({
+            name: item.name,
+            type: "script",
+            img: item.img,
+            command: command,
+            flags: { "boilerplate.itemMacro": true }
+            });
+        }
+        game.user.assignHotbarMacro(macro, slot);
+        return false;
+    }
+    else if(data.item.type == 'spell'){
+        const item = data.item;
+        let foundActor = null
+        game.actors.forEach(actor => {
+            actor.items.forEach(item => {
+                if(data.item._id == item._id) {
+                    foundActor = actor
+                }
+            });
+        });
+        if (!foundActor) {
+            return ui.notifications.warn("You can only create macro buttons with the original character");
+        }
+        const command = 
+`let actor = game.actors.get('${foundActor._id}');
+actor.rollSpell("${item._id}")`;
+        let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+        if (!macro) {
+            macro = await Macro.create({
+            name: item.name,
+            type: "script",
+            img: item.img,
+            command: command,
+            flags: { "boilerplate.itemMacro": true }
+            });
+        }
+        game.user.assignHotbarMacro(macro, slot);
+        return false;
+    }
+}

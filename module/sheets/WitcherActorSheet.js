@@ -23,11 +23,11 @@ export default class WitcherActorSheet extends ActorSheet {
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.woundTreshold) {
+      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.coreStats.woundTreshold.value) {
         applyWoundTreshold(this.actor)
       }
 
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.woundTreshold) {
+      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.coreStats.woundTreshold.value) {
         removeWoundTreshold(this.actor)
       }
 
@@ -145,6 +145,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
@@ -205,6 +206,35 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find("#resistmagic-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 4)});
       html.find("#resistcoerc-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 5)});
       html.find("#ritcraft-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 6)});
+
+      html.find(".dragable").on("dragstart", (ev) => {
+        console.log(ev)
+        let itemId = ev.target.dataset.id
+        let item = this.actor.getOwnedItem(itemId);
+        ev.originalEvent.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({
+            item: item,
+            type: "itemDrop",
+            }),
+          )});
+
+      const newDragDrop = new DragDrop({
+        dragSelector:`.dragable`,
+        dropSelector:`.items`,
+        permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDragDrop.bind(this) },
+        callbacks: { dragstart: this._onDragStart.bind(this), drop: this._onDrop.bind(this) }
+      })
+      this._dragDrop.push(newDragDrop);
+
+    }
+    async _onDrop(event) {
+      let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
+      if (dragData.type === "itemDrop") {
+        this.actor.createEmbeddedDocuments("Item", [dragData.item]);
+      } else {
+        super._onDrop(event, data);
+      }
     }
     
     async _onCritAdd(event) {
@@ -291,8 +321,10 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
 
-    async _onSpellRoll(event) {
-      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+    async _onSpellRoll(event, itemId = null) {
+      if (!itemId){
+        itemId = event.currentTarget.closest(".item").dataset.itemId;
+      }
       let spellItem = this.actor.getOwnedItem(itemId);
       let formula = `1d10`
       formula += `+${this.actor.data.data.stats.will.current}`
@@ -701,8 +733,14 @@ export default class WitcherActorSheet extends ActorSheet {
       editor.toggleClass("hidden");
     }
 
-    _onItemRoll(event) {
-      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+    _onFocusIn(event) {
+      event.currentTarget.select();
+    }
+
+    _onItemRoll(event, itemId = null) {
+      if (!itemId){
+        itemId = event.currentTarget.closest(".item").dataset.itemId;
+      }
       let item = this.actor.getOwnedItem(itemId);
       let formula = item.data.data.damage
 

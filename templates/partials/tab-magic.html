@@ -4,6 +4,7 @@
         <table class="novice-spell-table">
             <tr> 
                 <td></td> 
+                <td></td> 
                 <td><b>name</b></td>
                 <td><b>STA Cost</b></td>
                 <td></td> 
@@ -17,6 +18,7 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
+                    <td><img src="{{noviceSpell.img}}" class="item-img dragable" draggable="true" data-id="{{noviceSpell._id}}"/></td>
                     <td><a class="spell-roll">{{noviceSpell.name}}</a></td>
                     <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{noviceSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
@@ -44,6 +46,7 @@
         <table class="journeyman-spell-table">
             <tr> 
                 <td></td> 
+                <td></td> 
                 <td><b>name</b></td>
                 <td><b>STA Cost</b></td>
                 <td></td> 
@@ -57,6 +60,7 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
+                    <td><img src="{{journeymanSpell.img}}" class="item-img dragable" draggable="true" data-id="{{journeymanSpell._id}}"/></td>
                     <td><a class="spell-roll">{{journeymanSpell.name}}</a></td>
                     <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{journeymanSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
@@ -84,6 +88,7 @@
         <table class="master-spell-table">
             <tr> 
                 <td></td> 
+                <td></td> 
                 <td><b>name</b></td>
                 <td><b>STA Cost</b></td>
                 <td></td> 
@@ -97,6 +102,7 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
+                    <td><img src="{{masterSpell.img}}" class="item-img dragable" draggable="true" data-id="{{masterSpell._id}}"/></td>
                     <td><a class="spell-roll">{{masterSpell.name}}</a></td>
                     <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{masterSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
@@ -147,6 +153,7 @@
         <table class="hexes-table">
             <tr> 
                 <td></td> 
+                <td></td> 
                 <td><b>name</b></td>
                 <td><b>STA Cost</b></td>
                 <td></td> 
@@ -160,6 +167,7 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
+                    <td><img src="{{ritual.img}}" class="item-img dragable" draggable="true" data-id="{{ritual._id}}"/></td>
                     <td><a class="spell-roll">{{ritual.name}}</a></td>
                     <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{ritual.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
@@ -188,9 +196,9 @@
         <table class="hexes-table">
             <tr> 
                 <td></td> 
+                <td></td> 
                 <td><b>name</b></td>
                 <td><b>STA Cost</b></td>
-                <td><b>Danger</b></td>
                 <td></td> 
             </tr>
             {{#each hexes as |hex id|}}
@@ -202,9 +210,9 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
+                    <td><img src="{{hex.img}}" class="item-img dragable" draggable="true" data-id="{{hex._id}}"/></td>
                     <td><a class="spell-roll">{{hex.name}}</a></td>
                     <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{hex.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="data.danger" type="text" value="{{hex.data.danger}}"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info hidden">

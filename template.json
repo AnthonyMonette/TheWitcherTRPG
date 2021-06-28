@@ -77,6 +77,10 @@
           "rec": {
             "value": 0,
             "label": "WITCHER.Actor.CoreStat.Rec"
+          },
+          "woundTreshold": {
+            "value": 0,
+            "lable": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },
         "derivedStats": {
@@ -104,6 +108,7 @@
             "value": 0,
             "label": "WITCHER.Actor.DerStat.Vigor"
           }
+          
         },
         "skills": {
           "int": {
@@ -328,7 +333,11 @@
               "label": "WITCHER.SkWillRitCraft"
             }
           }
-        }
+        },
+        "adrenaline": {
+            "current": 0,
+            "label": "WITCHER.Actor.Adrenaline"
+          }
       }
     },
     "character": {
