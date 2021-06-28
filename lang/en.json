@@ -83,7 +83,7 @@
     "WITCHER.Actor.CoreStat.Leap": "LEAP",
     "WITCHER.Actor.CoreStat.Enc": "ENC",
     "WITCHER.Actor.CoreStat.Rec": "REC",
-    "WITCHER.Actor.CoreStat.WT": "WT",
+    "WITCHER.Actor.CoreStat.woundTreshold": "WT",
 
     "WITCHER.Actor.DerStat.Vigor": "VIGOR",
     "WITCHER.Actor.DerStat.HP": "Max HP",

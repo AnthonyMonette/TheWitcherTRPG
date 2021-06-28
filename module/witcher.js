@@ -114,7 +114,7 @@ function updateDerived(actor){
         'data.coreStats.enc.value': newEnc,
         'data.coreStats.run.value': newRun,
         'data.coreStats.leap.value': newLeap,
-		'data.coreStats.wt.value': newWT,
+		'data.coreStats.woundTreshold.value': newWT,
         'data.attackStats.meleeBonus': meleeBonus,
         'data.attackStats.punch.value': `1d6+${pBonus}`,
         'data.attackStats.kick.value': `1d6+${kBonus}`,
