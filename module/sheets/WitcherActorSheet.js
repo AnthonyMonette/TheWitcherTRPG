@@ -226,9 +226,9 @@ export default class WitcherActorSheet extends ActorSheet {
         callbacks: { dragstart: this._onDragStart.bind(this), drop: this._onDrop.bind(this) }
       })
       this._dragDrop.push(newDragDrop);
-
     }
-    async _onDrop(event) {
+
+    async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
         this.actor.createEmbeddedDocuments("Item", [dragData.item]);
