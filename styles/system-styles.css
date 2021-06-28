@@ -700,3 +700,7 @@ input.luck-value {
   width: 150px;
   height: 100%;
 }
+
+.description {
+  margin: 10px;
+}

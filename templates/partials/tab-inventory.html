@@ -18,7 +18,7 @@
                     <td>
                         <a class="item-weapon-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{weapon.img}}" class="item-img" /></td>
+                    <td><img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{weapon.data.quantity}}" data-dtype="Number"/></td>
                     <td><a class="item-roll">{{weapon.name}}</a></td>
                     <td><input class="inline-edit range-info" data-field="data.range" type="text" value="{{weapon.data.range}}" placeholder="" /></td>
@@ -82,7 +82,7 @@
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{armor.img}}" class="item-img" /></td>
+                    <td><img src="{{armor.img}}" class="item-img dragable" draggable="true" data-id="{{armor._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
                     <td><input class="inlinefas--edit stopping-info" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/></td>
@@ -149,7 +149,7 @@
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{valuable.img}}" class="item-img" /></td>
+                    <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{valuable.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
@@ -209,7 +209,7 @@
                             <a class="item-armor-display"><i class="fas fa-info"></i></a>
                         </div>
                     </td>
-                    <td><img src="{{diagram.img}}" class="item-img" /></td>
+                    <td><img src="{{diagram.img}}" class="item-img dragable" draggable="true" data-id="{{diagram._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{diagram.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit" data-field="data.learned" type="checkbox" value="{{data.learned}}" {{checked data.learned}}/>
@@ -314,7 +314,7 @@
                 {{#each components as |component id|}}
                 <tbody class="item" data-item-id="{{component._id}}">
                     <tr>
-                        <td><img src="{{component.img}}" class="item-img" /></td>
+                        <td><img src="{{component.img}}" class="item-img dragable" draggable="true" data-id="{{component._id}}"/></td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{component.data.quantity}}" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{component.data.weight}}" data-dtype="Number"/></td>

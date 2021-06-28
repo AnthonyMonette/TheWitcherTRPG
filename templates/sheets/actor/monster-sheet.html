@@ -181,6 +181,7 @@
                 <table class="weapon-table">
                     <tr>
                         <td></td>
+                        <td></td>
                         <td><b>Name</b></td>
                         <td><b>DMG</b></td>
                         <td><b>ROF</b></td>
@@ -190,6 +191,9 @@
                         <tr>
                             <td>
                                 <a class="item-weapon-display"><i class="fas fa-info"></i></a>
+                            </td>
+                            <td>
+                                <img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/>
                             </td>
                             <td><a class="item-roll">{{weapon.name}}</a></td>
                             <td><input class="inline-edit" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
@@ -220,6 +224,7 @@
                 <table>
                     {{#each loots as |valuable id|}}
                     <tr class="item" data-item-id="{{valuable._id}}">
+                        <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
                         <td><input class="small-medium inline-edit" data-field="data.quantity" type="text" value="{{data.quantity}}"  placeholder="1d6" /></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
