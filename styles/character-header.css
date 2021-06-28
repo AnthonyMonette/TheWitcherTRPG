@@ -2,6 +2,10 @@
     display: flex;
   }
 
+button.char-dummy {
+    display: none;
+}
+
 .char-left-sidebar {
     width: 140px;
     flex: none;

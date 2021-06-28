@@ -180,10 +180,6 @@ input.item-quantity{
   width: 30px;
 }
 
-.lifeEvents {
-  margin: 10px;
-}
-
 .events {
   width: 45px;
 }
@@ -210,6 +206,7 @@ input.item-quantity{
 }
 .item-delete {
   margin: 5px;
+  width: 15px;
 }
 .item-edit {
   margin: 5px;
@@ -368,9 +365,6 @@ input.focus {
 .dice-display {
   text-align: center;
 }
-.item-delete {
-  width: 15px;
-}
 
 input.small-medium {
   width: 50px;
@@ -437,11 +431,6 @@ input.skill-value {
     align-items: center;
 }
 
-.bg-note {
-  width: 32%;
-  float: left;
-  margin-right: 5px;
-}
 .add-item {
   margin-right: 5px;
 }

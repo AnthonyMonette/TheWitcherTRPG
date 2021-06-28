@@ -16,10 +16,7 @@
                 value="{{details.value}}" />
             {{/each}}
         </div>
-        
-        <div class="lifeEvents background">
-            <textarea rows=25 name="data.general.background.value">{{data.general.background.value}}</textarea>
-        </div>    
+        {{editor content=data.general.background.value target="data.general.background.value" button=true editable=editable}}
     </div>
     <div class="flex">
         <div class="crit-wounds">
