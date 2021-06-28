@@ -1,0 +1,126 @@
+.char-flex {
+    display: flex;
+  }
+
+.char-left-sidebar {
+    width: 140px;
+    flex: none;
+}
+
+.char-stat-title {
+    margin-left: 55px;
+}
+
+.char-stat-display {
+    display: flex;
+    width: 140px;
+    text-align: center;
+}
+
+input.header-stat {
+    width: 35px;
+}
+
+.char-stat-display label {
+    padding: 5px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input.total-stats-show {
+    width: 35px;
+}
+
+.total-stats.lable {
+    position: relative;
+}
+
+.total-stats {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.right-sidebar {
+  margin-left: 10px;
+}
+
+.right-top {
+    display: flex;
+    max-width: 230px;
+    height: 60px;
+    text-align: center;
+}
+
+.right-bottom {
+    width: 230px;
+    height: 275px;
+}
+
+.right-element {
+    float: left;
+    margin: auto;
+    width: 50%;
+    height: 90px;
+    text-align: center;
+}
+
+.right-image{
+    height: 75px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 0;
+}
+
+.right-row {
+    size: 75px;
+}
+  
+  .right-row label {
+    position: relative;
+}
+
+input.right-value {
+    position: relative;
+    text-align: center;
+    bottom: 55px;
+    width: 40px;
+    font-size: 25px;
+    border: none;
+    background: none;
+    color: #000;
+}
+
+.right-value::placeholder {
+    color: black;
+}
+
+.right-max {
+    position: relative;
+    bottom: 84px;
+    left: 54px;
+    border: none;
+    text-align: left;
+    width: 50px;
+    font-size: 25px;
+    color: #000;
+}
+
+button.button-roll {
+    width: 100px;
+    height: 30px;
+    background-color: darkred;
+    border-radius: 12px;
+    color: white;
+}
+
+.char-info {
+    padding: 10px;
+    width: 250px;
+    background-color: lightslategray;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}

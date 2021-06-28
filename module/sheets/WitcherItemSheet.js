@@ -48,6 +48,7 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".remove-effect").on("click", this._oRemoveEffect.bind(this));
       
       html.find(".list-edit").on("blur", this._onEffectEdit.bind(this));
+      html.find("input").focusin(ev => this._onFocusIn(ev));
     }
 
 
@@ -81,5 +82,9 @@ export default class WitcherItemSheet extends ItemSheet {
       }
       newEffectList.push({id: genId(), name: "effect", percentage: ""})
       this.item.update({'data.effects': newEffectList});
+    }
+
+    _onFocusIn(event) {
+      event.currentTarget.select();
     }
   }

@@ -3,13 +3,13 @@
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
 
         <div class="flex">
-            <div class="left-sidebar">
-                <div class="stat-title">
+            <div class="monster-left-sidebar">
+                <div class="monster-stat-title">
                     <label>Current/Max</label>
                 </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
-                    <div class="stat-display" data-stat="{{stat}}">
+                    <div class="stat-display monster-stat-display" data-stat="{{stat}}">
                         <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
                         <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
                         <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
@@ -19,12 +19,12 @@
                 <hr />
                 
                 {{#each data.coreStats as |details coreStat|}}
-                <div class="stat-display">
+                <div class="stat-display monster-stat-display">
                     <label>{{localize details.label}}</label> 
                     <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 {{/each}}
-                <div class="stat-display">
+                <div class="stat-display monster-stat-display">
                     <label>VIGOR</label> 
                     <input class="header-stat" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}"/>
                 </div>
@@ -47,13 +47,13 @@
                     </div>
                     
                 </div>
-                <div class="stat-display">
+                <div class="stat-display monster-stat-display">
                     <label>HP</label> 
                     <input class="header-stat" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}"/>
                     /
                     <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}"/>
                 </div>
-                <div class="stat-display">
+                <div class="stat-display monster-stat-display">
                     <label>STA:</label> 
                     <input class="header-stat" name="data.derivedStats.sta.value" type="text" value="{{data.derivedStats.sta.value}}"/>
                     /

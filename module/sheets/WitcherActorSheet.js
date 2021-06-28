@@ -23,11 +23,11 @@ export default class WitcherActorSheet extends ActorSheet {
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.woundTreshold) {
+      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.coreStats.woundTreshold.value) {
         applyWoundTreshold(this.actor)
       }
 
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.woundTreshold) {
+      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.coreStats.woundTreshold.value) {
         removeWoundTreshold(this.actor)
       }
 
@@ -145,6 +145,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
@@ -730,6 +731,10 @@ export default class WitcherActorSheet extends ActorSheet {
       let section = event.currentTarget.closest(".item");
       let editor = $(section).find(".item-info")
       editor.toggleClass("hidden");
+    }
+
+    _onFocusIn(event) {
+      event.currentTarget.select();
     }
 
     _onItemRoll(event, itemId = null) {
