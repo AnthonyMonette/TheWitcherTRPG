@@ -7,18 +7,46 @@
     flex: none;
 }
 
+.char-stat-display {
+    display: flex;
+    width: 140px;
+    height: 27px;
+    text-align: center;
+}
+
+.char-stat-button {
+    width: 65px;
+    height: 26px;
+    background-color: darkred;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+}
+
+.char-stat-button:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+.char-stat-label {
+    position: relative;
+    margin-bottom: 2px;
+}
+
 .char-stat-title {
     margin-left: 55px;
 }
 
-.char-stat-display {
-    display: flex;
-    width: 140px;
-    text-align: center;
-}
-
 input.header-stat {
     width: 35px;
+    height: 26px;
+    margin-bottom: 1px;
+    margin-right: 1px;
 }
 
 .char-stat-display label {
@@ -39,18 +67,11 @@ input.total-stats-show {
 
 .total-stats {
     text-align: right;
-    margin-right: 10px;
+    margin-right: 4px;
 }
 
 .right-sidebar {
   margin-left: 10px;
-}
-
-.right-top {
-    display: flex;
-    max-width: 230px;
-    height: 60px;
-    text-align: center;
 }
 
 .right-bottom {
@@ -77,7 +98,7 @@ input.total-stats-show {
     size: 75px;
 }
   
-  .right-row label {
+.right-row label {
     position: relative;
 }
 
@@ -107,12 +128,37 @@ input.right-value {
     color: #000;
 }
 
-button.button-roll {
-    width: 100px;
+.right-top {
+    display: flex;
+    width: 230px;
+    height: 60px;
+}
+
+.char-button-collum {
+    width: 115px;
+    height: 60px;
+    margin-left: 2.5px;
+}
+
+.button-roll {
+    display: flex;
+    width: 110px;
     height: 30px;
+    align-items: center;
+    justify-content: center;
     background-color: darkred;
     border-radius: 12px;
     color: white;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    margin-bottom: 1px;
+}
+
+.button-roll:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
 }
 
 .char-info {
@@ -123,4 +169,8 @@ button.button-roll {
     border-radius: 10px;
     padding: 10px;
     color: white;
+}
+
+.char-flexrow{
+    float: top;
 }
