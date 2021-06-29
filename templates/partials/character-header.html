@@ -1,11 +1,10 @@
 <div class="char-left-sidebar">
-        <button class="char-dummy"></button>
     <div class="char-stat-title">
         <label>Current/Max</label>
     </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display char-stat-display" data-stat="{{stat}}">
-        <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
+        <a type="button" class="char-stat-button stat-roll">{{localize details.label}}</a>
         <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
         <input class="header-stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
     </div>
@@ -58,15 +57,15 @@
 </div>    
 <div class="right-sidebar">
     <div class="char-info">
-        <div class="flexrow">
+        <div class="char-flexrow">
             <div class="right-top">
-                <div>
-                    <button class="button-roll init-roll" >Initiative</button>
-                    <button class="button-roll death-roll">Saving Throw</button>
+                <div class="char-button-collum">
+                    <a class="button-roll init-roll" >Initiative</a>
+                    <a class="button-roll death-roll">Saving Throw</a>
                 </div>
-                <div>
-                    <button class="button-roll crit-roll">Crit/Fumble</button>
-                    <button class="button-roll defence-roll">Defense</button>
+                <div class="char-button-collum">
+                    <a class="button-roll crit-roll">Crit/Fumble</a>
+                    <a class="button-roll defence-roll">Defense</a>
                 </div>
             </div>
             <div class="right-bottom">
