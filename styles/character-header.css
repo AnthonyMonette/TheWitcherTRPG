@@ -7,11 +7,9 @@
     flex: none;
 }
 
-.char-stat-display {
-    display: flex;
-    width: 140px;
-    height: 27px;
-    text-align: center;
+.char-stat-title label {
+    font-weight: bold;
+    margin-left: 4px;
 }
 
 .char-stat-button {
@@ -20,11 +18,16 @@
     background-color: darkred;
     border-radius: 12px;
     color: white;
-    text-align: center;
     padding: 5px;
     border-style: solid;
-    border-color: white;
     border-width: 1px;
+}
+
+.char-stat-display {
+    display: flex;
+    width: 140px;
+    height: 27px;
+    text-align: center;
 }
 
 .char-stat-button:hover {
@@ -33,36 +36,12 @@
     box-shadow: 0 0 10px #9ecaed;
 }
 
-.char-stat-label {
-    position: relative;
-    margin-bottom: 2px;
-}
-
-.char-stat-title {
-    margin-left: 55px;
-}
-
 input.header-stat {
+    font-weight: bold;
     width: 35px;
     height: 26px;
     margin-bottom: 1px;
     margin-right: 1px;
-}
-
-.char-stat-display label {
-    padding: 5px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-input.total-stats-show {
-    width: 35px;
-}
-
-.total-stats.lable {
-    position: relative;
 }
 
 .total-stats {
@@ -70,13 +49,54 @@ input.total-stats-show {
     margin-right: 4px;
 }
 
-.right-sidebar {
-  margin-left: 10px;
+.total-stats label {
+    font-weight: bold;
 }
 
-.right-bottom {
-    width: 230px;
-    height: 275px;
+input.total-stats-show {
+    width: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.char-stat-label {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.header-center {
+    width: 380px;
+}
+
+.header-center label {
+    font-weight: bold;
+}
+
+.charname {
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.char-center-middle {
+    display: flex;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.actor-img {
+    height: 175px;
+    width: 175px;
+}
+
+.right-sidebar {
+  padding: 10px;
+  width: 250px;
+  background-color: lightslategray;
+  border-radius: 10px;
+  color: white;
 }
 
 .right-element {
@@ -104,7 +124,6 @@ input.total-stats-show {
 
 input.right-value {
     position: relative;
-    text-align: center;
     bottom: 55px;
     width: 40px;
     font-size: 25px;
@@ -159,18 +178,4 @@ input.right-value {
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 10px #9ecaed;
-}
-
-.char-info {
-    padding: 10px;
-    width: 250px;
-    background-color: lightslategray;
-    margin: 10px;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-}
-
-.char-flexrow{
-    float: top;
 }

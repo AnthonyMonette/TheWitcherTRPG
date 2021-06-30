@@ -76,19 +76,6 @@
   margin-left: 10px;
 }
 
-.actor-img {
-  height: 175px;
-  width: 175px;
-}
-
-.skill-column {
-  margin: 5px;
-}
-
-.table-skills {
-  width: 175px;
-}
-
 .input-skill {
   width: 25px;
 }
@@ -311,14 +298,6 @@ input.sta-input {
 
 .magic-info {
   width: 250px;
-  background-color: lightslategray;
-  margin: auto;
-  border-radius: 10px;
-  padding: 10px;
-  color: white;
-}
-
-.skill-info {
   background-color: lightslategray;
   margin: auto;
   border-radius: 10px;

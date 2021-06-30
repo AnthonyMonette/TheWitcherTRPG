@@ -1,0 +1,72 @@
+.skill a {
+    display: flex;
+    background-color: darkred;
+    border-radius: 12px;
+    color: white;
+    padding: 4px;
+    border-style: solid;
+    width: 140px;
+    height: 30px;
+}
+
+.skill {
+    padding: 0 !important;
+}
+
+.table-skills {
+    width: 175px;
+}
+
+.skill-column {
+    margin: 5px;
+}
+
+.char-input-skill {
+    width: 30px;
+    text-align: center;
+}
+
+.stats {  
+    font-weight: bold;
+    width: 30px !important;
+    text-align: center !important;
+}
+
+.total-skills {
+    font-weight: bold;
+}
+
+.flex label {
+    margin: 5px;
+}
+
+.skill-info h3 {
+    margin: 0px !important;
+}
+
+.IP-value {
+    font-weight: bold;
+    width: 30px !important;
+    text-align: center !important;
+    background: lightsteelblue !important;
+}
+
+.skill-info {
+    background-color: lightslategray;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+.extra-skill-name {
+    background-color: lightsteelblue !important;
+}
+
+.extra-skill-value {  
+    font-weight: bold;
+    width: 30px !important;
+    text-align: center !important;
+    background: lightsteelblue !important;
+    min-width: 30px !important;
+}

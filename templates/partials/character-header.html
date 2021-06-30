@@ -1,36 +1,36 @@
 <div class="char-left-sidebar">
     <div class="char-stat-title">
-        <label>Current/Max</label>
+        <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
+        <label>{{localize "WITCHER.Actor.StatTitle.LableRight"}}</label>
     </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display char-stat-display" data-stat="{{stat}}">
-        <a type="button" class="char-stat-button stat-roll">{{localize details.label}}</a>
+        <a class="char-stat-button stat-roll">{{localize details.label}}</a>
         <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
         <input class="header-stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
     </div>
     {{/each}}
 
     <div class="total-stats">
-        <label class="total-stats-lable"> Total Stats</label>
+        <label class="total-stats-lable"> {{localize "WITCHER.Actor.TotalStats"}}</label>
         <input class="total-stats-show" type="text" value="{{totalStats}}" placeholder="0" data-dtype="Number" readonly/>
     </div>
 </div>
 <div class="header-center">
-    <div class="flexrow">
-        <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
-    </div>
-    <div class="flex ressource">
+    <label>Name:</label>
+    <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+    <div class="char-center-middle">
         <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
         <div>
             {{#each data.coreStats as |details coreStat|}}
             <div class="char-stat-display">
-                <label>{{localize details.label}}</label> 
+                <label class="char-stat-label">{{localize details.label}}</label> 
                 <input class="header-stat" value="{{details.value}}" type="text" placeholder="0" data-dtype="Number" readonly/>
             </div>
             {{/each}}
         </div>
     </div>
-    <div class="flexrow ressource">
+    <div class="flexrow">
         <div class="char-flex">
             <label><b>Race</b></label>
             {{race.name}}
@@ -44,7 +44,7 @@
             <input class="header-stat" name="data.general.age" type="number" value="{{data.general.age}}" placeholder="0" data-dtype="Number"/>
         </div>
     </div>
-    <div class="flexrow ressource">
+    <div class="flexrow">
         <div class="char-flex">
             <label><b>Profession</b></label>
             {{profession.name}}
@@ -56,61 +56,57 @@
     </div>
 </div>    
 <div class="right-sidebar">
-    <div class="char-info">
-        <div class="char-flexrow">
-            <div class="right-top">
-                <div class="char-button-collum">
-                    <a class="button-roll init-roll" >Initiative</a>
-                    <a class="button-roll death-roll">Saving Throw</a>
+        <div class="right-top">
+            <div class="char-button-collum">
+                <a class="button-roll init-roll" >{{localize "WITCHER.Actor.Initiative"}}</a>
+                <a class="button-roll death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
+            </div>
+            <div class="char-button-collum">
+                <a class="button-roll crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
+                <a class="button-roll defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+            </div>
+        </div>
+        <div class="right-bottom">
+            <div class=right-row>
+                <div class="right-element">
+                    <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})</label>
+                    {{#if data.woundTresholdApplied}}
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
+                    {{/if}}
+                    {{#unless data.woundTresholdApplied}}
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
+                    {{/unless}}
+                    <input class="right-value" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
-                <div class="char-button-collum">
-                    <a class="button-roll crit-roll">Crit/Fumble</a>
-                    <a class="button-roll defence-roll">Defense</a>
+                <div class="right-element">
+                    <label>{{localize "WITCHER.Actor.Stamina"}} ({{data.derivedStats.sta.max}})</label>
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
+                    <input class="right-value" name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
             </div>
-            <div class="right-bottom">
-                <div class=right-row>
-                    <div class="right-element">
-                        <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})</label>
-                        {{#if data.woundTresholdApplied}}
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
-                        {{/if}}
-                        {{#unless data.woundTresholdApplied}}
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
-                        {{/unless}}
-                        <input class="right-value" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="right-element">
-                        <label>{{localize "WITCHER.Actor.Stamina"}} ({{data.derivedStats.sta.max}})</label>
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
-                        <input class="right-value" name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
+            <div class=right-row>
+                <div class="right-element">
+                    <label>{{localize data.derivedStats.resolve.label}} ({{data.derivedStats.resolve.max}})</label>
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
+                    <input class="right-value" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
-                <div class=right-row>
-                    <div class="right-element">
-                        <label>{{localize data.derivedStats.resolve.label}} ({{data.derivedStats.resolve.max}})</label>
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
-                        <input class="right-value" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="right-element">
-                        <label>{{localize data.derivedStats.focus.label}} ({{data.derivedStats.focus.max}})</label> 
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
-                        <input class="right-value" name="data.derivedStats.focus.current" type="number" value="{{data.derivedStats.focus.current}}" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
+                <div class="right-element">
+                    <label>{{localize data.derivedStats.focus.label}} ({{data.derivedStats.focus.max}})</label> 
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
+                    <input class="right-value" name="data.derivedStats.focus.current" type="number" value="{{data.derivedStats.focus.current}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
-                <div class=right-row>
-                    <div class="right-element">
-                        <label>{{localize "WITCHER.StLuck"}} ({{data.stats.luck.current}})</label>
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/clover.png"/>
-                        <input class="right-value" name="data.stats.luck.total" type="number" value="{{data.stats.luck.total}}" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="right-element">
-                        <label>{{localize "WITCHER.Actor.Adrenaline"}}</label>
-                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/adrenaline.png"/>
-                        <input class="right-value" name="data.adrenaline" type="number" value="{{data.adrenaline}}" min="0" max="99" placeholder="0" data-dtype="Number"/>
-                    </div>
+            </div>
+            <div class=right-row>
+                <div class="right-element">
+                    <label>{{localize "WITCHER.StLuck"}} ({{data.stats.luck.current}})</label>
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/clover.png"/>
+                    <input class="right-value" name="data.stats.luck.total" type="number" value="{{data.stats.luck.total}}" max="99" placeholder="0" data-dtype="Number"/>
+                </div>
+                <div class="right-element">
+                    <label>{{localize "WITCHER.Actor.Adrenaline"}}</label>
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/adrenaline.png"/>
+                    <input class="right-value" name="data.adrenaline" type="number" value="{{data.adrenaline}}" min="0" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
             </div>
         </div>
-    </div>
 </div>    

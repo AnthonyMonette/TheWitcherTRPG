@@ -1,63 +1,64 @@
 <div class="flex">
     <div class="skill-column">
-        <h1>Intelligence</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Intelligence"}}</h1>
         <table class="table-skills">
             {{#each data.skills.int as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
             {{/each}}
         </table>
         <div class="skill-info">
-            <h3>Improvement points</h3>
+            <h3>{{localize "WITCHER.Actor.ImprovementPoints"}}</h3>
             <div class="flex">
-                <label>Current IP:</label> <input class="focus-value" name="data.improvementPoints" type="text" value="{{data.improvementPoints}}" placeholder="0" data-dtype="Number"/>
+                <label>{{localize "WITCHER.Actor.CurrentIP"}}</label> 
+                <input class="IP-value" name="data.improvementPoints" type="number" value="{{data.improvementPoints}}" placeholder="0" data-dtype="Number"/>
             </div>
             <div class="flex">
-                <input class="focus" name="data.skillTraining1.name" type="text" value="{{data.skillTraining1.name}}" placeholder="Skill name..." />
-                <input class="focus-value"name="data.skillTraining1.value" type="text" value="{{data.skillTraining1.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="data.skillTraining1.name" type="text" value="{{data.skillTraining1.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value"name="data.skillTraining1.value" type="number" value="{{data.skillTraining1.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.skillTraining2.name" type="text" value="{{data.skillTraining2.name}}" placeholder="Skill name..." />
-                <input class="focus-value" name="data.skillTraining2.value" type="text" value="{{data.skillTraining2.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="data.skillTraining2.name" type="text" value="{{data.skillTraining2.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="data.skillTraining2.value" type="number" value="{{data.skillTraining2.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.skillTraining3.name" type="text" value="{{data.skillTraining3.name}}" placeholder="Skill name..." />
-                <input class="focus-value" name="data.skillTraining3.value" type="text" value="{{data.skillTraining3.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="data.skillTraining3.name" type="text" value="{{data.skillTraining3.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="data.skillTraining3.value" type="number" value="{{data.skillTraining3.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.skillTraining4.name" type="text" value="{{data.skillTraining4.name}}" placeholder="Skill name..." />
-                <input class="focus-value" name="data.skillTraining4.value" type="text" value="{{data.skillTraining4.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="data.skillTraining4.name" type="text" value="{{data.skillTraining4.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="data.skillTraining4.value" type="number" value="{{data.skillTraining4.value}}" placeholder="0" />
             </div>
         </div>
     </div>
     <div class="skill-column">
-        <h1>Reflex</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Reflex"}}</h1>
         <table class="table-skills">
             {{#each data.skills.ref as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
             {{/each}}
         </table>
-        <h1>Will</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Willpower"}}</h1>
         <table class="table-skills">
             {{#each data.skills.will as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
@@ -65,27 +66,27 @@
         </table>
     </div>
     <div class="skill-column">
-        <h1>Dexterity</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Dexterity"}}</h1>
         <table class="table-skills">
             {{#each data.skills.dex as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
             {{/each}}
         </table>
-        <h1>Crafting</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Crafting"}}</h1>
         <table class="table-skills">
             {{#each data.skills.cra as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
@@ -93,34 +94,34 @@
         </table>
     </div>
     <div class="skill-column">
-        <h1>Body</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Body"}}</h1>
         <table class="table-skills">
             {{#each data.skills.body as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
             {{/each}}
         </table>
-        <h1>Empaty</h1>
+        <h1>{{localize "WITCHER.Actor.Skill.Empathy"}}</h1>
         <table class="table-skills">
             {{#each data.skills.emp as |skill st|}}
             <tr>
                 <td class="{{st}} skill">
                     <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
                 </td>
-                <td class="input-skill">
+                <td class="char-input-skill">
                     <input class="stats {{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
                 </td>
             </tr>
             {{/each}}
         </table>
         <div>
-            <b>Total Skill <input name="totalSkills" type="number" value="{{totalSkills}}" placeholder="0" readonly/> </b>
+            <b>{{localize "WITCHER.ACtor.TotalSkill"}} <input class="total-skills" name="totalSkills" type="number" value="{{totalSkills}}" placeholder="0" readonly/> </b>
         </div>
     </div>
 </div>
