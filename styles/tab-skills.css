@@ -1,4 +1,16 @@
-.skill a {
+.skill-column {
+    margin: 5px;
+}
+
+.char-skill {
+    padding: 0em;
+}
+
+.table-skills {
+    width: 175px;
+}
+
+.char-skill a {
     display: flex;
     background-color: darkred;
     border-radius: 12px;
@@ -9,46 +21,16 @@
     height: 30px;
 }
 
-.skill {
-    padding: 0 !important;
+.char-skill:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
 }
 
-.table-skills {
-    width: 175px;
-}
-
-.skill-column {
-    margin: 5px;
-}
-
-.char-input-skill {
+.char-input-skill input {
+    font-weight: bold;
     width: 30px;
     text-align: center;
-}
-
-.stats {  
-    font-weight: bold;
-    width: 30px !important;
-    text-align: center !important;
-}
-
-.total-skills {
-    font-weight: bold;
-}
-
-.flex label {
-    margin: 5px;
-}
-
-.skill-info h3 {
-    margin: 0px !important;
-}
-
-.IP-value {
-    font-weight: bold;
-    width: 30px !important;
-    text-align: center !important;
-    background: lightsteelblue !important;
 }
 
 .skill-info {
@@ -57,6 +39,21 @@
     border-radius: 10px;
     padding: 10px;
     color: white;
+}
+
+.skill-info h3 {
+    margin: 0px !important;
+}
+
+.flex label {
+    margin: 5px;
+}
+
+.IP-value {
+    font-weight: bold;
+    width: 30px !important;
+    text-align: center !important;
+    background: lightsteelblue !important;
 }
 
 .extra-skill-name {
@@ -69,4 +66,8 @@
     text-align: center !important;
     background: lightsteelblue !important;
     min-width: 30px !important;
+}
+
+.total-skills {
+    font-weight: bold;
 }
