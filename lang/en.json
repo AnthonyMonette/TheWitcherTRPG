@@ -16,6 +16,8 @@
     "WITCHER.Weapon.Elderfolk": "Eld.",
 
     "WITCHER.Armor.StoppingPower": "SP",
+    "WITCHER.Armor.MaxStoppingPower": "Max. SP",
+    
     "WITCHER.Armor.Enhancement": "AE",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Encumbrance",
@@ -192,5 +194,17 @@
     "WITCHER.LifeEvents": "Life Events",
     "WITCHER.Decade": "Decade",
     "WITCHER.Event": "Event",
-    "WITCHER.DeathSave": "Stun/Death Save"
+    "WITCHER.DeathSave": "Stun/Death Save",
+
+    "WITCHER.table.Quantity": "Qty",
+    "WITCHER.table.Range": "Range",
+    "WITCHER.table.Damage": "Damage",
+    "WITCHER.table.Reliability": "Rel.",
+    "WITCHER.table.Name": "Name",
+
+    "WITCHER.table.StoppingPower": "Stp",
+    "WITCHER.table.ResBludgeon": "B",
+    "WITCHER.table.ResSlashing": "S",
+    "WITCHER.table.ResPiercing": "P",
+    "WITCHER.table.Equipped": "Eq"
 }

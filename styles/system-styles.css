@@ -65,8 +65,7 @@
   width: 35px;
 }
 .armor-display label {
-  padding: 5px;
-  width: 100px;
+  width: 95px;
   display: flex;
   align-items: center;
   justify-content: center;

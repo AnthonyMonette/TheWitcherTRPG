@@ -862,6 +862,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (isExtraAttack) { attFormula += "-3"; }
                 if (isFastDraw) { attFormula += "-3"; }
                 if (isProne) { attFormula += "-2"; }
                 if (isPinned) { attFormula += "+4"; }

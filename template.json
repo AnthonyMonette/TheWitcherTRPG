@@ -662,6 +662,7 @@
     "armor": {
       "templates": ["base"],
       "stopping": 0,
+      "maxStopping": 0,
       "reliable": 0,
       "avail": "",
       "enhancements": 0,
