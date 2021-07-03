@@ -80,7 +80,7 @@
           },
           "woundTreshold": {
             "value": 0,
-            "lable": "WITCHER.Actor.CoreStat.woundTreshold"
+            "label": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },
         "derivedStats": {
