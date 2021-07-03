@@ -786,6 +786,7 @@ export default class WitcherActorSheet extends ActorSheet {
       const AttackModifierOptions = `
       <div class="flex">
         <div>
+          <label><input type="checkbox" name="outsideLOS"> Outside the enemy LOS</label> <br />
           <label><input type="checkbox" name="isFastDraw"> Fast Draw</label> <br />
           <label><input type="checkbox" name="isProne"> You are prone</label> <br />
           <label><input type="checkbox" name="isPinned"> Target pinned</label> <br />
@@ -793,6 +794,7 @@ export default class WitcherActorSheet extends ActorSheet {
           <label><input type="checkbox" name="isMoving"> Moving target REF > 10</label> <br />
         </div>
         <div>
+          <label><input type="checkbox" name="targetOutsideLOS"> Target is outside your LOS</label> <br />
           <label><input type="checkbox" name="isAmbush"> Ambush</label> <br />
           <label><input type="checkbox" name="isRicochet"> Ricochet</label> <br />
           <label><input type="checkbox" name="isBlinded"> You are blinded</label> <br />
@@ -850,6 +852,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let location = html.find("[name=location]")[0].value;
 
+              let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
+              let outsideLOS = html.find("[name=outsideLOS]").prop("checked");
               let isFastDraw = html.find("[name=isFastDraw]").prop("checked");
               let isProne = html.find("[name=isProne]").prop("checked");
               let isPinned = html.find("[name=isPinned]").prop("checked");
@@ -884,6 +888,8 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (targetOutsideLOS) {attFormula += "-3";}
+                if (outsideLOS) {attFormula += "+3";}
                 if (isExtraAttack) { attFormula += "-3"; }
                 if (isFastDraw) { attFormula += "-3"; }
                 if (isProne) { attFormula += "-2"; }
