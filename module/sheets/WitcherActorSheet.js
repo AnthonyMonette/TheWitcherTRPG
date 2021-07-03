@@ -231,6 +231,28 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
+        let previousActor = null
+        game.actors.forEach(actor => {
+          actor.items.forEach(item => {
+              if(dragData.item._id == item._id) {
+                previousActor = actor
+              }
+          });
+        });
+        
+        if (dragData.item.data.quantity.includes("d")){
+          let messageData = {
+            speaker: {alias: this.actor.name},
+            flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
+          }
+    
+          let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
+          dragData.item.data.quantity = Math.floor(roll.roll.total)
+        }
+
+        if (previousActor) {
+          previousActor.deleteOwnedItem(dragData.item._id)
+        }
         this.actor.createEmbeddedDocuments("Item", [dragData.item]);
       } else {
         super._onDrop(event, data);
