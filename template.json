@@ -342,14 +342,16 @@
     },
     "character": {
       "templates": ["baseActor"],
-      "critWounds": [{
-        "id": "first",
-        "gravity": "",
-        "name": "",
-        "effect": "",
-        "status": ""
-      }],
+      "critWounds": [],
       "config": {
+        "CritDescription": {},
+        "CritGravity": {},
+        "CritGravityDefaultEffect": {},
+        "CritMod": {},
+        "CritSimple": {},
+        "CritComplex": {},
+        "CritDifficult": {},
+        "CritDeadly": {},
         "homelands":{
           "aedirn": "Aedirn",
           "angren": "Angren",

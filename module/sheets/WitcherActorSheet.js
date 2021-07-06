@@ -1,8 +1,35 @@
-
 import { RollCustomMessage } from "../chat.js";
+import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold, genId } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
+    constructor(...args) {
+      super(...args);
+      this.actor.update({
+        "data.CritDescription": witcher.CritDescription,
+      });
+      this.actor.update({
+        "data.CritGravity": witcher.CritGravity,
+      });
+      this.actor.update({
+        "data.CritGravityDefaultEffect": witcher.CritGravityDefaultEffect,
+      });
+      this.actor.update({
+        "data.CritMod": witcher.CritMod,
+      });
+      this.actor.update({
+        "data.CritSimple": witcher.CritSimple,
+      });
+      this.actor.update({
+        "data.CritComplex": witcher.CritComplex,
+      });
+      this.actor.update({
+        "data.CritDifficult": witcher.CritDifficult,
+      });
+      this.actor.update({
+        "data.CritDeadly": witcher.CritDeadly,
+      });
+    }
     /** @override */
     static get defaultOptions() {
       return mergeObject(super.defaultOptions, {
@@ -145,6 +172,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      html.find(".delete-crit").on("click", this._onCritRemove.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
@@ -237,16 +265,30 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
     
+
     async _onCritAdd(event) {
-      event.preventDefault();
-      let newCritList  = []
-      if (this.actor.data.data.critWounds){
-        newCritList = this.actor.data.data.critWounds
-      }
-      newCritList.push({id: genId()})
-      this.actor.update({'data.critWounds': newCritList});
+        event.preventDefault();
+        const prevCritList = this.actor.data.data.critWounds;
+        const newCritList = Object.values(prevCritList).map((details) => details);
+        newCritList.push({
+            id: genId(),
+            effect: witcher.CritGravityDefaultEffect.Simple,
+            mod: "None",
+            description: witcher.CritDescription.SimpleCrackedJaw,
+            notes: "",
+        });
+        this.actor.update({ "data.critWounds": newCritList });
     }
-    
+
+  async _onCritRemove(event) {
+      event.preventDefault();
+      const prevCritList = this.actor.data.data.critWounds;
+      const newCritList = Object.values(prevCritList).map((details) => details);
+      const idxToRm = newCritList.findIndex((v) => v.id === event.target.dataset.id);
+      newCritList.splice(idxToRm, 1);
+      this.actor.update({ "data.critWounds": newCritList });
+  }
+
     
     async _onItemAdd(event) {
       let element = event.currentTarget
