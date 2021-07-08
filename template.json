@@ -345,6 +345,7 @@
       "critWounds": [],
       "config": {
         "CritDescription": {},
+        "CritModDescription": {},
         "CritGravity": {},
         "CritGravityDefaultEffect": {},
         "CritMod": {},

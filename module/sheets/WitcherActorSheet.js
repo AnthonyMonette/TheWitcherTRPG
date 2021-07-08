@@ -9,6 +9,9 @@ export default class WitcherActorSheet extends ActorSheet {
         "data.CritDescription": witcher.CritDescription,
       });
       this.actor.update({
+        "data.CritModDescription": witcher.CritModDescription,
+      });
+      this.actor.update({
         "data.CritGravity": witcher.CritGravity,
       });
       this.actor.update({
