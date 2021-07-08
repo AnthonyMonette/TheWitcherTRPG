@@ -53,7 +53,7 @@
                     </select>
                     <a class="delete-crit"><i class="fas fa-minus" data-id="{{critWound.id}}"></i></a>
                     <br />
-                    <textarea rows=2 name="data.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{lookup ../config.CritDescription critWound.effect}}</textarea>
+                    <textarea readonly rows=2 name="data.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{lookup ../config.CritDescription critWound.effect}}</textarea>
                     <br />
                     <textarea rows=1 name="data.critWounds.{{i}}.notes">{{critWound.notes}}</textarea>
                 </li>
