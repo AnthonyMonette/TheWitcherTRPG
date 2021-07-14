@@ -33,7 +33,7 @@ function updateDerived(actor){
 		'data.coreStats.woundTreshold.value': baseMax+1,
 				'data.attackStats.meleeBonus': meleeBonus,
 				'data.attackStats.punch.value': `1d6+${meleeBonus}`,
-				'data.attackStats.kick.value': `1d6+${meleeBonus}`,
+				'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
 		});
 }
 
