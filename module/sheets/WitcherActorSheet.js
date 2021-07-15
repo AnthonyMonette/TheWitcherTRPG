@@ -3,36 +3,6 @@ import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold, genId } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
-    constructor(...args) {
-      super(...args);
-      this.actor.update({
-        "data.CritDescription": witcher.CritDescription,
-      });
-      this.actor.update({
-        "data.CritModDescription": witcher.CritModDescription,
-      });
-      this.actor.update({
-        "data.CritGravity": witcher.CritGravity,
-      });
-      this.actor.update({
-        "data.CritGravityDefaultEffect": witcher.CritGravityDefaultEffect,
-      });
-      this.actor.update({
-        "data.CritMod": witcher.CritMod,
-      });
-      this.actor.update({
-        "data.CritSimple": witcher.CritSimple,
-      });
-      this.actor.update({
-        "data.CritComplex": witcher.CritComplex,
-      });
-      this.actor.update({
-        "data.CritDifficult": witcher.CritDifficult,
-      });
-      this.actor.update({
-        "data.CritDeadly": witcher.CritDeadly,
-      });
-    }
     /** @override */
     static get defaultOptions() {
       return mergeObject(super.defaultOptions, {
