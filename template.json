@@ -9,6 +9,7 @@
       "baseActor": {
         "woundTreshold": 0,
         "woundTresholdApplied": false,
+        "deathStateApplied": false,
         "stats": {
           "int": {
             "max": 0,

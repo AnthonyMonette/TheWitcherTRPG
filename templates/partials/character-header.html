@@ -70,13 +70,20 @@
             <div class=right-row>
                 <div class="right-element">
                     <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})</label>
+                    {{#if data.deathStateApplied}}
+                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-dead.png"/>
+                    {{/if}}
                     {{#if data.woundTresholdApplied}}
-                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
+                      {{#unless data.deathStateApplied}}
+                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
+                      {{/unless}}
                     {{/if}}
                     {{#unless data.woundTresholdApplied}}
-                    <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
+                      {{#unless data.deathStateApplied}}
+                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
+                      {{/unless}}
                     {{/unless}}
-                    <input class="right-value" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value hp-value" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
                 <div class="right-element">
                     <label>{{localize "WITCHER.Actor.Stamina"}} ({{data.derivedStats.sta.max}})</label>
