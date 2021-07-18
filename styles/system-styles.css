@@ -433,6 +433,15 @@ input.skill-value {
   padding: 10px;
   color: white;
 }
+
+.crit-wound-description {
+  margin-top: 10px;
+}
+
+.crit-wound-mod-description {
+  margin-top: 5px;
+}
+
 .weight-value {
   margin: auto;
   width: min-content;
