@@ -24,7 +24,7 @@
                     <td><a class="item-roll">{{weapon.name}}</a></td>
                     <td><input class="inline-edit range-info" data-field="data.range" type="text" value="{{weapon.data.range}}" placeholder="" /></td>
                     <td><input class="inline-edit damage-info" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
-                    <td><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/></td>
+                    <td><div class="flex"><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/>/{{weapon.data.maxReliability}}</div></td>
                     <td><input class="inline-edit" data-field="data.equiped" type="checkbox" {{checked data.equiped}}/></td>
                 </tr>
                 <tr class="item-info hidden" >

@@ -649,6 +649,7 @@
       "avail": "",
       "damage": "",
       "reliable": 0,
+      "maxReliability": 0,
       "hands": 0,
       "range": "",
       "equiped": false,
