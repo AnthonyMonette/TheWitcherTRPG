@@ -29,6 +29,7 @@ function onDamage(event) {
     let name = event.currentTarget.getAttribute("data-name")
     let damageFormula = event.currentTarget.getAttribute("data-dmg")
     let location = event.currentTarget.getAttribute("data-location")
+    let locationFormula = event.currentTarget.getAttribute("data-location-formula")
     let strike = event.currentTarget.getAttribute("data-strike")
     let effects = JSON.parse(event.currentTarget.getAttribute("data-effects"))
 
@@ -38,7 +39,7 @@ function onDamage(event) {
       damageFormula = `(${damageFormula})*2`;
       messageData.flavor += `<div>Strong Attack</div>`;
     }
-    messageData.flavor += `<div><b>Location:</b> ${location}</div>`;
+    messageData.flavor += `<div><b>Location:</b> ${location} = ${locationFormula} </div>`;
     if (effects) {
       messageData.flavor += `<b>Effects:</b>`;
       effects.forEach(element => {

@@ -37,6 +37,7 @@
             <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
             <th>{{localize "WITCHER.Item.Availability"}}</th>
             <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
+            <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
             <th>{{localize "WITCHER.Weapon.Hands"}}</th>
             <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
             <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
@@ -56,6 +57,7 @@
                 </select>
             </td>
             <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
+            <td><input type="text" name="data.maxReliability" value="{{data.maxReliability}}" data-dtype="Number"/></td>
             <td>
                 <select name="data.hands" id="hands-select">
                     {{#select data.hands}}
