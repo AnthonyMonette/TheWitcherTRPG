@@ -1,6 +1,6 @@
 import { RollCustomMessage } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold, genId } from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, applyDeathState, removeDeathState, removeWoundTreshold, genId } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -22,14 +22,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
-
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.coreStats.woundTreshold.value) {
-        applyWoundTreshold(this.actor)
-      }
-
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.coreStats.woundTreshold.value) {
-        removeWoundTreshold(this.actor)
-      }
 
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
       data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
@@ -121,6 +113,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let thisActor = this.actor;
       
+      html.find(".hp-value").change(this._onHPChanged.bind(this));
       html.find(".inline-edit").change(this._onInlineEdit.bind(this));
       html.find(".item-edit").on("click", this._onItemEdit.bind(this));
       html.find(".item-weapon-display").on("click", this._onItemDisplayInfo.bind(this));
@@ -732,6 +725,29 @@ export default class WitcherActorSheet extends ActorSheet {
         statName: statName,
         difficulty: statValue
       })
+    }
+
+    _onHPChanged(event) {
+      let HPvalue = event.currentTarget.value;
+      if (!this.actor.data.data.deathStateApplied && HPvalue <= 0) {
+        applyDeathState(this.actor)
+      }
+      else if (this.actor.data.data.deathStateApplied && HPvalue > 0) {
+        removeDeathState(this.actor)
+        if (HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
+          applyWoundTreshold(this.actor)
+        }
+      }
+      else if (!this.actor.data.data.woundTresholdApplied && HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
+          applyWoundTreshold(this.actor)
+      }
+      if (HPvalue >= this.actor.data.data.coreStats.woundTreshold.value){
+          removeWoundTreshold(this.actor)
+      }
+      this.actor.update({ 
+        'data.derivedStats.hp.value': HPvalue,
+        });
+      console.log(`death=${this.actor.data.data.deathStateApplied} - wound=${this.actor.data.data.woundTresholdApplied} `)
     }
 
     _onInlineEdit(event) {
