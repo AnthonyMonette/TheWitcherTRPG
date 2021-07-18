@@ -483,10 +483,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDeathSaveRoll(event) {
       let rollResult = new Roll("1d10").roll()
+      let stunBase = Math.floor((this.actor.data.data.stats.body.max + this.actor.data.data.stats.will.max)/2);
+      if(stunBase > 10){
+        stunBase = 10;
+      }
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
         type: "Stats Roll",
         statName: "WITCHER.DeathSave",
-        difficulty: this.actor.data.data.coreStats.stun.value
+        difficulty: stunBase
       })
     }
 
