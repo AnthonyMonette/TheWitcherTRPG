@@ -232,6 +232,28 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
+        let previousActor = null
+        game.actors.forEach(actor => {
+          actor.items.forEach(item => {
+              if(dragData.item._id == item._id) {
+                previousActor = actor
+              }
+          });
+        });
+        
+        if (dragData.item.data.quantity.includes("d")){
+          let messageData = {
+            speaker: {alias: this.actor.name},
+            flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
+          }
+    
+          let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
+          dragData.item.data.quantity = Math.floor(roll.roll.total)
+        }
+
+        if (previousActor) {
+          previousActor.deleteOwnedItem(dragData.item._id)
+        }
         this.actor.createEmbeddedDocuments("Item", [dragData.item]);
       } else {
         super._onDrop(event, data);
@@ -779,6 +801,7 @@ export default class WitcherActorSheet extends ActorSheet {
       const AttackModifierOptions = `
       <div class="flex">
         <div>
+          <label><input type="checkbox" name="outsideLOS"> Outside the enemy LOS</label> <br />
           <label><input type="checkbox" name="isFastDraw"> Fast Draw</label> <br />
           <label><input type="checkbox" name="isProne"> You are prone</label> <br />
           <label><input type="checkbox" name="isPinned"> Target pinned</label> <br />
@@ -786,6 +809,7 @@ export default class WitcherActorSheet extends ActorSheet {
           <label><input type="checkbox" name="isMoving"> Moving target REF > 10</label> <br />
         </div>
         <div>
+          <label><input type="checkbox" name="targetOutsideLOS"> Target is outside your LOS</label> <br />
           <label><input type="checkbox" name="isAmbush"> Ambush</label> <br />
           <label><input type="checkbox" name="isRicochet"> Ricochet</label> <br />
           <label><input type="checkbox" name="isBlinded"> You are blinded</label> <br />
@@ -843,6 +867,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let location = html.find("[name=location]")[0].value;
 
+              let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
+              let outsideLOS = html.find("[name=outsideLOS]").prop("checked");
               let isFastDraw = html.find("[name=isFastDraw]").prop("checked");
               let isProne = html.find("[name=isProne]").prop("checked");
               let isPinned = html.find("[name=isPinned]").prop("checked");
@@ -877,6 +903,9 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (targetOutsideLOS) {attFormula += "-3";}
+                if (outsideLOS) {attFormula += "+3";}
+                if (isExtraAttack) { attFormula += "-3"; }
                 if (isFastDraw) { attFormula += "-3"; }
                 if (isProne) { attFormula += "-2"; }
                 if (isPinned) { attFormula += "+4"; }
@@ -957,13 +986,14 @@ export default class WitcherActorSheet extends ActorSheet {
                   damageFormula += "+"+customDmg;
                 }                
                 let touchedLocation = ""
+                let LocationFormula = "(Damage-SP)"
                 switch(location){
                   case "randomHuman":
                     let randomHumanLocation = getRandomInt(10)
                     switch(randomHumanLocation){
                       case 1:
                         touchedLocation = "Head";
-                        damageFormula = `(${damageFormula})*3`;
+                        LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
@@ -972,21 +1002,21 @@ export default class WitcherActorSheet extends ActorSheet {
                         break;
                       case 5:
                         touchedLocation = "R Arm";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 6:
                         touchedLocation = "L Arm";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 7:
                       case 8:
                         touchedLocation = "R Leg";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 9:
                       case 10:
                         touchedLocation = "L Leg";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       default:
                         touchedLocation = "Torso";
@@ -997,7 +1027,7 @@ export default class WitcherActorSheet extends ActorSheet {
                     switch(randomMonsterLocation){
                       case 1:
                         touchedLocation = "Head";
-                        damageFormula = `(${damageFormula})*3`;
+                        LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
@@ -1008,16 +1038,16 @@ export default class WitcherActorSheet extends ActorSheet {
                       case 6:
                       case 7:
                         touchedLocation = "R Limb";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 8:
                       case 9:
                         touchedLocation = "L Limb";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 10:
                         touchedLocation = "Tail or Wing";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       default:
                         touchedLocation = "Torso";
@@ -1026,7 +1056,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   case "head":
                     touchedLocation = "Head";
                     attFormula = `${attFormula}-6`;
-                    damageFormula = `(${damageFormula})*3`;
+                    LocationFormula = `*3`;
                     break;
                   case "torso":
                     touchedLocation = "Torso";
@@ -1035,17 +1065,17 @@ export default class WitcherActorSheet extends ActorSheet {
                   case "arm":
                     touchedLocation = "Arm";
                     attFormula = `${attFormula}-3`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                   case "leg":
                     touchedLocation = "Leg";
                     attFormula = `${attFormula}-2`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                   case "tail":
                     touchedLocation = "Tail or Wing";
                     attFormula = `${attFormula}-2`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                 }
                 if (strike == "joint" || strike == "strong") {
@@ -1054,7 +1084,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
+                messageData.flavor += `<span> Location: ${touchedLocation} = ${LocationFormula} </span>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
                 new Roll(attFormula).roll().toMessage(messageData)
               }
             }

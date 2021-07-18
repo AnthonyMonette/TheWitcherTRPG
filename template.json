@@ -80,7 +80,7 @@
           },
           "woundTreshold": {
             "value": 0,
-            "lable": "WITCHER.Actor.CoreStat.woundTreshold"
+            "label": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },
         "derivedStats": {
@@ -592,6 +592,7 @@
       "resistances": "",
       "immunities": "",
       "susceptibilities": "",
+      "senses": "",
       "height": "",
       "weight": "",
       "environment": "",
@@ -665,6 +666,7 @@
     "armor": {
       "templates": ["base"],
       "stopping": 0,
+      "maxStopping": 0,
       "reliable": 0,
       "avail": "",
       "enhancements": 0,

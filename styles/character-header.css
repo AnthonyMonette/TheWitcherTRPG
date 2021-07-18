@@ -7,55 +7,96 @@
     flex: none;
 }
 
-.char-stat-title {
-    margin-left: 55px;
+.char-stat-title label {
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+.char-stat-button {
+    width: 65px;
+    height: 26px;
+    background-color: darkred;
+    border-radius: 12px;
+    color: white;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .char-stat-display {
     display: flex;
     width: 140px;
+    height: 27px;
     text-align: center;
 }
 
+.char-stat-button:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
 input.header-stat {
+    font-weight: bold;
     width: 35px;
-}
-
-.char-stat-display label {
-    padding: 5px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-input.total-stats-show {
-    width: 35px;
-}
-
-.total-stats.lable {
-    position: relative;
+    height: 26px;
+    margin-bottom: 1px;
+    margin-right: 1px;
 }
 
 .total-stats {
     text-align: right;
-    margin-right: 10px;
+    margin-right: 4px;
 }
 
-.right-sidebar {
-  margin-left: 10px;
+.total-stats label {
+    font-weight: bold;
 }
 
-.right-top {
-    display: flex;
-    max-width: 230px;
-    height: 60px;
+input.total-stats-show {
+    width: 35px;
+    font-weight: bold;
     text-align: center;
 }
 
-.right-bottom {
-    width: 230px;
-    height: 275px;
+.char-stat-label {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.header-center {
+    width: 380px;
+}
+
+.header-center label {
+    font-weight: bold;
+}
+
+.charname {
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.char-center-middle {
+    display: flex;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.actor-img {
+    height: 175px;
+    width: 175px;
+}
+
+.right-sidebar {
+  padding: 10px;
+  width: 250px;
+  background-color: lightslategray;
+  border-radius: 10px;
+  color: white;
 }
 
 .right-element {
@@ -77,13 +118,12 @@ input.total-stats-show {
     size: 75px;
 }
   
-  .right-row label {
+.right-row label {
     position: relative;
 }
 
 input.right-value {
     position: relative;
-    text-align: center;
     bottom: 55px;
     width: 40px;
     font-size: 25px;
@@ -107,20 +147,35 @@ input.right-value {
     color: #000;
 }
 
-button.button-roll {
-    width: 100px;
+.right-top {
+    display: flex;
+    width: 230px;
+    height: 60px;
+}
+
+.char-button-collum {
+    width: 115px;
+    height: 60px;
+    margin-left: 2.5px;
+}
+
+.button-roll {
+    display: flex;
+    width: 110px;
     height: 30px;
+    align-items: center;
+    justify-content: center;
     background-color: darkred;
     border-radius: 12px;
     color: white;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    margin-bottom: 1px;
 }
 
-.char-info {
-    padding: 10px;
-    width: 250px;
-    background-color: lightslategray;
-    margin: 10px;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
+.button-roll:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
 }
