@@ -902,6 +902,12 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (item.data.data.accuracy < 0){
+                  attFormula += `${item.data.data.accuracy}`
+                }
+                if (item.data.data.accuracy > 0){
+                  attFormula += `+${item.data.data.accuracy}`
+                }
                 if (targetOutsideLOS) {attFormula += "-3";}
                 if (outsideLOS) {attFormula += "+3";}
                 if (isExtraAttack) { attFormula += "-3"; }
