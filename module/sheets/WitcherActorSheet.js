@@ -240,8 +240,7 @@ export default class WitcherActorSheet extends ActorSheet {
               }
           });
         });
-        
-        if (dragData.item.data.quantity.includes("d")){
+        if (typeof(dragData.item.data.quantity) === 'string' && dragData.item.data.quantity.includes("d")){
           let messageData = {
             speaker: {alias: this.actor.name},
             flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
