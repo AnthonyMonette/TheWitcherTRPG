@@ -65,8 +65,7 @@
   width: 35px;
 }
 .armor-display label {
-  padding: 5px;
-  width: 100px;
+  width: 95px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,19 +73,6 @@
 
 .actions {
   margin-left: 10px;
-}
-
-.actor-img {
-  height: 175px;
-  width: 175px;
-}
-
-.skill-column {
-  margin: 5px;
-}
-
-.table-skills {
-  width: 175px;
 }
 
 .input-skill {
@@ -177,11 +163,7 @@ input.profession-skill-input {
 }
 
 input.item-quantity{
-  width: 30px;
-}
-
-.lifeEvents {
-  margin: 10px;
+  width: 45px;
 }
 
 .events {
@@ -210,6 +192,7 @@ input.item-quantity{
 }
 .item-delete {
   margin: 5px;
+  width: 15px;
 }
 .item-edit {
   margin: 5px;
@@ -321,14 +304,6 @@ input.sta-input {
   color: white;
 }
 
-.skill-info {
-  background-color: lightslategray;
-  margin: auto;
-  border-radius: 10px;
-  padding: 10px;
-  color: white;
-}
-
 input.focus-value {
   background-color: lightsteelblue;
   width: 25px;
@@ -367,9 +342,6 @@ input.focus {
 
 .dice-display {
   text-align: center;
-}
-.item-delete {
-  width: 15px;
 }
 
 input.small-medium {
@@ -437,11 +409,6 @@ input.skill-value {
     align-items: center;
 }
 
-.bg-note {
-  width: 32%;
-  float: left;
-  margin-right: 5px;
-}
 .add-item {
   margin-right: 5px;
 }
@@ -466,6 +433,15 @@ input.skill-value {
   padding: 10px;
   color: white;
 }
+
+.crit-wound-description {
+  margin-top: 10px;
+}
+
+.crit-wound-mod-description {
+  margin-top: 5px;
+}
+
 .weight-value {
   margin: auto;
   width: min-content;

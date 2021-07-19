@@ -6,11 +6,12 @@
             <tr>
                 <td></td> 
                 <td></td> 
-                <td><b>Qty</b></td>
-                <td><b>Name</b></td>
-                <td><b>Range</b></td>
-                <td><b>Damage</b></td>
-                <td><b>Rel.</b></td>
+                <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Range"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Damage"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Reliability"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Equipped"}}</b></td>
             </tr>
             {{#each weapons as |weapon id|}}
             <tbody class="item" data-item-id="{{weapon._id}}">
@@ -23,7 +24,8 @@
                     <td><a class="item-roll">{{weapon.name}}</a></td>
                     <td><input class="inline-edit range-info" data-field="data.range" type="text" value="{{weapon.data.range}}" placeholder="" /></td>
                     <td><input class="inline-edit damage-info" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
-                    <td><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/></td>
+                    <td><div class="flex"><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/>/{{weapon.data.maxReliability}}</div></td>
+                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" {{checked data.equiped}}/></td>
                 </tr>
                 <tr class="item-info hidden" >
                     <td colspan="7">
@@ -68,12 +70,13 @@
             <tr>
                 <td></td> 
                 <td></td> 
-                <td><b>Qty</b></td>
-                <td><b>Name</b></td>
-                <td><b>Stp</b></td>
-                <td><b>B</b></td>
-                <td><b>S</b></td>
-                <td><b>P</b></td>
+                <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.table.Equipped"}}</b></td>
+                <td><b>{{localize "WITCHER.table.StoppingPower"}}</b></td>
+                <td><b>{{localize "WITCHER.table.ResBludgeon"}}</b></td>
+                <td><b>{{localize "WITCHER.table.ResSlashing"}}</b></td>
+                <td><b>{{localize "WITCHER.table.ResPiercing"}}</b></td>
                 <td></td> 
             </tr>
             {{#each armors as |armor id|}}
@@ -85,7 +88,12 @@
                     <td><img src="{{armor.img}}" class="item-img dragable" draggable="true" data-id="{{armor._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
-                    <td><input class="inlinefas--edit stopping-info" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/></td>
+                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" {{checked data.equiped}}/></td>
+                    <td><div class="flex">
+                            <input class="inline-edit small" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/> /{{armor.data.maxStopping}}
+                        </div>
+                    </td>
+                        
                     <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled /></td>
                     <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} disabled /></td>
                     <td><input type="checkbox" name="data.percing" {{checked data.percing}} disabled /></td>
@@ -107,16 +115,6 @@
                                 </tr>
                             {{/if}}
                             {{#if (eq type "enhancement")}}
-                                <tr>
-                                    <td>
-                                        <div class="flex"> 
-                                            <label class="label-info"><b>B</b></label><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled />
-                                            <label class="label-info"><b>S</b></label><input type="checkbox" name="data.slashing" {{checked data.slashing}} disabled />
-                                            <label class="label-info"><b>P</b></label><input type="checkbox" name="data.percing" {{checked data.percing}} disabled />
-                                        </div>
-                                    </td>
-                                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></i></a></td>
-                                </tr>
                                 <tr>
                                     <td><div><b>Effect :</b></label>{{weapon.data.effect}}</div></td>
                                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>

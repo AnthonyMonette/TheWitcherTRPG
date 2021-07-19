@@ -9,6 +9,7 @@
       "baseActor": {
         "woundTreshold": 0,
         "woundTresholdApplied": false,
+        "deathStateApplied": false,
         "stats": {
           "int": {
             "max": 0,
@@ -80,7 +81,7 @@
           },
           "woundTreshold": {
             "value": 0,
-            "lable": "WITCHER.Actor.CoreStat.woundTreshold"
+            "label": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },
         "derivedStats": {
@@ -342,14 +343,17 @@
     },
     "character": {
       "templates": ["baseActor"],
-      "critWounds": [{
-        "id": "first",
-        "gravity": "",
-        "name": "",
-        "effect": "",
-        "status": ""
-      }],
+      "critWounds": [],
       "config": {
+        "CritDescription": {},
+        "CritModDescription": {},
+        "CritGravity": {},
+        "CritGravityDefaultEffect": {},
+        "CritMod": {},
+        "CritSimple": {},
+        "CritComplex": {},
+        "CritDifficult": {},
+        "CritDeadly": {},
         "homelands":{
           "aedirn": "Aedirn",
           "angren": "Angren",
@@ -589,6 +593,7 @@
       "resistances": "",
       "immunities": "",
       "susceptibilities": "",
+      "senses": "",
       "height": "",
       "weight": "",
       "environment": "",
@@ -645,6 +650,7 @@
       "avail": "",
       "damage": "",
       "reliable": 0,
+      "maxReliability": 0,
       "hands": 0,
       "range": "",
       "equiped": false,
@@ -662,6 +668,7 @@
     "armor": {
       "templates": ["base"],
       "stopping": 0,
+      "maxStopping": 0,
       "reliable": 0,
       "avail": "",
       "enhancements": 0,

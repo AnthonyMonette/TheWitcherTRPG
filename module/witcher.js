@@ -37,23 +37,61 @@ function updateDerived(actor){
 	});
 }
 
+function applyDeathState(actor){
+    let newInt = Math.floor(actor.data.data.stats.int.max/3);
+    let newRef= Math.floor(actor.data.data.stats.ref.max/3);
+    let newDex = Math.floor(actor.data.data.stats.dex.max/3);
+    let newBody = Math.floor(actor.data.data.stats.body.max/3);
+    let newSpd = Math.floor(actor.data.data.stats.spd.max/3);
+    let newEmp= Math.floor(actor.data.data.stats.emp.max/3);
+    let newCra = Math.floor(actor.data.data.stats.cra.max/3);
+    let newWill = Math.floor(actor.data.data.stats.will.max/3);
+    let newLuck = Math.floor(actor.data.data.stats.luck.max/3);
+
+    actor.update({ 
+        'data.deathStateApplied': true,
+        'data.stats.int.current': newInt,
+        'data.stats.ref.current': newRef,
+        'data.stats.dex.current': newDex,
+        'data.stats.body.current': newBody,
+        'data.stats.spd.current': newSpd,
+        'data.stats.emp.current': newEmp,
+        'data.stats.cra.current': newCra,
+        'data.stats.will.current': newWill,
+        'data.stats.luck.current': newLuck,
+     });
+}
+
+function removeDeathState(actor){
+    actor.update({ 
+        'data.deathStateApplied': false,
+        'data.stats.int.current': actor.data.data.stats.int.max,
+        'data.stats.ref.current': actor.data.data.stats.ref.max,
+        'data.stats.dex.current': actor.data.data.stats.dex.max,
+        'data.stats.body.current': actor.data.data.stats.body.max,
+        'data.stats.spd.current': actor.data.data.stats.spd.max,
+        'data.stats.emp.current': actor.data.data.stats.emp.max,
+        'data.stats.cra.current': actor.data.data.stats.cra.max,
+        'data.stats.will.current': actor.data.data.stats.will.max,
+        'data.stats.luck.current': actor.data.data.stats.luck.max,
+     });
+}
+
 function removeWoundTreshold(actor){
-	console.log("removing wound treshold")
-	actor.update({ 
-		'data.woundTresholdApplied': false,
-		'data.stats.ref.current': actor.data.data.stats.ref.max,
-		'data.stats.dex.current': actor.data.data.stats.dex.max,
-		'data.stats.int.current': actor.data.data.stats.int.max,
-		'data.stats.will.current': actor.data.data.stats.will.max,
-	 });
+    actor.update({ 
+        'data.woundTresholdApplied': false,
+        'data.stats.ref.current': actor.data.data.stats.ref.max,
+        'data.stats.dex.current': actor.data.data.stats.dex.max,
+        'data.stats.int.current': actor.data.data.stats.int.max,
+        'data.stats.will.current': actor.data.data.stats.will.max,
+     });
 }
 
 function applyWoundTreshold(actor){
-	console.log("applying wound treshold")
-	let newRef = Math.floor(actor.data.data.stats.ref.max/2);
-	let newDex= Math.floor(actor.data.data.stats.dex.max/2);
-	let newInt = Math.floor(actor.data.data.stats.int.max/2);
-	let newWill = Math.floor(actor.data.data.stats.will.max/2);
+    let newRef = Math.floor(actor.data.data.stats.ref.max/2);
+    let newDex= Math.floor(actor.data.data.stats.dex.max/2);
+    let newInt = Math.floor(actor.data.data.stats.int.max/2);
+    let newWill = Math.floor(actor.data.data.stats.will.max/2);
 
 	actor.update({ 
 			'data.woundTresholdApplied': true,
@@ -65,12 +103,11 @@ function applyWoundTreshold(actor){
 }
 
 function rollSkillCheck(thisActor, statNum, skillNum){
-	console.log("coucou")
-	let parentStat = "";
-	let skillName = "";
-	let stat = 0;
-	let skill = 0;
-	let array;
+    let parentStat = "";
+    let skillName = "";
+    let stat = 0;
+    let skill = 0;
+    let array;
 
 	switch(statNum){
 		case 0:
@@ -279,4 +316,4 @@ function genId() {
 		return '_' + Math.random().toString(36).substr(2, 9);
 	};
 
-export { updateDerived, rollSkillCheck, genId, applyWoundTreshold, removeWoundTreshold };
+export { updateDerived, rollSkillCheck, genId, applyWoundTreshold, removeWoundTreshold, applyDeathState, removeDeathState };

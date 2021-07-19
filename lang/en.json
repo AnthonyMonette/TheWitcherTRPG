@@ -9,6 +9,7 @@
     "WITCHER.Weapon.WeaponAccuracy": "WA",
     "WITCHER.Weapon.Damage": "DMG",
     "WITCHER.Weapon.Reliability": "Rel.",
+    "WITCHER.Weapon.MaxReliability": "Max. Rel.",
     "WITCHER.Weapon.Hands": "Hands",
     "WITCHER.Weapon.Concealement": "Conc.",
     "WITCHER.Weapon.Enhancement": "EN",
@@ -16,6 +17,8 @@
     "WITCHER.Weapon.Elderfolk": "Eld.",
 
     "WITCHER.Armor.StoppingPower": "SP",
+    "WITCHER.Armor.MaxStoppingPower": "Max. SP",
+    
     "WITCHER.Armor.Enhancement": "AE",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Encumbrance",
@@ -68,6 +71,8 @@
     "WITCHER.StSpd": "Speed",
     "WITCHER.StVigor": "Vigor",
 
+    "WITCHER.Actor.TotalStats": "Total Stats",
+
     "WITCHER.Actor.Stat.Int": "INT",
     "WITCHER.Actor.Stat.Ref": "REF",
     "WITCHER.Actor.Stat.Dex": "DEX",
@@ -77,6 +82,9 @@
     "WITCHER.Actor.Stat.Cra": "CRA",
     "WITCHER.Actor.Stat.Will": "WILL",
     "WITCHER.Actor.Stat.Luck": "LUCK",
+
+    "WITCHER.Actor.StatTitle.LableLeft": "Statistics",
+    "WITCHER.Actor.StatTitle.LableRight": "Mod / Max",
 
     "WITCHER.Actor.CoreStat.Stun": "STUN",
     "WITCHER.Actor.CoreStat.Run": "RUN",
@@ -92,10 +100,22 @@
     "WITCHER.Actor.DerStat.Focus": "Focus",
     "WITCHER.Actor.DerStat.Punch": "Punch",
     "WITCHER.Actor.DerStat.Kick": "Kick",
-
+    
+    "WITCHER.Actor.Initiative": "Initiative",
+    "WITCHER.Actor.SavingThrow": "Saving Throw",
+    "WITCHER.Actor.Crit/Fumble": "Crit/Fumble",
+    "WITCHER.Actor.Defense": "Defense",
     "WITCHER.Actor.Adrenaline": "Adrenaline",
     "WITCHER.Actor.Stamina": "Stamina",
     "WITCHER.Actor.Hp": "HP",
+
+    "WITCHER.Actor.Skill.Intelligence": "Intelligence",
+    "WITCHER.Actor.Skill.Reflex": "Reflex",
+    "WITCHER.Actor.Skill.Willpower": "Willpower",
+    "WITCHER.Actor.Skill.Dexterity": "Dexterity",
+    "WITCHER.Actor.Skill.Crafting": "Crafting",
+    "WITCHER.Actor.Skill.Body": "Body",
+    "WITCHER.Actor.Skill.Empathy": "Empathy",
 
     "WITCHER.SkIntAwareness": "Awareness",
     "WITCHER.SkIntBusiness": "Business",
@@ -156,6 +176,10 @@
     "WITCHER.SkWillResistCoer": "Resist Coercion",
     "WITCHER.SkWillRitCraft": "Ritual Crafting (2)",
 
+    "WITCHER.Actor.ImprovementPoints": "Improvement Points",
+    "WITCHER.Actor.CurrentIP":"Current IP:",
+    "WITCHER.Actor.SkillName": "Skill name...",
+    "WITCHER.ACtor.TotalSkill": "Total Skill",
 
     "WITCHER.SocialStanding": "Social Standing",
     "WITCHER.Profession": "Profession",
@@ -171,5 +195,17 @@
     "WITCHER.LifeEvents": "Life Events",
     "WITCHER.Decade": "Decade",
     "WITCHER.Event": "Event",
-    "WITCHER.DeathSave": "Stun/Death Save"
+    "WITCHER.DeathSave": "Stun/Death Save",
+
+    "WITCHER.table.Quantity": "Qty",
+    "WITCHER.table.Range": "Range",
+    "WITCHER.table.Damage": "Damage",
+    "WITCHER.table.Reliability": "Rel.",
+    "WITCHER.table.Name": "Name",
+
+    "WITCHER.table.StoppingPower": "Stp",
+    "WITCHER.table.ResBludgeon": "B",
+    "WITCHER.table.ResSlashing": "S",
+    "WITCHER.table.ResPiercing": "P",
+    "WITCHER.table.Equipped": "Eq"
 }

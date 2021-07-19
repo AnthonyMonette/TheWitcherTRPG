@@ -1,6 +1,6 @@
-
 import { RollCustomMessage } from "../chat.js";
-import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, removeWoundTreshold, genId } from "../witcher.js";
+import { witcher } from "../config.js";
+import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, applyDeathState, removeDeathState, removeWoundTreshold, genId } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -22,14 +22,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
-
-      if (!this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value < this.actor.data.data.coreStats.woundTreshold.value) {
-        applyWoundTreshold(this.actor)
-      }
-
-      if (this.actor.data.data.woundTresholdApplied && this.actor.data.data.derivedStats.hp.value >= this.actor.data.data.coreStats.woundTreshold.value) {
-        removeWoundTreshold(this.actor)
-      }
 
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
       data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
@@ -121,6 +113,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let thisActor = this.actor;
       
+      html.find(".hp-value").change(this._onHPChanged.bind(this));
       html.find(".inline-edit").change(this._onInlineEdit.bind(this));
       html.find(".item-edit").on("click", this._onItemEdit.bind(this));
       html.find(".item-weapon-display").on("click", this._onItemDisplayInfo.bind(this));
@@ -145,6 +138,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".alchemy-potion").on("click", this._alchemyCraft.bind(this));
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
+      html.find(".delete-crit").on("click", this._onCritRemove.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
@@ -231,22 +225,57 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
+        let previousActor = null
+        game.actors.forEach(actor => {
+          actor.items.forEach(item => {
+              if(dragData.item._id == item._id) {
+                previousActor = actor
+              }
+          });
+        });
+        if (typeof(dragData.item.data.quantity) === 'string' && dragData.item.data.quantity.includes("d")){
+          let messageData = {
+            speaker: {alias: this.actor.name},
+            flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
+          }
+    
+          let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
+          dragData.item.data.quantity = Math.floor(roll.roll.total)
+        }
+
+        if (previousActor) {
+          previousActor.deleteOwnedItem(dragData.item._id)
+        }
         this.actor.createEmbeddedDocuments("Item", [dragData.item]);
       } else {
         super._onDrop(event, data);
       }
     }
     
+
     async _onCritAdd(event) {
-      event.preventDefault();
-      let newCritList  = []
-      if (this.actor.data.data.critWounds){
-        newCritList = this.actor.data.data.critWounds
-      }
-      newCritList.push({id: genId()})
-      this.actor.update({'data.critWounds': newCritList});
+        event.preventDefault();
+        const prevCritList = this.actor.data.data.critWounds;
+        const newCritList = Object.values(prevCritList).map((details) => details);
+        newCritList.push({
+            id: genId(),
+            effect: witcher.CritGravityDefaultEffect.Simple,
+            mod: "None",
+            description: witcher.CritDescription.SimpleCrackedJaw,
+            notes: "",
+        });
+        this.actor.update({ "data.critWounds": newCritList });
     }
-    
+
+  async _onCritRemove(event) {
+      event.preventDefault();
+      const prevCritList = this.actor.data.data.critWounds;
+      const newCritList = Object.values(prevCritList).map((details) => details);
+      const idxToRm = newCritList.findIndex((v) => v.id === event.target.dataset.id);
+      newCritList.splice(idxToRm, 1);
+      this.actor.update({ "data.critWounds": newCritList });
+  }
+
     
     async _onItemAdd(event) {
       let element = event.currentTarget
@@ -447,10 +476,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDeathSaveRoll(event) {
       let rollResult = new Roll("1d10").roll()
+      let stunBase = Math.floor((this.actor.data.data.stats.body.max + this.actor.data.data.stats.will.max)/2);
+      if(stunBase > 10){
+        stunBase = 10;
+      }
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
         type: "Stats Roll",
         statName: "WITCHER.DeathSave",
-        difficulty: this.actor.data.data.coreStats.stun.value
+        difficulty: stunBase
       })
     }
 
@@ -694,6 +727,29 @@ export default class WitcherActorSheet extends ActorSheet {
       })
     }
 
+    _onHPChanged(event) {
+      let HPvalue = event.currentTarget.value;
+      if (!this.actor.data.data.deathStateApplied && HPvalue <= 0) {
+        applyDeathState(this.actor)
+      }
+      else if (this.actor.data.data.deathStateApplied && HPvalue > 0) {
+        removeDeathState(this.actor)
+        if (HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
+          applyWoundTreshold(this.actor)
+        }
+      }
+      else if (!this.actor.data.data.woundTresholdApplied && HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
+          applyWoundTreshold(this.actor)
+      }
+      if (HPvalue >= this.actor.data.data.coreStats.woundTreshold.value){
+          removeWoundTreshold(this.actor)
+      }
+      this.actor.update({ 
+        'data.derivedStats.hp.value': HPvalue,
+        });
+      console.log(`death=${this.actor.data.data.deathStateApplied} - wound=${this.actor.data.data.woundTresholdApplied} `)
+    }
+
     _onInlineEdit(event) {
       event.preventDefault();
       let element = event.currentTarget;
@@ -764,6 +820,7 @@ export default class WitcherActorSheet extends ActorSheet {
       const AttackModifierOptions = `
       <div class="flex">
         <div>
+          <label><input type="checkbox" name="outsideLOS"> Outside the enemy LOS</label> <br />
           <label><input type="checkbox" name="isFastDraw"> Fast Draw</label> <br />
           <label><input type="checkbox" name="isProne"> You are prone</label> <br />
           <label><input type="checkbox" name="isPinned"> Target pinned</label> <br />
@@ -771,6 +828,7 @@ export default class WitcherActorSheet extends ActorSheet {
           <label><input type="checkbox" name="isMoving"> Moving target REF > 10</label> <br />
         </div>
         <div>
+          <label><input type="checkbox" name="targetOutsideLOS"> Target is outside your LOS</label> <br />
           <label><input type="checkbox" name="isAmbush"> Ambush</label> <br />
           <label><input type="checkbox" name="isRicochet"> Ricochet</label> <br />
           <label><input type="checkbox" name="isBlinded"> You are blinded</label> <br />
@@ -828,6 +886,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let location = html.find("[name=location]")[0].value;
 
+              let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
+              let outsideLOS = html.find("[name=outsideLOS]").prop("checked");
               let isFastDraw = html.find("[name=isFastDraw]").prop("checked");
               let isProne = html.find("[name=isProne]").prop("checked");
               let isPinned = html.find("[name=isPinned]").prop("checked");
@@ -862,6 +922,15 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
+                if (item.data.data.accuracy < 0){
+                  attFormula += `${item.data.data.accuracy}`
+                }
+                if (item.data.data.accuracy > 0){
+                  attFormula += `+${item.data.data.accuracy}`
+                }
+                if (targetOutsideLOS) {attFormula += "-3";}
+                if (outsideLOS) {attFormula += "+3";}
+                if (isExtraAttack) { attFormula += "-3"; }
                 if (isFastDraw) { attFormula += "-3"; }
                 if (isProne) { attFormula += "-2"; }
                 if (isPinned) { attFormula += "+4"; }
@@ -942,13 +1011,14 @@ export default class WitcherActorSheet extends ActorSheet {
                   damageFormula += "+"+customDmg;
                 }                
                 let touchedLocation = ""
+                let LocationFormula = "(Damage-SP)"
                 switch(location){
                   case "randomHuman":
                     let randomHumanLocation = getRandomInt(10)
                     switch(randomHumanLocation){
                       case 1:
                         touchedLocation = "Head";
-                        damageFormula = `(${damageFormula})*3`;
+                        LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
@@ -957,21 +1027,21 @@ export default class WitcherActorSheet extends ActorSheet {
                         break;
                       case 5:
                         touchedLocation = "R Arm";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 6:
                         touchedLocation = "L Arm";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 7:
                       case 8:
                         touchedLocation = "R Leg";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 9:
                       case 10:
                         touchedLocation = "L Leg";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       default:
                         touchedLocation = "Torso";
@@ -982,7 +1052,7 @@ export default class WitcherActorSheet extends ActorSheet {
                     switch(randomMonsterLocation){
                       case 1:
                         touchedLocation = "Head";
-                        damageFormula = `(${damageFormula})*3`;
+                        LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
@@ -993,16 +1063,16 @@ export default class WitcherActorSheet extends ActorSheet {
                       case 6:
                       case 7:
                         touchedLocation = "R Limb";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 8:
                       case 9:
                         touchedLocation = "L Limb";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       case 10:
                         touchedLocation = "Tail or Wing";
-                        damageFormula = `(${damageFormula})*0.5`;
+                        LocationFormula = `*0.5`;
                         break;
                       default:
                         touchedLocation = "Torso";
@@ -1011,7 +1081,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   case "head":
                     touchedLocation = "Head";
                     attFormula = `${attFormula}-6`;
-                    damageFormula = `(${damageFormula})*3`;
+                    LocationFormula = `*3`;
                     break;
                   case "torso":
                     touchedLocation = "Torso";
@@ -1020,17 +1090,17 @@ export default class WitcherActorSheet extends ActorSheet {
                   case "arm":
                     touchedLocation = "Arm";
                     attFormula = `${attFormula}-3`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                   case "leg":
                     touchedLocation = "Leg";
                     attFormula = `${attFormula}-2`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                   case "tail":
                     touchedLocation = "Tail or Wing";
                     attFormula = `${attFormula}-2`;
-                    damageFormula = `(${damageFormula})*0.5`;
+                    LocationFormula = `*0.5`;
                     break;
                 }
                 if (strike == "joint" || strike == "strong") {
@@ -1039,7 +1109,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
+                messageData.flavor += `<span> Location: ${touchedLocation} = ${LocationFormula} </span>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
                 new Roll(attFormula).roll().toMessage(messageData)
               }
             }
