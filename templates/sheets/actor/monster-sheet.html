@@ -1,68 +1,62 @@
-<div class="flex">
+<div class="monster-flex">
     <div>
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-
-        <div class="flex">
+        <div class="monster-flex">
             <div class="monster-left-sidebar">
                 <div class="monster-stat-title">
-                    <label>Current/Max</label>
+                    <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
+                    <label>{{localize "WITCHER.Actor.StatTitle.LableRight"}}</label>
                 </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display monster-stat-display" data-stat="{{stat}}">
-                        <label class="stat-label"><a class="stat-roll">{{localize details.label}}</a></label> 
-                        <input class="stat" name="data.stats.{{stat}}.current" type="text" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-                        <input class="stat" name="data.stats.{{stat}}.max" type="text" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                        <a class="monster-stat-button stat-roll">{{localize details.label}}</a></label> 
+                        <input class="stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+                        <input class="stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     {{/unless}}
                 {{/each}}
                 <hr />
-                
                 {{#each data.coreStats as |details coreStat|}}
-                <div class="stat-display monster-stat-display">
-                    <label>{{localize details.label}}</label> 
-                    <input class="header-stat" name="data.coreStats.{{coreStat}}.value" type="text" value="{{details.value}}" placeholder="0" data-dtype="Number"/>
+                <div class="monster-stat-display">
+                    <label>{{localize details.label}}</label>
+                    <input name="data.coreStats.{{coreStat}}.value" type="number" value="{{details.value}}" placeholder="0" data-dtype="Number" readonly/>
                 </div>
                 {{/each}}
-                <div class="stat-display monster-stat-display">
-                    <label>VIGOR</label> 
-                    <input class="header-stat" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}"/>
+                <div class="monster-stat-display">
+                    <label>{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
+                    <input name="data.derivedStats.vigor.value" type="number" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 <hr />
-                
-                <div class="">
-                    <div>
-                        <div class="flex"> 
-                            <label>Armor Head</label> 
-                            <input class="header-stat" name="data.armorHead" type="text" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
-                        </div>
-                        <div class="flex"> 
-                            <label>Armor Upper</label> 
-                            <input class="header-stat" name="data.armorUpper" type="text" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
-                        </div>
-                        <div class="flex"> 
-                            <label>Armor Lower</label> 
-                            <input class="header-stat" name="data.armorLower" type="text" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
-                        </div>
+                <div>
+                    <div class="monster-armor"> 
+                        <label>Armor Head</label> 
+                        <input name="data.armorHead" type="number" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
                     </div>
-                    
+                    <div class="monster-armor"> 
+                        <label>Armor Upper</label> 
+                        <input name="data.armorUpper" type="number" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
+                    </div>
+                    <div class="monster-armor"> 
+                        <label>Armor Lower</label> 
+                        <input name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
+                    </div>
                 </div>
-                <div class="stat-display monster-stat-display">
-                    <label>HP</label> 
-                    <input class="header-stat" name="data.derivedStats.hp.value" type="text" value="{{data.derivedStats.hp.value}}"/>
+                <div class="monster-HPSTA">
+                    <label>{{localize "WITCHER.Actor.Hp"}}</label> 
+                    <input name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
                     /
-                    <input class="header-stat" name="data.derivedStats.hp.max" type="text" value="{{data.derivedStats.hp.max}}"/>
+                    <input name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
                 </div>
-                <div class="stat-display monster-stat-display">
-                    <label>STA:</label> 
-                    <input class="header-stat" name="data.derivedStats.sta.value" type="text" value="{{data.derivedStats.sta.value}}"/>
+                <div class="monster-HPSTA">
+                    <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label> 
+                    <input name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
                     /
-                    <input class="header-stat" name="data.derivedStats.sta.max" type="text" value="{{data.derivedStats.sta.max}}"/>
-
+                    <input name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
                 </div>
             </div>
-            <div class="header-center">
-                <div class="flex">
+            <div class="monster-header-center">
+                <div class="monster-flex">
                     <select name="data.threat">
                         {{#select data.threat}}
                             <option value="easy">Easy</option>
@@ -118,7 +112,7 @@
                     <img src="systems/TheWitcherTRPG/assets/images/monsters/Vampires.png" class="cat-img" /> 
                     {{/if}}
                 </div>
-                <div class="flex">
+                <div class="monster-flex">
                     <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
                 </div>
                 <table class="monster-info">
@@ -139,9 +133,9 @@
         </div>
     </div>
     <div class="monster-right-sidebar">
-        <div class="flex">
+        <div class="monster-flex">
             <div>
-                <div class="flex">
+                <div class="monster-flex">
                     <label>Category</label> 
                     <select name="data.category">
                         {{#select data.category}}
@@ -151,7 +145,7 @@
                         {{/select}}
                     </select>
                 </div>
-                <div class="flex">
+                <div class="monster-flex">
                     <label>Custom stats:</label> 
                     <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
                 </div>
@@ -204,9 +198,9 @@
                                 <a class="item-edit"><i class="fas fa-edit"></i></a>
                             </td>
                             <td colspan="3">
-                                <div class="flex"><b>Effect :</b></label>
+                                <div class="monster-flex"><b>Effect :</b></label>
                                     {{#each weapon.data.effects as |effect id|}}
-                                        <div class="flex">
+                                        <div class="monster-flex">
                                         {{effect.name}}
                                         {{#if effect.percentage}}
                                             ({{effect.percentage}})%   
@@ -246,7 +240,7 @@
                 
                 {{#each notes as |note id|}}
                 <div class="item" data-item-id="{{note._id}}">
-                    <div class="flex">
+                    <div class="monster-flex">
                         <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
                         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </div>
