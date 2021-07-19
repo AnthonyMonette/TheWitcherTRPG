@@ -1,5 +1,5 @@
 export function getRandomInt(max) {
-		return Math.floor(Math.random() * (max + 1)) + 1;
+	return Math.floor(Math.random() * (max + 1)) + 1;
 }
 
 
@@ -11,157 +11,157 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-		if (actor.data.data.customStat === true){
-				return null;
-		}
-		const thisActor = actor;
-		const stats = thisActor.data.data.stats;
-		const base = Math.floor((stats.body.current + stats.will.current)/2);
-		const baseMax = Math.floor((stats.body.max + stats.will.max)/2);
-		const meleeBonus = Math.ceil((stats.body.current-6)/2)*2;
+	if (actor.data.data.customStat === true){
+		return null;
+	}
+	const thisActor = actor;
+	const stats = thisActor.data.data.stats;
+	const base = Math.floor((stats.body.current + stats.will.current)/2);
+	const baseMax = Math.floor((stats.body.max + stats.will.max)/2);
+	const meleeBonus = Math.ceil((stats.body.current-6)/2)*2;
 
-		thisActor.update({ 
-				'data.derivedStats.hp.max': base * 5,
-				'data.derivedStats.sta.max': base * 5,
-				'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
-				'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
-				'data.coreStats.rec.value': base,
-				'data.coreStats.stun.value': Math.clamped(base, 1, 10),
-				'data.coreStats.enc.value': stats.body.current*10,
-				'data.coreStats.run.value': stats.spd.current*3,
-				'data.coreStats.leap.value': Math.floor(stats.spd.current*3/5),
+	thisActor.update({ 
+		'data.derivedStats.hp.max': base * 5,
+		'data.derivedStats.sta.max': base * 5,
+		'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
+		'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
+		'data.coreStats.rec.value': base,
+		'data.coreStats.stun.value': Math.clamped(base, 1, 10),
+		'data.coreStats.enc.value': stats.body.current*10,
+		'data.coreStats.run.value': stats.spd.current*3,
+		'data.coreStats.leap.value': Math.floor(stats.spd.current*3/5),
 		'data.coreStats.woundTreshold.value': baseMax+1,
-				'data.attackStats.meleeBonus': meleeBonus,
-				'data.attackStats.punch.value': `1d6+${meleeBonus}`,
-				'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
-		});
+		'data.attackStats.meleeBonus': meleeBonus,
+		'data.attackStats.punch.value': `1d6+${meleeBonus}`,
+		'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
+	});
 }
 
 function removeWoundTreshold(actor){
-		console.log("removing wound treshold")
-		actor.update({ 
-				'data.woundTresholdApplied': false,
-				'data.stats.ref.current': actor.data.data.stats.ref.max,
-				'data.stats.dex.current': actor.data.data.stats.dex.max,
-				'data.stats.int.current': actor.data.data.stats.int.max,
-				'data.stats.will.current': actor.data.data.stats.will.max,
-		 });
+	console.log("removing wound treshold")
+	actor.update({ 
+		'data.woundTresholdApplied': false,
+		'data.stats.ref.current': actor.data.data.stats.ref.max,
+		'data.stats.dex.current': actor.data.data.stats.dex.max,
+		'data.stats.int.current': actor.data.data.stats.int.max,
+		'data.stats.will.current': actor.data.data.stats.will.max,
+	 });
 }
 
 function applyWoundTreshold(actor){
-		console.log("applying wound treshold")
-		let newRef = Math.floor(actor.data.data.stats.ref.max/2);
-		let newDex= Math.floor(actor.data.data.stats.dex.max/2);
-		let newInt = Math.floor(actor.data.data.stats.int.max/2);
-		let newWill = Math.floor(actor.data.data.stats.will.max/2);
+	console.log("applying wound treshold")
+	let newRef = Math.floor(actor.data.data.stats.ref.max/2);
+	let newDex= Math.floor(actor.data.data.stats.dex.max/2);
+	let newInt = Math.floor(actor.data.data.stats.int.max/2);
+	let newWill = Math.floor(actor.data.data.stats.will.max/2);
 
-		actor.update({ 
-				'data.woundTresholdApplied': true,
-				'data.stats.ref.current': newRef,
-				'data.stats.dex.current': newDex,
-				'data.stats.int.current': newInt,
-				'data.stats.will.current': newWill,
-		});
+	actor.update({ 
+			'data.woundTresholdApplied': true,
+			'data.stats.ref.current': newRef,
+			'data.stats.dex.current': newDex,
+			'data.stats.int.current': newInt,
+			'data.stats.will.current': newWill,
+	});
 }
 
 function rollSkillCheck(thisActor, statNum, skillNum){
-		console.log("coucou")
-		let parentStat = "";
-		let skillName = "";
-		let stat = 0;
-		let skill = 0;
-		let array;
+	console.log("coucou")
+	let parentStat = "";
+	let skillName = "";
+	let stat = 0;
+	let skill = 0;
+	let array;
 
-		switch(statNum){
-				case 0:
-						parentStat = game.i18n.localize("WITCHER.StInt");
-						array = getIntSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.int.current;
-						skill = array[1];
-						break;
-				case 1:
-						parentStat = game.i18n.localize("WITCHER.StRef");
-						array = getRefSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.ref.current;
-						skill = array[1];
-						break;
-				case 2:
-						parentStat = game.i18n.localize("WITCHER.StDex");
-						array = getDexSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.dex.current;
-						skill = array[1];
-						break;
-				case 3:
-						parentStat = game.i18n.localize("WITCHER.StBody");
-						array = getBodySkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.body.current;
-						skill = array[1];
-						break;
-				case 4:
-						parentStat = game.i18n.localize("WITCHER.StEmp");
-						array = getEmpSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.emp.current;
-						skill = array[1];
-						break;
-				case 5:
-						parentStat = game.i18n.localize("WITCHER.StCra");
-						array = getCraSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.cra.current;
-						skill = array[1];
-						break;
-				case 6:
-						parentStat = game.i18n.localize("WITCHER.StWill");
-						array = getWillSkillMod(thisActor, skillNum);
-						skillName = array[0];
-						stat = thisActor.data.data.stats.will.current;
-						skill = array[1];
-						break;
-		}
+	switch(statNum){
+		case 0:
+			parentStat = game.i18n.localize("WITCHER.StInt");
+			array = getIntSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.int.current;
+			skill = array[1];
+			break;
+		case 1:
+			parentStat = game.i18n.localize("WITCHER.StRef");
+			array = getRefSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.ref.current;
+			skill = array[1];
+			break;
+		case 2:
+			parentStat = game.i18n.localize("WITCHER.StDex");
+			array = getDexSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.dex.current;
+			skill = array[1];
+			break;
+		case 3:
+			parentStat = game.i18n.localize("WITCHER.StBody");
+			array = getBodySkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.body.current;
+			skill = array[1];
+			break;
+		case 4:
+			parentStat = game.i18n.localize("WITCHER.StEmp");
+			array = getEmpSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.emp.current;
+			skill = array[1];
+			break;
+		case 5:
+			parentStat = game.i18n.localize("WITCHER.StCra");
+			array = getCraSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.cra.current;
+			skill = array[1];
+			break;
+		case 6:
+			parentStat = game.i18n.localize("WITCHER.StWill");
+			array = getWillSkillMod(thisActor, skillNum);
+			skillName = array[0];
+			stat = thisActor.data.data.stats.will.current;
+			skill = array[1];
+			break;
+	}
 
-		skillName = skillName.replace(" (2)", "");
-		let messageData = {
-				speaker: {alias: thisActor.name},
-				flavor: `${parentStat}: ${skillName} Check`,
-		}
-		let rollFormula = `1d10+${stat}+${skill}`
-		new Roll(rollFormula).roll().toMessage(messageData)
+	skillName = skillName.replace(" (2)", "");
+	let messageData = {
+			speaker: {alias: thisActor.name},
+			flavor: `${parentStat}: ${skillName} Check`,
+	}
+	let rollFormula = `1d10+${stat}+${skill}`
+	new Roll(rollFormula).roll().toMessage(messageData)
 }
 
 function getIntSkillMod(actor, skillNum){
-		switch(skillNum){
-				case 0:
-						return [game.i18n.localize("WITCHER.SkIntAwareness"), actor.data.data.skills.int.awareness.value]
-				case 1:
-						return [game.i18n.localize("WITCHER.SkIntBusiness"), actor.data.data.skills.int.business.value]
-				case 2:
-						return [game.i18n.localize("WITCHER.SkIntDeduction"), actor.data.data.skills.int.deduction.value]
-				case 3:
-						return [game.i18n.localize("WITCHER.SkIntEducation"), actor.data.data.skills.int.education.value]
-				case 4:
-						return [game.i18n.localize("WITCHER.SkIntCommon"), actor.data.data.skills.int.commonsp.value]
-				case 5:
-						return [game.i18n.localize("WITCHER.SkIntElder"), actor.data.data.skills.int.eldersp.value]
-				case 6:
-						return [game.i18n.localize("WITCHER.SkIntDwarven"), actor.data.data.skills.int.dwarven.value]
-				case 7:
-						return [game.i18n.localize("WITCHER.SkIntMonster"), actor.data.data.skills.int.monster.value]
-				case 8:
-						return [game.i18n.localize("WITCHER.SkIntSocialEt"), actor.data.data.skills.int.socialetq.value]
-				case 9:
-						return [game.i18n.localize("WITCHER.SkIntStreet"), actor.data.data.skills.int.streetwise.value]
-				case 10:
-						return [game.i18n.localize("WITCHER.SkIntTactics"), actor.data.data.skills.int.tactics.value]
-				case 11:
-						return [game.i18n.localize("WITCHER.SkIntTeaching"), actor.data.data.skills.int.teaching.value]
-				case 12:
-						return [game.i18n.localize("WITCHER.SkIntWilderness"), actor.data.data.skills.int.wilderness.value]
-		}
+	switch(skillNum){
+		case 0:
+			return [game.i18n.localize("WITCHER.SkIntAwareness"), actor.data.data.skills.int.awareness.value]
+		case 1:
+			return [game.i18n.localize("WITCHER.SkIntBusiness"), actor.data.data.skills.int.business.value]
+		case 2:
+			return [game.i18n.localize("WITCHER.SkIntDeduction"), actor.data.data.skills.int.deduction.value]
+		case 3:
+			return [game.i18n.localize("WITCHER.SkIntEducation"), actor.data.data.skills.int.education.value]
+		case 4:
+			return [game.i18n.localize("WITCHER.SkIntCommon"), actor.data.data.skills.int.commonsp.value]
+		case 5:
+			return [game.i18n.localize("WITCHER.SkIntElder"), actor.data.data.skills.int.eldersp.value]
+		case 6:
+			return [game.i18n.localize("WITCHER.SkIntDwarven"), actor.data.data.skills.int.dwarven.value]
+		case 7:
+			return [game.i18n.localize("WITCHER.SkIntMonster"), actor.data.data.skills.int.monster.value]
+		case 8:
+			return [game.i18n.localize("WITCHER.SkIntSocialEt"), actor.data.data.skills.int.socialetq.value]
+		case 9:
+			return [game.i18n.localize("WITCHER.SkIntStreet"), actor.data.data.skills.int.streetwise.value]
+		case 10:
+			return [game.i18n.localize("WITCHER.SkIntTactics"), actor.data.data.skills.int.tactics.value]
+		case 11:
+			return [game.i18n.localize("WITCHER.SkIntTeaching"), actor.data.data.skills.int.teaching.value]
+		case 12:
+			return [game.i18n.localize("WITCHER.SkIntWilderness"), actor.data.data.skills.int.wilderness.value]
+	}
 }
 
 function getRefSkillMod(actor, skillNum){
