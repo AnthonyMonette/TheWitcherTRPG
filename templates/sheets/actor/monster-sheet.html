@@ -1,7 +1,7 @@
 <div class="monster-flex">
     <div>
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-        <div class="monster-flex">
+        <div class="monster-main">
             <div class="monster-left-sidebar">
                 <div class="monster-stat-title">
                     <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
@@ -30,15 +30,15 @@
                 <hr />
                 <div>
                     <div class="monster-armor"> 
-                        <label>Armor Head</label> 
+                        <label>{{localize "WITCHER.Monster.HeadArmor"}}</label> 
                         <input name="data.armorHead" type="number" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
-                        <label>Armor Upper</label> 
+                        <label>{{localize "WITCHER.Monster.UpperArmor"}}</label> 
                         <input name="data.armorUpper" type="number" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
-                        <label>Armor Lower</label> 
+                        <label>{{localize "WITCHER.Monster.LowerArmor"}}</label> 
                         <input name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
                     </div>
                 </div>
@@ -56,74 +56,88 @@
                 </div>
             </div>
             <div class="monster-header-center">
-                <div class="monster-flex">
-                    <select name="data.threat">
-                        {{#select data.threat}}
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        {{/select}}
-                    </select>
-                    <select name="data.difficulty">
-                        {{#select data.difficulty}}
-                            <option value="simple">Simple</option>
-                            <option value="complex">Complex</option>
-                            <option value="difficult">Difficult</option>
-                        {{/select}}
-                    </select>
-                    <label>Bounty</label> 
-                    <input name="data.bounty" type="text" value="{{data.bounty}}"/>
+                <div class="monster-center-top">
+                    <div class="monster-type">
+                        <label>Type</label>
+                        <select name="data.category">
+                            {{#select data.category}}
+                            {{#each config.MonsterTypes as |value name|}}
+                                    <option value="{{value}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="monster-difficulity">
+                        <label>Difficulity</label>
+                        <select name="data.threat">
+                            {{#select data.threat}}
+                                <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
+                                <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
+                                <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="monster-complexity">
+                        <label>Complexity</label> 
+                        <select name="data.difficulty">
+                            {{#select data.difficulty}}
+                                <option value="simple">{{localize "WITCHER.Monster.Simple"}}</option>
+                                <option value="complex">{{localize "WITCHER.Monster.Complex"}}</option>
+                                <option value="difficult">{{localize "WITCHER.Monster.Difficult"}}</option>
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="monster-bounty">
+                        <label>{{localize "WITCHER.Monster.Bounty"}}</label>
+                        <input name="data.bounty" type="text" value="{{data.bounty}}"/>
+                    </div>
                 </div>
-                <div class="category-img">
-                    {{#if (eq data.category "Humanoids")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Humanoids.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Necrophages")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Necrophages.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Specters")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Specters.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Beasts")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Beasts.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "CursedOnes")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/CursedOnes.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Hybrids")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Hybrids.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Insectoids")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Insectoids.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Elementa")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Elementa.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Relicts")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Relicts.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Ogroids")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Ogroids.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Draconids")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Draconids.png" class="cat-img" /> 
-                    {{/if}}
-                    {{#if (eq data.category "Vampires")}}
-                    <img src="systems/TheWitcherTRPG/assets/images/monsters/Vampires.png" class="cat-img" /> 
-                    {{/if}}
-                </div>
-                <div class="monster-flex">
                     <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                        {{#if (eq data.category "Humanoid")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Humanoids.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Necrophage")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Necrophages.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Specter")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Specters.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Beast")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Beasts.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "CursedOne")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/CursedOnes.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Hybrid")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Hybrids.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Insectoid")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Insectoids.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Elementa")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Elementa.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Relict")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Relicts.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Ogroid")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Ogroids.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Draconid")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Draconids.png" class="cat-img" /> 
+                        {{/if}}
+                        {{#if (eq data.category "Vampire")}}
+                        <img src="systems/TheWitcherTRPG/assets/images/monsters/Vampires.png" class="cat-img" /> 
+                        {{/if}}
+                    <table class="monster-info">
+                        <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
+                        <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
+                        <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
+                        <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
+                        <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
+                    </table>
                 </div>
-                <table class="monster-info">
-                    <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
-                    <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
-                    <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
-                    <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
-                    <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
-                </table>
             </div>
-        </div>
 
         <div class="monster-knowledge">
             <label>Commoner Supperstition (Education DC: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
@@ -135,16 +149,6 @@
     <div class="monster-right-sidebar">
         <div class="monster-flex">
             <div>
-                <div class="monster-flex">
-                    <label>Category</label> 
-                    <select name="data.category">
-                        {{#select data.category}}
-                        {{#each config.MonsterTypes as |value name|}}
-                                <option value="{{value}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </div>
                 <div class="monster-flex">
                     <label>Custom stats:</label> 
                     <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>

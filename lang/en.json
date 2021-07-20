@@ -207,5 +207,19 @@
     "WITCHER.table.ResBludgeon": "B",
     "WITCHER.table.ResSlashing": "S",
     "WITCHER.table.ResPiercing": "P",
-    "WITCHER.table.Equipped": "Eq"
+    "WITCHER.table.Equipped": "Eq",
+
+    "WITCHER.Monster.HeadArmor": "Armor Head",
+    "WITCHER.Monster.UpperArmor": "Armor Upper",
+    "WITCHER.Monster.LowerArmor": "Armor Lower",
+
+    "WITCHER.Monster.Easy": "Easy",
+    "WITCHER.Monster.Normal": "Normal",
+    "WITCHER.Monster.Hard": "Hard",
+    "WITCHER.Monster.Simple": "Simple",
+    "WITCHER.Monster.Complex": "Complex",
+    "WITCHER.Monster.Difficult": "Difficult",
+
+    "WITCHER.Monster.Bounty": "Bounty"
+
 }

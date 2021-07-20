@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.monster-main {
+  display: flex;
+  height: 600px;
+}
+
 .monster-left-sidebar {
   width: 140px;
   flex: none;
@@ -80,22 +85,55 @@
   width: 380px;
 }
 
-.monster-header-center label {
-  font-weight: bold;
+.monster-center-top {
+  display: flex;
+  margin-bottom: 1px;
 }
 
-input.small {
-    width: 30px;
+.monster-center-top label, .monster-center-top select, .monster-center-top input {
+  font-weight: bold;
+  text-align: center;
+}
+
+.monster-center-top select {
+  height: 26px;
+}
+
+.monster-center-top div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 3px;
+}
+
+.monster-type {
+  width: 110px;
+}
+
+.monster-difficulity,.monster-bounty {
+  width: 80px;
+}
+
+.monster-complexity {
+  width: 90px;
 }
 
 .monster-img {
   width: 375px;
-  height: 500px;
+  height: 545px;
+}
+
+.cat-img{
+  position: relative;
+  height: 75px;
+  width: 75px;
+  top: -535px;
+  left: 10px;
+  border: none;
 }
 
 .monster-info {
   position: relative;
-  top: -135px;
+  top: -220px;
   left: 10px;
   width: 250px;
   background-color: silver;
@@ -113,7 +151,8 @@ input.small {
 
 .monster-knowledge {
   width: 515px;
-  position: relative;
-  top: -100px;
-  margin-top: 10px;
+}
+
+input.small {
+  width: 30px;
 }
