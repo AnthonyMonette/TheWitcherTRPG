@@ -58,7 +58,7 @@
             <div class="monster-header-center">
                 <div class="monster-center-top">
                     <div class="monster-type">
-                        <label>Type</label>
+                        <label>{{localize "WITCHER.Monster.Type"}}</label>
                         <select name="data.category">
                             {{#select data.category}}
                             {{#each config.MonsterTypes as |value name|}}
@@ -68,7 +68,7 @@
                         </select>
                     </div>
                     <div class="monster-difficulity">
-                        <label>Difficulity</label>
+                        <label>{{localize "WITCHER.Monster.Difficulty"}}</label>
                         <select name="data.threat">
                             {{#select data.threat}}
                                 <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
@@ -78,7 +78,7 @@
                         </select>
                     </div>
                     <div class="monster-complexity">
-                        <label>Complexity</label> 
+                        <label>{{localize "WITCHER.Monster.Complexity"}}</label> 
                         <select name="data.difficulty">
                             {{#select data.difficulty}}
                                 <option value="simple">{{localize "WITCHER.Monster.Simple"}}</option>
@@ -130,20 +130,19 @@
                         <img src="systems/TheWitcherTRPG/assets/images/monsters/Vampires.png" class="cat-img" /> 
                         {{/if}}
                     <table class="monster-info">
-                        <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
-                        <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
-                        <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
-                        <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
-                        <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Height"}}</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Weight"}}</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Environment"}} </td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Intelligence"}}</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Organization"}} </td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
                     </table>
                 </div>
             </div>
-
         <div class="monster-knowledge">
-            <label>Commoner Supperstition (Education DC: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
-            <textarea rows=10 name="data.common">{{data.common}}</textarea>
-            <label>Witcher Knowledge (Monster Lore DC: <input class="skill-value" name="data.monsterLoreSkillValue" type="text" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/>)</label>
-            <textarea rows=25 name="data.monsterLore">{{data.monsterLore}}</textarea>
+            <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}<input class="skill-value" name="data.commonSkillValue" type="number" value="{{data.commonSkillValue}}" data-dtype="Number"/></label>
+            {{editor content=data.common target=data.common button=true editable=editable}}
+            <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}<input class="skill-value" name="data.monsterLoreSkillValue" type="number" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/></label>
+            {{editor content=data.monsterLore target=data.monsterLore button=true editable=editable}}
         </div>
     </div>
     <div class="monster-right-sidebar">

@@ -220,6 +220,18 @@
     "WITCHER.Monster.Complex": "Complex",
     "WITCHER.Monster.Difficult": "Difficult",
 
-    "WITCHER.Monster.Bounty": "Bounty"
+    "WITCHER.Monster.Type": "Type",
+    "WITCHER.Monster.Difficulty": "Difficulty",
+    "WITCHER.Monster.Complexity": "Complexity",
+    "WITCHER.Monster.Bounty": "Bounty",
+
+    "WITCHER.Monster.Height": "Height",
+    "WITCHER.Monster.Weight": "Weight",
+    "WITCHER.Monster.Environment": "Enviroment",
+    "WITCHER.Monster.Intelligence": "Intelligence",
+    "WITCHER.Monster.Organization": "Organization",
+
+    "WITCHER.Monster.CommonerSupperstition": "Commoner Supperstition: Education DC: ",
+    "WITCHER.Monster.WitcherKnowledge": "Witcher Knowledge: Monster Lore DC: "
 
 }

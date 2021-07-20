@@ -138,19 +138,27 @@
   width: 250px;
   background-color: silver;
   font-size: 12px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .monster-info input {
   height: 18px;
+  font-weight: bold;
+}
+
+.monster-knowledge {
+  width: 515px;
+}
+
+.monster-knowledge label, .monster-knowledge input {
+  font-weight: bold;
+  text-align: center;
 }
 
 .monster-right-sidebar {
   margin-left: 10px;
   flex: 1;
-}
-
-.monster-knowledge {
-  width: 515px;
 }
 
 input.small {
