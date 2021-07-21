@@ -19,6 +19,8 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
         "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html",
+        "systems/TheWitcherTRPG/templates/partials/monster-inventory-tab.html",
+        "systems/TheWitcherTRPG/templates/partials/monster-details-tab.html",
         "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html",
 
         "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html",

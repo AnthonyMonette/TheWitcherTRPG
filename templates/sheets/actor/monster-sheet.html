@@ -146,26 +146,25 @@
         </div>
     </div>
     <div class="monster-right-sidebar">
-        <div class="monster-flex">
+        <div class="monster-right-top">
             <div>
-                <div class="monster-flex">
-                    <label>Custom stats:</label> 
-                    <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+                <div class="monster-button-roll">
+                    <a class="init-roll" >{{localize "WITCHER.Actor.Initiative"}}</a>
+                    <a class="death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
+                </div>
+                <div class="monster-button-roll">
+                    <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
+                    <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
                 </div>
             </div>
-            <div class="actions">
-                <label class="stat-label"><a class="init-roll">Initiative</a></label>
-                <label class="stat-label"><a class="death-roll">Stun/Death</a></label>
-                <label class="stat-label"><a class="crit-roll">Crit/Fumble</a></label>
-                <label class="stat-label"><a class="defence-roll">Defense</a></label>
-            </div>
+            <label>Custom stats:</label>
+            <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
         </div>
-        
-        <nav class="sheet-tabs tabs flexrow" data-group="primary">
-            <a class="item" data-tab="skills"> Skills</a>
-            <a class="item" data-tab="inventory">Attacks/Loot </a>
-            <a class="item" data-tab="details"> Details</a>
-            <a class="item" data-tab="spells"> Spells</a>
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="skills"> {{localize "WITCHER.Monster.SkillTab"}}</a>
+            <a class="item" data-tab="inventory">{{localize "WITCHER.Monster.InventryTab"}} </a>
+            <a class="item" data-tab="details"> {{localize "WITCHER.Monster.DetailsTab"}}</a>
+            <a class="item" data-tab="spells"> {{localize "WITCHER.Monster.SpellsTab"}}</a>
         </nav>
 
         {{! Sheet Body }}
@@ -174,82 +173,10 @@
                 {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html"}}
             </div>
             <div class="tab" data-group="primary" data-tab="inventory">
-                <h2>Weapons <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
-                <table class="weapon-table">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><b>Name</b></td>
-                        <td><b>DMG</b></td>
-                        <td><b>ROF</b></td>
-                    </tr>
-                    {{#each weapons as |weapon id|}}
-                    <tbody class="item" data-item-id="{{weapon._id}}">
-                        <tr>
-                            <td>
-                                <a class="item-weapon-display"><i class="fas fa-info"></i></a>
-                            </td>
-                            <td>
-                                <img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/>
-                            </td>
-                            <td><a class="item-roll">{{weapon.name}}</a></td>
-                            <td><input class="inline-edit" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
-                            <td><input class="inline-edit small" data-field="data.rateOfFire" type="text" value="{{weapon.data.rateOfFire}}" data-dtype="Number"/></td>
-                        </tr>
-                        <tr class="item-info hidden" >
-                            <td>
-                                <a class="item-edit"><i class="fas fa-edit"></i></a>
-                            </td>
-                            <td colspan="3">
-                                <div class="monster-flex"><b>Effect :</b></label>
-                                    {{#each weapon.data.effects as |effect id|}}
-                                        <div class="monster-flex">
-                                        {{effect.name}}
-                                        {{#if effect.percentage}}
-                                            ({{effect.percentage}})%   
-                                        {{/if}}
-                                        ,
-                                        </div>
-                                    {{/each}}
-                                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                            </td>
-                        </tr>
-                    </tbody>
-                    {{/each}}
-                </table>
-                <h2>Loot <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
-                <table>
-                    {{#each loots as |valuable id|}}
-                    <tr class="item" data-item-id="{{valuable._id}}">
-                        <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
-                        <td><input class="small-medium inline-edit" data-field="data.quantity" type="text" value="{{data.quantity}}"  placeholder="1d6" /></td>
-                        <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
-                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                    </tr>
-                    {{/each}}
-                </table>
+                {{>"systems/TheWitcherTRPG/templates/partials/monster-inventory-tab.html"}}
             </div>
             <div class="tab" data-group="primary" data-tab="details">
-                <label>Resistances</label>
-                <input type="text" name="data.resistances" value="{{data.resistances}}" placeholder="" />
-                <label>Immunities</label>
-                <input type="text" name="data.immunities" value="{{data.immunities}}" placeholder="" />
-                <label>Susceptibilities</label>
-                <input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
-                <label>Senses</label>
-                <input type="text" name="data.senses" value="{{data.senses}}" placeholder="" />
-                
-                <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
-                
-                {{#each notes as |note id|}}
-                <div class="item" data-item-id="{{note._id}}">
-                    <div class="monster-flex">
-                        <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
-                        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-                    <textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
-                </div>
-                {{/each}}
+                {{>"systems/TheWitcherTRPG/templates/partials/monster-details-tab.html"}}
             </div>
             <div class="tab" data-group="primary" data-tab="spells">
                 {{> "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html"}}

@@ -232,6 +232,10 @@
     "WITCHER.Monster.Organization": "Organization",
 
     "WITCHER.Monster.CommonerSupperstition": "Commoner Supperstition: Education DC: ",
-    "WITCHER.Monster.WitcherKnowledge": "Witcher Knowledge: Monster Lore DC: "
+    "WITCHER.Monster.WitcherKnowledge": "Witcher Knowledge: Monster Lore DC: ",
 
+    "WITCHER.Monster.SkillTab": "Skills",
+    "WITCHER.Monster.InventryTab": "Attacks/Loot",
+    "WITCHER.Monster.DetailsTab": "Details",
+    "WITCHER.Monster.SpellsTab": "Spells"
 }
