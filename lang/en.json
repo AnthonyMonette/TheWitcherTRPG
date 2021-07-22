@@ -212,6 +212,7 @@
     "WITCHER.Monster.HeadArmor": "Armor Head",
     "WITCHER.Monster.UpperArmor": "Armor Upper",
     "WITCHER.Monster.LowerArmor": "Armor Lower",
+    "WITCHER.Monster.CustomHP/STA": "Custom HP/STA",
 
     "WITCHER.Monster.Easy": "Easy",
     "WITCHER.Monster.Normal": "Normal",

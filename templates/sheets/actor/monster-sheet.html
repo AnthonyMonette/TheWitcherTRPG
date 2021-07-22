@@ -28,6 +28,22 @@
                     <input name="data.derivedStats.vigor.value" type="number" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 <hr />
+                <div class="monster-custom">
+                    <label>{{localize "WITCHER.Monster.CustomHP/STA"}}</label>
+                    <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+                </div>
+                <div class="monster-HPSTA">
+                    <label>{{localize "WITCHER.Actor.Hp"}}</label> 
+                    <input name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
+                    /
+                    <input name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
+                </div>
+                <div class="monster-HPSTA">
+                    <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label> 
+                    <input name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
+                    /
+                    <input name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
+                </div>
                 <div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.HeadArmor"}}</label> 
@@ -41,18 +57,6 @@
                         <label>{{localize "WITCHER.Monster.LowerArmor"}}</label> 
                         <input name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
                     </div>
-                </div>
-                <div class="monster-HPSTA">
-                    <label>{{localize "WITCHER.Actor.Hp"}}</label> 
-                    <input name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
-                    /
-                    <input name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
-                </div>
-                <div class="monster-HPSTA">
-                    <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label> 
-                    <input name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
-                    /
-                    <input name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
                 </div>
             </div>
             <div class="monster-header-center">
@@ -147,18 +151,14 @@
     </div>
     <div class="monster-right-sidebar">
         <div class="monster-right-top">
-            <div>
-                <div class="monster-button-roll">
-                    <a class="init-roll" >{{localize "WITCHER.Actor.Initiative"}}</a>
-                    <a class="death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
-                </div>
-                <div class="monster-button-roll">
-                    <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
-                    <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
-                </div>
+            <div class="monster-button-roll">
+                <a class="init-roll" >{{localize "WITCHER.Actor.Initiative"}}</a>
+                <a class="death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
             </div>
-            <label>Custom stats:</label>
-            <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+            <div class="monster-button-roll">
+                <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
+                <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+            </div>
         </div>
         <nav class="sheet-tabs tabs" data-group="primary">
             <a class="item" data-tab="skills"> {{localize "WITCHER.Monster.SkillTab"}}</a>

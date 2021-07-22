@@ -4,7 +4,7 @@
 
 .monster-main {
   display: flex;
-  height: 600px;
+  height: 620px;
 }
 
 .monster-left-sidebar {
@@ -66,6 +66,15 @@
   float: left;
   width: 90px;
   margin: 5px;
+}
+
+.monster-custom {
+  display: flex;
+}
+
+.monster-custom label {
+  margin: 5px;
+  font-weight: bold;
 }
 
 .monster-HPSTA {
@@ -161,12 +170,12 @@
   flex: 1;
 }
 
-.monster-right-top > div {
+.monster-right-top {
   display: flex;
 }
 
 .monster-button-roll {
-  width: 112.5px;
+  width: 126.5px;
 }
 
 .monster-button-roll a {
@@ -181,10 +190,16 @@
   border-style: solid;
   border-color: white;
   border-width: 1px;
-  margin-bottom: 1px;
+  margin:0 auto;
 }
 
 .monster-button-roll a:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+.monster-custom input:hover {
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
