@@ -154,6 +154,7 @@ input.right-value {
     display: flex;
     width: 230px;
     height: 60px;
+    margin-bottom: 10px;
 }
 
 .char-button-collum {
