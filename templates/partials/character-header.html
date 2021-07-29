@@ -30,30 +30,26 @@
             {{/each}}
         </div>
     </div>
-    <div class="flexrow">
-        <div class="char-flex">
-            <label><b>Race</b></label>
-            {{race.name}}
-        </div>
-        <div class="char-flex">
-            <label><b>Gender</b></label>
-            <input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/>
-        </div>
-        <div class="char-flex">
-            <label><b>Age</b></label>
-            <input class="header-stat" name="data.general.age" type="number" value="{{data.general.age}}" placeholder="0" data-dtype="Number"/>
-        </div>
-    </div>
-    <div class="flexrow">
-        <div class="char-flex">
-            <label><b>Profession</b></label>
-            {{profession.name}}
-        </div>
-        <div class="char-flex">
-            <label><b>Origin</b></label>
-            {{data.general.homeland.value}}
-        </div>
-    </div>
+    <table class="char-bottom-section">
+        <tbody>
+            <tr>
+                <td><b>Race</b></td>
+                <td>{{race.name}}</td>
+            </tr>
+            <tr>
+                <td><b>Gender</b></td>
+                <td><input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/></td>
+                <td><b>Age</b></td>
+                <td><input class="header-stat" name="data.general.age" type="number" value="{{data.general.age}}" placeholder="0" data-dtype="Number"/></td>
+            </tr>
+            <tr>
+                <td><b>Profession</b></td>
+                <td>{{profession.name}}</td>
+                <td><b>Origin</b></td>
+                <td>{{data.general.homeland.value}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>    
 <div class="right-sidebar">
         <div class="right-top">

@@ -1,10 +1,13 @@
-.char-flex {
-    display: flex;
-  }
-
 .char-left-sidebar {
     width: 140px;
     flex: none;
+}
+
+.char-bottom-section {
+    width: 370px;
+}
+.char-bottom-section table td {
+    padding: 0.25em;
 }
 
 .char-stat-title label {
