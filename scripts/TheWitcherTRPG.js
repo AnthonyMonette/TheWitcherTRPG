@@ -17,6 +17,7 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/tab-background.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
+        "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
         "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html",
         "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html",
