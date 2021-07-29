@@ -241,7 +241,11 @@
                 <input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
                 <label>Senses</label>
                 <input type="text" name="data.senses" value="{{data.senses}}" placeholder="" />
-                
+
+                <div class="monster-crit-wounds-section">
+                    <h2>Crit Wounds <a class="add-crit" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+                    {{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
+                </div>
                 <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
                 
                 {{#each notes as |note id|}}
