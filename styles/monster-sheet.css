@@ -3,8 +3,7 @@
 }
 
 .monster-left-sidebar {
-    width: 140px;
-    flex: none;
+  width: 140px;
 }
 
 .monster-stat-title {
@@ -37,8 +36,8 @@ input.small {
 
 .monster-info {
   position: relative;
-  top: -135px;
-  left: 10px;
+  top: 352px;
+  right: 359px;
   width: 250px;
   background-color: silver;
   font-size: 12px;
@@ -54,8 +53,7 @@ input.small {
 }
 
 .monster-knowledge {
+  margin-top: 10px;
   width: 515px;
   position: relative;
-  top: -100px;
-  margin-top: 10px;
 }
