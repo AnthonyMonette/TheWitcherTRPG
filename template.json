@@ -582,6 +582,18 @@
     },
     "monster": {
       "templates": ["baseActor"],
+      "critWounds": [],
+      "config": {
+        "CritDescription": {},
+        "CritModDescription": {},
+        "CritGravity": {},
+        "CritGravityDefaultEffect": {},
+        "CritMod": {},
+        "CritSimple": {},
+        "CritComplex": {},
+        "CritDifficult": {},
+        "CritDeadly": {}
+      },
       "category": "",
       "threat": "",
       "difficulty": "",

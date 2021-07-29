@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.monster-sheet-left-column {
+  padding-right: 10px;
+}
+
 .monster-left-sidebar {
   width: 140px;
 }
@@ -47,13 +51,8 @@ input.small {
   height: 18px;
 }
 
-.monster-right-sidebar {
-  margin-left: 10px;
-  flex: 1;
-}
 
 .monster-knowledge {
   margin-top: 10px;
-  width: 515px;
   position: relative;
 }
