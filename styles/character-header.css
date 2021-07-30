@@ -7,7 +7,7 @@
     width: 370px;
 }
 .char-bottom-section table td {
-    padding: 0.25em;
+    padding: 0.35em 0.35em 0.35em 0.5em;
 }
 
 .char-stat-title label {
