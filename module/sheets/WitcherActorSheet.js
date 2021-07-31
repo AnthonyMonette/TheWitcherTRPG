@@ -755,14 +755,14 @@ export default class WitcherActorSheet extends ActorSheet {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".item").dataset.itemId;
-      let item = this.actor.getOwnedItem(itemId);
+      let item = this.actor.items.get(itemId);
       let field = element.dataset.field;
       // Edit checkbox values
       let value = element.value
       if(value == "false") { 
         value = true
       }
-      if(value == "true") { 
+      if(value == "true" || value== "checked") { 
         value = false
       }
       
