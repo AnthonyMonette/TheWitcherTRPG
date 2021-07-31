@@ -102,9 +102,9 @@ witcher.CritDescription = {
 };
 
 witcher.CritModDescription = {
-  SimpleCrackedJaw: { None: "You are at a -2 to Magical Skills & Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette and Intimidation.)", Stabilized: "You are at a -1 to Magical Skills & Verbal Combat.", Treated: "You are at a -1 to Magical Skills."},
-  SimpleDisfiguringScar: { None: "You take a -3 to empathic Verbal Combat (Charisma, Persuasion, Deceit, Social Etiquette, and Leadership)", Stabilized: "You take a -1 to emphatic Verbal Combat.", Treated: "You take a -1 to Seduction."},
-  SimpleCrackedRibs: { None: "You take a -2 to BODY. This does not affect health points.", Stabilized: "You are at a -1 to BODY. ", Treated: "You take a -10 to Encumberance."},
+  SimpleCrackedJaw: { None: "You are at a -2 to Magical Skills & Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette and Intimidation).", Stabilized: "You are at a -1 to Magical Skills & Verbal Combat.", Treated: "You are at a -1 to Magical Skills."},
+  SimpleDisfiguringScar: { None: "You take a -3 to empathic Verbal Combat (Charisma, Persuasion, Deceit, Social Etiquette, and Leadership).", Stabilized: "You take a -1 to emphatic Verbal Combat.", Treated: "You take a -1 to Seduction."},
+  SimpleCrackedRibs: { None: "You take a -2 to BODY. This does not affect health points.", Stabilized: "You are at a -1 to BODY.", Treated: "You take a -10 to Encumberance."},
   SimpleForeignObject: { None: "Your Recovery and Critical Healing are affected.", Stabilized: "Your Recovery & Critical Healing are halved.", Treated: "You take a -2 to Recovery and a -1 to your Critical Healing."},
   SimpleSprainedArm: { None: "You take a -2 to actions that use the arm.", Stabilized: "You are at a -1 to actions with that arm.", Treated: "You take a -1 to Physique."},
   SimpleSprainedLeg: { None: "You take a -2 to SPD, Dodge/Escape, and Athletics.", Stabilized: "You take a -1 to SPD, Dodge/Escape, and Athletics.", Treated: "You take a -1 to SPD."},

@@ -410,23 +410,6 @@ input.skill-value {
   height: 25px;
 }
 
-.crit-wounds {
-  background-color: red;
-  width: 450px;
-  margin: 5px;
-  border-radius: 10px;
-  padding: 10px;
-  color: white;
-}
-
-.crit-wound-description {
-  margin-top: 10px;
-}
-
-.crit-wound-mod-description {
-  margin-top: 5px;
-}
-
 .weight-value {
   margin: auto;
   width: min-content;
@@ -443,4 +426,28 @@ input.skill-value {
 
 .description {
   margin: 10px;
+}
+
+.crit-wounds {
+  width: 450px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.crit-wounds-table textarea {
+  resize: vertical;
+}
+
+.crit-wound-description {
+  margin-top: 10px;
+}
+
+.crit-wound-mod-description {
+  margin-top: 5px;
+}
+
+.add-crit,
+.delete-crit {
+  margin: 5px;
+  width: 15px;
 }

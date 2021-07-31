@@ -7,6 +7,13 @@
     flex: none;
 }
 
+.char-bottom-section {
+    width: 370px;
+}
+.char-bottom-section table td {
+    padding: 0.35em 0.35em 0.35em 0.5em;
+}
+
 .char-stat-title label {
     font-weight: bold;
     margin-left: 4px;
@@ -151,6 +158,7 @@ input.right-value {
     display: flex;
     width: 230px;
     height: 60px;
+    margin-bottom: 10px;
 }
 
 .char-button-collum {

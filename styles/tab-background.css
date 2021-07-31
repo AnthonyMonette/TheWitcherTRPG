@@ -3,15 +3,6 @@
     border-color: rgba(0, 0, 0, 0.308);
 }
 
-.crit-wounds {
-    background-color: red;
-    width: 450px;
-    margin: 5px;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-  }
-
 .lifeEvents {
   margin: 10px;
 }

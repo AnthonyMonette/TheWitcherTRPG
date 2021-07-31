@@ -71,6 +71,10 @@
     "WITCHER.StSpd": "Speed",
     "WITCHER.StVigor": "Vigor",
 
+    "WITCHER.Actor.Race": "Race",
+    "WITCHER.Actor.Gender": "Gender",
+    "WITCHER.Actor.Age": "Age",
+
     "WITCHER.Actor.TotalStats": "Total Stats",
 
     "WITCHER.Actor.Stat.Int": "INT",
