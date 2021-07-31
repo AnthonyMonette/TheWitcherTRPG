@@ -1,0 +1,20 @@
+<label>Resistances</label>
+<input type="text" name="data.resistances" value="{{data.resistances}}" placeholder="" />
+<label>Immunities</label>
+<input type="text" name="data.immunities" value="{{data.immunities}}" placeholder="" />
+<label>Susceptibilities</label>
+<input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
+<label>Senses</label>
+<input type="text" name="data.senses" value="{{data.senses}}" placeholder="" />
+
+<h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+
+{{#each notes as |note id|}}
+<div class="item" data-item-id="{{note._id}}">
+    <div class="monster-flex">
+        <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
+        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
+</div>
+{{/each}}

@@ -582,7 +582,7 @@
     },
     "monster": {
       "templates": ["baseActor"],
-      "category": "",
+      "category": "Humanoid",
       "threat": "",
       "difficulty": "",
       "bounty":0,

@@ -1,51 +1,168 @@
 .monster-flex {
-    display: flex;
+  display: flex;
+}
+
+.monster-main {
+  display: flex;
+  height: 620px;
 }
 
 .monster-left-sidebar {
-    width: 140px;
-    flex: none;
+  width: 140px;
+  flex: none;
 }
 
-.monster-stat-title {
-    margin-left: 55px;
+.monster-left-sidebar input {
+  display: flex;
+  font-weight: bold;
+  width: 35px;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+
+.monster-stat-title label {
+  font-weight: bold;
+  margin-left: 4px;
 }
 
 .monster-stat-display {
   display: flex;
-  width: 140px;
 }
 
-.monster-stat-display input {
-  width: 35px;
+.monster-stat-button {
+  width: 65px;
+  height: 26px;
+  background-color: darkred;
+  border-radius: 12px;
+  color: white;
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
 }
+
+.monster-stat-button:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
 .monster-stat-display label {
-  width: 60px;
+  font-weight: bold;
+  width: 55px;
+  margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-input.small {
-    width: 30px;
+.monster-armor {
+  display: flex;
+}
+
+.monster-armor label {
+  font-weight: bold;
+  float: left;
+  width: 90px;
+  margin: 5px;
+}
+
+.monster-custom {
+  display: flex;
+}
+
+.monster-custom label {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.monster-HPSTA {
+  display: flex;
+}
+
+.monster-HPSTA label {
+  font-weight: bold;
+  width: 49px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monster-header-center {
+  width: 380px;
+}
+
+.monster-center-top {
+  display: flex;
+  margin-bottom: 1px;
+}
+
+.monster-center-top label, .monster-center-top select, .monster-center-top input {
+  font-weight: bold;
+  text-align: center;
+}
+
+.monster-center-top select {
+  height: 26px;
+}
+
+.monster-center-top div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 3px;
+}
+
+.monster-type {
+  width: 110px;
+}
+
+.monster-difficulity,.monster-bounty {
+  width: 80px;
+}
+
+.monster-complexity {
+  width: 90px;
 }
 
 .monster-img {
   width: 375px;
-  height: 500px;
+  height: 545px;
+}
+
+.cat-img{
+  position: relative;
+  height: 75px;
+  width: 75px;
+  top: -535px;
+  left: 10px;
+  border: none;
 }
 
 .monster-info {
   position: relative;
-  top: -135px;
+  top: -220px;
   left: 10px;
   width: 250px;
   background-color: silver;
   font-size: 12px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .monster-info input {
   height: 18px;
+  font-weight: bold;
+}
+
+.monster-knowledge {
+  width: 515px;
+}
+
+.monster-knowledge label, .monster-knowledge input {
+  font-weight: bold;
+  text-align: center;
 }
 
 .monster-right-sidebar {
@@ -53,9 +170,41 @@ input.small {
   flex: 1;
 }
 
-.monster-knowledge {
-  width: 515px;
-  position: relative;
-  top: -100px;
-  margin-top: 10px;
+.monster-right-top {
+  display: flex;
+}
+
+.monster-button-roll {
+  width: 126.5px;
+}
+
+.monster-button-roll a {
+  display: flex;
+  width: 110px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  background-color: darkred;
+  border-radius: 12px;
+  color: white;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  margin:0 auto;
+}
+
+.monster-button-roll a:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+.monster-custom input:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+.monster-knowledge .editor-content {
+  height: 100px;
 }

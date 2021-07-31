@@ -207,5 +207,36 @@
     "WITCHER.table.ResBludgeon": "B",
     "WITCHER.table.ResSlashing": "S",
     "WITCHER.table.ResPiercing": "P",
-    "WITCHER.table.Equipped": "Eq"
+    "WITCHER.table.Equipped": "Eq",
+
+    "WITCHER.Monster.HeadArmor": "Armor Head",
+    "WITCHER.Monster.UpperArmor": "Armor Upper",
+    "WITCHER.Monster.LowerArmor": "Armor Lower",
+    "WITCHER.Monster.CustomHP/STA": "Custom HP/STA",
+
+    "WITCHER.Monster.Easy": "Easy",
+    "WITCHER.Monster.Normal": "Normal",
+    "WITCHER.Monster.Hard": "Hard",
+    "WITCHER.Monster.Simple": "Simple",
+    "WITCHER.Monster.Complex": "Complex",
+    "WITCHER.Monster.Difficult": "Difficult",
+
+    "WITCHER.Monster.Type": "Type",
+    "WITCHER.Monster.Difficulty": "Difficulty",
+    "WITCHER.Monster.Complexity": "Complexity",
+    "WITCHER.Monster.Bounty": "Bounty",
+
+    "WITCHER.Monster.Height": "Height",
+    "WITCHER.Monster.Weight": "Weight",
+    "WITCHER.Monster.Environment": "Enviroment",
+    "WITCHER.Monster.Intelligence": "Intelligence",
+    "WITCHER.Monster.Organization": "Organization",
+
+    "WITCHER.Monster.CommonerSupperstition": "Commoner Supperstition: Education DC: ",
+    "WITCHER.Monster.WitcherKnowledge": "Witcher Knowledge: Monster Lore DC: ",
+
+    "WITCHER.Monster.SkillTab": "Skills",
+    "WITCHER.Monster.InventryTab": "Attacks/Loot",
+    "WITCHER.Monster.DetailsTab": "Details",
+    "WITCHER.Monster.SpellsTab": "Spells"
 }
