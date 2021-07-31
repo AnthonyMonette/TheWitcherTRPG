@@ -1,0 +1,42 @@
+.monster-skill {
+    display: flex;
+}
+
+.skill-display {
+    position: relative;
+    width: 250px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.expander {
+    position: absolute;
+    right: 0px;
+}
+
+.skill-list td {
+    padding: 1px;
+}
+
+.skill-list span {
+    display: flex;
+    background-color: darkred;
+    border-radius: 12px;
+    color: white;
+    padding: 4px;
+    border-style: solid;
+    width: 220px;
+    height: 30px;
+}
+
+.skill-list span:hover {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+.input-skill input {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+}

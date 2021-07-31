@@ -1,190 +1,189 @@
-
 <div class="skill" data-skilltype="int">
-    <div class="flex">
-        <h3>Intelligence</h3>
+    <div class="monster-skill">
         {{#unless data.pannels.intIsOpen}}
-        <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.intIsOpen}}
-        <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
+    </div>
     {{#unless data.pannels.intIsOpen}}
-    <table class="skill-list hidden">
+        <table class="skill-list hidden">
     {{/unless}}
     {{#if data.pannels.intIsOpen}}
-    <table class="skill-list">
+        <table class="skill-list">
     {{/if}}
-        {{#each data.skills.int as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    {{#each data.skills.int as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="ref">
-    <div class="flex">
-        <h3>Reflex </h3>
-            {{#unless data.pannels.refIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.refIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.refIsOpen}}
-        <table class="skill-list hidden">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.refIsOpen}}
-        <table class="skill-list">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.ref as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.refIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.refIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.ref as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="dex">
-    <div class="flex">
-        <h3>Dexterity</h3>
-            {{#unless data.pannels.dexIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.dexIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.dexIsOpen}}
-        <table class="skill-list hidden">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.dexIsOpen}}
-        <table class="skill-list">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.dex as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.dexIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.dexIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.dex as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="body">
-    <div class="flex">
-        <h3>Body</h3>
-            {{#unless data.pannels.bodyIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.bodyIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.bodyIsOpen}}
-        <table class="skill-list hidden">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.bodyIsOpen}}
-        <table class="skill-list">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.body as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.bodyIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.bodyIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.body as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="emp">
-    <div class="flex">
-        <h3>Empathy</h3>
-            {{#unless data.pannels.empIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.empIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.empIsOpen}}
-        <table class="skill-list hidden">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.empIsOpen}}
-        <table class="skill-list">
+        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.emp as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.empIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.empIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.emp as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="cra">
-    <div class="flex">
-        <h3>Craft</h3>
-            {{#unless data.pannels.craIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.craIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.craIsOpen}}
-        <table class="skill-list hidden">
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.craIsOpen}}
-        <table class="skill-list">
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.cra as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.craIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.craIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.cra as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="will">
-    <div class="flex">
-        <h3>Will</h3>
-            {{#unless data.pannels.willIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.willIsOpen}}
-            <a class="skill-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
+    <div class="monster-skill">
         {{#unless data.pannels.willIsOpen}}
-        <table class="skill-list hidden">
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}<i class="expander fas fa-chevron-right"></i></a>
         {{/unless}}
         {{#if data.pannels.willIsOpen}}
-        <table class="skill-list">
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}<i class="expander fas fa-chevron-down"></i></a>
         {{/if}}
-        {{#each data.skills.will as |skill st|}}
-        <tr>
-            <td class="{{st}} skill">
-                <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-            </td>
-            <td class="input-skill">
-                <input class="stats {{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-            </td>
-        </tr>
-        {{/each}}
+    </div>
+    {{#unless data.pannels.willIsOpen}}
+        <table class="skill-list hidden">
+    {{/unless}}
+    {{#if data.pannels.willIsOpen}}
+        <table class="skill-list">
+    {{/if}}
+    {{#each data.skills.will as |skill st|}}
+    <tr>
+        <td class="{{st}} skill">
+            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+        </td>
+        <td class="input-skill">
+            <input class="stats {{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
+        </td>
+    </tr>
+    {{/each}}
     </table>
 </div>

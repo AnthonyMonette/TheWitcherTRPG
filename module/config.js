@@ -40,18 +40,18 @@ witcher.Concealment = {
 }
 
 witcher.MonsterTypes = {
-    Humanoids: "Humanoids",
-    Necrophages: "Necrophages",
-    Specters: "Specters",
-    Beasts: "Beasts",
-    CursedOnes: "CursedOnes",
-    Hybrids: "Hybrids",
-    Insectoids: "Insectoids",
+    Humanoid: "Humanoid",
+    Necrophage: "Necrophage",
+    Specter: "Specter",
+    Beast: "Beast",
+    CursedOne: "CursedOne",
+    Hybrid: "Hybrid",
+    Insectoid: "Insectoid",
     Elementa: "Elementa",
-    Relicts: "Relicts",
-    Ogroids: "Ogroids",
-    Draconids: "Draconids",
-    Vampires: "Vampires",
+    Relict: "Relict",
+    Ogroid: "Ogroid",
+    Draconid: "Draconid",
+    Vampire: "Vampire",
 }
 
 witcher.CritGravity = {
