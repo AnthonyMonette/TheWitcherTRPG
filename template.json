@@ -455,83 +455,123 @@
         "lifeEvents": {
           "10": {
             "decade": 1,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "20": {
             "decade": 2,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "30": {
             "decade": 3,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "40": {
             "decade": 4,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "50": {
             "decade": 5,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "60": {
             "decade": 6,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "70": {
             "decade": 7,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "80": {
             "decade": 8,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "90": {
             "decade": 9,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "100": {
             "decade": 10,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "110": {
             "decade": 11,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "120": {
             "decade": 12,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "130": {
             "decade": 13,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "140": {
             "decade": 14,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "150": {
             "decade": 15,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "160": {
             "decade": 16,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "170": {
             "decade": 17,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "180": {
             "decade": 18,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "190": {
             "decade": 19,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           },
           "200": {
             "decade": 20,
-            "value": ""
+            "value": "",
+            "detais":"",
+            "isOpened": false
           }
         }
       },
