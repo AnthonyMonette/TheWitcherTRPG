@@ -13,7 +13,6 @@
 
 .monster-left-sidebar {
   width: 140px;
-  flex: none;
 }
 
 .monster-left-sidebar input {
@@ -161,7 +160,8 @@
 }
 
 .monster-knowledge {
-  width: 515px;
+  margin-top: 10px;
+  position: relative;
 }
 
 .monster-knowledge label, .monster-knowledge input {
@@ -169,13 +169,10 @@
   text-align: center;
 }
 
-.monster-right-sidebar {
-  margin-left: 10px;
-  flex: 1;
-}
-
 .monster-right-top {
   display: flex;
+}
+
 .monster-crit-wounds-section {
   margin-top: 10px;
 }
