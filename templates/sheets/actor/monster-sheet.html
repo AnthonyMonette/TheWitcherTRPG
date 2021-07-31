@@ -1,5 +1,5 @@
 <div class="flex">
-    <div>
+    <div class="monster-sheet-left-column">
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
 
         <div class="flex">
@@ -120,19 +120,19 @@
                 </div>
                 <div class="flex">
                     <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                    <table class="monster-info">
+                        <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
+                        <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
+                        <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
+                        <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
+                        <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
+                    </table>
                 </div>
-                <table class="monster-info">
-                    <tr><td>Height</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
-                    <tr><td>Weight</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
-                    <tr><td>Environment</td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
-                    <tr><td>Intelligence</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
-                    <tr><td>Organization</td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
-                </table>
             </div>
         </div>
 
         <div class="monster-knowledge">
-            <label>Commoner Supperstition (Education DC: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
+            <label>Commoner Superstition (Education DC: <input class="skill-value" name="data.commonSkillValue" type="text" value="{{data.commonSkillValue}}" data-dtype="Number"/>)</label>
             <textarea rows=10 name="data.common">{{data.common}}</textarea>
             <label>Witcher Knowledge (Monster Lore DC: <input class="skill-value" name="data.monsterLoreSkillValue" type="text" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/>)</label>
             <textarea rows=25 name="data.monsterLore">{{data.monsterLore}}</textarea>
@@ -241,7 +241,11 @@
                 <input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
                 <label>Senses</label>
                 <input type="text" name="data.senses" value="{{data.senses}}" placeholder="" />
-                
+
+                <div class="monster-crit-wounds-section">
+                    <h2>Crit Wounds <a class="add-crit" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+                    {{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
+                </div>
                 <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
                 
                 {{#each notes as |note id|}}

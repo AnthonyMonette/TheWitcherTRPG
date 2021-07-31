@@ -2,9 +2,12 @@
     display: flex;
 }
 
+.monster-sheet-left-column {
+  padding-right: 10px;
+}
+
 .monster-left-sidebar {
-    width: 140px;
-    flex: none;
+  width: 140px;
 }
 
 .monster-stat-title {
@@ -37,8 +40,8 @@ input.small {
 
 .monster-info {
   position: relative;
-  top: -135px;
-  left: 10px;
+  top: 352px;
+  right: 359px;
   width: 250px;
   background-color: silver;
   font-size: 12px;
@@ -48,14 +51,12 @@ input.small {
   height: 18px;
 }
 
-.monster-right-sidebar {
-  margin-left: 10px;
-  flex: 1;
-}
 
 .monster-knowledge {
-  width: 515px;
+  margin-top: 10px;
   position: relative;
-  top: -100px;
+}
+
+.monster-crit-wounds-section {
   margin-top: 10px;
 }
