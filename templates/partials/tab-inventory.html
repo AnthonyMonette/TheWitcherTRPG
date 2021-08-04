@@ -25,7 +25,7 @@
                     <td><input class="inline-edit range-info" data-field="data.range" type="text" value="{{weapon.data.range}}" placeholder="" /></td>
                     <td><input class="inline-edit damage-info" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
                     <td><div class="flex"><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/>/{{weapon.data.maxReliability}}</div></td>
-                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" {{checked data.equiped}}/></td>
+                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" value={{checked data.equiped}} {{checked data.equiped}}/></td>
                 </tr>
                 <tr class="item-info hidden" >
                     <td colspan="7">
@@ -88,7 +88,7 @@
                     <td><img src="{{armor.img}}" class="item-img dragable" draggable="true" data-id="{{armor._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{armor.data.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" {{checked data.equiped}}/></td>
+                    <td><input class="inline-edit" data-field="data.equiped" type="checkbox" value={{checked data.equiped}} {{checked data.equiped}}/></td>
                     <td><div class="flex">
                             <input class="inline-edit small" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/> /{{armor.data.maxStopping}}
                         </div>

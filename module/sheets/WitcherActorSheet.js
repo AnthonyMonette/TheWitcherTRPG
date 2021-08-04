@@ -125,6 +125,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
+      html.find(".life-event-display").on("click", this._onLifeEventDisplay.bind(this));
 
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -754,14 +755,14 @@ export default class WitcherActorSheet extends ActorSheet {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".item").dataset.itemId;
-      let item = this.actor.getOwnedItem(itemId);
+      let item = this.actor.items.get(itemId);
       let field = element.dataset.field;
       // Edit checkbox values
       let value = element.value
       if(value == "false") { 
         value = true
       }
-      if(value == "true") { 
+      if(value == "true" || value== "checked") { 
         value = false
       }
       
@@ -1143,6 +1144,34 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
 
+    _onLifeEventDisplay(event) {
+      event.preventDefault(); 
+      let section = event.currentTarget.closest(".lifeEvents");
+     switch(section.dataset.event) {
+        case "10": this.actor.update({ 'data.general.lifeEvents.10.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "20": this.actor.update({ 'data.general.lifeEvents.20.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "30": this.actor.update({ 'data.general.lifeEvents.30.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "40": this.actor.update({ 'data.general.lifeEvents.40.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "50": this.actor.update({ 'data.general.lifeEvents.50.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "60": this.actor.update({ 'data.general.lifeEvents.60.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "70": this.actor.update({ 'data.general.lifeEvents.70.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "80": this.actor.update({ 'data.general.lifeEvents.80.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "90": this.actor.update({ 'data.general.lifeEvents.90.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "100": this.actor.update({ 'data.general.lifeEvents.100.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "110": this.actor.update({ 'data.general.lifeEvents.110.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "120": this.actor.update({ 'data.general.lifeEvents.120.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "130": this.actor.update({ 'data.general.lifeEvents.130.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "140": this.actor.update({ 'data.general.lifeEvents.140.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "150": this.actor.update({ 'data.general.lifeEvents.150.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "160": this.actor.update({ 'data.general.lifeEvents.160.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "170": this.actor.update({ 'data.general.lifeEvents.170.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "180": this.actor.update({ 'data.general.lifeEvents.180.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "190": this.actor.update({ 'data.general.lifeEvents.190.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        case "200": this.actor.update({ 'data.general.lifeEvents.200.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+      }
+    }
+
+    
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");

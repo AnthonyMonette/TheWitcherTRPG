@@ -26,7 +26,6 @@
 
 .monster-stat-title label {
   font-weight: bold;
-  margin-left: 4px;
 }
 
 .monster-stat-display {
@@ -145,8 +144,8 @@
 
 .monster-info {
   position: relative;
-  top: 352px;
-  right: 359px;
+  top: -220px;
+  left: 10px;
   width: 250px;
   background-color: silver;
   font-size: 12px;
