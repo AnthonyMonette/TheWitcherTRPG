@@ -802,7 +802,12 @@ export default class WitcherActorSheet extends ActorSheet {
       let formula = item.data.data.damage
 
       if (item.data.data.isMelee){
-        formula += this.actor.data.data.attackStats.meleeBonus
+        if (this.actor.data.data.attackStats.meleeBonus < 0){
+          formula += `${this.actor.data.data.attackStats.meleeBonus}`
+        }
+        if (this.actor.data.data.attackStats.meleeBonus > 0){
+          formula += `+${this.actor.data.data.attackStats.meleeBonus}`
+        }
       }
 
       let messageData = {
@@ -1012,7 +1017,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   damageFormula += "+"+customDmg;
                 }                
                 let touchedLocation = ""
-                let LocationFormula = "(Damage-SP)"
+                let LocationFormula = "(Full Damage)"
                 switch(location){
                   case "randomHuman":
                     let randomHumanLocation = getRandomInt(10)
