@@ -2,15 +2,15 @@ export const witcher = {};
 
 witcher.statTypes = {
     none: "",
-    int: "int",
-    ref: "ref",
-    dex: "dex",
-    body: "body",
-    spd: "spd",
-    emp: "emp",
-    cra: "cra",
-    will: "will",
-    luck: "luck"
+    int: "WITCHER.Actor.Stat.Int",
+    ref: "WITCHER.Actor.Stat.Ref",
+    dex: "WITCHER.Actor.Stat.Dex",
+    body: "WITCHER.Actor.Stat.Body",
+    spd: "WITCHER.Actor.Stat.Spd",
+    emp: "WITCHER.Actor.Stat.Emp",
+    cra: "WITCHER.Actor.Stat.Cra",
+    will: "WITCHER.Actor.Stat.Will",
+    luck: "WITCHER.Actor.Stat.Luck",
 }
 
 witcher.substanceTypes = {
@@ -22,7 +22,7 @@ witcher.substanceTypes = {
     vermilion: "Vermilion",
     sol: "Sol",
     caelum: "Caelum",
-    fulgur: "Fulgur"
+    fulgur: "Fulgur",
 }
 
 witcher.Avalability = {
