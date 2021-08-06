@@ -40,6 +40,7 @@ function onDamage(event) {
       messageData.flavor += `<div>Strong Attack</div>`;
     }
     messageData.flavor += `<div><b>Location:</b> ${location} = ${locationFormula} </div>`;
+    messageData.flavor += `<div>Remove SP before applying location modifier.</div>`;
     if (effects) {
       messageData.flavor += `<b>Effects:</b>`;
       effects.forEach(element => {

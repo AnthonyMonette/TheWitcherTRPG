@@ -17,8 +17,7 @@
 
 /* Sheet min widths */
 .witcher.sheet.actor {
-  min-width: 805px;
-  max-width: 805px;
+  min-width: 555px;
   min-height: 400px;
 }
 .witcher.sheet.item {
@@ -160,7 +159,7 @@ input.profession-skill-input {
 }
 
 input.item-quantity{
-  width: 45px;
+  width: 30px;
 }
 
 .events {
@@ -170,8 +169,9 @@ input.item-quantity{
 .weapon-item {
   width: 380px;
 }
+
 .weapon-section {
-  width:450px;
+  flex: 1;
 }
 
 .item-info {
@@ -224,8 +224,8 @@ input.reliable-info {
 }
 
 .armor-section {
+  flex: 1;
   margin-left: 10px;
-  width: 380px;
 }
 
 .armor-name-header {
@@ -406,8 +406,11 @@ input.skill-value {
 }
 
 .item-img{
-  width: 25px;
-  height: 25px;
+  border: none;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .weight-value {
