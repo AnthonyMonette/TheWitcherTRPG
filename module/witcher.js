@@ -66,9 +66,6 @@ function aliveState(actor){
 	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
 	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
 
-	console.log("alive")
-	console.log(actor.data.data.stats.luck.max)
-	console.log(luckTotalModifiers)
     actor.update({ 
         'data.deathStateApplied': false,
         'data.woundTresholdApplied': false,
@@ -97,8 +94,7 @@ function woundState(actor){
 	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
 	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
 	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
-	console.log("wounded")
-	console.log(actor.data.data.stats.luck.max)
+
 	actor.update({ 
 		'data.deathStateApplied': false,
 		'data.woundTresholdApplied': true,
@@ -138,10 +134,7 @@ function deadState(actor){
 	craModifiers.forEach(item => craTotalModifiers += Number(item.value));
 	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
 	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
-
-	console.log("dead")
-	console.log(actor.data.data.stats.luck.max)
-	console.log(luckTotalModifiers)
+	
     actor.update({ 
         'data.deathStateApplied': true,
         'data.woundTresholdApplied': false,
