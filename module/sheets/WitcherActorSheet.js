@@ -1,6 +1,6 @@
 import { RollCustomMessage } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, applyWoundTreshold, applyDeathState, removeDeathState, removeWoundTreshold, genId } from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, genId, aliveState, woundState, deadState } from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -126,6 +126,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
       html.find(".life-event-display").on("click", this._onLifeEventDisplay.bind(this));
+      html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
 
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -140,6 +141,12 @@ export default class WitcherActorSheet extends ActorSheet {
 
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
       html.find(".delete-crit").on("click", this._onCritRemove.bind(this));
+      
+      html.find(".add-modifier").on("click", this._onAddModifier.bind(this));
+      html.find(".delete-stat").on("click", this._onModifierRemove.bind(this));
+
+      html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
+
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
@@ -252,7 +259,28 @@ export default class WitcherActorSheet extends ActorSheet {
         super._onDrop(event, data);
       }
     }
-    
+
+    async _onAddModifier(event){
+      event.preventDefault();
+      let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      let newModifierList  = []
+      if (this.actor.data.data.stats[stat].modifiers){
+        newModifierList = this.actor.data.data.stats[stat].modifiers
+      }
+      newModifierList.push({id: genId(), name: "Modifier", value: 0})
+
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.modifiers': newModifierList}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.modifiers': newModifierList}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.modifiers': newModifierList}); break;
+        case "body": this.actor.update({ 'data.stats.body.modifiers': newModifierList}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.modifiers': newModifierList}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.modifiers': newModifierList}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.modifiers': newModifierList}); break;
+        case "will": this.actor.update({ 'data.stats.will.modifiers': newModifierList}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.modifiers': newModifierList}); break;
+      }
+    }
 
     async _onCritAdd(event) {
         event.preventDefault();
@@ -267,6 +295,79 @@ export default class WitcherActorSheet extends ActorSheet {
         });
         this.actor.update({ "data.critWounds": newCritList });
     }
+    
+    async _onModifierEdit(event) {
+      event.preventDefault();
+      let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+
+      let element = event.currentTarget;
+      let itemId = element.closest(".list-modifiers").dataset.id;
+      
+      let field = element.dataset.field;
+      let value = element.value
+      let modifiers = this.actor.data.data.stats[stat].modifiers;
+      let objIndex = modifiers.findIndex((obj => obj.id == itemId));
+      modifiers[objIndex][field] = value
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.modifiers': modifiers}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.modifiers': modifiers}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.modifiers': modifiers}); break;
+        case "body": this.actor.update({ 'data.stats.body.modifiers': modifiers}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.modifiers': modifiers}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.modifiers': modifiers}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.modifiers': modifiers}); break;
+        case "will": this.actor.update({ 'data.stats.will.modifiers': modifiers}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.modifiers': modifiers}); break;
+      }
+
+      let totalValues = 0
+      modifiers.forEach(item => totalValues += Number(item.value));
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.current': this.actor.data.data.stats.ref.max+totalValues}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.current': this.actor.data.data.stats.dex.max+totalValues}); break;
+        case "body": this.actor.update({ 'data.stats.body.current': this.actor.data.data.stats.body.max+totalValues}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.current': this.actor.data.data.stats.spd.max+totalValues}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.current': this.actor.data.data.stats.emp.max+totalValues}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.current': this.actor.data.data.stats.cra.max+totalValues}); break;
+        case "will": this.actor.update({ 'data.stats.will.current': this.actor.data.data.stats.will.max+totalValues}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.current': this.actor.data.data.stats.luck.max+totalValues}); break;
+      }
+    }
+
+    async _onModifierRemove(event) {
+      event.preventDefault();
+      let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      const prevModList = this.actor.data.data.stats[stat].modifiers;
+      const newModList = Object.values(prevModList).map((details) => details);
+      const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
+      newModList.splice(idxToRm, 1);
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.modifiers': newModList}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.modifiers': newModList}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.modifiers': newModList}); break;
+        case "body": this.actor.update({ 'data.stats.body.modifiers': newModList}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.modifiers': newModList}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.modifiers': newModList}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.modifiers': newModList}); break;
+        case "will": this.actor.update({ 'data.stats.will.modifiers': newModList}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.modifiers': newModList}); break;
+      }
+
+      let totalValues = 0
+      newModList.forEach(item => totalValues += Number(item.value));
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.current': this.actor.data.data.stats.ref.max+totalValues}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.current': this.actor.data.data.stats.dex.max+totalValues}); break;
+        case "body": this.actor.update({ 'data.stats.body.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "will": this.actor.update({ 'data.stats.will.current': this.actor.data.data.stats.int.max+totalValues}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.current': this.actor.data.data.stats.int.max+totalValues}); break;
+      }
+  }
 
   async _onCritRemove(event) {
       event.preventDefault();
@@ -311,7 +412,6 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }
 
-      console.log(itemData)
       this.actor.createOwnedItem(itemData)
     }
     
@@ -730,25 +830,17 @@ export default class WitcherActorSheet extends ActorSheet {
 
     _onHPChanged(event) {
       let HPvalue = event.currentTarget.value;
-      if (!this.actor.data.data.deathStateApplied && HPvalue <= 0) {
-        applyDeathState(this.actor)
-      }
-      else if (this.actor.data.data.deathStateApplied && HPvalue > 0) {
-        removeDeathState(this.actor)
-        if (HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
-          applyWoundTreshold(this.actor)
-        }
-      }
-      else if (!this.actor.data.data.woundTresholdApplied && HPvalue < this.actor.data.data.coreStats.woundTreshold.value){
-          applyWoundTreshold(this.actor)
-      }
-      if (HPvalue >= this.actor.data.data.coreStats.woundTreshold.value){
-          removeWoundTreshold(this.actor)
-      }
+      
+      if (HPvalue <= 0)
+        deadState(this.actor);
+      else if (HPvalue < this.actor.data.data.coreStats.woundTreshold.value > 0)
+        woundState(this.actor);
+      else
+        aliveState(this.actor);
+
       this.actor.update({ 
         'data.derivedStats.hp.value': HPvalue,
         });
-      console.log(`death=${this.actor.data.data.deathStateApplied} - wound=${this.actor.data.data.woundTresholdApplied} `)
     }
 
     _onInlineEdit(event) {
@@ -1152,31 +1244,46 @@ export default class WitcherActorSheet extends ActorSheet {
     _onLifeEventDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".lifeEvents");
-     switch(section.dataset.event) {
-        case "10": this.actor.update({ 'data.general.lifeEvents.10.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "20": this.actor.update({ 'data.general.lifeEvents.20.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "30": this.actor.update({ 'data.general.lifeEvents.30.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "40": this.actor.update({ 'data.general.lifeEvents.40.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "50": this.actor.update({ 'data.general.lifeEvents.50.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "60": this.actor.update({ 'data.general.lifeEvents.60.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "70": this.actor.update({ 'data.general.lifeEvents.70.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "80": this.actor.update({ 'data.general.lifeEvents.80.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "90": this.actor.update({ 'data.general.lifeEvents.90.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "100": this.actor.update({ 'data.general.lifeEvents.100.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "110": this.actor.update({ 'data.general.lifeEvents.110.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "120": this.actor.update({ 'data.general.lifeEvents.120.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "130": this.actor.update({ 'data.general.lifeEvents.130.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "140": this.actor.update({ 'data.general.lifeEvents.140.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "150": this.actor.update({ 'data.general.lifeEvents.150.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "160": this.actor.update({ 'data.general.lifeEvents.160.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "170": this.actor.update({ 'data.general.lifeEvents.170.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "180": this.actor.update({ 'data.general.lifeEvents.180.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "190": this.actor.update({ 'data.general.lifeEvents.190.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
-        case "200": this.actor.update({ 'data.general.lifeEvents.200.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+      switch(section.dataset.event) {
+          case "10": this.actor.update({ 'data.general.lifeEvents.10.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "20": this.actor.update({ 'data.general.lifeEvents.20.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "30": this.actor.update({ 'data.general.lifeEvents.30.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "40": this.actor.update({ 'data.general.lifeEvents.40.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "50": this.actor.update({ 'data.general.lifeEvents.50.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "60": this.actor.update({ 'data.general.lifeEvents.60.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "70": this.actor.update({ 'data.general.lifeEvents.70.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "80": this.actor.update({ 'data.general.lifeEvents.80.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "90": this.actor.update({ 'data.general.lifeEvents.90.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "100": this.actor.update({ 'data.general.lifeEvents.100.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "110": this.actor.update({ 'data.general.lifeEvents.110.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "120": this.actor.update({ 'data.general.lifeEvents.120.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "130": this.actor.update({ 'data.general.lifeEvents.130.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "140": this.actor.update({ 'data.general.lifeEvents.140.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "150": this.actor.update({ 'data.general.lifeEvents.150.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "160": this.actor.update({ 'data.general.lifeEvents.160.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "170": this.actor.update({ 'data.general.lifeEvents.170.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "180": this.actor.update({ 'data.general.lifeEvents.180.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "190": this.actor.update({ 'data.general.lifeEvents.190.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+          case "200": this.actor.update({ 'data.general.lifeEvents.200.isOpened': this.actor.data.data.general.lifeEvents[section.dataset.event].isOpened ? false : true}); break;
+        }
+    }
+
+    _onStatModifierDisplay(event){
+      event.preventDefault(); 
+      let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      switch(stat) {
+        case "int": this.actor.update({ 'data.stats.int.isOpened': this.actor.data.data.stats.int.isOpened ? false : true}); break;
+        case "ref": this.actor.update({ 'data.stats.ref.isOpened': this.actor.data.data.stats.ref.isOpened ? false : true}); break;
+        case "dex": this.actor.update({ 'data.stats.dex.isOpened': this.actor.data.data.stats.dex.isOpened ? false : true}); break;
+        case "body": this.actor.update({ 'data.stats.body.isOpened': this.actor.data.data.stats.body.isOpened ? false : true}); break;
+        case "spd": this.actor.update({ 'data.stats.spd.isOpened': this.actor.data.data.stats.spd.isOpened ? false : true}); break;
+        case "emp": this.actor.update({ 'data.stats.emp.isOpened': this.actor.data.data.stats.emp.isOpened ? false : true}); break;
+        case "cra": this.actor.update({ 'data.stats.cra.isOpened': this.actor.data.data.stats.cra.isOpened ? false : true}); break;
+        case "will": this.actor.update({ 'data.stats.will.isOpened': this.actor.data.data.stats.will.isOpened ? false : true}); break;
+        case "luck": this.actor.update({ 'data.stats.luck.isOpened': this.actor.data.data.stats.luck.isOpened ? false : true}); break;
       }
     }
 
-    
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");

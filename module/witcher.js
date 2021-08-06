@@ -37,69 +37,124 @@ function updateDerived(actor){
 	});
 }
 
-function applyDeathState(actor){
-    let newInt = Math.floor(actor.data.data.stats.int.max/3);
-    let newRef= Math.floor(actor.data.data.stats.ref.max/3);
-    let newDex = Math.floor(actor.data.data.stats.dex.max/3);
-    let newBody = Math.floor(actor.data.data.stats.body.max/3);
-    let newSpd = Math.floor(actor.data.data.stats.spd.max/3);
-    let newEmp= Math.floor(actor.data.data.stats.emp.max/3);
-    let newCra = Math.floor(actor.data.data.stats.cra.max/3);
-    let newWill = Math.floor(actor.data.data.stats.will.max/3);
-    let newLuck = Math.floor(actor.data.data.stats.luck.max/3);
+function aliveState(actor){
+	let intTotalModifiers = 0
+	let refTotalModifiers = 0
+	let dexTotalModifiers = 0
+	let bodyTotalModifiers = 0
+	let spdTotalModifiers = 0
+	let empTotalModifiers = 0
+	let craTotalModifiers = 0
+	let willTotalModifiers = 0
+	let luckTotalModifiers = 0
+	let intModifiers = actor.data.data.stats.int.modifiers;
+	let refModifiers = actor.data.data.stats.ref.modifiers;
+	let dexModifiers = actor.data.data.stats.dex.modifiers;
+	let bodyModifiers = actor.data.data.stats.body.modifiers;
+	let spdModifiers = actor.data.data.stats.spd.modifiers;
+	let empModifiers = actor.data.data.stats.emp.modifiers;
+	let craModifiers = actor.data.data.stats.cra.modifiers;
+	let willModifiers = actor.data.data.stats.will.modifiers;
+	let luckModifiers = actor.data.data.stats.luck.modifiers;
+	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
+	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
+	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
+	bodyModifiers.forEach(item => bodyTotalModifiers += Number(item.value));
+	spdModifiers.forEach(item => spdTotalModifiers += Number(item.value));
+	empModifiers.forEach(item => empTotalModifiers += Number(item.value));
+	craModifiers.forEach(item => craTotalModifiers += Number(item.value));
+	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
+	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
 
-    actor.update({ 
-        'data.deathStateApplied': true,
-        'data.stats.int.current': newInt,
-        'data.stats.ref.current': newRef,
-        'data.stats.dex.current': newDex,
-        'data.stats.body.current': newBody,
-        'data.stats.spd.current': newSpd,
-        'data.stats.emp.current': newEmp,
-        'data.stats.cra.current': newCra,
-        'data.stats.will.current': newWill,
-        'data.stats.luck.current': newLuck,
-     });
-}
-
-function removeDeathState(actor){
+	console.log("alive")
+	console.log(actor.data.data.stats.luck.max)
+	console.log(luckTotalModifiers)
     actor.update({ 
         'data.deathStateApplied': false,
-        'data.stats.int.current': actor.data.data.stats.int.max,
-        'data.stats.ref.current': actor.data.data.stats.ref.max,
-        'data.stats.dex.current': actor.data.data.stats.dex.max,
-        'data.stats.body.current': actor.data.data.stats.body.max,
-        'data.stats.spd.current': actor.data.data.stats.spd.max,
-        'data.stats.emp.current': actor.data.data.stats.emp.max,
-        'data.stats.cra.current': actor.data.data.stats.cra.max,
-        'data.stats.will.current': actor.data.data.stats.will.max,
-        'data.stats.luck.current': actor.data.data.stats.luck.max,
-     });
-}
-
-function removeWoundTreshold(actor){
-    actor.update({ 
         'data.woundTresholdApplied': false,
-        'data.stats.ref.current': actor.data.data.stats.ref.max,
-        'data.stats.dex.current': actor.data.data.stats.dex.max,
-        'data.stats.int.current': actor.data.data.stats.int.max,
-        'data.stats.will.current': actor.data.data.stats.will.max,
+        'data.stats.int.current': actor.data.data.stats.int.max + intTotalModifiers,
+        'data.stats.ref.current': actor.data.data.stats.ref.max + refTotalModifiers,
+        'data.stats.dex.current': actor.data.data.stats.dex.max + dexTotalModifiers,
+        'data.stats.body.current': actor.data.data.stats.body.max + bodyTotalModifiers,
+        'data.stats.spd.current': actor.data.data.stats.spd.max + spdTotalModifiers,
+        'data.stats.emp.current': actor.data.data.stats.emp.max + empTotalModifiers,
+        'data.stats.cra.current': actor.data.data.stats.cra.max + craTotalModifiers,
+        'data.stats.will.current': actor.data.data.stats.will.max + willTotalModifiers,
+        'data.stats.luck.current': actor.data.data.stats.luck.max + luckTotalModifiers,
      });
 }
 
-function applyWoundTreshold(actor){
-    let newRef = Math.floor(actor.data.data.stats.ref.max/2);
-    let newDex= Math.floor(actor.data.data.stats.dex.max/2);
-    let newInt = Math.floor(actor.data.data.stats.int.max/2);
-    let newWill = Math.floor(actor.data.data.stats.will.max/2);
-
+function woundState(actor){
+	let intTotalModifiers = 0
+	let refTotalModifiers = 0
+	let dexTotalModifiers = 0
+	let willTotalModifiers = 0
+	let intModifiers = actor.data.data.stats.int.modifiers;
+	let refModifiers = actor.data.data.stats.ref.modifiers;
+	let dexModifiers = actor.data.data.stats.dex.modifiers;
+	let willModifiers = actor.data.data.stats.will.modifiers;
+	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
+	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
+	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
+	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
+	console.log("wounded")
+	console.log(actor.data.data.stats.luck.max)
 	actor.update({ 
-			'data.woundTresholdApplied': true,
-			'data.stats.ref.current': newRef,
-			'data.stats.dex.current': newDex,
-			'data.stats.int.current': newInt,
-			'data.stats.will.current': newWill,
+		'data.deathStateApplied': false,
+		'data.woundTresholdApplied': true,
+		'data.stats.ref.current': Math.floor((actor.data.data.stats.ref.max + refTotalModifiers)/2),
+		'data.stats.dex.current': Math.floor((actor.data.data.stats.dex.max + dexTotalModifiers)/2),
+		'data.stats.int.current': Math.floor((actor.data.data.stats.int.max + intTotalModifiers)/2),
+		'data.stats.will.current': Math.floor((actor.data.data.stats.will.max + willTotalModifiers)/2),
 	});
+}
+
+function deadState(actor){
+	
+	let intTotalModifiers = 0
+	let refTotalModifiers = 0
+	let dexTotalModifiers = 0
+	let bodyTotalModifiers = 0
+	let spdTotalModifiers = 0
+	let empTotalModifiers = 0
+	let craTotalModifiers = 0
+	let willTotalModifiers = 0
+	let luckTotalModifiers = 0
+	let intModifiers = actor.data.data.stats.int.modifiers;
+	let refModifiers = actor.data.data.stats.ref.modifiers;
+	let dexModifiers = actor.data.data.stats.dex.modifiers;
+	let bodyModifiers = actor.data.data.stats.body.modifiers;
+	let spdModifiers = actor.data.data.stats.spd.modifiers;
+	let empModifiers = actor.data.data.stats.emp.modifiers;
+	let craModifiers = actor.data.data.stats.cra.modifiers;
+	let willModifiers = actor.data.data.stats.will.modifiers;
+	let luckModifiers = actor.data.data.stats.luck.modifiers;
+	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
+	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
+	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
+	bodyModifiers.forEach(item => bodyTotalModifiers += Number(item.value));
+	spdModifiers.forEach(item => spdTotalModifiers += Number(item.value));
+	empModifiers.forEach(item => empTotalModifiers += Number(item.value));
+	craModifiers.forEach(item => craTotalModifiers += Number(item.value));
+	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
+	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
+
+	console.log("dead")
+	console.log(actor.data.data.stats.luck.max)
+	console.log(luckTotalModifiers)
+    actor.update({ 
+        'data.deathStateApplied': true,
+        'data.woundTresholdApplied': false,
+        'data.stats.int.current': Math.floor((actor.data.data.stats.int.max + intTotalModifiers)/3),
+        'data.stats.ref.current': Math.floor((actor.data.data.stats.ref.max + refTotalModifiers)/3),
+        'data.stats.dex.current': Math.floor((actor.data.data.stats.dex.max + dexTotalModifiers)/3),
+        'data.stats.body.current': Math.floor((actor.data.data.stats.body.max + bodyTotalModifiers)/3),
+        'data.stats.spd.current': Math.floor((actor.data.data.stats.spd.max + spdTotalModifiers)/3),
+        'data.stats.emp.current': Math.floor((actor.data.data.stats.emp.max + empTotalModifiers)/3),
+        'data.stats.cra.current': Math.floor((actor.data.data.stats.cra.max + craTotalModifiers)/3),
+        'data.stats.will.current': Math.floor((actor.data.data.stats.will.max + willTotalModifiers)/3),
+        'data.stats.luck.current': Math.floor((actor.data.data.stats.luck.max + luckTotalModifiers)/3)
+     });
 }
 
 function rollSkillCheck(thisActor, statNum, skillNum){
@@ -316,4 +371,4 @@ function genId() {
 		return '_' + Math.random().toString(36).substr(2, 9);
 	};
 
-export { updateDerived, rollSkillCheck, genId, applyWoundTreshold, removeWoundTreshold, applyDeathState, removeDeathState };
+export { updateDerived, rollSkillCheck, genId, aliveState, woundState, deadState };
