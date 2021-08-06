@@ -3,7 +3,7 @@
 }
 
 .char-left-sidebar {
-    width: 140px;
+    width: 155px;
     flex: none;
 }
 
@@ -32,8 +32,7 @@
 
 .char-stat-display {
     display: flex;
-    width: 140px;
-    height: 27px;
+    width: 170px;
     text-align: center;
 }
 

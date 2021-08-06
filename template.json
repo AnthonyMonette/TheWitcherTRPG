@@ -14,48 +14,66 @@
           "int": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Int"
+            "label": "WITCHER.Actor.Stat.Int",
+            "isOpened": false,
+            "modifiers": []
           },
           "ref": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Ref"
+            "label": "WITCHER.Actor.Stat.Ref",
+            "isOpened": false,
+            "modifiers": []
           },
           "dex": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Dex"
+            "label": "WITCHER.Actor.Stat.Dex",
+            "isOpened": false,
+            "modifiers": []
           },
           "body": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Body"
+            "label": "WITCHER.Actor.Stat.Body",
+            "isOpened": false,
+            "modifiers": []
           },
           "spd": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Spd"
+            "label": "WITCHER.Actor.Stat.Spd",
+            "isOpened": false,
+            "modifiers": []
           },
           "emp": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Emp"
+            "label": "WITCHER.Actor.Stat.Emp",
+            "isOpened": false,
+            "modifiers": []
           },
           "cra": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Cra"
+            "label": "WITCHER.Actor.Stat.Cra",
+            "isOpened": false,
+            "modifiers": []
           },
           "will": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.Stat.Will"
+            "label": "WITCHER.Actor.Stat.Will",
+            "isOpened": false,
+            "modifiers": []
           },
           "luck": {
             "max": 0,
             "current": 0,
             "total": 0,
-            "label": "WITCHER.Actor.Stat.Luck"
+            "label": "WITCHER.Actor.Stat.Luck",
+            "isOpened": false,
+            "modifiers": []
           }
         },
         "coreStats": {
