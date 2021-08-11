@@ -116,7 +116,12 @@
                             {{/if}}
                             {{#if (eq type "enhancement")}}
                                 <tr>
-                                    <td><div><b>Effect :</b></label>{{weapon.data.effect}}</div></td>
+                                    <td><div class="flex"> <label class="label-info"><b>Enc :</b></label>{{armor.data.encumb}}</div></td>
+                                    <td><div class="flex"> <label class="label-info"><b>Weight :</b></label>{{armor.data.weight}}</div></td>
+                                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><div><b>Effect :</b></label>{{armor.data.effect}}</div></td>
                                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                             {{/if}}
@@ -154,7 +159,7 @@
                 </tr>
                 <tr class="item-info hidden">
                     {{#if (eq type "valuable")}}
-                    <td colspan="4"><div class="flex"><label class="label-info"><b>Effect :</b></label> <div>{{valuable.data.effect}}</div></div></td>
+                    <td colspan="4"><div class="flex"><label class="label-info"><b>Description :</b></label> <div>{{valuable.data.description}}</div></div></td>
                     {{/if}}
                     {{#if (eq type "alchemical")}}
                     <td colspan="4">

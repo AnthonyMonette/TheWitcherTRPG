@@ -1,7 +1,7 @@
 <div class="char-left-sidebar">
     <div class="char-stat-title">
         <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
-        <label>{{localize "WITCHER.Actor.StatTitle.LableRight"}}</label>
+        <label>{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
     </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display char-stat-display" data-stat="{{stat}}">
@@ -9,7 +9,7 @@
             <div class="flex">
                 <a class="char-stat-button stat-roll">{{localize details.label}}</a>
                 <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                <input class="header-stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                <input class="header-stat stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                 
                 {{#unless details.isOpened}}
                 <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
@@ -38,15 +38,39 @@
     </div>
 </div>
 <div class="header-center">
-    <label>Name:</label>
+    <label>{{localize "WITCHER.Actor.Name"}}:</label>
     <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
     <div class="char-center-middle">
         <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-        <div>
+        <div class="core-stats-list">
+            <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
+            <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
             {{#each data.coreStats as |details coreStat|}}
-            <div class="char-stat-display">
-                <label class="char-stat-label">{{localize details.label}}</label> 
-                <input class="header-stat" value="{{details.value}}" type="text" placeholder="0" data-dtype="Number" readonly/>
+            <div class="stat-display char-stat-display" data-type="coreStat" data-stat="{{coreStat}}">
+                <div>
+                    <div class="flex">
+                        <label class="char-stat-label">{{localize details.label}}</label>
+                        <input class="header-stat" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                        <input class="header-stat" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
+                        
+                        {{#unless details.isOpened}}
+                            <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
+                        {{/unless}}
+                        {{#if details.isOpened}}
+                            <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                        {{/if}}
+                    </div>
+                {{#if details.isOpened}}
+                    <a class="add-modifier"><i class="fas fa-plus"></i></a>
+                    {{#each details.modifiers as |modifier value|}}
+                    <div class="list-modifiers"  data-id="{{modifier.id}}">
+                        <input  class="medium list-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                        <input  class="small list-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
+                        <a class="delete-stat"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                    </div>
+                    {{/each}}
+                {{/if}}
+                </div>
             </div>
             {{/each}}
         </div>

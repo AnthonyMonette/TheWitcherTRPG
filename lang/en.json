@@ -71,9 +71,14 @@
     "WITCHER.StSpd": "Speed",
     "WITCHER.StVigor": "Vigor",
 
+    "WITCHER.Actor.Name": "Character Name",
     "WITCHER.Actor.Race": "Race",
     "WITCHER.Actor.Gender": "Gender",
     "WITCHER.Actor.Age": "Age",
+    "WITCHER.Actor.Perks": "Perks",
+
+    "WITCHER.Actor.Adda.Profession": "Add a Profession",
+    "WITCHER.Actor.Adda.Race": "Add a Race",
 
     "WITCHER.Actor.TotalStats": "Total Stats",
 
@@ -88,7 +93,8 @@
     "WITCHER.Actor.Stat.Luck": "LUCK",
 
     "WITCHER.Actor.StatTitle.LableLeft": "Statistics",
-    "WITCHER.Actor.StatTitle.LableRight": "Mod / Max",
+    "WITCHER.Actor.StatTitle.ModMax": "Mod / Max",
+    "WITCHER.Actor.StatTitle.Derived": "Derived",
 
     "WITCHER.Actor.CoreStat.Stun": "STUN",
     "WITCHER.Actor.CoreStat.Run": "RUN",
@@ -120,6 +126,8 @@
     "WITCHER.Actor.Skill.Crafting": "Crafting",
     "WITCHER.Actor.Skill.Body": "Body",
     "WITCHER.Actor.Skill.Empathy": "Empathy",
+
+    "WITCHER.Actor.Profession.Level": "Level",
 
     "WITCHER.SkIntAwareness": "Awareness",
     "WITCHER.SkIntBusiness": "Business",
@@ -242,5 +250,13 @@
     "WITCHER.Monster.SkillTab": "Skills",
     "WITCHER.Monster.InventryTab": "Attacks/Loot",
     "WITCHER.Monster.DetailsTab": "Details",
-    "WITCHER.Monster.SpellsTab": "Spells"
+    "WITCHER.Monster.SpellsTab": "Spells",
+    
+    "WITCHER.Loot.TotalWeight": "Total Weight",
+    "WITCHER.Loot.TotalCost": "Total Cost",
+    "WITCHER.Loot.Weapons": "Weapons",
+    "WITCHER.Loot.Armors": "Armors",
+    "WITCHER.Loot.Valuables": "Valuables",
+    "WITCHER.Loot.Diagrams": "Diagrams",
+    "WITCHER.Loot.Components": "Components"
 }

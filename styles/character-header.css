@@ -32,7 +32,6 @@
 
 .char-stat-display {
     display: flex;
-    width: 170px;
     text-align: center;
 }
 
@@ -52,7 +51,7 @@ input.header-stat {
 
 .total-stats {
     text-align: right;
-    margin-right: 4px;
+    margin-right: 19px;
 }
 
 .total-stats label {
@@ -93,9 +92,25 @@ input.total-stats-show {
 }
 
 .actor-img {
-    height: 175px;
-    width: 175px;
+    height: 225px;
+    width: 225px;
 }
+
+.core-stats-list {
+    width: 150px;
+}
+
+.core-stats-label {
+    text-align: center;
+    display: inline-block;
+    width: 60px;
+}
+
+.core-stats.minmax  {
+    text-align: center;
+    display: inline-block;
+}
+
 
 .right-sidebar {
   padding: 10px;

@@ -20,135 +20,111 @@ function updateDerived(actor){
 	const baseMax = Math.floor((stats.body.max + stats.will.max)/2);
 	const meleeBonus = Math.ceil((stats.body.current-6)/2)*2;
 
+	let intTotalModifiers = 0;
+	let refTotalModifiers = 0;
+	let dexTotalModifiers = 0;
+	let bodyTotalModifiers = 0;
+	let spdTotalModifiers = 0;
+	let empTotalModifiers = 0;
+	let craTotalModifiers = 0;
+	let willTotalModifiers = 0;
+	let luckTotalModifiers = 0;
+	thisActor.data.data.stats.int.modifiers.forEach(item => intTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.ref.modifiers.forEach(item => refTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.dex.modifiers.forEach(item => dexTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.body.modifiers.forEach(item => bodyTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.spd.modifiers.forEach(item => spdTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.emp.modifiers.forEach(item => empTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
+	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
+	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
+	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers;
+	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers;
+	let curBody = thisActor.data.data.stats.body.max + bodyTotalModifiers;
+	let curSpd = thisActor.data.data.stats.spd.max + spdTotalModifiers;
+	let curEmp = thisActor.data.data.stats.emp.max + empTotalModifiers;
+	let curCra = thisActor.data.data.stats.cra.max + craTotalModifiers;
+	let curWill = thisActor.data.data.stats.will.max + willTotalModifiers;
+	let curLuck = thisActor.data.data.stats.luck.max + luckTotalModifiers;
+	let isDead = false;
+	let isWounded = false;
+	let HPvalue = thisActor.data.data.derivedStats.hp.value;
+	if (HPvalue <= 0) {
+		isDead = true
+		curInt = Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers)/3)
+		curRef =Math.floor(( thisActor.data.data.stats.ref.max + refTotalModifiers)/3)
+		curDex = Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers)/3)
+		curBody = Math.floor((thisActor.data.data.stats.body.max + bodyTotalModifiers)/3)
+		curSpd = Math.floor((thisActor.data.data.stats.spd.max + spdTotalModifiers)/3)
+		curEmp = Math.floor((thisActor.data.data.stats.emp.max + empTotalModifiers)/3)
+		curCra = Math.floor((thisActor.data.data.stats.cra.max + craTotalModifiers)/3)
+		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/3)
+		curLuck = Math.floor((thisActor.data.data.stats.luck.max + luckTotalModifiers)/3)
+	}
+	else if (HPvalue < thisActor.data.data.coreStats.woundTreshold.value > 0) {
+		isWounded = true
+		curRef = Math.floor((thisActor.data.data.stats.ref.max + refTotalModifiers)/2)
+		curDex = Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers)/2)
+		curInt = Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers)/2)
+		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/2)
+	}
+
+	
+	let stunTotalModifiers = 0;
+	let runTotalModifiers = 0;
+	let leapTotalModifiers = 0;
+	let encTotalModifiers = 0;
+	let recTotalModifiers = 0;
+	let wtTotalModifiers = 0;
+	thisActor.data.data.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 	thisActor.update({ 
+        'data.deathStateApplied': isDead,
+        'data.woundTresholdApplied': isWounded,
+        'data.stats.int.current': curInt,
+        'data.stats.ref.current': curRef,
+        'data.stats.dex.current': curDex,
+        'data.stats.body.current': curBody,
+        'data.stats.spd.current': curSpd,
+        'data.stats.emp.current': curEmp,
+        'data.stats.cra.current': curCra,
+        'data.stats.will.current': curWill,
+        'data.stats.luck.current': curLuck,
+
 		'data.derivedStats.hp.max': base * 5,
 		'data.derivedStats.sta.max': base * 5,
 		'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
 		'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
-		'data.coreStats.rec.value': base,
-		'data.coreStats.stun.value': Math.clamped(base, 1, 10),
-		'data.coreStats.enc.value': stats.body.current*10,
-		'data.coreStats.run.value': stats.spd.current*3,
-		'data.coreStats.leap.value': Math.floor(stats.spd.current*3/5),
-		'data.coreStats.woundTreshold.value': baseMax+1,
+
+		'data.coreStats.stun.current': Math.clamped(base, 1, 10) + stunTotalModifiers,
+		'data.coreStats.stun.max': Math.clamped(baseMax, 1, 10),
+
+		'data.coreStats.enc.current': stats.body.current*10  + encTotalModifiers,
+		'data.coreStats.enc.max': stats.body.current*10,
+
+		'data.coreStats.run.current': stats.spd.current*3 +runTotalModifiers,
+		'data.coreStats.run.max': stats.spd.current*3,
+
+		'data.coreStats.leap.current': Math.floor(stats.spd.current*3/5)+leapTotalModifiers,
+		'data.coreStats.leap.max': Math.floor(stats.spd.max*3/5),
+
+		'data.coreStats.rec.current': base + recTotalModifiers,
+		'data.coreStats.rec.max': baseMax,
+		
+		'data.coreStats.woundTreshold.current': baseMax+1+wtTotalModifiers,
+		'data.coreStats.woundTreshold.max': baseMax+1,
+
 		'data.attackStats.meleeBonus': meleeBonus,
 		'data.attackStats.punch.value': `1d6+${meleeBonus}`,
 		'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
 	});
 }
 
-function aliveState(actor){
-	let intTotalModifiers = 0
-	let refTotalModifiers = 0
-	let dexTotalModifiers = 0
-	let bodyTotalModifiers = 0
-	let spdTotalModifiers = 0
-	let empTotalModifiers = 0
-	let craTotalModifiers = 0
-	let willTotalModifiers = 0
-	let luckTotalModifiers = 0
-	let intModifiers = actor.data.data.stats.int.modifiers;
-	let refModifiers = actor.data.data.stats.ref.modifiers;
-	let dexModifiers = actor.data.data.stats.dex.modifiers;
-	let bodyModifiers = actor.data.data.stats.body.modifiers;
-	let spdModifiers = actor.data.data.stats.spd.modifiers;
-	let empModifiers = actor.data.data.stats.emp.modifiers;
-	let craModifiers = actor.data.data.stats.cra.modifiers;
-	let willModifiers = actor.data.data.stats.will.modifiers;
-	let luckModifiers = actor.data.data.stats.luck.modifiers;
-	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
-	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
-	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
-	bodyModifiers.forEach(item => bodyTotalModifiers += Number(item.value));
-	spdModifiers.forEach(item => spdTotalModifiers += Number(item.value));
-	empModifiers.forEach(item => empTotalModifiers += Number(item.value));
-	craModifiers.forEach(item => craTotalModifiers += Number(item.value));
-	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
-	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
-
-    actor.update({ 
-        'data.deathStateApplied': false,
-        'data.woundTresholdApplied': false,
-        'data.stats.int.current': actor.data.data.stats.int.max + intTotalModifiers,
-        'data.stats.ref.current': actor.data.data.stats.ref.max + refTotalModifiers,
-        'data.stats.dex.current': actor.data.data.stats.dex.max + dexTotalModifiers,
-        'data.stats.body.current': actor.data.data.stats.body.max + bodyTotalModifiers,
-        'data.stats.spd.current': actor.data.data.stats.spd.max + spdTotalModifiers,
-        'data.stats.emp.current': actor.data.data.stats.emp.max + empTotalModifiers,
-        'data.stats.cra.current': actor.data.data.stats.cra.max + craTotalModifiers,
-        'data.stats.will.current': actor.data.data.stats.will.max + willTotalModifiers,
-        'data.stats.luck.current': actor.data.data.stats.luck.max + luckTotalModifiers,
-     });
-}
-
-function woundState(actor){
-	let intTotalModifiers = 0
-	let refTotalModifiers = 0
-	let dexTotalModifiers = 0
-	let willTotalModifiers = 0
-	let intModifiers = actor.data.data.stats.int.modifiers;
-	let refModifiers = actor.data.data.stats.ref.modifiers;
-	let dexModifiers = actor.data.data.stats.dex.modifiers;
-	let willModifiers = actor.data.data.stats.will.modifiers;
-	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
-	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
-	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
-	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
-
-	actor.update({ 
-		'data.deathStateApplied': false,
-		'data.woundTresholdApplied': true,
-		'data.stats.ref.current': Math.floor((actor.data.data.stats.ref.max + refTotalModifiers)/2),
-		'data.stats.dex.current': Math.floor((actor.data.data.stats.dex.max + dexTotalModifiers)/2),
-		'data.stats.int.current': Math.floor((actor.data.data.stats.int.max + intTotalModifiers)/2),
-		'data.stats.will.current': Math.floor((actor.data.data.stats.will.max + willTotalModifiers)/2),
-	});
-}
-
-function deadState(actor){
-	
-	let intTotalModifiers = 0
-	let refTotalModifiers = 0
-	let dexTotalModifiers = 0
-	let bodyTotalModifiers = 0
-	let spdTotalModifiers = 0
-	let empTotalModifiers = 0
-	let craTotalModifiers = 0
-	let willTotalModifiers = 0
-	let luckTotalModifiers = 0
-	let intModifiers = actor.data.data.stats.int.modifiers;
-	let refModifiers = actor.data.data.stats.ref.modifiers;
-	let dexModifiers = actor.data.data.stats.dex.modifiers;
-	let bodyModifiers = actor.data.data.stats.body.modifiers;
-	let spdModifiers = actor.data.data.stats.spd.modifiers;
-	let empModifiers = actor.data.data.stats.emp.modifiers;
-	let craModifiers = actor.data.data.stats.cra.modifiers;
-	let willModifiers = actor.data.data.stats.will.modifiers;
-	let luckModifiers = actor.data.data.stats.luck.modifiers;
-	intModifiers.forEach(item => intTotalModifiers += Number(item.value));
-	refModifiers.forEach(item => refTotalModifiers += Number(item.value));
-	dexModifiers.forEach(item => dexTotalModifiers += Number(item.value));
-	bodyModifiers.forEach(item => bodyTotalModifiers += Number(item.value));
-	spdModifiers.forEach(item => spdTotalModifiers += Number(item.value));
-	empModifiers.forEach(item => empTotalModifiers += Number(item.value));
-	craModifiers.forEach(item => craTotalModifiers += Number(item.value));
-	willModifiers.forEach(item => willTotalModifiers += Number(item.value));
-	luckModifiers.forEach(item => luckTotalModifiers += Number(item.value));
-	
-    actor.update({ 
-        'data.deathStateApplied': true,
-        'data.woundTresholdApplied': false,
-        'data.stats.int.current': Math.floor((actor.data.data.stats.int.max + intTotalModifiers)/3),
-        'data.stats.ref.current': Math.floor((actor.data.data.stats.ref.max + refTotalModifiers)/3),
-        'data.stats.dex.current': Math.floor((actor.data.data.stats.dex.max + dexTotalModifiers)/3),
-        'data.stats.body.current': Math.floor((actor.data.data.stats.body.max + bodyTotalModifiers)/3),
-        'data.stats.spd.current': Math.floor((actor.data.data.stats.spd.max + spdTotalModifiers)/3),
-        'data.stats.emp.current': Math.floor((actor.data.data.stats.emp.max + empTotalModifiers)/3),
-        'data.stats.cra.current': Math.floor((actor.data.data.stats.cra.max + craTotalModifiers)/3),
-        'data.stats.will.current': Math.floor((actor.data.data.stats.will.max + willTotalModifiers)/3),
-        'data.stats.luck.current': Math.floor((actor.data.data.stats.luck.max + luckTotalModifiers)/3)
-     });
-}
 
 function rollSkillCheck(thisActor, statNum, skillNum){
     let parentStat = "";
@@ -364,4 +340,4 @@ function genId() {
 		return '_' + Math.random().toString(36).substr(2, 9);
 	};
 
-export { updateDerived, rollSkillCheck, genId, aliveState, woundState, deadState };
+export { updateDerived, rollSkillCheck, genId};
