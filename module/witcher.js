@@ -38,7 +38,6 @@ function updateDerived(actor){
 	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
 
 	let armorEnc = getArmorEcumbrance(thisActor)
-
 	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
 	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc;
 	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc;
@@ -143,7 +142,7 @@ function getArmorEcumbrance(actor){
 	let armors = actor.items.filter(function(item) {return item.type=="armor"});
 	armors.forEach(item => {
 		if (item.data.data.equiped || item.data.data.equiped == "checked") {
-			encumbranceModifier += item.data.data.encumb * item.data.data.encumb
+			encumbranceModifier += item.data.data.encumb
 		}
 	});
 	return encumbranceModifier
@@ -214,6 +213,12 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			flavor: `${parentStat}: ${skillName} Check`,
 	}
 	let rollFormula = `1d10+${stat}+${skill}`
+
+	let armorEnc = getArmorEcumbrance(thisActor)
+	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
+		rollFormula += `-${armorEnc}`
+	}
+
 	new Roll(rollFormula).roll().toMessage(messageData)
 }
 
