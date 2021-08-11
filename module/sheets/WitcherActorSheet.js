@@ -1,6 +1,6 @@
 import { RollCustomMessage } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, genId, aliveState, woundState, deadState } from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, genId} from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -109,7 +109,7 @@ export default class WitcherActorSheet extends ActorSheet {
     activateListeners(html) {
       super.activateListeners(html);
       
-      html.find("input.stats").on("change", updateDerived(this.actor));
+      html.find("input.stat-max").on("change", updateDerived(this.actor));
 
       let thisActor = this.actor;
       
@@ -829,18 +829,7 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     _onHPChanged(event) {
-      let HPvalue = event.currentTarget.value;
-      
-      if (HPvalue <= 0)
-        deadState(this.actor);
-      else if (HPvalue < this.actor.data.data.coreStats.woundTreshold.value > 0)
-        woundState(this.actor);
-      else
-        aliveState(this.actor);
-
-      this.actor.update({ 
-        'data.derivedStats.hp.value': HPvalue,
-        });
+      updateDerived(this.actor)
     }
 
     _onInlineEdit(event) {

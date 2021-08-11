@@ -9,7 +9,7 @@
             <div class="flex">
                 <a class="char-stat-button stat-roll">{{localize details.label}}</a>
                 <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                <input class="header-stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                <input class="header-stat stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                 
                 {{#unless details.isOpened}}
                 <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>

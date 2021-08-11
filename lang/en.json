@@ -250,5 +250,13 @@
     "WITCHER.Monster.SkillTab": "Skills",
     "WITCHER.Monster.InventryTab": "Attacks/Loot",
     "WITCHER.Monster.DetailsTab": "Details",
-    "WITCHER.Monster.SpellsTab": "Spells"
+    "WITCHER.Monster.SpellsTab": "Spells",
+    
+    "WITCHER.Loot.TotalWeight": "Total Weight",
+    "WITCHER.Loot.TotalCost": "Total Cost",
+    "WITCHER.Loot.Weapons": "Weapons",
+    "WITCHER.Loot.Armors": "Armors",
+    "WITCHER.Loot.Valuables": "Valuables",
+    "WITCHER.Loot.Diagrams": "Diagrams",
+    "WITCHER.Loot.Components": "Components"
 }
