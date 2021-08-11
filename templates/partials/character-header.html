@@ -1,7 +1,7 @@
 <div class="char-left-sidebar">
     <div class="char-stat-title">
         <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
-        <label>{{localize "WITCHER.Actor.StatTitle.LableRight"}}</label>
+        <label>{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
     </div>
     {{#each data.stats as |details stat|}}
     <div class="stat-display char-stat-display" data-stat="{{stat}}">
@@ -38,15 +38,18 @@
     </div>
 </div>
 <div class="header-center">
-    <label>Name:</label>
+    <label>{{localize "WITCHER.Actor.Name"}}:</label>
     <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name" />
     <div class="char-center-middle">
         <img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-        <div>
+        <div class="core-stats-list">
+            <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
+            <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
             {{#each data.coreStats as |details coreStat|}}
             <div class="char-stat-display">
-                <label class="char-stat-label">{{localize details.label}}</label> 
-                <input class="header-stat" value="{{details.value}}" type="text" placeholder="0" data-dtype="Number" readonly/>
+                <label class="char-stat-label">{{localize details.label}}</label>
+                <input class="header-stat" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                <input class="header-stat" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
             </div>
             {{/each}}
         </div>

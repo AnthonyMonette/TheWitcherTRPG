@@ -1,0 +1,12 @@
+.profession-card .editor {
+    height: 150px;
+}
+
+.profession-card {
+    width: 250px;
+    margin: 5px;
+}
+
+.profession-card i {
+    margin: 5px;
+}

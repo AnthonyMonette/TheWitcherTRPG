@@ -24,8 +24,16 @@
   text-align: center;
 }
 
-.monster-stat-title label {
+.monster-stat-lable {
+  display: inline-block;
+  width: 65px;
   font-weight: bold;
+  text-align: center;
+}
+
+.monster-stat-modmax {
+  font-weight: bold;
+  text-align: center;
 }
 
 .monster-stat-display {

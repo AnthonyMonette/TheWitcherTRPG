@@ -12,14 +12,14 @@
                 <select class="defining-skill-select" name="data.definingSkill.stat">
                     {{#select data.definingSkill.stat}}
                     {{#each config.statTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
+                    <option value="{{type}}">{{localize name}}</option>
                     {{/each}}
                     {{/select}}
                 </select> 
-                <label>level</label>
+                <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                 <input class="profession-level" name="data.definingSkill.level" type="number" value="{{data.definingSkill.level}}" placeholder=""/>
             </div>
-            <textarea rows="10" name="data.definingSkill.definition">{{data.definingSkill.definition}}</textarea>
+            {{editor content=data.definingSkill.definition target="data.definingSkill.definition" button=true editable=editable}}
         </div>
         <div class="profession-path flexrow">
             <div>
@@ -30,14 +30,14 @@
                         <select class="first-path-select" name="data.skillPath1.skill1.stat">
                             {{#select data.skillPath1.skill1.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath1.skill1.level" type="number" value="{{data.skillPath1.skill1.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath1.skill1.definition">{{data.skillPath1.skill1.definition}}</textarea>
+                    {{editor content=data.skillPath1.skill1.definition target="data.skillPath1.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card first-path">
                     <div class="flex first-path-header">
@@ -45,14 +45,14 @@
                         <select class="first-path-select" name="data.skillPath1.skill2.stat">
                             {{#select data.skillPath1.skill2.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath1.skill2.level" type="number" value="{{data.skillPath1.skill2.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath1.skill2.definition">{{data.skillPath1.skill2.definition}}</textarea>
+                    {{editor content=data.skillPath1.skill2.definition target="data.skillPath1.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card first-path">
                     <div class="flex first-path-header">
@@ -60,14 +60,14 @@
                         <select class="first-path-select" name="data.skillPath1.skill3.stat">
                             {{#select data.skillPath1.skill3.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath1.skill3.level" type="number" value="{{data.skillPath1.skill3.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath1.skill3.definition">{{data.skillPath1.skill3.definition}}</textarea>
+                    {{editor content=data.skillPath1.skill3.definition target="data.skillPath1.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
             <div>
@@ -78,14 +78,14 @@
                         <select class="second-path-select" name="data.skillPath2.skill1.stat">
                             {{#select data.skillPath2.skill1.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath2.skill1.level" type="number" value="{{data.skillPath2.skill1.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath2.skill1.definition">{{data.skillPath2.skill1.definition}}</textarea>
+                    {{editor content=data.skillPath2.skill1.definition target="data.skillPath2.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card second-path">
                     <div class="flex second-path-header">
@@ -93,14 +93,14 @@
                         <select class="second-path-select" name="data.skillPath2.skill2.stat">
                             {{#select data.skillPath2.skill2.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath2.skill2.level" type="number" value="{{data.skillPath2.skill2.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath2.skill2.definition">{{data.skillPath2.skill2.definition}}</textarea>
+                    {{editor content=data.skillPath2.skill2.definition target="data.skillPath2.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card second-path">
                     <div class="flex second-path-header">
@@ -108,14 +108,14 @@
                         <select class="second-path-select" name="data.skillPath2.skill3.stat">
                             {{#select data.skillPath2.skill3.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath2.skill3.level" type="number" value="{{data.skillPath2.skill3.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath2.skill3.definition">{{data.skillPath2.skill3.definition}}</textarea>
+                    {{editor content=data.skillPath2.skill3.definition target="data.skillPath2.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
             <div>
@@ -126,14 +126,14 @@
                         <select class="third-path-select" name="data.skillPath3.skill1.stat">
                             {{#select data.skillPath3.skill1.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath3.skill1.level" type="number" value="{{data.skillPath3.skill1.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath3.skill1.definition">{{data.skillPath3.skill1.definition}}</textarea>
+                    {{editor content=data.skillPath3.skill1.definition target="data.skillPath3.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card third-path">
                     <div class="flex third-path-header">
@@ -141,14 +141,14 @@
                         <select class="third-path-select" name="data.skillPath3.skill2.stat">
                             {{#select data.skillPath3.skill2.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath3.skill2.level" type="number" value="{{data.skillPath3.skill2.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath3.skill2.definition">{{data.skillPath3.skill2.definition}}</textarea>
+                    {{editor content=data.skillPath3.skill2.definition target="data.skillPath3.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card third-path">
                     <div class="flex third-path-header">
@@ -156,14 +156,14 @@
                         <select class="third-path-select" name="data.skillPath3.skill3.stat">
                             {{#select data.skillPath3.skill3.stat}}
                             {{#each config.statTypes as |name type|}}
-                            <option value="{{type}}">{{name}}</option>
+                            <option value="{{type}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select> 
-                        <label>level</label>
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="profession-level" name="data.skillPath3.skill3.level" type="number" value="{{data.skillPath3.skill3.level}}" placeholder=""/>
                     </div>
-                    <textarea rows="10" name="data.skillPath3.skill3.definition">{{data.skillPath3.skill3.definition}}</textarea>
+                    {{editor content=data.skillPath3.skill3.definition target="data.skillPath3.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
         </div>

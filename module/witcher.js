@@ -25,12 +25,25 @@ function updateDerived(actor){
 		'data.derivedStats.sta.max': base * 5,
 		'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
 		'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
-		'data.coreStats.rec.value': base,
-		'data.coreStats.stun.value': Math.clamped(base, 1, 10),
-		'data.coreStats.enc.value': stats.body.current*10,
-		'data.coreStats.run.value': stats.spd.current*3,
-		'data.coreStats.leap.value': Math.floor(stats.spd.current*3/5),
-		'data.coreStats.woundTreshold.value': baseMax+1,
+
+		'data.coreStats.stun.current': Math.clamped(base, 1, 10),
+		'data.coreStats.stun.max': Math.clamped(baseMax, 1, 10),
+
+		'data.coreStats.enc.current': stats.body.current*10,
+		'data.coreStats.enc.max': stats.body.current*10,
+
+		'data.coreStats.run.current': stats.spd.current*3,
+		'data.coreStats.run.max': stats.spd.current*3,
+
+		'data.coreStats.leap.current': Math.floor(stats.spd.current*3/5),
+		'data.coreStats.leap.max': Math.floor(stats.spd.max*3/5),
+
+		'data.coreStats.rec.current': base,
+		'data.coreStats.rec.max': baseMax,
+		
+		'data.coreStats.woundTreshold.current': baseMax+1,
+		'data.coreStats.woundTreshold.max': baseMax+1,
+
 		'data.attackStats.meleeBonus': meleeBonus,
 		'data.attackStats.punch.value': `1d6+${meleeBonus}`,
 		'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,

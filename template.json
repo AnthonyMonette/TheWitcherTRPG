@@ -78,27 +78,33 @@
         },
         "coreStats": {
           "stun": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.Stun"
           },
           "run": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.Run"
           },
           "leap": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.Leap"
           },
           "enc": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.Enc"
           },
           "rec": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.Rec"
           },
           "woundTreshold": {
-            "value": 0,
+            "max": 0,
+            "current": 0,
             "label": "WITCHER.Actor.CoreStat.woundTreshold"
           }
         },

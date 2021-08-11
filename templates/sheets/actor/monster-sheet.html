@@ -3,9 +3,9 @@
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
         <div class="monster-main">
             <div class="monster-left-sidebar">
-                <div class="monster-stat-title">
-                    <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
-                    <label>{{localize "WITCHER.Actor.StatTitle.LableRight"}}</label>
+                <div>
+                    <label class="monster-stat-lable">{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
+                    <label class="monster-stat-modmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
                 </div>
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
@@ -20,7 +20,8 @@
                 {{#each data.coreStats as |details coreStat|}}
                 <div class="monster-stat-display">
                     <label>{{localize details.label}}</label>
-                    <input name="data.coreStats.{{coreStat}}.value" type="number" value="{{details.value}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input name="data.coreStats.{{coreStat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input name="data.coreStats.{{coreStat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
                 </div>
                 {{/each}}
                 <div class="monster-stat-display">

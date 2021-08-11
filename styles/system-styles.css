@@ -75,11 +75,6 @@
   width: 25px;
 }
 
-.profession-card {
-  width: 250px;
-  margin: 5px;
-}
-
 .profession-layout {
   flex-direction: column;
   display: flex;
@@ -333,10 +328,6 @@ input.focus {
   text-align: center;
 }
 
-.profession-card i {
-  margin: 5px;
-}
-
 .dice-display {
   text-align: center;
 }
@@ -395,7 +386,7 @@ input.skill-value {
 }
 
 .flex-header {
-    align-items: center;
+  align-items: center;
 }
 
 .add-item {
@@ -420,13 +411,6 @@ input.skill-value {
   top: 16px;
   color: white;
 }
-
-.left-loot-border {
-  border-right: solid 1px;
-  width: 150px;
-  height: 100%;
-}
-
 .description {
   margin: 10px;
 }
