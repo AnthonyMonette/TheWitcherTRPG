@@ -11,9 +11,7 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-	if (actor.data.data.customStat === true){
-		return null;
-	}
+	console.log("stat-max")
 	const thisActor = actor;
 	const stats = thisActor.data.data.stats;
 	const base = Math.floor((stats.body.current + stats.will.current)/2);
@@ -70,7 +68,6 @@ function updateDerived(actor){
 		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/2)
 	}
 
-	
 	let stunTotalModifiers = 0;
 	let runTotalModifiers = 0;
 	let leapTotalModifiers = 0;
@@ -83,6 +80,19 @@ function updateDerived(actor){
 	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
 	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
 	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
+
+	let curHp = thisActor.data.data.derivedStats.hp.max;
+	let curSta = thisActor.data.data.derivedStats.sta.max;
+	let curRes = thisActor.data.data.derivedStats.resolve.max;
+	let curFocus = thisActor.data.data.derivedStats.focus.max;
+
+	if (thisActor.data.data.customStat != true){
+		curHp = base * 5
+		curSta = base * 5
+		curRes = Math.floor((curWill + curInt)/2*5)
+		curFocus = Math.floor((curWill + curInt)/2*3)
+	}
+
 	thisActor.update({ 
         'data.deathStateApplied': isDead,
         'data.woundTresholdApplied': isWounded,
@@ -96,10 +106,10 @@ function updateDerived(actor){
         'data.stats.will.current': curWill,
         'data.stats.luck.current': curLuck,
 
-		'data.derivedStats.hp.max': base * 5,
-		'data.derivedStats.sta.max': base * 5,
-		'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
-		'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
+		'data.derivedStats.hp.max': curHp,
+		'data.derivedStats.sta.max': curSta,
+		'data.derivedStats.resolve.max': curRes,
+		'data.derivedStats.focus.max': curFocus,
 
 		'data.coreStats.stun.current': Math.clamped(base, 1, 10) + stunTotalModifiers,
 		'data.coreStats.stun.max': Math.clamped(baseMax, 1, 10),

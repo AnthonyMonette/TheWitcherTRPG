@@ -12,7 +12,7 @@
                     <div class="stat-display monster-stat-display" data-stat="{{stat}}">
                         <a class="monster-stat-button stat-roll">{{localize details.label}}</a></label> 
                         <input class="stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-                        <input class="stat" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                        <input class="stat stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     {{/unless}}
                 {{/each}}
