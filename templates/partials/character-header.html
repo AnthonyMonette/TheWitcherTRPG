@@ -46,10 +46,31 @@
             <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
             <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
             {{#each data.coreStats as |details coreStat|}}
-            <div class="char-stat-display">
-                <label class="char-stat-label">{{localize details.label}}</label>
-                <input class="header-stat" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                <input class="header-stat" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
+            <div class="stat-display char-stat-display" data-type="coreStat" data-stat="{{coreStat}}">
+                <div>
+                    <div class="flex">
+                        <label class="char-stat-label">{{localize details.label}}</label>
+                        <input class="header-stat" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                        <input class="header-stat" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
+                        
+                        {{#unless details.isOpened}}
+                            <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
+                        {{/unless}}
+                        {{#if details.isOpened}}
+                            <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                        {{/if}}
+                    </div>
+                {{#if details.isOpened}}
+                    <a class="add-modifier"><i class="fas fa-plus"></i></a>
+                    {{#each details.modifiers as |modifier value|}}
+                    <div class="list-modifiers"  data-id="{{modifier.id}}">
+                        <input  class="medium list-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                        <input  class="small list-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
+                        <a class="delete-stat"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                    </div>
+                    {{/each}}
+                {{/if}}
+                </div>
             </div>
             {{/each}}
         </div>

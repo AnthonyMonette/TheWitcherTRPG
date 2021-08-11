@@ -19,7 +19,7 @@ function updateDerived(actor){
 	const base = Math.floor((stats.body.current + stats.will.current)/2);
 	const baseMax = Math.floor((stats.body.max + stats.will.max)/2);
 	const meleeBonus = Math.ceil((stats.body.current-6)/2)*2;
-	
+
 	let intTotalModifiers = 0;
 	let refTotalModifiers = 0;
 	let dexTotalModifiers = 0;
@@ -70,6 +70,19 @@ function updateDerived(actor){
 		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/2)
 	}
 
+	
+	let stunTotalModifiers = 0;
+	let runTotalModifiers = 0;
+	let leapTotalModifiers = 0;
+	let encTotalModifiers = 0;
+	let recTotalModifiers = 0;
+	let wtTotalModifiers = 0;
+	thisActor.data.data.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 	thisActor.update({ 
         'data.deathStateApplied': isDead,
         'data.woundTresholdApplied': isWounded,
@@ -88,22 +101,22 @@ function updateDerived(actor){
 		'data.derivedStats.resolve.max': Math.floor((stats.will.current + stats.int.current)/2*5),
 		'data.derivedStats.focus.max': Math.floor((stats.will.current + stats.int.current)/2*3),
 
-		'data.coreStats.stun.current': Math.clamped(base, 1, 10),
+		'data.coreStats.stun.current': Math.clamped(base, 1, 10) + stunTotalModifiers,
 		'data.coreStats.stun.max': Math.clamped(baseMax, 1, 10),
 
-		'data.coreStats.enc.current': stats.body.current*10,
+		'data.coreStats.enc.current': stats.body.current*10  + encTotalModifiers,
 		'data.coreStats.enc.max': stats.body.current*10,
 
-		'data.coreStats.run.current': stats.spd.current*3,
+		'data.coreStats.run.current': stats.spd.current*3 +runTotalModifiers,
 		'data.coreStats.run.max': stats.spd.current*3,
 
-		'data.coreStats.leap.current': Math.floor(stats.spd.current*3/5),
+		'data.coreStats.leap.current': Math.floor(stats.spd.current*3/5)+leapTotalModifiers,
 		'data.coreStats.leap.max': Math.floor(stats.spd.max*3/5),
 
-		'data.coreStats.rec.current': base,
+		'data.coreStats.rec.current': base + recTotalModifiers,
 		'data.coreStats.rec.max': baseMax,
 		
-		'data.coreStats.woundTreshold.current': baseMax+1,
+		'data.coreStats.woundTreshold.current': baseMax+1+wtTotalModifiers,
 		'data.coreStats.woundTreshold.max': baseMax+1,
 
 		'data.attackStats.meleeBonus': meleeBonus,

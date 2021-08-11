@@ -7,7 +7,6 @@
     ],
     "templates":{
       "baseActor": {
-        "woundTreshold": 0,
         "woundTresholdApplied": false,
         "deathStateApplied": false,
         "stats": {
@@ -80,32 +79,44 @@
           "stun": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.Stun"
+            "label": "WITCHER.Actor.CoreStat.Stun",
+            "isOpened": false,
+            "modifiers": []
           },
           "run": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.Run"
+            "label": "WITCHER.Actor.CoreStat.Run",
+            "isOpened": false,
+            "modifiers": []
           },
           "leap": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.Leap"
+            "label": "WITCHER.Actor.CoreStat.Leap",
+            "isOpened": false,
+            "modifiers": []
           },
           "enc": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.Enc"
+            "label": "WITCHER.Actor.CoreStat.Enc",
+            "isOpened": false,
+            "modifiers": []
           },
           "rec": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.Rec"
+            "label": "WITCHER.Actor.CoreStat.Rec",
+            "isOpened": false,
+            "modifiers": []
           },
           "woundTreshold": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.CoreStat.woundTreshold"
+            "label": "WITCHER.Actor.CoreStat.woundTreshold",
+            "isOpened": false,
+            "modifiers": []
           }
         },
         "derivedStats": {

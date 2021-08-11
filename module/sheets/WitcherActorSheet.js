@@ -210,7 +210,6 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find("#ritcraft-rollable").on("click", function () {rollSkillCheck(thisActor, 6, 6)});
 
       html.find(".dragable").on("dragstart", (ev) => {
-        console.log(ev)
         let itemId = ev.target.dataset.id
         let item = this.actor.getOwnedItem(itemId);
         ev.originalEvent.dataTransfer.setData(
@@ -263,10 +262,19 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onAddModifier(event){
       event.preventDefault();
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      let type = event.currentTarget.closest(".stat-display").dataset.type;
+      
       let newModifierList  = []
-      if (this.actor.data.data.stats[stat].modifiers){
-        newModifierList = this.actor.data.data.stats[stat].modifiers
+      if (type != "coreStat") {
+        if (this.actor.data.data.stats[stat].modifiers){
+          newModifierList = this.actor.data.data.stats[stat].modifiers
+        }
+      }else {
+        if (this.actor.data.data.coreStats[stat].modifiers){
+          newModifierList = this.actor.data.data.coreStats[stat].modifiers
+        }
       }
+
       newModifierList.push({id: genId(), name: "Modifier", value: 0})
 
       switch(stat) {
@@ -279,6 +287,12 @@ export default class WitcherActorSheet extends ActorSheet {
         case "cra": this.actor.update({ 'data.stats.cra.modifiers': newModifierList}); break;
         case "will": this.actor.update({ 'data.stats.will.modifiers': newModifierList}); break;
         case "luck": this.actor.update({ 'data.stats.luck.modifiers': newModifierList}); break;
+        case "stun": this.actor.update({ 'data.coreStats.stun.modifiers': newModifierList}); break;
+        case "run": this.actor.update({ 'data.coreStats.run.modifiers': newModifierList}); break;
+        case "leap": this.actor.update({ 'data.coreStats.leap.modifiers': newModifierList}); break;
+        case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': newModifierList}); break;
+        case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': newModifierList}); break;
+        case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': newModifierList}); break;
       }
     }
 
@@ -299,13 +313,21 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onModifierEdit(event) {
       event.preventDefault();
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
+      let type = event.currentTarget.closest(".stat-display").dataset.type;
 
       let element = event.currentTarget;
       let itemId = element.closest(".list-modifiers").dataset.id;
       
       let field = element.dataset.field;
       let value = element.value
-      let modifiers = this.actor.data.data.stats[stat].modifiers;
+      let modifiers = []
+      
+      if (type != "coreStat") {
+        modifiers = this.actor.data.data.stats[stat].modifiers;
+      }else {
+        modifiers = this.actor.data.data.coreStats[stat].modifiers;
+      }
+
       let objIndex = modifiers.findIndex((obj => obj.id == itemId));
       modifiers[objIndex][field] = value
       switch(stat) {
@@ -318,27 +340,26 @@ export default class WitcherActorSheet extends ActorSheet {
         case "cra": this.actor.update({ 'data.stats.cra.modifiers': modifiers}); break;
         case "will": this.actor.update({ 'data.stats.will.modifiers': modifiers}); break;
         case "luck": this.actor.update({ 'data.stats.luck.modifiers': modifiers}); break;
+        case "stun": this.actor.update({ 'data.coreStats.stun.modifiers': modifiers}); break;
+        case "run": this.actor.update({ 'data.coreStats.run.modifiers': modifiers}); break;
+        case "leap": this.actor.update({ 'data.coreStats.leap.modifiers': modifiers}); break;
+        case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': modifiers}); break;
+        case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': modifiers}); break;
+        case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': modifiers}); break;
       }
-
-      let totalValues = 0
-      modifiers.forEach(item => totalValues += Number(item.value));
-      switch(stat) {
-        case "int": this.actor.update({ 'data.stats.int.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "ref": this.actor.update({ 'data.stats.ref.current': this.actor.data.data.stats.ref.max+totalValues}); break;
-        case "dex": this.actor.update({ 'data.stats.dex.current': this.actor.data.data.stats.dex.max+totalValues}); break;
-        case "body": this.actor.update({ 'data.stats.body.current': this.actor.data.data.stats.body.max+totalValues}); break;
-        case "spd": this.actor.update({ 'data.stats.spd.current': this.actor.data.data.stats.spd.max+totalValues}); break;
-        case "emp": this.actor.update({ 'data.stats.emp.current': this.actor.data.data.stats.emp.max+totalValues}); break;
-        case "cra": this.actor.update({ 'data.stats.cra.current': this.actor.data.data.stats.cra.max+totalValues}); break;
-        case "will": this.actor.update({ 'data.stats.will.current': this.actor.data.data.stats.will.max+totalValues}); break;
-        case "luck": this.actor.update({ 'data.stats.luck.current': this.actor.data.data.stats.luck.max+totalValues}); break;
-      }
+      updateDerived(this.actor);
     }
 
     async _onModifierRemove(event) {
       event.preventDefault();
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
-      const prevModList = this.actor.data.data.stats[stat].modifiers;
+      let type = event.currentTarget.closest(".stat-display").dataset.type;
+      let prevModList = []
+      if (type != "coreStat") {
+        prevModList = this.actor.data.data.stats[stat].modifiers;
+      }else {
+        prevModList = this.actor.data.data.coreStats[stat].modifiers;
+      }
       const newModList = Object.values(prevModList).map((details) => details);
       const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
       newModList.splice(idxToRm, 1);
@@ -352,21 +373,14 @@ export default class WitcherActorSheet extends ActorSheet {
         case "cra": this.actor.update({ 'data.stats.cra.modifiers': newModList}); break;
         case "will": this.actor.update({ 'data.stats.will.modifiers': newModList}); break;
         case "luck": this.actor.update({ 'data.stats.luck.modifiers': newModList}); break;
+        case "stun": this.actor.update({ 'data.coreStats.stun.modifiers': newModList}); break;
+        case "run": this.actor.update({ 'data.coreStats.run.modifiers': newModList}); break;
+        case "leap": this.actor.update({ 'data.coreStats.leap.modifiers': newModList}); break;
+        case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': newModList}); break;
+        case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': newModList}); break;
+        case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': newModList}); break;
       }
-
-      let totalValues = 0
-      newModList.forEach(item => totalValues += Number(item.value));
-      switch(stat) {
-        case "int": this.actor.update({ 'data.stats.int.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "ref": this.actor.update({ 'data.stats.ref.current': this.actor.data.data.stats.ref.max+totalValues}); break;
-        case "dex": this.actor.update({ 'data.stats.dex.current': this.actor.data.data.stats.dex.max+totalValues}); break;
-        case "body": this.actor.update({ 'data.stats.body.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "spd": this.actor.update({ 'data.stats.spd.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "emp": this.actor.update({ 'data.stats.emp.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "cra": this.actor.update({ 'data.stats.cra.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "will": this.actor.update({ 'data.stats.will.current': this.actor.data.data.stats.int.max+totalValues}); break;
-        case "luck": this.actor.update({ 'data.stats.luck.current': this.actor.data.data.stats.int.max+totalValues}); break;
-      }
+      updateDerived(this.actor);
   }
 
   async _onCritRemove(event) {
@@ -1270,6 +1284,12 @@ export default class WitcherActorSheet extends ActorSheet {
         case "cra": this.actor.update({ 'data.stats.cra.isOpened': this.actor.data.data.stats.cra.isOpened ? false : true}); break;
         case "will": this.actor.update({ 'data.stats.will.isOpened': this.actor.data.data.stats.will.isOpened ? false : true}); break;
         case "luck": this.actor.update({ 'data.stats.luck.isOpened': this.actor.data.data.stats.luck.isOpened ? false : true}); break;
+        case "stun": this.actor.update({ 'data.coreStats.stun.isOpened': this.actor.data.data.coreStats.stun.isOpened ? false : true}); break;
+        case "run": this.actor.update({ 'data.coreStats.run.isOpened': this.actor.data.data.coreStats.run.isOpened ? false : true}); break;
+        case "leap": this.actor.update({ 'data.coreStats.leap.isOpened': this.actor.data.data.coreStats.leap.isOpened ? false : true}); break;
+        case "enc": this.actor.update({ 'data.coreStats.enc.isOpened': this.actor.data.data.coreStats.enc.isOpened ? false : true}); break;
+        case "rec": this.actor.update({ 'data.coreStats.rec.isOpened': this.actor.data.data.coreStats.rec.isOpened ? false : true}); break;
+        case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.isOpened': this.actor.data.data.coreStats.woundTreshold.isOpened ? false : true}); break;
       }
     }
 
