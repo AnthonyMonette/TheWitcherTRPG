@@ -756,10 +756,20 @@
       "templates": ["base"],
       "stopping": 0,
       "maxStopping": 0,
+      "headStopping": 0,
+      "headMaxStopping": 0,
+      "torsoStopping": 0,
+      "torsoMaxStopping": 0,
+      "legStopping": 0,
+      "legMaxStopping": 0,
       "reliable": 0,
       "avail": "",
       "enhancements": 0,
-      "effect": "",
+      "effects": [{
+          "id": "first",
+          "name": "effect"
+        }
+      ],
       "encumb": 0,
       "location":"",
       "equiped": false,
