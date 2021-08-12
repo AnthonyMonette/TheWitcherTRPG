@@ -11,7 +11,6 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-	console.log("stat-max")
 	const thisActor = actor;
 	const stats = thisActor.data.data.stats;
 	const base = Math.floor((stats.body.current + stats.will.current)/2);
@@ -36,9 +35,11 @@ function updateDerived(actor){
 	thisActor.data.data.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
+
+	let armorEnc = getArmorEcumbrance(thisActor)
 	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
-	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers;
-	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers;
+	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc;
+	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc;
 	let curBody = thisActor.data.data.stats.body.max + bodyTotalModifiers;
 	let curSpd = thisActor.data.data.stats.spd.max + spdTotalModifiers;
 	let curEmp = thisActor.data.data.stats.emp.max + empTotalModifiers;
@@ -92,7 +93,7 @@ function updateDerived(actor){
 		curRes = Math.floor((curWill + curInt)/2*5)
 		curFocus = Math.floor((curWill + curInt)/2*3)
 	}
-
+	
 	thisActor.update({ 
         'data.deathStateApplied': isDead,
         'data.woundTresholdApplied': isWounded,
@@ -135,6 +136,16 @@ function updateDerived(actor){
 	});
 }
 
+function getArmorEcumbrance(actor){
+	let encumbranceModifier = 0
+	let armors = actor.items.filter(function(item) {return item.type=="armor"});
+	armors.forEach(item => {
+		if (item.data.data.equiped || item.data.data.equiped == "checked") {
+			encumbranceModifier += item.data.data.encumb
+		}
+	});
+	return encumbranceModifier
+}
 
 function rollSkillCheck(thisActor, statNum, skillNum){
     let parentStat = "";
@@ -201,6 +212,12 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			flavor: `${parentStat}: ${skillName} Check`,
 	}
 	let rollFormula = `1d10+${stat}+${skill}`
+
+	let armorEnc = getArmorEcumbrance(thisActor)
+	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
+		rollFormula += `-${armorEnc}`
+	}
+
 	new Roll(rollFormula).roll().toMessage(messageData)
 }
 

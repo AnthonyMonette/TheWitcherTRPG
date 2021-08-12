@@ -4,6 +4,8 @@
     "WITCHER.Item.Weight": "Weight",
     "WITCHER.Item.Cost": "Cost",
     "WITCHER.Item.Effect": "Effects",
+    "WITCHER.Item.Quantity": "Quantity",
+    "WITCHER.Item.Description": "Description",
 
     "WITCHER.Weapon.Type": "Type",
     "WITCHER.Weapon.WeaponAccuracy": "WA",
@@ -27,6 +29,13 @@
     "WITCHER.Armor.Slashing": "Slashing",
     "WITCHER.Armor.Percing": "Percing",
 
+    "WITCHER.Armor.LocationHead": "Head",
+    "WITCHER.Armor.LocationTorso": "Torso",
+    "WITCHER.Armor.LocationLeg": "Leg",
+    "WITCHER.Armor.LocationFull": "Full Cover",
+
+    "WITCHER.Armor.Location": "Location",
+
     "WITCHER.Component.Rarity": "Rarity",
     "WITCHER.Component.Location": "Location",
     "WITCHER.Component.Quantity": "Quantity",
@@ -39,7 +48,9 @@
     "WITCHER.Enhancement.Percing": "P",
 
     "WITCHER.Mount.Dex": "Dex + Atl",
-    "WITCHER.Mount.Control": "Control Mod",
+    "WITCHER.Mount.Dexterity": "Dex",
+    "WITCHER.Mount.ControlMod": "Control Mod",
+    "WITCHER.Mount.Control": "Control",
     "WITCHER.Mount.Speed": "Speed",
     "WITCHER.Mount.Hp": "HP",
     
@@ -47,15 +58,19 @@
     "WITCHER.Alchemy.Toxicity": "Tox.",
 
     
-    "WITCHER.Diagram.alchemyDC": "Alch DC.",
+    "WITCHER.Diagram.alchemyDC": "Alchemy DC.",
     "WITCHER.Diagram.craftingDC": "Craft DC.",
     "WITCHER.Diagram.craftingTime": "Time",
     "WITCHER.Diagram.components": "Components",
+    "WITCHER.Diagram.otherComponents": "Other Components",
     "WITCHER.Diagram.investment": "Investment",
+    "WITCHER.Diagram.Learned": "Learned",
     
-    "WITCHER.Mutagen.Source": "Mutagen Source",
+    "WITCHER.Mutagen.MutSource": "Mutagen Source",
     "WITCHER.Mutagen.AlchemyDC": "Alchemy DC",
     "WITCHER.Mutagen.MinorMutation": "Minor Mutation",
+    "WITCHER.Mutagen.Type": "Type",
+    "WITCHER.Mutagen.Source": "Source",
 
     "WITCHER.Valuable.Conceal": "Conceal",
     "WITCHER.Valuable.Quality": "Quality",
@@ -258,5 +273,54 @@
     "WITCHER.Loot.Armors": "Armors",
     "WITCHER.Loot.Valuables": "Valuables",
     "WITCHER.Loot.Diagrams": "Diagrams",
-    "WITCHER.Loot.Components": "Components"
+    "WITCHER.Loot.Components": "Components",
+
+    "WITCHER.Inventory.Armor": "Equipped Armor",
+    "WITCHER.Inventory.Weapons": "Equipped Weapons",
+    "WITCHER.Inventory.Valuables": "Valuables",
+    "WITCHER.Inventory.Substances": "Substances",
+    "WITCHER.Inventory.Components": "Components",
+    "WITCHER.Inventory.Diagrams": "Diagrams & Formlae",
+
+    "WITCHER.Button.Cancel": "Cancel",
+    "WITCHER.Button.Continue": "Continue",
+
+    "WITCHER.Spell.type": "Type",
+    "WITCHER.Spell.Spells": "Spells",
+    "WITCHER.Spell.Invocations": "Invocations",
+    "WITCHER.Spell.Witcher": "Witcher Signs",
+    "WITCHER.Spell.Rituals": "Rituals",
+    "WITCHER.Spell.Hexes": "Hexes",
+    "WITCHER.Spell.Danger": "Danger",
+    "WITCHER.Spell.DangerLow": "Low",
+    "WITCHER.Spell.DangerMedium": "Medium",
+    "WITCHER.Spell.DangerHigh": "High",
+    "WITCHER.Spell.Novice": "Novice",
+    "WITCHER.Spell.Journeyman": "Journeyman",
+    "WITCHER.Spell.Master": "Master",
+    "WITCHER.Spell.Mixed": "Mixed Elements",
+    "WITCHER.Spell.Earth": "Earth",    
+    "WITCHER.Spell.Air": "Air",
+    "WITCHER.Spell.Fire": "Fire",
+    "WITCHER.Spell.Wather": "Wather", 
+    "WITCHER.Spell.Druid": "Druid",
+    "WITCHER.Spell.Preacher": "Preacher",
+    "WITCHER.Spell.Archpriest": "Arch priest",    
+    "WITCHER.Spell.Basic": "Basic Sign",
+    "WITCHER.Spell.Alt": "Alternate Sign Forms",    
+    "WITCHER.Spell.Duration": "Duration",
+    "WITCHER.Spell.Range": "Range",
+    "WITCHER.Spell.Defence": "Defence",
+    "WITCHER.Spell.PrepTime": "Preparation Time",
+    "WITCHER.Spell.DC": "Dificulty Check",    
+    "WITCHER.Spell.Components": "Components",
+    "WITCHER.Spell.Requirements": "Requirements To Lift",    
+       
+    "WITCHER.Spell.StaCost": "Sta Cost",
+    "WITCHER.Spell.Variable": "Sta Variable",  
+    
+    
+    "WITCHER.Spell.staminaDialog": "How many stamina do you use?",
+    "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
+    "WITCHER.Spell.MagicCost": "Magic Costs"
 }

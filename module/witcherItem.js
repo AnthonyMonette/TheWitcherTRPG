@@ -7,9 +7,7 @@ export default class WitcherItem extends Item {
         let formula = item.data.data.damage
 
         if (item.data.data.isMelee){
-          console.log(this.actor.data.data.attackStats.meleeBonus)
           formula += this.actor.data.data.attackStats.meleeBonus
-          console.log(formula)
         }
   
         let messageData = {
