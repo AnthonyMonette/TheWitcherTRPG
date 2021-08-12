@@ -2,38 +2,40 @@
     <tbody>
         {{#each data.critWounds as |critWound i| }}
         <tr>
-            <td>
-                <input type="hidden" name="data.critWounds.{{i}}.id" type="text" value="{{critWound.id}}" />
-                <select name="data.critWounds.{{i}}.effect">
-                    {{#select (lookup this "effect") }}
-                    {{#each (lookup ../config "CritSimple") as |critEffect j|}}
-                    <option value="{{j}}">Simple - {{critEffect}}</option>
-                    {{/each}}
-                    {{#each (lookup ../config "CritComplex") as |critEffect j|}}
-                    <option value="{{j}}">Complex - {{critEffect}}</option>
-                    {{/each}}
-                    {{#each (lookup ../config "CritDifficult") as |critEffect j|}}
-                    <option value="{{j}}">Difficult - {{critEffect}}</option>
-                    {{/each}}
-                    {{#each (lookup ../config "CritDeadly") as |critEffect j|}}
-                    <option value="{{j}}">Deadly - {{critEffect}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-                <select name="data.critWounds.{{i}}.mod">
-                    {{#select (lookup this "mod") }}
-                    {{#each (lookup ../config "CritMod") as |critWoundModifier j|}}
-                    <option value="{{j}}">{{critWoundModifier}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-                <a class="delete-crit"><i class="fas fa-trash-alt" data-id="{{critWound.id}}"></i></a>
-                <br />
-                <div class="crit-wound-description" name="data.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{lookup ../config.CritDescription critWound.effect}}</div>
-                <br />
-                <div class="crit-wound-mod-description" name="data.critWounds.{{i}}.modDescription" data-id="CritModDescription.{{critWound.effect}}.{{critWound.mod}}">{{lookup (lookup ../config.CritModDescription critWound.effect) critWound.mod}}</div>
-                <br />
-                <textarea rows=1 name="data.critWounds.{{i}}.notes">{{critWound.notes}}</textarea>
+            <td class="flex">
+                <div class="critwound-left">
+                    <input type="hidden" name="data.critWounds.{{i}}.id" type="text" value="{{critWound.id}}" />
+                    <select name="data.critWounds.{{i}}.effect">
+                        {{#select (lookup this "effect") }}
+                        {{#each (lookup ../config "CritSimple") as |critEffect j|}}
+                        <option value="{{j}}">{{localize "WITCHER.CritWound.Simple"}} - {{critEffect}}</option>
+                        {{/each}}
+                        {{#each (lookup ../config "CritComplex") as |critEffect j|}}
+                        <option value="{{j}}">{{localize "WITCHER.CritWound.Complex"}} - {{critEffect}}</option>
+                        {{/each}}
+                        {{#each (lookup ../config "CritDifficult") as |critEffect j|}}
+                        <option value="{{j}}">{{localize "WITCHER.CritWound.Difficult"}} - {{critEffect}}</option>
+                        {{/each}}
+                        {{#each (lookup ../config "CritDeadly") as |critEffect j|}}
+                        <option value="{{j}}">{{localize "WITCHER.CritWound.Deadly"}} - {{critEffect}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <select name="data.critWounds.{{i}}.mod">
+                        {{#select (lookup this "mod") }}
+                        {{#each (lookup ../config "CritMod") as |critWoundModifier j|}}
+                        <option value="{{j}}">{{critWoundModifier}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <a class="delete-crit"><i class="fas fa-trash-alt" data-id="{{critWound.id}}"></i></a>
+                    <textarea rows=3 name="data.critWounds.{{i}}.notes">{{critWound.notes}}</textarea>
+                </div>
+                <div class="critwounds-right">
+                    <div class="crit-wound-description" name="data.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{localize (lookup ../config.CritDescription critWound.effect)}}</div>
+                    <br />
+                    <div class="crit-wound-mod-description" name="data.critWounds.{{i}}.modDescription" data-id="CritModDescription.{{critWound.effect}}.{{critWound.mod}}">{{localize (lookup (lookup ../config.CritModDescription critWound.effect) critWound.mod)}}</div>
+                </div>
             </td>
         </tr>
         {{/each}}

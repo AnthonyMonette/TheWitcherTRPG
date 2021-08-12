@@ -414,27 +414,3 @@ input.skill-value {
 .description {
   margin: 10px;
 }
-
-.crit-wounds {
-  width: 450px;
-  margin: 5px;
-  padding: 10px;
-}
-
-.crit-wounds-table textarea {
-  resize: vertical;
-}
-
-.crit-wound-description {
-  margin-top: 10px;
-}
-
-.crit-wound-mod-description {
-  margin-top: 5px;
-}
-
-.add-crit,
-.delete-crit {
-  margin: 5px;
-  width: 15px;
-}

@@ -20,7 +20,7 @@
     </div>
     <div class="flex">
         <div class="crit-wounds">
-            <h2>Crit Wounds <a class="add-crit"><i class="fas fa-plus"></i></a></h2>
+            <h2>{{localize "WITCHER.CritWound.Header"}}<a class="add-crit"><i class="fas fa-plus"></i></a></h2>
             {{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
         </div>
     </div>
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div>
-        <h2>Notes <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
+        <h2>{{localize "WITCHER.Notes"}} <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
                 
         {{#each notes as |note id|}}
         <div class="item bg-note" data-item-id="{{note._id}}">

@@ -1,0 +1,20 @@
+.critwound-left {
+    width: 50%;
+    margin-right: 5px;
+}
+
+.critwounds-right {
+    width: 50%;
+    margin-left: 5px;
+}
+
+.crit-wounds-table textarea {
+    resize: vertical;
+}
+  
+.add-crit,
+
+.delete-crit {
+    margin: 5px;
+    width: 15px;
+}
