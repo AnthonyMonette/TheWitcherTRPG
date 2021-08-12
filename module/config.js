@@ -40,25 +40,25 @@ witcher.Concealment = {
 }
 
 witcher.MonsterTypes = {
-    Humanoid: "Humanoid",
-    Necrophage: "Necrophage",
-    Specter: "Specter",
-    Beast: "Beast",
-    CursedOne: "CursedOne",
-    Hybrid: "Hybrid",
-    Insectoid: "Insectoid",
-    Elementa: "Elementa",
-    Relict: "Relict",
-    Ogroid: "Ogroid",
-    Draconid: "Draconid",
-    Vampire: "Vampire",
+    Humanoid: "WITCHER.Monster.Type.Humanoid",
+    Necrophage: "WITCHER.Monster.Type.Necrophage",
+    Specter: "WITCHER.Monster.Type.Specter",
+    Beast: "WITCHER.Monster.Type.Beast",
+    CursedOne: "WITCHER.Monster.Type.CursedOne",
+    Hybrid: "WITCHER.Monster.Type.Hybrid",
+    Insectoid: "WITCHER.Monster.Type.Insectoid",
+    Elementa: "WITCHER.Monster.Type.Elementa",
+    Relict: "WITCHER.Monster.Type.Relict",
+    Ogroid: "WITCHER.Monster.Type.Ogroid",
+    Draconid: "WITCHER.Monster.Type.Draconid",
+    Vampire: "WITCHER.Monster.Type.Vampire",
 }
 
 witcher.CritGravity = {
-    Simple: "Simple",
-    Complex: "Complex",
-    Difficult: "Difficult",
-    Deadly: "Deadly",
+    Simple: "WITCHER.CritWound.Simple",
+    Complex: "WITCHER.CritWound.Complex",
+    Difficult: "WITCHER.CritWound.Difficult",
+    Deadly: "WITCHER.CritWound.Deadly",
 };
 
 witcher.CritGravityDefaultEffect = {
@@ -69,9 +69,9 @@ witcher.CritGravityDefaultEffect = {
 };
 
 witcher.CritMod = {
-    None: "None",
-    Stabilized: "Stabilized",
-    Treated: "Treated",
+    None: "WITCHER.CritWound.None",
+    Stabilized: "WITCHER.CritWound.Stabilized",
+    Treated: "WITCHER.CritWound.Treated",
 };
 
 witcher.CritDescription = {
@@ -129,37 +129,37 @@ witcher.CritModDescription = {
 };
 
 witcher.CritSimple = {
-    SimpleCrackedJaw: "Cracked Jaw",
-    SimpleDisfiguringScar: "Disfiguring Scar",
-    SimpleCrackedRibs: "Cracked Ribs",
-    SimpleForeignObject: "Foreign Object",
-    SimpleSprainedArm: "Sprained Arm",
-    SimpleSprainedLeg: "Sprained Leg",
+    SimpleCrackedJaw: "WITCHER.CritWound.Name.SimpleCrackedJaw",
+    SimpleDisfiguringScar: "WITCHER.CritWound.Name.SimpleDisfiguringScar",
+    SimpleCrackedRibs: "WITCHER.CritWound.Name.SimpleCrackedRibs",
+    SimpleForeignObject: "WITCHER.CritWound.Name.SimpleForeignObject",
+    SimpleSprainedArm: "WITCHER.CritWound.Name.SimpleSprainedArm",
+    SimpleSprainedLeg: "WITCHER.CritWound.Name.SimpleSprainedLeg",
 };
 
 witcher.CritComplex = {
-    ComplexMinorHeadWound: "Minor Head Wound",
-    ComplexLostTeeth: "Lost Teeth",
-    ComplexRupturedSpleen: "Ruptured Spleen",
-    ComplexBrokenRibs: "Broken Ribs",
-    ComplexFracturedArm: "Fractured Arm",
-    ComplexFracturedLeg: "Fractured Leg",
+    ComplexMinorHeadWound: "WITCHER.CritWound.Name.ComplexMinorHeadWound",
+    ComplexLostTeeth: "WITCHER.CritWound.Name.ComplexLostTeeth",
+    ComplexRupturedSpleen: "WITCHER.CritWound.Name.ComplexRupturedSpleen",
+    ComplexBrokenRibs: "WITCHER.CritWound.Name.ComplexBrokenRibs",
+    ComplexFracturedArm: "WITCHER.CritWound.Name.ComplexFracturedArm",
+    ComplexFracturedLeg: "WITCHER.CritWound.Name.ComplexFracturedLeg",
 };
 
 witcher.CritDifficult = {
-    DifficultSkullFracture: "Skull Fracture",
-    DifficultConcussion: "Concussion",
-    DifficultTornStomach: "Torn Stomach",
-    DifficultSuckingChestWound: "Sucking Chest Wound",
-    DifficultCompoundArmFracture: "Compound Arm Fracture",
-    DifficultCompoundLegFracture: "Compound Leg Fracture",
+    DifficultSkullFracture: "WITCHER.CritWound.Name.DifficultSkullFracture",
+    DifficultConcussion: "WITCHER.CritWound.Name.DifficultConcussion",
+    DifficultTornStomach: "WITCHER.CritWound.Name.DifficultTornStomach",
+    DifficultSuckingChestWound: "WITCHER.CritWound.Name.DifficultSuckingChestWound",
+    DifficultCompoundArmFracture: "WITCHER.CritWound.Name.DifficultCompoundArmFracture",
+    DifficultCompoundLegFracture: "WITCHER.CritWound.Name.DifficultCompoundLegFracture",
 };
 
 witcher.CritDeadly = {
-    DeadlyDecapitated: "Decapitated",
-    DeadlyDamagedEye: "Damaged Eye",
-    DeadlyHearthDamage: "Hearth Damage",
-    DeadlySepticShock: "Septic Shock",
-    DeadlyDismemberedArm: "Dismembered Arm",
-    DeadlyDismemberedLeg: "Dismembered Leg",
+    DeadlyDecapitated: "WITCHER.CritWound.Name.DeadlyDecapitated",
+    DeadlyDamagedEye: "WITCHER.CritWound.Name.DeadlyDamagedEye",
+    DeadlyHearthDamage: "WITCHER.CritWound.Name.DeadlyHearthDamage",
+    DeadlySepticShock: "WITCHER.CritWound.Name.DeadlySepticShock",
+    DeadlyDismemberedArm: "WITCHER.CritWound.Name.DeadlyDismemberedArm",
+    DeadlyDismemberedLeg: "WITCHER.CritWound.Name.DeadlyDismemberedLeg",
 };
