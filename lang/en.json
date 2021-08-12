@@ -280,6 +280,47 @@
     "WITCHER.Inventory.Valuables": "Valuables",
     "WITCHER.Inventory.Substances": "Substances",
     "WITCHER.Inventory.Components": "Components",
-    "WITCHER.Inventory.Diagrams": "Diagrams & Formlae"
+    "WITCHER.Inventory.Diagrams": "Diagrams & Formlae",
 
+    "WITCHER.Button.Cancel": "Cancel",
+    "WITCHER.Button.Continue": "Continue",
+
+    "WITCHER.Spell.type": "Type",
+    "WITCHER.Spell.Spells": "Spells",
+    "WITCHER.Spell.Invocations": "Invocations",
+    "WITCHER.Spell.Witcher": "Witcher Signs",
+    "WITCHER.Spell.Rituals": "Rituals",
+    "WITCHER.Spell.Hexes": "Hexes",
+    "WITCHER.Spell.Danger": "Danger",
+    "WITCHER.Spell.DangerLow": "Low",
+    "WITCHER.Spell.DangerMedium": "Medium",
+    "WITCHER.Spell.DangerHigh": "High",
+    "WITCHER.Spell.Novice": "Novice",
+    "WITCHER.Spell.Journeyman": "Journeyman",
+    "WITCHER.Spell.Master": "Master",
+    "WITCHER.Spell.Mixed": "Mixed Elements",
+    "WITCHER.Spell.Earth": "Earth",    
+    "WITCHER.Spell.Air": "Air",
+    "WITCHER.Spell.Fire": "Fire",
+    "WITCHER.Spell.Wather": "Wather", 
+    "WITCHER.Spell.Druid": "Druid",
+    "WITCHER.Spell.Preacher": "Preacher",
+    "WITCHER.Spell.Archpriest": "Arch priest",    
+    "WITCHER.Spell.Basic": "Basic Sign",
+    "WITCHER.Spell.Alt": "Alternate Sign Forms",    
+    "WITCHER.Spell.Duration": "Duration",
+    "WITCHER.Spell.Range": "Range",
+    "WITCHER.Spell.Defence": "Defence",
+    "WITCHER.Spell.PrepTime": "Preparation Time",
+    "WITCHER.Spell.DC": "Dificulty Check",    
+    "WITCHER.Spell.Components": "Components",
+    "WITCHER.Spell.Requirements": "Requirements To Lift",    
+       
+    "WITCHER.Spell.StaCost": "Sta Cost",
+    "WITCHER.Spell.Variable": "Sta Variable",  
+    
+    
+    "WITCHER.Spell.staminaDialog": "How many stamina do you use?",
+    "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
+    "WITCHER.Spell.MagicCost": "Magic Costs"
 }

@@ -1,4 +1,4 @@
-import { RollCustomMessage } from "../chat.js";
+import { RollCustomMessage, buttonDialog } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId} from "../witcher.js";
 
@@ -486,24 +486,44 @@ export default class WitcherActorSheet extends ActorSheet {
           break;
       }
       let staCostTotal = spellItem.data.data.stamina;
-      let staCostdisplay = spellItem.data.data.stamina;
-      if (staCostTotal != "V" || staCostTotal != "Varivable"){
-        let staFocus = 0 
-        if (this.actor.data.data.focus1) {
-          staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
+      if (spellItem.data.data.staminaIsVar){
+        const content = `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1>`;
+        let cancel = true
+        let dialogData = {
+          buttons : [[`${game.i18n.localize("WITCHER.Button.Cancel")}`, ()=>{}], 
+          [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+            let sta = html.find("[name=staCost]")[0].value;
+            staCostTotal = sta
+            cancel = false
+          } ]],
+          title : game.i18n.localize("WITCHER.Spell.MagicCost"),
+          content : content
         }
-        
-        staCostTotal -= staFocus
-        if (staCostTotal < 0) {
-          staCostTotal = 0
+        await buttonDialog(dialogData)
+        if (cancel) {
+          return
         }
-
-        let newSta = this.actor.data.data.derivedStats.sta.value - staCostTotal
-        this.actor.update({ 
-          'data.derivedStats.sta.value': newSta
-        });
-        staCostdisplay += `-${staFocus}[Focus]`
       }
+      let staCostdisplay = staCostTotal;
+      let staFocus = 0 
+      if (this.actor.data.data.focus1) {
+        staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
+      }
+      
+      staCostTotal -= staFocus
+      if (staCostTotal < 0) {
+        staCostTotal = 0
+      }
+
+      let newSta = this.actor.data.data.derivedStats.sta.value - staCostTotal
+      if (newSta < 0) {
+        return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+      }
+      
+      this.actor.update({ 
+        'data.derivedStats.sta.value': newSta
+      });
+      staCostdisplay += `-${staFocus}[Focus]`
 
       let rollResult = new Roll(formula).roll()
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", this.actor, {

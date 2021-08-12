@@ -11,7 +11,6 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 @param {Actor} actor - The actor passed in from actor-sheet.js to have its properties updated
 */
 function updateDerived(actor){
-	console.log("stat-max")
 	const thisActor = actor;
 	const stats = thisActor.data.data.stats;
 	const base = Math.floor((stats.body.current + stats.will.current)/2);

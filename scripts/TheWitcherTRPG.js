@@ -70,7 +70,6 @@ Hooks.once("ready", async function() {
  * @returns {Promise}
  */
 async function createBoilerplateMacro(data, slot) { 
-    console.log(data)
     if (data.type == 'Actor') {
         const actor = game.actors.get(data.id);
         if (!actor) {
