@@ -1,11 +1,30 @@
 {
-    
+    "WITCHER.Type": "Type",
+    "WITCHER.Percentage": "Percentage",
+
     "WITCHER.Item.Availability": "Avail.",
     "WITCHER.Item.Weight": "Weight",
     "WITCHER.Item.Cost": "Cost",
     "WITCHER.Item.Effect": "Effects",
     "WITCHER.Item.Quantity": "Quantity",
     "WITCHER.Item.Description": "Description",
+    "WITCHER.Item.Attribute": "Attributes",
+
+    "WITCHER.Item.CraftingMaterial": "Crafting Material",
+    "WITCHER.Item.Hides&AnimalParts": "Hides & Animal Parts",
+    "WITCHER.Item.AlchemicalTreatments": "Alchemical Treatments",
+    "WITCHER.Item.Ingots&Minerals": "Ingots & Minerals",
+
+    "WITCHER.Item.Avalability.Everywhere": "E",
+    "WITCHER.Item.Avalability.Common": "C",
+    "WITCHER.Item.Avalability.Poor": "P",
+    "WITCHER.Item.Avalability.Rare": "R",
+    "WITCHER.Item.Avalability.Witcher": "W",
+
+    "Witcher.Item.Tiny": "T",
+    "Witcher.Item.Small": "S",
+    "Witcher.Item.Large": "L",
+    "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Type",
     "WITCHER.Weapon.WeaponAccuracy": "WA",
@@ -17,6 +36,9 @@
     "WITCHER.Weapon.Enhancement": "EN",
     "WITCHER.Weapon.Range": "Range",
     "WITCHER.Weapon.Elderfolk": "Eld.",
+
+    "WITCHER.Weapon.AttackSkill": "Attack Skill",
+    "WITCHER.Weapon.MeleeBonus": "Melee Bonus",
 
     "WITCHER.Armor.StoppingPower": "SP",
     "WITCHER.Armor.MaxStoppingPower": "Max. SP",
@@ -56,7 +78,9 @@
     
     "WITCHER.Alchemy.Duration": "Dura.",
     "WITCHER.Alchemy.Toxicity": "Tox.",
-
+    "WITCHER.Alchemy.Potion": "Potion",
+    "WITCHER.Alchemy.Decoction": "Decoction",
+    "WITCHER.Alchemy.Oil": "Oil",
     
     "WITCHER.Diagram.alchemyDC": "Alchemy DC.",
     "WITCHER.Diagram.craftingDC": "Craft DC.",
@@ -65,6 +89,21 @@
     "WITCHER.Diagram.otherComponents": "Other Components",
     "WITCHER.Diagram.investment": "Investment",
     "WITCHER.Diagram.Learned": "Learned",
+    "WITCHER.Diagram.Formulae": "Formuale",
+
+    "WITCHER.Diagram.Ingredient": "Ingredient",
+    "WITCHER.Diagram.Weapon": "Weapon",
+    "WITCHER.Diagram.Armor": "Armor",
+    "WITCHER.Diagram.ArmorEnhancement": "Armor Enhancement",
+    "WITCHER.Diagram.ElderfolkWeapon": "Elderfolk Weapon",
+    "WITCHER.Diagram.ElderfolkArmor": "Elderfolk Armor",
+    "WITCHER.Diagram.Ammunitionr": "Ammunitionr",
+
+    "WITCHER.Diagram.Novice": "Novice",
+    "WITCHER.Diagram.Journeyman": "Journeyman",
+    "WITCHER.Diagram.Master": "Master",
+    "WITCHER.Diagram.GrandMaster": "Grand Master",
+    "WITCHER.Diagram.Witcher": "Witcher",
     
     "WITCHER.Mutagen.MutSource": "Mutagen Source",
     "WITCHER.Mutagen.AlchemyDC": "Alchemy DC",
@@ -72,8 +111,20 @@
     "WITCHER.Mutagen.Type": "Type",
     "WITCHER.Mutagen.Source": "Source",
 
+    "WITCHER.Mutagen.Red": "Red", 
+    "WITCHER.Mutagen.Green": "Green",
+    "WITCHER.Mutagen.Blue": "Blue",
+
     "WITCHER.Valuable.Conceal": "Conceal",
     "WITCHER.Valuable.Quality": "Quality",
+    "WITCHER.Valueble.Toolkit": "Toolkit",
+    "WITCHER.Valueble.General": "General",
+    "WITCHER.Valueble.Containers": "Containers",
+    "WITCHER.Valueble.Food&Drinks": "Food & Drinks",
+    "WITCHER.Valueble.Clothings": "Clothings",
+    "WITCHER.Valueble.Service": "Service",
+    "WITCHER.Valueble.Loging": "Loging",
+    "WITCHER.Valueble.MountAccessories": "Mount Accessories",
 
     "WITCHER.StInt": "Intelligence",
     "WITCHER.StRef": "Reflex",
@@ -85,6 +136,12 @@
     "WITCHER.StLuck": "Luck",
     "WITCHER.StSpd": "Speed",
     "WITCHER.StVigor": "Vigor",
+
+    "WITCHER.Actor.SkillTab": "Skills & Modifiers",
+    "WITCHER.Actor.ProfessionTab": "Profession & Race",
+    "WITCHER.Actor.InventoryTab": "Gear & inventory",
+    "WITCHER.Actor.MagicTab": "Magic and Spells",
+    "WITCHER.Actor.BackgroundTab": "Background",
 
     "WITCHER.Actor.Name": "Character Name",
     "WITCHER.Actor.Race": "Race",
@@ -436,6 +493,18 @@
     "WITCHER.Inventory.Substances": "Substances",
     "WITCHER.Inventory.Components": "Components",
     "WITCHER.Inventory.Diagrams": "Diagrams & Formlae",
+
+    "WITCHER.Inventory.Substance": "Substance",
+
+    "WITCHER.Inventory.Vitriol": "Vitriol",
+    "WITCHER.Inventory.Rebis": "Rebis",
+    "WITCHER.Inventory.Aether": "Aether",
+    "WITCHER.Inventory.Quebrith": "Quebrith",
+    "WITCHER.Inventory.Hydragenum": "Hydragenum",
+    "WITCHER.Inventory.Vermilion": "Vermilion",
+    "WITCHER.Inventory.Sol": "Sol",
+    "WITCHER.Inventory.Caelum": "Caelum",
+    "WITCHER.Inventory.Fulgur": "Fulgur",
 
     "WITCHER.Button.Cancel": "Cancel",
     "WITCHER.Button.Continue": "Continue",
