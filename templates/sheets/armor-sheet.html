@@ -17,17 +17,6 @@
     </header>
     <div>
         <div>
-            <label>{{localize "WITCHER.Component.Location"}}:</label>
-            <select name="data.location" id="location-select">
-            {{#select data.location}}
-                <option value="Head">{{localize "WITCHER.Armor.LocationHead"}}</option>
-                <option value="Torso">{{localize "WITCHER.Armor.LocationTorso"}}</option>
-                <option value="Leg">{{localize "WITCHER.Armor.LocationLeg"}}</option>
-                <option value="FullCover">{{localize "WITCHER.Armor.LocationFull"}}</option>
-            {{/select}}
-            </select>
-        </div>
-        <div>
             <label>{{localize "WITCHER.Armor.Resistances"}}:</label>
             <label>{{localize "WITCHER.Armor.Bludgeoning"}}</label><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/>
             <label>{{localize "WITCHER.Armor.Slashing"}}</label><input type="checkbox" name="data.slashing" {{checked data.slashing}} />
@@ -40,7 +29,7 @@
             <th>{{localize "WITCHER.Item.Availability"}}</th>
             <th>{{localize "WITCHER.Armor.Enhancement"}}</th>
             <th>{{localize "WITCHER.Armor.EncumbranceValue"}}</th>
-            <th>{{localize "WITCHER.Armor.Reliable"}}</th>
+            <th>{{localize "WITCHER.Armor.Location"}}</th>
         </tr>
         <tr>
             <td>
@@ -54,8 +43,17 @@
             </td>
             <td><input type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
             <td><input type="number" name="data.encumb" value="{{data.encumb}}" data-dtype="Number"/></td>
-            <td><input type="number" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
-    </table>
+            <td>
+                <select name="data.location" id="location-select">
+                {{#select data.location}}
+                    <option value="Head">{{localize "WITCHER.Armor.LocationHead"}}</option>
+                    <option value="Torso">{{localize "WITCHER.Armor.LocationTorso"}}</option>
+                    <option value="Leg">{{localize "WITCHER.Armor.LocationLeg"}}</option>
+                    <option value="FullCover">{{localize "WITCHER.Armor.LocationFull"}}</option>
+                {{/select}}
+                </select>
+            </td>    
+        </table>
     <div class="flex">
         <table class="sp-table">
             <tr>
