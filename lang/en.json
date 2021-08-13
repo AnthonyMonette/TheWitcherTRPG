@@ -1,6 +1,7 @@
 {
     "WITCHER.Type": "Type",
     "WITCHER.Percentage": "Percentage",
+    "WITCHER.DC": "DC",
 
     "WITCHER.Item.Availability": "Avail.",
     "WITCHER.Item.Weight": "Weight",
@@ -9,6 +10,7 @@
     "WITCHER.Item.Quantity": "Quantity",
     "WITCHER.Item.Description": "Description",
     "WITCHER.Item.Attribute": "Attributes",
+    "WITCHER.Item.ROF": "ROF",
 
     "WITCHER.Item.CraftingMaterial": "Crafting Material",
     "WITCHER.Item.Hides&AnimalParts": "Hides & Animal Parts",
@@ -478,6 +480,11 @@
     "WITCHER.Monster.Type.Ogroid": "Ogroid",
     "WITCHER.Monster.Type.Draconid": "Draconid",
     "WITCHER.Monster.Type.Vampire": "Vampire",
+
+    "WITCHER.Monster.Resistances": "Resistances",
+    "WITCHER.Monster.Immunities": "Immunities",
+    "WITCHER.Monster.Susceptibilities": "Susceptibilities",
+    "WITCHER.Monster.Senses": "Senses",
     
     "WITCHER.Loot.TotalWeight": "Total Weight",
     "WITCHER.Loot.TotalCost": "Total Cost",
@@ -538,13 +545,17 @@
     "WITCHER.Spell.PrepTime": "Preparation Time",
     "WITCHER.Spell.DC": "Dificulty Check",    
     "WITCHER.Spell.Components": "Components",
-    "WITCHER.Spell.Requirements": "Requirements To Lift",    
+    "WITCHER.Spell.Requirements": "Requirements To Lift",
+    "WITCHER.Spell.Effect": "Effect",
+    "WITCHER.Spell.AlternateComponents": "Alternate Components",
+    "WITCHER.SPell.Signs": "Signs",
        
-    "WITCHER.Spell.StaCost": "Sta Cost",
-    "WITCHER.Spell.Variable": "Sta Variable",  
-    
+    "WITCHER.Spell.StaCost": "STA Cost",
+    "WITCHER.Spell.Variable": "STA Variable",
     
     "WITCHER.Spell.staminaDialog": "How many stamina do you use?",
     "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
-    "WITCHER.Spell.MagicCost": "Magic Costs"
+    "WITCHER.Spell.MagicCost": "Magic Costs",
+
+    "WITCHER.Chat.SaveText": "To succeed you need to roll below"
 }
