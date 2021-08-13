@@ -61,7 +61,7 @@ function updateDerived(actor){
 		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/3)
 		curLuck = Math.floor((thisActor.data.data.stats.luck.max + luckTotalModifiers)/3)
 	}
-	else if (HPvalue < thisActor.data.data.coreStats.woundTreshold.value > 0) {
+	else if (HPvalue < thisActor.data.data.coreStats.woundTreshold.current > 0) {
 		isWounded = true
 		curRef = Math.floor((thisActor.data.data.stats.ref.max + refTotalModifiers)/2)
 		curDex = Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers)/2)
