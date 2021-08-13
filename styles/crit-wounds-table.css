@@ -1,0 +1,41 @@
+.critwound-left {
+    width: 50%;
+    margin-right: 5px;
+}
+
+.critwounds-right {
+    width: 50%;
+    margin-left: 5px;
+}
+
+.crit-wounds-table textarea {
+    resize: vertical;
+}
+  
+.add-crit,
+
+.delete-crit {
+    margin: 5px;
+    width: 15px;
+}
+
+.critwounds-second-line {
+    display: flex;
+    text-align: center;
+    height: 26px;
+    width: 232px;
+    line-height: 26px;
+    margin: 1px;
+}
+
+.healing-time-lable {
+    width: 150px;
+}
+
+.days-healed {
+    width: 40px !important;
+}
+
+.healing-time {
+    width: 40px !important;
+}
