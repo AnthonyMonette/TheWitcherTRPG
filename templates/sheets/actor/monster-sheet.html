@@ -63,11 +63,11 @@
             <div class="monster-header-center">
                 <div class="monster-center-top">
                     <div class="monster-type">
-                        <label>{{localize "WITCHER.Monster.Type"}}</label>
+                        <label>{{localize "WITCHER.Monster.Type.Lable"}}</label>
                         <select name="data.category">
                             {{#select data.category}}
-                            {{#each config.MonsterTypes as |value name|}}
-                                    <option value="{{value}}">{{name}}</option>
+                            {{#each config.MonsterTypes as | name value|}}
+                                    <option value="{{value}}">{{localize name}}</option>
                             {{/each}}
                             {{/select}}
                         </select>

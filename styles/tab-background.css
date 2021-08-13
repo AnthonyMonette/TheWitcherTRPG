@@ -4,7 +4,7 @@
 }
 
 .lifeEvents {
-  margin: 10px;
+    margin: 10px;
 }
 
 .add-item {
@@ -20,4 +20,10 @@
 .item-delete {
     margin: 5px;
     width: 15px;
+}
+
+.crit-wounds {
+    width: 783px;
+    margin: 5px;
+    padding: 10px;
 }
