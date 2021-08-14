@@ -16,24 +16,24 @@
         </div>
     </header>
     <div class="flex-header">
-        <label>Attack Skill:</label>
+        <label>{{localize "WITCHER.Weapon.AttackSkill"}}:</label>
         <select name="data.attackSkill" id="hands-select">
             {{#select data.attackSkill}}
-                <option value="Brawling"> Brawling </option>
-                <option value="Melee"> Melee </option>
-                <option value="Small Blades"> Small Blades </option>
-                <option value="Staff/Spear"> Staff/Spear </option>
-                <option value="Swordsmanship"> Swordsmanship </option>
-                <option value="Archery"> Archery </option>
-                <option value="Athletics"> Athletics </option>
-                <option value="Crossbow"> Crossbow </option>
+                <option value="Brawling"> {{localize "WITCHER.SkRefBrawling"}} </option>
+                <option value="Melee"> {{localize "WITCHER.SkRefMelee"}} </option>
+                <option value="Small Blades"> {{localize "WITCHER.SkRefSmall"}} </option>
+                <option value="Staff/Spear"> {{localize "WITCHER.SkRefStaff"}} </option>
+                <option value="Swordsmanship"> {{localize "WITCHER.SkRefSwordmanship"}} </option>
+                <option value="Archery"> {{localize "WITCHER.SkDexArchery"}} </option>
+                <option value="Athletics"> {{localize "WITCHER.SkDexAthletics"}} </option>
+                <option value="Crossbow"> {{localize "WITCHER.SkDexCrossbow"}} </option>
             {{/select}}
         </select>
     </div>
     <table>
         <tr>
             <th>{{localize "WITCHER.Weapon.Type"}}</th>
-            <th>Melee Bonus</th>
+            <th>{{localize "WITCHER.Weapon.MeleeBonus"}}</th>
             <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
             <th>{{localize "WITCHER.Item.Availability"}}</th>
             <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
@@ -50,8 +50,8 @@
             <td>
                 <select name="data.avail" id="avail-select">
                 {{#select data.avail}}
-                {{#each config.Avalability as |value name|}}
-                        <option value="{{value}}">{{name}}</option>
+                {{#each config.Avalability as |name value|}}
+                        <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
                 </select>
@@ -69,8 +69,8 @@
             <td>
                 <select name="data.conceal" id="avail-select">
                     {{#select data.conceal}}
-                    {{#each config.Concealment as |value name|}}
-                            <option value="{{value}}">{{name}}</option>
+                    {{#each config.Concealment as |name value|}}
+                            <option value="{{value}}">{{localize name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>
@@ -97,7 +97,7 @@
                 <a class="remove-effect"><i class="fas fa-minus"></i></a>
                 <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
                 <div  class="flex">
-                    <label>Percentage:</label>
+                    <label>{{localize "WITCHER.Percentage"}}:</label>
                     <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
                     %
                 </div>

@@ -35,8 +35,8 @@
             <td>
                 <select name="data.avail" id="avail-select">
                 {{#select data.avail}}
-                {{#each config.Avalability as |value name|}}
-                        <option value="{{value}}">{{name}}</option>
+                {{#each config.Avalability as |name value|}}
+                        <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
                 </select>

@@ -1,11 +1,11 @@
-<h2>Weapons <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
+<h2>{{localize "WITCHER.Loot.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
 <table class="weapon-table">
     <tr>
         <td></td>
         <td></td>
-        <td><b>Name</b></td>
-        <td><b>DMG</b></td>
-        <td><b>ROF</b></td>
+        <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+        <td><b>{{localize "WITCHER.Weapon.Damage"}}</b></td>
+        <td><b>{{localize "WITCHER.Item.ROF"}}</b></td>
     </tr>
     {{#each weapons as |weapon id|}}
     <tbody class="item" data-item-id="{{weapon._id}}">
@@ -25,7 +25,7 @@
                 <a class="item-edit"><i class="fas fa-edit"></i></a>
             </td>
             <td colspan="3">
-                <div class="monster-flex"><b>Effect :</b></label>
+                <div class="monster-flex"><b>{{localize "WITCHER.Spell.Effect"}} :</b></label>
                     {{#each weapon.data.effects as |effect id|}}
                         <div class="monster-flex">
                         {{effect.name}}
