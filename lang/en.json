@@ -56,7 +56,15 @@
     "WITCHER.Armor.LocationHead": "Head",
     "WITCHER.Armor.LocationTorso": "Torso",
     "WITCHER.Armor.LocationLeg": "Leg",
+    "WITCHER.Armor.LocationArm": "Arm",
     "WITCHER.Armor.LocationFull": "Full Cover",
+
+    "WITCHER.Armor.LocationLeft": "L.",
+    "WITCHER.Armor.LocationRight": "R.",
+
+    "WITCHER.Location.Left": "Left",
+    "WITCHER.Location.Right": "Right",
+    
 
     "WITCHER.Armor.Location": "Location",
 
