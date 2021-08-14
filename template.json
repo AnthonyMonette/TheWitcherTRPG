@@ -754,6 +754,8 @@
     },
     "armor": {
       "templates": ["base"],
+      "reliability": 0,
+      "reliabilityMax": 0,
       "headStopping": 0,
       "headMaxStopping": 0,
       "torsoStopping": 0,

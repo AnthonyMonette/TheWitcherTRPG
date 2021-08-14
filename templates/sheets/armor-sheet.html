@@ -50,6 +50,7 @@
                     <option value="Torso">{{localize "WITCHER.Armor.LocationTorso"}}</option>
                     <option value="Leg">{{localize "WITCHER.Armor.LocationLeg"}}</option>
                     <option value="FullCover">{{localize "WITCHER.Armor.LocationFull"}}</option>
+                    <option value="Shield">{{localize "WITCHER.Armor.LocationShield"}}</option>
                 {{/select}}
                 </select>
             </td>    
@@ -57,9 +58,16 @@
     <div class="flex">
         <table class="sp-table">
             <tr>
+                
+                {{#unless (eq data.location "Shield")}}
                 <th class="location-table">{{localize "WITCHER.Armor.Location"}}</th>
                 <th>{{localize "WITCHER.Armor.StoppingPower"}}</th>
                 <th>{{localize "WITCHER.Armor.MaxStoppingPower"}}</th>
+                {{/unless}}
+                {{#if (eq data.location "Shield")}}
+                <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
+                <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
+                {{/if}}
             </tr>
             {{#if (eq data.location "Head")}}
                 <tr>
@@ -128,6 +136,12 @@
                     <td>{{localize "WITCHER.Location.Right"}} {{localize "WITCHER.Armor.LocationLeg"}}</td>
                     <td><input type="number" name="data.rightLegStopping" value="{{data.rightLegStopping}}" data-dtype="Number"/></td>
                     <td><input type="number" name="data.rightLegMaxStopping" value="{{data.rightLegMaxStopping}}" data-dtype="Number"/></td>
+                </tr>
+            {{/if}}
+            {{#if (eq data.location "Shield")}}
+                <tr>
+                    <td><input type="number" name="data.reliability" value="{{data.reliability}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="data.reliabilityMax" value="{{data.reliabilityMax}}" data-dtype="Number"/></td>
                 </tr>
             {{/if}}
         </table>

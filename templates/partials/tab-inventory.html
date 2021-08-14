@@ -162,6 +162,11 @@
                         </div>
                         {{/if}}
 
+                        {{#if (eq data.location "Shield")}} 
+                            {{localize "WITCHER.table.Reliability"}}
+                            <input class="inline-edit small" data-field="data.reliability" type="text" value="{{armor.data.reliability}}" data-dtype="Number"/> /{{armor.data.reliabilityMax}}
+                        {{/if}}
+
                     </td>
                         
                     <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled /></td>
