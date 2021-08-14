@@ -1,12 +1,12 @@
 <div class="flex">
     <div class="spell-section">
-        <h2> Novice - Spells, Invocation, Sings <a class="add-item" data-itemType="spell" data-spellType="spellNovice"><i class="fas fa-plus"></i></a> </h2>
+        <h2> {{localize "WITCHER.Spell.Novice"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.SPell.Signs"}} <a class="add-item" data-itemType="spell" data-spellType="spellNovice"><i class="fas fa-plus"></i></a> </h2>
         <table class="novice-spell-table">
             <tr> 
                 <td></td> 
                 <td></td> 
-                <td><b>name</b></td>
-                <td><b>STA Cost</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
                 <td></td> 
             </tr>
             {{#each noviceSpells as |noviceSpell id|}}
@@ -27,13 +27,13 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>Effect :</b></label> {{noviceSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{noviceSpell.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>Source :</b></label> {{noviceSpell.data.source}}
-                                <label><b>Range :</b></label> {{noviceSpell.data.range}}
-                                <label><b>Duration :</b></label> {{noviceSpell.data.duration}}
-                                <label><b>Defense :</b></label> {{noviceSpell.data.defense}}
+                                <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{noviceSpell.data.source}}
+                                <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{noviceSpell.data.range}}
+                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{noviceSpell.data.duration}}
+                                <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{noviceSpell.data.defense}}
                             </div>
                         </div>
                     </td>
@@ -42,13 +42,13 @@
             {{/each}}
         </table>
         
-        <h2> Journeyman - Spells, Invocation, Sings <a class="add-item" data-itemType="spell" data-spellType="spellJourneyman"><i class="fas fa-plus"></i></a> </h2>
+        <h2> {{localize "WITCHER.Spell.Journeyman"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.SPell.Signs"}} <a class="add-item" data-itemType="spell" data-spellType="spellJourneyman"><i class="fas fa-plus"></i></a> </h2>
         <table class="journeyman-spell-table">
             <tr> 
                 <td></td> 
                 <td></td> 
-                <td><b>name</b></td>
-                <td><b>STA Cost</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
                 <td></td> 
             </tr>
             {{#each journeymanSpells as |journeymanSpell id|}}
@@ -69,13 +69,13 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>Effect :</b></label> {{journeymanSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{journeymanSpell.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>Source :</b></label> {{journeymanSpell.data.source}}
-                                <label><b>Range :</b></label> {{journeymanSpell.data.range}}
-                                <label><b>Duration :</b></label> {{journeymanSpell.data.duration}}
-                                <label><b>Defense :</b></label> {{journeymanSpell.data.defense}}
+                               <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{journeymanSpell.data.source}}
+                               <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{journeymanSpell.data.range}}
+                               <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{journeymanSpell.data.duration}}
+                               <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{journeymanSpell.data.defense}}
                             </div>
                         </div>
                     </td>
@@ -84,13 +84,13 @@
             {{/each}}
         </table>
         
-        <h2> Master - Spells, Invocation, Sings <a class="add-item" data-itemType="spell" data-spellType="spellMaster"><i class="fas fa-plus"></i></a>  </h2>
+        <h2> {{localize "WITCHER.Spell.Master"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.SPell.Signs"}} <a class="add-item" data-itemType="spell" data-spellType="spellMaster"><i class="fas fa-plus"></i></a>  </h2>
         <table class="master-spell-table">
             <tr> 
                 <td></td> 
                 <td></td> 
-                <td><b>name</b></td>
-                <td><b>STA Cost</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
                 <td></td> 
             </tr>
             {{#each masterSpells as |masterSpell id|}}
@@ -111,13 +111,13 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>Effect :</b></label> {{masterSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{masterSpell.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>Source :</b></label> {{masterSpell.data.source}}
-                                <label><b>Range :</b></label> {{masterSpell.data.range}}
-                                <label><b>Duration :</b></label> {{masterSpell.data.duration}}
-                                <label><b>Defense :</b></label> {{masterSpell.data.defense}}
+                                <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{masterSpell.data.source}}
+                                <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{masterSpell.data.range}}
+                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{masterSpell.data.duration}}
+                                <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{masterSpell.data.defense}}
                             </div>
                         </div>
                     </td>
@@ -129,7 +129,7 @@
     <div class="magic-section">
         <div class="magic-info">
             <div class="stat-display">
-                <label>Vigor</label> 
+                <label>{{localize "WITCHER.StVigor"}}</label> 
                 <input class="focus-value" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
             </div>
             <div class="flex">
@@ -149,13 +149,13 @@
                 <input class="focus-value" name="data.v.value" type="text" value="{{data.focus4.value}}" placeholder="0" />
             </div>
         </div>
-        <h2> Rituals <a class="add-item" data-itemType="spell" data-spellType="rituals"><i class="fas fa-plus"></i></a> </h2>
+        <h2> {{localize "WITCHER.Spell.Rituals"}} <a class="add-item" data-itemType="spell" data-spellType="rituals"><i class="fas fa-plus"></i></a> </h2>
         <table class="hexes-table">
             <tr> 
                 <td></td> 
                 <td></td> 
-                <td><b>name</b></td>
-                <td><b>STA Cost</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
                 <td></td> 
             </tr>
             {{#each rituals as |ritual id|}}
@@ -176,15 +176,15 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>Effect :</b></label> {{ritual.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{ritual.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>Components :</b></label> {{ritual.data.components}}
+                                <label><b>{{localize "WITCHER.Spell.Components"}} :</b></label> {{ritual.data.components}}
                             </div>
                             <div class="flex">
-                                <label><b>Prep Time :</b></label> {{ritual.data.preparationTime}}
-                                <label><b>DC :</b></label> {{ritual.data.dificultyCheck}}
-                                <label><b>Duration :</b></label> {{ritual.data.duration}}
+                                <label><b>{{localize "WITCHER.Spell.PrepTime"}}:</b></label> {{ritual.data.preparationTime}}
+                                <label><b>{{localize "WITCHER.DC"}} :</b></label> {{ritual.data.dificultyCheck}}
+                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{ritual.data.duration}}
                             </div>
                         </div>
                     </td>
@@ -192,13 +192,13 @@
             </tbody>
             {{/each}}
         </table>
-        <h2> Hexes <a class="add-item" data-itemType="spell" data-spellType="hexes"><i class="fas fa-plus"></i></a> </h2>
+        <h2> {{localize "WITCHER.Spell.Hexes"}} <a class="add-item" data-itemType="spell" data-spellType="hexes"><i class="fas fa-plus"></i></a> </h2>
         <table class="hexes-table">
             <tr> 
                 <td></td> 
                 <td></td> 
-                <td><b>name</b></td>
-                <td><b>STA Cost</b></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
                 <td></td> 
             </tr>
             {{#each hexes as |hex id|}}
@@ -219,10 +219,10 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>Effect :</b></label> {{hex.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{hex.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>Requirement To Lift :</b></label> {{hex.data.liftRequirement}}
+                                <label><b>{{localize "WITCHER.Spell.Requirements"}}</b></label> {{hex.data.liftRequirement}}
                             </div>
                         </div>
                     </td>

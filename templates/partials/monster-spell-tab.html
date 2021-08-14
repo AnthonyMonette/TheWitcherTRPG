@@ -14,7 +14,7 @@
     </div>
 </div>
 <div class="spell" data-spelltype="noviceSpell">
-    <h3>Spells - Novice
+    <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Novice"}}
         {{#unless data.pannels.noviceSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
@@ -29,8 +29,8 @@
     {{/if}}
         <tr> 
             <td></td> 
-            <td><b>name</b></td>
-            <td><b>STA Cost</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
             <td></td> 
         </tr>
         {{#each noviceSpells as |spell id|}}
@@ -48,7 +48,7 @@
     </table>
 </div>
 <div class="spell" data-spelltype="journeymanSpell">
-    <h3>Spells - Journeyman
+    <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Journeyman"}}
         {{#unless data.pannels.journeymanSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
@@ -63,8 +63,8 @@
     {{/if}}
         <tr> 
             <td></td> 
-            <td><b>name</b></td>
-            <td><b>STA Cost</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
             <td></td> 
         </tr>
         {{#each journeymanSpells as |spell id|}}
@@ -82,7 +82,7 @@
     </table>
 </div>
 <div class="spell" data-spelltype="masterSpell">
-    <h3>Spells - Master 
+    <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Master"}}
         {{#unless data.pannels.masterSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
@@ -97,8 +97,8 @@
     {{/if}}
         <tr> 
             <td></td> 
-            <td><b>name</b></td>
-            <td><b>STA Cost</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
             <td></td> 
         </tr>
         {{#each masterSpells as |spell id|}}
@@ -131,8 +131,8 @@
     {{/if}}
         <tr> 
             <td></td> 
-            <td><b>name</b></td>
-            <td><b>STA Cost</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
             <td></td> 
         </tr>
         {{#each rituals as |ritual id|}}
@@ -165,8 +165,8 @@
     {{/if}}
         <tr> 
             <td></td> 
-            <td><b>name</b></td>
-            <td><b>STA Cost</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
             <td></td> 
         </tr>
         {{#each hexes as |hex id|}}

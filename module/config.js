@@ -14,29 +14,29 @@ witcher.statTypes = {
 }
 
 witcher.substanceTypes = {
-    vitriol: "Vitriol",
-    rebis: "Rebis",
-    aether: "Aether",
-    quebrith: "Quebrith",
-    hydragenum: "Hydragenum",
-    vermilion: "Vermilion",
-    sol: "Sol",
-    caelum: "Caelum",
-    fulgur: "Fulgur",
+    vitriol: "WITCHER.Inventory.Vitriol",
+    rebis: "WITCHER.Inventory.Rebis",
+    aether: "WITCHER.Inventory.Aether",
+    quebrith: "WITCHER.Inventory.Quebrith",
+    hydragenum: "WITCHER.Inventory.Hydragenum",
+    vermilion: "WITCHER.Inventory.Vermilion",
+    sol: "WITCHER.Inventory.Sol",
+    caelum: "WITCHER.Inventory.Caelum",
+    fulgur: "WITCHER.Inventory.Fulgur",
 }
 
 witcher.Avalability = {
-    E: "Everywhere",
-    C: "Common",
-    P: "Poor",
-    R: "Rare",
+    Everywhere: "WITCHER.Item.Avalability.Everywhere",
+    Common: "WITCHER.Item.Avalability.Common",
+    Poor: "WITCHER.Item.Avalability.Poor",
+    Rare: "WITCHER.Item.Avalability.Rare",
 }
 
 witcher.Concealment = {
-    T: "Tiny",
-    S: "Small",
-    L: "Large",
-    NA: "CantHide",
+    T: "Witcher.Item.Tiny",
+    S: "Witcher.Item.Small",
+    L: "Witcher.Item.Large",
+    NA: "Witcher.Item.CantHide",
 }
 
 witcher.MonsterTypes = {

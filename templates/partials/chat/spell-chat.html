@@ -1,33 +1,33 @@
 <div class="dice-roll chat-message">
     <h2>{{title}}</h2>
-    <div><b>Sta Cost: </b>{{staCost}}</div>
+    <div><b>{{localize "WITCHER.Spell.StaCost"}}: </b>{{staCost}}</div>
     {{#if effet}}
-    <div><b>Effet: </b>{{effet}}</div>
+    <div><b>{{localize "WITCHER.Spell.Effect"}}: </b>{{effet}}</div>
     {{/if}}
     {{#if range}}
-    <div><b>Range: </b>{{range}}</div>
+    <div><b>{{localize "WITCHER.Spell.Range"}}: </b>{{range}}</div>
     {{/if}}
     {{#if duration}}
-    <div><b>Duration: </b>{{duration}}</div>
+    <div><b>{{localize "WITCHER.Spell.Duration"}}: </b>{{duration}}</div>
     {{/if}}
     {{#if defence}}
-    <div><b>Defence: </b>{{defence}}</div>
+    <div><b>{{localize "WITCHER.Spell.Defence"}}: </b>{{defence}}</div>
     {{/if}}
     {{#if preparationTime}}
-    <div><b>Preparation Time: </b>{{preparationTime}}</div>
+    <div><b>{{localize "WITCHER.Spell.PrepTime"}}: </b>{{preparationTime}}</div>
     {{/if}}
     {{#if dificultyCheck}}
-    <div><b>DC: </b>{{dificultyCheck}}</div>
+    <div><b>{{localize "WITCHER.DC"}}: </b>{{dificultyCheck}}</div>
     {{/if}}
     {{#if components}}
-    <div><b>Components: </b>{{components}}</div>
+    <div><b>{{localize "WITCHER.Spell.Components"}}: </b>{{components}}</div>
     {{/if}}
     {{#if alternateComponents}}
-    <div><b>Alternate Components: </b>{{alternateComponents}}</div>
+    <div><b>{{localize "WITCHER.Spell.AlternateComponents"}}: </b>{{alternateComponents}}</div>
     {{/if}}
     
     {{#if liftRequirement}}
-    <div><b>Requirement To Lift: </b>{{liftRequirement}}</div>
+    <div><b>{{localize "WITCHER.Spell.Requirements"}}: </b>{{liftRequirement}}</div>
     {{/if}}
 
     {{> "templates/dice/roll.html"}}

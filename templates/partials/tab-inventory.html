@@ -90,34 +90,83 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit" data-field="data.equiped" type="checkbox" value={{checked data.equiped}} {{checked data.equiped}}/></td>
                     <td>
-                        {{#unless (eq armor.data.location "FullCover")}}
+                        {{#if (eq data.location "Head")}}
                         <div class="flex sp">
-                            {{#if (eq armor.data.location "Head")}}
-                            <i class="fas fa-hard-hat"></i>
-                            {{/if}}
-                            {{#if (eq armor.data.location "Torso")}}
-                            <i class="fas fa-tshirt"></i>
-                            {{/if}}
-                            {{#if (eq armor.data.location "Leg")}}
-                            <i class="fas fa-shoe-prints"></i>
-                            {{/if}}
-                            <input class="inline-edit small" data-field="data.stopping" type="text" value="{{armor.data.stopping}}" data-dtype="Number"/> /{{armor.data.maxStopping}}
-                        </div>
-                        {{/unless}}
-                        {{#if (eq armor.data.location "FullCover")}}
-                        <div class="flex sp">
+                            <div class="icon-spacer"></div>
                             <i class="fas fa-hard-hat"></i>
                             <input class="inline-edit small" data-field="data.headStopping" type="text" value="{{armor.data.headStopping}}" data-dtype="Number"/> /{{armor.data.headMaxStopping}}
                         </div>
+                        {{/if}}
+
+                        {{#if (eq data.location "Torso")}}
                         <div class="flex sp">
+                            <div class="icon-spacer"></div>
                             <i class="fas fa-tshirt"></i>
                             <input class="inline-edit small" data-field="data.torsoStopping" type="text" value="{{armor.data.torsoStopping}}" data-dtype="Number"/> /{{armor.data.torsoMaxStopping}}
                         </div>
                         <div class="flex sp">
-                            <i class="fas fa-shoe-prints"></i>
-                            <input class="inline-edit small" data-field="data.legStopping" type="text" value="{{armor.data.legStopping}}" data-dtype="Number"/> /{{armor.data.legMaxStopping}}
+                            {{localize "WITCHER.Armor.LocationLeft"}}
+                            <i class="fas fa-hand-paper"></i>
+                            <input class="inline-edit small" data-field="data.leftArmStopping" type="text" value="{{armor.data.leftArmStopping}}" data-dtype="Number"/> /{{armor.data.leftArmMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationRight"}}
+                            <i class="fas fa-hand-paper"></i>
+                            <input class="inline-edit small" data-field="data.rightArmStopping" type="text" value="{{armor.data.rightArmStopping}}" data-dtype="Number"/> /{{armor.data.rightArmMaxStopping}}
                         </div>
                         {{/if}}
+
+                        {{#if (eq data.location "Leg")}}
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationLeft"}}
+                            <i class="fas fa-shoe-prints"></i>
+                            <input class="inline-edit small" data-field="data.leftLegStopping" type="text" value="{{armor.data.leftLegStopping}}" data-dtype="Number"/> /{{armor.data.leftLegMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationRight"}}
+                            <i class="fas fa-shoe-prints"></i>
+                            <input class="inline-edit small" data-field="data.rightLegStopping" type="text" value="{{armor.data.rightLegStopping}}" data-dtype="Number"/> /{{armor.data.rightLegMaxStopping}}
+                        </div>
+                        {{/if}}
+
+                        {{#if (eq data.location "FullCover")}}
+                        <div class="flex sp">
+                            <div class="icon-spacer"></div>
+                            <i class="fas fa-hard-hat"></i>
+                            <input class="inline-edit small" data-field="data.headStopping" type="text" value="{{armor.data.headStopping}}" data-dtype="Number"/> /{{armor.data.headMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            <div class="icon-spacer"></div>
+                            <i class="fas fa-tshirt"></i>
+                            <input class="inline-edit small" data-field="data.torsoStopping" type="text" value="{{armor.data.torsoStopping}}" data-dtype="Number"/> /{{armor.data.torsoMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationLeft"}}
+                            <i class="fas fa-hand-paper"></i>
+                            <input class="inline-edit small" data-field="data.leftArmStopping" type="text" value="{{armor.data.leftArmStopping}}" data-dtype="Number"/> /{{armor.data.leftArmMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationRight"}}
+                            <i class="fas fa-hand-paper"></i>
+                            <input class="inline-edit small" data-field="data.rightArmStopping" type="text" value="{{armor.data.rightArmStopping}}" data-dtype="Number"/> /{{armor.data.rightArmMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationLeft"}}
+                            <i class="fas fa-shoe-prints"></i>
+                            <input class="inline-edit small" data-field="data.leftLegStopping" type="text" value="{{armor.data.leftLegStopping}}" data-dtype="Number"/> /{{armor.data.leftLegMaxStopping}}
+                        </div>
+                        <div class="flex sp">
+                            {{localize "WITCHER.Armor.LocationRight"}}
+                            <i class="fas fa-shoe-prints"></i>
+                            <input class="inline-edit small" data-field="data.rightLegStopping" type="text" value="{{armor.data.rightLegStopping}}" data-dtype="Number"/> /{{armor.data.rightLegMaxStopping}}
+                        </div>
+                        {{/if}}
+
+                        {{#if (eq data.location "Shield")}} 
+                            {{localize "WITCHER.table.Reliability"}}
+                            <input class="inline-edit small" data-field="data.reliability" type="text" value="{{armor.data.reliability}}" data-dtype="Number"/> /{{armor.data.reliabilityMax}}
+                        {{/if}}
+
                     </td>
                         
                     <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled /></td>
