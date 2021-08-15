@@ -130,6 +130,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
       html.find(".life-event-display").on("click", this._onLifeEventDisplay.bind(this));
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
+      html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
 
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -145,10 +146,13 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".add-crit").on("click", this._onCritAdd.bind(this));
       html.find(".delete-crit").on("click", this._onCritRemove.bind(this));
       
+      html.find(".add-skill-modifier").on("click", this._onAddSkillModifier.bind(this));
       html.find(".add-modifier").on("click", this._onAddModifier.bind(this));
       html.find(".delete-stat").on("click", this._onModifierRemove.bind(this));
+      html.find(".delete-skill-modifier").on("click", this._onSkillModifierRemove.bind(this));
 
       html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
+      html.find(".skill-mod-edit").on("blur", this._onSkillModifierEdit.bind(this));
 
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
@@ -262,6 +266,77 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
+    async _onAddSkillModifier(event){
+      let stat = event.currentTarget.closest(".skill").dataset.stat;
+      let skill = event.currentTarget.closest(".skill").dataset.skill;
+      let newModifierList  = []
+      if (this.actor.data.data.skills[stat][skill].modifiers){
+        newModifierList = this.actor.data.data.skills[stat][skill].modifiers
+      }
+      newModifierList.push({id: genId(), name: "Modifier", value: 0})
+      
+      switch(skill) {
+        case "awareness": this.actor.update({ 'data.skills.int.awareness.modifiers': newModifierList}); break;
+        case "business": this.actor.update({ 'data.skills.int.business.modifiers': newModifierList}); break;
+        case "deduction": this.actor.update({ 'data.skills.int.deduction.modifiers': newModifierList}); break;
+        case "education": this.actor.update({ 'data.skills.int.education.modifiers': newModifierList}); break;
+        case "commonsp": this.actor.update({ 'data.skills.int.commonsp.modifiers': newModifierList}); break;
+        case "eldersp": this.actor.update({ 'data.skills.int.eldersp.modifiers': newModifierList}); break;
+        case "dwarven": this.actor.update({ 'data.skills.int.dwarven.modifiers': newModifierList}); break;
+        case "monster": this.actor.update({ 'data.skills.int.monster.modifiers': newModifierList}); break;
+        case "socialetq": this.actor.update({ 'data.skills.int.socialetq.modifiers': newModifierList}); break;
+        case "streetwise": this.actor.update({ 'data.skills.int.streetwise.modifiers': newModifierList}); break;
+        case "tactics": this.actor.update({ 'data.skills.int.tactics.modifiers': newModifierList}); break;
+        case "teaching": this.actor.update({ 'data.skills.int.teaching.modifiers': newModifierList}); break;
+        case "wilderness": this.actor.update({ 'data.skills.int.wilderness.modifiers': newModifierList}); break;
+        
+        case "brawling": this.actor.update({ 'data.skills.ref.brawling.modifiers': newModifierList}); break;
+        case "dodge": this.actor.update({ 'data.skills.ref.dodge.modifiers': newModifierList}); break;
+        case "melee": this.actor.update({ 'data.skills.ref.melee.modifiers': newModifierList}); break;
+        case "riding": this.actor.update({ 'data.skills.ref.riding.modifiers': newModifierList}); break;
+        case "sailing": this.actor.update({ 'data.skills.ref.sailing.modifiers': newModifierList}); break;
+        case "smallblades": this.actor.update({ 'data.skills.ref.smallblades.modifiers': newModifierList}); break;
+        case "staffspear": this.actor.update({ 'data.skills.ref.staffspear.modifiers': newModifierList}); break;
+        case "swordsmanship": this.actor.update({ 'data.skills.ref.swordsmanship.modifiers': newModifierList}); break;
+        
+        case "courage": this.actor.update({ 'data.skills.will.courage.modifiers': newModifierList}); break;
+        case "hexweave": this.actor.update({ 'data.skills.will.hexweave.modifiers': newModifierList}); break;
+        case "intimidation": this.actor.update({ 'data.skills.will.intimidation.modifiers': newModifierList}); break;
+        case "spellcast": this.actor.update({ 'data.skills.will.spellcast.modifiers': newModifierList}); break;
+        case "resistmagic": this.actor.update({ 'data.skills.will.resistmagic.modifiers': newModifierList}); break;
+        case "resistcoerc": this.actor.update({ 'data.skills.will.resistcoerc.modifiers': newModifierList}); break;
+        case "ritcraft": this.actor.update({ 'data.skills.will.ritcraft.modifiers': newModifierList}); break;
+ 
+        case "archery": this.actor.update({ 'data.skills.dex.archery.modifiers': newModifierList}); break;
+        case "athletics": this.actor.update({ 'data.skills.dex.athletics.modifiers': newModifierList}); break;
+        case "crossbow": this.actor.update({ 'data.skills.dex.crossbow.modifiers': newModifierList}); break;
+        case "sleight": this.actor.update({ 'data.skills.dex.sleight.modifiers': newModifierList}); break;
+        case "stealth": this.actor.update({ 'data.skills.dex.stealth.modifiers': newModifierList}); break;
+        
+        case "alchemy": this.actor.update({ 'data.skills.cra.alchemy.modifiers': newModifierList}); break;
+        case "crafting": this.actor.update({ 'data.skills.cra.crafting.modifiers': newModifierList}); break;
+        case "disguise": this.actor.update({ 'data.skills.cra.disguise.modifiers': newModifierList}); break;
+        case "firstaid": this.actor.update({ 'data.skills.cra.firstaid.modifiers': newModifierList}); break;
+        case "forgery": this.actor.update({ 'data.skills.cra.forgery.modifiers': newModifierList}); break;
+        case "picklock": this.actor.update({ 'data.skills.cra.picklock.modifiers': newModifierList}); break;
+        case "trapcraft": this.actor.update({ 'data.skills.cra.trapcraft.modifiers': newModifierList}); break;
+
+        case "physique": this.actor.update({ 'data.skills.body.physique.modifiers': newModifierList}); break;
+        case "endurance": this.actor.update({ 'data.skills.body.endurance.modifiers': newModifierList}); break;
+        
+        case "charisma": this.actor.update({ 'data.skills.emp.charisma.modifiers': newModifierList}); break;
+        case "deceit": this.actor.update({ 'data.skills.emp.deceit.modifiers': newModifierList}); break;
+        case "finearts": this.actor.update({ 'data.skills.emp.finearts.modifiers': newModifierList}); break;
+        case "gambling": this.actor.update({ 'data.skills.emp.gambling.modifiers': newModifierList}); break;
+        case "grooming": this.actor.update({ 'data.skills.emp.grooming.modifiers': newModifierList}); break;
+        case "perception": this.actor.update({ 'data.skills.emp.perception.modifiers': newModifierList}); break;
+        case "leadership": this.actor.update({ 'data.skills.emp.leadership.modifiers': newModifierList}); break;
+        case "persuasion": this.actor.update({ 'data.skills.emp.persuasion.modifiers': newModifierList}); break;
+        case "performance": this.actor.update({ 'data.skills.emp.performance.modifiers': newModifierList}); break;
+        case "seduction": this.actor.update({ 'data.skills.emp.seduction.modifiers': newModifierList}); break;
+      }
+    }
+
     async _onAddModifier(event){
       event.preventDefault();
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
@@ -313,6 +388,82 @@ export default class WitcherActorSheet extends ActorSheet {
         this.actor.update({ "data.critWounds": newCritList });
     }
     
+    async _onSkillModifierEdit(event){
+      let stat = event.currentTarget.closest(".skill").dataset.stat;
+      let skill = event.currentTarget.closest(".skill").dataset.skill;
+
+      let element = event.currentTarget;
+      let itemId = element.closest(".list-modifiers").dataset.id;
+      
+      let field = element.dataset.field;
+      let value = element.value
+      let modifiers = this.actor.data.data.skills[stat][skill].modifiers;
+
+      let objIndex = modifiers.findIndex((obj => obj.id == itemId));
+      modifiers[objIndex][field] = value
+      
+      switch(skill) {
+        case "awareness": this.actor.update({ 'data.skills.int.awareness.modifiers': modifiers}); break;
+        case "business": this.actor.update({ 'data.skills.int.business.modifiers': modifiers}); break;
+        case "deduction": this.actor.update({ 'data.skills.int.deduction.modifiers': modifiers}); break;
+        case "education": this.actor.update({ 'data.skills.int.education.modifiers': modifiers}); break;
+        case "commonsp": this.actor.update({ 'data.skills.int.commonsp.modifiers': modifiers}); break;
+        case "eldersp": this.actor.update({ 'data.skills.int.eldersp.modifiers': modifiers}); break;
+        case "dwarven": this.actor.update({ 'data.skills.int.dwarven.modifiers': modifiers}); break;
+        case "monster": this.actor.update({ 'data.skills.int.monster.modifiers': modifiers}); break;
+        case "socialetq": this.actor.update({ 'data.skills.int.socialetq.modifiers': modifiers}); break;
+        case "streetwise": this.actor.update({ 'data.skills.int.streetwise.modifiers': modifiers}); break;
+        case "tactics": this.actor.update({ 'data.skills.int.tactics.modifiers': modifiers}); break;
+        case "teaching": this.actor.update({ 'data.skills.int.teaching.modifiers': modifiers}); break;
+        case "wilderness": this.actor.update({ 'data.skills.int.wilderness.modifiers': modifiers}); break;
+        
+        case "brawling": this.actor.update({ 'data.skills.ref.brawling.modifiers': modifiers}); break;
+        case "dodge": this.actor.update({ 'data.skills.ref.dodge.modifiers': modifiers}); break;
+        case "melee": this.actor.update({ 'data.skills.ref.melee.modifiers': modifiers}); break;
+        case "riding": this.actor.update({ 'data.skills.ref.riding.modifiers': modifiers}); break;
+        case "sailing": this.actor.update({ 'data.skills.ref.sailing.modifiers': modifiers}); break;
+        case "smallblades": this.actor.update({ 'data.skills.ref.smallblades.modifiers': modifiers}); break;
+        case "staffspear": this.actor.update({ 'data.skills.ref.staffspear.modifiers': modifiers}); break;
+        case "swordsmanship": this.actor.update({ 'data.skills.ref.swordsmanship.modifiers': modifiers}); break;
+        
+        case "courage": this.actor.update({ 'data.skills.will.courage.modifiers': modifiers}); break;
+        case "hexweave": this.actor.update({ 'data.skills.will.hexweave.modifiers': modifiers}); break;
+        case "intimidation": this.actor.update({ 'data.skills.will.intimidation.modifiers': modifiers}); break;
+        case "spellcast": this.actor.update({ 'data.skills.will.spellcast.modifiers': modifiers}); break;
+        case "resistmagic": this.actor.update({ 'data.skills.will.resistmagic.modifiers': modifiers}); break;
+        case "resistcoerc": this.actor.update({ 'data.skills.will.resistcoerc.modifiers': modifiers}); break;
+        case "ritcraft": this.actor.update({ 'data.skills.will.ritcraft.modifiers': modifiers}); break;
+ 
+        case "archery": this.actor.update({ 'data.skills.dex.archery.modifiers': modifiers}); break;
+        case "athletics": this.actor.update({ 'data.skills.dex.athletics.modifiers': modifiers}); break;
+        case "crossbow": this.actor.update({ 'data.skills.dex.crossbow.modifiers': modifiers}); break;
+        case "sleight": this.actor.update({ 'data.skills.dex.sleight.modifiers': modifiers}); break;
+        case "stealth": this.actor.update({ 'data.skills.dex.stealth.modifiers': modifiers}); break;
+        
+        case "alchemy": this.actor.update({ 'data.skills.cra.alchemy.modifiers': modifiers}); break;
+        case "crafting": this.actor.update({ 'data.skills.cra.crafting.modifiers': modifiers}); break;
+        case "disguise": this.actor.update({ 'data.skills.cra.disguise.modifiers': modifiers}); break;
+        case "firstaid": this.actor.update({ 'data.skills.cra.firstaid.modifiers': modifiers}); break;
+        case "forgery": this.actor.update({ 'data.skills.cra.forgery.modifiers': modifiers}); break;
+        case "picklock": this.actor.update({ 'data.skills.cra.picklock.modifiers': modifiers}); break;
+        case "trapcraft": this.actor.update({ 'data.skills.cra.trapcraft.modifiers': modifiers}); break;
+
+        case "physique": this.actor.update({ 'data.skills.body.physique.modifiers': modifiers}); break;
+        case "endurance": this.actor.update({ 'data.skills.body.endurance.modifiers': modifiers}); break;
+        
+        case "charisma": this.actor.update({ 'data.skills.emp.charisma.modifiers': modifiers}); break;
+        case "deceit": this.actor.update({ 'data.skills.emp.deceit.modifiers': modifiers}); break;
+        case "finearts": this.actor.update({ 'data.skills.emp.finearts.modifiers': modifiers}); break;
+        case "gambling": this.actor.update({ 'data.skills.emp.gambling.modifiers': modifiers}); break;
+        case "grooming": this.actor.update({ 'data.skills.emp.grooming.modifiers': modifiers}); break;
+        case "perception": this.actor.update({ 'data.skills.emp.perception.modifiers': modifiers}); break;
+        case "leadership": this.actor.update({ 'data.skills.emp.leadership.modifiers': modifiers}); break;
+        case "persuasion": this.actor.update({ 'data.skills.emp.persuasion.modifiers': modifiers}); break;
+        case "performance": this.actor.update({ 'data.skills.emp.performance.modifiers': modifiers}); break;
+        case "seduction": this.actor.update({ 'data.skills.emp.seduction.modifiers': modifiers}); break;
+      }
+    }
+
     async _onModifierEdit(event) {
       event.preventDefault();
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
@@ -351,6 +502,77 @@ export default class WitcherActorSheet extends ActorSheet {
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': modifiers}); break;
       }
       updateDerived(this.actor);
+    }
+
+    async _onSkillModifierRemove(event){
+      let stat = event.currentTarget.closest(".skill").dataset.stat;
+      let skill = event.currentTarget.closest(".skill").dataset.skill;
+
+      let prevModList = this.actor.data.data.skills[stat][skill].modifiers;
+      const newModList = Object.values(prevModList).map((details) => details);
+      const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
+      newModList.splice(idxToRm, 1);
+      
+      switch(skill) {
+        case "awareness": this.actor.update({ 'data.skills.int.awareness.modifiers': newModList}); break;
+        case "business": this.actor.update({ 'data.skills.int.business.modifiers': newModList}); break;
+        case "deduction": this.actor.update({ 'data.skills.int.deduction.modifiers': newModList}); break;
+        case "education": this.actor.update({ 'data.skills.int.education.modifiers': newModList}); break;
+        case "commonsp": this.actor.update({ 'data.skills.int.commonsp.modifiers': newModList}); break;
+        case "eldersp": this.actor.update({ 'data.skills.int.eldersp.modifiers': newModList}); break;
+        case "dwarven": this.actor.update({ 'data.skills.int.dwarven.modifiers': newModList}); break;
+        case "monster": this.actor.update({ 'data.skills.int.monster.modifiers': newModList}); break;
+        case "socialetq": this.actor.update({ 'data.skills.int.socialetq.modifiers': newModList}); break;
+        case "streetwise": this.actor.update({ 'data.skills.int.streetwise.modifiers': newModList}); break;
+        case "tactics": this.actor.update({ 'data.skills.int.tactics.modifiers': newModList}); break;
+        case "teaching": this.actor.update({ 'data.skills.int.teaching.modifiers': newModList}); break;
+        case "wilderness": this.actor.update({ 'data.skills.int.wilderness.modifiers': newModList}); break;
+        
+        case "brawling": this.actor.update({ 'data.skills.ref.brawling.modifiers': newModList}); break;
+        case "dodge": this.actor.update({ 'data.skills.ref.dodge.modifiers': newModList}); break;
+        case "melee": this.actor.update({ 'data.skills.ref.melee.modifiers': newModList}); break;
+        case "riding": this.actor.update({ 'data.skills.ref.riding.modifiers': newModList}); break;
+        case "sailing": this.actor.update({ 'data.skills.ref.sailing.modifiers': newModList}); break;
+        case "smallblades": this.actor.update({ 'data.skills.ref.smallblades.modifiers': newModList}); break;
+        case "staffspear": this.actor.update({ 'data.skills.ref.staffspear.modifiers': newModList}); break;
+        case "swordsmanship": this.actor.update({ 'data.skills.ref.swordsmanship.modifiers': newModList}); break;
+        
+        case "courage": this.actor.update({ 'data.skills.will.courage.modifiers': newModList}); break;
+        case "hexweave": this.actor.update({ 'data.skills.will.hexweave.modifiers': newModList}); break;
+        case "intimidation": this.actor.update({ 'data.skills.will.intimidation.modifiers': newModList}); break;
+        case "spellcast": this.actor.update({ 'data.skills.will.spellcast.modifiers': newModList}); break;
+        case "resistmagic": this.actor.update({ 'data.skills.will.resistmagic.modifiers': newModList}); break;
+        case "resistcoerc": this.actor.update({ 'data.skills.will.resistcoerc.modifiers': newModList}); break;
+        case "ritcraft": this.actor.update({ 'data.skills.will.ritcraft.modifiers': newModList}); break;
+ 
+        case "archery": this.actor.update({ 'data.skills.dex.archery.modifiers': newModList}); break;
+        case "athletics": this.actor.update({ 'data.skills.dex.athletics.modifiers': newModList}); break;
+        case "crossbow": this.actor.update({ 'data.skills.dex.crossbow.modifiers': newModList}); break;
+        case "sleight": this.actor.update({ 'data.skills.dex.sleight.modifiers': newModList}); break;
+        case "stealth": this.actor.update({ 'data.skills.dex.stealth.modifiers': newModList}); break;
+        
+        case "alchemy": this.actor.update({ 'data.skills.cra.alchemy.modifiers': newModList}); break;
+        case "crafting": this.actor.update({ 'data.skills.cra.crafting.modifiers': newModList}); break;
+        case "disguise": this.actor.update({ 'data.skills.cra.disguise.modifiers': newModList}); break;
+        case "firstaid": this.actor.update({ 'data.skills.cra.firstaid.modifiers': newModList}); break;
+        case "forgery": this.actor.update({ 'data.skills.cra.forgery.modifiers': newModList}); break;
+        case "picklock": this.actor.update({ 'data.skills.cra.picklock.modifiers': newModList}); break;
+        case "trapcraft": this.actor.update({ 'data.skills.cra.trapcraft.modifiers': newModList}); break;
+
+        case "physique": this.actor.update({ 'data.skills.body.physique.modifiers': newModList}); break;
+        case "endurance": this.actor.update({ 'data.skills.body.endurance.modifiers': newModList}); break;
+        
+        case "charisma": this.actor.update({ 'data.skills.emp.charisma.modifiers': newModList}); break;
+        case "deceit": this.actor.update({ 'data.skills.emp.deceit.modifiers': newModList}); break;
+        case "finearts": this.actor.update({ 'data.skills.emp.finearts.modifiers': newModList}); break;
+        case "gambling": this.actor.update({ 'data.skills.emp.gambling.modifiers': newModList}); break;
+        case "grooming": this.actor.update({ 'data.skills.emp.grooming.modifiers': newModList}); break;
+        case "perception": this.actor.update({ 'data.skills.emp.perception.modifiers': newModList}); break;
+        case "leadership": this.actor.update({ 'data.skills.emp.leadership.modifiers': newModList}); break;
+        case "persuasion": this.actor.update({ 'data.skills.emp.persuasion.modifiers': newModList}); break;
+        case "performance": this.actor.update({ 'data.skills.emp.performance.modifiers': newModList}); break;
+        case "seduction": this.actor.update({ 'data.skills.emp.seduction.modifiers': newModList}); break;
+      }
     }
 
     async _onModifierRemove(event) {
@@ -1344,7 +1566,70 @@ export default class WitcherActorSheet extends ActorSheet {
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.isOpened': this.actor.data.data.coreStats.woundTreshold.isOpened ? false : true}); break;
       }
     }
+    _onSkillModifierDisplay(event){
+      event.preventDefault(); 
+      let skill = event.currentTarget.closest(".skill").dataset.skill;
+      switch(skill) {
+        case "awareness": this.actor.update({ 'data.skills.int.awareness.isOpened': this.actor.data.data.skills.int.awareness.isOpened ? false : true}); break;
+        case "business": this.actor.update({ 'data.skills.int.business.isOpened': this.actor.data.data.skills.int.business.isOpened ? false : true}); break;
+        case "deduction": this.actor.update({ 'data.skills.int.deduction.isOpened': this.actor.data.data.skills.int.deduction.isOpened ? false : true}); break;
+        case "education": this.actor.update({ 'data.skills.int.education.isOpened': this.actor.data.data.skills.int.education.isOpened ? false : true}); break;
+        case "commonsp": this.actor.update({ 'data.skills.int.commonsp.isOpened': this.actor.data.data.skills.int.commonsp.isOpened ? false : true}); break;
+        case "eldersp": this.actor.update({ 'data.skills.int.eldersp.isOpened': this.actor.data.data.skills.int.eldersp.isOpened ? false : true}); break;
+        case "dwarven": this.actor.update({ 'data.skills.int.dwarven.isOpened': this.actor.data.data.skills.int.dwarven.isOpened ? false : true}); break;
+        case "monster": this.actor.update({ 'data.skills.int.monster.isOpened': this.actor.data.data.skills.int.monster.isOpened ? false : true}); break;
+        case "socialetq": this.actor.update({ 'data.skills.int.socialetq.isOpened': this.actor.data.data.skills.int.socialetq.isOpened ? false : true}); break;
+        case "streetwise": this.actor.update({ 'data.skills.int.streetwise.isOpened': this.actor.data.data.skills.int.streetwise.isOpened ? false : true}); break;
+        case "tactics": this.actor.update({ 'data.skills.int.tactics.isOpened': this.actor.data.data.skills.int.tactics.isOpened ? false : true}); break;
+        case "teaching": this.actor.update({ 'data.skills.int.teaching.isOpened': this.actor.data.data.skills.int.teaching.isOpened ? false : true}); break;
+        case "wilderness": this.actor.update({ 'data.skills.int.wilderness.isOpened': this.actor.data.data.skills.int.wilderness.isOpened ? false : true}); break;
+        
+        case "brawling": this.actor.update({ 'data.skills.ref.brawling.isOpened': this.actor.data.data.skills.ref.brawling.isOpened ? false : true}); break;
+        case "dodge": this.actor.update({ 'data.skills.ref.dodge.isOpened': this.actor.data.data.skills.ref.dodge.isOpened ? false : true}); break;
+        case "melee": this.actor.update({ 'data.skills.ref.melee.isOpened': this.actor.data.data.skills.ref.melee.isOpened ? false : true}); break;
+        case "riding": this.actor.update({ 'data.skills.ref.riding.isOpened': this.actor.data.data.skills.ref.riding.isOpened ? false : true}); break;
+        case "sailing": this.actor.update({ 'data.skills.ref.sailing.isOpened': this.actor.data.data.skills.ref.sailing.isOpened ? false : true}); break;
+        case "smallblades": this.actor.update({ 'data.skills.ref.smallblades.isOpened': this.actor.data.data.skills.ref.smallblades.isOpened ? false : true}); break;
+        case "staffspear": this.actor.update({ 'data.skills.ref.staffspear.isOpened': this.actor.data.data.skills.ref.staffspear.isOpened ? false : true}); break;
+        case "swordsmanship": this.actor.update({ 'data.skills.ref.swordsmanship.isOpened': this.actor.data.data.skills.ref.swordsmanship.isOpened ? false : true}); break;
+        
+        case "courage": this.actor.update({ 'data.skills.will.courage.isOpened': this.actor.data.data.skills.will.courage.isOpened ? false : true}); break;
+        case "hexweave": this.actor.update({ 'data.skills.will.hexweave.isOpened': this.actor.data.data.skills.will.hexweave.isOpened ? false : true}); break;
+        case "intimidation": this.actor.update({ 'data.skills.will.intimidation.isOpened': this.actor.data.data.skills.will.intimidation.isOpened ? false : true}); break;
+        case "spellcast": this.actor.update({ 'data.skills.will.spellcast.isOpened': this.actor.data.data.skills.will.spellcast.isOpened ? false : true}); break;
+        case "resistmagic": this.actor.update({ 'data.skills.will.resistmagic.isOpened': this.actor.data.data.skills.will.resistmagic.isOpened ? false : true}); break;
+        case "resistcoerc": this.actor.update({ 'data.skills.will.resistcoerc.isOpened': this.actor.data.data.skills.will.resistcoerc.isOpened ? false : true}); break;
+        case "ritcraft": this.actor.update({ 'data.skills.will.ritcraft.isOpened': this.actor.data.data.skills.will.ritcraft.isOpened ? false : true}); break;
+ 
+        case "archery": this.actor.update({ 'data.skills.dex.archery.isOpened': this.actor.data.data.skills.dex.archery.isOpened ? false : true}); break;
+        case "athletics": this.actor.update({ 'data.skills.dex.athletics.isOpened': this.actor.data.data.skills.dex.athletics.isOpened ? false : true}); break;
+        case "crossbow": this.actor.update({ 'data.skills.dex.crossbow.isOpened': this.actor.data.data.skills.dex.crossbow.isOpened ? false : true}); break;
+        case "sleight": this.actor.update({ 'data.skills.dex.sleight.isOpened': this.actor.data.data.skills.dex.sleight.isOpened ? false : true}); break;
+        case "stealth": this.actor.update({ 'data.skills.dex.stealth.isOpened': this.actor.data.data.skills.dex.stealth.isOpened ? false : true}); break;
+        
+        case "alchemy": this.actor.update({ 'data.skills.cra.alchemy.isOpened': this.actor.data.data.skills.cra.alchemy.isOpened ? false : true}); break;
+        case "crafting": this.actor.update({ 'data.skills.cra.crafting.isOpened': this.actor.data.data.skills.cra.crafting.isOpened ? false : true}); break;
+        case "disguise": this.actor.update({ 'data.skills.cra.disguise.isOpened': this.actor.data.data.skills.cra.disguise.isOpened ? false : true}); break;
+        case "firstaid": this.actor.update({ 'data.skills.cra.firstaid.isOpened': this.actor.data.data.skills.cra.firstaid.isOpened ? false : true}); break;
+        case "forgery": this.actor.update({ 'data.skills.cra.forgery.isOpened': this.actor.data.data.skills.cra.forgery.isOpened ? false : true}); break;
+        case "picklock": this.actor.update({ 'data.skills.cra.picklock.isOpened': this.actor.data.data.skills.cra.picklock.isOpened ? false : true}); break;
+        case "trapcraft": this.actor.update({ 'data.skills.cra.trapcraft.isOpened': this.actor.data.data.skills.cra.trapcraft.isOpened ? false : true}); break;
 
+        case "physique": this.actor.update({ 'data.skills.body.physique.isOpened': this.actor.data.data.skills.body.physique.isOpened ? false : true}); break;
+        case "endurance": this.actor.update({ 'data.skills.body.endurance.isOpened': this.actor.data.data.skills.body.endurance.isOpened ? false : true}); break;
+        
+        case "charisma": this.actor.update({ 'data.skills.emp.charisma.isOpened': this.actor.data.data.skills.emp.charisma.isOpened ? false : true}); break;
+        case "deceit": this.actor.update({ 'data.skills.emp.deceit.isOpened': this.actor.data.data.skills.emp.deceit.isOpened ? false : true}); break;
+        case "finearts": this.actor.update({ 'data.skills.emp.finearts.isOpened': this.actor.data.data.skills.emp.finearts.isOpened ? false : true}); break;
+        case "gambling": this.actor.update({ 'data.skills.emp.gambling.isOpened': this.actor.data.data.skills.emp.gambling.isOpened ? false : true}); break;
+        case "grooming": this.actor.update({ 'data.skills.emp.grooming.isOpened': this.actor.data.data.skills.emp.grooming.isOpened ? false : true}); break;
+        case "perception": this.actor.update({ 'data.skills.emp.perception.isOpened': this.actor.data.data.skills.emp.perception.isOpened ? false : true}); break;
+        case "leadership": this.actor.update({ 'data.skills.emp.leadership.isOpened': this.actor.data.data.skills.emp.leadership.isOpened ? false : true}); break;
+        case "persuasion": this.actor.update({ 'data.skills.emp.persuasion.isOpened': this.actor.data.data.skills.emp.persuasion.isOpened ? false : true}); break;
+        case "performance": this.actor.update({ 'data.skills.emp.performance.isOpened': this.actor.data.data.skills.emp.performance.isOpened ? false : true}); break;
+        case "seduction": this.actor.update({ 'data.skills.emp.seduction.isOpened': this.actor.data.data.skills.emp.seduction.isOpened ? false : true}); break;
+      }
+    }
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");

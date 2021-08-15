@@ -150,223 +150,327 @@
           "int": {
             "awareness": {
               "value": 0,
-              "label": "WITCHER.SkIntAwareness"
+              "label": "WITCHER.SkIntAwareness",
+              "isOpened": false,
+              "modifiers": []
             },
             "business": {
               "value": 0,
-              "label": "WITCHER.SkIntBusiness"
+              "label": "WITCHER.SkIntBusiness",
+              "isOpened": false,
+              "modifiers": []
             },
             "deduction": {
               "value": 0,
-              "label": "WITCHER.SkIntDeduction"
+              "label": "WITCHER.SkIntDeduction",
+              "isOpened": false,
+              "modifiers": []
             },
             "education": {
               "value": 0,
-              "label": "WITCHER.SkIntEducation"
+              "label": "WITCHER.SkIntEducation",
+              "isOpened": false,
+              "modifiers": []
             },
             "commonsp": {
               "value": 0,
-              "label": "WITCHER.SkIntCommon"
+              "label": "WITCHER.SkIntCommon",
+              "isOpened": false,
+              "modifiers": []
             },
             "eldersp": {
               "value": 0,
-              "label": "WITCHER.SkIntElder"
+              "label": "WITCHER.SkIntElder",
+              "isOpened": false,
+              "modifiers": []
             },
             "dwarven": {
               "value": 0,
-              "label": "WITCHER.SkIntDwarven"
+              "label": "WITCHER.SkIntDwarven",
+              "isOpened": false,
+              "modifiers": []
             },
             "monster": {
               "value": 0,
-              "label": "WITCHER.SkIntMonster"
+              "label": "WITCHER.SkIntMonster",
+              "isOpened": false,
+              "modifiers": []
             },
             "socialetq": {
               "value": 0,
-              "label": "WITCHER.SkIntSocialEt"
+              "label": "WITCHER.SkIntSocialEt",
+              "isOpened": false,
+              "modifiers": []
             },
             "streetwise": {
               "value": 0,
-              "label": "WITCHER.SkIntStreet"
+              "label": "WITCHER.SkIntStreet",
+              "isOpened": false,
+              "modifiers": []
             },
             "tactics": {
               "value": 0,
-              "label": "WITCHER.SkIntTactics"
+              "label": "WITCHER.SkIntTactics",
+              "isOpened": false,
+              "modifiers": []
             },
             "teaching": {
               "value": 0,
-              "label": "WITCHER.SkIntTeaching"
+              "label": "WITCHER.SkIntTeaching",
+              "isOpened": false,
+              "modifiers": []
             },
             "wilderness": {
               "value": 0,
-              "label": "WITCHER.SkIntWilderness"
+              "label": "WITCHER.SkIntWilderness",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "ref": {
             "brawling": {
               "value": 0,
-              "label": "WITCHER.SkRefBrawling"
+              "label": "WITCHER.SkRefBrawling",
+              "isOpened": false,
+              "modifiers": []
             },
             "dodge": {
               "value": 0,
-              "label": "WITCHER.SkRefDodge"
+              "label": "WITCHER.SkRefDodge",
+              "isOpened": false,
+              "modifiers": []
             },
             "melee": {
               "value": 0,
-              "label": "WITCHER.SkRefMelee"
+              "label": "WITCHER.SkRefMelee",
+              "isOpened": false,
+              "modifiers": []
             },
             "riding": {
               "value": 0,
-              "label": "WITCHER.SkRefRiding"
+              "label": "WITCHER.SkRefRiding",
+              "isOpened": false,
+              "modifiers": []
             },
             "sailing": {
               "value": 0,
-              "label": "WITCHER.SkRefSailing"
+              "label": "WITCHER.SkRefSailing",
+              "isOpened": false,
+              "modifiers": []
             },
             "smallblades": {
               "value": 0,
-              "label": "WITCHER.SkRefSmall"
+              "label": "WITCHER.SkRefSmall",
+              "isOpened": false,
+              "modifiers": []
             },
             "staffspear": {
               "value": 0,
-              "label": "WITCHER.SkRefStaff"
+              "label": "WITCHER.SkRefStaff",
+              "isOpened": false,
+              "modifiers": []
             },
             "swordsmanship": {
               "value": 0,
-              "label": "WITCHER.SkRefSwordmanship"
+              "label": "WITCHER.SkRefSwordmanship",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "dex": {
             "archery": {
               "value": 0,
-              "label": "WITCHER.SkDexArchery"
+              "label": "WITCHER.SkDexArchery",
+              "isOpened": false,
+              "modifiers": []
             },
             "athletics": {
               "value": 0,
-              "label": "WITCHER.SkDexAthletics"
+              "label": "WITCHER.SkDexAthletics",
+              "isOpened": false,
+              "modifiers": []
             },
             "crossbow": {
               "value": 0,
-              "label": "WITCHER.SkDexCrossbow"
+              "label": "WITCHER.SkDexCrossbow",
+              "isOpened": false,
+              "modifiers": []
             },
             "sleight": {
               "value": 0,
-              "label": "WITCHER.SkDexSleight"
+              "label": "WITCHER.SkDexSleight",
+              "isOpened": false,
+              "modifiers": []
             },
             "stealth": {
               "value": 0,
-              "label": "WITCHER.SkDexStealth"
+              "label": "WITCHER.SkDexStealth",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "body": {
             "physique": {
               "value": 0,
-              "label": "WITCHER.SkBodyPhys"
+              "label": "WITCHER.SkBodyPhys",
+              "isOpened": false,
+              "modifiers": []
             },
             "endurance": {
               "value": 0,
-              "label": "WITCHER.SkBodyEnd"
+              "label": "WITCHER.SkBodyEnd",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "emp": {
             "charisma": {
               "value": 0,
-              "label": "WITCHER.SkEmpCharisma"
+              "label": "WITCHER.SkEmpCharisma",
+              "isOpened": false,
+              "modifiers": []
             },
             "deceit": {
               "value": 0,
-              "label": "WITCHER.SkEmpDeceit"
+              "label": "WITCHER.SkEmpDeceit",
+              "isOpened": false,
+              "modifiers": []
             },
             "finearts": {
               "value": 0,
-              "label": "WITCHER.SkEmpArts"
+              "label": "WITCHER.SkEmpArts",
+              "isOpened": false,
+              "modifiers": []
             },
             "gambling": {
               "value": 0,
-              "label": "WITCHER.SkEmpGambling"
+              "label": "WITCHER.SkEmpGambling",
+              "isOpened": false,
+              "modifiers": []
             },
             "grooming": {
               "value": 0,
-              "label": "WITCHER.SkEmpGrooming"
+              "label": "WITCHER.SkEmpGrooming",
+              "isOpened": false,
+              "modifiers": []
             },
             "perception": {
               "value": 0,
-              "label": "WITCHER.SkEmpHumanPerc"
+              "label": "WITCHER.SkEmpHumanPerc",
+              "isOpened": false,
+              "modifiers": []
             },
             "leadership": {
               "value": 0,
-              "label": "WITCHER.SkEmpLeadership"
+              "label": "WITCHER.SkEmpLeadership",
+              "isOpened": false,
+              "modifiers": []
             },
             "persuasion": {
               "value": 0,
-              "label": "WITCHER.SkEmpPersuasion"
+              "label": "WITCHER.SkEmpPersuasion",
+              "isOpened": false,
+              "modifiers": []
             },
             "performance": {
               "value": 0,
-              "label": "WITCHER.SkEmpPerformance"
+              "label": "WITCHER.SkEmpPerformance",
+              "isOpened": false,
+              "modifiers": []
             },
             "seduction": {
               "value": 0,
-              "label": "WITCHER.SkEmpSeduction"
+              "label": "WITCHER.SkEmpSeduction",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "cra": {
             "alchemy": {
               "value": 0,
-              "label": "WITCHER.SkCraAlchemy"
+              "label": "WITCHER.SkCraAlchemy",
+              "isOpened": false,
+              "modifiers": []
             },
             "crafting": {
               "value": 0,
-              "label": "WITCHER.SkCraCrafting"
+              "label": "WITCHER.SkCraCrafting",
+              "isOpened": false,
+              "modifiers": []
             },
             "disguise": {
               "value": 0,
-              "label": "WITCHER.SkCraDisguise"
+              "label": "WITCHER.SkCraDisguise",
+              "isOpened": false,
+              "modifiers": []
             },
             "firstaid": {
               "value": 0,
-              "label": "WITCHER.SkCraAid"
+              "label": "WITCHER.SkCraAid",
+              "isOpened": false,
+              "modifiers": []
             },
             "forgery": {
               "value": 0,
-              "label": "WITCHER.SkCraForge"
+              "label": "WITCHER.SkCraForge",
+              "isOpened": false,
+              "modifiers": []
             },
             "picklock": {
               "value": 0,
-              "label": "WITCHER.SkCraPick"
+              "label": "WITCHER.SkCraPick",
+              "isOpened": false,
+              "modifiers": []
             },
             "trapcraft": {
               "value": 0,
-              "label": "WITCHER.SkCraTrapCraft"
+              "label": "WITCHER.SkCraTrapCraft",
+              "isOpened": false,
+              "modifiers": []
             }
           },
           "will": {
             "courage": {
               "value": 0,
-              "label": "WITCHER.SkWillCourage"
+              "label": "WITCHER.SkWillCourage",
+              "isOpened": false,
+              "modifiers": []
             },
             "hexweave": {
               "value": 0,
-              "label": "WITCHER.SkWillHex"
+              "label": "WITCHER.SkWillHex",
+              "isOpened": false,
+              "modifiers": []
             },
             "intimidation": {
               "value": 0,
-              "label": "WITCHER.SkWillIntim"
+              "label": "WITCHER.SkWillIntim",
+              "isOpened": false,
+              "modifiers": []
             },
             "spellcast": {
               "value": 0,
-              "label": "WITCHER.SkWillSpellcast"
+              "label": "WITCHER.SkWillSpellcast",
+              "isOpened": false,
+              "modifiers": []
             },
             "resistmagic": {
               "value": 0,
-              "label": "WITCHER.SkWillResistMag"
+              "label": "WITCHER.SkWillResistMag",
+              "isOpened": false,
+              "modifiers": []
             },
             "resistcoerc": {
               "value": 0,
-              "label": "WITCHER.SkWillResistCoer"
+              "label": "WITCHER.SkWillResistCoer",
+              "isOpened": false,
+              "modifiers": []
             },
             "ritcraft": {
               "value": 0,
-              "label": "WITCHER.SkWillRitCraft"
+              "label": "WITCHER.SkWillRitCraft",
+              "isOpened": false,
+              "modifiers": []
             }
           }
         },
