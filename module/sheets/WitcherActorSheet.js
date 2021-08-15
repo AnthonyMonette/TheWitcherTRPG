@@ -436,7 +436,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.getOwnedItem(itemId);
 
-      const content = `<label>Crafting a ${item.data.name}</label> <br /> Work in progress`;
+      const content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br /> Work in progress`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
@@ -444,21 +444,21 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       new Dialog({
-        title: `Performing an alchemy action`, 
+        title: `${game.i18n.localize("WITCHER.Dialog.AlchemyTitle")}`, 
         content,
         buttons: {
           Craft: {
-            label: "Craft", 
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonCraft")}`, 
             callback: (html) => {
               let stat = this.actor.data.data.stats.cra.current;
               let skill = this.actor.data.data.skills.cra.alchemy.value;
-              messageData.flavor = `<h1>Crafting an alchemical</h1>`,
-              messageData.flavor += `Alchemy DC: ${item.data.data.alchemyDC}`;
-
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingAlchemycal")}</h1>`,
+              messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.alchemyDC")} ${item.data.data.alchemyDC}`;
+              
               if (!item.data.data.alchemyDC || item.data.data.alchemyDC == 0){
                 stat = this.actor.data.data.stats.cra.current;
                 skill = this.actor.data.data.skills.cra.crafting.value;
-                messageData.flavor = `Crafting DC: ${item.data.data.craftingDC}`;
+                messageData.flavor = `${game.i18n.localize("WITCHER.DiagramcraftingDC")} ${item.data.data.craftingDC}`;
               }
               let rollFormula = `1d10+${stat}+${skill}`;
               new Roll(rollFormula).roll().toMessage(messageData);
@@ -627,29 +627,29 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDefenceRoll(event) {
       const options = `
-      <option value="brawling"> Brawling </option>
-      <option value="melee"> Melee </option>
-      <option value="smallblades"> Small Blades </option>
-      <option value="staffspear"> Staff/Spear </option>
-      <option value="swordsmanship"> Swordsmanship </option>
+      <option value="brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>
+      <option value="melee"> ${game.i18n.localize("WITCHER.SkRefMelee")} </option>
+      <option value="smallblades"> ${game.i18n.localize("WITCHER.SkRefSmall")} </option>
+      <option value="staffspear">  ${game.i18n.localize("WITCHER.SkRefStaff")} </option>
+      <option value="swordsmanship"> ${game.i18n.localize("WITCHER.SkRefSwordmanship")} </option>
       `;
       const content = `
       <div class="flex">
-       <label>Extra defense: <input type="checkbox" name="isExtraDefense"></label> <br />
+       <label>${game.i18n.localize("WITCHER.Dialog.DefenseExtra")}: <input type="checkbox" name="isExtraDefense"></label> <br />
       </div>
-      <label>Defense with: </label><select name="form">${options}</select>`;
+      <label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select>`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
-        flavor: `<h1>Defense</h1>`,
+        flavor: `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}</h1>`,
       }
 
       new Dialog({
-        title: `Performing a defense action`, 
+        title: `${game.i18n.localize("WITCHER.Dialog.DefenseTitle")}`, 
         content,
         buttons: {
           Dodge: {
-            label: "Dodge", 
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}`, 
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
@@ -660,14 +660,14 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let stat = this.actor.data.data.stats.ref.current;
               let skill = this.actor.data.data.skills.ref.dodge.value;
-              let displayFormula = `1d10 + Ref + Dodge/Escape`;
-              messageData.flavor = `<h1>Defense: Dodge</h1><p>${displayFormula}</p>`;
+              let displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefDodge")}`;
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
           },
           Reposition: {
-            label: "Reposition",
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}`,
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
@@ -678,14 +678,14 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let stat = this.actor.data.data.stats.dex.current;
               let skill = this.actor.data.data.skills.dex.athletics.value;
-              let displayFormula = `1d10 + Dex + Athletics`;
-              messageData.flavor = `<h1>Defense: Reposition</h1><p>${displayFormula}</p>`;
+              let displayFormula = `1d10 + Dex + ${game.i18n.localize("WITCHER.SkDexAthletics")}`;
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
           },
           Block: {
-            label: "Block",
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}`,
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
@@ -697,37 +697,37 @@ export default class WitcherActorSheet extends ActorSheet {
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
-              let displayFormula = `1d10 + Ref + Defense`;
+              let displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
               switch(defense){
                 case "brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
-                  displayFormula = `1d10 + Ref + Brawling`;
+                  displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
                   break;
                 case "melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
-                  displayFormula = `1d10 + Ref + Melee`;
+                  displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
                   break;
                 case "smallblades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
-                  displayFormula = `1d10 + Ref + Small Blades`;
+                  displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
                   break;
                 case "staffspear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
-                  displayFormula = `1d10 + Ref + Staff/Spear`;
+                  displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
                   break;
                 case "swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
-                  displayFormula = `1d10 + Ref + Swordsmanship`;
+                  displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
                   break;
               }
 
-              messageData.flavor = `<h1>Defense: Block</h1><p>${displayFormula}</p>`;
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
           },
           Parry: {
-            label: "Parry",
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`,
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
@@ -739,37 +739,37 @@ export default class WitcherActorSheet extends ActorSheet {
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
-              let displayFormula = `1d10 + Ref + Parry`;
+              let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
               switch(defense){
                 case "brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
-                  displayFormula = `1d10 + Ref + Brawling - 3`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
                   break;
                 case "melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
-                  displayFormula = `1d10 + Ref + Melee - 3`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
                   break;
                 case "smallblades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
-                  displayFormula = `1d10 + Ref + Small Blades - 3`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
                   break;
                 case "staffspear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
-                  displayFormula = `1d10 + Ref + Staff/Spear - 3`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
                   break;
                 case "swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
-                  displayFormula = `1d10 + Ref + Swordsmanship - 3`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 3`;
                   break;
               }
 
-              messageData.flavor = `<h1>Defense: Parry</h1><p>${displayFormula}</p>`;
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}-3`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
           },
           ParryAgainstThrown: {
-            label: "Parry Thrown weapon",
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`,
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
@@ -781,31 +781,31 @@ export default class WitcherActorSheet extends ActorSheet {
               let defense = html.find("[name=form]")[0].value;
               let stat = this.actor.data.data.stats.ref.current;
               let skill = 0;
-              let displayFormula = `1d10 + Ref + Parry`;
+              let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
               switch(defense){
                 case "brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
-                  displayFormula = `1d10 + Ref + Brawling - 5`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 5`;
                   break;
                 case "melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
-                  displayFormula = `1d10 + Ref + Melee - 5`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 5`;
                   break;
                 case "smallblades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
-                  displayFormula = `1d10 + Ref + Small Blades - 5`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 5`;
                   break;
                 case "staffspear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
-                  displayFormula = `1d10 + Ref + Staff/Spear - 5`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 5`;
                   break;
                 case "swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
-                  displayFormula = `1d10 + Ref + Swordsmanship - 5`;
+                  displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 5`;
                   break;
               }
 
-              messageData.flavor = `<h1>Defense: Parry</h1><p>${displayFormula}</p>`;
+              messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}-5`;
               new Roll(rollFormula).roll().toMessage(messageData);
             }
@@ -930,97 +930,97 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let messageData = {
         speaker: {alias: this.actor.name},
-        flavor: `<h1>Attack: ${item.name}</h1>`,
+        flavor: `<h1> ${game.i18n.localize("WITCHER.Dialog.attack")}: ${item.name}</h1>`,
       }
+  
       const locationOptions = `
-      <option value="randomHuman"> Random Human </option>
-      <option value="randomMonster"> Random Monster </option>
-      <option value="head"> Head </option>
-      <option value="torso"> Torso </option>
-      <option value="arm"> Arm </option>
-      <option value="leg"> Leg </option>
-      <option value="tail"> Tail/wing </option>
+      <option value="randomHuman"> ${game.i18n.localize("WITCHER.Dialog.attackRandomHuman")} </option>
+      <option value="randomMonster"> ${game.i18n.localize("WITCHER.Dialog.attackRandomMonster")} </option>
+      <option value="head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
+      <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
+      <option value="arm"> ${game.i18n.localize("WITCHER.Dialog.attackArm")} </option>
+      <option value="leg"> ${game.i18n.localize("WITCHER.Dialog.attackLeg")} </option>
+      <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
+
       const AttackModifierOptions = `
       <div class="flex">
         <div>
-          <label><input type="checkbox" name="outsideLOS"> Outside the enemy LOS</label> <br />
-          <label><input type="checkbox" name="isFastDraw"> Fast Draw</label> <br />
-          <label><input type="checkbox" name="isProne"> You are prone</label> <br />
-          <label><input type="checkbox" name="isPinned"> Target pinned</label> <br />
-          <label><input type="checkbox" name="isActivelyDodging"> Target actively dodging</label> <br />
-          <label><input type="checkbox" name="isMoving"> Moving target REF > 10</label> <br />
+          <label><input type="checkbox" name="outsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
+          <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackisFastDraw")}</label> <br />
+          <label><input type="checkbox" name="isProne">${game.i18n.localize("WITCHER.Dialog.attackisProne")}</label> <br />
+          <label><input type="checkbox" name="isPinned"> ${game.i18n.localize("WITCHER.Dialog.attackisPinned")}</label> <br />
+          <label><input type="checkbox" name="isActivelyDodging"> ${game.i18n.localize("WITCHER.Dialog.attackisActivelyDodging")}</label> <br />
+          <label><input type="checkbox" name="isMoving"> ${game.i18n.localize("WITCHER.Dialog.attackisMoving")}</label> <br />
         </div>
         <div>
-          <label><input type="checkbox" name="targetOutsideLOS"> Target is outside your LOS</label> <br />
-          <label><input type="checkbox" name="isAmbush"> Ambush</label> <br />
-          <label><input type="checkbox" name="isRicochet"> Ricochet</label> <br />
-          <label><input type="checkbox" name="isBlinded"> You are blinded</label> <br />
-          <label><input type="checkbox" name="isSilhouetted"> Silhouetted</label> <br />
-          <label><input type="checkbox" name="isAiming"> Aiming rounds: </label> <input class="small" name="customAim" value=0> <br />
+          <label><input type="checkbox" name="targetOutsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attacktargetOutsideLOS")}</label> <br />
+          <label><input type="checkbox" name="isAmbush"> ${game.i18n.localize("WITCHER.Dialog.attackisAmbush")}</label> <br />
+          <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
+          <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
+          <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
+          <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input class="small" name="customAim" value=0> <br />
         </div>
       </div>
       `;
       const opponentSizeOptions = `
-      <option value="medium"> Medium </option>
-      <option value="small"> Small</option>
-      <option value="large"> Large </option>
-      <option value="huge"> Huge </option>
+      <option value="medium"> ${game.i18n.localize("WITCHER.Dialog.sizeMedium")} </option>
+      <option value="small"> ${game.i18n.localize("WITCHER.Dialog.sizeSmall")}</option>
+      <option value="large"> ${game.i18n.localize("WITCHER.Dialog.sizeLarge")} </option>
+      <option value="huge"> ${game.i18n.localize("WITCHER.Dialog.sizeHuge")} </option>
       `;
       const rangeOptions = `
-      <option value="none"> None </option>
-      <option value="pointBlank"> Point Blank </option>
-      <option value="close"> Close</option>
-      <option value="medium"> Medium </option>
-      <option value="long"> Long </option>
-      <option value="extreme"> Extreme </option>
+      <option value="none"> ${game.i18n.localize("WITCHER.Dialog.rangeNone")} </option>
+      <option value="pointBlank"> ${game.i18n.localize("WITCHER.Dialog.rangePointBlank")} </option>
+      <option value="close"> ${game.i18n.localize("WITCHER.Dialog.rangeClose")}</option>
+      <option value="medium"> ${game.i18n.localize("WITCHER.Dialog.rangeMedium")} </option>
+      <option value="long"> ${game.i18n.localize("WITCHER.Dialog.rangeLong")} </option>
+      <option value="extreme"> ${game.i18n.localize("WITCHER.Dialog.rangeExtreme")} </option>
       `;
       const StrikeOptions = `
-      <option value="normal"> Normal Strike </option>
-      <option value="fast"> Fast Strike </option>
-      <option value="strong"> Strong Strike </option>
-      <option value="joint"> Joint Strike </option>
+      <option value="normal"> ${game.i18n.localize("WITCHER.Dialog.strikeNormal")} </option>
+      <option value="fast"> ${game.i18n.localize("WITCHER.Dialog.strikeFast")} </option>
+      <option value="strong"> ${game.i18n.localize("WITCHER.Dialog.strikeStrong")} </option>
+      <option value="joint"> ${game.i18n.localize("WITCHER.Dialog.strikeJoint")} </option>
       `;
-
-
-      let content = `<h2>${item.name} Attack will use: ${item.data.data.attackSkill}</h2> 
+      let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${item.data.data.attackSkill}</h2> 
                      <div class="flex">
-                      <label>Extra attack: <input type="checkbox" name="isExtraAttack"></label> <br />
+                      <label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />
                      </div>
-                     <label>Hit Location: <select name="location">${locationOptions}</select></label> <br />
-                     <label>Attack Modifiers:</label> <br />${AttackModifierOptions}
-                     <label>Opponent Size Modifiers: <select name="size">${opponentSizeOptions}</select></label> <br />
-                     <label>Range Modifiers: <select name="range">${rangeOptions}</select></label> <br />
-                     <label>Custom Modifiers: <input name="customAtt" value=0></label> <br />
-                     <label>Strike type: <select name="strike">${StrikeOptions}</select></label> <br /><br />
-                     <h2>${item.name} damage: ${formula}</h2> 
-                     <label>Melee Bonus: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
-                     <label>Custom Damage Modifiers: <input name="customDmg" value=0></label> <br /><br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}:</label> <br />${AttackModifierOptions}
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackSize")}: <select name="size">${opponentSizeOptions}</select></label> <br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> <br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br /><br />
+                     <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />
                      `;
 
       if (! item.data.data.isMelee){
         let ammunitions = this.actor.items.filter(function(item) {return item.data.type=="weapon" &&  item.data.data.isAmmo});
         let quantity = ammunitions.sum("quantity")
-        content += `<h2>Choose Ammunition</h2> `
+        content += `<h2>${game.i18n.localize("WITCHER.Dialog.chooseAmmunition")}</h2> `
         if (quantity <= 0) {
-          content += `<div class="error">No ammunition available</h2>`
+          content += `<div class="error-display">${game.i18n.localize("WITCHER.Dialog.NoAmmunation")}</h2>`
         }
         else {
           let ammunationOption = ``
           ammunitions.forEach(element => {
             ammunationOption += `<option value="${element.data._id}"> ${element.data.name}(${element.data.data.quantity}) </option>`;
           });
-          content += ` <label>Ammunation: <select name="ammunation">${ammunationOption}</select></label> <br /><br />`
+          content += ` <label>${game.i18n.localize("WITCHER.Dialog.Ammunation")}: <select name="ammunation">${ammunationOption}</select></label> <br /><br />`
         }
       }
               
-
+      
       new Dialog({
-        title: `Performing an Attack with: ${item.name}`, 
+        title: `${game.i18n.localize("WITCHER.Dialog.attackWith")}: ${item.name}`, 
         content,
         buttons: {
           Roll: {
-            label: "Roll",
+            label: `${game.i18n.localize("WITCHER.Dialog.ButtonRoll")}`,
             callback: (html) => {
               let isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
 
@@ -1155,67 +1155,67 @@ export default class WitcherActorSheet extends ActorSheet {
                   damageFormula += "+"+customDmg;
                 }                
                 let touchedLocation = ""
-                let LocationFormula = "(Full Damage)"
+                let LocationFormula = `(${game.i18n.localize("WITCHER.Chat.FullDmg")})`
                 switch(location){
                   case "randomHuman":
                     let randomHumanLocation = getRandomInt(10)
                     switch(randomHumanLocation){
                       case 1:
-                        touchedLocation = "Head";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
                         LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
                       case 4:
-                        touchedLocation = "Torso";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                         break;
                       case 5:
-                        touchedLocation = "R Arm";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                         LocationFormula = `*0.5`;
                         break;
                       case 6:
-                        touchedLocation = "L Arm";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                         LocationFormula = `*0.5`;
                         break;
                       case 7:
                       case 8:
-                        touchedLocation = "R Leg";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                         LocationFormula = `*0.5`;
                         break;
                       case 9:
                       case 10:
-                        touchedLocation = "L Leg";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                         LocationFormula = `*0.5`;
                         break;
                       default:
-                        touchedLocation = "Torso";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                     }
                     break;
                   case "randomMonster":
                     let randomMonsterLocation = getRandomInt(10)
                     switch(randomMonsterLocation){
                       case 1:
-                        touchedLocation = "Head";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
                         LocationFormula = `*3`;
                         break;
                       case 2:
                       case 3:
                       case 4:
                       case 5:
-                        touchedLocation = "Torso";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                       break;
                       case 6:
                       case 7:
-                        touchedLocation = "R Limb";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
                         LocationFormula = `*0.5`;
                         break;
                       case 8:
                       case 9:
-                        touchedLocation = "L Limb";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
                         LocationFormula = `*0.5`;
                         break;
                       case 10:
-                        touchedLocation = "Tail or Wing";
+                        touchedLocation = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
                         LocationFormula = `*0.5`;
                         break;
                       default:
@@ -1223,26 +1223,26 @@ export default class WitcherActorSheet extends ActorSheet {
                     }
                     break;
                   case "head":
-                    touchedLocation = "Head";
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
                     attFormula = `${attFormula}-6`;
                     LocationFormula = `*3`;
                     break;
                   case "torso":
-                    touchedLocation = "Torso";
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                     attFormula = `${attFormula}-1`;
                     break;
                   case "arm":
-                    touchedLocation = "Arm";
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                     attFormula = `${attFormula}-3`;
                     LocationFormula = `*0.5`;
                     break;
                   case "leg":
-                    touchedLocation = "Leg";
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                     attFormula = `${attFormula}-2`;
                     LocationFormula = `*0.5`;
                     break;
                   case "tail":
-                    touchedLocation = "Tail or Wing";
+                    touchedLocation = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
                     attFormula = `${attFormula}-2`;
                     LocationFormula = `*0.5`;
                     break;
@@ -1262,8 +1262,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
-                messageData.flavor += `<span> Location: ${touchedLocation} = ${LocationFormula} </span>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>Damage</button>`;
+                messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 new Roll(attFormula).roll().toMessage(messageData)
               }
             }
