@@ -13,10 +13,20 @@
             </div>
         </div>
     </header>
+    <div class="flex">
+        <label>{{localize "WITCHER.Type"}}:</label>
+        <select name="data.type" id="type-select">
+            {{#select data.type}}
+            <option value="armor">{{localize "WITCHER.Enhancement.Armor"}}</option>
+            <option value="rune">{{localize "WITCHER.Enhancement.Rune"}}</option>
+            <option value="glyph">{{localize "WITCHER.Enhancement.Glyph"}}</option>
+            {{/select}}
+        </select>
+    </div>
+    {{#if (eq data.type "armor")}}
     <table>
         <tr>
             <th>{{localize "WITCHER.Item.Availability"}}</th>
-            <th>{{localize "WITCHER.Item.Effect"}}</th>
             <th>{{localize "WITCHER.Enhancement.Stopping"}}</th>
             <th>{{localize "WITCHER.Enhancement.Bludgeoning"}}</th>
             <th>{{localize "WITCHER.Enhancement.Slashing"}}</th>
@@ -32,11 +42,17 @@
                 {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.effect" value="{{data.effect}}"/></td>
             <td><input type="text" name="data.stopping" value="{{data.stopping}}" data-dtype="Number"/></td>
             <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
             <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
             <td><input type="checkbox" name="data.percing" {{checked data.percing}} /></td>
         </tr>
+        <tr >
+            <td colspan="5">
+            </td>
+        </tr>
     </table>
+    {{/if}}
+    <label>{{localize "WITCHER.Item.Effect"}}</label>
+    <textarea rows=3 name="data.effect">{{data.effect}}</textarea>
 </form>

@@ -24,10 +24,10 @@ export default class WitcherActorSheet extends ActorSheet {
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
-      data.armors = data.items.filter(function(item) {return item.type=="armor" || item.type == "enhancement"});
+      data.armors = data.items.filter(function(item) {return item.type=="armor" || (item.type == "enhancement" && item.data.type == "armor")});
       data.components = data.items.filter(function(item) {return item.type=="component" &&  item.data.type!="substances"});
       data.allComponents = data.items.filter(function(item) {return item.type=="component"});
-      data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" });
+      data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" || (item.type == "enhancement" && item.data.type != "armor")});
       data.diagrams = data.items.filter(function(item) {return item.type=="diagrams"});
       data.spells = data.items.filter(function(item) {return item.type=="spell"});
       

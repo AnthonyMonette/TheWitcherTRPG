@@ -83,6 +83,10 @@
     "WITCHER.Enhancement.Slashing": "S",
     "WITCHER.Enhancement.Percing": "P",
 
+    "WITCHER.Enhancement.Armor": "Armor",
+    "WITCHER.Enhancement.Rune": "Rune",
+    "WITCHER.Enhancement.Glyph": "Glyph",
+
     "WITCHER.Mount.Dex": "Dex + Atl",
     "WITCHER.Mount.Dexterity": "Dex",
     "WITCHER.Mount.ControlMod": "Control Mod",
