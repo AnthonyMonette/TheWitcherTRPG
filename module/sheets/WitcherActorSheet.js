@@ -131,7 +131,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".life-event-display").on("click", this._onLifeEventDisplay.bind(this));
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
-
+      html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
+      
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
@@ -343,13 +344,15 @@ export default class WitcherActorSheet extends ActorSheet {
       let type = event.currentTarget.closest(".stat-display").dataset.type;
       
       let newModifierList  = []
-      if (type != "coreStat") {
-        if (this.actor.data.data.stats[stat].modifiers){
-          newModifierList = this.actor.data.data.stats[stat].modifiers
-        }
-      }else {
+      if (type == "coreStat") {
         if (this.actor.data.data.coreStats[stat].modifiers){
           newModifierList = this.actor.data.data.coreStats[stat].modifiers
+        }
+      }else  if (type == "derivedStat") {
+        newModifierList = this.actor.data.data.derivedStats[stat].modifiers
+      }else {
+        if (this.actor.data.data.stats[stat].modifiers){
+          newModifierList = this.actor.data.data.stats[stat].modifiers
         }
       }
 
@@ -371,6 +374,10 @@ export default class WitcherActorSheet extends ActorSheet {
         case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': newModifierList}); break;
         case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': newModifierList}); break;
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': newModifierList}); break;
+        case "hp": this.actor.update({ 'data.derivedStats.hp.modifiers': newModifierList}); break;
+        case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': newModifierList}); break;
+        case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': newModifierList}); break;
+        case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': newModifierList}); break;
       }
     }
 
@@ -476,10 +483,12 @@ export default class WitcherActorSheet extends ActorSheet {
       let value = element.value
       let modifiers = []
       
-      if (type != "coreStat") {
-        modifiers = this.actor.data.data.stats[stat].modifiers;
-      }else {
+      if (type == "coreStat") {
         modifiers = this.actor.data.data.coreStats[stat].modifiers;
+      }else if (type == "derivedStat") {
+        modifiers = this.actor.data.data.derivedStats[stat].modifiers;
+      }else {
+        modifiers = this.actor.data.data.stats[stat].modifiers;
       }
 
       let objIndex = modifiers.findIndex((obj => obj.id == itemId));
@@ -500,6 +509,10 @@ export default class WitcherActorSheet extends ActorSheet {
         case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': modifiers}); break;
         case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': modifiers}); break;
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': modifiers}); break;
+        case "hp": this.actor.update({ 'data.derivedStats.hp.modifiers': modifiers}); break;
+        case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': modifiers}); break;
+        case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': modifiers}); break;
+        case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': modifiers}); break;
       }
       updateDerived(this.actor);
     }
@@ -580,10 +593,12 @@ export default class WitcherActorSheet extends ActorSheet {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let type = event.currentTarget.closest(".stat-display").dataset.type;
       let prevModList = []
-      if (type != "coreStat") {
-        prevModList = this.actor.data.data.stats[stat].modifiers;
-      }else {
+      if (type == "coreStat") {
         prevModList = this.actor.data.data.coreStats[stat].modifiers;
+      }else if(type == "derivedStat"){
+        prevModList = this.actor.data.data.derivedStats[stat].modifiers;
+      }else {
+        prevModList = this.actor.data.data.stats[stat].modifiers;
       }
       const newModList = Object.values(prevModList).map((details) => details);
       const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
@@ -604,6 +619,10 @@ export default class WitcherActorSheet extends ActorSheet {
         case "enc": this.actor.update({ 'data.coreStats.enc.modifiers': newModList}); break;
         case "rec": this.actor.update({ 'data.coreStats.rec.modifiers': newModList}); break;
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.modifiers': newModList}); break;
+        case "hp": this.actor.update({ 'data.derivedStats.hp.modifiers': newModList}); break;
+        case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': newModList}); break;
+        case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': newModList}); break;
+        case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': newModList}); break;
       }
       updateDerived(this.actor);
   }
@@ -1566,6 +1585,11 @@ export default class WitcherActorSheet extends ActorSheet {
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.isOpened': this.actor.data.data.coreStats.woundTreshold.isOpened ? false : true}); break;
       }
     }
+
+    _onDerivedModifierDisplay(event){
+      this.actor.update({ 'data.derivedStats.modifiersIsOpened': this.actor.data.data.derivedStats.modifiersIsOpened ? false : true});
+    }
+
     _onSkillModifierDisplay(event){
       event.preventDefault(); 
       let skill = event.currentTarget.closest(".skill").dataset.skill;
