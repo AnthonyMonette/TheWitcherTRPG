@@ -16,6 +16,7 @@
         </div>
     </header>
     <div class="flex-header">
+        {{#unless data.isAmmo}}
         <label>{{localize "WITCHER.Weapon.AttackSkill"}}:</label>
         <select name="data.attackSkill" id="hands-select">
             {{#select data.attackSkill}}
@@ -29,24 +30,43 @@
                 <option value="Crossbow"> {{localize "WITCHER.SkDexCrossbow"}} </option>
             {{/select}}
         </select>
+        {{/unless}}
+        <label>{{localize "WITCHER.Weapon.isAmmunition"}}</label>
+        <input type="checkbox" name="data.isAmmo" {{checked data.isAmmo}}/>
     </div>
     <table>
         <tr>
             <th>{{localize "WITCHER.Weapon.Type"}}</th>
+            {{#unless data.isAmmo}}
             <th>{{localize "WITCHER.Weapon.MeleeBonus"}}</th>
             <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
+            <th>{{localize "WITCHER.Weapon.Hands"}}</th>
+            <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
+            {{/unless}}
             <th>{{localize "WITCHER.Item.Availability"}}</th>
             <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
             <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
-            <th>{{localize "WITCHER.Weapon.Hands"}}</th>
             <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
-            <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
-            <th>ROF</th>
+            {{#unless data.isAmmo}}
+            <th>{{localize "WITCHER.Weapon.rateOfFire"}}</th>
+            {{/unless}}
+
         </tr>
         <tr>
             <td><input type="text" name="data.type" value="{{data.type}}"/></td>
+            {{#unless data.isAmmo}}
             <td><input type="checkbox" name="data.isMelee"  {{checked data.isMelee}}/></td>
             <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
+            <td>
+                <select name="data.hands" id="hands-select">
+                    {{#select data.hands}}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        {{/select}}
+                </select>
+            </td>
+            <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+            {{/unless}}
             <td>
                 <select name="data.avail" id="avail-select">
                 {{#select data.avail}}
@@ -59,14 +79,6 @@
             <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
             <td><input type="text" name="data.maxReliability" value="{{data.maxReliability}}" data-dtype="Number"/></td>
             <td>
-                <select name="data.hands" id="hands-select">
-                    {{#select data.hands}}
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        {{/select}}
-                </select>
-            </td>
-            <td>
                 <select name="data.conceal" id="avail-select">
                     {{#select data.conceal}}
                     {{#each config.Concealment as |name value|}}
@@ -75,11 +87,13 @@
                     {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+            {{#unless data.isAmmo}}
             <td><input type="text" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
+            {{/unless}}
         </tr>
     </table>
     <div class="flex">
+        {{#unless data.isAmmo}}
         <div class="flex">
             <div>
                 <b>{{localize "WITCHER.Weapon.Damage"}}</b><input type="text" name="data.damage" value="{{data.damage}}"/>
@@ -88,6 +102,7 @@
                 <b>{{localize "WITCHER.Weapon.Range"}}</b><input type="text" name="data.range" value="{{data.range}}"/>
             </div>
         </div>
+        {{/unless}}
         <div>
             <div class="flex">
                 <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>

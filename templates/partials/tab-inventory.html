@@ -33,9 +33,15 @@
                             <tr>
                                 <td></td> 
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Type"}} :</b></label>{{weapon.data.type}}</div></td>
+                                {{#unless weapon.data.isAmmo}}
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Hands"}} :</b></label>{{weapon.data.hands}}</div></td>
-                                <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Concealement"}} :</b></label>{{weapon.data.conceal}}</div></td>
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Enhancement"}} :</b></label>{{weapon.data.enhancements}}</div></td>
+                                {{/unless}}
+                                {{#if weapon.data.hands}}
+                                <td></td> 
+                                <td></td> 
+                                {{/if}}
+                                <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Concealement"}} :</b></label>{{weapon.data.conceal}}</div></td>
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Weight"}} :</b></label>{{weapon.data.weight}}</div></td>
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
