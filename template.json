@@ -785,6 +785,7 @@
     },
     "enhancement": {
       "templates": ["base"],
+      "type": "",
       "avail": "",
       "effect": "",
       "stopping": 0,

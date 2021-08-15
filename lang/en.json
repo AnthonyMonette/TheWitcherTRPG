@@ -83,6 +83,10 @@
     "WITCHER.Enhancement.Slashing": "S",
     "WITCHER.Enhancement.Percing": "P",
 
+    "WITCHER.Enhancement.Armor": "Armor",
+    "WITCHER.Enhancement.Rune": "Rune",
+    "WITCHER.Enhancement.Glyph": "Glyph",
+
     "WITCHER.Mount.Dex": "Dex + Atl",
     "WITCHER.Mount.Dexterity": "Dex",
     "WITCHER.Mount.ControlMod": "Control Mod",
@@ -569,5 +573,82 @@
     "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
     "WITCHER.Spell.MagicCost": "Magic Costs",
 
-    "WITCHER.Chat.SaveText": "To succeed you need to roll below"
+    "WITCHER.Chat.SaveText": "To succeed you need to roll below",
+
+    "WITCHER.Dialog.Crafting": "Crafting a",
+    "WITCHER.Dialog.AlchemyTitle": "Performing an alchemy action",
+    "WITCHER.Dialog.ButtonCraft": "Craft",
+    "WITCHER.Dialog.CraftingAlchemycal": "Crafting an alchemical",
+
+    "WITCHER.Dialog.ButtonDodge": "Dodge",
+    "WITCHER.Dialog.ButtonReposition": "Reposition",
+    "WITCHER.Dialog.ButtonParry": "Parry",
+    "WITCHER.Dialog.ButtonBlock": "Block",
+    "WITCHER.Dialog.ButtonParryThrown": "Parry thrown weapon",
+    "WITCHER.Dialog.Defense": "Defense",
+    "WITCHER.Dialog.DefenseExtra": "Extra defense",
+    "WITCHER.Dialog.DefenseWith": "Defense with",
+    "WITCHER.Dialog.DefenseTitle": "Performing a defense action",
+
+    "WITCHER.Dialog.attack": "Random Human",
+
+    "WITCHER.Dialog.attackRandomHuman": "Random Human",
+    "WITCHER.Dialog.attackRandomMonster": "Random Monster",
+    "WITCHER.Dialog.attackHead": "Head",
+    "WITCHER.Dialog.attackTorso": "Torso",
+    "WITCHER.Dialog.attackArm": "Arm",
+    "WITCHER.Dialog.attackLeg": "Leg",
+    "WITCHER.Dialog.attackLimb": "Limb",
+    "WITCHER.Dialog.attackTail": "Tail/wing",
+
+    "WITCHER.Dialog.attackOutsideLOS": "Outside the enemy LOS",
+    "WITCHER.Dialog.attackisFastDraw": "Fast Draw",
+    "WITCHER.Dialog.attackisProne": "You are prone",
+    "WITCHER.Dialog.attackisPinned": "Target pinned",
+    "WITCHER.Dialog.attackisActivelyDodging": "Target actively dodging",
+    "WITCHER.Dialog.attackisMoving": "Moving target REF > 10",
+    "WITCHER.Dialog.attacktargetOutsideLOS": " Target is outside your LOS",
+    "WITCHER.Dialog.attackisAmbush": "Ambush",
+    "WITCHER.Dialog.attackisRicochet": "Ricochet",
+    "WITCHER.Dialog.attackisBlinded": "You are blinded",
+    "WITCHER.Dialog.attackisSilhouetted": "Silhouetted",
+    "WITCHER.Dialog.attackisAiming": "Aiming rounds",
+
+    "WITCHER.Dialog.sizeMedium": "Medium",
+    "WITCHER.Dialog.sizeSmall": "Small",
+    "WITCHER.Dialog.sizeLarge": "Large",
+    "WITCHER.Dialog.sizeHuge": "Huge",
+
+    "WITCHER.Dialog.rangeNone": "None",
+    "WITCHER.Dialog.rangePointBlank": "Point Blank",
+    "WITCHER.Dialog.rangeClose": "Close",
+    "WITCHER.Dialog.rangeMedium": "Medium",
+    "WITCHER.Dialog.rangeLong": "Long",
+    "WITCHER.Dialog.rangeExtreme": "Extreme",
+    
+    "WITCHER.Dialog.strikeNormal": "Normal Strike",
+    "WITCHER.Dialog.strikeFast": "Fast Strike",
+    "WITCHER.Dialog.strikeStrong": "Strong Strike",
+    "WITCHER.Dialog.strikeJoint": "Joint Strike",
+
+    "WITCHER.Dialog.attackUse": "Attack will use",
+    "WITCHER.Dialog.attackExtra": "Extra attack",
+    "WITCHER.Dialog.attackLocation": " Hit Location",
+    "WITCHER.Dialog.attackModifierse": "Attack Modifiers",
+    "WITCHER.Dialog.attackSize": " Opponent Size Modifiers",
+    "WITCHER.Dialog.attackRange": "Range Modifiers",
+    "WITCHER.Dialog.attackCustom": "Custom Modifiers",
+    "WITCHER.Dialog.attackStrike": " Strike type",
+    "WITCHER.Dialog.attackDamage": " damage",
+    "WITCHER.Dialog.attackMeleeBonus": " Melee Bonus",
+    "WITCHER.Dialog.attackCustomDmg": "Custom Damage Modifiers",
+    "WITCHER.Dialog.attackWith": "Performing an Attack with",
+    
+    "WITCHER.Dialog.chooseAmmunition": " Choose Ammunition",
+    "WITCHER.Dialog.NoAmmunation": " No ammunition available",
+    "WITCHER.Dialog.Ammunation": "Ammunation",
+
+    "WITCHER.Dialog.ButtonRoll": "Roll",
+    
+    "WITCHER.Chat.FullDmg": "Full Damage"
 }
