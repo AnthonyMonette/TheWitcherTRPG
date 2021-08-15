@@ -120,29 +120,35 @@
           }
         },
         "derivedStats": {
+          "modifiersIsOpened": false,
           "hp": {
             "max": 0,
             "value": 0,
-            "label": "WITCHER.Actor.DerStat.HP"
+            "label": "WITCHER.Actor.DerStat.HP",
+            "modifiers": []
           },
           "sta": {
             "max": 0,
             "value": 0,
-            "label": "WITCHER.Actor.DerStat.Sta"
+            "label": "WITCHER.Actor.DerStat.Sta",
+            "modifiers": []
           },
           "resolve": {
             "max": 0,
             "value": 0,
-            "label": "WITCHER.Actor.DerStat.Resolve"
+            "label": "WITCHER.Actor.DerStat.Resolve",
+            "modifiers": []
           },
           "focus": {
             "max": 0,
             "current": 0,
-            "label": "WITCHER.Actor.DerStat.Focus"
+            "label": "WITCHER.Actor.DerStat.Focus",
+            "modifiers": []
           },
           "vigor": {
             "value": 0,
-            "label": "WITCHER.Actor.DerStat.Vigor"
+            "label": "WITCHER.Actor.DerStat.Vigor",
+            "modifiers": []
           }
           
         },

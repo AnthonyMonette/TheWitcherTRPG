@@ -82,16 +82,25 @@ function updateDerived(actor){
 	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
 	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 
-	let curHp = thisActor.data.data.derivedStats.hp.max;
-	let curSta = thisActor.data.data.derivedStats.sta.max;
-	let curRes = thisActor.data.data.derivedStats.resolve.max;
-	let curFocus = thisActor.data.data.derivedStats.focus.max;
+	let hpTotalModifiers = 0;
+	let staTotalModifiers = 0;
+	let resTotalModifiers = 0;
+	let focusTotalModifiers = 0;
+	thisActor.data.data.derivedStats.hp.modifiers.forEach(item => hpTotalModifiers += Number(item.value));
+	thisActor.data.data.derivedStats.sta.modifiers.forEach(item => staTotalModifiers += Number(item.value));
+	thisActor.data.data.derivedStats.resolve.modifiers.forEach(item => resTotalModifiers += Number(item.value));
+	thisActor.data.data.derivedStats.focus.modifiers.forEach(item => focusTotalModifiers += Number(item.value));
+
+	let curHp = thisActor.data.data.derivedStats.hp.max + hpTotalModifiers;
+	let curSta = thisActor.data.data.derivedStats.sta.max + staTotalModifiers;
+	let curRes = thisActor.data.data.derivedStats.resolve.max + resTotalModifiers;
+	let curFocus = thisActor.data.data.derivedStats.focus.max + focusTotalModifiers;
 
 	if (thisActor.data.data.customStat != true){
-		curHp = base * 5
-		curSta = base * 5
-		curRes = Math.floor((curWill + curInt)/2*5)
-		curFocus = Math.floor((curWill + curInt)/2*3)
+		curHp = base * 5 + hpTotalModifiers
+		curSta = base * 5 + staTotalModifiers 
+		curRes = Math.floor((curWill + curInt)/2*5) + resTotalModifiers
+		curFocus = Math.floor((curWill + curInt)/2*3) + focusTotalModifiers
 	}
 	
 	thisActor.update({ 
