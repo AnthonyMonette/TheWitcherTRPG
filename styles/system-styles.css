@@ -414,3 +414,7 @@ input.skill-value {
 .description {
   margin: 10px;
 }
+
+.error {
+  color:red;
+}

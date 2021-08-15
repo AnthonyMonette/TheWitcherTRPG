@@ -43,6 +43,9 @@ export default class WitcherActorSheet extends ActorSheet {
             if (this[i]["data"][prop]){
               total += Number(this[i]["data"][prop])
             }
+            else if (this[i]["data"]["data"][prop]){
+              total += Number(this[i]["data"]["data"][prop])
+            }
         }
         return total
       }
@@ -995,6 +998,22 @@ export default class WitcherActorSheet extends ActorSheet {
                      <label>Custom Damage Modifiers: <input name="customDmg" value=0></label> <br /><br />
                      `;
 
+      if (! item.data.data.isMelee){
+        let ammunitions = this.actor.items.filter(function(item) {return item.data.type=="weapon" &&  item.data.data.isAmmo});
+        let quantity = ammunitions.sum("quantity")
+        content += `<h2>Choose Ammunition</h2> `
+        if (quantity <= 0) {
+          content += `<div class="error">No ammunition available</h2>`
+        }
+        else {
+          let ammunationOption = ``
+          ammunitions.forEach(element => {
+            ammunationOption += `<option value="${element.data._id}"> ${element.data.name}(${element.data.data.quantity}) </option>`;
+          });
+          content += ` <label>Ammunation: <select name="ammunation">${ammunationOption}</select></label> <br /><br />`
+        }
+      }
+              
 
       new Dialog({
         title: `Performing an Attack with: ${item.name}`, 
@@ -1006,6 +1025,10 @@ export default class WitcherActorSheet extends ActorSheet {
               let isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
 
               let location = html.find("[name=location]")[0].value;
+              let ammunition = undefined
+              if (html.find("[name=ammunation]")[0]) {
+                ammunition = html.find("[name=ammunation]")[0].value;
+              }
 
               let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
               let outsideLOS = html.find("[name=outsideLOS]").prop("checked");
@@ -1227,6 +1250,15 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (strike == "joint" || strike == "strong") {
                   attFormula = `${attFormula}-3`;
                 }
+
+                let allEffects = item.data.data.effects
+
+                if (ammunition){
+                  let item = this.actor.items.get(ammunition);
+                  let newQuantity = item.data.data.quantity - 1;
+                  item.update({"data.quantity": newQuantity})
+                  allEffects.push(...item.data.data.effects)
+                } 
 
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;

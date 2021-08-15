@@ -733,6 +733,7 @@
       "templates": ["base"],
       "type": "",
       "isMelee": false,
+      "isAmmo": false,
       "accuracy": 0,
       "avail": "",
       "damage": "",
