@@ -13,17 +13,17 @@
     "WITCHER.Weapon.Reliability": "Fiab.",
     "WITCHER.Weapon.MaxReliability": "Max. Fiab.",
     "WITCHER.Weapon.Hands": "Manos",
-    "WITCHER.Weapon.Concealement": "CD.",
+    "WITCHER.Weapon.0": "CD.",
     "WITCHER.Weapon.Enhancement": "Mej",
     "WITCHER.Weapon.Range": "Alcance",
     "WITCHER.Weapon.Elderfolk": "Reliquia",
 
     "WITCHER.Armor.StoppingPower": "CP",
-    "WITCHER.Armor.MaxStoppingPower": "Max. CP",
+    "WITCHER.Armor.MaxStoppingPower": "CP.Max",
     
     "WITCHER.Armor.Enhancement": "MA",
     "WITCHER.Armor.Reliable": "Rel.",
-    "WITCHER.Armor.EncumbranceValue": "Peso",
+    "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
     "WITCHER.Armor.Resistances": "Resistencia",
     "WITCHER.Armor.Bludgeoning": "Aplastante",
     "WITCHER.Armor.Slashing": "Cortante",
@@ -71,10 +71,6 @@
     "WITCHER.StSpd": "Velocidad",
     "WITCHER.StVigor": "Vigor",
 
-    "WITCHER.Actor.Race": "Raza",
-    "WITCHER.Actor.Gender": "Género",
-    "WITCHER.Actor.Age": "Edad",
-
     "WITCHER.Actor.TotalStats": "Total Stats",
 
     "WITCHER.Actor.Stat.Int": "INT",
@@ -87,7 +83,7 @@
     "WITCHER.Actor.Stat.Will": "VOL",
     "WITCHER.Actor.Stat.Luck": "SUE",
 
-    "WITCHER.Actor.StatTitle.LableLeft": "Características",
+    "WITCHER.Actor.StatTitle.LableLeft": "Car.",
     "WITCHER.Actor.StatTitle.LableRight": "Valor / Mod",
 
     "WITCHER.Actor.CoreStat.Stun": "ATU",
@@ -106,8 +102,8 @@
     "WITCHER.Actor.DerStat.Kick": "Patada",
     
     "WITCHER.Actor.Initiative": "Iniciativa",
-    "WITCHER.Actor.SavingThrow": "Tirada de salvación",
-    "WITCHER.Actor.Crit/Fumble": "Crit/Pifía",
+    "WITCHER.Actor.SavingThrow": "T. de salvación",
+    "WITCHER.Actor.Crit/Fumble": "Crítico/Pifía",
     "WITCHER.Actor.Defense": "Defensa",
     "WITCHER.Actor.Adrenaline": "Adrenalina",
     "WITCHER.Actor.Stamina": "Aguante",
@@ -125,10 +121,10 @@
     "WITCHER.SkIntBusiness": "Negociar",
     "WITCHER.SkIntDeduction": "Deducción",
     "WITCHER.SkIntEducation": "Cultura",
-    "WITCHER.SkIntCommon": "Lengua Común(2)",
+    "WITCHER.SkIntCommon": "Lengua: Común(2)",
     "WITCHER.SkIntElder": "Lengua: Antigua(2)",
     "WITCHER.SkIntDwarven": "Lengua: Enanés (2)",
-    "WITCHER.SkIntMonster": "Saber de monstruos (2)",
+    "WITCHER.SkIntMonster": "S. de monstruos (2)",
     "WITCHER.SkIntSocialEt": "Etiqueta",
     "WITCHER.SkIntStreet": "Callejeo",
     "WITCHER.SkIntTactics": "Táctica(2)",
@@ -136,7 +132,7 @@
     "WITCHER.SkIntWilderness": "Supervivencia",
 
     "WITCHER.SkRefBrawling": "Pelea",
-    "WITCHER.SkRefDodge": "Esquivar/Zagarse",
+    "WITCHER.SkRefDodge": "Esquivar/Zafarse",
     "WITCHER.SkRefMelee": "Melé",
     "WITCHER.SkRefRiding": "Montar",
     "WITCHER.SkRefSailing": "Navegar",
@@ -160,7 +156,7 @@
     "WITCHER.SkEmpGrooming": "Vestuario y estilo",
     "WITCHER.SkEmpHumanPerc": "Percepción humana",
     "WITCHER.SkEmpLeadership": "Liderazgo",
-    "WITCHER.SkEmpPersuasion": "Persuasion",
+    "WITCHER.SkEmpPersuasion": "Persuasión",
     "WITCHER.SkEmpPerformance": "Interpretar",
     "WITCHER.SkEmpSeduction": "Seducción",
 
@@ -199,7 +195,7 @@
     "WITCHER.LifeEvents": "Acontecimientos en tu vida",
     "WITCHER.Decade": "Decada",
     "WITCHER.Event": "Eventos",
-    "WITCHER.DeathSave": "Stun/Death Save",
+    "WITCHER.DeathSave": "ATU/S. contra muerte",
 
     "WITCHER.table.Quantity": "Cant.",
     "WITCHER.table.Range": "Alcance",
@@ -213,9 +209,9 @@
     "WITCHER.table.ResPiercing": "P",
     "WITCHER.table.Equipped": "Eq",
 	
-	"WITCHER.Monster.HeadArmor": "Armor Head",
-    "WITCHER.Monster.UpperArmor": "Armadura superior",
-    "WITCHER.Monster.LowerArmor": "Armadura inferior",
+	"WITCHER.Monster.HeadArmor": "Armadura cabeza",
+    "WITCHER.Monster.UpperArmor": "Armadura torso",
+    "WITCHER.Monster.LowerArmor": "Armadura piernas",
     "WITCHER.Monster.CustomHP/STA": "Personalizar PV/AGU",
 
     "WITCHER.Monster.Easy": "Fácil",
@@ -236,8 +232,8 @@
     "WITCHER.Monster.Intelligence": "Inteligencia",
     "WITCHER.Monster.Organization": "Organización",
 
-    "WITCHER.Monster.CommonerSupperstition": "Supersticiones de Profanos: DO de Cultura: ",
-    "WITCHER.Monster.WitcherKnowledge": "Conocimiento de Brujo: DO de Saber de Monstruos ",
+    "WITCHER.Monster.CommonerSupperstition": "S. de Profanos: DO de Cultura: ",
+    "WITCHER.Monster.WitcherKnowledge": "Con. de Brujo: DO de Saber de Monstruos ",
 
     "WITCHER.Monster.SkillTab": "Habilidades",
     "WITCHER.Monster.InventryTab": "Ataques/Botín",
