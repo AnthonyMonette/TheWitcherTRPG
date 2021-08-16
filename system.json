@@ -78,6 +78,11 @@
         "lang": "pt-BR",
         "name": "Brazilian Portuguese",
         "path": "lang/ptbr.json"
+      },
+      {
+        "lang": "fr",
+        "name": "Français",
+        "path": "lang/fr.json"
       }
     ],
     "socket": false,
