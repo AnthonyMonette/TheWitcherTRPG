@@ -3,7 +3,7 @@
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
     "compatibleCoreVersion": "0.8.8",
-    "version": 0.36, 
+    "version": 0.37, 
     "author": "TechAntho",
     "scripts": [
     ],
@@ -51,15 +51,15 @@
         "entity": "RollTable"
       },
       {
-        "name": "Components",
-        "label": "Components",
-        "path": "packs/components.db",
+        "name": "Component",
+        "label": "Component",
+        "path": "packs/component.db",
         "entity": "Item"
       },
       {
-        "name": "Valuables",
-        "label": "Valuables",
-        "path": "packs/valuables.db",
+        "name": "Valuable",
+        "label": "Valuable",
+        "path": "packs/valuable.db",
         "entity": "Item"
       }
     ],
