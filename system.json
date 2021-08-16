@@ -85,6 +85,11 @@
         "path": "lang/fr.json"
       }
     ],
+    "dependencies": [
+      {
+        "name": "compendium-folders",
+        "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/master/module.json"
+      }],
     "socket": false,
     "initiative": "1d10",
     "gridDistance": 2,
