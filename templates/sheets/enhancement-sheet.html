@@ -53,6 +53,18 @@
         </tr>
     </table>
     {{/if}}
-    <label>{{localize "WITCHER.Item.Effect"}}</label>
-    <textarea rows=3 name="data.effect">{{data.effect}}</textarea>
+    <div class="flex">
+        <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
+    </div>
+    {{#each data.effects as |effect name|}}
+    <div class="flex list-item"  data-id="{{effect.id}}">
+        <a class="remove-effect"><i class="fas fa-minus"></i></a>
+        <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
+        <div  class="flex">
+            <label>{{localize "WITCHER.Percentage"}}:</label>
+            <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
+            %
+        </div>
+    </div>
+    {{/each}}
 </form>
