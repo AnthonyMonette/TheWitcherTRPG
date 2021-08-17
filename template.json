@@ -860,6 +860,7 @@
       ],
       "conceal": "",
       "enhancements": 0,
+      "enhancementItems": [],
       "rateOfFire":1,
       "attackSkill": ""
     },
@@ -896,8 +897,13 @@
     "enhancement": {
       "templates": ["base"],
       "type": "",
+      "applied": "",
       "avail": "",
-      "effect": "",
+      "effects": [{
+          "id": "first",
+          "name": "effect"
+        }
+      ],
       "stopping": 0,
       "bludgeoning": false,
       "slashing": false,

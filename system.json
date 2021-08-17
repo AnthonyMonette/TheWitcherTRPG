@@ -3,7 +3,7 @@
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
     "compatibleCoreVersion": "0.8.8",
-    "version": 0.36, 
+    "version": 0.39, 
     "author": "TechAntho",
     "scripts": [
     ],
@@ -51,15 +51,15 @@
         "entity": "RollTable"
       },
       {
-        "name": "Components",
-        "label": "Components",
-        "path": "packs/components.db",
+        "name": "Component",
+        "label": "Component",
+        "path": "packs/component.db",
         "entity": "Item"
       },
       {
-        "name": "Valuables",
-        "label": "Valuables",
-        "path": "packs/valuables.db",
+        "name": "Valuable",
+        "label": "Valuable",
+        "path": "packs/valuable.db",
         "entity": "Item"
       }
     ],
@@ -69,12 +69,27 @@
         "name": "English",
         "path": "lang/en.json"
       },
-	  {
+	    {
         "lang": "es",
         "name": "Español",
         "path": "lang/es.json"
+      },
+      {
+        "lang": "pt-BR",
+        "name": "Brazilian Portuguese",
+        "path": "lang/ptbr.json"
+      },
+      {
+        "lang": "fr",
+        "name": "Français",
+        "path": "lang/fr.json"
       }
     ],
+    "dependencies": [
+      {
+        "name": "compendium-folders",
+        "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/master/module.json"
+      }],
     "socket": false,
     "initiative": "1d10",
     "gridDistance": 2,

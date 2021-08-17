@@ -1,0 +1,15 @@
+.enhancement-slot {
+    height: 30px;
+    width: 30px;
+    border: solid black 1px;
+}
+
+.item-enhancement {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}
+
+.no-margin {
+    margin: 0px;;
+}

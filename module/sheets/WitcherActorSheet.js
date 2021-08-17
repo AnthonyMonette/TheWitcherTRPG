@@ -24,10 +24,26 @@ export default class WitcherActorSheet extends ActorSheet {
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
 
       data.weapons = data.items.filter(function(item) {return item.type=="weapon"});
-      data.armors = data.items.filter(function(item) {return item.type=="armor" || (item.type == "enhancement" && item.data.type == "armor")});
+      data.weapons.forEach((weapon)=>{
+        if (weapon.data.enhancements > 0 && weapon.data.enhancements != weapon.data.enhancementItems.length) {
+          let newEnhancementList = []
+          for (let i = 0; i < weapon.data.enhancements; i++) {
+            let element = weapon.data.enhancementItems[i]
+            if (JSON.stringify(element) != '{}'){
+              newEnhancementList.push(element)
+            }else {
+              newEnhancementList.push({})
+            }
+          } 
+          let item = this.actor.items.get(weapon._id);
+          item.update({ 'data.enhancementItems': newEnhancementList})
+        }
+      });
+
+      data.armors = data.items.filter(function(item) {return item.type=="armor" || (item.type == "enhancement" && item.data.type == "armor" && item.data.applied == false)});
       data.components = data.items.filter(function(item) {return item.type=="component" &&  item.data.type!="substances"});
       data.allComponents = data.items.filter(function(item) {return item.type=="component"});
-      data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" || (item.type == "enhancement" && item.data.type != "armor")});
+      data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" || (item.type == "enhancement" && item.data.type != "armor" && item.data.applied == false)});
       data.diagrams = data.items.filter(function(item) {return item.type=="diagrams"});
       data.spells = data.items.filter(function(item) {return item.type=="spell"});
       
@@ -155,6 +171,9 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
       html.find(".skill-mod-edit").on("blur", this._onSkillModifierEdit.bind(this));
 
+      html.find(".enhancement-weapon-slot").on("click", this._chooseEnhancement.bind(this));
+      html.find(".enhancement-armor-slot").on("click", this._chooseEnhancement.bind(this));
+
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
@@ -219,7 +238,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       html.find(".dragable").on("dragstart", (ev) => {
         let itemId = ev.target.dataset.id
-        let item = this.actor.getOwnedItem(itemId);
+        let item = this.actor.items.get(itemId);
         ev.originalEvent.dataTransfer.setData(
           "text/plain",
           JSON.stringify({
@@ -267,6 +286,66 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
+    async _chooseEnhancement(event) {
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId)
+      let type = event.currentTarget.closest(".item").dataset.type;
+      
+      let content = ""
+      let enhancements = []
+      if (type == "weapon"){
+        enhancements = this.actor.items.filter(function(item) {return item.type == "enhancement" && item.data.data.type == "rune" && item.data.data.applied == false});
+      }
+      else {
+        enhancements = this.actor.items.filter(function(item) {return item.type == "enhancement" && item.data.data.applied == false && (item.data.data.type == "armor" || item.data.data.type == "glyph")});
+      }
+       
+      let quantity = enhancements.sum("quantity")
+      if (quantity == 0 ) {
+        content += `<div class="error-display">${game.i18n.localize("WITCHER.Enhancement.NoEnhancement")}</div>`
+      }else {
+        let enhancementsOption = ``
+        enhancements.forEach(element => {
+          enhancementsOption += `<option value="${element.data._id}"> ${element.data.name}(${element.data.data.quantity}) </option>`;
+        });
+        content += `<div><label>${game.i18n.localize("WITCHER.Dialog.Enhancement")}: <select name="enhancement">${enhancementsOption}</select></label></div>`
+      }
+
+      new Dialog({
+        title: `${game.i18n.localize("WITCHER.Enhancement.ChooseTitle")}`, 
+        content,
+        buttons: {
+          Cancel: {
+            label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+            callback: ()=>{}}, 
+          Apply: {
+            label: `${game.i18n.localize("WITCHER.Dialog.Apply")}`, 
+            callback: (html) => {
+            console.log("enhancement choosed")
+            let enhancementId = undefined
+            if (html.find("[name=enhancement]")[0]) {
+              enhancementId = html.find("[name=enhancement]")[0].value;
+            }
+            let choosedEnhancement = this.actor.items.get(enhancementId)
+            if (item && choosedEnhancement){
+              let newEnhancementList = []
+              let added = false
+              item.data.data.enhancementItems.forEach(element => {
+                if (JSON.stringify(element) === '{}' && !added) {
+                  element = choosedEnhancement
+                  added = true
+                }
+                newEnhancementList.push(element)
+              });
+              
+              item.update({ 'data.enhancementItems': newEnhancementList})
+              choosedEnhancement.update({ 'data.applied': true})
+            }
+          }
+        }
+        }}).render(true) 
+      }
+    
     async _onAddSkillModifier(event){
       let stat = event.currentTarget.closest(".skill").dataset.stat;
       let skill = event.currentTarget.closest(".skill").dataset.skill;
@@ -675,7 +754,7 @@ export default class WitcherActorSheet extends ActorSheet {
     
     async _alchemyCraft(event) {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
-      let item = this.actor.getOwnedItem(itemId);
+      let item = this.actor.items.get(itemId);
 
       const content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br /> Work in progress`;
 
@@ -713,7 +792,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (!itemId){
         itemId = event.currentTarget.closest(".item").dataset.itemId;
       }
-      let spellItem = this.actor.getOwnedItem(itemId);
+      let spellItem = this.actor.items.get(itemId);
       let formula = `1d10`
       formula += `+${this.actor.data.data.stats.will.current}`
       switch(spellItem.data.data.class) {
@@ -1131,7 +1210,8 @@ export default class WitcherActorSheet extends ActorSheet {
     _onItemEdit(event) {
       event.preventDefault(); 
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
-      let item = this.actor.getOwnedItem(itemId);
+      console.log(itemId)
+      let item = this.actor.items.get(itemId);
 
       item.sheet.render(true)
     }
@@ -1157,7 +1237,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (!itemId){
         itemId = event.currentTarget.closest(".item").dataset.itemId;
       }
-      let item = this.actor.getOwnedItem(itemId);
+      let item = this.actor.items.get(itemId);
       let formula = item.data.data.damage
 
       if (item.data.data.isMelee){
@@ -1239,7 +1319,7 @@ export default class WitcherActorSheet extends ActorSheet {
                      <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />
                      `;
 
-      if (! item.data.data.isMelee){
+      if (!item.data.data.isMelee){
         let ammunitions = this.actor.items.filter(function(item) {return item.data.type=="weapon" &&  item.data.data.isAmmo});
         let quantity = ammunitions.sum("quantity")
         content += `<h2>${game.i18n.localize("WITCHER.Dialog.chooseAmmunition")}</h2> `
@@ -1500,6 +1580,16 @@ export default class WitcherActorSheet extends ActorSheet {
                   item.update({"data.quantity": newQuantity})
                   allEffects.push(...item.data.data.effects)
                 } 
+
+                if (item.data.data.enhancementItems) {
+                  item.data.data.enhancementItems.forEach(element => {
+                    if (JSON.stringify(element) != '{}'){
+                      let enhancement = this.actor.items.get(element._id);
+                      console.log(enhancement)
+                      allEffects.push(...enhancement.data.data.effects)
+                    }
+                  });
+                }
 
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
