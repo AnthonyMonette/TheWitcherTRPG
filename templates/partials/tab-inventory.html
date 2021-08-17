@@ -14,7 +14,7 @@
                 <td><b>{{localize "WITCHER.table.Equipped"}}</b></td>
             </tr>
             {{#each weapons as |weapon id|}}
-            <tbody class="item" data-item-id="{{weapon._id}}">
+            <tbody class="item" data-item-id="{{weapon._id}}" data-type="weapon">
                 <tr>
                     <td>
                         <a class="item-weapon-display"><i class="fas fa-info"></i></a>
@@ -35,7 +35,6 @@
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Type"}} :</b></label>{{weapon.data.type}}</div></td>
                                 {{#unless weapon.data.isAmmo}}
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Hands"}} :</b></label>{{weapon.data.hands}}</div></td>
-                                <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Enhancement"}} :</b></label>{{weapon.data.enhancements}}</div></td>
                                 {{/unless}}
                                 {{#if weapon.data.hands}}
                                 <td></td> 
@@ -45,8 +44,34 @@
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Weight"}} :</b></label>{{weapon.data.weight}}</div></td>
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
+                            {{#unless weapon.data.isAmmo}}
                             <tr >
+                                <td colspan="8">
+                                    <div class="flex">
+                                        {{localize "WITCHER.Weapon.Enhancement"}}:
+                                        {{#each weapon.data.enhancementItems as |enhancement id|}}
+                                            {{#if enhancement.img}}
+                                                <div class="item item-enhancement" data-item-id="{{enhancement._id}}">
+                                                    <img class="item-edit no-margin" src="{{enhancement.img}}"/>
+                                                </div>
+                                            {{/if}}
+                                            {{#unless enhancement.img}}
+                                                <div class="item-enhancement">
+                                                    <a><div class="enhancement-slot enhancement-weapon-slot" ></div></a>
+                                                </div>
+                                            {{/unless}}
+                                        {{/each}}
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/unless}}
+                            <tr >
+                                {{#unless weapon.data.isAmmo}}
+                                <td colspan="7">
+                                {{/unless}}
+                                {{#if weapon.data.isAmmo}}
                                 <td colspan="6">
+                                {{/if}}
                                     <div class="flex">
                                     <b>{{localize "WITCHER.Item.Effect"}} :</b>
                                     {{#each weapon.data.effects as |effect id|}}

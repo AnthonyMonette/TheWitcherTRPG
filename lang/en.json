@@ -633,22 +633,27 @@
 
     "WITCHER.Dialog.attackUse": "Attack will use",
     "WITCHER.Dialog.attackExtra": "Extra attack",
-    "WITCHER.Dialog.attackLocation": " Hit Location",
+    "WITCHER.Dialog.attackLocation": "Hit Location",
     "WITCHER.Dialog.attackModifierse": "Attack Modifiers",
     "WITCHER.Dialog.attackSize": " Opponent Size Modifiers",
     "WITCHER.Dialog.attackRange": "Range Modifiers",
     "WITCHER.Dialog.attackCustom": "Custom Modifiers",
     "WITCHER.Dialog.attackStrike": " Strike type",
-    "WITCHER.Dialog.attackDamage": " damage",
+    "WITCHER.Dialog.attackDamage": "damage",
     "WITCHER.Dialog.attackMeleeBonus": " Melee Bonus",
     "WITCHER.Dialog.attackCustomDmg": "Custom Damage Modifiers",
     "WITCHER.Dialog.attackWith": "Performing an Attack with",
     
     "WITCHER.Dialog.chooseAmmunition": " Choose Ammunition",
-    "WITCHER.Dialog.NoAmmunation": " No ammunition available",
+    "WITCHER.Dialog.NoAmmunation": "No ammunition available",
     "WITCHER.Dialog.Ammunation": "Ammunation",
 
     "WITCHER.Dialog.ButtonRoll": "Roll",
     
-    "WITCHER.Chat.FullDmg": "Full Damage"
+    "WITCHER.Chat.FullDmg": "Full Damage",
+
+    "WITCHER.Enhancement.ChooseTitle": "Choose an Enhancement",
+    "WITCHER.Enhancement.NoEnhancement": "No Enhancement available",
+    "WITCHER.Dialog.Enhancement": "Enhancement",
+    "WITCHER.Dialog.Apply": "Apply"
 }
