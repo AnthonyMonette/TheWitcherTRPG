@@ -107,7 +107,7 @@ export default class WitcherActorSheet extends ActorSheet {
       data.fulgurCount =  data.substancesFulgur.sum("quantity");
 
 
-      data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical"});
+      data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical" || item.type == "enhancement" || item.type == "mutagen"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
 
       data.totalWeight =  data.items.weight();
