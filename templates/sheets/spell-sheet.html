@@ -33,14 +33,13 @@
                     {{/select}}
                 </select>
                 {{/unless}}
-                {{#unless (eq data.staminaIsVar true)}}
-                    <label>{{localize "WITCHER.Spell.StaCost"}}</label>
-                    <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
-                {{/unless}}
-                <label>{{localize "WITCHER.Spell.Variable"}}</label>
-                <input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/>
-
             </div>
+            {{#unless (eq data.staminaIsVar true)}}
+                <label>{{localize "WITCHER.Spell.StaCost"}}</label>
+                <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
+            {{/unless}}
+            <label>{{localize "WITCHER.Spell.Variable"}}</label>
+            <input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/>
         </div>
     </header>
     <div>
