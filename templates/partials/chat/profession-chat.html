@@ -6,6 +6,13 @@
             <b>{{roll.formula}}</b>
         </div>
     </div>
+    {{#if (eq state "Crit")}}
+    <div class="dice-sucess">{{localize "WITCHER.Crit"}}</div>
+    {{/if}}
+
+    {{#if (eq state "Fumble")}}
+    <div class="dice-fail">{{localize "WITCHER.Fumble"}}</div>
+    {{/if}}
     {{> "templates/dice/roll.html"}}
     
     <div  class="dice-display">

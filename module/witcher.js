@@ -35,13 +35,35 @@ function updateDerived(actor){
 	thisActor.data.data.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
+	let stunTotalModifiers = 0;
+	let runTotalModifiers = 0;
+	let leapTotalModifiers = 0;
+	let encTotalModifiers = 0;
+	let recTotalModifiers = 0;
+	let wtTotalModifiers = 0;
+	thisActor.data.data.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
+	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 
+
+	
+	let curentEncumbrance = (thisActor.data.data.stats.body.max + bodyTotalModifiers) * 10  + encTotalModifiers
+	var totalWeights = 0
+	thisActor.items.forEach(item => {if (item.data.data.weight) {totalWeights += Number(item.data.data.weight)}})
+	let encDiff = 0
+	if (curentEncumbrance < totalWeights){
+		encDiff = Math.ceil((totalWeights-curentEncumbrance) / 5)
+	}
 	let armorEnc = getArmorEcumbrance(thisActor)
+
 	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
-	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc;
-	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc;
+	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff;
+	let curDex = thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc - encDiff;
 	let curBody = thisActor.data.data.stats.body.max + bodyTotalModifiers;
-	let curSpd = thisActor.data.data.stats.spd.max + spdTotalModifiers;
+	let curSpd = thisActor.data.data.stats.spd.max + spdTotalModifiers - encDiff;
 	let curEmp = thisActor.data.data.stats.emp.max + empTotalModifiers;
 	let curCra = thisActor.data.data.stats.cra.max + craTotalModifiers;
 	let curWill = thisActor.data.data.stats.will.max + willTotalModifiers;
@@ -69,19 +91,6 @@ function updateDerived(actor){
 		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/2)
 	}
 
-	let stunTotalModifiers = 0;
-	let runTotalModifiers = 0;
-	let leapTotalModifiers = 0;
-	let encTotalModifiers = 0;
-	let recTotalModifiers = 0;
-	let wtTotalModifiers = 0;
-	thisActor.data.data.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
-
 	let hpTotalModifiers = 0;
 	let staTotalModifiers = 0;
 	let resTotalModifiers = 0;
@@ -102,7 +111,7 @@ function updateDerived(actor){
 		curRes = Math.floor((curWill + curInt)/2*5) + resTotalModifiers
 		curFocus = Math.floor((curWill + curInt)/2*3) + focusTotalModifiers
 	}
-	
+
 	thisActor.update({ 
         'data.deathStateApplied': isDead,
         'data.woundTresholdApplied': isWounded,
@@ -226,8 +235,14 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
 		rollFormula += `-${armorEnc}`
 	}
-
-	new Roll(rollFormula).roll().toMessage(messageData)
+	let roll = new Roll(rollFormula).roll()
+	if (roll.dice[0].results[0].result == 10){  
+	  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+	};
+	if (roll.dice[0].results[0].result == 1){  
+	  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+	};
+	roll.toMessage(messageData);
 }
 
 function getIntSkillMod(actor, skillNum){

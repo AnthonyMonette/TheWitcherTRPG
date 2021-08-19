@@ -86,6 +86,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       data.totalStats = this.calc_total_stats(data)
       data.totalSkills = this.calc_total_skills(data)
+      data.totalProfSkills = this.calc_total_skills_profession(data)
 
       data.substancesVitriol = data.items.filter(function(item) {return item.type=="component" &&  item.data.type=="substances" && item.data.substanceType=="vitriol" });
       data.vitriolCount =  data.substancesVitriol.sum("quantity");
@@ -912,12 +913,20 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = new Roll(`1d10+${statValue}+${level}`).roll()
+      let state = ""
+      if (rollResult.dice[0].results[0].result == 10){  
+        state = "Crit"
+      };
+      if (rollResult.dice[0].results[0].result == 1){  
+        state = "Fumble"
+      };
       await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html", this.actor, {
         type: "Stats Roll",
         title: name,
         effet: effet,
         statName: statName,
-        difficulty: statValue
+        difficulty: statValue,
+        state: state
       })
     }
 
@@ -983,7 +992,14 @@ export default class WitcherActorSheet extends ActorSheet {
               let displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefDodge")}`;
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+              };
+              roll.toMessage(messageData);
             }
           },
           Reposition: {
@@ -1001,7 +1017,14 @@ export default class WitcherActorSheet extends ActorSheet {
               let displayFormula = `1d10 + Dex + ${game.i18n.localize("WITCHER.SkDexAthletics")}`;
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+              };
+              roll.toMessage(messageData);
             }
           },
           Block: {
@@ -1043,7 +1066,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+              };
+              roll.toMessage(messageData);
             }
           },
           Parry: {
@@ -1085,7 +1115,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}-3`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+              };
+              roll.toMessage(messageData);
             }
           },
           ParryAgainstThrown: {
@@ -1127,7 +1164,14 @@ export default class WitcherActorSheet extends ActorSheet {
 
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}-5`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+              };
+              roll.toMessage(messageData);
             }
           }
         }
@@ -1595,7 +1639,14 @@ export default class WitcherActorSheet extends ActorSheet {
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
                 messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
-                new Roll(attFormula).roll().toMessage(messageData)
+                let roll = new Roll(attFormula).roll()
+                if (roll.dice[0].results[0].result == 10){  
+                  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                };
+                if (roll.dice[0].results[0].result == 1){  
+                  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                };
+                roll.toMessage(messageData);
               }
             }
           }
@@ -1805,6 +1856,15 @@ export default class WitcherActorSheet extends ActorSheet {
           this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
           break;
       }
+    }
+
+    calc_total_skills_profession(data){
+      let totalSkills = 0;
+      totalSkills += Number(data.profession.data.definingSkill.level);
+      totalSkills += Number(data.profession.data.skillPath1.skill1.level) +  Number(data.profession.data.skillPath1.skill2.level) + Number(data.profession.data.skillPath1.skill3.level)
+      totalSkills += Number(data.profession.data.skillPath2.skill1.level) +  Number(data.profession.data.skillPath2.skill2.level) + Number(data.profession.data.skillPath2.skill3.level)
+      totalSkills += Number(data.profession.data.skillPath3.skill1.level) +  Number(data.profession.data.skillPath3.skill2.level) + Number(data.profession.data.skillPath3.skill3.level)
+      return totalSkills;
     }
 
     calc_total_skills(data) {

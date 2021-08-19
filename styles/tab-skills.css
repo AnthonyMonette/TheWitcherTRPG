@@ -67,3 +67,7 @@
 .total-skills {
     font-weight: bold;
 }
+
+.not-skilled a {
+    background-color: saddlebrown
+}
