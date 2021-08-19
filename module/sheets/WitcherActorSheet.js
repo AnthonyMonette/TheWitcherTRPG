@@ -41,6 +41,22 @@ export default class WitcherActorSheet extends ActorSheet {
       });
 
       data.armors = data.items.filter(function(item) {return item.type=="armor" || (item.type == "enhancement" && item.data.type == "armor" && item.data.applied == false)});
+      data.armors.forEach((armor)=>{
+        if (armor.data.enhancements > 0 && armor.data.enhancements != armor.data.enhancementItems.length) {
+          let newEnhancementList = []
+          for (let i = 0; i < armor.data.enhancements; i++) {
+            let element = armor.data.enhancementItems[i]
+            if (JSON.stringify(element) != '{}'){
+              newEnhancementList.push(element)
+            }else {
+              newEnhancementList.push({})
+            }
+          } 
+          let item = this.actor.items.get(armor._id);
+          item.update({ 'data.enhancementItems': newEnhancementList})
+        }
+      });
+
       data.components = data.items.filter(function(item) {return item.type=="component" &&  item.data.type!="substances"});
       data.allComponents = data.items.filter(function(item) {return item.type=="component"});
       data.valuables = data.items.filter(function(item) {return item.type=="valuable" || item.type == "mount" || item.type =="alchemical" || item.type =="mutagen" || (item.type == "enhancement" && item.data.type != "armor" && item.data.applied == false)});
@@ -332,15 +348,43 @@ export default class WitcherActorSheet extends ActorSheet {
               let newEnhancementList = []
               let added = false
               item.data.data.enhancementItems.forEach(element => {
-                if (JSON.stringify(element) === '{}' && !added) {
+                if ((JSON.stringify(element) === '{}'|| !element) && !added) {
                   element = choosedEnhancement
                   added = true
                 }
                 newEnhancementList.push(element)
               });
-              
-              item.update({ 'data.enhancementItems': newEnhancementList})
-              choosedEnhancement.update({ 'data.applied': true})
+              if (type == "weapon") {
+                item.update({ 'data.enhancementItems': newEnhancementList})
+              }
+              else {
+                let allEffects = item.data.data.effects
+                allEffects.push(...choosedEnhancement.data.data.effects)
+                if (choosedEnhancement.data.data.type == "armor") {
+                  item.update({ 'data.enhancementItems': newEnhancementList,
+                                "data.headStopping": item.data.data.headStopping + choosedEnhancement.data.data.stopping,
+                                "data.headMaxStopping": item.data.data.headMaxStopping + choosedEnhancement.data.data.stopping,
+                                "data.torsoStopping": item.data.data.torsoStopping + choosedEnhancement.data.data.stopping,
+                                "data.torsoMaxStopping": item.data.data.torsoMaxStopping + choosedEnhancement.data.data.stopping,
+                                "data.leftArmStopping": item.data.data.leftArmStopping + choosedEnhancement.data.data.stopping,
+                                "data.leftArmMaxStopping": item.data.data.leftArmMaxStopping + choosedEnhancement.data.data.stopping,
+                                "data.rightArmStopping": item.data.data.rightArmStopping + choosedEnhancement.data.data.stopping,
+                                "data.rightArmMaxStopping": item.data.data.rightArmMaxStopping + choosedEnhancement.data.data.stopping,
+                                "data.leftLegStopping": item.data.data.leftLegStopping + choosedEnhancement.data.data.stopping,
+                                "data.leftLegMaxStopping": item.data.data.leftLegMaxStopping + choosedEnhancement.data.data.stopping,
+                                "data.rightLegStopping": item.data.data.rightLegStopping + choosedEnhancement.data.data.stopping,
+                                "data.rightLegMaxStopping": item.data.data.rightLegMaxStopping + choosedEnhancement.data.data.stopping,
+                                'data.bludgeoning': choosedEnhancement.data.data.bludgeoning,
+                                'data.slashing': choosedEnhancement.data.data.slashing,
+                                'data.percing': choosedEnhancement.data.data.percing,
+                                'data.effects': allEffects})
+                }
+                else {
+                  item.update({'data.effects': allEffects})
+                }
+                choosedEnhancement.update({ 'data.applied': true,
+                                            'data.weight': 0})
+              }
             }
           }
         }
