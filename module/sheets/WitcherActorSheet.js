@@ -29,7 +29,7 @@ export default class WitcherActorSheet extends ActorSheet {
           let newEnhancementList = []
           for (let i = 0; i < weapon.data.enhancements; i++) {
             let element = weapon.data.enhancementItems[i]
-            if (JSON.stringify(element) != '{}'){
+            if (element && JSON.stringify(element) != '{}'){
               newEnhancementList.push(element)
             }else {
               newEnhancementList.push({})
@@ -46,7 +46,7 @@ export default class WitcherActorSheet extends ActorSheet {
           let newEnhancementList = []
           for (let i = 0; i < armor.data.enhancements; i++) {
             let element = armor.data.enhancementItems[i]
-            if (JSON.stringify(element) != '{}'){
+            if (element && JSON.stringify(element) != '{}'){
               newEnhancementList.push(element)
             }else {
               newEnhancementList.push({})
@@ -1558,7 +1558,6 @@ export default class WitcherActorSheet extends ActorSheet {
                     attFormula = `${attFormula}-4`;
                     break;
                 }
-
                 
                 if (customDmg != "0") {
                   damageFormula += "+"+customDmg;
@@ -1661,7 +1660,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 let allEffects = item.data.data.effects
-
+                console.log("test")
                 if (ammunition){
                   let item = this.actor.items.get(ammunition);
                   let newQuantity = item.data.data.quantity - 1;
@@ -1671,7 +1670,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 if (item.data.data.enhancementItems) {
                   item.data.data.enhancementItems.forEach(element => {
-                    if (JSON.stringify(element) != '{}'){
+                    if (element && JSON.stringify(element) != '{}'){
                       let enhancement = this.actor.items.get(element._id);
                       console.log(enhancement)
                       allEffects.push(...enhancement.data.data.effects)
@@ -1679,6 +1678,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   });
                 }
 
+                console.log("test")
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
@@ -1690,6 +1690,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (roll.dice[0].results[0].result == 1){  
                   messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
                 };
+                console.log("test")
                 roll.toMessage(messageData);
               }
             }
