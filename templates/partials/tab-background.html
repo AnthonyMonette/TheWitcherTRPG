@@ -12,8 +12,7 @@
             </select>
             {{#each data.general.details as |details dt|}}
             {{localize details.label}}
-            <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text"
-                value="{{details.value}}" />
+            <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text" value="{{details.value}}" />
             {{/each}}
         </div>
         {{editor content=data.general.background.value target="data.general.background.value" button=true editable=editable}}
