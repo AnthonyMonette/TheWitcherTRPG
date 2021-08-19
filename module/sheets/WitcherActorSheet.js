@@ -1860,10 +1860,12 @@ export default class WitcherActorSheet extends ActorSheet {
 
     calc_total_skills_profession(data){
       let totalSkills = 0;
-      totalSkills += Number(data.profession.data.definingSkill.level);
-      totalSkills += Number(data.profession.data.skillPath1.skill1.level) +  Number(data.profession.data.skillPath1.skill2.level) + Number(data.profession.data.skillPath1.skill3.level)
-      totalSkills += Number(data.profession.data.skillPath2.skill1.level) +  Number(data.profession.data.skillPath2.skill2.level) + Number(data.profession.data.skillPath2.skill3.level)
-      totalSkills += Number(data.profession.data.skillPath3.skill1.level) +  Number(data.profession.data.skillPath3.skill2.level) + Number(data.profession.data.skillPath3.skill3.level)
+      if (data.profession) {
+        totalSkills += Number(data.profession.data.definingSkill.level);
+        totalSkills += Number(data.profession.data.skillPath1.skill1.level) +  Number(data.profession.data.skillPath1.skill2.level) + Number(data.profession.data.skillPath1.skill3.level)
+        totalSkills += Number(data.profession.data.skillPath2.skill1.level) +  Number(data.profession.data.skillPath2.skill2.level) + Number(data.profession.data.skillPath2.skill3.level)
+        totalSkills += Number(data.profession.data.skillPath3.skill1.level) +  Number(data.profession.data.skillPath3.skill2.level) + Number(data.profession.data.skillPath3.skill3.level)  
+      }
       return totalSkills;
     }
 
