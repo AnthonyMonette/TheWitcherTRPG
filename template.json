@@ -882,6 +882,7 @@
       "rightLegMaxStopping": 0,
       "avail": "",
       "enhancements": 0,
+      "enhancementItems": [],
       "effects": [{
           "id": "first",
           "name": "effect"

@@ -111,7 +111,7 @@
                 <td></td> 
             </tr>
             {{#each armors as |armor id|}}
-            <tbody class="item" data-item-id="{{armor._id}}">
+            <tbody class="item" data-item-id="{{armor._id}}"  data-type="armor">
                 <tr>
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
@@ -208,6 +208,25 @@
                 <tr class="item-info hidden">
                     <td colspan="9">
                         <table>
+                            <tr >
+                                <td colspan="8">
+                                    <div class="flex">
+                                        {{localize "WITCHER.Weapon.Enhancement"}}:
+                                        {{#each armor.data.enhancementItems as |enhancement id|}}
+                                            {{#if enhancement.img}}
+                                                <div class="item item-enhancement" data-item-id="{{enhancement._id}}">
+                                                    <img class="item-edit no-margin" src="{{enhancement.img}}"/>
+                                                </div>
+                                            {{/if}}
+                                            {{#unless enhancement.img}}
+                                                <div class="item-enhancement">
+                                                    <a><div class="enhancement-slot enhancement-armor-slot" ></div></a>
+                                                </div>
+                                            {{/unless}}
+                                        {{/each}}
+                                    </div>
+                                </td>
+                            </tr>
                             {{#if (eq type "armor")}}
                                 <tr>
                                     <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Enhancement"}} :</b></label>{{armor.data.enhancements}}</div></td>
