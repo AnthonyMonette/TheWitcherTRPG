@@ -150,7 +150,7 @@
 
     "WITCHER.Actor.SkillTab": "Perícias e Modificadores",
     "WITCHER.Actor.ProfessionTab": "Profissão e Raça",
-    "WITCHER.Actor.InventoryTab": "Equipamento e Inventário",
+    "WITCHER.Actor.InventoryTab": "Equip. e Inventário",
     "WITCHER.Actor.MagicTab": "Magia e Feitiços",
     "WITCHER.Actor.BackgroundTab": "Antecedente",
 
@@ -163,7 +163,7 @@
     "WITCHER.Actor.Adda.Profession": "Adicione uma Profissão",
     "WITCHER.Actor.Adda.Race": "Adicione uma Raça",
 
-    "WITCHER.Actor.TotalStats": "Pontos Totais",
+    "WITCHER.Actor.TotalStats": "Total",
 
     "WITCHER.Actor.Stat.Int": "INT",
     "WITCHER.Actor.Stat.Ref": "REF",
@@ -175,7 +175,7 @@
     "WITCHER.Actor.Stat.Will": "VON",
     "WITCHER.Actor.Stat.Luck": "SORTE",
 
-    "WITCHER.Actor.StatTitle.LableLeft": "Estatísticas",
+    "WITCHER.Actor.StatTitle.LableLeft": "Atributos",
     "WITCHER.Actor.StatTitle.ModMax": "Mod / Máx",
     "WITCHER.Actor.StatTitle.Derived": "Derivado",
 
@@ -195,7 +195,7 @@
     "WITCHER.Actor.DerStat.Kick": "Chute",
     
     "WITCHER.Actor.Initiative": "Iniciativa",
-    "WITCHER.Actor.SavingThrow": "Teste de Resistência",
+    "WITCHER.Actor.SavingThrow": "T. Resistência",
     "WITCHER.Actor.Crit/Fumble": "Crit/Vacil",
     "WITCHER.Actor.Defense": "Defesa",
     "WITCHER.Actor.Adrenaline": "Adrenalina",
@@ -361,16 +361,16 @@
     "WITCHER.SkIntCommon": "Idioma Comum (2)",
     "WITCHER.SkIntElder": "Fala Ancestral (2)",
     "WITCHER.SkIntDwarven": "Anão (2)",
-    "WITCHER.SkIntMonster": "Conhec. sobre Monstros (2)",
+    "WITCHER.SkIntMonster": "Sab. de Monstros (2)",
     "WITCHER.SkIntSocialEt": "Etiqueta Social",
     "WITCHER.SkIntStreet": "Sabedoria das Ruas",
     "WITCHER.SkIntTactics": "Táticas (2)",
     "WITCHER.SkIntTeaching": "Ensinar",
-    "WITCHER.SkIntWilderness": "Sobrevivência no Ermo",
+    "WITCHER.SkIntWilderness": "Sobrev. no Ermo",
 
     "WITCHER.SkRefBrawling": "Brigar",
     "WITCHER.SkRefDodge": "Esquivar/Escapar",
-    "WITCHER.SkRefMelee": "Curta distância",
+    "WITCHER.SkRefMelee": "Curta Distância",
     "WITCHER.SkRefRiding": "Cavalgar",
     "WITCHER.SkRefSailing": "Velejar",
     "WITCHER.SkRefSmall": "Lâminas Pequenas",
@@ -415,8 +415,9 @@
 
     "WITCHER.Actor.ImprovementPoints": "Pontos de Melhoria",
     "WITCHER.Actor.CurrentIP":"PMs Atuais:",
-    "WITCHER.Actor.SkillName": "Preícia...",
-    "WITCHER.ACtor.TotalSkill": "Perícia Total",
+    "WITCHER.Actor.SkillName": "Perícia...",
+    "WITCHER.ACtor.TotalSkill": "Perícias Totais",
+    "WITCHER.ACtor.TotalProfSkill": "Árvore de Profissão",
 
     "WITCHER.SocialStanding": "Social Standing",
     "WITCHER.Profession": "Profissão",
@@ -433,6 +434,9 @@
     "WITCHER.Decade": "Década",
     "WITCHER.Event": "Evento",
     "WITCHER.DeathSave": "Save de STUN/MORTE",
+	
+    "WITCHER.Crit": "Critical",
+    "WITCHER.Fumble": "Fumble",
 
     "WITCHER.table.Quantity": "Qtd",
     "WITCHER.table.Range": "ALC",
@@ -440,15 +444,15 @@
     "WITCHER.table.Reliability": "DURA",
     "WITCHER.table.Name": "Nome",
 
-    "WITCHER.table.StoppingPower": "Prd",
+    "WITCHER.table.StoppingPower": "PP",
     "WITCHER.table.ResBludgeon": "CC",
     "WITCHER.table.ResSlashing": "CO",
     "WITCHER.table.ResPiercing": "PE",
     "WITCHER.table.Equipped": "Eq",
 
-    "WITCHER.Monster.HeadArmor": "Armadura Cabeça",
-    "WITCHER.Monster.UpperArmor": "Armadura Sup.",
-    "WITCHER.Monster.LowerArmor": "Armadura Inf.",
+    "WITCHER.Monster.HeadArmor": "PP Cabeça",
+    "WITCHER.Monster.UpperArmor": "PP Tronco",
+    "WITCHER.Monster.LowerArmor": "PP Inferior",
     "WITCHER.Monster.CustomHP/STA": "PV/STA Custom",
 
     "WITCHER.Monster.Easy": "Fácil",
@@ -639,7 +643,7 @@
     "WITCHER.Dialog.attackCustom": "Modificadores Extras",
     "WITCHER.Dialog.attackStrike": "Tipo de golpe",
     "WITCHER.Dialog.attackDamage": " dano",
-    "WITCHER.Dialog.attackMeleeBonus": "Bônus de Curta Distância",
+    "WITCHER.Dialog.attackMeleeBonus": "Bônus Melee",
     "WITCHER.Dialog.attackCustomDmg": "Modificadores de Dano Extra",
     "WITCHER.Dialog.attackWith": "Realizando um ataque com",
 
