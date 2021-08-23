@@ -153,9 +153,11 @@
                     <input class="right-value" name="data.stats.luck.total" type="number" value="{{data.stats.luck.total}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
                 <div class="right-element">
+                {{#if useAdrenaline}}
                     <label>{{localize "WITCHER.Actor.Adrenaline"}}</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/adrenaline.png"/>
                     <input class="right-value" name="data.adrenaline" type="number" value="{{data.adrenaline}}" min="0" max="99" placeholder="0" data-dtype="Number"/>
+                {{/if}}
                 </div>
             </div>
         </div>

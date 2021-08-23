@@ -663,5 +663,9 @@
     "WITCHER.Enhancement.ChooseTitle": "Choose an Enhancement",
     "WITCHER.Enhancement.NoEnhancement": "No Enhancement available",
     "WITCHER.Dialog.Enhancement": "Enhancement",
-    "WITCHER.Dialog.Apply": "Apply"
+    "WITCHER.Dialog.Apply": "Apply",
+
+    "WITCHER.Settings.Adrenaline": "Use Adrenaline Optional Rule",
+    "WITCHER.Settings.AdrenalineDetails": "Adrenaline is the willpower to go on and Fight harder in dire situations"
+    
 }

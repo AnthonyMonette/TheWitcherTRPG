@@ -4,6 +4,7 @@ import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
 import WitcherActor from "../module/witcherActor.js";
 import * as Chat from "../module/chat.js";
+import { registerSettings } from "../module/settings.js";
 
 
 async function preloadHandlebarsTemplates(){
@@ -47,6 +48,7 @@ Hooks.once("init", function () {
     Actors.registerSheet("witcher", WitcherActorSheet, {makeDefault: true});
 
     preloadHandlebarsTemplates();
+    registerSettings();
 });
 
 Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));

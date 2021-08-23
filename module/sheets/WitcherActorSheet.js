@@ -139,6 +139,9 @@ export default class WitcherActorSheet extends ActorSheet {
       if (this.actor.data.data.pannels == undefined){
         this.actor.update({ 'data.pannels':{}});
       }
+
+      data.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
+
       return data;
     }
 
