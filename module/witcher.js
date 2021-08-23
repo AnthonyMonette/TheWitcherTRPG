@@ -145,8 +145,8 @@ function updateDerived(actor){
 		'data.coreStats.rec.current': base + recTotalModifiers,
 		'data.coreStats.rec.max': baseMax,
 		
-		'data.coreStats.woundTreshold.current': baseMax+1+wtTotalModifiers,
-		'data.coreStats.woundTreshold.max': baseMax+1,
+		'data.coreStats.woundTreshold.current': baseMax+wtTotalModifiers,
+		'data.coreStats.woundTreshold.max': baseMax,
 
 		'data.attackStats.meleeBonus': meleeBonus,
 		'data.attackStats.punch.value': `1d6+${meleeBonus}`,
