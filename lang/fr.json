@@ -659,5 +659,10 @@
     "WITCHER.Enhancement.ChooseTitle": "Choisissez une am/lioration",
     "WITCHER.Enhancement.NoEnhancement": "Aucune amélioration disponnible",
     "WITCHER.Dialog.Enhancement": "Amélioration",
-    "WITCHER.Dialog.Apply": "Appliquer"
+    "WITCHER.Dialog.Apply": "Appliquer",
+
+    "WITCHER.Weapon.Broken": "Votre arme est maintenant brisée",
+    "WITCHER.Shield.Broken": "Votre bouclier est maintenant brisée",
+    "WITCHER.Settings.Adrenaline": "Utiliser la règle optionnelle de l'Adrénaline",
+    "WITCHER.Settings.AdrenalineDetails": "l'adrénaline est la volonté de continuer a vous battre dans des situations difficiles."
 }
