@@ -75,7 +75,7 @@
             {{/if}}
         </div>
         <label>{{localize "WITCHER.Item.Effect"}}</label>
-        <textarea rows="10" name="data.effect">{{data.effect}}</textarea>
+<textarea rows="10" name="data.effect">{{data.effect}}</textarea>
 
         {{#unless (eq data.class "Hexes")}}
         <label>{{localize "WITCHER.Spell.Duration"}}</label>
@@ -98,11 +98,11 @@
         <label>{{localize "WITCHER.Spell.DC"}}</label>
         <input name="data.dificultyCheck" type="text" value="{{data.dificultyCheck}}"/>
         <label>{{localize "WITCHER.Spell.Components"}}</label>
-        <textarea rows="4" name="data.components">{{data.components}}</textarea>
+<textarea rows="4" name="data.components">{{data.components}}</textarea>
         {{/if}}
         {{#if (eq data.class "Hexes")}}
         <label>{{localize "WITCHER.Spell.Requirements"}}</label>
-        <textarea rows="5" name="data.liftRequirement">{{data.liftRequirement}}</textarea>
+<textarea rows="5" name="data.liftRequirement">{{data.liftRequirement}}</textarea>
         {{/if}}
     </div>
 </form>
