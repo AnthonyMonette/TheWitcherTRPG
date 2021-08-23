@@ -423,7 +423,8 @@
     "WITCHER.Actor.ImprovementPoints": "Points d'Amélioration",
     "WITCHER.Actor.CurrentIP":"PA Actuel:",
     "WITCHER.Actor.SkillName": "Compétence...",
-    "WITCHER.ACtor.TotalSkill": "Compétence totales",
+    "WITCHER.ACtor.TotalSkill": "Compétences totale",
+    "WITCHER.ACtor.TotalProfSkill": "Compétences de proffession totale",
 
     "WITCHER.SocialStanding": "Statut social",
     "WITCHER.Profession": "Profession",
@@ -440,6 +441,9 @@
     "WITCHER.Decade": "Décennie",
     "WITCHER.Event": "Événement",
     "WITCHER.DeathSave": "Jet d'Étourdissement/Mort",
+
+    "WITCHER.Crit": "Critique",
+    "WITCHER.Fumble": "Rater",
 
     "WITCHER.table.Quantity": "Qté",
     "WITCHER.table.Range": "Portée",
@@ -650,5 +654,10 @@
 
     "WITCHER.Dialog.ButtonRoll": "Lance",
     
-    "WITCHER.Chat.FullDmg": "dégâts complets"
+    "WITCHER.Chat.FullDmg": "dégâts complets",
+
+    "WITCHER.Enhancement.ChooseTitle": "Choisissez une am/lioration",
+    "WITCHER.Enhancement.NoEnhancement": "Aucune amélioration disponnible",
+    "WITCHER.Dialog.Enhancement": "Amélioration",
+    "WITCHER.Dialog.Apply": "Appliquer"
 }
