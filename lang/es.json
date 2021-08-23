@@ -12,7 +12,7 @@
     "WITCHER.Item.Effect": "Efectos",
     "WITCHER.Item.Quantity": "Cantidad",
     "WITCHER.Item.Description": "Descripción",
-    "WITCHER.Item.Attribute": "A",
+    "WITCHER.Item.Attribute": "Atributos",
     "WITCHER.Item.ROF": "ATA",
 
     "WITCHER.Item.CraftingMaterial": "Materiales de artesanía",
@@ -60,16 +60,16 @@
 
     "WITCHER.Armor.LocationHead": "Cabeza",
     "WITCHER.Armor.LocationTorso": "Torso",
-    "WITCHER.Armor.LocationLeg": "Piernas",
-    "WITCHER.Armor.LocationArm": "Brazos",
+    "WITCHER.Armor.LocationLeg": "Pierna",
+    "WITCHER.Armor.LocationArm": "Brazo",
     "WITCHER.Armor.LocationFull": "Cobertura total",
     "WITCHER.Armor.LocationShield": "Escudo",
 
     "WITCHER.Armor.LocationLeft": "Izq.",
     "WITCHER.Armor.LocationRight": "Der.",
 
-    "WITCHER.Location.Left": "Izquierda",
-    "WITCHER.Location.Right": "Derecha",
+    "WITCHER.Location.Left": "Izquierdo",
+    "WITCHER.Location.Right": "Derecho",
     
 
     "WITCHER.Armor.Location": "Localización",
@@ -157,9 +157,9 @@
     "WITCHER.StSpd": "Velocidad",
     "WITCHER.StVigor": "Vigor",
 
-    "WITCHER.Actor.SkillTab": "Habilidades y modificadores",
+    "WITCHER.Actor.SkillTab": "Habilidades",
     "WITCHER.Actor.ProfessionTab": "Profesión y raza",
-    "WITCHER.Actor.InventoryTab": "Equipamiento e inventario",
+    "WITCHER.Actor.InventoryTab": "Inventario",
     "WITCHER.Actor.MagicTab": "Magia y hechizos",
     "WITCHER.Actor.BackgroundTab": "Transfondo",
 
@@ -222,7 +222,7 @@
     "WITCHER.Actor.Profession.Level": "Nivel",
 
     "WITCHER.CritWound.Header": "Heridas críticas",
-    "WITCHER.CritWound.HealingTime.Label": "Tiempo para sanar",
+    "WITCHER.CritWound.HealingTime.Label": "Días para sanar",
     "WITCHER.CritWound.Simple": "Leves",
     "WITCHER.CritWound.Complex": "Moderadas",
     "WITCHER.CritWound.Difficult": "Graves",
@@ -426,7 +426,8 @@
     "WITCHER.Actor.CurrentIP":"Actual PP:",
     "WITCHER.Actor.SkillName": "Nombre habilidad...",
     "WITCHER.ACtor.TotalSkill": "Total Habilidad",
-
+    "WITCHER.ACtor.TotalProfSkill": "Puntos totales de profesión",
+	
     "WITCHER.SocialStanding": "Estatus social",
     "WITCHER.Profession": "Profesión",
     "WITCHER.Reputation": "Reputación",
@@ -443,6 +444,9 @@
     "WITCHER.Event": "Eventos",
     "WITCHER.DeathSave": "ATU/S. contra muerte",
 
+    "WITCHER.Crit": "Crítico",
+    "WITCHER.Fumble": "Pifia",
+
     "WITCHER.table.Quantity": "Cant.",
     "WITCHER.table.Range": "Alcance",
     "WITCHER.table.Damage": "Daño",
@@ -455,9 +459,9 @@
     "WITCHER.table.ResPiercing": "P",
     "WITCHER.table.Equipped": "Eq",
 
-    "WITCHER.Monster.HeadArmor": "Armadura cabeza",
-    "WITCHER.Monster.UpperArmor": "Armadura torso",
-    "WITCHER.Monster.LowerArmor": "Armadura piernas",
+    "WITCHER.Monster.HeadArmor": "Arm.cabeza",
+    "WITCHER.Monster.UpperArmor": "Arm.torso",
+    "WITCHER.Monster.LowerArmor": "Arm.piernas",
     "WITCHER.Monster.CustomHP/STA": "Personalizar PV/AGU",
 
     "WITCHER.Monster.Easy": "Fácil",
@@ -537,7 +541,7 @@
 
     "WITCHER.Spell.type": "Tipo",
     "WITCHER.Spell.Spells": "Hechizo",
-    "WITCHER.Spell.Invocations": "Invocacióm",
+    "WITCHER.Spell.Invocations": "Invocación",
     "WITCHER.Spell.Witcher": "Señal de brujo",
     "WITCHER.Spell.Rituals": "Ritual",
     "WITCHER.Spell.Hexes": "Maleficios",
@@ -548,7 +552,7 @@
     "WITCHER.Spell.Novice": "Novicio",
     "WITCHER.Spell.Journeyman": "Adepto",
     "WITCHER.Spell.Master": "Maestro",
-    "WITCHER.Spell.Mixed": "Mixtos",
+    "WITCHER.Spell.Mixed": "Mixto",
     "WITCHER.Spell.Earth": "Tierra",    
     "WITCHER.Spell.Air": "Aire",
     "WITCHER.Spell.Fire": "Fuego",
@@ -606,16 +610,16 @@
 
     "WITCHER.Dialog.attackOutsideLOS": "Fuera del ángulo de visión del objetivo",
     "WITCHER.Dialog.attackisFastDraw": "Desenfundado rápido",
-    "WITCHER.Dialog.attackisProne": "You are prone",
+    "WITCHER.Dialog.attackisProne": "Estas apresado",
     "WITCHER.Dialog.attackisPinned": "Objetivo inmovilizado",
     "WITCHER.Dialog.attackisActivelyDodging": "Objetivo esquivando activamente ",
     "WITCHER.Dialog.attackisMoving": "Objetivo que se ha desplazado y tiene REF > 10",
     "WITCHER.Dialog.attacktargetOutsideLOS": "Objetivo fuera de tu ángulo de visión",
     "WITCHER.Dialog.attackisAmbush": "Emboscada",
-    "WITCHER.Dialog.attackisRicochet": "Re rebote",
+    "WITCHER.Dialog.attackisRicochet": "De rebote",
     "WITCHER.Dialog.attackisBlinded": "Deslumbrado o cegado",
     "WITCHER.Dialog.attackisSilhouetted": "Objetivo resaltado",
-    "WITCHER.Dialog.attackisAiming": "Rondas apuntando",
+    "WITCHER.Dialog.attackisAiming": "Apuntar/Asaltos",
 
     "WITCHER.Dialog.sizeMedium": "Mediano",
     "WITCHER.Dialog.sizeSmall": "Pequeño",
