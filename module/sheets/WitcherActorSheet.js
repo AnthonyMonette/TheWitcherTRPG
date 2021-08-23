@@ -999,13 +999,16 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _onDefenceRoll(event) {
-      const options = `
-      <option value="brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>
-      <option value="melee"> ${game.i18n.localize("WITCHER.SkRefMelee")} </option>
-      <option value="smallblades"> ${game.i18n.localize("WITCHER.SkRefSmall")} </option>
-      <option value="staffspear">  ${game.i18n.localize("WITCHER.SkRefStaff")} </option>
-      <option value="swordsmanship"> ${game.i18n.localize("WITCHER.SkRefSwordmanship")} </option>
+      
+      let weapons = this.actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && item.data.data.isMelee});
+      let shields = this.actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
+      let options = `
+      <option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>
       `;
+      weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+      shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+
+      
       const content = `
       <div class="flex">
        <label>${game.i18n.localize("WITCHER.Dialog.DefenseExtra")}: <input type="checkbox" name="isExtraDefense"></label> <br />
@@ -1086,26 +1089,44 @@ export default class WitcherActorSheet extends ActorSheet {
               let skill = 0;
               let displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
               switch(defense){
-                case "brawling":
+                case "Brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
                   displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
                   break;
-                case "melee":
+                case "Melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
                   displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
                   break;
-                case "smallblades":
+                case "Small Blades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
                   displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
                   break;
-                case "staffspear":
+                case "Staff/Spear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
                   displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
                   break;
-                case "swordsmanship":
+                case "Swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
                   displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
                   break;
+              }
+
+              let item_id = html.find("[name=form]")[0].selectedOptions[0].getAttribute('itemid')
+              let type = html.find("[name=form]")[0].selectedOptions[0].getAttribute('type')
+              if (item_id){
+                let item = this.actor.items.get(item_id);
+                if (type == "Weapon") {
+                  item.update({'data.reliable': item.data.data.reliable - 1})
+                  if (item.data.data.reliable - 1 <= 0) {
+                    return ui.notifications.error(game.i18n.localize("WITCHER.Weapon.Broken"));
+                  }
+                }
+                else {
+                  item.update({'data.reliability': item.data.data.reliability - 1})
+                  if (item.data.data.reliability - 1 <= 0) {
+                    return ui.notifications.error(game.i18n.localize("WITCHER.Shield.Broken"));
+                  }
+                }
               }
 
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
@@ -1135,23 +1156,23 @@ export default class WitcherActorSheet extends ActorSheet {
               let skill = 0;
               let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
               switch(defense){
-                case "brawling":
+                case "Brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
                   break;
-                case "melee":
+                case "Melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
                   break;
-                case "smallblades":
+                case "Small Blades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
                   break;
-                case "staffspear":
+                case "Staff/Spear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
                   break;
-                case "swordsmanship":
+                case "Swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 3`;
                   break;
