@@ -48,15 +48,16 @@ function updateDerived(actor){
 	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
 	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 
-
-	
 	let curentEncumbrance = (thisActor.data.data.stats.body.max + bodyTotalModifiers) * 10  + encTotalModifiers
+	console.log(curentEncumbrance)
 	var totalWeights = 0
 	thisActor.items.forEach(item => {if (item.data.data.weight) {totalWeights += Number(item.data.data.weight)}})
+	console.log(totalWeights)
 	let encDiff = 0
 	if (curentEncumbrance < totalWeights){
 		encDiff = Math.ceil((totalWeights-curentEncumbrance) / 5)
 	}
+	console.log(encDiff)
 	let armorEnc = getArmorEcumbrance(thisActor)
 
 	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
