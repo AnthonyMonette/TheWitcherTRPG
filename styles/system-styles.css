@@ -352,10 +352,6 @@ input.spell-roll-value {
   width: 200px;
 }
 
-.chat-message{
-  flex-direction: column;
-}
-
 .weightbar{
   background-color: grey;
   width: 100%;

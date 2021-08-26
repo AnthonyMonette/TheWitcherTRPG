@@ -1,4 +1,4 @@
-import { RollCustomMessage, buttonDialog } from "../chat.js";
+import { buttonDialog } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId} from "../witcher.js";
 
@@ -896,20 +896,34 @@ export default class WitcherActorSheet extends ActorSheet {
       staCostdisplay += `-${staFocus}[Focus]`
 
       let rollResult = new Roll(formula).roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/spell-chat.html", this.actor, {
-        type: "Spell Roll",
-        title: spellItem.name,
-        staCost: staCostdisplay,
-        effet: spellItem.data.data.effect,
-        range:spellItem.data.data.range,
-        duration:spellItem.data.data.duration,
-        defence:spellItem.data.data.defence,
-        preparationTime:spellItem.data.data.preparationTime,
-        components:spellItem.data.data.components,
-        alternateComponents:spellItem.data.data.alternateComponents,
-        dificultyCheck:spellItem.data.data.dificultyCheck,
-        liftRequirement:spellItem.data.data.liftRequirement
-      })
+      let messageData = {flavor:`<h2>${spellItem.name}</h2>
+          <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
+          <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`}
+      if (spellItem.data.data.range) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Range")}: </b>${spellItem.data.data.range}</div>`
+      }
+      if (spellItem.data.data.duration) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Duration")}: </b>${spellItem.data.data.duration}</div>`
+      }
+      if (spellItem.data.data.defence) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Defence")}: </b>${spellItem.data.data.defence}</div>`
+      }
+      if (spellItem.data.data.preparationTime) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.PrepTime")}: </b>${spellItem.data.data.preparationTime}</div>`
+      }
+      if (spellItem.data.data.dificultyCheck) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.DC")}: </b>${spellItem.data.data.dificultyCheck}</div>`
+      }
+      if (spellItem.data.data.components) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Components")}: </b>${spellItem.data.data.components}</div>`
+      }
+      if (spellItem.data.data.alternateComponents) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.AlternateComponents")}: </b>${spellItem.data.data.alternateComponents}</div>`
+      }
+      if (spellItem.data.data.liftRequirement) {
+        messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Requirements")}: </b>${spellItem.data.data.liftRequirement}</div>`
+      }
+      rollResult.toMessage(messageData)
     }
 
     async _onProfessionRoll(event) {
@@ -959,21 +973,14 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = new Roll(`1d10+${statValue}+${level}`).roll()
-      let state = ""
+      let messageData = {flavor: `<h2>${name}</h2>${effet}`}
       if (rollResult.dice[0].results[0].result == 10){  
-        state = "Crit"
-      };
-      if (rollResult.dice[0].results[0].result == 1){  
-        state = "Fumble"
-      };
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/profession-chat.html", this.actor, {
-        type: "Stats Roll",
-        title: name,
-        effet: effet,
-        statName: statName,
-        difficulty: statValue,
-        state: state
-      })
+        messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>`
+      }
+      else if(rollResult.dice[0].results[0].result == 1) {
+        messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>`
+      }
+      rollResult.toMessage(messageData)
     }
 
     async _onInitRoll(event) {
@@ -982,9 +989,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onCritRoll(event) {
       let rollResult = new Roll("1d10x10").roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/crit-chat.html", this.actor, {
-        type: "Stats Roll",
-      })
+      rollResult.toMessage()
     }
 
     async _onDeathSaveRoll(event) {
@@ -993,11 +998,20 @@ export default class WitcherActorSheet extends ActorSheet {
       if(stunBase > 10){
         stunBase = 10;
       }
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
-        type: "Stats Roll",
-        statName: "WITCHER.DeathSave",
-        difficulty: stunBase
-      })
+
+      let messageData = {flavor: `
+      <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
+      <div class="roll-summary">
+          <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${stunBase}</b></div>
+      </div>
+      <hr />`}
+      if (rollResult.total < stunBase) {
+        messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
+      }
+      else {
+        messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
+      }
+      rollResult.toMessage(messageData);
     }
 
     async _onDefenceRoll(event) {
@@ -1289,11 +1303,20 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = new Roll("1d10").roll()
-      await RollCustomMessage(rollResult, "systems/TheWitcherTRPG/templates/partials/chat/stat-chat.html", this.actor, {
-        type: "Stats Roll",
-        statName: statName,
-        difficulty: statValue
-      })
+      let messageData = {}
+      messageData.flavor = `
+      <h2>${game.i18n.localize(statName)}</h2>
+      <div class="roll-summary">
+          <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${statValue}</b></div>
+      </div>
+      <hr />`
+      if (rollResult.total < statValue) {
+        messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
+      }
+      else {
+        messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
+      }
+      rollResult.toMessage(messageData);
     }
 
     _onHPChanged(event) {
