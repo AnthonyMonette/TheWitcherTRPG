@@ -553,7 +553,7 @@
     "WITCHER.Spell.Earth": "Earth",    
     "WITCHER.Spell.Air": "Air",
     "WITCHER.Spell.Fire": "Fire",
-    "WITCHER.Spell.Wather": "Wather", 
+    "WITCHER.Spell.Water": "Water", 
     "WITCHER.Spell.Druid": "Druid",
     "WITCHER.Spell.Preacher": "Preacher",
     "WITCHER.Spell.Archpriest": "Arch priest",    
@@ -664,5 +664,7 @@
     "WITCHER.Weapon.Broken": "Your weapon is now broken",
     "WITCHER.Shield.Broken": "Your shield is now broken",
     "WITCHER.Settings.Adrenaline": "Use Adrenaline Optional Rule",
-    "WITCHER.Settings.AdrenalineDetails": "Adrenaline is the willpower to go on and Fight harder in dire situations"
+    "WITCHER.Settings.AdrenalineDetails": "Adrenaline is the willpower to go on and Fight harder in dire situations",
+
+    "WITCHER.Dialog.Skill" : "Performing a Skill Check"
 }
