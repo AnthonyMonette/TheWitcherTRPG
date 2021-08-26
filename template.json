@@ -800,7 +800,23 @@
       "commonSkillValue": "",
       "monsterLore": "",
       "monsterLoreSkillValue": "",
-      "customStat": false
+      "customStat": false,
+      "focus1": {
+        "name": "",
+        "value": 0
+      },
+      "focus2": {
+        "name": "",
+        "value": 0
+      },
+      "focus3": {
+        "name": "",
+        "value": 0
+      },
+      "focus4": {
+        "name": "",
+        "value": 0
+      }
     },
     "loot": {
       "templates": ["baseActor"],

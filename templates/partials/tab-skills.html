@@ -6,12 +6,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="int">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -74,12 +74,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="ref">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -116,12 +116,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="will">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -160,12 +160,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="dex">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -202,12 +202,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="cra">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -246,12 +246,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="body">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
@@ -288,12 +288,12 @@
             <tbody class="skill" data-skill="{{st}}" data-stat="emp">
                 <tr>
                     {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled">
+                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
                     {{/if}}
                     {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill">
+                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
                     {{/unless}}
-                        <a><span class="{{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
+                        <a><span>{{localize skill.label}}</span></a>
                     </td>
                     <td class="char-input-skill">
                         <input class="{{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>

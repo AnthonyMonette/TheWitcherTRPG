@@ -666,5 +666,7 @@
     "WITCHER.Settings.Adrenaline": "Use Adrenaline Optional Rule",
     "WITCHER.Settings.AdrenalineDetails": "Adrenaline is the willpower to go on and Fight harder in dire situations",
 
-    "WITCHER.Dialog.Skill" : "Performing a Skill Check"
+    "WITCHER.Dialog.Skill" : "Performing a Skill Check",
+    "WITCHER.Chat.Success" : "Success",
+    "WITCHER.Chat.Fail" : "Fail"
 }
