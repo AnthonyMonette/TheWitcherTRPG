@@ -235,14 +235,33 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
 		rollFormula += `-${armorEnc}`
 	}
-	let roll = new Roll(rollFormula).roll()
-	if (roll.dice[0].results[0].result == 10){  
-	  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
-	};
-	if (roll.dice[0].results[0].result == 1){  
-	  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
-	};
-	roll.toMessage(messageData);
+	new Dialog({
+		title: `${game.i18n.localize("WITCHER.Dialog.Skill")}: ${skillName}`, 
+		content: `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>`,
+		buttons: {
+		  LocationRandom: {
+			label: game.i18n.localize("WITCHER.Button.Continue"), 
+			callback: (html) => {
+				let customAtt = html.find("[name=customModifiers]")[0].value;
+				
+				if (customAtt < 0){
+					rollFormula += `${customAtt}`
+				}
+				if (customAtt > 0){
+					rollFormula += `+${customAtt}`
+				}
+
+				let roll = new Roll(rollFormula).roll()
+				if (roll.dice[0].results[0].result == 10){  
+				  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+				};
+				if (roll.dice[0].results[0].result == 1){  
+				  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+				};
+				roll.toMessage(messageData);
+			}
+		  }
+		}}).render(true) 
 }
 
 function getIntSkillMod(actor, skillNum){
