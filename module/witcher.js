@@ -220,7 +220,6 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	let rollFormula = `1d10+${stat}+${skill}`
 
 	if (array[2]) {
-		console.log(array[2])
 		let totalModifiers = 0;
 		array[2].forEach(item => totalModifiers += Number(item.value));
         if (totalModifiers < 0){

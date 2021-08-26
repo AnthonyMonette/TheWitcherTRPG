@@ -341,7 +341,6 @@ export default class WitcherActorSheet extends ActorSheet {
           Apply: {
             label: `${game.i18n.localize("WITCHER.Dialog.Apply")}`, 
             callback: (html) => {
-            console.log("enhancement choosed")
             let enhancementId = undefined
             if (html.find("[name=enhancement]")[0]) {
               enhancementId = html.find("[name=enhancement]")[0].value;
@@ -1322,7 +1321,6 @@ export default class WitcherActorSheet extends ActorSheet {
     _onItemEdit(event) {
       event.preventDefault(); 
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
-      console.log(itemId)
       let item = this.actor.items.get(itemId);
 
       item.sheet.render(true)
@@ -1684,7 +1682,6 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 let allEffects = item.data.data.effects
-                console.log("test")
                 if (ammunition){
                   let item = this.actor.items.get(ammunition);
                   let newQuantity = item.data.data.quantity - 1;
@@ -1696,13 +1693,11 @@ export default class WitcherActorSheet extends ActorSheet {
                   item.data.data.enhancementItems.forEach(element => {
                     if (element && JSON.stringify(element) != '{}'){
                       let enhancement = this.actor.items.get(element._id);
-                      console.log(enhancement)
                       allEffects.push(...enhancement.data.data.effects)
                     }
                   });
                 }
 
-                console.log("test")
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
@@ -1714,7 +1709,6 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (roll.dice[0].results[0].result == 1){  
                   messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
                 };
-                console.log("test")
                 roll.toMessage(messageData);
               }
             }
