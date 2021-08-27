@@ -1,6 +1,6 @@
 import { buttonDialog } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, genId} from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight} from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -127,7 +127,7 @@ export default class WitcherActorSheet extends ActorSheet {
       data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical" || item.type == "enhancement" || item.type == "mutagen"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
 
-      data.totalWeight =  data.items.weight();
+      data.totalWeight =   data.items.weight() + calc_currency_weight(data.data.currency);
       data.totalCost =  data.items.cost();
 
       data.noviceSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.data.level=="novice" && (item.data.class=="Spells" || item.data.class=="Invocations" || item.data.class=="Witcher")});

@@ -668,5 +668,13 @@
 
     "WITCHER.Dialog.Skill" : "Performing a Skill Check",
     "WITCHER.Chat.Success" : "Success",
-    "WITCHER.Chat.Fail" : "Fail"
+    "WITCHER.Chat.Fail" : "Fail",
+
+    "WITCHER.Currency.bizant" : "Bizant",
+    "WITCHER.Currency.ducat" : "Ducat",
+    "WITCHER.Currency.lintar" : "Lintar",
+    "WITCHER.Currency.floren" : "Floren",
+    "WITCHER.Currency.crown" : "Crown",
+    "WITCHER.Currency.oren" : "Oren",
+    "WITCHER.Currency.falsecoin" : "FalseCoin"
 }
