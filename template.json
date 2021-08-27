@@ -9,6 +9,15 @@
       "baseActor": {
         "woundTresholdApplied": false,
         "deathStateApplied": false,
+        "currency": {
+          "bizant": 0,
+          "ducat": 0,
+          "lintar": 0,
+          "floren": 0,
+          "crown": 0,
+          "oren": 0,
+          "falsecoin": 0
+        },
         "stats": {
           "int": {
             "max": 0,
