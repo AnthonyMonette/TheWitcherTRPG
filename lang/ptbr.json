@@ -45,6 +45,7 @@
     "WITCHER.Armor.StoppingPower": "PP",
     "WITCHER.Armor.MaxStoppingPower": "PP Max.",
     
+    "WITCHER.Weapon.Broken": "Sua arma Quebrou",
     "WITCHER.Armor.Enhancement": "MA",
     "WITCHER.Armor.Reliable": "DURA",
     "WITCHER.Armor.EncumbranceValue": "VF",
@@ -67,6 +68,7 @@
     "WITCHER.Location.Right": "Direita",
     
 
+    "WITCHER.Shield.Broken": "Seu escudo quebrou",
     "WITCHER.Armor.Location": "Local",
 
     "WITCHER.Component.Rarity": "Raridade",
@@ -402,7 +404,7 @@
     "WITCHER.SkCraDisguise": "Disfarce",
     "WITCHER.SkCraAid": "Primeiros Socorros",
     "WITCHER.SkCraForge": "Falsificação",
-    "WITCHER.SkCraPick": "Arrombar Fechaduras",
+    "WITCHER.SkCraPick": "Arrombar Fechad.",
     "WITCHER.SkCraTrapCraft": "Criar Armadilhas (2)",
 
     "WITCHER.SkWillCourage": "Coragem",
@@ -653,5 +655,22 @@
 
     "WITCHER.Dialog.ButtonRoll": "Rolar",
 
-    "WITCHER.Chat.FullDmg": "Dano inteiro"
+    "WITCHER.Chat.FullDmg": "Dano inteiro",
+    
+    "WITCHER.Dialog.Apply": "Aplicar",
+
+    "WITCHER.Settings.Adrenaline": "Usar Regra Opcional de Adrenalina",
+    "WITCHER.Settings.AdrenalineDetails": "Adrenalina é a força de vontade que se tem para continuar a lutar mais forte em situações terríveis",
+    
+    "WITCHER.Dialog.Skill" : "Realizando um Teste de Perícia",
+    "WITCHER.Chat.Success" : "Sucesso",
+    "WITCHER.Chat.Fail" : "Falha",
+    
+    "WITCHER.Currency.bizant" : "Bizante",
+    "WITCHER.Currency.ducat" : "Ducates",
+    "WITCHER.Currency.lintar" : "Lintar",
+    "WITCHER.Currency.floren" : "Florim",
+    "WITCHER.Currency.crown" : "Crown",
+    "WITCHER.Currency.oren" : "Oren",
+    "WITCHER.Currency.falsecoin" : "Falsa"
 }
