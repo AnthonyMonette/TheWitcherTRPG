@@ -50,6 +50,7 @@
 
     "WITCHER.Armor.StoppingPower": "CP",
     "WITCHER.Armor.MaxStoppingPower": "Max. CP",
+	
     "WITCHER.Armor.Enhancement": "MA",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
@@ -68,8 +69,8 @@
     "WITCHER.Armor.LocationLeft": "Izq.",
     "WITCHER.Armor.LocationRight": "Der.",
 
-    "WITCHER.Location.Left": "Izquierdo",
-    "WITCHER.Location.Right": "Derecho",
+    "WITCHER.Location.Left": "Izq.",
+    "WITCHER.Location.Right": "Der.",
     
 
     "WITCHER.Armor.Location": "Localización",
@@ -425,9 +426,9 @@
     "WITCHER.Actor.ImprovementPoints": "Puntos de Perfeccionamiento",
     "WITCHER.Actor.CurrentIP":"Actual PP:",
     "WITCHER.Actor.SkillName": "Nombre habilidad...",
-    "WITCHER.ACtor.TotalSkill": "Total Habilidad",
-    "WITCHER.ACtor.TotalProfSkill": "Puntos totales de profesión",
-	
+    "WITCHER.ACtor.TotalSkill": "Pts. Habilidad",
+	"WITCHER.ACtor.TotalProfSkill": "Pts. profesión habilidad",
+
     "WITCHER.SocialStanding": "Estatus social",
     "WITCHER.Profession": "Profesión",
     "WITCHER.Reputation": "Reputación",
@@ -443,8 +444,8 @@
     "WITCHER.Decade": "Decada",
     "WITCHER.Event": "Eventos",
     "WITCHER.DeathSave": "ATU/S. contra muerte",
-
-    "WITCHER.Crit": "Crítico",
+	
+	"WITCHER.Crit": "Crítico",
     "WITCHER.Fumble": "Pifia",
 
     "WITCHER.table.Quantity": "Cant.",
@@ -484,7 +485,6 @@
 
     "WITCHER.Monster.CommonerSupperstition": "S. de Profanos: DO de Cultura: ",
     "WITCHER.Monster.WitcherKnowledge": "Con. de Brujo: DO de Saber de Monstruos ",
-
 
     "WITCHER.Monster.SkillTab": "Habilidades",
     "WITCHER.Monster.InventryTab": "Ataques/Botín",
@@ -658,9 +658,26 @@
     "WITCHER.Dialog.ButtonRoll": "Tirar los dados",
     
     "WITCHER.Chat.FullDmg": "Daño total",
-
-    "WITCHER.Enhancement.ChooseTitle": "Escoja una mejora",
-    "WITCHER.Enhancement.NoEnhancement": "Ninguna mejora disponible",
+	
+	"WITCHER.Enhancement.ChooseTitle": "Elija una mejora",
+    "WITCHER.Enhancement.NoEnhancement": "No hay ninguna mejora disponible",
     "WITCHER.Dialog.Enhancement": "Mejora",
-    "WITCHER.Dialog.Apply": "Aplicar"
+    "WITCHER.Dialog.Apply": "Aplicar",
+
+    "WITCHER.Weapon.Broken": "Tu arma ahora está rota",
+    "WITCHER.Shield.Broken": "Tu escudo ahora esta roto",
+    "WITCHER.Settings.Adrenaline": "Use la regla opcional de adrenalina",
+    "WITCHER.Settings.AdrenalineDetails": "La adrenalina es la fuerza de voluntad para seguir adelante y luchar más duro en situaciones extremas.",
+
+    "WITCHER.Dialog.Skill" : "Realización de una prueba de habilidad",
+    "WITCHER.Chat.Success" : "Éxito",
+    "WITCHER.Chat.Fail" : "Fallo",
+
+    "WITCHER.Currency.bizant" : "Bizant",
+    "WITCHER.Currency.ducat" : "Ducado",
+    "WITCHER.Currency.lintar" : "Lintar",
+    "WITCHER.Currency.floren" : "Florín",
+    "WITCHER.Currency.crown" : "Corona",
+    "WITCHER.Currency.oren" : "Oren",
+    "WITCHER.Currency.falsecoin" : "Moneda falsa"
 }
