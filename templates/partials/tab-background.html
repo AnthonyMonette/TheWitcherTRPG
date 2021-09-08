@@ -20,9 +20,32 @@
     <div class="flex">
         <div class="crit-wounds">
             <h2>{{localize "WITCHER.CritWound.Header"}}<a class="add-crit"><i class="fas fa-plus"></i></a></h2>
-            {{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
+{{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
         </div>
     </div>
+    <div class="crit-wounds">
+        <h2>{{localize "WITCHER.background.activeEffect"}}<a class="add-active-effect"><i class="fas fa-plus"></i></a></h2>
+    </div>
+    {{#each activeEffects as |effect ev|}}
+    <div class="item flex" data-item-id="{{effect._id}}">
+        <a class="item-edit"><i class="fas fa-edit"></i></a>
+        <img src="{{effect.img}}" class="item-img"/>
+        <label class="modifier-display"><b>{{effect.name}}</b></label>
+        <div class="modifier-display">
+            {{#each effect.data.stats as |stat index|}}
+                <div>{{stat.stat}} :{{stat.modifier}}</div> 
+            {{/each}}
+        </div>
+        <div class="modifier-display">
+            {{#each effect.data.skills as |skill index|}}
+                <div>{{localize skill.skill}} :{{skill.modifier}}</div> 
+            {{/each}}
+        </div>
+<textarea rows=3 >{{effect.data.description}}</textarea>
+        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    {{/each}}
+
     <div class="flexcol background">
         <div class="lifeEvents scrollable" id="lifeEvents">
             <table class="lifevents">

@@ -366,12 +366,17 @@
     "WITCHER.SkIntDeduction": "Deduction",
     "WITCHER.SkIntEducation": "Education",
     "WITCHER.SkIntCommon": "Common Speech (2)",
+    "WITCHER.SkIntCommonLable": "Common Speech",
     "WITCHER.SkIntElder": "Elder Speech (2)",
+    "WITCHER.SkIntElderLable": "Elder Speech",
     "WITCHER.SkIntDwarven": "Dwarven (2)",
+    "WITCHER.SkIntDwarvenLable": "Dwarven",
     "WITCHER.SkIntMonster": "Monster Lore (2)",
+    "WITCHER.SkIntMonsterLable": "Monster Lore",
     "WITCHER.SkIntSocialEt": "Social Etiquette",
     "WITCHER.SkIntStreet": "Streetwise",
     "WITCHER.SkIntTactics": "Tactics (2)",
+    "WITCHER.SkIntTacticsLable": "Tactics",
     "WITCHER.SkIntTeaching": "Teaching",
     "WITCHER.SkIntWilderness": "Wilderness Survival",
 
@@ -405,20 +410,28 @@
     "WITCHER.SkEmpSeduction": "Seduction",
 
     "WITCHER.SkCraAlchemy": "Alchemy (2)",
+    "WITCHER.SkCraAlchemyLable": "Alchemy",
     "WITCHER.SkCraCrafting": "Crafting (2)",
+    "WITCHER.SkCraCraftingLable": "Crafting",
     "WITCHER.SkCraDisguise": "Disguise",
     "WITCHER.SkCraAid": "First Aid",
     "WITCHER.SkCraForge": "Forgery",
     "WITCHER.SkCraPick": "Pick Lock",
     "WITCHER.SkCraTrapCraft": "Trap Crafting (2)",
+    "WITCHER.SkCraTrapCraftLable": "Trap Crafting",
 
     "WITCHER.SkWillCourage": "Courage",
     "WITCHER.SkWillHex": "Hex Weaving (2)",
+    "WITCHER.SkWillHexLable": "Hex Weaving",
     "WITCHER.SkWillIntim": "Intimidation",
     "WITCHER.SkWillSpellcast": "Spell Casting (2)",
+    "WITCHER.SkWillSpellcastLable": "Spell Casting",
     "WITCHER.SkWillResistMag": "Resist Magic (2)",
+    "WITCHER.SkWillResistMagLable": "Resist Magic",
     "WITCHER.SkWillResistCoer": "Resist Coercion",
     "WITCHER.SkWillRitCraft": "Ritual Crafting (2)",
+    "WITCHER.SkWillRitCraftLable": "Ritual Crafting",
+
 
     "WITCHER.Actor.ImprovementPoints": "Improvement Points",
     "WITCHER.Actor.CurrentIP":"Current IP:",
@@ -676,5 +689,7 @@
     "WITCHER.Currency.floren" : "Floren",
     "WITCHER.Currency.crown" : "Crown",
     "WITCHER.Currency.oren" : "Oren",
-    "WITCHER.Currency.falsecoin" : "FalseCoin"
+    "WITCHER.Currency.falsecoin" : "FalseCoin",
+    
+    "WITCHER.background.activeEffect" : "Active Effects"
 }

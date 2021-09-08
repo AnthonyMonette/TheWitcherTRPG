@@ -846,7 +846,8 @@
       "spell",
       "profession",
       "note",
-      "race"
+      "race",
+      "effect"
     ],
     "templates":{
       "base": {
@@ -1100,6 +1101,20 @@
         "name": "",
         "description": ""
       }
+    },
+    "effect": {
+      "stats" : [{
+        "id": "first",
+        "stat": "",
+        "modifier": 0
+        }
+      ],
+      "skills" : [{
+        "id": "first",
+        "skill": "",
+        "modifier": 0
+        }
+      ]
     }
   }
 }
