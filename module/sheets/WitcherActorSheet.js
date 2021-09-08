@@ -126,6 +126,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
       data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical" || item.type == "enhancement" || item.type == "mutagen"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
+      
+      data.activeEffects =  data.items.filter(function(item) {return item.type=="effect"});
 
       data.totalWeight =   data.items.weight() + calc_currency_weight(data.data.currency);
       data.totalCost =  data.items.cost();
@@ -160,7 +162,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
       html.find(".add-item").on("click", this._onItemAdd.bind(this));
-
+      html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
@@ -798,7 +800,15 @@ export default class WitcherActorSheet extends ActorSheet {
 
       this.actor.createOwnedItem(itemData)
     }
-    
+
+    async _onAddActiveEffect(){
+      let itemData = {
+        name: `new effect`, 
+        type: "effect"
+      }
+      this.actor.createOwnedItem(itemData)
+    }
+
     async _alchemyCraft(event) {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.items.get(itemId);
@@ -1540,37 +1550,30 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (isSilhouetted) { attFormula += "+2"; }
                 if (isAiming) { attFormula += `+${customAim}`}
 
-                if (item.data.data.isMelee){
-                  attFormula += `+${this.actor.data.data.stats.ref.current}`;
-                } 
-                else { 
-                  attFormula += `+${this.actor.data.data.stats.dex.current}`;
-                }
-                
                 switch(item.data.data.attackSkill){
                   case "Brawling":
-                    attFormula += `+${this.actor.data.data.skills.ref.brawling.value}`;
+                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.brawling.value}`;
                     break;
                   case "Melee":
-                    attFormula += `+${this.actor.data.data.skills.ref.melee.value}`;
+                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.melee.value}`;
                     break;
                   case "Small Blades":
-                    attFormula += `+${this.actor.data.data.skills.ref.smallblades.value}`;
+                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.smallblades.value}`;
                     break;
                   case "Staff/Spear":
-                    attFormula += `+${this.actor.data.data.skills.ref.staffspear.value}`;
+                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.staffspear.value}`;
                     break;
                   case "Swordsmanship":
-                    attFormula += `+${this.actor.data.data.skills.ref.swordsmanship.value}`;
+                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.swordsmanship.value}`;
                     break;
                   case "Archery":
-                    attFormula += `+${this.actor.data.data.skills.dex.archery.value}`;
+                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.archery.value}`;
                     break;
                   case "Athletics":
-                    attFormula += `+${this.actor.data.data.skills.dex.athletics.value}`;
+                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.athletics.value}`;
                     break;
                   case "Crossbow":
-                    attFormula += `+${this.actor.data.data.skills.dex.crossbow.value}`;
+                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.crossbow.value}`;
                     break;
                 }
 

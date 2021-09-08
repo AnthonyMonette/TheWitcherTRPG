@@ -1,0 +1,107 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+        </div>
+    </header>
+    <label><b>{{localize "WITCHER.Item.Description"}}</b></label>
+<textarea rows=5 name="data.description">{{data.description}}</textarea>
+    <div class="flex">
+        <div class="effect-column">
+            <b>{{localize "WITCHER.Actor.StatTitle.LableLeft"}} </b><a class="add-modifier-stat"><i class="fas fa-plus"></i></a>
+            {{#each data.stats as |stat index|}}
+            <div class="flex list-item"  data-id="{{stat.id}}" data-type="stat">
+                <a class="remove-modifier-stat"><i class="fas fa-minus"></i></a>
+                <select class="modifiers-edit" data-field="stat">
+                    {{#select stat.stat}}
+                    <option value="none"></option>
+                    <option value="INT">{{localize "WITCHER.Actor.Stat.Int"}}</option>
+                    <option value="REF">{{localize "WITCHER.Actor.Stat.Ref"}}</option>
+                    <option value="DEX">{{localize "WITCHER.Actor.Stat.Dex"}}</option>
+                    <option value="BODY">{{localize "WITCHER.Actor.Stat.Body"}}</option>
+                    <option value="SPD">{{localize "WITCHER.Actor.Stat.Spd"}}</option>
+                    <option value="EMP">{{localize "WITCHER.Actor.Stat.Emp"}}</option>
+                    <option value="CRA">{{localize "WITCHER.Actor.Stat.Cra"}}</option>
+                    <option value="WILL">{{localize "WITCHER.Actor.Stat.Will"}}</option>
+                    <option value="LUCK">{{localize "WITCHER.Actor.Stat.Luck"}}</option>
+                    {{/select}}
+                </select> 
+                <input  class="modifiers-edit" data-field="modifier" type="text" value="{{stat.modifier}}"/>
+            </div>
+            {{/each}}
+        </div>
+        <div class="effect-column">
+            <b>{{localize "WITCHER.Monster.SkillTab"}} </b><a class="add-modifier-skill"><i class="fas fa-plus"></i></a>
+            {{#each data.skills as |skill index|}}
+            <div class="flex list-item"  data-id="{{skill.id}}">
+                <a class="remove-modifier-skill"><i class="fas fa-minus"></i></a>
+                <select class="modifiers-edit-skills" data-field="skill">
+                    {{#select skill.skill}}
+                    <option value="none"></option>
+                    <option value="WITCHER.SkIntAwareness"> {{localize "WITCHER.SkIntAwareness"}}</option>
+                    <option value="WITCHER.SkIntBusiness"> {{localize "WITCHER.SkIntBusiness"}}</option>
+                    <option value="WITCHER.SkIntDeduction"> {{localize "WITCHER.SkIntDeduction"}}</option>
+                    <option value="WITCHER.SkIntEducation"> {{localize "WITCHER.SkIntEducation"}}</option>
+                    <option value="WITCHER.SkIntCommonLable"> {{localize "WITCHER.SkIntCommonLable"}}</option>
+                    <option value="WITCHER.SkIntElderLable"> {{localize "WITCHER.SkIntElderLable"}}</option>
+                    <option value="WITCHER.SkIntDwarvenLable"> {{localize "WITCHER.SkIntDwarvenLable"}}</option>
+                    <option value="WITCHER.SkIntMonsterLable"> {{localize "WITCHER.SkIntMonsterLable"}}</option>
+                    <option value="WITCHER.SkIntSocialEt"> {{localize "WITCHER.SkIntSocialEt"}}</option>
+                    <option value="WITCHER.SkIntStreet"> {{localize "WITCHER.SkIntStreet"}}</option>
+                    <option value="WITCHER.SkIntTacticsLable"> {{localize "WITCHER.SkIntTacticsLable"}}</option>
+                    <option value="WITCHER.SkIntTeaching"> {{localize "WITCHER.SkIntTeaching"}}</option>
+                    <option value="WITCHER.SkIntWilderness"> {{localize "WITCHER.SkIntWilderness"}}</option>
+                    
+                    <option value="WITCHER.SkRefBrawling"> {{localize "WITCHER.SkRefBrawling"}}</option>
+                    <option value="WITCHER.SkRefDodge"> {{localize "WITCHER.SkRefDodge"}}</option>
+                    <option value="WITCHER.SkRefMelee"> {{localize "WITCHER.SkRefMelee"}}</option>
+                    <option value="WITCHER.SkRefRiding"> {{localize "WITCHER.SkRefRiding"}}</option>
+                    <option value="WITCHER.SkRefSailing"> {{localize "WITCHER.SkRefSailing"}}</option>
+                    <option value="WITCHER.SkRefSmall"> {{localize "WITCHER.SkRefSmall"}}</option>
+                    <option value="WITCHER.SkRefStaff"> {{localize "WITCHER.SkRefStaff"}}</option>
+                    <option value="WITCHER.SkRefSwordmanship"> {{localize "WITCHER.SkRefSwordmanship"}}</option>
+                    
+                    <option value="WITCHER.SkWillCourage"> {{localize "WITCHER.SkWillCourage"}}</option>
+                    <option value="WITCHER.SkWillHexLable"> {{localize "WITCHER.SkWillHexLable"}}</option>
+                    <option value="WITCHER.SkWillIntim"> {{localize "WITCHER.SkWillIntim"}}</option>
+                    <option value="WITCHER.SkWillSpellcastLable"> {{localize "WITCHER.SkWillSpellcastLable"}}</option>
+                    <option value="WITCHER.SkWillResistMagLable"> {{localize "WITCHER.SkWillResistMagLable"}}</option>
+                    <option value="WITCHER.SkWillResistCoer"> {{localize "WITCHER.SkWillResistCoer"}}</option>
+                    <option value="WITCHER.SkWillRitCraftLable"> {{localize "WITCHER.SkWillRitCraftLable"}}</option>
+
+                    <option value="WITCHER.SkDexArchery"> {{localize "WITCHER.SkDexArchery"}}</option>
+                    <option value="WITCHER.SkDexAthletics"> {{localize "WITCHER.SkDexAthletics"}}</option>
+                    <option value="WITCHER.SkDexCrossbow"> {{localize "WITCHER.SkDexCrossbow"}}</option>
+                    <option value="WITCHER.SkDexSleight"> {{localize "WITCHER.SkDexSleight"}}</option>
+                    <option value="WITCHER.SkDexStealth"> {{localize "WITCHER.SkDexStealth"}}</option>
+                    
+                    <option value="WITCHER.SkCraAlchemyLable"> {{localize "WITCHER.SkCraAlchemyLable"}}</option>
+                    <option value="WITCHER.SkCraCraftingLable"> {{localize "WITCHER.SkCraCraftingLable"}}</option>
+                    <option value="WITCHER.SkCraDisguise"> {{localize "WITCHER.SkCraDisguise"}}</option>
+                    <option value="WITCHER.SkCraAid"> {{localize "WITCHER.SkCraAid"}}</option>
+                    <option value="WITCHER.SkCraForge"> {{localize "WITCHER.SkCraForge"}}</option>
+                    <option value="WITCHER.SkCraPick"> {{localize "WITCHER.SkCraPick"}}</option>
+                    <option value="WITCHER.SkCraTrapCraftLable"> {{localize "WITCHER.SkCraTrapCraftLable"}}</option>
+                    
+                    <option value="WITCHER.SkBodyPhys"> {{localize "WITCHER.SkBodyPhys"}}</option>
+                    <option value="WITCHER.SkBodyEnd"> {{localize "WITCHER.SkBodyEnd"}}</option>
+                    
+                    <option value="WITCHER.SkEmpCharisma"> {{localize "WITCHER.SkEmpCharisma"}}</option>
+                    <option value="WITCHER.SkEmpDeceit"> {{localize "WITCHER.SkEmpDeceit"}}</option>
+                    <option value="WITCHER.SkEmpArts"> {{localize "WITCHER.SkEmpArts"}}</option>
+                    <option value="WITCHER.SkEmpGambling"> {{localize "WITCHER.SkEmpGambling"}}</option>
+                    <option value="WITCHER.SkEmpGrooming"> {{localize "WITCHER.SkEmpGrooming"}}</option>
+                    <option value="WITCHER.SkEmpHumanPerc"> {{localize "WITCHER.SkEmpHumanPerc"}}</option>
+                    <option value="WITCHER.SkEmpLeadership"> {{localize "WITCHER.SkEmpLeadership"}}</option>
+                    <option value="WITCHER.SkEmpPersuasion"> {{localize "WITCHER.SkEmpPersuasion"}}</option>
+                    <option value="WITCHER.SkEmpPerformance"> {{localize "WITCHER.SkEmpPerformance"}}</option>
+                    <option value="WITCHER.SkEmpSeduction"> {{localize "WITCHER.SkEmpSeduction"}}</option>
+                    {{/select}}
+                </select> 
+                <input  class="modifiers-edit-skills" data-field="modifier" type="text" value="{{skill.modifier}}"/>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</form>

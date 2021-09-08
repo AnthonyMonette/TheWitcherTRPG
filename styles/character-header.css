@@ -201,3 +201,7 @@ input.right-value {
     border-color: #9ecaed;
     box-shadow: 0 0 10px #9ecaed;
 }
+
+.effect-column {
+    flex: 1;
+}

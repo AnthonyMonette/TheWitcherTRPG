@@ -27,3 +27,7 @@
     margin: 5px;
     padding: 10px;
 }
+
+.modifier-display {
+    min-width: 100px;
+}

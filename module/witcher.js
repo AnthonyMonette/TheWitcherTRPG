@@ -35,6 +35,23 @@ function updateDerived(actor){
 	thisActor.data.data.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
 	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
+	
+	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
+	activeEffects.forEach(item => 
+		item.data.data.stats.forEach(stat => {
+			switch(stat.stat){
+				case "INT": intTotalModifiers += Number(stat.modifier); break;
+				case "REF": refTotalModifiers += Number(stat.modifier); break;
+				case "DEX": dexTotalModifiers += Number(stat.modifier); break;
+				case "BODY": bodyTotalModifiers += Number(stat.modifier); break;
+				case "SPD": spdTotalModifiers += Number(stat.modifier); break;
+				case "EMP": empTotalModifiers += Number(stat.modifier); break;
+				case "CRA": craTotalModifiers += Number(stat.modifier); break;
+				case "WILL": willTotalModifiers += Number(stat.modifier); break;
+				case "LUCK": luckTotalModifiers += Number(stat.modifier); break;
+			}
+		}));
+
 	let stunTotalModifiers = 0;
 	let runTotalModifiers = 0;
 	let leapTotalModifiers = 0;
@@ -228,6 +245,15 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			rollFormula += `+${totalModifiers}`
 		}
 	}
+
+	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
+	activeEffects.forEach(item => 
+		item.data.data.skills.forEach(skill => {
+			console.log(skill)
+			if (skillName == game.i18n.localize(skill.skill)){
+				rollFormula += `+${skill.modifier}`
+			}
+		}));
 
 	let armorEnc = getArmorEcumbrance(thisActor)
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
