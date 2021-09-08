@@ -1109,6 +1109,12 @@
         "modifier": 0
         }
       ],
+      "derived" : [{
+        "id": "first",
+        "derivedStat": "",
+        "modifier": 0
+        }
+      ],
       "skills" : [{
         "id": "first",
         "skill": "",

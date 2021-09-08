@@ -40,15 +40,15 @@ function updateDerived(actor){
 	activeEffects.forEach(item => 
 		item.data.data.stats.forEach(stat => {
 			switch(stat.stat){
-				case "INT": intTotalModifiers += Number(stat.modifier); break;
-				case "REF": refTotalModifiers += Number(stat.modifier); break;
-				case "DEX": dexTotalModifiers += Number(stat.modifier); break;
-				case "BODY": bodyTotalModifiers += Number(stat.modifier); break;
-				case "SPD": spdTotalModifiers += Number(stat.modifier); break;
-				case "EMP": empTotalModifiers += Number(stat.modifier); break;
-				case "CRA": craTotalModifiers += Number(stat.modifier); break;
-				case "WILL": willTotalModifiers += Number(stat.modifier); break;
-				case "LUCK": luckTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Int": intTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Ref": refTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Dex": dexTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Body": bodyTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Spd": spdTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Emp": empTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Cra": craTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Will": willTotalModifiers += Number(stat.modifier); break;
+				case "WITCHER.Actor.Stat.Luck": luckTotalModifiers += Number(stat.modifier); break;
 			}
 		}));
 
@@ -74,6 +74,19 @@ function updateDerived(actor){
 		encDiff = Math.ceil((totalWeights-curentEncumbrance) / 5)
 	}
 	let armorEnc = getArmorEcumbrance(thisActor)
+
+	activeEffects.forEach(item => 
+		item.data.data.derived.forEach(derived => {
+			switch(derived.derivedStat){
+				case "WITCHER.Actor.CoreStat.Stun": stunTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.CoreStat.Run": runTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.CoreStat.Leap": leapTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.CoreStat.Enc": encTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.CoreStat.Rec": recTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.CoreStat.woundTreshold": wtTotalModifiers += Number(derived.modifier); break;
+			}
+		}));
+
 
 	let curInt = thisActor.data.data.stats.int.max + intTotalModifiers;
 	let curRef = thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff;
@@ -115,6 +128,13 @@ function updateDerived(actor){
 	thisActor.data.data.derivedStats.sta.modifiers.forEach(item => staTotalModifiers += Number(item.value));
 	thisActor.data.data.derivedStats.resolve.modifiers.forEach(item => resTotalModifiers += Number(item.value));
 	thisActor.data.data.derivedStats.focus.modifiers.forEach(item => focusTotalModifiers += Number(item.value));
+	activeEffects.forEach(item => 
+		item.data.data.derived.forEach(derived => {
+			switch(derived.derivedStat){
+				case "WITCHER.Actor.DerStat.HP": hpTotalModifiers += Number(derived.modifier); break;
+				case "WITCHER.Actor.DerStat.Sta": staTotalModifiers += Number(derived.modifier); break;
+			}
+		}));
 
 	let curHp = thisActor.data.data.derivedStats.hp.max + hpTotalModifiers;
 	let curSta = thisActor.data.data.derivedStats.sta.max + staTotalModifiers;
@@ -249,7 +269,6 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
 	activeEffects.forEach(item => 
 		item.data.data.skills.forEach(skill => {
-			console.log(skill)
 			if (skillName == game.i18n.localize(skill.skill)){
 				rollFormula += `+${skill.modifier}`
 			}

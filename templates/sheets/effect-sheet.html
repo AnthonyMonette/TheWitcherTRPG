@@ -16,18 +16,40 @@
                 <select class="modifiers-edit" data-field="stat">
                     {{#select stat.stat}}
                     <option value="none"></option>
-                    <option value="INT">{{localize "WITCHER.Actor.Stat.Int"}}</option>
-                    <option value="REF">{{localize "WITCHER.Actor.Stat.Ref"}}</option>
-                    <option value="DEX">{{localize "WITCHER.Actor.Stat.Dex"}}</option>
-                    <option value="BODY">{{localize "WITCHER.Actor.Stat.Body"}}</option>
-                    <option value="SPD">{{localize "WITCHER.Actor.Stat.Spd"}}</option>
-                    <option value="EMP">{{localize "WITCHER.Actor.Stat.Emp"}}</option>
-                    <option value="CRA">{{localize "WITCHER.Actor.Stat.Cra"}}</option>
-                    <option value="WILL">{{localize "WITCHER.Actor.Stat.Will"}}</option>
-                    <option value="LUCK">{{localize "WITCHER.Actor.Stat.Luck"}}</option>
+                    <option value="WITCHER.Actor.Stat.Int">{{localize "WITCHER.Actor.Stat.Int"}}</option>
+                    <option value="WITCHER.Actor.Stat.Ref">{{localize "WITCHER.Actor.Stat.Ref"}}</option>
+                    <option value="WITCHER.Actor.Stat.Dex">{{localize "WITCHER.Actor.Stat.Dex"}}</option>
+                    <option value="WITCHER.Actor.Stat.Body">{{localize "WITCHER.Actor.Stat.Body"}}</option>
+                    <option value="WITCHER.Actor.Stat.Spd">{{localize "WITCHER.Actor.Stat.Spd"}}</option>
+                    <option value="WITCHER.Actor.Stat.Emp">{{localize "WITCHER.Actor.Stat.Emp"}}</option>
+                    <option value="WITCHER.Actor.Stat.Cra">{{localize "WITCHER.Actor.Stat.Cra"}}</option>
+                    <option value="WITCHER.Actor.Stat.Will">{{localize "WITCHER.Actor.Stat.Will"}}</option>
+                    <option value="WITCHER.Actor.Stat.Luck">{{localize "WITCHER.Actor.Stat.Luck"}}</option>
                     {{/select}}
                 </select> 
                 <input  class="modifiers-edit" data-field="modifier" type="text" value="{{stat.modifier}}"/>
+            </div>
+            {{/each}}
+        </div>
+        <div class="effect-column">
+            <b>{{localize "WITCHER.Actor.StatTitle.Derived"}} </b><a class="add-modifier-derived"><i class="fas fa-plus"></i></a>
+            {{#each data.derived as |derived index|}}
+            <div class="flex list-item"  data-id="{{derived.id}}" data-type="derived">
+                <a class="remove-modifier-derived"><i class="fas fa-minus"></i></a>
+                <select class="modifiers-edit-derived" data-field="derivedStat">
+                    {{#select derived.derivedStat}}
+                    <option value="none"></option>
+                    <option value="WITCHER.Actor.CoreStat.Stun">{{localize "WITCHER.Actor.CoreStat.Stun"}}</option>
+                    <option value="WITCHER.Actor.CoreStat.Run">{{localize "WITCHER.Actor.CoreStat.Run"}}</option>
+                    <option value="WITCHER.Actor.CoreStat.Leap">{{localize "WITCHER.Actor.CoreStat.Leap"}}</option>
+                    <option value="WITCHER.Actor.CoreStat.Enc">{{localize "WITCHER.Actor.CoreStat.Enc"}}</option>
+                    <option value="WITCHER.Actor.CoreStat.Rec">{{localize "WITCHER.Actor.CoreStat.Rec"}}</option>
+                    <option value="WITCHER.Actor.CoreStat.woundTreshold">{{localize "WITCHER.Actor.CoreStat.woundTreshold"}}</option>
+                    <option value="WITCHER.Actor.DerStat.HP">{{localize "WITCHER.Actor.DerStat.HP"}}</option>
+                    <option value="WITCHER.Actor.DerStat.Sta">{{localize "WITCHER.Actor.DerStat.Sta"}}</option>
+                    {{/select}}
+                </select> 
+                <input  class="modifiers-edit-derived" data-field="modifier" type="text" value="{{derived.modifier}}"/>
             </div>
             {{/each}}
         </div>
