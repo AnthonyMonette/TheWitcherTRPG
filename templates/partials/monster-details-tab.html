@@ -9,8 +9,38 @@
 
 <div class="monster-crit-wounds-section">
     <h2>{{localize "WITCHER.CritWound.Header"}}<a class="add-crit" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
-    {{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
+{{> "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html"}}
 </div>
+
+<h2>{{localize "WITCHER.background.activeEffect"}}<a class="add-active-effect"><i class="fas fa-plus"></i></a></h2>
+{{#each activeEffects as |effect ev|}}
+<div class="item" data-item-id="{{effect._id}}">
+    <div class="flex">
+        <a class="item-edit"><i class="fas fa-edit"></i></a>
+        <img src="{{effect.img}}" class="item-img"/>
+        <label class="modifier-flex"><b>{{effect.name}}</b></label>
+        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="flex">
+        <div class="modifier-flex">
+            {{#each effect.data.stats as |stat index|}}
+                <div>{{localize stat.stat}} :{{stat.modifier}}</div> 
+            {{/each}}
+        </div>
+        <div class="modifier-flex">
+            {{#each effect.data.derived as |derived index|}}
+                <div>{{localize derived.derivedStat}} :{{derived.modifier}}</div> 
+            {{/each}}
+        </div>
+        <div class="modifier-flex">
+            {{#each effect.data.skills as |skill index|}}
+                <div>{{localize skill.skill}} :{{skill.modifier}}</div> 
+            {{/each}}
+        </div>
+    </div>
+<textarea rows=3 >{{effect.data.description}}</textarea>
+</div>
+{{/each}}
 
 <h2>{{localize "WITCHER.Notes"}} <a class="add-item" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
 
