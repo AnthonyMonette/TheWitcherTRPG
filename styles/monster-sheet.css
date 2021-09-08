@@ -218,3 +218,7 @@
 .monster-knowledge .editor-content {
   height: 100px;
 }
+
+.modifier-flex {
+  flex: 1
+}
