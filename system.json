@@ -3,7 +3,7 @@
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
     "compatibleCoreVersion": "0.8.8",
-    "version": 0.52, 
+    "version": 0.53, 
     "author": "TechAntho",
     "scripts": [
     ],
