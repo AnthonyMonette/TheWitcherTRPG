@@ -47,13 +47,16 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".add-effect").on("click", this._onAddEffect.bind(this));
       html.find(".add-modifier-stat").on("click", this._onAddModifierStat.bind(this));
       html.find(".add-modifier-skill").on("click", this._onAddModifierSkill.bind(this));
+      html.find(".add-modifier-derived").on("click", this._onAddModifierDerived.bind(this));
       html.find(".remove-effect").on("click", this._oRemoveEffect.bind(this));
       html.find(".remove-modifier-stat").on("click", this._onRemoveModifierStat.bind(this));
       html.find(".remove-modifier-skill").on("click", this._onRemoveModifierSkill.bind(this));
+      html.find(".remove-modifier-derived").on("click", this._onRemoveModifierDerived.bind(this));
       
       html.find(".list-edit").on("blur", this._onEffectEdit.bind(this));
       html.find(".modifiers-edit").on("change", this._onModifierEdit.bind(this));
       html.find(".modifiers-edit-skills").on("change", this._onModifierSkillsEdit.bind(this));
+      html.find(".modifiers-edit-derived").on("change", this._onModifierDerivedEdit.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
     }
 
@@ -83,6 +86,19 @@ export default class WitcherItemSheet extends ItemSheet {
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
       this.item.update({'data.stats': effects});
+    }
+    
+    _onModifierDerivedEdit(event) {
+      event.preventDefault();
+      let element = event.currentTarget;
+      let itemId = element.closest(".list-item").dataset.id;
+      
+      let field = element.dataset.field;
+      let value = element.value
+      let effects = this.item.data.data.derived
+      let objIndex = effects.findIndex((obj => obj.id == itemId));
+      effects[objIndex][field] = value
+      this.item.update({'data.derived': effects});
     }
 
     _onModifierSkillsEdit(event) {
@@ -122,7 +138,15 @@ export default class WitcherItemSheet extends ItemSheet {
       this.item.update({'data.skills': newModifierList});
     }
 
+    _onRemoveModifierDerived(event) {
+      event.preventDefault();
+      let element = event.currentTarget;
+      let itemId = element.closest(".list-item").dataset.id;
+      let newModifierList  = this.item.data.data.derived.filter(item => item.id !== itemId)
+      this.item.update({'data.derived': newModifierList});
+    }
 
+    
     _onAddEffect(event) {
       event.preventDefault();
       let newEffectList  = []
@@ -153,6 +177,17 @@ export default class WitcherItemSheet extends ItemSheet {
       this.item.update({'data.skills': newModifierList});
     }
 
+    _onAddModifierDerived(event) {
+      event.preventDefault();
+      let newModifierList  = []
+      if (this.item.data.data.derived){
+        newModifierList = this.item.data.data.derived
+      }
+      newModifierList.push({id: genId(), derivedStat: "none", modifier: 0})
+      console.log(newModifierList)
+      this.item.update({'data.derived': newModifierList});
+    }
+    
     _onFocusIn(event) {
       event.currentTarget.select();
     }

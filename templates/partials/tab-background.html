@@ -33,7 +33,12 @@
         <label class="modifier-display"><b>{{effect.name}}</b></label>
         <div class="modifier-display">
             {{#each effect.data.stats as |stat index|}}
-                <div>{{stat.stat}} :{{stat.modifier}}</div> 
+                <div>{{localize stat.stat}} :{{stat.modifier}}</div> 
+            {{/each}}
+        </div>
+        <div class="modifier-display">
+            {{#each effect.data.derived as |derived index|}}
+                <div>{{localize derived.derivedStat}} :{{derived.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-display">
