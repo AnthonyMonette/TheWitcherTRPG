@@ -691,5 +691,14 @@
     "WITCHER.Currency.oren" : "Oren",
     "WITCHER.Currency.falsecoin" : "FalseCoin",
     
-    "WITCHER.background.activeEffect" : "Active Effects"
+    "WITCHER.background.activeEffect" : "Active Effects",
+
+    "WITCHER.Spell.CreateTemplate": "Create a Template",
+    "WITCHER.Spell.meters": "m",
+    "WITCHER.Spell.Size" : "Size",
+    "WITCHER.Spell.Type" : "Type",
+    "WITCHER.Spell.Square": "Square",
+    "WITCHER.Spell.Circle": "Circle",
+    "WITCHER.Spell.Cone": "Cone",
+    "WITCHER.Spell.Ray": "Ray"
 }

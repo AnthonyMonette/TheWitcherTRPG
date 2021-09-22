@@ -109,21 +109,21 @@
 
         <hr />
         <div class="flex">
-            <label>Create a Template</label>
+            <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
             <input type="checkbox" name="data.createTemplate"  {{checked data.createTemplate}}/>
         </div>
         
         {{#if (eq data.createTemplate true)}}
         <div class="flex">
-            <label><b>Size</b></label>
-            <input class="medium" name="data.templateSize" type="text" value="{{data.templateSize}}"/>(m)
-            <label><b>Type</b></label>
+            <label><b>{{localize "WITCHER.Spell.Size"}}</b></label>
+            <input class="medium" name="data.templateSize" type="text" value="{{data.templateSize}}"/>({{localize "WITCHER.Spell.meters"}})
+            <label><b>{{localize "WITCHER.Spell.Type"}}</b></label>
             <select name="data.templateType">
                 {{#select data.templateType}}
-                <option value="rect">Square</option>
-                <option value="circle">Circle</option>
-                <option value="cone">Cone</option>
-                <option value="ray">Ray</option>
+                <option value="rect">{{localize "WITCHER.Spell.Square"}}</option>
+                <option value="circle">{{localize "WITCHER.Spell.Circle"}}</option>
+                <option value="cone">{{localize "WITCHER.Spell.Cone"}}</option>
+                <option value="ray">{{localize "WITCHER.Spell.Ray"}}</option>
                 {{/select}}
             </select>
         </div>
