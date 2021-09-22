@@ -1007,7 +1007,10 @@
       "preparationTime": "",
       "dificultyCheck": "",
       "danger": "",
-      "liftRequirement": ""
+      "liftRequirement": "",
+      "createTemplate" : false,
+      "templateSize": "",
+      "templateType": ""
     },
     "profession": {
       "definingSkill": {
