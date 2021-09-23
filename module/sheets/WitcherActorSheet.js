@@ -934,6 +934,28 @@ export default class WitcherActorSheet extends ActorSheet {
         messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Requirements")}: </b>${spellItem.data.data.liftRequirement}</div>`
       }
       rollResult.toMessage(messageData)
+
+      let token = this.actor.token;
+      if (token && spellItem.data.data.createTemplate) {
+        let distance = Number(spellItem.data.data.templateSize)
+        let direction = 0
+        if (spellItem.data.data.templateType == "rect") {
+          distance = Math.hypot(Number(spellItem.data.data.templateSize))
+          direction = 45
+        }
+        let templateData = {
+          t: spellItem.data.data.templateType,
+          user: game.user._id,
+          distance: distance,
+          direction: direction,
+          x: token.data.x + (token.data.width * 100) / 2,
+          y: token.data.y  + (token.data.height * 100) / 2,
+          fillColor: game.user.color
+        }
+
+
+        await MeasuredTemplate.create(templateData);
+      }
     }
 
     async _onProfessionRoll(event) {
