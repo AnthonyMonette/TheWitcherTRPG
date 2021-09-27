@@ -369,12 +369,17 @@
     "WITCHER.SkIntDeduction": "Deducción",
     "WITCHER.SkIntEducation": "Cultura",
     "WITCHER.SkIntCommon": "Lengua: Común(2)",
+	"WITCHER.SkIntCommonLable": "Lengua: Común",
     "WITCHER.SkIntElder": "Lengua: Antigua(2)",
+	"WITCHER.SkIntElderLable": "Lengua: Antigua",
     "WITCHER.SkIntDwarven": "Lengua: Enanés (2)",
+	"WITCHER.SkIntDwarvenLable": "Lengua: Enanés",
     "WITCHER.SkIntMonster": "S. de monstruos (2)",
+	"WITCHER.SkIntMonsterLable": "S. de monstruos",
     "WITCHER.SkIntSocialEt": "Etiqueta",
     "WITCHER.SkIntStreet": "Callejeo",
     "WITCHER.SkIntTactics": "Táctica(2)",
+	"WITCHER.SkIntTacticsLable": "Táctica",
     "WITCHER.SkIntTeaching": "Enseñar",
     "WITCHER.SkIntWilderness": "Supervivencia",
 
@@ -408,20 +413,27 @@
     "WITCHER.SkEmpSeduction": "Seducción",
 
     "WITCHER.SkCraAlchemy": "Alquimia (2)",
+	"WITCHER.SkCraAlchemyLable": "Alquimia",
     "WITCHER.SkCraCrafting": "Artesanía (2)",
+	"WITCHER.SkCraCraftingLable": "Artesanía",
     "WITCHER.SkCraDisguise": "Disfraz",
     "WITCHER.SkCraAid": "Primeros auxilios",
     "WITCHER.SkCraForge": "Falsificación",
     "WITCHER.SkCraPick": "Abrir cerraduras",
     "WITCHER.SkCraTrapCraft": "Preparar Trampas (2)",
+	"WITCHER.SkCraTrapCraftLable": "Preparar Trampas",
 
     "WITCHER.SkWillCourage": "Coraje",
     "WITCHER.SkWillHex": "Urdir Maleficios (2)",
+	"WITCHER.SkWillHexLable": "Urdir Maleficios",
     "WITCHER.SkWillIntim": "Intimidar",
     "WITCHER.SkWillSpellcast": "Lanzar Hechizos (2)",
+	"WITCHER.SkWillSpellcastLable": "Lanzar Hechizos",
     "WITCHER.SkWillResistMag": "Resitir magia (2)",
+	"WITCHER.SkWillResistMagLable": "Resitir magia",
     "WITCHER.SkWillResistCoer": "Resist Coacción",
     "WITCHER.SkWillRitCraft": "Elaborar rituales(2)",
+	"WITCHER.SkWillRitCraftLable": "Elaborar rituales",
 
     "WITCHER.Actor.ImprovementPoints": "Puntos de Perfeccionamiento",
     "WITCHER.Actor.CurrentIP":"Actual PP:",
@@ -679,5 +691,16 @@
     "WITCHER.Currency.floren" : "Florín",
     "WITCHER.Currency.crown" : "Corona",
     "WITCHER.Currency.oren" : "Oren",
-    "WITCHER.Currency.falsecoin" : "Moneda falsa"
+    "WITCHER.Currency.falsecoin" : "Moneda falsa",
+	
+	"WITCHER.background.activeEffect" : "Efectos activos",
+
+    "WITCHER.Spell.CreateTemplate": "Crear una plantilla",
+    "WITCHER.Spell.meters": "m",
+    "WITCHER.Spell.Size" : "Alcance",
+    "WITCHER.Spell.Type" : "Tipo",
+    "WITCHER.Spell.Square": "Casillas",
+    "WITCHER.Spell.Circle": "Radio",
+    "WITCHER.Spell.Cone": "Cono",
+    "WITCHER.Spell.Ray": "Rayo"
 }
