@@ -302,7 +302,9 @@ export default class WitcherActorSheet extends ActorSheet {
         if (previousActor) {
           previousActor.deleteOwnedItem(dragData.item._id)
         }
-        this.actor.createEmbeddedDocuments("Item", [dragData.item]);
+        if (dragData.item.data.quantity != 0) {
+          this.actor.createEmbeddedDocuments("Item", [dragData.item]);
+        }
       } else {
         super._onDrop(event, data);
       }
@@ -866,23 +868,41 @@ export default class WitcherActorSheet extends ActorSheet {
           break;
       }
       let staCostTotal = spellItem.data.data.stamina;
+      let customModifier = 0;
+      let isExtraAttack = false
+      let content = `<label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />`
       if (spellItem.data.data.staminaIsVar){
-        const content = `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1>`;
-        let cancel = true
-        let dialogData = {
-          buttons : [[`${game.i18n.localize("WITCHER.Button.Cancel")}`, ()=>{}], 
-          [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
-            let sta = html.find("[name=staCost]")[0].value;
-            staCostTotal = sta
-            cancel = false
-          } ]],
-          title : game.i18n.localize("WITCHER.Spell.MagicCost"),
-          content : content
+        content = `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1> <br />`
+      }
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br />`;
+      let cancel = true
+      let dialogData = {
+        buttons : [
+        [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+          
+          if (spellItem.data.data.staminaIsVar){
+            staCostTotal = html.find("[name=staCost]")[0].value;
+          }
+          customModifier = html.find("[name=customMod]")[0].value;
+          isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
+          cancel = false
+        } ]],
+        title : game.i18n.localize("WITCHER.Spell.MagicCost"),
+        content : content
+      }
+      await buttonDialog(dialogData)
+      if (cancel) {
+        return
+      }
+      let newSta  = this.actor.data.data.derivedStats.sta.value
+      if (isExtraAttack) {
+        newSta -= 3
+        if (newSta < 0) {
+          return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
         }
-        await buttonDialog(dialogData)
-        if (cancel) {
-          return
-        }
+        this.actor.update({ 
+          'data.derivedStats.sta.value': newSta
+        });
       }
       let staCostdisplay = staCostTotal;
       let staFocus = 0 
@@ -895,7 +915,7 @@ export default class WitcherActorSheet extends ActorSheet {
         staCostTotal = 0
       }
 
-      let newSta = this.actor.data.data.derivedStats.sta.value - staCostTotal
+      newSta -= staCostTotal
       if (newSta < 0) {
         return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
       }
@@ -904,7 +924,9 @@ export default class WitcherActorSheet extends ActorSheet {
         'data.derivedStats.sta.value': newSta
       });
       staCostdisplay += `-${staFocus}[Focus]`
-
+	
+      if (customModifier < 0){formula += `${customModifier}`}
+      if (customModifier > 0){formula += `+${customModifier}`}
       let rollResult = new Roll(formula).roll()
       let messageData = {flavor:`<h2>${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
@@ -933,6 +955,14 @@ export default class WitcherActorSheet extends ActorSheet {
       if (spellItem.data.data.liftRequirement) {
         messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Requirements")}: </b>${spellItem.data.data.liftRequirement}</div>`
       }
+
+      if (rollResult.dice[0].results[0].result == 10){  
+        messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>`
+      }
+      else if(rollResult.dice[0].results[0].result == 1) {
+        messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>`
+      }
+
       rollResult.toMessage(messageData)
 
       let token = this.actor.token;
@@ -1061,7 +1091,8 @@ export default class WitcherActorSheet extends ActorSheet {
       <div class="flex">
        <label>${game.i18n.localize("WITCHER.Dialog.DefenseExtra")}: <input type="checkbox" name="isExtraDefense"></label> <br />
       </div>
-      <label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select>`;
+      <label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select>
+      <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customDef" value=0></label> <br />`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
@@ -1076,8 +1107,12 @@ export default class WitcherActorSheet extends ActorSheet {
             label: `${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}`, 
             callback: (html) => {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+              let customDef = html.find("[name=customDef]")[0].value;
               if (isExtraDefense) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
@@ -1087,6 +1122,9 @@ export default class WitcherActorSheet extends ActorSheet {
               let displayFormula = `1d10 + Ref + ${game.i18n.localize("WITCHER.SkRefDodge")}`;
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}</h1><p>${displayFormula}</p>`;
               let rollFormula = `1d10+${stat}+${skill}`;
+              if (customDef != "0") {
+                rollFormula += "+"+customDef;
+              }
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
@@ -1103,6 +1141,9 @@ export default class WitcherActorSheet extends ActorSheet {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
@@ -1128,6 +1169,9 @@ export default class WitcherActorSheet extends ActorSheet {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
@@ -1195,6 +1239,9 @@ export default class WitcherActorSheet extends ActorSheet {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
@@ -1244,6 +1291,9 @@ export default class WitcherActorSheet extends ActorSheet {
               let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
               if (isExtraDefense) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 1
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
@@ -1540,6 +1590,10 @@ export default class WitcherActorSheet extends ActorSheet {
               
               if (isExtraAttack) {
                 let newSta = this.actor.data.data.derivedStats.sta.value - 3
+                
+                if (newSta < 0) {
+                  return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+                }
                 this.actor.update({ 
                   'data.derivedStats.sta.value': newSta
                 });
