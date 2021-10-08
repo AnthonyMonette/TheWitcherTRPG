@@ -1510,6 +1510,9 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     _onItemRoll(event, itemId = null) {
+      
+      let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
+
       if (!itemId){
         itemId = event.currentTarget.closest(".item").dataset.itemId;
       }
@@ -1668,10 +1671,10 @@ export default class WitcherActorSheet extends ActorSheet {
                 let damageFormula = formula;
 
                 if (item.data.data.accuracy < 0){
-                  attFormula += `${item.data.data.accuracy}`
+                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
                 }
                 if (item.data.data.accuracy > 0){
-                  attFormula += `+${item.data.data.accuracy}`
+                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
                 }
                 if (targetOutsideLOS) {attFormula += "-3";}
                 if (outsideLOS) {attFormula += "+3";}
