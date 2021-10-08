@@ -135,6 +135,7 @@
             "max": 0,
             "value": 0,
             "label": "WITCHER.Actor.DerStat.HP",
+            "unmodifiedMax": 0,
             "modifiers": []
           },
           "sta": {

@@ -208,6 +208,9 @@ function updateDerived(actor){
 	let curRes = thisActor.data.data.derivedStats.resolve.max + resTotalModifiers;
 	let curFocus = thisActor.data.data.derivedStats.focus.max + focusTotalModifiers;
 
+	
+	let unmodifiedMaxHp = baseMax * 5
+
 	if (thisActor.data.data.customStat != true){
 		curHp = Math.floor((base * 5 + hpTotalModifiers)/hpDivider)
 		curSta = Math.floor((base * 5 + staTotalModifiers)/staDivider) 
@@ -229,6 +232,7 @@ function updateDerived(actor){
         'data.stats.luck.current': curLuck,
 
 		'data.derivedStats.hp.max': curHp,
+		'data.derivedStats.hp.unmodifiedMax': unmodifiedMaxHp,
 		'data.derivedStats.sta.max': curSta,
 		'data.derivedStats.resolve.max': curRes,
 		'data.derivedStats.focus.max': curFocus,
