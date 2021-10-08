@@ -9,6 +9,7 @@
       "baseActor": {
         "woundTresholdApplied": false,
         "deathStateApplied": false,
+        "deathSaves": 0,
         "currency": {
           "bizant": 0,
           "ducat": 0,

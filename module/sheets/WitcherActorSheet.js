@@ -196,6 +196,9 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".enhancement-weapon-slot").on("click", this._chooseEnhancement.bind(this));
       html.find(".enhancement-armor-slot").on("click", this._chooseEnhancement.bind(this));
 
+      html.find(".death-minus").on("click", this._removeDeathSaves.bind(this));
+      html.find(".death-plus").on("click", this._addDeathSaves.bind(this));
+
       html.find("input").focusin(ev => this._onFocusIn(ev));
       
       
@@ -278,6 +281,15 @@ export default class WitcherActorSheet extends ActorSheet {
       this._dragDrop.push(newDragDrop);
     }
 
+    async _removeDeathSaves(event) {
+      event.preventDefault();
+      this.actor.update({ "data.deathSaves": 0 });
+    }
+    async _addDeathSaves(event) {
+      event.preventDefault();
+      this.actor.update({ "data.deathSaves": this.actor.data.data.deathSaves + 1 });
+    }
+    
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
@@ -1060,7 +1072,8 @@ export default class WitcherActorSheet extends ActorSheet {
       if(stunBase > 10){
         stunBase = 10;
       }
-
+      stunBase -= this.actor.data.data.deathSaves
+      
       let messageData = {flavor: `
       <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
       <div class="roll-summary">
