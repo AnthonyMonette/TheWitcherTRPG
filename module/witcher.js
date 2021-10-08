@@ -316,6 +316,7 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			stat = thisActor.data.data.stats.will.current;
 			break;
 	}
+	let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
 
 	skillName = array[0];
 	skill = array[1];
@@ -324,16 +325,16 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			speaker: {alias: thisActor.name},
 			flavor: `${parentStat}: ${skillName} Check`,
 	}
-	let rollFormula = `1d10+${stat}+${skill}`
+	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]` ;
 
 	if (array[2]) {
 		let totalModifiers = 0;
 		array[2].forEach(item => totalModifiers += Number(item.value));
         if (totalModifiers < 0){
-			rollFormula += `${totalModifiers}`
+			rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
 		}
 		if (totalModifiers > 0){
-			rollFormula += `+${totalModifiers}`
+			rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
 		}
 	}
 
@@ -341,14 +342,14 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	activeEffects.forEach(item => 
 		item.data.data.skills.forEach(skill => {
 			if (skillName == game.i18n.localize(skill.skill)){
-				if (skill.modifier.includes("/")){rollFormula += `/${Number(skill.modifier.replace("/", ''))}`}
-				else {rollFormula += `+${skill.modifier}`}
+				if (skill.modifier.includes("/")){rollFormula += !displayRollDetails ? `/${Number(skill.modifier.replace("/", ''))}` : `/${Number(skill.modifier.replace("/", ''))}[${item.name}]`}
+				else {rollFormula += !displayRollDetails ? `+${skill.modifier}` : `+${skill.modifier}[${item.name}]`}
 			}
 		}));
 
 	let armorEnc = getArmorEcumbrance(thisActor)
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){
-		rollFormula += `-${armorEnc}`
+		rollFormula += !displayRollDetails ? `-${armorEnc}`: `-${armorEnc}[${game.i18n.localize("WITCHER.Armor.EncumbranceValue")}]`
 	}
 	new Dialog({
 		title: `${game.i18n.localize("WITCHER.Dialog.Skill")}: ${skillName}`, 
@@ -358,12 +359,11 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 			label: game.i18n.localize("WITCHER.Button.Continue"), 
 			callback: (html) => {
 				let customAtt = html.find("[name=customModifiers]")[0].value;
-				
 				if (customAtt < 0){
-					rollFormula += `${customAtt}`
+					rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 				if (customAtt > 0){
-					rollFormula += `+${customAtt}`
+					rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 
 				let roll = new Roll(rollFormula).roll()
