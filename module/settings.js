@@ -8,4 +8,13 @@ export const registerSettings = function() {
         type: Boolean,
         default: false
       });
+    // Register any custom system settings here
+    game.settings.register("TheWitcherTRPG", "displayRollsDetails", {
+        name: "WITCHER.Settings.displayRollDetails",
+        hint: "WITCHER.Settings.displayRollDetailsHint",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
+      });
 }

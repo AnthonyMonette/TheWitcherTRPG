@@ -205,3 +205,8 @@ input.right-value {
 .effect-column {
     flex: 1;
 }
+
+.death {
+    color: red;
+    width: 14px;
+}

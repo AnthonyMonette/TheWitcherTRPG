@@ -109,10 +109,23 @@
                 <a class="button-roll defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
             </div>
         </div>
+        <div>
+            <a class="death-minus"><i class="fas fa-minus"></i></a>
+            {{#if (gt data.deathSaves 0)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 0)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 1)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 1)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 2)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 2)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 3)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 3)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 4)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 4)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 5)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 5)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 6)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 6)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 7)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 7)}}<i class="fas fa-skull"></i>-{{/unless}}
+            {{#if (gt data.deathSaves 8)}}<i class="death fas fa-skull-crossbones"></i>-{{/if}}{{#unless (gt data.deathSaves 8)}}<i class="fas fa-skull"></i>-{{/unless}}
+            <a class="death-plus"><i class="fas fa-plus"></i></a>
+        </div>
         <div class="right-bottom">
             <div class="right-row">
                 <div class="right-element">
-                    <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})</label>
+                    <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})/{{data.derivedStats.hp.unmodifiedMax}}</label>
                     {{#if data.deathStateApplied}}
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-dead.png"/>
                     {{/if}}

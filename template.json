@@ -9,6 +9,7 @@
       "baseActor": {
         "woundTresholdApplied": false,
         "deathStateApplied": false,
+        "deathSaves": 0,
         "currency": {
           "bizant": 0,
           "ducat": 0,
@@ -134,6 +135,7 @@
             "max": 0,
             "value": 0,
             "label": "WITCHER.Actor.DerStat.HP",
+            "unmodifiedMax": 0,
             "modifiers": []
           },
           "sta": {
