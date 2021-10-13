@@ -76,6 +76,8 @@ export default class WitcherActorSheet extends ActorSheet {
       data.races = data.items.filter(function(item) {return item.type=="race"});
       data.race = data.races[0];
 
+      data.bags = data.items.filter(function(item) {return item.type=="container"});
+
       Array.prototype.sum = function (prop) {
         var total = 0
         for ( var i = 0, _len = this.length; i < _len; i++ ) {

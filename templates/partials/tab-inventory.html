@@ -334,6 +334,35 @@
             </tbody>
             {{/each}}
         </table>
+        <h2>Bags<a class="add-item" data-itemType="container"><i class="fas fa-plus"></i></a></h2>
+        <table class="diagram-table">
+            {{#each bags as |container id|}}
+            <tbody class="item" data-item-id="{{container._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                        </div>
+                    </td>
+                    <td><img src="{{container.img}}" class="item-img dragable" draggable="true" data-id="{{container._id}}"/></td></td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3" >
+                        <div class="flex">
+                            {{#if (gte container.data.holding container.data.maxCarryingCapacity)}}
+                            <div class="weightbar-overweight"></div>
+                            {{/if}}    
+                            {{#if (lt container.data.holding container.data.maxCarryingCapacity)}}
+                            <progress class="weightbar" value="{{container.data.holding}}" max="{{container.data.maxCarryingCapacity}}"></progress>
+                            {{/if}}  
+                            <span>{{container.data.holding}}/{{container.data.maxCarryingCapacity}} </span>
+                        </div>
+                    </td>  
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
         <h2>{{localize  "WITCHER.Inventory.Diagrams"}} <a class="add-item" data-itemType="diagrams"><i class="fas fa-plus"></i></a></h2>
         <table class="diagram-table">
             <tr> 
@@ -442,7 +471,7 @@
     </div>
     <div class="component-section">
         <div>
-            {{> "systems/TheWitcherTRPG/templates/partials/substances.html"}}
+{{> "systems/TheWitcherTRPG/templates/partials/substances.html"}}
         </div>
         <div class="components">
             <h2>{{localize  "WITCHER.Inventory.Components"}} <a class="add-item" data-itemType="component"><i class="fas fa-plus"></i></a></h2>
