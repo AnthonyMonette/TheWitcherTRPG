@@ -298,6 +298,9 @@
                     <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
                 </tr>
                 <tr class="item-info hidden">
+                    {{#if (eq type "enhancement")}}
+                    <td colspan="4"></td>
+                    {{/if}}
                     {{#if (eq type "valuable")}}
                     <td colspan="4"><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Description"}} :</b></label> <div>{{valuable.data.description}}</div></div></td>
                     {{/if}}
@@ -328,6 +331,7 @@
                         <div>
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                             <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                            <a class="item-bag"><i class="fas fa-shopping-bag"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -341,11 +345,20 @@
                 <tr>
                     <td>
                         <div class="flex">
-                            <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>
                     <td><img src="{{container.img}}" class="item-img dragable" draggable="true" data-id="{{container._id}}"/></td></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" /></td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{container.name}}" placeholder="name" /></td>
+                    <td>
+                        {{#unless container.data.itemsDisplayed}}
+                        <a class="bag-display-items"><i class="fas fa-chevron-right"></i></a></div>
+                        {{/unless}}
+                        {{#if container.data.itemsDisplayed}}
+                        <a class="bag-display-items"><i class="fas fa-chevron-down"></i></a></div>
+                        {{/if}}
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="3" >

@@ -274,6 +274,7 @@ export default class WitcherActorSheet extends ActorSheet {
         ev.originalEvent.dataTransfer.setData(
           "text/plain",
           JSON.stringify({
+            owner: this.actor,
             item: item,
             type: "itemDrop",
             }),
@@ -300,14 +301,11 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
-        let previousActor = null
-        game.actors.forEach(actor => {
-          actor.items.forEach(item => {
-              if(dragData.item._id == item._id) {
-                previousActor = actor
-              }
-          });
-        });
+        let previousActor = game.actors.get(dragData.owner._id);
+        if (previousActor && previousActor.id == this.actor.id) {
+          return 
+        }
+
         if (typeof(dragData.item.data.quantity) === 'string' && dragData.item.data.quantity.includes("d")){
           let messageData = {
             speaker: {alias: this.actor.name},

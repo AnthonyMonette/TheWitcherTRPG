@@ -865,7 +865,8 @@
       "templates": ["base"],
       "carryingItems": [],
       "maxCarryingCapacity": 0,
-      "holding": 0
+      "holding": 0,
+      "itemsDisplayed" : false
     },
     "valuable": {
       "templates": ["base"],
