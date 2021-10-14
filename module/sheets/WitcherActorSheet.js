@@ -204,10 +204,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-minus").on("click", this._removeDeathSaves.bind(this));
       html.find(".death-plus").on("click", this._addDeathSaves.bind(this));
 
-      html.find("input").focusin(ev => this._onFocusIn(ev));
-
-      html.find(".attack-modifier-toggle").on("click", this._onAttackModifiersToggle.bind(this));
-      
+      html.find("input").focusin(ev => this._onFocusIn(ev));      
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
@@ -894,14 +891,13 @@ export default class WitcherActorSheet extends ActorSheet {
       let isExtraAttack = false
       let content = `<label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />`
       if (spellItem.data.data.staminaIsVar){
-        content = `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1> <br />`
+        content += `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1> <br />`
       }
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br />`;
       let cancel = true
       let dialogData = {
         buttons : [
         [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
-          
           if (spellItem.data.data.staminaIsVar){
             staCostTotal = html.find("[name=staCost]")[0].value;
           }
@@ -950,7 +946,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       let rollResult = new Roll(formula).roll()
-      let messageData = {flavor:`<h2>${spellItem.name}</h2>
+      let messageData = {flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
           <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`}
       if (spellItem.data.data.range) {
@@ -978,6 +974,11 @@ export default class WitcherActorSheet extends ActorSheet {
         messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Requirements")}: </b>${spellItem.data.data.liftRequirement}</div>`
       }
 
+      if (spellItem.data.data.causeDamages) {
+        let effects = JSON.stringify(spellItem.data.data.effects)
+        messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.data.data.damage}" data-location="random" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+      }
+      
       if (rollResult.dice[0].results[0].result == 10){  
         messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
       }
@@ -1509,16 +1510,6 @@ export default class WitcherActorSheet extends ActorSheet {
 
     _onFocusIn(event) {
       event.currentTarget.select();
-    }
-
-    async _onAttackModifiersToggle(event) {
-      console.log("test")
-      var x = document.getElementById("attackModifiers");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
     }
 
     _onItemRoll(event, itemId = null) {

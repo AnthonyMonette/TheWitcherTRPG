@@ -11,6 +11,7 @@
 }
 
 .char-skill a {
+    font-size: 12px;
     display: flex;
     background-color: darkred;
     border-radius: 12px;

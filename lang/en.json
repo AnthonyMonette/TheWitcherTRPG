@@ -497,7 +497,7 @@
     "WITCHER.Monster.WitcherKnowledge": "Witcher Knowledge: Monster Lore DC: ",
 
     "WITCHER.Monster.SkillTab": "Skills",
-    "WITCHER.Monster.InventryTab": "Attacks/Loot",
+    "WITCHER.Monster.InventryTab": "Att/Loot",
     "WITCHER.Monster.DetailsTab": "Details",
     "WITCHER.Monster.SpellsTab": "Spells",
 
@@ -708,5 +708,9 @@
     "WITCHER.Settings.modifiers": "Modifiers",
 
     "WITCHER.Resources.modifiers": "Resources Modifiers",
-    "WITCHER.Weapon.onlyDmg": "Roll Only Damages"
+    "WITCHER.Weapon.onlyDmg": "Roll Only Damages",
+
+    "WITCHER.Spell.Damage": "Cause Damages",
+    "WITCHER.Damage.RemoveSP": "Remove SP before applying location modifier.",
+    "WITCHER.Effect.Rolled": "Rolled"
 }
