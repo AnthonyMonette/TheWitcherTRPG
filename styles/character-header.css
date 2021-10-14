@@ -210,3 +210,8 @@ input.right-value {
     color: red;
     width: 14px;
 }
+
+.death-section {
+    display: flex;
+    justify-content: center;
+}

@@ -1013,7 +1013,14 @@
       "liftRequirement": "",
       "createTemplate" : false,
       "templateSize": "",
-      "templateType": ""
+      "templateType": "",
+      "causeDamages": false,
+      "damage": "",
+      "effects": [{
+          "id": "first",
+          "name": "effect"
+        }
+      ]
     },
     "profession": {
       "definingSkill": {

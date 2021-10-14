@@ -51,31 +51,68 @@ function onDamage(event) {
     let img = event.currentTarget.getAttribute("data-img")
     let name = event.currentTarget.getAttribute("data-name")
     let damageFormula = event.currentTarget.getAttribute("data-dmg")
-    let location = event.currentTarget.getAttribute("data-location")
-    let locationFormula = event.currentTarget.getAttribute("data-location-formula")
-    let strike = event.currentTarget.getAttribute("data-strike")
+    let touchedLocation = event.currentTarget.getAttribute("data-location")
+    let locationFormula = ""
+    let strike = ""
+    if (touchedLocation != "random") {
+      locationFormula = event.currentTarget.getAttribute("data-location-formula")
+      strike = event.currentTarget.getAttribute("data-strike")
+    } else {
+      let randomHumanLocation = getRandomInt(10)
+      switch(randomHumanLocation){
+        case 1:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
+          locationFormula = `*3`;
+          break;
+        case 2:
+        case 3:
+        case 4:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+          break;
+        case 5:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+          locationFormula = `*0.5`;
+          break;
+        case 6:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+          locationFormula = `*0.5`;
+          break;
+        case 7:
+        case 8:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+          locationFormula = `*0.5`;
+          break;
+        case 9:
+        case 10:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+          locationFormula = `*0.5`;
+          break;
+        default:
+          touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+      }
+    }
     let effects = JSON.parse(event.currentTarget.getAttribute("data-effects"))
-    rollDamage(img, name, damageFormula, location, locationFormula, strike, effects);
+    rollDamage(img, name, damageFormula, touchedLocation, locationFormula, strike, effects);
 
 }
 
 export async function rollDamage(img, name, damageFormula, location, locationFormula, strike, effects) {
   let messageData = {}
-  messageData.flavor = `<h1><img src="${img}" class="item-img" />Damage: ${name} </h1>`;
+  messageData.flavor = `<h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
 
   if (strike == "strong") {
     damageFormula = `(${damageFormula})*2`;
-    messageData.flavor += `<div>Strong Attack</div>`;
+    messageData.flavor += `<div>${game.i18n.localize("WITCHER.Dialog.strikeStrong")}</div>`;
   }
-  messageData.flavor += `<div><b>Location:</b> ${location} = ${locationFormula} </div>`;
-  messageData.flavor += `<div>Remove SP before applying location modifier.</div>`;
+  messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.attackLocation")}:</b> ${location} = ${locationFormula} </div>`;
+  messageData.flavor += `<div>${game.i18n.localize("WITCHER.Damage.RemoveSP")}</div>`;
   if (effects) {
-    messageData.flavor += `<b>Effects:</b>`;
+    messageData.flavor += `<b>${game.i18n.localize("WITCHER.Item.Effect")}:</b>`;
     effects.forEach(element => {
       messageData.flavor += `<div class="flex">${element.name}`;
       if (element.percentage) {
         let rollPercentage = getRandomInt(100);
-        messageData.flavor += `<div>(${element.percentage}%) <b>Rolled:</b> ${rollPercentage}</div>`;
+        messageData.flavor += `<div>(${element.percentage}%) <b>${game.i18n.localize("WITCHER.Effect.Rolled")}:</b> ${rollPercentage}</div>`;
       }
       messageData.flavor += `</div>`;
     });
