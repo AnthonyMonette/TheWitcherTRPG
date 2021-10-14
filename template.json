@@ -1116,6 +1116,7 @@
       }
     },
     "effect": {
+      "description": "",
       "stats" : [{
         "id": "first",
         "stat": "",
