@@ -368,10 +368,10 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 
 				let roll = new Roll(rollFormula).roll()
 				if (roll.dice[0].results[0].result == 10){  
-				  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+				  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
 				};
 				if (roll.dice[0].results[0].result == 1){  
-				  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+				  messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
 				};
 				roll.toMessage(messageData);
 			}
