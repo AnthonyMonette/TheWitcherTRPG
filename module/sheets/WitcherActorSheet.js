@@ -204,10 +204,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-minus").on("click", this._removeDeathSaves.bind(this));
       html.find(".death-plus").on("click", this._addDeathSaves.bind(this));
 
-      html.find("input").focusin(ev => this._onFocusIn(ev));
-
-      html.find(".attack-modifier-toggle").on("click", this._onAttackModifiersToggle.bind(this));
-      
+      html.find("input").focusin(ev => this._onFocusIn(ev));      
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
@@ -1509,16 +1506,6 @@ export default class WitcherActorSheet extends ActorSheet {
 
     _onFocusIn(event) {
       event.currentTarget.select();
-    }
-
-    async _onAttackModifiersToggle(event) {
-      console.log("test")
-      var x = document.getElementById("attackModifiers");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
     }
 
     _onItemRoll(event, itemId = null) {
