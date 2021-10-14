@@ -2,6 +2,7 @@ import { getRandomInt } from "./witcher.js";
 
 export function addChatListeners(html){
     html.on('click',"button.damage", onDamage)
+    html.on('click',"a.crit-roll", onCritRoll)
 }
 
 /*
@@ -41,6 +42,10 @@ export async function buttonDialog(data)
   });
 }
 
+function onCritRoll(event) {
+  let rollResult = new Roll("1d10x10").roll()
+  rollResult.toMessage()
+}
 
 function onDamage(event) {
     let messageData = {}

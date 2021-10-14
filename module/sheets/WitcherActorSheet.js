@@ -205,6 +205,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-plus").on("click", this._addDeathSaves.bind(this));
 
       html.find("input").focusin(ev => this._onFocusIn(ev));
+
+      html.find(".attack-modifier-toggle").on("click", this._onAttackModifiersToggle.bind(this));
       
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
@@ -977,10 +979,10 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       if (rollResult.dice[0].results[0].result == 10){  
-        messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>`
+        messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
       }
-      else if(rollResult.dice[0].results[0].result == 1) {
-        messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>`
+      else if(rollResult.dice[0].results[0].result == 1) {  
+        messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
       }
 
       rollResult.toMessage(messageData)
@@ -1058,10 +1060,10 @@ export default class WitcherActorSheet extends ActorSheet {
       let rollResult = new Roll(rollFormula).roll()
       let messageData = {flavor: `<h2>${name}</h2>${effet}`}
       if (rollResult.dice[0].results[0].result == 10){  
-        messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>`
+        messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
       }
-      else if(rollResult.dice[0].results[0].result == 1) {
-        messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>`
+      else if(rollResult.dice[0].results[0].result == 1) {  
+        messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
       }
       rollResult.toMessage(messageData)
     }
@@ -1152,10 +1154,10 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
-                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
               if (roll.dice[0].results[0].result == 1){  
-                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
               };
               roll.toMessage(messageData);
             }
@@ -1186,10 +1188,10 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
-                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
               if (roll.dice[0].results[0].result == 1){  
-                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
               };
               roll.toMessage(messageData);
             }
@@ -1266,10 +1268,10 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
-                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
               if (roll.dice[0].results[0].result == 1){  
-                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
               };
               roll.toMessage(messageData);
             }
@@ -1328,10 +1330,10 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
-                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
               if (roll.dice[0].results[0].result == 1){  
-                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
               };
               roll.toMessage(messageData);
             }
@@ -1390,10 +1392,10 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
-                messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
               if (roll.dice[0].results[0].result == 1){  
-                messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
               };
               roll.toMessage(messageData);
             }
@@ -1509,6 +1511,16 @@ export default class WitcherActorSheet extends ActorSheet {
       event.currentTarget.select();
     }
 
+    async _onAttackModifiersToggle(event) {
+      console.log("test")
+      var x = document.getElementById("attackModifiers");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
     _onItemRoll(event, itemId = null) {
       
       let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
@@ -1544,7 +1556,7 @@ export default class WitcherActorSheet extends ActorSheet {
       `;
 
       const AttackModifierOptions = `
-      <div class="flex">
+      <div id="attackModifiers" class="flex">
         <div>
           <label><input type="checkbox" name="outsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
           <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackisFastDraw")}</label> <br />
@@ -1587,12 +1599,18 @@ export default class WitcherActorSheet extends ActorSheet {
                      <div class="flex">
                       <label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />
                      </div>
+                     <script>
+                     function myFunction() {
+                       var x = document.getElementById("attackModifiers");
+                       x.style.display = x.style.display === "none" ? "block" : "none";
+                     }
+                     </script
                      <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}:</label> <br />${AttackModifierOptions}
                      <label>${game.i18n.localize("WITCHER.Dialog.attackSize")}: <select name="size">${opponentSizeOptions}</select></label> <br />
                      <label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> <br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
                      <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br /><br />
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                      <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
                      <label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
                      <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />
@@ -1870,10 +1888,10 @@ export default class WitcherActorSheet extends ActorSheet {
                 messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
-                  messageData.flavor += `<div class="dice-sucess">${game.i18n.localize("WITCHER.Crit")}</div>  `;
+                  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
                 };
                 if (roll.dice[0].results[0].result == 1){  
-                  messageData.flavor += `<div class="dice-fail">${game.i18n.localize("WITCHER.Fumble")}</div>  `;
+                  messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
                 };
                 roll.toMessage(messageData);
               }
