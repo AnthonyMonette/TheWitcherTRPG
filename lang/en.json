@@ -637,11 +637,11 @@
     "WITCHER.Dialog.sizeHuge": "Huge",
 
     "WITCHER.Dialog.rangeNone": "None",
-    "WITCHER.Dialog.rangePointBlank": "Point Blank",
-    "WITCHER.Dialog.rangeClose": "Close",
-    "WITCHER.Dialog.rangeMedium": "Medium",
-    "WITCHER.Dialog.rangeLong": "Long",
-    "WITCHER.Dialog.rangeExtreme": "Extreme",
+    "WITCHER.Dialog.rangePointBlank": "Point Blank (<2m)",
+    "WITCHER.Dialog.rangeClose": "Close (1/4 Range)",
+    "WITCHER.Dialog.rangeMedium": "Medium (1/2 Range)",
+    "WITCHER.Dialog.rangeLong": "Long (Full Range)",
+    "WITCHER.Dialog.rangeExtreme": "Extreme (2x Range)",
     
     "WITCHER.Dialog.strikeNormal": "Normal Strike",
     "WITCHER.Dialog.strikeFast": "Fast Strike",
@@ -655,7 +655,7 @@
     "WITCHER.Dialog.attackSize": " Opponent Size Modifiers",
     "WITCHER.Dialog.attackRange": "Range Modifiers",
     "WITCHER.Dialog.attackCustom": "Custom Modifiers",
-    "WITCHER.Dialog.attackStrike": " Strike type",
+    "WITCHER.Dialog.attackStrike": "Strike type",
     "WITCHER.Dialog.attackDamage": "damage",
     "WITCHER.Dialog.attackMeleeBonus": " Melee Bonus",
     "WITCHER.Dialog.attackCustomDmg": "Custom Damage Modifiers",
@@ -705,5 +705,8 @@
     "WITCHER.Settings.displayRollDetails": "Display roll's details",
     "WITCHER.Settings.displayRollDetailsHint": "Display details when rolling dice : 1d10+2[stat]+4[skill]-3[parry]",
     "WITCHER.Settings.Custom": "Custom",
-    "WITCHER.Settings.modifiers": "Modifiers"
+    "WITCHER.Settings.modifiers": "Modifiers",
+
+    "WITCHER.Resources.modifiers": "Resources Modifiers",
+    "WITCHER.Weapon.onlyDmg": "Roll Only Damages"
 }
