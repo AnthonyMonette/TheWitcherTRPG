@@ -1442,7 +1442,7 @@ export default class WitcherActorSheet extends ActorSheet {
             statName = "WITCHER.StWill";
             break;
         case "luck":
-            statValue = this.actor.data.data.stats.int.current;
+            statValue = this.actor.data.data.stats.luck.current;
             statName = "WITCHER.StLuck";
             break;
       }
@@ -1557,29 +1557,19 @@ export default class WitcherActorSheet extends ActorSheet {
 
       const AttackModifierOptions = `
       <div id="attackModifiers" class="flex">
-        <div>
-          <label><input type="checkbox" name="outsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
-          <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackisFastDraw")}</label> <br />
-          <label><input type="checkbox" name="isProne">${game.i18n.localize("WITCHER.Dialog.attackisProne")}</label> <br />
-          <label><input type="checkbox" name="isPinned"> ${game.i18n.localize("WITCHER.Dialog.attackisPinned")}</label> <br />
-          <label><input type="checkbox" name="isActivelyDodging"> ${game.i18n.localize("WITCHER.Dialog.attackisActivelyDodging")}</label> <br />
-          <label><input type="checkbox" name="isMoving"> ${game.i18n.localize("WITCHER.Dialog.attackisMoving")}</label> <br />
-        </div>
-        <div>
-          <label><input type="checkbox" name="targetOutsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attacktargetOutsideLOS")}</label> <br />
-          <label><input type="checkbox" name="isAmbush"> ${game.i18n.localize("WITCHER.Dialog.attackisAmbush")}</label> <br />
-          <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
-          <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
-          <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
-          <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input class="small" name="customAim" value=0> <br />
-        </div>
-      </div>
-      `;
-      const opponentSizeOptions = `
-      <option value="medium"> ${game.i18n.localize("WITCHER.Dialog.sizeMedium")} </option>
-      <option value="small"> ${game.i18n.localize("WITCHER.Dialog.sizeSmall")}</option>
-      <option value="large"> ${game.i18n.localize("WITCHER.Dialog.sizeLarge")} </option>
-      <option value="huge"> ${game.i18n.localize("WITCHER.Dialog.sizeHuge")} </option>
+        <label><input type="checkbox" name="outsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
+        <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackisFastDraw")}</label> <br />
+        <label><input type="checkbox" name="isProne">${game.i18n.localize("WITCHER.Dialog.attackisProne")}</label> <br />
+        <label><input type="checkbox" name="isPinned"> ${game.i18n.localize("WITCHER.Dialog.attackisPinned")}</label> <br />
+        <label><input type="checkbox" name="isActivelyDodging"> ${game.i18n.localize("WITCHER.Dialog.attackisActivelyDodging")}</label> <br />
+        <label><input type="checkbox" name="isMoving"> ${game.i18n.localize("WITCHER.Dialog.attackisMoving")}</label> <br />
+        <label><input type="checkbox" name="targetOutsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attacktargetOutsideLOS")}</label> <br />
+        <label><input type="checkbox" name="isAmbush"> ${game.i18n.localize("WITCHER.Dialog.attackisAmbush")}</label> <br />
+        <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
+        <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
+        <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
+        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input class="small" name="customAim" value=0> <br />
+    </div>
       `;
       const rangeOptions = `
       <option value="none"> ${game.i18n.localize("WITCHER.Dialog.rangeNone")} </option>
@@ -1605,16 +1595,17 @@ export default class WitcherActorSheet extends ActorSheet {
                        x.style.display = x.style.display === "none" ? "block" : "none";
                      }
                      </script
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackSize")}: <select name="size">${opponentSizeOptions}</select></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
-                     <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
-                     <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />
-                     `;
+                     <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />`
+      if (item.data.data.range) {
+        content += `<label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> ${item.data.data.range}<br />`
+      }
+
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
+                  <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />`;
 
       if (!item.data.data.isMelee){
         let ammunitions = this.actor.items.filter(function(item) {return item.data.type=="weapon" &&  item.data.data.isAmmo});
@@ -1662,8 +1653,7 @@ export default class WitcherActorSheet extends ActorSheet {
               let isAiming = html.find("[name=isAiming]").prop("checked");
               let customAim = html.find("[name=customAim]")[0].value;
 
-              let size = html.find("[name=size]")[0].value;
-              let range = html.find("[name=range]")[0].value;
+              let range = item.data.data.range ? html.find("[name=range]")[0].value: null;
               let customAtt = html.find("[name=customAtt]")[0].value;
               let strike = html.find("[name=strike]")[0].value;
 
@@ -1710,58 +1700,55 @@ export default class WitcherActorSheet extends ActorSheet {
 
                 switch(item.data.data.attackSkill){
                   case "Brawling":
-                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.brawling.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.brawling.value}`:
+                      `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.brawling.value}[${game.i18n.localize("WITCHER.SkRefBrawling")}]`;
                     break;
                   case "Melee":
-                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.melee.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.melee.value}`:
+                      `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.melee.value}[${game.i18n.localize("WITCHER.SkRefMelee")}]`;
                     break;
                   case "Small Blades":
-                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.smallblades.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.smallblades.value}`:
+                      `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.smallblades.value}[${game.i18n.localize("WITCHER.SkRefSmall")}]`;
                     break;
                   case "Staff/Spear":
-                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.staffspear.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.staffspear.value}`:
+                      `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.staffspear.value}[${game.i18n.localize("WITCHER.SkRefStaff")}]`;
                     break;
                   case "Swordsmanship":
-                    attFormula += `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.swordsmanship.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.swordsmanship.value}`:
+                      `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordmanship")}]`;
                     break;
                   case "Archery":
-                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.archery.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.archery.value}`:
+                      `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.archery.value}[${game.i18n.localize("WITCHER.SkDexArchery")}]`;
                     break;
                   case "Athletics":
-                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.athletics.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.athletics.value}`:
+                      `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.athletics.value}[${game.i18n.localize("WITCHER.SkDexAthletics")}]`;
                     break;
                   case "Crossbow":
-                    attFormula += `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.crossbow.value}`;
+                    attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.crossbow.value}`:
+                    `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.crossbow.value}[${game.i18n.localize("WITCHER.SkDexCrossbow")}]`;
                     break;
                 }
 
                 if (customAtt != "0") {
-                  attFormula += "+"+customAtt;
-                }
-                switch(range){
-                  case "pointBlank":
-                    attFormula = `${attFormula}+5`;
-                    break;
-                  case "medium":
-                    attFormula = `${attFormula}-2`;
-                    break;
-                  case "long":
-                    attFormula = `${attFormula}-4`;
-                    break;
-                  case "extreme":
-                    attFormula = `${attFormula}-6`;
-                    break;
+                  attFormula +=  !displayRollDetails ? `+${customAtt}`:  `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
                 }
 
-                switch(size){
-                  case "small":
-                    attFormula = `${attFormula}+2`;
+                switch(range){
+                  case "pointBlank":
+                    attFormula = !displayRollDetails ? `${attFormula}+5`: `${attFormula}+5[${game.i18n.localize("WITCHER.Weapon.Range")}]`;
                     break;
-                  case "large":
-                    attFormula = `${attFormula}-2`;
+                  case "medium":
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Weapon.Range")}]`;
                     break;
-                  case "huge":
-                    attFormula = `${attFormula}-4`;
+                  case "long":
+                    attFormula = !displayRollDetails ? `${attFormula}-4`: `${attFormula}-4[${game.i18n.localize("WITCHER.Weapon.Range")}]`;
+                    break;
+                  case "extreme":
+                    attFormula = !displayRollDetails ? `${attFormula}-6`: `${attFormula}-6[${game.i18n.localize("WITCHER.Weapon.Range")}]`;
                     break;
                 }
                 
@@ -1838,31 +1825,31 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                   case "head":
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
-                    attFormula = `${attFormula}-6`;
+                    attFormula = !displayRollDetails ? `${attFormula}-6`:  `${attFormula}-6[${game.i18n.localize("WITCHER.Armor.Location")}]` ;
                     LocationFormula = `*3`;
                     break;
                   case "torso":
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
-                    attFormula = `${attFormula}-1`;
+                    attFormula = !displayRollDetails ? `${attFormula}-1`: `${attFormula}-1[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     break;
                   case "arm":
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
-                    attFormula = `${attFormula}-3`;
+                    attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
                   case "leg":
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
-                    attFormula = `${attFormula}-2`;
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
                   case "tail":
                     touchedLocation = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
-                    attFormula = `${attFormula}-2`;
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
                 }
                 if (strike == "joint" || strike == "strong") {
-                  attFormula = `${attFormula}-3`;
+                  attFormula = !displayRollDetails ? `${attFormula}-3`:  `${attFormula}-3[${game.i18n.localize("WITCHER.Dialog.attackStrike")}]`;
                 }
 
                 let allEffects = item.data.data.effects
