@@ -890,7 +890,8 @@
       "enhancements": 0,
       "enhancementItems": [],
       "rateOfFire":1,
-      "attackSkill": ""
+      "attackSkill": "",
+      "rollOnlyDmg": false
     },
     "armor": {
       "templates": ["base"],

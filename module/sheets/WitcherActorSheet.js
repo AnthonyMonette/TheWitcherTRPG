@@ -1,4 +1,4 @@
-import { buttonDialog } from "../chat.js";
+import { buttonDialog, rollDamage } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight} from "../witcher.js";
 
@@ -1893,7 +1893,13 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (roll.dice[0].results[0].result == 1){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
                 };
-                roll.toMessage(messageData);
+
+                if (item.data.data.rollOnlyDmg) {
+                  rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.data.data.effects)
+                }
+                else{
+                  roll.toMessage(messageData);
+                }
               }
             }
           }
