@@ -712,5 +712,8 @@
 
     "WITCHER.Spell.Damage": "Cause Damages",
     "WITCHER.Damage.RemoveSP": "Remove SP before applying location modifier.",
-    "WITCHER.Effect.Rolled": "Rolled"
+    "WITCHER.Effect.Rolled": "Rolled",
+
+    "WITCHER.Settings.specialFont": "Use the witcher special font"
+
 }

@@ -57,6 +57,15 @@ Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 Hooks.once("ready", async function() {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createBoilerplateMacro(data, slot));
+    
+    if (game.settings.get("TheWitcherTRPG", "useWitcherFont")) {
+        let els = document.getElementsByClassName("game")
+        Array.prototype.forEach.call(els, function(el) {
+            if (el) {el.classList.add("witcher-style")}
+        });
+        let chat = document.getElementById("chat-log")
+        if (chat) {chat.classList.add("witcher-style")}
+    }
   });
 
 /**
