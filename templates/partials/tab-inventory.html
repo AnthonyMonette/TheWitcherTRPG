@@ -331,7 +331,7 @@
                         <div>
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                             <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                            <a class="item-bag"><i class="fas fa-shopping-bag"></i></a>
+                            <a class="item-store"><i class="fas fa-shopping-bag"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -341,7 +341,7 @@
         <h2>Bags<a class="add-item" data-itemType="container"><i class="fas fa-plus"></i></a></h2>
         <table class="diagram-table">
             {{#each bags as |container id|}}
-            <tbody class="item" data-item-id="{{container._id}}">
+            <tbody class="item container" data-item-id="{{container._id}}">
                 <tr>
                     <td>
                         <div class="flex">
@@ -360,6 +360,15 @@
                         {{/if}}
                     </td>
                 </tr>
+                {{#if container.data.itemsDisplayed}}
+                {{#each container.items as | object id|}}
+                <tr class="item" data-item-id="{{object._id}}">
+                    <td></td>
+                    <td><img src="{{object.img}}" class="item-img dragable" draggable="true" data-id="{{object._id}}"/></td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{object.name}}" placeholder="name" /></td>
+                </tr>
+                {{/each}}
+                {{/if}}
                 <tr>
                     <td colspan="3" >
                         <div class="flex">

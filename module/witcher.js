@@ -518,6 +518,20 @@ function getWillSkillMod(actor, skillNum){
 		}
 }
 
+function store_item_in_container(actor, item, container) {
+	let newWeight = container.data.data.holding + item.data.data.weight
+	if (newWeight > container.data.data.maxCarryingCapacity) {
+		console.log("Too Much weight")
+		return
+	}
+	let newItemList = container.data.data.carryingItems
+	newItemList.push(item.id)
+	container.update({'data.holding': newWeight,
+	                  'data.carryingItems': newItemList })
+	item.update({'data.isStored': true })
+}
+
+
 function genId() {
 		// Math.random should be unique because of its seeding algorithm.
 		// Convert it to base 36 (numbers + letters), and grab the first 9 characters
@@ -537,4 +551,4 @@ function calc_currency_weight(currency) {
 	return Number(totalPieces * 0.01)
 }
 
-export { updateDerived, rollSkillCheck, genId, calc_currency_weight};
+export { updateDerived, rollSkillCheck, genId, calc_currency_weight, store_item_in_container};

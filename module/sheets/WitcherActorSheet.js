@@ -1,6 +1,6 @@
 import { buttonDialog } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight} from "../witcher.js";
+import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight, store_item_in_container} from "../witcher.js";
 
 export default class WitcherActorSheet extends ActorSheet {
     /** @override */
@@ -77,6 +77,10 @@ export default class WitcherActorSheet extends ActorSheet {
       data.race = data.races[0];
 
       data.bags = data.items.filter(function(item) {return item.type=="container"});
+      data.bags.forEach(container => {
+        container.items  = data.items.filter(function(item) {return container.data.carryingItems.includes(item._id)})
+      });
+      console.log(data.bags)
 
       Array.prototype.sum = function (prop) {
         var total = 0
@@ -177,6 +181,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
       html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
+      html.find(".bag-display-items").on("click", this._onDisplayStoredItems.bind(this));     
       
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -206,8 +211,9 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-minus").on("click", this._removeDeathSaves.bind(this));
       html.find(".death-plus").on("click", this._addDeathSaves.bind(this));
 
+      html.find(".item-store").on("click", this._onStoreItem.bind(this));
+
       html.find("input").focusin(ev => this._onFocusIn(ev));
-      
       
       html.find("#awareness-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 0)});
       html.find("#business-rollable").on("click", function () {rollSkillCheck(thisActor, 0, 1)});
@@ -1956,8 +1962,15 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
+    _onDisplayStoredItems(event){
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+      item.update({"data.itemsDisplayed": !item.data.data.itemsDisplayed})
+    }
+
+
     _onDerivedModifierDisplay(event){
-      this.actor.update({ 'data.derivedStats.modifiersIsOpened': this.actor.data.data.derivedStats.modifiersIsOpened ? false : true});
+      this.actor.update({ 'data.derivedStats.modifiersIsOpened': !this.actor.data.data.derivedStats.modifiersIsOpened});
     }
 
     _onSkillModifierDisplay(event){
@@ -2086,6 +2099,36 @@ export default class WitcherActorSheet extends ActorSheet {
           break;
       }
     }
+ 
+    _onStoreItem(event){
+      event.preventDefault(); 
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+
+      let containers = this.actor.items.filter(function(item) {return item.type=="container"}); 
+      let containersOptions = ""
+      containers.forEach(item => containersOptions += `<option value="${item._id}">${item.name}</option>`);
+     
+      let content = `<label>${game.i18n.localize("WITCHER.Valueble.Containers")}: </label><select name="form">${containersOptions}</select>`
+
+      new Dialog({
+        title: `${game.i18n.localize("WITCHER.StoreItem.Choose")}`, 
+        content,
+        buttons: {
+          Cancel: {
+            label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+            callback: ()=>{}}, 
+          Apply: {
+            label: `Store`, 
+            callback: (html) => {
+              let containerId = html.find("[name=form]")[0].value;
+              let container = this.actor.items.get(containerId);
+              store_item_in_container(this.actor, item, container)
+          }
+        }
+        }}).render(true) 
+    }
+
 
     calc_total_skills_profession(data){
       let totalSkills = 0;

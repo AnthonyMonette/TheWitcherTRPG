@@ -705,5 +705,7 @@
     "WITCHER.Settings.displayRollDetails": "Display roll's details",
     "WITCHER.Settings.displayRollDetailsHint": "Display details when rolling dice : 1d10+2[stat]+4[skill]-3[parry]",
     "WITCHER.Settings.Custom": "Custom",
-    "WITCHER.Settings.modifiers": "Modifiers"
+    "WITCHER.Settings.modifiers": "Modifiers",
+
+    "WITCHER.StoreItem.Choose": "Choose a Container"
 }

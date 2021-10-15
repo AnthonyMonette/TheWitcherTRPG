@@ -858,7 +858,8 @@
         "quantity": 1,
         "weight": 0,
         "cost": 0,
-        "position": 0
+        "position": 0,
+        "isStored": false
       }
     },
     "container": {
