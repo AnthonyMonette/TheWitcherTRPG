@@ -15,10 +15,6 @@
     src:url('./fonts/thewitcher2.ttf');
 }
 
-.window-content{
-    font-family: Thewitcher;
-}
-
-#chat-log {
+.witcher-style{
     font-family: Thewitcher;
 }
