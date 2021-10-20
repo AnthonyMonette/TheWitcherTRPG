@@ -59,7 +59,7 @@
     {{#each data.effects as |effect name|}}
     <div class="flex list-item"  data-id="{{effect.id}}">
         <a class="remove-effect"><i class="fas fa-minus"></i></a>
-        <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
+<textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>
         <div  class="flex">
             <label>{{localize "WITCHER.Percentage"}}:</label>
             <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>

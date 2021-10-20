@@ -21,6 +21,6 @@ export const registerSettings = function() {
         scope: "world",
         config: true,
         type: Boolean,
-        default: true
+        default: false
       });
 }
