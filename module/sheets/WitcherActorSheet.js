@@ -300,7 +300,7 @@ export default class WitcherActorSheet extends ActorSheet {
         let previousActor = null
         game.actors.forEach(actor => {
           actor.items.forEach(item => {
-              if(dragData.item._id == item._id) {
+              if(dragData.item._id == item.id) {
                 previousActor = actor
               }
           });
@@ -313,16 +313,63 @@ export default class WitcherActorSheet extends ActorSheet {
     
           let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
           dragData.item.data.quantity = Math.floor(roll.roll.total)
-        }
-
-        if (previousActor) {
-          previousActor.deleteOwnedItem(dragData.item._id)
+          this._addItem(this.actor, dragData.item)
+          if (previousActor) {
+            previousActor.deleteOwnedItem(dragData.item._id)
+          }
+          return
         }
         if (dragData.item.data.quantity != 0) {
-          this.actor.createEmbeddedDocuments("Item", [dragData.item]);
+          if (dragData.item.data.quantity > 1) {
+            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
+            let cancel = true
+            let numberOfItem = 0
+            let dialogData = {
+              buttons : [
+              [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+                numberOfItem = html.find("[name=numberOfItem]")[0].value;
+                cancel = false
+              } ]],
+              title : game.i18n.localize("WITCHER.Items.transferTitle"),
+              content : content
+            }
+            await buttonDialog(dialogData)
+            if (cancel) {
+              return
+            }else {
+              let item = previousActor.items.get(dragData.item._id)
+              let newQuantity = dragData.item.data.quantity - numberOfItem
+              if (newQuantity <= 0 ){
+                previousActor.deleteOwnedItem(dragData.item._id)
+              }else {
+                item.update({'data.quantity': newQuantity <0 ? 0 : newQuantity})
+              }
+              if (numberOfItem > dragData.item.data.quantity) {
+                numberOfItem = dragData.item.data.quantity
+              }
+              dragData.item.data.quantity = numberOfItem
+              this._addItem(this.actor, dragData.item)
+            }
+          }else {
+            this._addItem(this.actor, dragData.item)
+            if (previousActor) {
+              previousActor.deleteOwnedItem(dragData.item._id)
+            }
+          }
         }
       } else {
         super._onDrop(event, data);
+      }
+    }
+
+    async _addItem(actor, Additem) {
+      let foundItem = (actor.items).find(item => item.name == Additem.name);
+      console.log(foundItem)
+      if (foundItem){
+        foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(Additem.data.quantity)})
+      }
+      else {
+        actor.createEmbeddedDocuments("Item", [Additem]);
       }
     }
 

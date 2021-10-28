@@ -720,6 +720,8 @@
 
     "WITCHER.SKill.profession": "Prof",
     "WITCHER.SKill.pickup": "Pick",
-    "WITCHER.SKill.learn": "Learn"
+    "WITCHER.SKill.learn": "Learn",
 
+    "WITCHER.Items.transferTitle": "Transfering Items",
+    "WITCHER.Items.transferMany": "How many items to transfer"
 }
