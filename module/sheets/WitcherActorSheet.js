@@ -2185,7 +2185,7 @@ export default class WitcherActorSheet extends ActorSheet {
       for (let element in data.data.skills) {
         for (let skill in data.data.skills[element]) {
           let skillLabel = game.i18n.localize(data.data.skills[element][skill].label)
-          if (skillLabel.includes("(2)")){
+          if (skillLabel?.includes("(2)")){
             totalSkills += data.data.skills[element][skill].value * 2;
           }
           else{
