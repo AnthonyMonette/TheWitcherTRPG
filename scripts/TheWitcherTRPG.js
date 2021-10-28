@@ -68,6 +68,34 @@ Hooks.once("ready", async function() {
     }
   });
 
+  Hooks.once("dragRuler.ready", (SpeedProvider) => {
+    console.log(`test`)
+    class FictionalGameSystemSpeedProvider extends SpeedProvider {
+        get colors() {
+            console.log(`color`)
+            return [
+                {id: "walk", default: 0x00FF00, name: "my-module-id.speeds.walk"},
+                {id: "dash", default: 0xFFFF00, name: "my-module-id.speeds.dash"},
+                {id: "run", default: 0xFF8000, name: "my-module-id.speeds.run"}
+            ]
+        }
+
+        getRanges(token) {
+            let baseSpeed = token.actor.data.data.stats.spd.current
+			// A character can always walk it's base speed and dash twice it's base speed
+			let moveSpeed = baseSpeed %2 == 0 ? baseSpeed : baseSpeed+1;
+            let runspeed = (baseSpeed * 3) %2 ==0 ?baseSpeed * 3: baseSpeed * 3 + 1;
+            const ranges = [
+				{range: moveSpeed, color: "walk"},
+				{range: runspeed, color: "dash"}
+			]
+            return ranges
+        }
+    }
+
+    dragRuler.registerSystem("TheWitcherTRPG", FictionalGameSystemSpeedProvider)
+})
+
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
