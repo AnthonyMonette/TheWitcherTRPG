@@ -300,7 +300,7 @@ export default class WitcherActorSheet extends ActorSheet {
         let previousActor = null
         game.actors.forEach(actor => {
           actor.items.forEach(item => {
-              if(dragData.item._id == item._id) {
+              if(dragData.item._id == item.id) {
                 previousActor = actor
               }
           });
@@ -313,16 +313,63 @@ export default class WitcherActorSheet extends ActorSheet {
     
           let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
           dragData.item.data.quantity = Math.floor(roll.roll.total)
-        }
-
-        if (previousActor) {
-          previousActor.deleteOwnedItem(dragData.item._id)
+          this._addItem(this.actor, dragData.item)
+          if (previousActor) {
+            previousActor.deleteOwnedItem(dragData.item._id)
+          }
+          return
         }
         if (dragData.item.data.quantity != 0) {
-          this.actor.createEmbeddedDocuments("Item", [dragData.item]);
+          if (dragData.item.data.quantity > 1) {
+            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
+            let cancel = true
+            let numberOfItem = 0
+            let dialogData = {
+              buttons : [
+              [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+                numberOfItem = html.find("[name=numberOfItem]")[0].value;
+                cancel = false
+              } ]],
+              title : game.i18n.localize("WITCHER.Items.transferTitle"),
+              content : content
+            }
+            await buttonDialog(dialogData)
+            if (cancel) {
+              return
+            }else {
+              let item = previousActor.items.get(dragData.item._id)
+              let newQuantity = dragData.item.data.quantity - numberOfItem
+              if (newQuantity <= 0 ){
+                previousActor.deleteOwnedItem(dragData.item._id)
+              }else {
+                item.update({'data.quantity': newQuantity <0 ? 0 : newQuantity})
+              }
+              if (numberOfItem > dragData.item.data.quantity) {
+                numberOfItem = dragData.item.data.quantity
+              }
+              dragData.item.data.quantity = numberOfItem
+              this._addItem(this.actor, dragData.item)
+            }
+          }else {
+            this._addItem(this.actor, dragData.item)
+            if (previousActor) {
+              previousActor.deleteOwnedItem(dragData.item._id)
+            }
+          }
         }
       } else {
         super._onDrop(event, data);
+      }
+    }
+
+    async _addItem(actor, Additem) {
+      let foundItem = (actor.items).find(item => item.name == Additem.name);
+      console.log(foundItem)
+      if (foundItem){
+        foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(Additem.data.quantity)})
+      }
+      else {
+        actor.createEmbeddedDocuments("Item", [Additem]);
       }
     }
 
@@ -1153,6 +1200,16 @@ export default class WitcherActorSheet extends ActorSheet {
               if (customDef != "0") {
                 rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
               }
+
+              let totalModifiers = 0;
+              this.actor.data.data.skills.ref.dodge.modifiers.forEach(item => totalModifiers += Number(item.value));
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1187,6 +1244,16 @@ export default class WitcherActorSheet extends ActorSheet {
                 rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
               }
 
+
+              let totalModifiers = 0;
+              this.actor.data.data.skills.dex.athletics.modifiers.forEach(item => totalModifiers += Number(item.value));
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1216,31 +1283,38 @@ export default class WitcherActorSheet extends ActorSheet {
               let skill = 0;
               let skillName = "";
               let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
+              
+              let totalModifiers = 0;
               switch(defense){
                 case "Brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
                   skillName = this.actor.data.data.skills.ref.brawling.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
+                  this.actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
                   skillName = this.actor.data.data.skills.ref.melee.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
+                  this.actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Small Blades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
                   skillName = this.actor.data.data.skills.ref.smallblades.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
+                  this.actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Staff/Spear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
                   skillName = this.actor.data.data.skills.ref.staffspear.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
+                  this.actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
                   skillName = this.actor.data.data.skills.ref.swordsmanship.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
+                  this.actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
               }
 
@@ -1267,6 +1341,14 @@ export default class WitcherActorSheet extends ActorSheet {
               if (customDef != "0") {
                 rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
               }
+              
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1296,31 +1378,37 @@ export default class WitcherActorSheet extends ActorSheet {
               let skill = 0;
               let skillName = "";
               let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
+              let totalModifiers = 0;
               switch(defense){
                 case "Brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
                   skillName = this.actor.data.data.skills.ref.brawling.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
+                  this.actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
                   skillName = this.actor.data.data.skills.ref.melee.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
+                  this.actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Small Blades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
                   skillName = this.actor.data.data.skills.ref.smallblades.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
+                  this.actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Staff/Spear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
                   skillName = this.actor.data.data.skills.ref.staffspear.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
+                  this.actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
                   skillName = this.actor.data.data.skills.ref.swordsmanship.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 3`;
+                  this.actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
               }
 
@@ -1329,6 +1417,14 @@ export default class WitcherActorSheet extends ActorSheet {
               if (customDef != "0") {
                 rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
               }
+              
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1358,31 +1454,37 @@ export default class WitcherActorSheet extends ActorSheet {
               let skill = 0;
               let skillName = ""
               let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
+              let totalModifiers = 0;
               switch(defense){
                 case "Brawling":
                   skill = this.actor.data.data.skills.ref.brawling.value;
                   skillName = this.actor.data.data.skills.ref.brawling.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 5`;
+                  this.actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Melee":
                   skill = this.actor.data.data.skills.ref.melee.value;
                   skillName = this.actor.data.data.skills.ref.melee.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 5`;
+                  this.actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Small Blades":
                   skill = this.actor.data.data.skills.ref.smallblades.value;
                   skillName = this.actor.data.data.skills.ref.smallblades.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 5`;
+                  this.actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Staff/Spear":
                   skill = this.actor.data.data.skills.ref.staffspear.value;
                   skillName = this.actor.data.data.skills.ref.staffspear.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 5`;
+                  this.actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
                 case "Swordsmanship":
                   skill = this.actor.data.data.skills.ref.swordsmanship.value;
                   skillName = this.actor.data.data.skills.ref.swordsmanship.label;
                   displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 5`;
+                  this.actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
                   break;
               }
 
@@ -1391,6 +1493,14 @@ export default class WitcherActorSheet extends ActorSheet {
               if (customDef != "0") {
                 rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
               }
+              
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
               let roll = new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1689,38 +1799,48 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (isSilhouetted) { attFormula += "+2"; }
                 if (isAiming) { attFormula += `+${customAim}`}
 
+                let totalModifiers = 0;
+
                 switch(item.data.data.attackSkill){
                   case "Brawling":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.brawling.value}`:
                       `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.brawling.value}[${game.i18n.localize("WITCHER.SkRefBrawling")}]`;
+                    this.actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Melee":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.melee.value}`:
                       `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.melee.value}[${game.i18n.localize("WITCHER.SkRefMelee")}]`;
+                      this.actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Small Blades":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.smallblades.value}`:
                       `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.smallblades.value}[${game.i18n.localize("WITCHER.SkRefSmall")}]`;
+                      this.actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Staff/Spear":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.staffspear.value}`:
                       `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.staffspear.value}[${game.i18n.localize("WITCHER.SkRefStaff")}]`;
+                      this.actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Swordsmanship":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.ref.current}+${this.actor.data.data.skills.ref.swordsmanship.value}`:
                       `+${this.actor.data.data.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.data.data.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordmanship")}]`;
+                      this.actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Archery":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.archery.value}`:
                       `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.archery.value}[${game.i18n.localize("WITCHER.SkDexArchery")}]`;
+                      this.actor.data.data.skills.dex.archery.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Athletics":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.athletics.value}`:
                       `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.athletics.value}[${game.i18n.localize("WITCHER.SkDexAthletics")}]`;
+                      this.actor.data.data.skills.dex.athletics.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                   case "Crossbow":
                     attFormula += !displayRollDetails ? `+${this.actor.data.data.stats.dex.current}+${this.actor.data.data.skills.dex.crossbow.value}`:
                     `+${this.actor.data.data.stats.dex.current}[${game.i18n.localize("WITCHER.Actor.Stat.Dex")}]+${this.actor.data.data.skills.dex.crossbow.value}[${game.i18n.localize("WITCHER.SkDexCrossbow")}]`;
+                    this.actor.data.data.skills.dex.crossbow.modifiers.forEach(item => totalModifiers += Number(item.value));
                     break;
                 }
 
@@ -1841,6 +1961,13 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
                 if (strike == "joint" || strike == "strong") {
                   attFormula = !displayRollDetails ? `${attFormula}-3`:  `${attFormula}-3[${game.i18n.localize("WITCHER.Dialog.attackStrike")}]`;
+                }
+
+                if (totalModifiers < 0){
+                  attFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+                }
+                if (totalModifiers > 0){
+                  attFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
                 }
 
                 let allEffects = item.data.data.effects
@@ -2105,7 +2232,7 @@ export default class WitcherActorSheet extends ActorSheet {
       for (let element in data.data.skills) {
         for (let skill in data.data.skills[element]) {
           let skillLabel = game.i18n.localize(data.data.skills[element][skill].label)
-          if (skillLabel.includes("(2)")){
+          if (skillLabel?.includes("(2)")){
             totalSkills += data.data.skills[element][skill].value * 2;
           }
           else{

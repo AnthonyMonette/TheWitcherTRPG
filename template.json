@@ -169,79 +169,118 @@
               "value": 0,
               "label": "WITCHER.SkIntAwareness",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "business": {
               "value": 0,
               "label": "WITCHER.SkIntBusiness",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "deduction": {
               "value": 0,
               "label": "WITCHER.SkIntDeduction",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "education": {
               "value": 0,
               "label": "WITCHER.SkIntEducation",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "commonsp": {
               "value": 0,
               "label": "WITCHER.SkIntCommon",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "eldersp": {
               "value": 0,
               "label": "WITCHER.SkIntElder",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "dwarven": {
               "value": 0,
               "label": "WITCHER.SkIntDwarven",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "monster": {
               "value": 0,
               "label": "WITCHER.SkIntMonster",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "socialetq": {
               "value": 0,
               "label": "WITCHER.SkIntSocialEt",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "streetwise": {
               "value": 0,
               "label": "WITCHER.SkIntStreet",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "tactics": {
               "value": 0,
               "label": "WITCHER.SkIntTactics",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "teaching": {
               "value": 0,
               "label": "WITCHER.SkIntTeaching",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "wilderness": {
               "value": 0,
               "label": "WITCHER.SkIntWilderness",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "ref": {
@@ -249,49 +288,73 @@
               "value": 0,
               "label": "WITCHER.SkRefBrawling",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "dodge": {
               "value": 0,
               "label": "WITCHER.SkRefDodge",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "melee": {
               "value": 0,
               "label": "WITCHER.SkRefMelee",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "riding": {
               "value": 0,
               "label": "WITCHER.SkRefRiding",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "sailing": {
               "value": 0,
               "label": "WITCHER.SkRefSailing",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "smallblades": {
               "value": 0,
               "label": "WITCHER.SkRefSmall",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "staffspear": {
               "value": 0,
               "label": "WITCHER.SkRefStaff",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "swordsmanship": {
               "value": 0,
               "label": "WITCHER.SkRefSwordmanship",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "dex": {
@@ -299,31 +362,46 @@
               "value": 0,
               "label": "WITCHER.SkDexArchery",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "athletics": {
               "value": 0,
               "label": "WITCHER.SkDexAthletics",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "crossbow": {
               "value": 0,
               "label": "WITCHER.SkDexCrossbow",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "sleight": {
               "value": 0,
               "label": "WITCHER.SkDexSleight",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "stealth": {
               "value": 0,
               "label": "WITCHER.SkDexStealth",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "body": {
@@ -331,13 +409,19 @@
               "value": 0,
               "label": "WITCHER.SkBodyPhys",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "endurance": {
               "value": 0,
               "label": "WITCHER.SkBodyEnd",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "emp": {
@@ -345,61 +429,91 @@
               "value": 0,
               "label": "WITCHER.SkEmpCharisma",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "deceit": {
               "value": 0,
               "label": "WITCHER.SkEmpDeceit",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "finearts": {
               "value": 0,
               "label": "WITCHER.SkEmpArts",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "gambling": {
               "value": 0,
               "label": "WITCHER.SkEmpGambling",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "grooming": {
               "value": 0,
               "label": "WITCHER.SkEmpGrooming",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "perception": {
               "value": 0,
               "label": "WITCHER.SkEmpHumanPerc",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "leadership": {
               "value": 0,
               "label": "WITCHER.SkEmpLeadership",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "persuasion": {
               "value": 0,
               "label": "WITCHER.SkEmpPersuasion",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "performance": {
               "value": 0,
               "label": "WITCHER.SkEmpPerformance",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "seduction": {
               "value": 0,
               "label": "WITCHER.SkEmpSeduction",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "cra": {
@@ -407,43 +521,64 @@
               "value": 0,
               "label": "WITCHER.SkCraAlchemy",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "crafting": {
               "value": 0,
               "label": "WITCHER.SkCraCrafting",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "disguise": {
               "value": 0,
               "label": "WITCHER.SkCraDisguise",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "firstaid": {
               "value": 0,
               "label": "WITCHER.SkCraAid",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "forgery": {
               "value": 0,
               "label": "WITCHER.SkCraForge",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "picklock": {
               "value": 0,
               "label": "WITCHER.SkCraPick",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "trapcraft": {
               "value": 0,
               "label": "WITCHER.SkCraTrapCraft",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           },
           "will": {
@@ -451,43 +586,64 @@
               "value": 0,
               "label": "WITCHER.SkWillCourage",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "hexweave": {
               "value": 0,
               "label": "WITCHER.SkWillHex",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "intimidation": {
               "value": 0,
               "label": "WITCHER.SkWillIntim",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "spellcast": {
               "value": 0,
               "label": "WITCHER.SkWillSpellcast",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "resistmagic": {
               "value": 0,
               "label": "WITCHER.SkWillResistMag",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "resistcoerc": {
               "value": 0,
               "label": "WITCHER.SkWillResistCoer",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             },
             "ritcraft": {
               "value": 0,
               "label": "WITCHER.SkWillRitCraft",
               "isOpened": false,
-              "modifiers": []
+              "modifiers": [],
+              "isProffession": false,
+              "isPickup": false,
+              "isLearned": false
             }
           }
         },

@@ -2,45 +2,8 @@
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Intelligence"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.int as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="int">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-
-            </tbody>
+            {{#each data.skills.int as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="int"}}
             {{/each}}
         </table>
         <div class="skill-info">
@@ -70,258 +33,42 @@
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Reflex"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.ref as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="ref">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.ref as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="ref"}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Willpower"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.will as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="will">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.will as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="will" skill-data=data}}
             {{/each}}
         </table>
     </div>
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Dexterity"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.dex as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="dex">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.dex as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="dex" skill-data=data}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Crafting"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.cra as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="cra">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.cra as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="cra" skill-data=data}}
             {{/each}}
         </table>
     </div>
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Body"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.body as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="body">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.body as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="body" skill-data=data}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Empathy"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.emp as |skill st|}}
-            <tbody class="skill" data-skill="{{st}}" data-stat="emp">
-                <tr>
-                    {{#if (eq skill.value 0)}}
-                    <td class="{{st}} char-skill not-skilled" class="{{st}}" id="{{st}}-rollable">
-                    {{/if}}
-                    {{#unless (eq skill.value 0)}}
-                    <td class="{{st}} char-skill" class="{{st}}" id="{{st}}-rollable">
-                    {{/unless}}
-                        <a><span>{{localize skill.label}}</span></a>
-                    </td>
-                    <td class="char-input-skill">
-                        <input class="{{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" />
-                    </td>
-                    <td>
-                        {{#unless skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                        {{/unless}}
-                        {{#if skill.isOpened}}
-                        <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{#if skill.isOpened}}
-                <tr>
-                    <td colspan="3">
-                        <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-                        {{#each skill.modifiers as |modifier value|}}
-                        <div class="list-modifiers"  data-id="{{modifier.id}}">
-                            <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                            <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                            <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-                        </div>
-                        {{/each}}
-                    </td>
-                </tr>
-                {{/if}}
-            </tbody>
+            {{#each data.skills.emp as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="emp" skill-data=data}}
             {{/each}}
         </table>
         <div>

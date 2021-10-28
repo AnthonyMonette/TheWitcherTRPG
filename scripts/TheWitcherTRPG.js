@@ -23,7 +23,8 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html",
         "systems/TheWitcherTRPG/templates/partials/monster-inventory-tab.html",
         "systems/TheWitcherTRPG/templates/partials/monster-details-tab.html",
-        "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html"
+        "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html",
+        "systems/TheWitcherTRPG/templates/partials/skill-display.html"
     ];
     return loadTemplates(templatePath); 
 }

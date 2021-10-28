@@ -69,6 +69,16 @@
     font-weight: bold;
 }
 
+.learned-skilled a {
+    background-color: darkolivegreen
+}
+
 .not-skilled a {
     background-color: saddlebrown
+}
+
+input[type="checkbox"].skill-checkbox {
+    height: 15px;
+    width: 15px;
+    margin-left: 0px;
 }

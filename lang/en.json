@@ -716,6 +716,12 @@
     "WITCHER.Damage.RemoveSP": "Remove SP before applying location modifier.",
     "WITCHER.Effect.Rolled": "Rolled",
 
-    "WITCHER.Settings.specialFont": "Use the witcher special font"
+    "WITCHER.Settings.specialFont": "Use the witcher special font",
 
+    "WITCHER.SKill.profession": "Prof",
+    "WITCHER.SKill.pickup": "Pick",
+    "WITCHER.SKill.learn": "Learn",
+
+    "WITCHER.Items.transferTitle": "Transfering Items",
+    "WITCHER.Items.transferMany": "How many items to transfer"
 }

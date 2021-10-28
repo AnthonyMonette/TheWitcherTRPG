@@ -1,7 +1,7 @@
 {
     "I18N.LANGUAGE": "Español",
     "I18N.MAINTAINERS": "@Mk1lolo#0316",
-	
+    
     "WITCHER.Type": "Tipo",
     "WITCHER.Percentage": "Porcentaje",
     "WITCHER.DC": "DO",
@@ -50,7 +50,7 @@
 
     "WITCHER.Armor.StoppingPower": "CP",
     "WITCHER.Armor.MaxStoppingPower": "Max. CP",
-	
+    
     "WITCHER.Armor.Enhancement": "MA",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
@@ -136,7 +136,7 @@
     "WITCHER.Mutagen.Green": "Verde",
     "WITCHER.Mutagen.Blue": "Azul",
 
-    "WITCHER.Valuable.Conceal": "CP",
+    "WITCHER.Valuable.Conceal": "CD",
     "WITCHER.Valuable.Quality": "Cantidad",
     "WITCHER.Valueble.Toolkit": "Herramienta",
     "WITCHER.Valueble.General": "General",
@@ -292,7 +292,7 @@
     "WITCHER.CritWound.Mod.SimpleDisfiguringScar.None": "Recibes un -3 a Combate Verbal empático (Carisma, Liderazgo, Persuasión y Seducción).", 
     "WITCHER.CritWound.Mod.SimpleDisfiguringScar.Stabilized": "Recibes un -1 a Combate Verbal empático.", 
     "WITCHER.CritWound.Mod.SimpleDisfiguringScar.Treated": "Recibes un -1 a Seducción.",
-	"WITCHER.CritWound.Mod.SimpleCrackedRibs.None": "Recibes un -2 a TCO (no afecta al cálculo de Puntos de Vida).", 
+    "WITCHER.CritWound.Mod.SimpleCrackedRibs.None": "Recibes un -2 a TCO (no afecta al cálculo de Puntos de Vida).", 
     "WITCHER.CritWound.Mod.SimpleCrackedRibs.Stabilized": "Recibes un -1 a TCO (no afecta al cálculo de PV)", 
     "WITCHER.CritWound.Mod.SimpleCrackedRibs.Treated": "Recibes un -10 a Estorbo.",
     "WITCHER.CritWound.Mod.SimpleForeignObject.None": "Tu REC se reduce a un cuarto, así como tu TCO de cara a calcular el tiempo de curación de heridas críticas.", 
@@ -305,7 +305,7 @@
     "WITCHER.CritWound.Mod.SimpleSprainedLeg.Stabilized": "Recibes un -1 a MOV, Esquivar/Zafarse y Atletismo.", 
     "WITCHER.CritWound.Mod.SimpleSprainedLeg.Treated": "Recibes un -1 a MOV.",
 
-	"WITCHER.CritWound.Mod.ComplexMinorHeadWound.None":  "Recibes un -1 a INT, VOL y ATU.", 
+    "WITCHER.CritWound.Mod.ComplexMinorHeadWound.None":  "Recibes un -1 a INT, VOL y ATU.", 
     "WITCHER.CritWound.Mod.ComplexMinorHeadWound.Stabilized":  "Recibes un -1 a INT y VOL.", 
     "WITCHER.CritWound.Mod.ComplexMinorHeadWound.Treated":  "Recibes un -1 a VOL.",
     "WITCHER.CritWound.Mod.ComplexLostTeeth.None":  "Recibes un -3 a Habilidades Mágicas y Combate Verbal.", 
@@ -369,17 +369,17 @@
     "WITCHER.SkIntDeduction": "Deducción",
     "WITCHER.SkIntEducation": "Cultura",
     "WITCHER.SkIntCommon": "Lengua: Común(2)",
-	"WITCHER.SkIntCommonLable": "Lengua: Común",
+    "WITCHER.SkIntCommonLable": "Lengua: Común",
     "WITCHER.SkIntElder": "Lengua: Antigua(2)",
-	"WITCHER.SkIntElderLable": "Lengua: Antigua",
+    "WITCHER.SkIntElderLable": "Lengua: Antigua",
     "WITCHER.SkIntDwarven": "Lengua: Enanés (2)",
-	"WITCHER.SkIntDwarvenLable": "Lengua: Enanés",
+    "WITCHER.SkIntDwarvenLable": "Lengua: Enanés",
     "WITCHER.SkIntMonster": "S. de monstruos (2)",
-	"WITCHER.SkIntMonsterLable": "S. de monstruos",
+    "WITCHER.SkIntMonsterLable": "S. de monstruos",
     "WITCHER.SkIntSocialEt": "Etiqueta",
     "WITCHER.SkIntStreet": "Callejeo",
     "WITCHER.SkIntTactics": "Táctica(2)",
-	"WITCHER.SkIntTacticsLable": "Táctica",
+    "WITCHER.SkIntTacticsLable": "Táctica",
     "WITCHER.SkIntTeaching": "Enseñar",
     "WITCHER.SkIntWilderness": "Supervivencia",
 
@@ -413,33 +413,33 @@
     "WITCHER.SkEmpSeduction": "Seducción",
 
     "WITCHER.SkCraAlchemy": "Alquimia (2)",
-	"WITCHER.SkCraAlchemyLable": "Alquimia",
+    "WITCHER.SkCraAlchemyLable": "Alquimia",
     "WITCHER.SkCraCrafting": "Artesanía (2)",
-	"WITCHER.SkCraCraftingLable": "Artesanía",
+    "WITCHER.SkCraCraftingLable": "Artesanía",
     "WITCHER.SkCraDisguise": "Disfraz",
     "WITCHER.SkCraAid": "Primeros auxilios",
     "WITCHER.SkCraForge": "Falsificación",
     "WITCHER.SkCraPick": "Abrir cerraduras",
     "WITCHER.SkCraTrapCraft": "Preparar Trampas (2)",
-	"WITCHER.SkCraTrapCraftLable": "Preparar Trampas",
+    "WITCHER.SkCraTrapCraftLable": "Preparar Trampas",
 
     "WITCHER.SkWillCourage": "Coraje",
     "WITCHER.SkWillHex": "Urdir Maleficios (2)",
-	"WITCHER.SkWillHexLable": "Urdir Maleficios",
+    "WITCHER.SkWillHexLable": "Urdir Maleficios",
     "WITCHER.SkWillIntim": "Intimidar",
     "WITCHER.SkWillSpellcast": "Lanzar Hechizos (2)",
-	"WITCHER.SkWillSpellcastLable": "Lanzar Hechizos",
+    "WITCHER.SkWillSpellcastLable": "Lanzar Hechizos",
     "WITCHER.SkWillResistMag": "Resitir magia (2)",
-	"WITCHER.SkWillResistMagLable": "Resitir magia",
+    "WITCHER.SkWillResistMagLable": "Resitir magia",
     "WITCHER.SkWillResistCoer": "Resist Coacción",
     "WITCHER.SkWillRitCraft": "Elaborar rituales(2)",
-	"WITCHER.SkWillRitCraftLable": "Elaborar rituales",
+    "WITCHER.SkWillRitCraftLable": "Elaborar rituales",
 
     "WITCHER.Actor.ImprovementPoints": "Puntos de Perfeccionamiento",
     "WITCHER.Actor.CurrentIP":"Actual PP:",
     "WITCHER.Actor.SkillName": "Nombre habilidad...",
     "WITCHER.ACtor.TotalSkill": "Pts. Habilidad",
-	"WITCHER.ACtor.TotalProfSkill": "Pts. profesión habilidad",
+    "WITCHER.ACtor.TotalProfSkill": "Pts. profesión habilidad",
 
     "WITCHER.SocialStanding": "Estatus social",
     "WITCHER.Profession": "Profesión",
@@ -456,8 +456,8 @@
     "WITCHER.Decade": "Decada",
     "WITCHER.Event": "Eventos",
     "WITCHER.DeathSave": "ATU/S. contra muerte",
-	
-	"WITCHER.Crit": "Crítico",
+    
+    "WITCHER.Crit": "Crítico",
     "WITCHER.Fumble": "Pifia",
 
     "WITCHER.table.Quantity": "Cant.",
@@ -670,8 +670,8 @@
     "WITCHER.Dialog.ButtonRoll": "Tirar los dados",
     
     "WITCHER.Chat.FullDmg": "Daño total",
-	
-	"WITCHER.Enhancement.ChooseTitle": "Elija una mejora",
+    
+    "WITCHER.Enhancement.ChooseTitle": "Elija una mejora",
     "WITCHER.Enhancement.NoEnhancement": "No hay ninguna mejora disponible",
     "WITCHER.Dialog.Enhancement": "Mejora",
     "WITCHER.Dialog.Apply": "Aplicar",
@@ -692,8 +692,8 @@
     "WITCHER.Currency.crown" : "Corona",
     "WITCHER.Currency.oren" : "Oren",
     "WITCHER.Currency.falsecoin" : "Moneda falsa",
-	
-	"WITCHER.background.activeEffect" : "Efectos activos",
+    
+    "WITCHER.background.activeEffect" : "Efectos activos",
 
     "WITCHER.Spell.CreateTemplate": "Crear una plantilla",
     "WITCHER.Spell.meters": "m",
@@ -702,5 +702,19 @@
     "WITCHER.Spell.Square": "Casillas",
     "WITCHER.Spell.Circle": "Radio",
     "WITCHER.Spell.Cone": "Cono",
-    "WITCHER.Spell.Ray": "Rayo"
+    "WITCHER.Spell.Ray": "Rayo",
+    
+    "WITCHER.Settings.displayRollDetails": "Mostrar detalles de la tirada",
+    "WITCHER.Settings.displayRollDetailsHint": "Mostrar detalles al lanzar los dados: 1d10 + 2 [estadística] +4 [habilidad] -3 [parada]",
+    "WITCHER.Settings.Custom": "Personalizar",
+    "WITCHER.Settings.modifiers": "Modificadores",
+
+    "WITCHER.Resources.modifiers": "Modificadores de recursos",
+    "WITCHER.Weapon.onlyDmg": "Solo tiradas de daño",
+
+    "WITCHER.Spell.Damage": "Causa daño",
+    "WITCHER.Damage.RemoveSP": "Resta la CP antes de aplicar el modificador de localización",
+    "WITCHER.Effect.Rolled": "Rolled",
+
+    "WITCHER.Settings.specialFont": "Usa la fuente especial de The Witcher"
 }
