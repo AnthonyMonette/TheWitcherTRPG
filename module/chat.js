@@ -1,3 +1,4 @@
+import { ExecuteDefense } from "../scripts/actions.js";
 import { getRandomInt } from "./witcher.js";
 
 export function addChatListeners(html){
@@ -98,7 +99,7 @@ function onDamage(event) {
 
 export async function rollDamage(img, name, damageFormula, location, locationFormula, strike, effects) {
   let messageData = {}
-  messageData.flavor = `<h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
+  messageData.flavor = `<div class="damage-message"><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
 
   if (strike == "strong") {
     damageFormula = `(${damageFormula})*2`;
@@ -118,4 +119,35 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
     });
   }
   new Roll(damageFormula).roll().toMessage(messageData)
+}
+
+export function addChatMessageContextOptions(html, options){
+  let canDefend = li => li.find(".attack-message").length
+  let canApplyDamage = li => li.find(".damage-message").length
+  options.push(
+    {
+      name: "Apply Damage",
+      icon: '<i class="fas fa-user-minus"></i>',
+      condition: canApplyDamage,      
+      callback: li => {
+        let defender = canvas.tokens.controlled.slice()
+        if (defender.length > 0) {
+          console.log("apply Damage")
+        }
+      }
+    },
+    {
+      name: "Defense",
+      icon: '<i class="fas fa-shield-alt"></i>',
+      condition: canDefend,   
+      callback: li => {
+        let defender = canvas.tokens.controlled.slice()
+        if (defender.length > 0) {
+          ExecuteDefense(defender[0].actor)
+        }
+      }
+    }
+  );
+  console.log(options)
+  return options;
 }
