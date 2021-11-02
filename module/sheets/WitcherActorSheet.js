@@ -1272,8 +1272,9 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       let item = this.actor.items.get(itemId);
       let formula = item.data.data.damage
-
-      if (item.data.data.isMelee){
+     
+      let isMeleeAttack = witcher.meleeSkills.includes(item.data.data.attackSkill)
+      if (this.actor.type == "character" && isMeleeAttack){
         if (this.actor.data.data.attackStats.meleeBonus < 0){
           formula += `${this.actor.data.data.attackStats.meleeBonus}`
         }
@@ -1346,10 +1347,13 @@ export default class WitcherActorSheet extends ActorSheet {
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                   <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br /><br />`;
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br />`;
+                  
+      if (this.actor.type =="character" && isMeleeAttack){ 
+        content += `<label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />`
+      }
 
-      if (!item.data.data.isMelee){
+      if (item.data.data.usingAmmo){
         let ammunitions = this.actor.items.filter(function(item) {return item.data.type=="weapon" &&  item.data.data.isAmmo});
         let quantity = ammunitions.sum("quantity")
         content += `<h2>${game.i18n.localize("WITCHER.Dialog.chooseAmmunition")}</h2> `
@@ -1631,7 +1635,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1641,7 +1645,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 };
                 
                 if (item.data.data.rollOnlyDmg) {
-                  rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.data.data.effects)
+                  rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.data.data.effects, item.data.data.type)
                 }
                 else{
                   roll.toMessage(messageData);

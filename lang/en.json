@@ -55,6 +55,13 @@
     "WITCHER.Armor.Bludgeoning": "Bludgeoning",
     "WITCHER.Armor.Slashing": "Slashing",
     "WITCHER.Armor.Percing": "Percing",
+    "WITCHER.Armor.Elemental": "Elemental",
+    "WITCHER.Armor.Type": "Type",
+    
+    "WITCHER.Armor.Light": "Light Armor",
+    "WITCHER.Armor.Medium": "Medium Armor",
+    "WITCHER.Armor.Heavy": "Heavy Armor",
+    "WITCHER.Armor.Natural": "Natural Armor",
 
     "WITCHER.Armor.LocationHead": "Head",
     "WITCHER.Armor.LocationTorso": "Torso",
@@ -653,6 +660,7 @@
     "WITCHER.Dialog.attackUse": "Attack will use",
     "WITCHER.Dialog.attackExtra": "Extra attack",
     "WITCHER.Dialog.attackLocation": "Hit Location",
+    "WITCHER.Dialog.damageType": "Damage Type",
     "WITCHER.Dialog.attackModifierse": "Attack Modifiers",
     "WITCHER.Dialog.attackSize": " Opponent Size Modifiers",
     "WITCHER.Dialog.attackRange": "Range Modifiers",
@@ -711,6 +719,7 @@
 
     "WITCHER.Resources.modifiers": "Resources Modifiers",
     "WITCHER.Weapon.onlyDmg": "Roll Only Damages",
+    "WITCHER.Weapon.useAmmo": "Use Ammunition",
 
     "WITCHER.Spell.Damage": "Cause Damages",
     "WITCHER.Damage.RemoveSP": "Remove SP before applying location modifier.",
@@ -723,5 +732,23 @@
     "WITCHER.SKill.learn": "Learn",
 
     "WITCHER.Items.transferTitle": "Transfering Items",
-    "WITCHER.Items.transferMany": "How many items to transfer"
+    "WITCHER.Items.transferMany": "How many items to transfer",
+
+    "WITCHER.Damage.damageType": "What type of damage",
+    "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
+    "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
+
+    "WITCHER.Damage.initial": "Initial Damage",
+    "WITCHER.Damage.totalSP": "Total Stopping Power",
+    "WITCHER.Damage.afterSPReduct": "Damage after sp reducttion",
+    "WITCHER.Damage.afterLocationModifier": "Damage after location modifier",
+    "WITCHER.Damage.afterResistances": "Damage after resistances",
+    "WITCHER.Damage.totalApplied": "Total Damage Applied",
+    "WITCHER.Damage.NotEnough": "Not enough damage to pierce the armor",
+
+    "WITCHER.Context.applyDmg": "Apply Damage",
+    "WITCHER.Context.Defense": "Defense",
+    "WITCHER.Context.SelectActor": "At least one actor must be selected",
+
+    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type"
 }

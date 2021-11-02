@@ -1,4 +1,4 @@
-import { ExecuteDefense } from "../scripts/actions.js";
+import { ExecuteDefense, ApplyDamage } from "../scripts/actions.js";
 import { getRandomInt } from "./witcher.js";
 
 export function addChatListeners(html){
@@ -53,6 +53,7 @@ function onDamage(event) {
     let name = event.currentTarget.getAttribute("data-name")
     let damageFormula = event.currentTarget.getAttribute("data-dmg")
     let touchedLocation = event.currentTarget.getAttribute("data-location")
+    let damageType = event.currentTarget.getAttribute("data-dmg-type")
     let locationFormula = ""
     let strike = ""
     if (touchedLocation != "random") {
@@ -93,19 +94,20 @@ function onDamage(event) {
       }
     }
     let effects = JSON.parse(event.currentTarget.getAttribute("data-effects"))
-    rollDamage(img, name, damageFormula, touchedLocation, locationFormula, strike, effects);
+    rollDamage(img, name, damageFormula, touchedLocation, locationFormula, strike, effects, damageType);
 
 }
 
-export async function rollDamage(img, name, damageFormula, location, locationFormula, strike, effects) {
+export async function rollDamage(img, name, damageFormula, location, locationFormula, strike, effects, damageType) {
   let messageData = {}
-  messageData.flavor = `<div class="damage-message"><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
+  messageData.flavor = `<div class="damage-message" data-location="${location}" data-dmg-type="${damageType}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
 
   if (strike == "strong") {
     damageFormula = `(${damageFormula})*2`;
     messageData.flavor += `<div>${game.i18n.localize("WITCHER.Dialog.strikeStrong")}</div>`;
   }
   messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.attackLocation")}:</b> ${location} = ${locationFormula} </div>`;
+  messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.damageType")}:</b> ${damageType} </div>`;
   messageData.flavor += `<div>${game.i18n.localize("WITCHER.Damage.RemoveSP")}</div>`;
   if (effects) {
     messageData.flavor += `<b>${game.i18n.localize("WITCHER.Item.Effect")}:</b>`;
@@ -126,25 +128,44 @@ export function addChatMessageContextOptions(html, options){
   let canApplyDamage = li => li.find(".damage-message").length
   options.push(
     {
-      name: "Apply Damage",
+      name: `${game.i18n.localize("WITCHER.Context.applyDmg")}`,
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApplyDamage,      
       callback: li => {
         let defender = canvas.tokens.controlled.slice()
-        if (defender.length > 0) {
-          console.log("apply Damage")
+        let defenderActor;
+        if (defender.length == 0) {
+          if (game.user.character){
+            defenderActor = game.user.character
+          }else {
+            return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
+          }
+        }else {
+          defenderActor = defender[0].actor
         }
+        ApplyDamage(defenderActor, 
+          li.find(".damage-message")[0].dataset.dmgType,
+          li.find(".damage-message")[0].dataset.location,
+          li.find(".dice-total")[0].innerText)
       }
     },
     {
-      name: "Defense",
+      name: `${game.i18n.localize("WITCHER.Context.Defense")}`,
       icon: '<i class="fas fa-shield-alt"></i>',
       condition: canDefend,   
       callback: li => {
         let defender = canvas.tokens.controlled.slice()
-        if (defender.length > 0) {
-          ExecuteDefense(defender[0].actor)
+        let defenderActor;
+        if (defender.length == 0) {
+          if (game.user.character){
+            defenderActor = game.user.character
+          }else {
+            return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
+          }
+        }else {
+          defenderActor = defender[0].actor
         }
+        ExecuteDefense(defenderActor)
       }
     }
   );

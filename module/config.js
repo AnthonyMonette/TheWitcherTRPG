@@ -163,3 +163,5 @@ witcher.CritDeadly = {
     DeadlyDismemberedArm: "WITCHER.CritWound.Name.DeadlyDismemberedArm",
     DeadlyDismemberedLeg: "WITCHER.CritWound.Name.DeadlyDismemberedLeg",
 };
+
+witcher.meleeSkills = ["Brawling", "Melee", "Small Blades", "Staff/Spear", "Swordsmanship"];
