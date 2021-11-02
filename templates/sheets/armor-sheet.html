@@ -30,6 +30,7 @@
             <th>{{localize "WITCHER.Armor.Enhancement"}}</th>
             <th>{{localize "WITCHER.Armor.EncumbranceValue"}}</th>
             <th>{{localize "WITCHER.Armor.Location"}}</th>
+            <th>{{localize "WITCHER.Armor.Type"}}</th>
         </tr>
         <tr>
             <td>
@@ -51,6 +52,16 @@
                     <option value="Leg">{{localize "WITCHER.Armor.LocationLeg"}}</option>
                     <option value="FullCover">{{localize "WITCHER.Armor.LocationFull"}}</option>
                     <option value="Shield">{{localize "WITCHER.Armor.LocationShield"}}</option>
+                {{/select}}
+                </select>
+            </td>    
+            <td>
+                <select name="data.type" id="type-select">
+                {{#select data.type}}
+                    <option value="Light">{{localize "WITCHER.Armor.Light"}}</option>
+                    <option value="Medium">{{localize "WITCHER.Armor.Medium"}}</option>
+                    <option value="Heavy">{{localize "WITCHER.Armor.Heavy"}}</option>
+                    <option value="Natural">{{localize "WITCHER.Armor.Natural"}}</option>
                 {{/select}}
                 </select>
             </td>    

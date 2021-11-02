@@ -21,6 +21,7 @@
             <table class="substances-vitriol-table">
                 {{#each substancesVitriol as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" type="number" data-field="data.quantity" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -52,6 +53,7 @@
             <table class="substances-rebis-table">
                 {{#each substancesRebis as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -83,6 +85,7 @@
             <table class="substances-aether-table">
                 {{#each substancesAether as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -114,6 +117,7 @@
             <table class="substances-quebrith-table">
                 {{#each substancesQuebrith as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -145,6 +149,7 @@
             <table class="substances-hydragenum-table">
                 {{#each substancesHydragenum as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -176,6 +181,7 @@
             <table class="substances-vermilion-table">
                 {{#each substancesVermilion as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -207,6 +213,7 @@
             <table class="substances-sol-table">
                 {{#each substancesSol as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -238,6 +245,7 @@
             <table class="substances-caelum-table">
                 {{#each substancesCaelum as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>
@@ -269,6 +277,7 @@
             <table class="substances-fulgur-table">
                 {{#each substancesFulgur as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
+                        <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
                         <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{substance.data.quantity}}" placeholder="0" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{substance.name}}" placeholder="name" /></td>
                         <td><input class="inline-edit" data-field="data.weight" type="text" value="{{substance.data.weight}}" placeholder="weight" /></td>

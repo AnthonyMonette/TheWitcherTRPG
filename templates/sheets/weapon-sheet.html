@@ -31,16 +31,19 @@
             {{/select}}
         </select>
         {{/unless}}
+    </div>
+    <div>
         <label>{{localize "WITCHER.Weapon.isAmmunition"}}</label>
         <input type="checkbox" name="data.isAmmo" {{checked data.isAmmo}}/>
         <label>{{localize "WITCHER.Weapon.onlyDmg"}}</label>
         <input type="checkbox" name="data.rollOnlyDmg" {{checked data.rollOnlyDmg}}/>
+        <label>{{localize "WITCHER.Weapon.useAmmo"}}</label>
+        <input type="checkbox" name="data.usingAmmo" {{checked data.usingAmmo}}/>
     </div>
     <table>
         <tr>
             <th>{{localize "WITCHER.Weapon.Type"}}</th>
             {{#unless data.isAmmo}}
-            <th>{{localize "WITCHER.Weapon.MeleeBonus"}}</th>
             <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
             <th>{{localize "WITCHER.Weapon.Hands"}}</th>
             <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
@@ -57,7 +60,6 @@
         <tr>
             <td><input type="text" name="data.type" value="{{data.type}}"/></td>
             {{#unless data.isAmmo}}
-            <td><input type="checkbox" name="data.isMelee"  {{checked data.isMelee}}/></td>
             <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
             <td>
                 <select name="data.hands" id="hands-select">
