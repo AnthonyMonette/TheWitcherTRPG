@@ -9,6 +9,7 @@
 @import "./loot-sheet.css";
 @import "./profession-sheet.css";
 @import "./crit-wounds-table.css";
+@import "./item-sheets.css";
 
 @font-face {
     font-family:'Thewitcher';

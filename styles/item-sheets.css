@@ -1,0 +1,22 @@
+.item-collum {
+    display: table-cell;
+    text-align: center;
+    width: 100px;
+}
+
+.item-row {
+    display: table;
+    text-align: center;
+}
+
+.item-collum input {
+    width: 75px;
+    height: 27px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.item-selector select{
+    margin-right: 5px;
+    margin-left: 5px;
+}

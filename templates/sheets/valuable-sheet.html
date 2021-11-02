@@ -1,17 +1,22 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="flex">
+        <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+    </header>
+        <div class="item-row">
+            <div class="item-collum">
                 <label>{{localize "WITCHER.Item.Quantity"}}</label>
                 <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+            </div>
+            <div class="item-collum">
                 <label>{{localize "WITCHER.Item.Weight"}}</label>
                 <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+            </div>
+            <div class="item-collum">
                 <label>{{localize "WITCHER.Item.Cost"}}</label>
                 <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
             </div>
-            <div class="resource">
+            <div class="item-collum item-selector">
                 <label>{{localize "WITCHER.Type"}}</label>
                 <select name="data.type" id="type-select">
                     {{#select data.type}}
@@ -25,6 +30,8 @@
                     <option value="mount-accessories">{{localize "WITCHER.Valueble.MountAccessories"}}</option>
                     {{/select}}
                 </select>
+            </div>
+            <div class="item-collum item-selector">
                 <th>{{localize "WITCHER.Item.Availability"}}</th>
                 <select name="data.avail" id="avail-select">
                     {{#select data.avail}}
@@ -33,6 +40,8 @@
                     {{/each}}
                     {{/select}}
                 </select>
+            </div>
+            <div class="item-collum item-selector">
                 <th>{{localize "WITCHER.Valuable.Conceal"}}</th>
                 <select name="data.conceal" id="avail-select">
                     {{#select data.conceal}}
@@ -43,7 +52,6 @@
                 </select>
             </div>
         </div>
-    </header>
     {{!-- effect Tab --}}
     <div class="description">
 <textarea rows=5 name="data.description">{{data.description}}</textarea>

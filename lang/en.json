@@ -114,7 +114,7 @@
     "WITCHER.Diagram.otherComponents": "Other Components",
     "WITCHER.Diagram.investment": "Investment",
     "WITCHER.Diagram.Learned": "Learned",
-    "WITCHER.Diagram.Formulae": "Formuale",
+    "WITCHER.Diagram.Formulae": "Formulae",
 
     "WITCHER.Diagram.Ingredient": "Ingredient",
     "WITCHER.Diagram.Weapon": "Weapon",
@@ -591,6 +591,7 @@
     "WITCHER.Spell.Effect": "Effect",
     "WITCHER.Spell.AlternateComponents": "Alternate Components",
     "WITCHER.SPell.Signs": "Signs",
+    "WITCHER.Spell.Element": "Element",
        
     "WITCHER.Spell.StaCost": "STA Cost",
     "WITCHER.Spell.Variable": "STA Variable",
