@@ -715,6 +715,31 @@
     "WITCHER.Spell.Damage": "Causa daño",
     "WITCHER.Damage.RemoveSP": "Resta la CP antes de aplicar el modificador de localización",
     "WITCHER.Effect.Rolled": "Rolled",
+    
+    "WITCHER.Settings.specialFont": "Usa la fuente especial de The Witcher",
+    
+    "WITCHER.SKill.profession": "Prof",
+    "WITCHER.SKill.pickup": "Recoger",
+    "WITCHER.SKill.learn": "Aprender",
 
-    "WITCHER.Settings.specialFont": "Usa la fuente especial de The Witcher"
+    "WITCHER.Items.transferTitle": "Transferir objetos",
+    "WITCHER.Items.transferMany": "¿Cuántos objetos quieres transferir?",
+    
+    "WITCHER.Damage.damageType": "What type of damage",
+    "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
+    "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
+
+    "WITCHER.Damage.initial": "Daño inicial",
+    "WITCHER.Damage.totalSP": "Capacidad de parada total",
+    "WITCHER.Damage.afterSPReduct": "Daño después de la reducción de la clase de parada",
+    "WITCHER.Damage.afterLocationModifier": "Daño después del modificador de localización",
+    "WITCHER.Damage.afterResistances": "Daño después de las resistencias",
+    "WITCHER.Damage.totalApplied": "Daño total aplicado",
+    "WITCHER.Damage.NotEnough": "No hay suficiente daño para penetrar la armadura",
+
+    "WITCHER.Context.applyDmg": "Aplicar daño",
+    "WITCHER.Context.Defense": "Defensa",
+    "WITCHER.Context.SelectActor": "Debes seleccionar al menos un actor",
+
+    "WITCHER.Armor.tooMuch": "Hay demasiada armadura equipada del mismo tipo "
 }
