@@ -70,10 +70,8 @@ Hooks.once("ready", async function() {
   });
 
   Hooks.once("dragRuler.ready", (SpeedProvider) => {
-    console.log(`test`)
     class FictionalGameSystemSpeedProvider extends SpeedProvider {
         get colors() {
-            console.log(`color`)
             return [
                 {id: "walk", default: 0x00FF00, name: "my-module-id.speeds.walk"},
                 {id: "dash", default: 0xFFFF00, name: "my-module-id.speeds.dash"},
@@ -96,6 +94,8 @@ Hooks.once("ready", async function() {
 
     dragRuler.registerSystem("TheWitcherTRPG", FictionalGameSystemSpeedProvider)
 })
+
+Hooks.on("getChatLogEntryContext", Chat.addChatMessageContextOptions);
 
 /**
  * Create a Macro from an Item drop.

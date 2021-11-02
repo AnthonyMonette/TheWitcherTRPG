@@ -1026,8 +1026,8 @@
     "weapon": {
       "templates": ["base"],
       "type": "",
-      "isMelee": false,
       "isAmmo": false,
+      "usingAmmo": false,
       "accuracy": 0,
       "avail": "",
       "damage": "",
@@ -1065,6 +1065,7 @@
       "leftLegMaxStopping": 0,
       "rightLegStopping": 0,
       "rightLegMaxStopping": 0,
+      "type": "Light",
       "avail": "",
       "enhancements": 0,
       "enhancementItems": [],
@@ -1074,7 +1075,7 @@
         }
       ],
       "encumb": 0,
-      "location":"",
+      "location":"Head",
       "equiped": false,
       "bludgeoning": false,
       "slashing": false,
