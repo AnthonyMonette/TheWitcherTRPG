@@ -534,7 +534,7 @@ function calc_currency_weight(currency) {
 	totalPieces += Number(currency.crown);
 	totalPieces += Number(currency.oren);
 	totalPieces += Number(currency.falsecoin);
-	return Number(totalPieces * 0.01)
+	return Number(totalPieces * 0.001)
 }
 
 export { updateDerived, rollSkillCheck, genId, calc_currency_weight};
