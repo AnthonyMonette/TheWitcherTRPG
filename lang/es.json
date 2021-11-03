@@ -58,6 +58,13 @@
     "WITCHER.Armor.Bludgeoning": "Aplastante",
     "WITCHER.Armor.Slashing": "Cortante",
     "WITCHER.Armor.Percing": "Perforante",
+    "WITCHER.Armor.Elemental": "Elemental",
+    "WITCHER.Armor.Type": "Tipo",
+    
+    "WITCHER.Armor.Light": "Armadura ligera",
+    "WITCHER.Armor.Medium": "Armadura media",
+    "WITCHER.Armor.Heavy": "Armaduar pesada",
+    "WITCHER.Armor.Natural": "Armadura natural",
 
     "WITCHER.Armor.LocationHead": "Cabeza",
     "WITCHER.Armor.LocationTorso": "Torso",
@@ -119,6 +126,8 @@
     "WITCHER.Diagram.ElderfolkWeapon": "Arma del pueblo antiguo",
     "WITCHER.Diagram.ElderfolkArmor": "Armadura del pueblo antiguo",
     "WITCHER.Diagram.Ammunition": "Munición",
+    "WITCHER.Diagram.Bomb": "Bombas",
+    "WITCHER.Diagram.Traps": "Trampas",
 
     "WITCHER.Diagram.Novice": "Novicio",
     "WITCHER.Diagram.Journeyman": "Adepto",
@@ -639,11 +648,11 @@
     "WITCHER.Dialog.sizeHuge": "Enorme",
 
     "WITCHER.Dialog.rangeNone": "Ninguno",
-    "WITCHER.Dialog.rangePointBlank": "Bocajarro",
-    "WITCHER.Dialog.rangeClose": "Corto",
-    "WITCHER.Dialog.rangeMedium": "Medio",
-    "WITCHER.Dialog.rangeLong": "Largo",
-    "WITCHER.Dialog.rangeExtreme": "Extremo",
+    "WITCHER.Dialog.rangePointBlank": "Bocajarro (<2m)",
+    "WITCHER.Dialog.rangeClose": "Corto (1/4 Alc)",
+    "WITCHER.Dialog.rangeMedium": "Medio (1/2 Alc)",
+    "WITCHER.Dialog.rangeLong": "Largo (Máx Alc)",
+    "WITCHER.Dialog.rangeExtreme": "Extremo (2x Alc)",
     
     "WITCHER.Dialog.strikeNormal": "Ataque normal",
     "WITCHER.Dialog.strikeFast": "Ataque rápido",
@@ -653,12 +662,13 @@
     "WITCHER.Dialog.attackUse": "El ataque usará",
     "WITCHER.Dialog.attackExtra": "Ataque extra",
     "WITCHER.Dialog.attackLocation": " Localización de daño",
+		"WITCHER.Dialog.damageType": "Tipo de daño",
     "WITCHER.Dialog.attackModifierse": "Modificadores de ataque",
     "WITCHER.Dialog.attackSize": "Modificadores de tamaño del oponente",
     "WITCHER.Dialog.attackRange": "Modificadores de alcance",
     "WITCHER.Dialog.attackCustom": "Modificadores personalizados",
     "WITCHER.Dialog.attackStrike": "Tipo de ataque",
-    "WITCHER.Dialog.attackDamage": "daño",
+    "WITCHER.Dialog.attackDamage": "Daño",
     "WITCHER.Dialog.attackMeleeBonus": "Bono cuerpo a cuerpo",
     "WITCHER.Dialog.attackCustomDmg": "Modificadores de daño personalizados",
     "WITCHER.Dialog.attackWith": "Realizar un ataque con",
@@ -711,6 +721,7 @@
 
     "WITCHER.Resources.modifiers": "Modificadores de recursos",
     "WITCHER.Weapon.onlyDmg": "Solo tiradas de daño",
+		"WITCHER.Weapon.useAmmo": "Usar munición",
 
     "WITCHER.Spell.Damage": "Causa daño",
     "WITCHER.Damage.RemoveSP": "Resta la CP antes de aplicar el modificador de localización",
@@ -725,9 +736,9 @@
     "WITCHER.Items.transferTitle": "Transferir objetos",
     "WITCHER.Items.transferMany": "¿Cuántos objetos quieres transferir?",
     
-    "WITCHER.Damage.damageType": "What type of damage",
-    "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
-    "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
+    "WITCHER.Damage.damageType": "¿Que tipo de daño?",
+    "WITCHER.Damage.resistSilver": "Aplicar resistencia a la plata",
+    "WITCHER.Damage.resistMeteorite": "Aplicar resistencia meteoríca ",
 
     "WITCHER.Damage.initial": "Daño inicial",
     "WITCHER.Damage.totalSP": "Capacidad de parada total",
