@@ -1,56 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <h1 class="spellname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-    </header>
-    <div class="item-row">
-        <div class="item-collum item-selector">
-            <label>{{localize "WITCHER.Spell.type"}}</label>
-            <select name="data.class" id="profession-select">
-                {{#select data.class}}
-                <option value="Spells">{{localize "WITCHER.Spell.Spells"}}</option>
-                <option value="Invocations">{{localize "WITCHER.Spell.Invocations"}}</option>
-                <option value="Witcher">{{localize "WITCHER.Spell.Witcher"}}</option>
-                <option value="Rituals">{{localize "WITCHER.Spell.Rituals"}}</option>
-                <option value="Hexes">{{localize "WITCHER.Spell.Hexes"}}</option>
-                {{/select}}
-            </select>
-        </div>
-        <div class="item-collum item-selector">
-            {{#if (eq data.class "Hexes")}}
-            <label>{{localize "WITCHER.Spell.Danger"}}</label>
-            <select name="data.danger" id="level-select">
-                {{#select data.danger}}
-                <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
-                <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
-                <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
-                {{/select}}
-            </select>
-            {{/if}}
-            {{#unless (eq data.class "Hexes")}}
-            <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
-            <select name="data.level" id="level-select">
-                {{#select data.level}}
-                <option value="novice">{{localize "WITCHER.Spell.Novice"}}</option>
-                <option value="journeyman">{{localize "WITCHER.Spell.Journeyman"}}</option>
-                <option value="master">{{localize "WITCHER.Spell.Master"}}</option>
-                {{/select}}
-            </select>
-            {{/unless}}
-        </div>
+    <input type="hidden" name="data.isSpell" value="data.isSpell"/>
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    <div class="item-options">
         <div class="item-collum">
+            <div class="item-option-tickbox">
                 <label>{{localize "WITCHER.Spell.Variable"}}</label>
                 <input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/>
+            </div>
         </div>
         <div class="item-collum">
-            {{#unless (eq data.staminaIsVar true)}}
-                <label>{{localize "WITCHER.Spell.StaCost"}}</label>
-                <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
-            {{/unless}}
-        </div>
-    </div>
-    <div class="item-row">
-        <div class="item-collum item-selector">
             {{#if (or (eq data.class "Spells") 
                       (eq data.class "Witcher"))}}
                 <label>{{localize "WITCHER.Spell.Element"}}</label>
@@ -75,7 +33,7 @@
                 </select>
             {{/if}}
         </div>
-        <div class="item-collum item-selector">
+        <div class="item-collum">
             {{#if (eq data.class "Witcher")}}
                 <label>{{localize "WITCHER.Spell.Type"}}</label>
                 <select name="data.domain">
@@ -89,7 +47,7 @@
     </div>
 
     <label>{{localize "WITCHER.Item.Effect"}}</label>
-    <textarea rows="10" name="data.effect">{{data.effect}}</textarea>
+<textarea rows="10" name="data.effect">{{data.effect}}</textarea>
         {{#unless (eq data.class "Hexes")}}
         <div class="flex">
             <label>{{localize "WITCHER.Spell.Duration"}}</label>
