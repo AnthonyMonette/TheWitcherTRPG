@@ -1037,7 +1037,20 @@ export default class WitcherActorSheet extends ActorSheet {
 
       rollResult.toMessage(messageData)
 
-      let token = this.actor.token;
+      let tokens = canvas.tokens.controlled.slice()
+      let token;
+      console.log(tokens)
+      if (tokens.length == 0) {
+        if (game.user.character){
+          token = game.user.character.token
+        }else {
+          return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
+        }
+      }else {
+        token = tokens[0]
+      }
+      console.log(token)
+
       if (token && spellItem.data.data.createTemplate) {
         let distance = Number(spellItem.data.data.templateSize)
         let direction = 0
