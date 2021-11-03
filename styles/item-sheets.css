@@ -1,0 +1,90 @@
+.item-header {
+    display: flex;
+}
+
+.item-header img{
+    height: 100px;
+    max-width: 200px;
+}
+
+.itemname {
+    margin-left: 5px;
+}
+
+.item-header-row {
+    display: table;
+    margin: 0 auto;
+}
+
+.item-header-first-collum {
+    width: 400px;
+}
+
+.item-header-second-collum {
+    display: table-cell;
+    text-align: center;
+    width: 100px;
+}
+
+.item-header-second-collum input {
+    width: 75px;
+    height: 27px;
+}
+
+.item-header-second-collum label {
+    display: block;
+}
+
+.item-header-spell {
+    width: 33.33%;
+}
+
+.item-options {
+    display: flex;
+    width: 501px;
+    height: 54px;
+}
+
+.item-option-tickbox {
+    height: 27px;
+}
+
+.item-option-tickbox label {
+    float: left;
+    margin-top: 5px;
+}
+
+.item-option-tickbox input {
+    float: right;
+}
+
+.item-collum {
+    text-align: center;
+    width: 33.33%;
+}
+
+.item-collum label{
+    display: block;
+}
+
+.item-row {
+    display: flex;
+    text-align: center;
+}
+
+.item-second-collum{
+    text-align: center;
+    width: 50%;
+}
+
+.item-second-collum label{
+    display: block;
+    width: 100%;
+}
+
+.----item-collum input {
+    width: 75px;
+    height: 27px;
+    margin-right: 5px;
+    margin-left: 5px;
+}

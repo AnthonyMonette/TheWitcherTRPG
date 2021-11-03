@@ -1,0 +1,76 @@
+<header class="item-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="item-header-first-collum">
+        <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+        <div class="item-header-row">
+            {{#unless data.isSpell}}
+                <div class="item-header-second-collum">
+                    <label>{{localize "WITCHER.Item.Quantity"}}</label>
+                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
+                </div>
+                <div class="item-header-second-collum">
+                    <label>{{localize "WITCHER.Item.Weight"}}</label>
+                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
+                </div>
+                <div class="item-header-second-collum">
+                    {{#if data.isMutagen}}
+                            <label>{{localize "WITCHER.Type"}}</label>
+                            <select name="data.type" id="type-select">
+                            {{#select data.type}}
+                            <option value="red">{{localize "WITCHER.Mutagen.Red"}}</option>
+                            <option value="green">{{localize "WITCHER.Mutagen.Green"}}</option>
+                            <option value="blue">{{localize "WITCHER.Mutagen.Blue"}}</option>
+                            {{/select}}
+                            </select>
+                    {{/if}}
+                    {{#unless data.isMutagen}}
+                            <label>{{localize "WITCHER.Item.Cost"}}</label>
+                            <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+                    {{/unless}}
+                </div>
+            {{/unless}}
+            {{#if data.isSpell}}
+                <div class="item-header-second-collum item-header-spell">
+                    <label>{{localize "WITCHER.Spell.type"}}</label>
+                    <select name="data.class" id="profession-select">
+                    {{#select data.class}}
+                        <option value="Spells">{{localize "WITCHER.Spell.Spells"}}</option>
+                        <option value="Invocations">{{localize "WITCHER.Spell.Invocations"}}</option>
+                        <option value="Witcher">{{localize "WITCHER.Spell.Witcher"}}</option>
+                        <option value="Rituals">{{localize "WITCHER.Spell.Rituals"}}</option>
+                        <option value="Hexes">{{localize "WITCHER.Spell.Hexes"}}</option>
+                    {{/select}}
+                    </select>
+                </div>
+                <div class="item-header-second-collum item-header-spell">
+                    {{#if (eq data.class "Hexes")}}
+                    <label>{{localize "WITCHER.Spell.Danger"}}</label>
+                    <select name="data.danger" id="level-select">
+                        {{#select data.danger}}
+                        <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
+                        <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
+                        <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
+                        {{/select}}
+                    </select>
+                    {{/if}}
+                    {{#unless (eq data.class "Hexes")}}
+                    <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
+                    <select name="data.level" id="level-select">
+                        {{#select data.level}}
+                        <option value="novice">{{localize "WITCHER.Spell.Novice"}}</option>
+                        <option value="journeyman">{{localize "WITCHER.Spell.Journeyman"}}</option>
+                        <option value="master">{{localize "WITCHER.Spell.Master"}}</option>
+                        {{/select}}
+                    </select>
+                    {{/unless}}
+                </div>
+                <div class="item-header-second-collum item-header-spell">
+                    {{#unless (eq data.staminaIsVar true)}}
+                        <label>{{localize "WITCHER.Spell.StaCost"}}</label>
+                        <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
+                     {{/unless}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</header>

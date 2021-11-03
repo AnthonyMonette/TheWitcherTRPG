@@ -1,43 +1,36 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="flex">
-                <label>{{localize "WITCHER.Item.Quantity"}}</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Weight"}}</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Cost"}}</label>
-                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
-            </div>
-            <div class="resource flex">
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    <div class="item-options">
+        <div class="item-collum">
+            <div class="item-option-tickbox">
                 <label>{{localize "WITCHER.Diagram.Formulae"}} </label>
                 <input type="checkbox" name="data.isFormulae" {{checked data.isFormulae}}/>
-                <label>{{localize "WITCHER.Type"}}</label>
-                <select name="data.type" id="type-select">
-                    {{#select data.type}}
-                    {{#if data.isFormulae}}
-                    <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
-                    <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
-                    <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
-                    {{/if}}
-                    {{#unless data.isFormulae}}
-                    <option value="ingredients">{{localize "WITCHER.Diagram.Ingredient"}}</option>
-                    <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
-                    <option value="armor">{{localize "WITCHER.Diagram.Armor"}}</option>
-                    <option value="armor-nhancement">{{localize "WITCHER.Diagram.ArmorEnhancement"}}</option>
-                    <option value="elderfolk-weapon">{{localize "WITCHER.Diagram.ElderfolkWeapon"}}</option>
-                    <option value="elderfolk-armor">{{localize "WITCHER.Diagram.ElderfolkArmor"}}</option>
-                    <option value="Ammunition">{{localize "WITCHER.Diagram.Ammunition"}}</option>
-                    <option value="bomb">{{localize  "WITCHER.Diagram.Bomb"}}</option>
-                    <option value="traps">{{localize "WITCHER.Diagram.Traps"}}</option>
-                    {{/unless}}
-                    {{/select}}
-                </select>
             </div>
         </div>
-    </header>
+        <div class="item-collum">
+            <label>{{localize "WITCHER.Type"}}</label>
+            <select name="data.type" id="type-select">
+                {{#select data.type}}
+                {{#if data.isFormulae}}
+                <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
+                <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
+                <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
+                {{/if}}
+                {{#unless data.isFormulae}}
+                <option value="ingredients">{{localize "WITCHER.Diagram.Ingredient"}}</option>
+                <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
+                <option value="armor">{{localize "WITCHER.Diagram.Armor"}}</option>
+                <option value="armor-nhancement">{{localize "WITCHER.Diagram.ArmorEnhancement"}}</option>
+                <option value="elderfolk-weapon">{{localize "WITCHER.Diagram.ElderfolkWeapon"}}</option>
+                <option value="elderfolk-armor">{{localize "WITCHER.Diagram.ElderfolkArmor"}}</option>
+                <option value="Ammunition">{{localize "WITCHER.Diagram.Ammunition"}}</option>
+                <option value="bomb">{{localize  "WITCHER.Diagram.Bomb"}}</option>
+                <option value="traps">{{localize "WITCHER.Diagram.Traps"}}</option>
+                {{/unless}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
     <table>
         <tr> 
             <th>{{localize "WITCHER.Actor.Profession.Level"}}</th>
