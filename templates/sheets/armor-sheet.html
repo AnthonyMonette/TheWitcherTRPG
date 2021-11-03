@@ -1,26 +1,23 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="resource flex">
-                <div class="flex">
-                    <label>{{localize "WITCHER.Item.Quantity"}}</label>
-                    <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-                    <label>{{localize "WITCHER.Item.Weight"}}</label>
-                    <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
-                    <label>{{localize "WITCHER.Item.Cost"}}</label>
-                    <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
-                </div>
+{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    <div class="item-options">
+        <div class="item-collum">
+            <div class="item-option-tickbox">
+                <label>{{localize "WITCHER.Armor.Bludgeoning" }} {{localize "WITCHER.Armor.Res"}}</label>
+                <input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/>
             </div>
         </div>
-    </header>
-    <div>
-        <div>
-            <label>{{localize "WITCHER.Armor.Resistances"}}:</label>
-            <label>{{localize "WITCHER.Armor.Bludgeoning"}}</label><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/>
-            <label>{{localize "WITCHER.Armor.Slashing"}}</label><input type="checkbox" name="data.slashing" {{checked data.slashing}} />
-            <label>{{localize "WITCHER.Armor.Percing"}}</label><input type="checkbox" name="data.percing" {{checked data.percing}} />
+        <div class="item-collum">
+            <div class="item-option-tickbox">
+                <label>{{localize "WITCHER.Armor.Slashing"}} {{localize "WITCHER.Armor.Res"}}</label>
+                <input type="checkbox" name="data.slashing" {{checked data.slashing}} />
+            </div>
+        </div>
+        <div class="item-collum">
+            <div class="item-option-tickbox">
+                <label>{{localize "WITCHER.Armor.Percing"}} {{localize "WITCHER.Armor.Res"}}</label>
+                <input type="checkbox" name="data.percing" {{checked data.percing}} />
+            </div>
         </div>
     </div>
         {{!-- Attributes Tab --}}

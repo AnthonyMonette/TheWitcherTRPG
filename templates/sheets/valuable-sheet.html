@@ -1,49 +1,46 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="flex">
-                <label>{{localize "WITCHER.Item.Quantity"}}</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Weight"}}</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Cost"}}</label>
-                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
-            </div>
-            <div class="resource">
-                <label>{{localize "WITCHER.Type"}}</label>
-                <select name="data.type" id="type-select">
-                    {{#select data.type}}
-                    <option value="toolkit">{{localize "WITCHER.Valueble.Toolkit"}}</option>
-                    <option value="genera">{{localize "WITCHER.Valueble.General"}}</option>
-                    <option value="containers">{{localize "WITCHER.Valueble.Containers"}}</option>
-                    <option value="food-drink">{{localize "WITCHER.Valueble.Food&Drinks"}}</option>
-                    <option value="clothing">{{localize "WITCHER.Valueble.Clothings"}}</option>
-                    <option value="service">{{localize "WITCHER.Valueble.Service"}}</option>
-                    <option value="lodging">{{localize "WITCHER.Valueble.Loging"}}</option>
-                    <option value="mount-accessories">{{localize "WITCHER.Valueble.MountAccessories"}}</option>
-                    {{/select}}
-                </select>
-                <th>{{localize "WITCHER.Item.Availability"}}</th>
-                <select name="data.avail" id="avail-select">
-                    {{#select data.avail}}
-                    {{#each config.Avalability as |name value|}}
-                            <option value="{{value}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-                <th>{{localize "WITCHER.Valuable.Conceal"}}</th>
-                <select name="data.conceal" id="avail-select">
-                    {{#select data.conceal}}
-                    {{#each config.Concealment as |name value|}}
-                            <option value="{{value}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
+{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    <div class="item-options">
+        <div class="item-collum item-selector">
+            <label>{{localize "WITCHER.Type"}}</label>
+            <select name="data.type" id="type-select">
+                {{#select data.type}}
+                <option value="toolkit">{{localize "WITCHER.Valueble.Toolkit"}}</option>
+                <option value="genera">{{localize "WITCHER.Valueble.General"}}</option>
+                <option value="containers">{{localize "WITCHER.Valueble.Containers"}}</option>
+                <option value="food-drink">{{localize "WITCHER.Valueble.Food&Drinks"}}</option>
+                <option value="clothing">{{localize "WITCHER.Valueble.Clothings"}}</option>
+                <option value="service">{{localize "WITCHER.Valueble.Service"}}</option>
+                <option value="lodging">{{localize "WITCHER.Valueble.Loging"}}</option>
+                <option value="mount-accessories">{{localize "WITCHER.Valueble.MountAccessories"}}</option>
+                {{/select}}
+            </select>
+        </div>
+        <div class="item-collum">
+            <div class="item-row">
+                <div class="item-second-collum">
+                    <label>{{localize "WITCHER.Item.Availability"}}</label>
+                    <select name="data.avail" id="avail-select">
+                        {{#select data.avail}}
+                        {{#each config.Avalability as |name value|}}
+                                <option value="{{value}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="item-second-collum">
+                    <th>{{localize "WITCHER.Valuable.Conceal"}}</th>
+                    <select name="data.conceal" id="avail-select">
+                        {{#select data.conceal}}
+                        {{#each config.Concealment as |name value|}}
+                                <option value="{{value}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
     {{!-- effect Tab --}}
     <div class="description">
 <textarea rows=5 name="data.description">{{data.description}}</textarea>

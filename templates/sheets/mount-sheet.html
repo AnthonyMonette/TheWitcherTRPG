@@ -1,19 +1,5 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-            <div class="resource flex">
-                <label>{{localize "WITCHER.Item.Quantity"}}</label>
-                <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Weight"}}</label>
-                <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number" />
-                <label>{{localize "WITCHER.Item.Cost"}}</label>
-                <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
-            </div>
-        </div>
-    </header>
-
+{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="description">{{localize "WITCHER.Item.Description"}}</a>
