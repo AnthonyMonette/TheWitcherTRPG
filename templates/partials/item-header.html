@@ -2,7 +2,7 @@
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="item-header-first-collum">
         <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-        <div class="item-header-row">
+        <div class="item-flex-container">
             {{#unless (eq item.type "spell")}}
                 <div class="item-header-second-collum">
                     <label>{{localize "WITCHER.Item.Quantity"}}</label>

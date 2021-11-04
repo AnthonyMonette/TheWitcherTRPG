@@ -4,63 +4,61 @@
 
 .item-header img{
     height: 100px;
-    max-width: 200px;
+    width: 100px;
 }
 
-.itemname {
-    margin-left: 5px;
+.item-header h1 {
+    margin-bottom: 0;
 }
 
-.item-header-row {
-    display: table;
-    margin: 0 auto;
+.item-flex-container {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    height: 64px;
 }
 
 .item-header-first-collum {
     width: 400px;
+    margin-left: 5px;
 }
 
 .item-header-second-collum {
-    display: table-cell;
-    text-align: center;
-    width: 100px;
+    width: 120px;
+    margin: auto;
 }
 
 .item-header-second-collum input {
+    display: block;
     width: 75px;
     height: 27px;
+    margin: auto;
 }
 
-.item-header-second-collum label {
+.item-header-second-collum select {
     display: block;
-}
-
-.item-header-spell {
-    width: 33.33%;
+    margin: auto;
 }
 
 .item-options {
     display: flex;
-    width: 501px;
+    text-align: center;
+    justify-content: space-around;
+    margin-top: 1px;
     height: 54px;
 }
 
 .item-option-tickbox {
+    display: flex;
     height: 27px;
-}
-
-.item-option-tickbox label {
-    float: left;
-    margin-top: 5px;
-}
-
-.item-option-tickbox input {
-    float: right;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
 }
 
 .item-collum {
     text-align: center;
-    width: 33.33%;
+    width: 168px;
 }
 
 .item-collum label{
@@ -82,9 +80,9 @@
     width: 100%;
 }
 
-.----item-collum input {
-    width: 75px;
-    height: 27px;
-    margin-right: 5px;
-    margin-left: 5px;
+.weapon-dmg-type{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
 }
