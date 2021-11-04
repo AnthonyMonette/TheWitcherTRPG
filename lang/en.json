@@ -64,6 +64,8 @@
     "WITCHER.Armor.Heavy": "Heavy Armor",
     "WITCHER.Armor.Natural": "Natural Armor",
 
+    "WITCHER.Armor.LayerBonus": "Layer Bonus",
+
     "WITCHER.Armor.LocationHead": "Head",
     "WITCHER.Armor.LocationTorso": "Torso",
     "WITCHER.Armor.LocationLeg": "Leg",
@@ -624,8 +626,10 @@
     "WITCHER.Dialog.attackRandomMonster": "Random Monster",
     "WITCHER.Dialog.attackHead": "Head",
     "WITCHER.Dialog.attackTorso": "Torso",
-    "WITCHER.Dialog.attackArm": "Arm",
-    "WITCHER.Dialog.attackLeg": "Leg",
+    "WITCHER.Dialog.attackRArm": "R. Arm",
+    "WITCHER.Dialog.attackLArm": "L. Arm",
+    "WITCHER.Dialog.attackRLeg": "R. Leg",
+    "WITCHER.Dialog.attackLLeg": "L. Leg",
     "WITCHER.Dialog.attackLimb": "Limb",
     "WITCHER.Dialog.attackTail": "Tail/wing",
 
@@ -737,6 +741,7 @@
     "WITCHER.Items.transferMany": "How many items to transfer",
 
     "WITCHER.Damage.damageType": "What type of damage",
+    "WITCHER.Damage.ChangeLocation": "Change The Location",
     "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
     "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
 

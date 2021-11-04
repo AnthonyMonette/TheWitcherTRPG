@@ -1049,7 +1049,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }else {
         token = tokens[0]
       }
-      console.log(token)
 
       if (token && spellItem.data.data.createTemplate) {
         let distance = Number(spellItem.data.data.templateSize)
@@ -1306,8 +1305,10 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="randomMonster"> ${game.i18n.localize("WITCHER.Dialog.attackRandomMonster")} </option>
       <option value="head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
       <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
-      <option value="arm"> ${game.i18n.localize("WITCHER.Dialog.attackArm")} </option>
-      <option value="leg"> ${game.i18n.localize("WITCHER.Dialog.attackLeg")} </option>
+      <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
+      <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
+      <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+      <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
       <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
 
@@ -1601,13 +1602,23 @@ export default class WitcherActorSheet extends ActorSheet {
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-1`: `${attFormula}-1[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     break;
-                  case "arm":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                  case "L. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
-                  case "leg":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                  case "R. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "L. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "R. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")}  ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
