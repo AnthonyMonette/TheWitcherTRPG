@@ -361,7 +361,7 @@ function ExecuteDefense(actor){
         <label>${game.i18n.localize("WITCHER.Dialog.DefenseExtra")}: <input type="checkbox" name="isExtraDefense"></label> <br />
     </div>
     <label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />
-    <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customDef" value=0></label> <br />`;
+    <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="Number" class="small" name="customDef" value=0></label> <br />`;
 
     let messageData = {
     speaker: {alias: actor.name},
