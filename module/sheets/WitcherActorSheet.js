@@ -182,6 +182,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
+      html.find(".heal-button").on("click", this._onHeal.bind(this));
       
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
@@ -323,7 +324,7 @@ export default class WitcherActorSheet extends ActorSheet {
         }
         if (dragData.item.data.quantity != 0) {
           if (dragData.item.data.quantity > 1) {
-            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
+            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input type="number" class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
             let cancel = true
             let numberOfItem = 0
             let dialogData = {
@@ -1049,7 +1050,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }else {
         token = tokens[0]
       }
-      console.log(token)
 
       if (token && spellItem.data.data.createTemplate) {
         let distance = Number(spellItem.data.data.templateSize)
@@ -1165,10 +1165,87 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDefenceRoll(event) {
       ExecuteDefense(this.actor)
-      
-     
     }
-    
+
+    async _onHeal(){let dialogTemplate = `
+      <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
+      <div class="flex">
+        <div>
+          <div><input id="R" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.resting")}</div>
+          <div> <input id="SF" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.sterilized")}</div>
+        </div>
+        <div>
+          <div><input id="HH" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healinghand")}</div>
+            <div><input id="HT" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healingTent")}</div>
+        </div>
+      </div>`;
+    new Dialog({
+      title: game.i18n.localize("WITCHER.Heal.dialogTitle"),
+      content: dialogTemplate,
+      buttons: {
+        t1: {
+          label: game.i18n.localize("WITCHER.Heal.button"),
+          callback: async (html) => {
+            let rested = html.find("#R")[0].checked;
+            let sterFluid = html.find("#SF")[0].checked;
+            let healHand = html.find("#HH")[0].checked;
+            let healTent = html.find("#HT")[0].checked;
+
+            let actor =  this.actor;
+            let rec = actor.data.data.coreStats.rec.current;
+            let curHealth = actor.data.data.derivedStats.hp.value;
+            let total_rec = 0;
+            let maxHealth = actor.data.data.derivedStats.hp.max;
+            //Calculate healed amount
+            if(rested){
+              console.log("Spent Day Resting");
+              total_rec += rec;
+            }
+            else{
+              console.log("Spent Day Active");
+              total_rec += Math.floor(rec / 2);
+            }
+            if(sterFluid){
+              console.log("Add Sterilising Fluid Bonus");
+              total_rec += 2;
+            }
+            if(healHand){
+              console.log("Add Healing Hands Bonus");
+              total_rec += 3;
+            }
+            if(healTent){
+              console.log("Add Healing Tent Bonus");
+              total_rec += 2;
+            }
+            //Update actor health
+            await actor.update({"data.derivedStats.hp.value": Math.min(curHealth + total_rec, maxHealth)})
+            setTimeout(() => {
+                      let newSTA = actor.data.data.derivedStats.sta.max;
+                      //Delay stamina refill to allow actor sheet to update max STA value if previously Seriously Wounded or in Death State, otherwise it would refill to the weakened max STA value
+                      actor.update({"data.derivedStats.sta.value": newSTA});
+                    }, 400);
+                    
+            ui.notifications.info(`${actor.data.name} ${game.i18n.localize("WITCHER.Heal.recovered")} ${rested? game.i18n.localize("WITCHER.Heal.restful"): game.i18n.localize("WITCHER.Heal.active")} ${game.i18n.localize("WITCHER.Heal.day")}`)
+          
+            //Remove add one day for each Crit wound and removes it if equals to max days.
+            const critList = Object.values( this.actor.data.data.critWounds).map((details) => details);
+            let newCritList = []
+            critList.forEach(crit => {
+              crit.daysHealed += 1
+              if ( crit.daysHealed < crit.healingTime ){
+                newCritList.push(crit)
+              }
+            });
+            this.actor.update({ "data.critWounds": newCritList });
+          }
+        },
+        t2: {
+          label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+        }
+      },
+    }).render(true);
+    }
+
     async _onStatSaveRoll(event) {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let statValue = 0
@@ -1306,8 +1383,10 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="randomMonster"> ${game.i18n.localize("WITCHER.Dialog.attackRandomMonster")} </option>
       <option value="head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
       <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
-      <option value="arm"> ${game.i18n.localize("WITCHER.Dialog.attackArm")} </option>
-      <option value="leg"> ${game.i18n.localize("WITCHER.Dialog.attackLeg")} </option>
+      <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
+      <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
+      <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+      <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
       <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
 
@@ -1324,7 +1403,7 @@ export default class WitcherActorSheet extends ActorSheet {
         <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
         <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
         <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
-        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input class="small" name="customAim" value=0> <br />
+        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input  type="number" class="small" name="customAim" value=0> <br />
     </div>
       `;
       const rangeOptions = `
@@ -1357,10 +1436,10 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                   <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br />`;
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input type="number" class="small" name="customDmg" value=0></label> <br />`;
                   
       if (this.actor.type =="character" && isMeleeAttack){ 
         content += `<label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />`
@@ -1601,13 +1680,23 @@ export default class WitcherActorSheet extends ActorSheet {
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-1`: `${attFormula}-1[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     break;
-                  case "arm":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                  case "L. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
-                  case "leg":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                  case "R. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "L. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "R. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")}  ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
