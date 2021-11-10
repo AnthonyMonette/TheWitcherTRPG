@@ -757,5 +757,19 @@
     "WITCHER.Context.Defense": "Defense",
     "WITCHER.Context.SelectActor": "At least one actor must be selected",
 
-    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type"
+    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type",
+
+    "WITCHER.Heal.button": "Heal",
+    "WITCHER.Heal.dialogTitle": "Heal After Rest",
+    "WITCHER.Heal.title": "Healing Circumstances",
+
+    "WITCHER.Heal.resting": "Spent Day Resting",
+    "WITCHER.Heal.sterilized": "Received Sterilising Fluid",
+    "WITCHER.Heal.healinghand": "Received Healing Hands",
+    "WITCHER.Heal.healingTent": "Received Healing Tent",
+
+    "WITCHER.Heal.recovered": " has recovered from an",
+    "WITCHER.Heal.restful": "restful",
+    "WITCHER.Heal.active": "active",
+    "WITCHER.Heal.day": "day"
 }
