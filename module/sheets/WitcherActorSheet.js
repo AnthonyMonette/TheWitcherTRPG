@@ -182,6 +182,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
+      html.find(".heal-button").on("click", this._onHeal.bind(this));
       
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
@@ -1164,10 +1165,87 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDefenceRoll(event) {
       ExecuteDefense(this.actor)
-      
-     
     }
-    
+
+    async _onHeal(){let dialogTemplate = `
+      <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
+      <div class="flex">
+        <div>
+          <div><input id="R" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.resting")}</div>
+          <div><input id="SF" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.sterilized")}</div>
+        </div>
+        <div>
+          <div><input id="HH" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healinghand")}</div>
+            <div><input id="HT" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healingTent")}</div>
+        </div>
+      </div>`;
+    new Dialog({
+      title: game.i18n.localize("WITCHER.Heal.dialogTitle"),
+      content: dialogTemplate,
+      buttons: {
+        t1: {
+          label: game.i18n.localize("WITCHER.Heal.button"),
+          callback: async (html) => {
+            let rested = html.find("#R")[0].checked;
+            let sterFluid = html.find("#SF")[0].checked;
+            let healHand = html.find("#HH")[0].checked;
+            let healTent = html.find("#HT")[0].checked;
+
+            let actor =  this.actor;
+            let rec = actor.data.data.coreStats.rec.current;
+            let curHealth = actor.data.data.derivedStats.hp.value;
+            let total_rec = 0;
+            let maxHealth = actor.data.data.derivedStats.hp.max;
+            //Calculate healed amount
+            if(rested){
+              console.log("Spent Day Resting");
+              total_rec += rec;
+            }
+            else{
+              console.log("Spent Day Active");
+              total_rec += Math.floor(rec / 2);
+            }
+            if(sterFluid){
+              console.log("Add Sterilising Fluid Bonus");
+              total_rec += 2;
+            }
+            if(healHand){
+              console.log("Add Healing Hands Bonus");
+              total_rec += 3;
+            }
+            if(healTent){
+              console.log("Add Healing Tent Bonus");
+              total_rec += 2;
+            }
+            //Update actor health
+            await actor.update({"data.derivedStats.hp.value": Math.min(curHealth + total_rec, maxHealth)})
+            setTimeout(() => {
+                      let newSTA = actor.data.data.derivedStats.sta.max;
+                      //Delay stamina refill to allow actor sheet to update max STA value if previously Seriously Wounded or in Death State, otherwise it would refill to the weakened max STA value
+                      actor.update({"data.derivedStats.sta.value": newSTA});
+                    }, 400);
+                    
+            ui.notifications.info(`${actor.data.name} ${game.i18n.localize("WITCHER.Heal.recovered")} ${rested? game.i18n.localize("WITCHER.Heal.restful"): game.i18n.localize("WITCHER.Heal.active")} ${game.i18n.localize("WITCHER.Heal.day")}`)
+          
+            //Remove add one day for each Crit wound and removes it if equals to max days.
+            const critList = Object.values( this.actor.data.data.critWounds).map((details) => details);
+            let newCritList = []
+            critList.forEach(crit => {
+              crit.daysHealed += 1
+              if ( crit.daysHealed < crit.healingTime ){
+                newCritList.push(crit)
+              }
+            });
+            this.actor.update({ "data.critWounds": newCritList });
+          }
+        },
+        t2: {
+          label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+        }
+      },
+    }).render(true);
+    }
+
     async _onStatSaveRoll(event) {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let statValue = 0

@@ -50,10 +50,21 @@
     "WITCHER.Armor.Reliable": "DURA",
     "WITCHER.Armor.EncumbranceValue": "VF",
     "WITCHER.Armor.Resistances": "Resistências",
+    "WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Concussiva",
     "WITCHER.Armor.Slashing": "Cortante",
     "WITCHER.Armor.Percing": "Perfurante",
+    "WITCHER.Armor.Elemental": "Elemental",
+    "WITCHER.Armor.Type": "Tipo",
 
+    "WITCHER.Armor.Light": "Armadura Leve",
+    "WITCHER.Armor.Medium": "Armadura Média",
+    "WITCHER.Armor.Heavy": "Armadura Pesada",
+    "WITCHER.Armor.Natural": "Armadura Natural",
+    
+    "WITCHER.Armor.LayerBonus": "Bonus de Camada",
+
+    
     "WITCHER.Armor.LocationHead": "Cabeça",
     "WITCHER.Armor.LocationTorso": "Tronco",
     "WITCHER.Armor.LocationLeg": "Perna",
@@ -479,7 +490,7 @@
     "WITCHER.Monster.WitcherKnowledge": "Conhecimento de Bruxo: Treino de Bruxo ND: ",
 
     "WITCHER.Monster.SkillTab": "Perícias",
-    "WITCHER.Monster.InventryTab": "Ataques/Equip",
+    "WITCHER.Monster.InventryTab": "ATK/Loot",
     "WITCHER.Monster.DetailsTab": "Detalhes",
     "WITCHER.Monster.SpellsTab": "Feitiços",
 
@@ -564,6 +575,7 @@
     "WITCHER.Spell.Effect": "Efeitos",
     "WITCHER.Spell.AlternateComponents": "Componentes Alternativos",
     "WITCHER.SPell.Signs": "Sinais",
+    "WITCHER.Spell.Element": "Elemento",
        
     "WITCHER.Spell.StaCost": "Custo de EST",
     "WITCHER.Spell.Variable": "EST Variável",
@@ -601,8 +613,10 @@
     "WITCHER.Dialog.attackRandomMonster": "Aleatório Monstro",
     "WITCHER.Dialog.attackHead": "Cabeça",
     "WITCHER.Dialog.attackTorso": "Tronco",
-    "WITCHER.Dialog.attackArm": "Braço",
-    "WITCHER.Dialog.attackLeg": "Perna",
+    "WITCHER.Dialog.attackRArm": "Braço Dir.",
+    "WITCHER.Dialog.attackLArm": "Braço Esq.",
+    "WITCHER.Dialog.attackRLeg": "Perna Dir.",
+    "WITCHER.Dialog.attackLLeg": "Perna Esq",
     "WITCHER.Dialog.attackLimb": "Membro",
     "WITCHER.Dialog.attackTail": "Cauda e Asas",
     
@@ -625,12 +639,12 @@
     "WITCHER.Dialog.sizeHuge": "Imenso",
 
     "WITCHER.Dialog.rangeNone": "None",
-    "WITCHER.Dialog.rangePointBlank": "Queima-roupa",
-    "WITCHER.Dialog.rangeClose": "Perto",
-    "WITCHER.Dialog.rangeMedium": "Médio",
-    "WITCHER.Dialog.rangeLong": "Longo",
-    "WITCHER.Dialog.rangeExtreme": "Extremo",
-
+    "WITCHER.Dialog.rangePointBlank": "Queima-roupa (<2m)",
+    "WITCHER.Dialog.rangeClose": "Perto (1/4 Range)",
+    "WITCHER.Dialog.rangeMedium": "Médio (1/2 Range)",
+    "WITCHER.Dialog.rangeLong": "Longo (Full Range)",
+    "WITCHER.Dialog.rangeExtreme": "Extremo (2x Range)",
+    
     "WITCHER.Dialog.strikeNormal": "Golpe Normal",
     "WITCHER.Dialog.strikeFast": "Golpe Rápido",
     "WITCHER.Dialog.strikeStrong": "Golpe Forte",
@@ -639,6 +653,7 @@
     "WITCHER.Dialog.attackUse": "Ataque utiliza",
     "WITCHER.Dialog.attackExtra": "Ataque extra",
     "WITCHER.Dialog.attackLocation": "Local de Acerto",
+    "WITCHER.Dialog.damageType": "Tipo de Dano",
     "WITCHER.Dialog.attackModifierse": "Modificadores de Ataque",
     "WITCHER.Dialog.attackSize": "Modificadores de Tamanho",
     "WITCHER.Dialog.attackRange": "Modificadores de Distância",
@@ -652,6 +667,8 @@
     "WITCHER.Dialog.chooseAmmunition": " Escolha munição",
     "WITCHER.Dialog.NoAmmunation": " Não há munições disponíveis",
     "WITCHER.Dialog.Ammunation": "Munição",
+    "WITCHER.Diagram.Bomb": "Bomba",
+    "WITCHER.Diagram.Traps": "Armadilha",
 
     "WITCHER.Dialog.ButtonRoll": "Rolar",
 
@@ -670,7 +687,60 @@
     "WITCHER.Currency.ducat" : "Ducates",
     "WITCHER.Currency.lintar" : "Lintar",
     "WITCHER.Currency.floren" : "Florim",
-    "WITCHER.Currency.crown" : "Crown",
+    "WITCHER.Currency.crown" : "Coroa",
     "WITCHER.Currency.oren" : "Oren",
     "WITCHER.Currency.falsecoin" : "Falsa"
+    
+    "WITCHER.background.activeEffect" : "Efeitos Ativos",
+
+    "WITCHER.Spell.CreateTemplate": "Criar um Modelo",
+    "WITCHER.Spell.meters": "m",
+    "WITCHER.Spell.Size" : "Tamanho",
+    "WITCHER.Spell.Type" : "Tipo",
+    "WITCHER.Spell.Square": "Quadrado",
+    "WITCHER.Spell.Circle": "Circulo",
+    "WITCHER.Spell.Cone": "Cone",
+    "WITCHER.Spell.Ray": "Raio"
+    
+    "WITCHER.Settings.displayRollDetails": "Exibir detalhes de rolagem",
+    "WITCHER.Settings.displayRollDetailsHint": "Exibir detalhes nas rolagens : 1d10+2[atrib]+4[perícia]-3[aparar]",
+    "WITCHER.Settings.Custom": "Personalizado",
+    "WITCHER.Settings.modifiers": "Mods"
+    
+    "WITCHER.Resources.modifiers": "Modificadores de Recurso",
+    "WITCHER.Weapon.onlyDmg": "Rolar só dano"
+    "WITCHER.Weapon.useAmmo": "Usar Munição",
+    
+    "WITCHER.Spell.Damage": "Causa Dano",
+    "WITCHER.Damage.RemoveSP": "Remover PP antes de aplicar Localização.",
+    "WITCHER.Effect.Rolled": "Rolado"
+    
+    "WITCHER.Settings.specialFont": "Usar a fonte especial do Witcher",
+
+    "WITCHER.SKill.profession": "Prof",
+    "WITCHER.SKill.pickup": "Pick",
+    "WITCHER.SKill.learn": "Learn"
+    
+    "WITCHER.Items.transferTitle": "Transferencia de itens",
+    "WITCHER.Items.transferMany": "Quantos transferir"
+    
+    
+    "WITCHER.Damage.damageType": "Qual tipo de dano",
+    "WITCHER.Damage.ChangeLocation": "Mudar a Localização",
+    "WITCHER.Damage.resistSilver": "Aplicar resistência à não-prata",
+    "WITCHER.Damage.resistMeteorite": "Aplicar resistência à não-meteorito",
+
+    "WITCHER.Damage.initial": "Dano Bruto",
+    "WITCHER.Damage.totalSP": "Poder de Parada",
+    "WITCHER.Damage.afterSPReduct": "Dano pós redução de PP",
+    "WITCHER.Damage.afterLocationModifier": "Dano pós localização",
+    "WITCHER.Damage.afterResistances": "Dano após resistência",
+    "WITCHER.Damage.totalApplied": "Dano Final",
+    "WITCHER.Damage.NotEnough": "Dano não é suficiente",
+
+    "WITCHER.Context.applyDmg": "Aplicar Dano",
+    "WITCHER.Context.Defense": "Defender",
+    "WITCHER.Context.SelectActor": "Ao menos 1 ator deve estar selecionado.",
+
+    "WITCHER.Armor.tooMuch": "Muitas armaduras do mesmo tipo equipadas"
 }

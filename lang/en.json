@@ -469,6 +469,7 @@
 
     "WITCHER.Crit": "Critical",
     "WITCHER.Fumble": "Fumble",
+    "WITCHER.CritTotal": "For a total of",
 
     "WITCHER.table.Quantity": "Qty",
     "WITCHER.table.Range": "Range",
@@ -749,13 +750,33 @@
     "WITCHER.Damage.totalSP": "Total Stopping Power",
     "WITCHER.Damage.afterSPReduct": "Damage after sp reducttion",
     "WITCHER.Damage.afterLocationModifier": "Damage after location modifier",
-    "WITCHER.Damage.afterResistances": "Damage after resistances",
+    "WITCHER.Damage.afterResistances": "Damage after resistances/vulnerabilities",
     "WITCHER.Damage.totalApplied": "Total Damage Applied",
     "WITCHER.Damage.NotEnough": "Not enough damage to pierce the armor",
+    "WITCHER.Damage.isVulnerable": "Vulnerable to the attack",
+    "WITCHER.Damage.oilDmg": "Add Oil Damages (+5)",
+    "WITCHER.Damage.silverDmg": "Add Silver Damages",
+    "WITCHER.Damage.silver": "Silver",
+    "WITCHER.Damage.oil": "Oil",
+
 
     "WITCHER.Context.applyDmg": "Apply Damage",
     "WITCHER.Context.Defense": "Defense",
     "WITCHER.Context.SelectActor": "At least one actor must be selected",
 
-    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type"
+    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type",
+
+    "WITCHER.Heal.button": "Heal",
+    "WITCHER.Heal.dialogTitle": "Heal After Rest",
+    "WITCHER.Heal.title": "Healing Circumstances",
+
+    "WITCHER.Heal.resting": "Spent Day Resting",
+    "WITCHER.Heal.sterilized": "Received Sterilising Fluid",
+    "WITCHER.Heal.healinghand": "Received Healing Hands",
+    "WITCHER.Heal.healingTent": "Received Healing Tent",
+
+    "WITCHER.Heal.recovered": " has recovered from an",
+    "WITCHER.Heal.restful": "restful",
+    "WITCHER.Heal.active": "active",
+    "WITCHER.Heal.day": "day"
 }

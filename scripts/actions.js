@@ -26,6 +26,14 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
     <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
     <option value="Tail/wing"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
+    `;    
+    const silverOptions = `
+    <option></option>
+    <option value="1d6">1d6</option>
+    <option value="2d6">2d6</option>
+    <option value="3d6">3d6</option>
+    <option value="4d6">4d6</option>
+    <option value="5d6">5d6</option>
     `;
 
     let content = `<label>${game.i18n.localize("WITCHER.Damage.damageType")}: <select name="damageType">${damageTypeOption}</select></label> <br />
@@ -33,14 +41,22 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
 
     if (actor.type == "monster"){ 
         content += `<label>${game.i18n.localize("WITCHER.Damage.resistSilver")}: <input type="checkbox" name="resistNonSilver"></label><br />
-                    <label>${game.i18n.localize("WITCHER.Damage.resistMeteorite")}: <input type="checkbox" name="resistNonMeteorite"></label>`
+                    <label>${game.i18n.localize("WITCHER.Damage.resistMeteorite")}: <input type="checkbox" name="resistNonMeteorite"></label><br />`
     }
+    content += `<label>${game.i18n.localize("WITCHER.Damage.isVulnerable")}: <input type="checkbox" name="vulnerable"></label><br />
+    <label>${game.i18n.localize("WITCHER.Damage.oilDmg")}: <input type="checkbox" name="oilDmg"></label><br />
+    <label>${game.i18n.localize("WITCHER.Damage.silverDmg")}: <select name="silverDmg">${silverOptions}</select></label><br />`
 
     let cancel = true
     let damageType = 0
     let resistSilver = false;
     let resistMeteorite = false;
     let newLocation = false;
+    let isVulnerable = false;
+    let addOilDmg = false;
+    let silverDmg;
+
+    let infoTotalDmg = totalDamage
 
     let dialogData = {
         buttons : [
@@ -50,16 +66,31 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 newLocation = html.find("[name=changeLocation]")[0].value;
                 resistSilver = html.find("[name=resistNonSilver]").prop("checked");
                 resistMeteorite = html.find("[name=resistNonMeteorite]").prop("checked");
+                isVulnerable = html.find("[name=vulnerable]").prop("checked");
+                addOilDmg = html.find("[name=oilDmg]").prop("checked");
+                silverDmg = html.find("[name=silverDmg]")[0].value;
                 cancel = false
              } ]],
-        title : game.i18n.localize("WITCHER.Items.transferTitle"),
+        title : game.i18n.localize("WITCHER.Context.applyDmg"),
         content : content
     }
     await buttonDialog(dialogData)
 
+    if (silverDmg){
+      let silverRoll = new Roll(silverDmg).roll()
+      totalDamage = Number(totalDamage) + silverRoll.total
+      infoTotalDmg += `+${silverRoll.total}[${game.i18n.localize("WITCHER.Damage.silver")}]`
+    }
+
     if (newLocation != "Empty"){
       location = newLocation
     }
+    if (addOilDmg){
+      totalDamage = Number(totalDamage) + 5
+      infoTotalDmg += `+5[${game.i18n.localize("WITCHER.Damage.oil")}]`
+    }
+
+    infoTotalDmg = totalDamage +": " +infoTotalDmg;
 
     let armorSet = {};
     let totalSP = 0
@@ -72,7 +103,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 values = getArmorSp(armorSet["lightArmor"]?.data.data.headStopping, armorSet["mediumArmor"]?.data.data.headStopping, armorSet["heavyArmor"]?.data.data.headStopping)
                 displaySP = values[0]
                 totalSP = values[1]
-                console.log(values)
                 break;
             case "Torso":
                 armorSet = getArmors(torsoAmors)
@@ -141,7 +171,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         return
     }
 
-    let infoTotalDmg = totalDamage
     totalDamage -= totalSP < 0 ? 0: totalSP;
 
     let infoAfterSPReduction = totalDamage < 0 ? 0: totalDamage
@@ -149,6 +178,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     if (cancel) {
         return
     }
+
     if (totalDamage <=0){
         let messageContent = `${game.i18n.localize("WITCHER.Damage.initial")}: ${infoTotalDmg} <br />
         ${game.i18n.localize("WITCHER.Damage.totalSP")}: ${displaySP}<br />
@@ -193,7 +223,9 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     if (resistSilver || resistMeteorite) {
         totalDamage *= 0.5
     }
-    
+    if (isVulnerable) {
+      totalDamage *= 2
+    }
     let infoAfterResistance = totalDamage
 
     switch(location){
