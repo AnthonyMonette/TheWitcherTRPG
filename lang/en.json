@@ -469,6 +469,7 @@
 
     "WITCHER.Crit": "Critical",
     "WITCHER.Fumble": "Fumble",
+    "WITCHER.CritTotal": "For a total of",
 
     "WITCHER.table.Quantity": "Qty",
     "WITCHER.table.Range": "Range",
