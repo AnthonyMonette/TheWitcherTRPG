@@ -168,6 +168,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-armor-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
+      html.find(".item-buy").on("click", this._onItemBuy.bind(this));
       html.find(".add-item").on("click", this._onItemAdd.bind(this));
       html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
@@ -275,6 +276,7 @@ export default class WitcherActorSheet extends ActorSheet {
           "text/plain",
           JSON.stringify({
             item: item,
+            actor: this.actor,
             type: "itemDrop",
             }),
           )});
@@ -300,14 +302,13 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
-        let previousActor = null
-        game.actors.forEach(actor => {
-          actor.items.forEach(item => {
-              if(dragData.item._id == item.id) {
-                previousActor = actor
-              }
-          });
-        });
+        let previousActor = game.actors.get(dragData.actor._id)
+        let token = previousActor.token ?? previousActor.getActiveTokens()[0]
+        previousActor = token.actor
+
+        if (previousActor == this.actor){
+          return;
+        }
         if (typeof(dragData.item.data.quantity) === 'string' && dragData.item.data.quantity.includes("d")){
           let messageData = {
             speaker: {alias: this.actor.name},
@@ -315,8 +316,7 @@ export default class WitcherActorSheet extends ActorSheet {
           }
     
           let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
-          dragData.item.data.quantity = Math.floor(roll.roll.total)
-          this._addItem(this.actor, dragData.item)
+          this._addItem(this.actor, dragData.item, Math.floor(roll.roll.total))
           if (previousActor) {
             previousActor.deleteOwnedItem(dragData.item._id)
           }
@@ -332,7 +332,12 @@ export default class WitcherActorSheet extends ActorSheet {
               [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
                 numberOfItem = html.find("[name=numberOfItem]")[0].value;
                 cancel = false
-              } ]],
+              } ],
+              [`${game.i18n.localize("WITCHER.Button.All")}`, ()=>{  
+                numberOfItem = dragData.item.data.quantity
+                cancel = false
+              } ]
+            ],
               title : game.i18n.localize("WITCHER.Items.transferTitle"),
               content : content
             }
@@ -340,18 +345,11 @@ export default class WitcherActorSheet extends ActorSheet {
             if (cancel) {
               return
             }else {
-              let item = previousActor.items.get(dragData.item._id)
-              let newQuantity = dragData.item.data.quantity - numberOfItem
-              if (newQuantity <= 0 ){
-                previousActor.deleteOwnedItem(dragData.item._id)
-              }else {
-                item.update({'data.quantity': newQuantity <0 ? 0 : newQuantity})
-              }
+              this._removeItem(previousActor, dragData.item._id, numberOfItem)
               if (numberOfItem > dragData.item.data.quantity) {
                 numberOfItem = dragData.item.data.quantity
               }
-              dragData.item.data.quantity = numberOfItem
-              this._addItem(this.actor, dragData.item)
+              this._addItem(this.actor, dragData.item, numberOfItem)
             }
           }else {
             this._addItem(this.actor, dragData.item)
@@ -365,14 +363,28 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
-    async _addItem(actor, Additem) {
+    async _removeItem(actor, itemId, quantityToRemove) {
+      let foundItem = actor.items.get(itemId)
+      let newQuantity = foundItem.data.data.quantity - quantityToRemove
+      if (newQuantity <= 0 ){
+        await actor.deleteOwnedItem(itemId)
+      }else {
+        await foundItem.update({'data.quantity': newQuantity < 0 ? 0 : newQuantity})
+      }
+    }
+
+    async _addItem(actor, Additem, numberOfItem) {
       let foundItem = (actor.items).find(item => item.name == Additem.name);
-      console.log(foundItem)
       if (foundItem){
-        foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(Additem.data.quantity)})
+        await foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(numberOfItem)})
       }
       else {
-        actor.createEmbeddedDocuments("Item", [Additem]);
+        let newItem = { ...Additem };
+    
+        if (numberOfItem) {
+          newItem.data.quantity = Number(numberOfItem)
+        }
+        await actor.createEmbeddedDocuments("Item", [newItem]);
       }
     }
 
@@ -1342,6 +1354,131 @@ export default class WitcherActorSheet extends ActorSheet {
       return this.actor.deleteOwnedItem(itemId);
     }
 
+    async _onItemBuy(event) {
+      event.preventDefault(); 
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+      let coinOptions = `
+      <option value="crown" selected> ${game.i18n.localize("WITCHER.Currency.crown")} </option>
+      <option value="bizant"> ${game.i18n.localize("WITCHER.Currency.bizant")} </option>
+      <option value="ducat"> ${game.i18n.localize("WITCHER.Currency.ducat")} </option>
+      <option value="lintar"> ${game.i18n.localize("WITCHER.Currency.lintar")} </option>
+      <option value="floren"> ${game.i18n.localize("WITCHER.Currency.floren")} </option>
+      <option value="oren"> ${game.i18n.localize("WITCHER.Currency.oren")} </option>
+      `;   
+      let percentOptions = `
+      <option value="50">50%</option>
+      <option value="100"selected>100%</option>
+      <option value="125">125%</option>
+      <option value="150">150%</option>
+      <option value="175">175%</option>
+      <option value="200">200%</option>
+      `;   
+
+      let content = `
+      <script>
+        function calcTotalCost() {
+          var qtyInput = document.getElementById("itemQty");
+          var ItemCostInput = document.getElementById("custumCost");
+          var costTotalInput = document.getElementById("costTotal");
+          costTotalInput.value = ItemCostInput.value * qtyInput.value
+        }
+        function applyPercentage() {
+          var qtyInput = document.getElementById("itemQty");
+          var percentage = document.getElementById("percent");
+          var ItemCostInput = document.getElementById("custumCost");
+          ItemCostInput.value = Math.ceil(${item.data.data.cost} * (percentage.value / 100))
+
+          var costTotalInput = document.getElementById("costTotal");
+          costTotalInput.value = ItemCostInput.value * qtyInput.value
+        }
+      </script>
+
+      <label>${game.i18n.localize("WITCHER.Loot.InitialCost")}: ${item.data.data.cost}</label><br />
+      <label>${game.i18n.localize("WITCHER.Loot.HowMany")}: <input id="itemQty" onChange="calcTotalCost()" type="number" class="small" name="itemQty" value=1> /${item.data.data.quantity}</label> <br />
+      <label>${game.i18n.localize("WITCHER.Loot.ItemCost")}</label> <input id="custumCost" onChange="calcTotalCost()" type="number" name="costPerItemValue" value=${item.data.data.cost}>${game.i18n.localize("WITCHER.Loot.Percent")}<select id="percent" onChange="applyPercentage()" name="percentage">${percentOptions}</select><br /><br />
+      <label>${game.i18n.localize("WITCHER.Loot.TotalCost")}</label> <input id="costTotal" type="number" class="small" name="costTotalValue" value=${item.data.data.cost}> <select name="coinType">${coinOptions}</select><br />
+      `
+      let Characteroptions = `<option value="">other</option>`
+      for(let actor of game.actors){
+        if (actor.testUserPermission(game.user, "OWNER")){
+          if (actor == game.user.character) {
+            Characteroptions += `<option value="${actor.data._id}" selected>${actor.data.name}</option>`
+          }else {
+            Characteroptions += `<option value="${actor.data._id}">${actor.data.name}</option>`
+          }
+        };
+      }
+      content += `To Character : <select name="character">${Characteroptions}</select>`
+      let cancel = true
+      let numberOfItem = 0;
+      let totalCost = 0;
+      let characterId = "";
+      let coinType = "";
+
+      let dialogData = {
+        buttons : [
+        [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+          numberOfItem = html.find("[name=itemQty]")[0].value;
+          totalCost = html.find("[name=costTotalValue]")[0].value;
+          coinType = html.find("[name=coinType]")[0].value;
+          characterId = html.find("[name=character]")[0].value;
+          cancel = false
+        } ]],
+        title : game.i18n.localize("WITCHER.Loot.BuyTitle"),
+        content : content
+      }
+      await buttonDialog(dialogData)
+      if (cancel) {
+        return
+      }
+
+      let buyerActor = game.actors.get(characterId)
+      let token = buyerActor.token ?? buyerActor.getActiveTokens()[0]
+      buyerActor = token.actor
+
+      let hasEnoughMoney = true 
+      if (buyerActor){
+        hasEnoughMoney = buyerActor.data.data.currency[coinType] >= totalCost
+      } 
+
+      if (!hasEnoughMoney) {
+        ui.notifications.error("Not Enough Coins");
+      } else {
+        this._removeItem(this.actor, itemId, numberOfItem)
+        if (buyerActor){
+          this._addItem(buyerActor, item.data, numberOfItem)
+        } 
+  
+        switch(coinType){
+          case "crown":
+            if (buyerActor){buyerActor.update({'data.currency.crown': buyerActor.data.data.currency[coinType] - totalCost})} 
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "bizant":
+            if (buyerActor){buyerActor.update({'data.currency.bizant': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "ducat":
+            if (buyerActor){buyerActor.update({'data.currency.ducat': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "lintar":
+            if (buyerActor){buyerActor.update({'data.currency.lintar': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "floren":
+            if (buyerActor){buyerActor.update({'data.currency.floren': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "oren":
+            if (buyerActor){buyerActor.update({'data.currency.oren': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+        }
+      }
+    }
+
     _onItemDisplayInfo(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".item");
@@ -1429,7 +1566,7 @@ export default class WitcherActorSheet extends ActorSheet {
                        var x = document.getElementById("attackModifiers");
                        x.style.display = x.style.display === "none" ? "block" : "none";
                      }
-                     </script
+                     </script>
                      <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />`
       if (item.data.data.range) {
         content += `<label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> ${item.data.data.range}<br />`

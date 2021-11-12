@@ -9,3 +9,7 @@
     margin-top: 10px;
     border-width: 0px;
 }
+
+.item-section{
+    flex: 1
+}

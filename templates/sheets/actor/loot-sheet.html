@@ -1,12 +1,26 @@
 <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+{{#if (gt data.maxWeight 0)}}
+<div class="wrapper">
+    <div class="weight-value">
+        <span>{{totalWeight}}/{{data.maxWeight}} </span>
+    </div>
+
+    {{#if (gte totalWeight data.maxWeight)}}
+    <div class="weightbar-overweight"></div>
+    {{/if}}    
+    {{#if (lt totalWeight data.maxWeight)}}
+    <progress class="weightbar" value="{{totalWeight}}" max="{{data.maxWeight}}"></progress>
+    {{/if}}  
+</div>
+{{/if}}  
 <div class="flex">
     <div class="flex left-loot-border">
         <div>
             <div>
-                <label>{{localize "WITCHER.Loot.TotalWeight"}}:</label> 
+                <label>{{localize "WITCHER.Loot.MaxWeight"}}:</label> 
             </div>
             <div>
-                <span>{{totalWeight}}</span>
+                <span><input name="data.maxWeight" type="number" value="{{data.maxWeight}}" data-dtype="number"/></span>
             </div>
             <div>
                 <label>{{localize "WITCHER.Loot.TotalCost"}}:</label> 
@@ -19,7 +33,16 @@
             </div>
         </div>
     </div>
-    <di>
+    <di class="item-section">
+        <div class="flex">
+            <div class="currency"> <label>{{localize "WITCHER.Currency.bizant"}}</label><input class="small-medium" name="data.currency.bizant" type="number" value="{{data.currency.bizant}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.ducat"}}</label><input class="small-medium" name="data.currency.ducat" type="number" value="{{data.currency.ducat}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.lintar"}}</label><input class="small-medium" name="data.currency.lintar" type="number" value="{{data.currency.lintar}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.floren"}}</label><input class="small-medium" name="data.currency.floren" type="number" value="{{data.currency.floren}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.crown"}}</label><input class="small-medium" name="data.currency.crown" type="number" value="{{data.currency.crown}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.oren"}}</label><input class="small-medium" name="data.currency.oren" type="number" value="{{data.currency.oren}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.falsecoin"}}</label><input class="small-medium" name="data.currency.falsecoin" type="number" value="{{data.currency.falsecoin}}" placeholder="0" data-dtype="Number"/></div>
+        </div>
         <h2>{{localize "WITCHER.Loot.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
         <table class="weapon-table">
             <tr>
@@ -40,7 +63,7 @@
                     <td><input class="inline-edit item-name" data-field="name" type="text" value="{{item.name}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
                     <td><input class="inline-edit Cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" placeholder="" /></td>
-                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
             {{/each}}
@@ -56,7 +79,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
                     <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
             {{/each}}
@@ -72,7 +95,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
                     <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
             {{/each}}
@@ -88,7 +111,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
                     <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
             {{/each}}
@@ -104,7 +127,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
                     <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
             {{/each}}
