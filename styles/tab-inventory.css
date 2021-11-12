@@ -23,3 +23,19 @@
 #attackModifiers {
     display: none;
 }
+
+.wrapper { 
+    position: relative;
+}
+
+.weightbar{
+    background-color: grey;
+    width: 100%;
+    height: 12px;
+}
+  
+.weight-value {
+    color: white;
+    position: absolute;
+    right: 10px;
+}

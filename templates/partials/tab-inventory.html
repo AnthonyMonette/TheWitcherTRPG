@@ -1,3 +1,14 @@
+<div class="wrapper">
+    <div class="weight-value">
+        <span>{{totalWeight}}/{{data.coreStats.enc.current}} </span>
+    </div>
+    {{#if (gte totalWeight data.coreStats.enc.current)}}
+    <div class="weightbar-overweight"></div>
+    {{/if}}    
+    {{#if (lt totalWeight data.coreStats.enc.current)}}
+    <progress class="weightbar" value="{{totalWeight}}" max="{{data.coreStats.enc.current}}"></progress>
+    {{/if}}    
+</div>
 <div class="flex">
     <div class="weapon-section">
         <div class="flex">
@@ -469,14 +480,3 @@
         </div>
     </div>
 </div>
-
-<div class="weight-value">
-    <span>{{totalWeight}}/{{data.coreStats.enc.current}} </span>
-</div>
-
-{{#if (gte totalWeight data.coreStats.enc.current)}}
-<div class="weightbar-overweight"></div>
-{{/if}}    
-{{#if (lt totalWeight data.coreStats.enc.current)}}
-<progress class="weightbar" value="{{totalWeight}}" max="{{data.coreStats.enc.current}}"></progress>
-{{/if}}    

@@ -469,6 +469,7 @@
 
     "WITCHER.Crit": "Critical",
     "WITCHER.Fumble": "Fumble",
+    "WITCHER.CritTotal": "For a total of",
 
     "WITCHER.table.Quantity": "Qty",
     "WITCHER.table.Range": "Range",
@@ -532,6 +533,7 @@
     "WITCHER.Monster.Senses": "Senses",
     
     "WITCHER.Loot.TotalWeight": "Total Weight",
+    "WITCHER.Loot.MaxWeight": "Max Weight",
     "WITCHER.Loot.TotalCost": "Total Cost",
     "WITCHER.Loot.Weapons": "Weapons",
     "WITCHER.Loot.Armors": "Armors",
@@ -560,6 +562,7 @@
 
     "WITCHER.Button.Cancel": "Cancel",
     "WITCHER.Button.Continue": "Continue",
+    "WITCHER.Button.All": "All",
 
     "WITCHER.Spell.type": "Type",
     "WITCHER.Spell.Spells": "Spells",
@@ -777,5 +780,13 @@
     "WITCHER.Heal.recovered": " has recovered from an",
     "WITCHER.Heal.restful": "restful",
     "WITCHER.Heal.active": "active",
-    "WITCHER.Heal.day": "day"
+    "WITCHER.Heal.day": "day",
+
+    "WITCHER.Loot.NotEnough": "Not Enough Coins",
+    "WITCHER.Loot.InitialCost": "Initial Cost",
+    "WITCHER.Loot.HowMany": "How Many Items",
+    "WITCHER.Loot.ItemCost": "Cost by item",
+    "WITCHER.Loot.Percent": "Apply Percent",
+    
+    "WITCHER.Loot.BuyTitle": "Buy/Sell Items"
 }
