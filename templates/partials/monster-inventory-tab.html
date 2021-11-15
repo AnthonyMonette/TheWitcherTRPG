@@ -41,7 +41,10 @@
     </tbody>
     {{/each}}
 </table>
-<h2>Loot <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
+<div class="flex">
+    <h2 class="flex1">Loot <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
+    <a class="button-roll export-loot">{{localize "WITCHER.Monster.exportLoot"}}</a>
+</div>
 <table>
     {{#each loots as |valuable id|}}
     <tr class="item" data-item-id="{{valuable._id}}">

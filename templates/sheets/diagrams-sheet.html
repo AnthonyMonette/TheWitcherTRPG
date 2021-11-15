@@ -34,8 +34,12 @@
     <table>
         <tr> 
             <th>{{localize "WITCHER.Actor.Profession.Level"}}</th>
-            <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
+            {{#if data.isFormulae}}
             <th>{{localize "WITCHER.Diagram.alchemyDC"}}</th>
+            {{/if}}
+            {{#unless data.isFormulae}}
+            <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
+            {{/unless}}
             <th>{{localize "WITCHER.Diagram.craftingTime"}}</th>
             <th>{{localize "WITCHER.Diagram.investment"}}</th>
         </tr>
@@ -51,8 +55,12 @@
                     {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
+            {{#if data.isFormulae}}
             <td><input type="text" name="data.alchemyDC" value="{{data.alchemyDC}}" data-dtype="Number"/></td>
+            {{/if}}
+            {{#unless data.isFormulae}}
+            <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
+            {{/unless}}
             <td><input type="text" name="data.craftingTime" value="{{data.craftingTime}}"/></td>
             <td><input type="text" name="data.investment" value="{{data.investment}}" data-dtype="Number"/></td>
         </tr>

@@ -132,7 +132,6 @@ export default class WitcherActorSheet extends ActorSheet {
       data.substancesFulgur = data.items.filter(function(item) {return item.type=="component" &&  item.data.type=="substances" && item.data.substanceType=="fulgur" });
       data.fulgurCount =  data.substancesFulgur.sum("quantity");
 
-
       data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical" || item.type == "enhancement" || item.type == "mutagen"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
       
@@ -178,6 +177,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
       html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
+
+      html.find(".export-loot").on("click", this._onExportLoot.bind(this));
       
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -890,14 +891,104 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _alchemyCraft(event) {
+      let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.items.get(itemId);
 
-      const content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br /> Work in progress`;
+      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br />`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
         flavor: `<h1>Crafting</h1>`,
+      }
+
+      
+      content += `<div class="flex components-display">`
+      if (item.data.data.alchemyComponents.vitriol > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> ${item.data.data.alchemyComponents.vitriol}`
+      }
+      if (item.data.data.alchemyComponents.rebis > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> ${item.data.data.alchemyComponents.rebis}`
+      }
+      if (item.data.data.alchemyComponents.aether > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> ${item.data.data.alchemyComponents.aether}`
+      }
+      if (item.data.data.alchemyComponents.quebrith > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> ${item.data.data.alchemyComponents.quebrith}`
+      }
+      if (item.data.data.alchemyComponents.hydragenum > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> ${item.data.data.alchemyComponents.hydragenum}`
+      }
+      if (item.data.data.alchemyComponents.vermilion > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> ${item.data.data.alchemyComponents.vermilion}`
+      }
+      if (item.data.data.alchemyComponents.sol > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> ${item.data.data.alchemyComponents.sol}`
+      }
+      if (item.data.data.alchemyComponents.caelum > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> ${item.data.data.alchemyComponents.caelum}`
+      }
+      if (item.data.data.alchemyComponents.fulgur > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> ${item.data.data.alchemyComponents.fulgur}`
+      }
+      content += `</div>`
+
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.CraftingDiagram")}: <input type="checkbox" name="hasDiagram"></label> <br />`
+
+      let substancesVitriol = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="vitriol" });
+      let vitriolCount =  substancesVitriol.sum("quantity");
+      let substancesRebis = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="rebis" });
+      let rebisCount =  substancesRebis.sum("quantity");
+      let substancesAether = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="aether" });
+      let aetherCount =  substancesAether.sum("quantity");
+      let substancesQuebrith = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="quebrith" });
+      let quebrithCount =  substancesQuebrith.sum("quantity");
+      let substancesHydragenum = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="hydragenum" });
+      let hydragenumCount =  substancesHydragenum.sum("quantity");
+      let substancesVermilion = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="vermilion" });
+      let vermilionCount =  substancesVermilion.sum("quantity");
+      let substancesSol = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="sol" });
+      let solCount =  substancesSol.sum("quantity");
+      let substancesCaelum = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="caelum" });
+      let caelumCount =  substancesCaelum.sum("quantity");
+      let substancesFulgur = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="fulgur" });
+      let fulgurCount =  substancesFulgur.sum("quantity")
+      let missing = 0
+      if (item.data.data.alchemyComponents.vitriol > 0 && item.data.data.alchemyComponents.vitriol > vitriolCount){
+        missing = item.data.data.alchemyComponents.vitriol - vitriolCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vitriol")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.rebis > 0 && item.data.data.alchemyComponents.rebis > rebisCount){
+        missing = item.data.data.alchemyComponents.rebis - rebisCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Rebis")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.aether > 0 && item.data.data.alchemyComponents.aether > aetherCount){
+        missing = item.data.data.alchemyComponents.aether - aetherCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Aether")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.quebrith > 0 && item.data.data.alchemyComponents.quebrith > quebrithCount){
+        missing = item.data.data.alchemyComponents.quebrith - quebrithCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Quebrith")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.hydragenum > 0 && item.data.data.alchemyComponents.hydragenum > hydragenumCount){
+        missing = item.data.data.alchemyComponents.hydragenum - hydragenumCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Hydragenum")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.vermilion > 0 && item.data.data.alchemyComponents.vermilion > vermilionCount){
+        missing = item.data.data.alchemyComponents.vermilion - vermilionCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vermilion")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.sol > 0 && item.data.data.alchemyComponents.sol > solCount){
+        missing = item.data.data.alchemyComponents.sol - solCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Sol")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.caelum > 0 && item.data.data.alchemyComponents.caelum > caelumCount){
+        missing = item.data.data.alchemyComponents.caelum - caelumCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Caelum")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.fulgur > 0 && item.data.data.alchemyComponents.fulgur > fulgurCount){
+        missing = item.data.data.alchemyComponents.fulgur - fulgurCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Fulgur")}</span><br />`
       }
 
       new Dialog({
@@ -908,7 +999,11 @@ export default class WitcherActorSheet extends ActorSheet {
             label: `${game.i18n.localize("WITCHER.Dialog.ButtonCraft")}`, 
             callback: (html) => {
               let stat = this.actor.data.data.stats.cra.current;
+              let statName = game.i18n.localize(this.actor.data.data.stats.cra.label);
               let skill = this.actor.data.data.skills.cra.alchemy.value;
+              let skillName = game.i18n.localize(this.actor.data.data.skills.cra.alchemy.label);
+              let hasDiagram = html.find("[name=hasDiagram]").prop("checked");
+              skillName = skillName.replace(" (2)", "");
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingAlchemycal")}</h1>`,
               messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.alchemyDC")} ${item.data.data.alchemyDC}`;
               
@@ -917,8 +1012,30 @@ export default class WitcherActorSheet extends ActorSheet {
                 skill = this.actor.data.data.skills.cra.crafting.value;
                 messageData.flavor = `${game.i18n.localize("WITCHER.DiagramcraftingDC")} ${item.data.data.craftingDC}`;
               }
-              let rollFormula = `1d10+${stat}+${skill}`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              
+            	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${statName}]+${skill}[${skillName}]` ;
+
+              if (hasDiagram) {
+                rollFormula += !displayRollDetails ? `+2`:`+2[${game.i18n.localize("WITCHER.Dialog.Diagram")}]`
+              }
+
+              let totalModifiers = 0
+              this.actor.data.data.skills.cra.alchemy.modifiers.forEach(item => totalModifiers += Number(item.value));
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+              };
+              roll.toMessage(messageData);
             }
           }
         }}).render(true) 
@@ -1435,8 +1552,9 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let buyerActor = game.actors.get(characterId)
       let token = buyerActor.token ?? buyerActor.getActiveTokens()[0]
-      buyerActor = token.actor
-
+      if (token){
+        buyerActor = token.actor  
+      }
       let hasEnoughMoney = true 
       if (buyerActor){
         hasEnoughMoney = buyerActor.data.data.currency[coinType] >= totalCost
@@ -2037,6 +2155,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "seduction": this.actor.update({ 'data.skills.emp.seduction.isOpened': this.actor.data.data.skills.emp.seduction.isOpened ? false : true}); break;
       }
     }
+
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");
@@ -2098,6 +2217,23 @@ export default class WitcherActorSheet extends ActorSheet {
           this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
           break;
       }
+    }
+    
+    async _onExportLoot(event) {
+      let newLoot = await Actor.create(this.actor.data);
+      await newLoot.update({
+        "name" : newLoot.data.name + "--loot",
+        "type" : "loot"
+      });
+      
+      newLoot.items.forEach((item)=>{
+        if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
+          let roll = new Roll(item.data.data.quantity).roll()
+          item.update({ 'data.quantity': Math.ceil(roll.total)})
+        }
+      });
+
+      newLoot.sheet.render(true)
     }
 
     calc_total_skills_profession(data){
