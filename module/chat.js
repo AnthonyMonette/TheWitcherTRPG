@@ -44,7 +44,10 @@ export async function buttonDialog(data)
 }
 
 function onCritRoll(event) {
-  let current = event.currentTarget.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
+  let current = event.currentTarget.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
+  if(!current.length){
+    current = event.currentTarget.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
+  }
   let isSuccess = event.currentTarget.getElementsByClassName("dice-sucess")
   let totalValue = Number(current[0].innerText)
   let rollResult = new Roll("1d10x10").roll()

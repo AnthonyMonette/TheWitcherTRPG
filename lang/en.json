@@ -444,7 +444,6 @@
     "WITCHER.SkWillRitCraft": "Ritual Crafting (2)",
     "WITCHER.SkWillRitCraftLable": "Ritual Crafting",
 
-
     "WITCHER.Actor.ImprovementPoints": "Improvement Points",
     "WITCHER.Actor.CurrentIP":"Current IP:",
     "WITCHER.Actor.SkillName": "Skill name...",
@@ -612,6 +611,9 @@
     "WITCHER.Dialog.AlchemyTitle": "Performing an alchemy action",
     "WITCHER.Dialog.ButtonCraft": "Craft",
     "WITCHER.Dialog.CraftingAlchemycal": "Crafting an alchemical",
+    "WITCHER.Dialog.NoComponents": "Not Enough Component",
+    "WITCHER.Dialog.CraftingDiagram": "You have the diagram",
+    "WITCHER.Dialog.Diagram": "Diagram",
 
     "WITCHER.Dialog.ButtonDodge": "Dodge",
     "WITCHER.Dialog.ButtonReposition": "Reposition",
@@ -788,5 +790,6 @@
     "WITCHER.Loot.ItemCost": "Cost by item",
     "WITCHER.Loot.Percent": "Apply Percent",
     
-    "WITCHER.Loot.BuyTitle": "Buy/Sell Items"
+    "WITCHER.Loot.BuyTitle": "Buy/Sell Items",
+    "WITCHER.Monster.exportLoot": "Export To loot"    
 }

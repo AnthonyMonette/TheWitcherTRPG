@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.flex1 {
+  flex: 1;
+}
+
+
 /* Navigation tabs */
 .sheet nav.sheet-tabs { 
   height: 32px;
