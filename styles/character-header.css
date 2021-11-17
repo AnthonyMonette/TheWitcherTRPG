@@ -171,13 +171,11 @@ input.right-value {
 .right-top {
     display: flex;
     width: 230px;
-    height: 60px;
     margin-bottom: 10px;
 }
 
 .char-button-collum {
     width: 115px;
-    height: 60px;
     margin-left: 2.5px;
 }
 

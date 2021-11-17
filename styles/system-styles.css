@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.flex1 {
+  flex: 1;
+}
+
+
 /* Navigation tabs */
 .sheet nav.sheet-tabs { 
   height: 32px;
@@ -344,6 +349,10 @@ input.medium {
   width: 100px;
 }
 
+input#custumCost {
+  width: 40px;
+}
+
 input.spell-sta {
   width: 25px;
 }
@@ -352,11 +361,6 @@ input.spell-roll-value {
   width: 200px;
 }
 
-.weightbar{
-  background-color: grey;
-  width: 100%;
-  height: 15px;
-}
 .weightbar-overweight{
   background-color: red;
   width: 100%;
@@ -400,13 +404,6 @@ input.skill-value {
   min-height: 40px;
 }
 
-.weight-value {
-  margin: auto;
-  width: min-content;
-  position: relative;
-  top: 16px;
-  color: white;
-}
 .description {
   margin: 10px;
 }

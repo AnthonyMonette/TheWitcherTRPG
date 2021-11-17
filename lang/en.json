@@ -64,6 +64,8 @@
     "WITCHER.Armor.Heavy": "Heavy Armor",
     "WITCHER.Armor.Natural": "Natural Armor",
 
+    "WITCHER.Armor.LayerBonus": "Layer Bonus",
+
     "WITCHER.Armor.LocationHead": "Head",
     "WITCHER.Armor.LocationTorso": "Torso",
     "WITCHER.Armor.LocationLeg": "Leg",
@@ -443,7 +445,6 @@
     "WITCHER.SkWillRitCraft": "Ritual Crafting (2)",
     "WITCHER.SkWillRitCraftLable": "Ritual Crafting",
 
-
     "WITCHER.Actor.ImprovementPoints": "Improvement Points",
     "WITCHER.Actor.CurrentIP":"Current IP:",
     "WITCHER.Actor.SkillName": "Skill name...",
@@ -468,6 +469,7 @@
 
     "WITCHER.Crit": "Critical",
     "WITCHER.Fumble": "Fumble",
+    "WITCHER.CritTotal": "For a total of",
 
     "WITCHER.table.Quantity": "Qty",
     "WITCHER.table.Range": "Range",
@@ -531,6 +533,7 @@
     "WITCHER.Monster.Senses": "Senses",
     
     "WITCHER.Loot.TotalWeight": "Total Weight",
+    "WITCHER.Loot.MaxWeight": "Max Weight",
     "WITCHER.Loot.TotalCost": "Total Cost",
     "WITCHER.Loot.Weapons": "Weapons",
     "WITCHER.Loot.Armors": "Armors",
@@ -559,6 +562,7 @@
 
     "WITCHER.Button.Cancel": "Cancel",
     "WITCHER.Button.Continue": "Continue",
+    "WITCHER.Button.All": "All",
 
     "WITCHER.Spell.type": "Type",
     "WITCHER.Spell.Spells": "Spells",
@@ -608,6 +612,9 @@
     "WITCHER.Dialog.AlchemyTitle": "Performing an alchemy action",
     "WITCHER.Dialog.ButtonCraft": "Craft",
     "WITCHER.Dialog.CraftingAlchemycal": "Crafting an alchemical",
+    "WITCHER.Dialog.NoComponents": "Not Enough Component",
+    "WITCHER.Dialog.CraftingDiagram": "You have the diagram",
+    "WITCHER.Dialog.Diagram": "Diagram",
 
     "WITCHER.Dialog.ButtonDodge": "Dodge",
     "WITCHER.Dialog.ButtonReposition": "Reposition",
@@ -625,8 +632,10 @@
     "WITCHER.Dialog.attackRandomMonster": "Random Monster",
     "WITCHER.Dialog.attackHead": "Head",
     "WITCHER.Dialog.attackTorso": "Torso",
-    "WITCHER.Dialog.attackArm": "Arm",
-    "WITCHER.Dialog.attackLeg": "Leg",
+    "WITCHER.Dialog.attackRArm": "R. Arm",
+    "WITCHER.Dialog.attackLArm": "L. Arm",
+    "WITCHER.Dialog.attackRLeg": "R. Leg",
+    "WITCHER.Dialog.attackLLeg": "L. Leg",
     "WITCHER.Dialog.attackLimb": "Limb",
     "WITCHER.Dialog.attackTail": "Tail/wing",
 
@@ -738,6 +747,7 @@
     "WITCHER.Items.transferMany": "How many items to transfer",
 
     "WITCHER.Damage.damageType": "What type of damage",
+    "WITCHER.Damage.ChangeLocation": "Change The Location",
     "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
     "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
 
@@ -745,13 +755,42 @@
     "WITCHER.Damage.totalSP": "Total Stopping Power",
     "WITCHER.Damage.afterSPReduct": "Damage after sp reducttion",
     "WITCHER.Damage.afterLocationModifier": "Damage after location modifier",
-    "WITCHER.Damage.afterResistances": "Damage after resistances",
+    "WITCHER.Damage.afterResistances": "Damage after resistances/vulnerabilities",
     "WITCHER.Damage.totalApplied": "Total Damage Applied",
     "WITCHER.Damage.NotEnough": "Not enough damage to pierce the armor",
+    "WITCHER.Damage.isVulnerable": "Vulnerable to the attack",
+    "WITCHER.Damage.oilDmg": "Add Oil Damages (+5)",
+    "WITCHER.Damage.silverDmg": "Add Silver Damages",
+    "WITCHER.Damage.silver": "Silver",
+    "WITCHER.Damage.oil": "Oil",
+
 
     "WITCHER.Context.applyDmg": "Apply Damage",
     "WITCHER.Context.Defense": "Defense",
     "WITCHER.Context.SelectActor": "At least one actor must be selected",
 
-    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type"
+    "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type",
+
+    "WITCHER.Heal.button": "Heal",
+    "WITCHER.Heal.dialogTitle": "Heal After Rest",
+    "WITCHER.Heal.title": "Healing Circumstances",
+
+    "WITCHER.Heal.resting": "Spent Day Resting",
+    "WITCHER.Heal.sterilized": "Received Sterilising Fluid",
+    "WITCHER.Heal.healinghand": "Received Healing Hands",
+    "WITCHER.Heal.healingTent": "Received Healing Tent",
+
+    "WITCHER.Heal.recovered": " has recovered from an",
+    "WITCHER.Heal.restful": "restful",
+    "WITCHER.Heal.active": "active",
+    "WITCHER.Heal.day": "day",
+
+    "WITCHER.Loot.NotEnough": "Not Enough Coins",
+    "WITCHER.Loot.InitialCost": "Initial Cost",
+    "WITCHER.Loot.HowMany": "How Many Items",
+    "WITCHER.Loot.ItemCost": "Cost by item",
+    "WITCHER.Loot.Percent": "Apply Percent",
+    
+    "WITCHER.Loot.BuyTitle": "Buy/Sell Items",
+    "WITCHER.Monster.exportLoot": "Export To loot"    
 }

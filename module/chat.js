@@ -44,8 +44,22 @@ export async function buttonDialog(data)
 }
 
 function onCritRoll(event) {
+  let current = event.currentTarget.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
+  if(!current.length){
+    current = event.currentTarget.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
+  }
+  let isSuccess = event.currentTarget.getElementsByClassName("dice-sucess")
+  let totalValue = Number(current[0].innerText)
   let rollResult = new Roll("1d10x10").roll()
-  rollResult.toMessage()
+  if (isSuccess.length){
+    totalValue += Number(rollResult.total)
+  }else {
+    totalValue--
+    totalValue -= Number(rollResult.total)
+  }
+  let messageData = {}
+  messageData.flavor = `<div>${game.i18n.localize("WITCHER.CritTotal")}: ${totalValue}</div>`
+  rollResult.toMessage(messageData)
 }
 
 function onDamage(event) {

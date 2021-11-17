@@ -10,6 +10,88 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
 
     let naturalArmors = armors.filter(function(item) {return item.data.data.type == "Natural"})
 
+    let damageTypeOption = `
+    <option value="Slashing"> ${game.i18n.localize("WITCHER.Armor.Slashing")} </option>
+    <option value="Blundgeoning"> ${game.i18n.localize("WITCHER.Armor.Bludgeoning")} </option>
+    <option value="Percing"> ${game.i18n.localize("WITCHER.Armor.Percing")} </option>
+    <option value="Elemental"> ${game.i18n.localize("WITCHER.Armor.Elemental")} </option>
+    `;
+    
+    const locationOptions = `
+    <option value="Empty"></option>
+    <option value="Head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
+    <option value="Torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
+    <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
+    <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
+    <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+    <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
+    <option value="Tail/wing"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
+    `;    
+    const silverOptions = `
+    <option></option>
+    <option value="1d6">1d6</option>
+    <option value="2d6">2d6</option>
+    <option value="3d6">3d6</option>
+    <option value="4d6">4d6</option>
+    <option value="5d6">5d6</option>
+    `;
+
+    let content = `<label>${game.i18n.localize("WITCHER.Damage.damageType")}: <select name="damageType">${damageTypeOption}</select></label> <br />
+      <label>${game.i18n.localize("WITCHER.Damage.ChangeLocation")}: <select name="changeLocation">${locationOptions}</select></label> <br />`
+
+    if (actor.type == "monster"){ 
+        content += `<label>${game.i18n.localize("WITCHER.Damage.resistSilver")}: <input type="checkbox" name="resistNonSilver"></label><br />
+                    <label>${game.i18n.localize("WITCHER.Damage.resistMeteorite")}: <input type="checkbox" name="resistNonMeteorite"></label><br />`
+    }
+    content += `<label>${game.i18n.localize("WITCHER.Damage.isVulnerable")}: <input type="checkbox" name="vulnerable"></label><br />
+    <label>${game.i18n.localize("WITCHER.Damage.oilDmg")}: <input type="checkbox" name="oilDmg"></label><br />
+    <label>${game.i18n.localize("WITCHER.Damage.silverDmg")}: <select name="silverDmg">${silverOptions}</select></label><br />`
+
+    let cancel = true
+    let damageType = 0
+    let resistSilver = false;
+    let resistMeteorite = false;
+    let newLocation = false;
+    let isVulnerable = false;
+    let addOilDmg = false;
+    let silverDmg;
+
+    let infoTotalDmg = totalDamage
+
+    let dialogData = {
+        buttons : [
+            [`${game.i18n.localize("WITCHER.Button.Continue")}`, 
+             (html)=>{  
+                damageType = html.find("[name=damageType]")[0].value;
+                newLocation = html.find("[name=changeLocation]")[0].value;
+                resistSilver = html.find("[name=resistNonSilver]").prop("checked");
+                resistMeteorite = html.find("[name=resistNonMeteorite]").prop("checked");
+                isVulnerable = html.find("[name=vulnerable]").prop("checked");
+                addOilDmg = html.find("[name=oilDmg]").prop("checked");
+                silverDmg = html.find("[name=silverDmg]")[0].value;
+                cancel = false
+             } ]],
+        title : game.i18n.localize("WITCHER.Context.applyDmg"),
+        content : content
+    }
+    await buttonDialog(dialogData)
+
+    if (silverDmg){
+      let silverRoll = new Roll(silverDmg).roll()
+      totalDamage = Number(totalDamage) + silverRoll.total
+      infoTotalDmg += `+${silverRoll.total}[${game.i18n.localize("WITCHER.Damage.silver")}]`
+    }
+
+    if (newLocation != "Empty"){
+      location = newLocation
+    }
+    if (addOilDmg){
+      totalDamage = Number(totalDamage) + 5
+      infoTotalDmg += `+5[${game.i18n.localize("WITCHER.Damage.oil")}]`
+    }
+
+    infoTotalDmg = totalDamage +": " +infoTotalDmg;
+
     let armorSet = {};
     let totalSP = 0
     let displaySP = ""
@@ -21,7 +103,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 values = getArmorSp(armorSet["lightArmor"]?.data.data.headStopping, armorSet["mediumArmor"]?.data.data.headStopping, armorSet["heavyArmor"]?.data.data.headStopping)
                 displaySP = values[0]
                 totalSP = values[1]
-                console.log(values)
                 break;
             case "Torso":
                 armorSet = getArmors(torsoAmors)
@@ -63,6 +144,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 case "R. Leg": totalSP = Number(totalSP) + Number(armor?.data.data.rightLegStopping); displaySP += `+${armor?.data.data.rightLegStopping}`; break;
                 case "L. Leg": totalSP = Number(totalSP) + Number(armor?.data.data.leftLegStopping); displaySP += `+${armor?.data.data.leftLegStopping}`; break;
             }
+            displaySP += `[${game.i18n.localize("WITCHER.Armor.Natural")}]`;
         })
     } else {
         switch(location){
@@ -88,39 +170,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     if (!armorSet) {
         return
     }
-    let damageTypeOption = `
-    <option value="Slashing"> ${game.i18n.localize("WITCHER.Armor.Slashing")} </option>
-    <option value="Blundgeoning"> ${game.i18n.localize("WITCHER.Armor.Bludgeoning")} </option>
-    <option value="Percing"> ${game.i18n.localize("WITCHER.Armor.Percing")} </option>
-    <option value="Elemental"> ${game.i18n.localize("WITCHER.Armor.Elemental")} </option>
-    `;
-    let content = `<label>${game.i18n.localize("WITCHER.Damage.damageType")}: <select name="damageType">${damageTypeOption}</select></label> <br />`
-
-    if (actor.type == "monster"){ 
-        content += `<label>${game.i18n.localize("WITCHER.Damage.resistSilver")}: <input type="checkbox" name="resistNonSilver"></label><br />
-                    <label>${game.i18n.localize("WITCHER.Damage.resistMeteorite")}: <input type="checkbox" name="resistNonMeteorite"></label>`
-    }
-
-    let cancel = true
-    let damageType = 0
-    let resistSilver = false;
-    let resistMeteorite = false;
-
-    let dialogData = {
-        buttons : [
-            [`${game.i18n.localize("WITCHER.Button.Continue")}`, 
-             (html)=>{  
-                damageType = html.find("[name=damageType]")[0].value;
-                resistSilver = html.find("[name=resistNonSilver]").prop("checked");
-                resistMeteorite = html.find("[name=resistNonMeteorite]").prop("checked");
-                cancel = false
-             } ]],
-        title : game.i18n.localize("WITCHER.Items.transferTitle"),
-        content : content
-    }
-    await buttonDialog(dialogData)
-    let infoTotalDmg = totalDamage
-    let infoTotalSP = totalSP
 
     totalDamage -= totalSP < 0 ? 0: totalSP;
 
@@ -129,9 +178,10 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     if (cancel) {
         return
     }
+
     if (totalDamage <=0){
         let messageContent = `${game.i18n.localize("WITCHER.Damage.initial")}: ${infoTotalDmg} <br />
-        ${game.i18n.localize("WITCHER.Damage.totalSP")}: ${infoTotalSP}<br />
+        ${game.i18n.localize("WITCHER.Damage.totalSP")}: ${displaySP}<br />
         ${game.i18n.localize("WITCHER.Damage.afterSPReduct")} ${infoAfterSPReduction}<br /><br />
         ${game.i18n.localize("WITCHER.Damage.NotEnough")}
         `;
@@ -173,7 +223,9 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     if (resistSilver || resistMeteorite) {
         totalDamage *= 0.5
     }
-    
+    if (isVulnerable) {
+      totalDamage *= 2
+    }
     let infoAfterResistance = totalDamage
 
     switch(location){
@@ -288,12 +340,12 @@ function getArmorSp(lightArmorSP, mediumArmorSP, heavyArmorSP){
         if (mediumArmorSP) { 
             let diff = getArmorDiffBonus(mediumArmorSP, lightArmorSP)
             totalSP = Number(totalSP) + Number(diff)
-            displaySP +=  "+" + diff
+            displaySP +=  `+${diff}[${game.i18n.localize("WITCHER.Armor.LayerBonus")}]`
         }
         else if (heavyArmorSP) { 
             let diff = getArmorDiffBonus(heavyArmorSP, lightArmorSP)
             totalSP = Number(totalSP) + Number(diff)
-            displaySP +=  "+" + diff
+            displaySP +=  `+${diff}[${game.i18n.localize("WITCHER.Armor.LayerBonus")}]`
         }
         else  {
             totalSP = lightArmorSP
@@ -306,7 +358,7 @@ function getArmorSp(lightArmorSP, mediumArmorSP, heavyArmorSP){
 function getArmorDiffBonus(OverArmor, UnderArmor) {
     let diff = OverArmor - UnderArmor
     
-    if (UnderArmor <= 0|| OverArmor <= 0) {
+    if (UnderArmor <= 0 || OverArmor <= 0) {
         return 0
     }
 
@@ -341,7 +393,7 @@ function ExecuteDefense(actor){
         <label>${game.i18n.localize("WITCHER.Dialog.DefenseExtra")}: <input type="checkbox" name="isExtraDefense"></label> <br />
     </div>
     <label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />
-    <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customDef" value=0></label> <br />`;
+    <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="Number" class="small" name="customDef" value=0></label> <br />`;
 
     let messageData = {
     speaker: {alias: actor.name},

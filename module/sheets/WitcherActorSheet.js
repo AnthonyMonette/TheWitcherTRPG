@@ -132,7 +132,6 @@ export default class WitcherActorSheet extends ActorSheet {
       data.substancesFulgur = data.items.filter(function(item) {return item.type=="component" &&  item.data.type=="substances" && item.data.substanceType=="fulgur" });
       data.fulgurCount =  data.substancesFulgur.sum("quantity");
 
-
       data.loots =  data.items.filter(function(item) {return item.type=="component" || item.type == "valuable" || item.type=="diagrams" || item.type=="armor" || item.type=="alchemical" || item.type == "enhancement" || item.type == "mutagen"});
       data.notes =  data.items.filter(function(item) {return item.type=="note"});
       
@@ -168,6 +167,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-armor-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
+      html.find(".item-buy").on("click", this._onItemBuy.bind(this));
       html.find(".add-item").on("click", this._onItemAdd.bind(this));
       html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
@@ -177,11 +177,14 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
       html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
+
+      html.find(".export-loot").on("click", this._onExportLoot.bind(this));
       
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
+      html.find(".heal-button").on("click", this._onHeal.bind(this));
       
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
@@ -274,6 +277,7 @@ export default class WitcherActorSheet extends ActorSheet {
           "text/plain",
           JSON.stringify({
             item: item,
+            actor: this.actor,
             type: "itemDrop",
             }),
           )});
@@ -299,14 +303,13 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDrop(event, data) {
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
-        let previousActor = null
-        game.actors.forEach(actor => {
-          actor.items.forEach(item => {
-              if(dragData.item._id == item.id) {
-                previousActor = actor
-              }
-          });
-        });
+        let previousActor = game.actors.get(dragData.actor._id)
+        let token = previousActor.token ?? previousActor.getActiveTokens()[0]
+        previousActor = token.actor
+
+        if (previousActor == this.actor){
+          return;
+        }
         if (typeof(dragData.item.data.quantity) === 'string' && dragData.item.data.quantity.includes("d")){
           let messageData = {
             speaker: {alias: this.actor.name},
@@ -314,8 +317,7 @@ export default class WitcherActorSheet extends ActorSheet {
           }
     
           let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
-          dragData.item.data.quantity = Math.floor(roll.roll.total)
-          this._addItem(this.actor, dragData.item)
+          this._addItem(this.actor, dragData.item, Math.floor(roll.roll.total))
           if (previousActor) {
             previousActor.deleteOwnedItem(dragData.item._id)
           }
@@ -323,7 +325,7 @@ export default class WitcherActorSheet extends ActorSheet {
         }
         if (dragData.item.data.quantity != 0) {
           if (dragData.item.data.quantity > 1) {
-            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
+            let content =  `${ game.i18n.localize("WITCHER.Items.transferMany")}: <input type="number" class="small" name="numberOfItem" value=1>/${dragData.item.data.quantity} <br />`
             let cancel = true
             let numberOfItem = 0
             let dialogData = {
@@ -331,7 +333,12 @@ export default class WitcherActorSheet extends ActorSheet {
               [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
                 numberOfItem = html.find("[name=numberOfItem]")[0].value;
                 cancel = false
-              } ]],
+              } ],
+              [`${game.i18n.localize("WITCHER.Button.All")}`, ()=>{  
+                numberOfItem = dragData.item.data.quantity
+                cancel = false
+              } ]
+            ],
               title : game.i18n.localize("WITCHER.Items.transferTitle"),
               content : content
             }
@@ -339,18 +346,11 @@ export default class WitcherActorSheet extends ActorSheet {
             if (cancel) {
               return
             }else {
-              let item = previousActor.items.get(dragData.item._id)
-              let newQuantity = dragData.item.data.quantity - numberOfItem
-              if (newQuantity <= 0 ){
-                previousActor.deleteOwnedItem(dragData.item._id)
-              }else {
-                item.update({'data.quantity': newQuantity <0 ? 0 : newQuantity})
-              }
+              this._removeItem(previousActor, dragData.item._id, numberOfItem)
               if (numberOfItem > dragData.item.data.quantity) {
                 numberOfItem = dragData.item.data.quantity
               }
-              dragData.item.data.quantity = numberOfItem
-              this._addItem(this.actor, dragData.item)
+              this._addItem(this.actor, dragData.item, numberOfItem)
             }
           }else {
             this._addItem(this.actor, dragData.item)
@@ -364,14 +364,28 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
-    async _addItem(actor, Additem) {
+    async _removeItem(actor, itemId, quantityToRemove) {
+      let foundItem = actor.items.get(itemId)
+      let newQuantity = foundItem.data.data.quantity - quantityToRemove
+      if (newQuantity <= 0 ){
+        await actor.deleteOwnedItem(itemId)
+      }else {
+        await foundItem.update({'data.quantity': newQuantity < 0 ? 0 : newQuantity})
+      }
+    }
+
+    async _addItem(actor, Additem, numberOfItem) {
       let foundItem = (actor.items).find(item => item.name == Additem.name);
-      console.log(foundItem)
       if (foundItem){
-        foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(Additem.data.quantity)})
+        await foundItem.update({'data.quantity': Number(foundItem.data.data.quantity) + Number(numberOfItem)})
       }
       else {
-        actor.createEmbeddedDocuments("Item", [Additem]);
+        let newItem = { ...Additem };
+    
+        if (numberOfItem) {
+          newItem.data.quantity = Number(numberOfItem)
+        }
+        await actor.createEmbeddedDocuments("Item", [newItem]);
       }
     }
 
@@ -877,14 +891,104 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _alchemyCraft(event) {
+      let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.items.get(itemId);
 
-      const content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br /> Work in progress`;
+      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.data.name}</label> <br />`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
         flavor: `<h1>Crafting</h1>`,
+      }
+
+      
+      content += `<div class="flex components-display">`
+      if (item.data.data.alchemyComponents.vitriol > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> ${item.data.data.alchemyComponents.vitriol}`
+      }
+      if (item.data.data.alchemyComponents.rebis > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> ${item.data.data.alchemyComponents.rebis}`
+      }
+      if (item.data.data.alchemyComponents.aether > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> ${item.data.data.alchemyComponents.aether}`
+      }
+      if (item.data.data.alchemyComponents.quebrith > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> ${item.data.data.alchemyComponents.quebrith}`
+      }
+      if (item.data.data.alchemyComponents.hydragenum > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> ${item.data.data.alchemyComponents.hydragenum}`
+      }
+      if (item.data.data.alchemyComponents.vermilion > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> ${item.data.data.alchemyComponents.vermilion}`
+      }
+      if (item.data.data.alchemyComponents.sol > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> ${item.data.data.alchemyComponents.sol}`
+      }
+      if (item.data.data.alchemyComponents.caelum > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> ${item.data.data.alchemyComponents.caelum}`
+      }
+      if (item.data.data.alchemyComponents.fulgur > 0) {
+        content += `<img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> ${item.data.data.alchemyComponents.fulgur}`
+      }
+      content += `</div>`
+
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.CraftingDiagram")}: <input type="checkbox" name="hasDiagram"></label> <br />`
+
+      let substancesVitriol = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="vitriol" });
+      let vitriolCount =  substancesVitriol.sum("quantity");
+      let substancesRebis = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="rebis" });
+      let rebisCount =  substancesRebis.sum("quantity");
+      let substancesAether = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="aether" });
+      let aetherCount =  substancesAether.sum("quantity");
+      let substancesQuebrith = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="quebrith" });
+      let quebrithCount =  substancesQuebrith.sum("quantity");
+      let substancesHydragenum = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="hydragenum" });
+      let hydragenumCount =  substancesHydragenum.sum("quantity");
+      let substancesVermilion = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="vermilion" });
+      let vermilionCount =  substancesVermilion.sum("quantity");
+      let substancesSol = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="sol" });
+      let solCount =  substancesSol.sum("quantity");
+      let substancesCaelum = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="caelum" });
+      let caelumCount =  substancesCaelum.sum("quantity");
+      let substancesFulgur = this.actor.items.filter(function(item) {return item.type=="component" &&  item.data.data.type=="substances" && item.data.data.substanceType=="fulgur" });
+      let fulgurCount =  substancesFulgur.sum("quantity")
+      let missing = 0
+      if (item.data.data.alchemyComponents.vitriol > 0 && item.data.data.alchemyComponents.vitriol > vitriolCount){
+        missing = item.data.data.alchemyComponents.vitriol - vitriolCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vitriol")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.rebis > 0 && item.data.data.alchemyComponents.rebis > rebisCount){
+        missing = item.data.data.alchemyComponents.rebis - rebisCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Rebis")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.aether > 0 && item.data.data.alchemyComponents.aether > aetherCount){
+        missing = item.data.data.alchemyComponents.aether - aetherCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Aether")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.quebrith > 0 && item.data.data.alchemyComponents.quebrith > quebrithCount){
+        missing = item.data.data.alchemyComponents.quebrith - quebrithCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Quebrith")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.hydragenum > 0 && item.data.data.alchemyComponents.hydragenum > hydragenumCount){
+        missing = item.data.data.alchemyComponents.hydragenum - hydragenumCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Hydragenum")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.vermilion > 0 && item.data.data.alchemyComponents.vermilion > vermilionCount){
+        missing = item.data.data.alchemyComponents.vermilion - vermilionCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vermilion")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.sol > 0 && item.data.data.alchemyComponents.sol > solCount){
+        missing = item.data.data.alchemyComponents.sol - solCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Sol")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.caelum > 0 && item.data.data.alchemyComponents.caelum > caelumCount){
+        missing = item.data.data.alchemyComponents.caelum - caelumCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Caelum")}</span><br />`
+      }
+      if (item.data.data.alchemyComponents.fulgur > 0 && item.data.data.alchemyComponents.fulgur > fulgurCount){
+        missing = item.data.data.alchemyComponents.fulgur - fulgurCount
+        content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Fulgur")}</span><br />`
       }
 
       new Dialog({
@@ -895,7 +999,11 @@ export default class WitcherActorSheet extends ActorSheet {
             label: `${game.i18n.localize("WITCHER.Dialog.ButtonCraft")}`, 
             callback: (html) => {
               let stat = this.actor.data.data.stats.cra.current;
+              let statName = game.i18n.localize(this.actor.data.data.stats.cra.label);
               let skill = this.actor.data.data.skills.cra.alchemy.value;
+              let skillName = game.i18n.localize(this.actor.data.data.skills.cra.alchemy.label);
+              let hasDiagram = html.find("[name=hasDiagram]").prop("checked");
+              skillName = skillName.replace(" (2)", "");
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingAlchemycal")}</h1>`,
               messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.alchemyDC")} ${item.data.data.alchemyDC}`;
               
@@ -904,8 +1012,30 @@ export default class WitcherActorSheet extends ActorSheet {
                 skill = this.actor.data.data.skills.cra.crafting.value;
                 messageData.flavor = `${game.i18n.localize("WITCHER.DiagramcraftingDC")} ${item.data.data.craftingDC}`;
               }
-              let rollFormula = `1d10+${stat}+${skill}`;
-              new Roll(rollFormula).roll().toMessage(messageData);
+              
+            	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${statName}]+${skill}[${skillName}]` ;
+
+              if (hasDiagram) {
+                rollFormula += !displayRollDetails ? `+2`:`+2[${game.i18n.localize("WITCHER.Dialog.Diagram")}]`
+              }
+
+              let totalModifiers = 0
+              this.actor.data.data.skills.cra.alchemy.modifiers.forEach(item => totalModifiers += Number(item.value));
+              if (totalModifiers < 0){
+                rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }
+              if (totalModifiers > 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+              }
+
+              let roll = new Roll(rollFormula).roll()
+              if (roll.dice[0].results[0].result == 10){  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+              };
+              if (roll.dice[0].results[0].result == 1){  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+              };
+              roll.toMessage(messageData);
             }
           }
         }}).render(true) 
@@ -1049,7 +1179,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }else {
         token = tokens[0]
       }
-      console.log(token)
 
       if (token && spellItem.data.data.createTemplate) {
         let distance = Number(spellItem.data.data.templateSize)
@@ -1165,10 +1294,87 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onDefenceRoll(event) {
       ExecuteDefense(this.actor)
-      
-     
     }
-    
+
+    async _onHeal(){let dialogTemplate = `
+      <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
+      <div class="flex">
+        <div>
+          <div><input id="R" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.resting")}</div>
+          <div><input id="SF" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.sterilized")}</div>
+        </div>
+        <div>
+          <div><input id="HH" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healinghand")}</div>
+            <div><input id="HT" type="checkbox" unchecked/> ${game.i18n.localize("WITCHER.Heal.healingTent")}</div>
+        </div>
+      </div>`;
+    new Dialog({
+      title: game.i18n.localize("WITCHER.Heal.dialogTitle"),
+      content: dialogTemplate,
+      buttons: {
+        t1: {
+          label: game.i18n.localize("WITCHER.Heal.button"),
+          callback: async (html) => {
+            let rested = html.find("#R")[0].checked;
+            let sterFluid = html.find("#SF")[0].checked;
+            let healHand = html.find("#HH")[0].checked;
+            let healTent = html.find("#HT")[0].checked;
+
+            let actor =  this.actor;
+            let rec = actor.data.data.coreStats.rec.current;
+            let curHealth = actor.data.data.derivedStats.hp.value;
+            let total_rec = 0;
+            let maxHealth = actor.data.data.derivedStats.hp.max;
+            //Calculate healed amount
+            if(rested){
+              console.log("Spent Day Resting");
+              total_rec += rec;
+            }
+            else{
+              console.log("Spent Day Active");
+              total_rec += Math.floor(rec / 2);
+            }
+            if(sterFluid){
+              console.log("Add Sterilising Fluid Bonus");
+              total_rec += 2;
+            }
+            if(healHand){
+              console.log("Add Healing Hands Bonus");
+              total_rec += 3;
+            }
+            if(healTent){
+              console.log("Add Healing Tent Bonus");
+              total_rec += 2;
+            }
+            //Update actor health
+            await actor.update({"data.derivedStats.hp.value": Math.min(curHealth + total_rec, maxHealth)})
+            setTimeout(() => {
+                      let newSTA = actor.data.data.derivedStats.sta.max;
+                      //Delay stamina refill to allow actor sheet to update max STA value if previously Seriously Wounded or in Death State, otherwise it would refill to the weakened max STA value
+                      actor.update({"data.derivedStats.sta.value": newSTA});
+                    }, 400);
+                    
+            ui.notifications.info(`${actor.data.name} ${game.i18n.localize("WITCHER.Heal.recovered")} ${rested? game.i18n.localize("WITCHER.Heal.restful"): game.i18n.localize("WITCHER.Heal.active")} ${game.i18n.localize("WITCHER.Heal.day")}`)
+          
+            //Remove add one day for each Crit wound and removes it if equals to max days.
+            const critList = Object.values( this.actor.data.data.critWounds).map((details) => details);
+            let newCritList = []
+            critList.forEach(crit => {
+              crit.daysHealed += 1
+              if ( crit.daysHealed < crit.healingTime ){
+                newCritList.push(crit)
+              }
+            });
+            this.actor.update({ "data.critWounds": newCritList });
+          }
+        },
+        t2: {
+          label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+        }
+      },
+    }).render(true);
+    }
+
     async _onStatSaveRoll(event) {
       let stat = event.currentTarget.closest(".stat-display").dataset.stat;
       let statValue = 0
@@ -1265,6 +1471,132 @@ export default class WitcherActorSheet extends ActorSheet {
       return this.actor.deleteOwnedItem(itemId);
     }
 
+    async _onItemBuy(event) {
+      event.preventDefault(); 
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+      let coinOptions = `
+      <option value="crown" selected> ${game.i18n.localize("WITCHER.Currency.crown")} </option>
+      <option value="bizant"> ${game.i18n.localize("WITCHER.Currency.bizant")} </option>
+      <option value="ducat"> ${game.i18n.localize("WITCHER.Currency.ducat")} </option>
+      <option value="lintar"> ${game.i18n.localize("WITCHER.Currency.lintar")} </option>
+      <option value="floren"> ${game.i18n.localize("WITCHER.Currency.floren")} </option>
+      <option value="oren"> ${game.i18n.localize("WITCHER.Currency.oren")} </option>
+      `;   
+      let percentOptions = `
+      <option value="50">50%</option>
+      <option value="100"selected>100%</option>
+      <option value="125">125%</option>
+      <option value="150">150%</option>
+      <option value="175">175%</option>
+      <option value="200">200%</option>
+      `;   
+
+      let content = `
+      <script>
+        function calcTotalCost() {
+          var qtyInput = document.getElementById("itemQty");
+          var ItemCostInput = document.getElementById("custumCost");
+          var costTotalInput = document.getElementById("costTotal");
+          costTotalInput.value = ItemCostInput.value * qtyInput.value
+        }
+        function applyPercentage() {
+          var qtyInput = document.getElementById("itemQty");
+          var percentage = document.getElementById("percent");
+          var ItemCostInput = document.getElementById("custumCost");
+          ItemCostInput.value = Math.ceil(${item.data.data.cost} * (percentage.value / 100))
+
+          var costTotalInput = document.getElementById("costTotal");
+          costTotalInput.value = ItemCostInput.value * qtyInput.value
+        }
+      </script>
+
+      <label>${game.i18n.localize("WITCHER.Loot.InitialCost")}: ${item.data.data.cost}</label><br />
+      <label>${game.i18n.localize("WITCHER.Loot.HowMany")}: <input id="itemQty" onChange="calcTotalCost()" type="number" class="small" name="itemQty" value=1> /${item.data.data.quantity}</label> <br />
+      <label>${game.i18n.localize("WITCHER.Loot.ItemCost")}</label> <input id="custumCost" onChange="calcTotalCost()" type="number" name="costPerItemValue" value=${item.data.data.cost}>${game.i18n.localize("WITCHER.Loot.Percent")}<select id="percent" onChange="applyPercentage()" name="percentage">${percentOptions}</select><br /><br />
+      <label>${game.i18n.localize("WITCHER.Loot.TotalCost")}</label> <input id="costTotal" type="number" class="small" name="costTotalValue" value=${item.data.data.cost}> <select name="coinType">${coinOptions}</select><br />
+      `
+      let Characteroptions = `<option value="">other</option>`
+      for(let actor of game.actors){
+        if (actor.testUserPermission(game.user, "OWNER")){
+          if (actor == game.user.character) {
+            Characteroptions += `<option value="${actor.data._id}" selected>${actor.data.name}</option>`
+          }else {
+            Characteroptions += `<option value="${actor.data._id}">${actor.data.name}</option>`
+          }
+        };
+      }
+      content += `To Character : <select name="character">${Characteroptions}</select>`
+      let cancel = true
+      let numberOfItem = 0;
+      let totalCost = 0;
+      let characterId = "";
+      let coinType = "";
+
+      let dialogData = {
+        buttons : [
+        [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+          numberOfItem = html.find("[name=itemQty]")[0].value;
+          totalCost = html.find("[name=costTotalValue]")[0].value;
+          coinType = html.find("[name=coinType]")[0].value;
+          characterId = html.find("[name=character]")[0].value;
+          cancel = false
+        } ]],
+        title : game.i18n.localize("WITCHER.Loot.BuyTitle"),
+        content : content
+      }
+      await buttonDialog(dialogData)
+      if (cancel) {
+        return
+      }
+
+      let buyerActor = game.actors.get(characterId)
+      let token = buyerActor.token ?? buyerActor.getActiveTokens()[0]
+      if (token){
+        buyerActor = token.actor  
+      }
+      let hasEnoughMoney = true 
+      if (buyerActor){
+        hasEnoughMoney = buyerActor.data.data.currency[coinType] >= totalCost
+      } 
+
+      if (!hasEnoughMoney) {
+        ui.notifications.error("Not Enough Coins");
+      } else {
+        this._removeItem(this.actor, itemId, numberOfItem)
+        if (buyerActor){
+          this._addItem(buyerActor, item.data, numberOfItem)
+        } 
+  
+        switch(coinType){
+          case "crown":
+            if (buyerActor){buyerActor.update({'data.currency.crown': buyerActor.data.data.currency[coinType] - totalCost})} 
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "bizant":
+            if (buyerActor){buyerActor.update({'data.currency.bizant': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "ducat":
+            if (buyerActor){buyerActor.update({'data.currency.ducat': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "lintar":
+            if (buyerActor){buyerActor.update({'data.currency.lintar': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "floren":
+            if (buyerActor){buyerActor.update({'data.currency.floren': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+          case "oren":
+            if (buyerActor){buyerActor.update({'data.currency.oren': buyerActor.data.data.currency[coinType] - totalCost})}
+            this.actor.update({'data.currency.crown': Number(this.actor.data.data.currency[coinType]) + Number(totalCost)})
+            break;
+        }
+      }
+    }
+
     _onItemDisplayInfo(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".item");
@@ -1306,8 +1638,10 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="randomMonster"> ${game.i18n.localize("WITCHER.Dialog.attackRandomMonster")} </option>
       <option value="head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
       <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
-      <option value="arm"> ${game.i18n.localize("WITCHER.Dialog.attackArm")} </option>
-      <option value="leg"> ${game.i18n.localize("WITCHER.Dialog.attackLeg")} </option>
+      <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
+      <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
+      <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+      <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
       <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
 
@@ -1324,7 +1658,7 @@ export default class WitcherActorSheet extends ActorSheet {
         <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
         <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
         <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
-        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input class="small" name="customAim" value=0> <br />
+        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input  type="number" class="small" name="customAim" value=0> <br />
     </div>
       `;
       const rangeOptions = `
@@ -1350,17 +1684,17 @@ export default class WitcherActorSheet extends ActorSheet {
                        var x = document.getElementById("attackModifiers");
                        x.style.display = x.style.display === "none" ? "block" : "none";
                      }
-                     </script
+                     </script>
                      <label>${game.i18n.localize("WITCHER.Dialog.attackLocation")}: <select name="location">${locationOptions}</select></label> <br />`
       if (item.data.data.range) {
         content += `<label>${game.i18n.localize("WITCHER.Dialog.attackRange")}: <select name="range">${rangeOptions}</select></label> ${item.data.data.range}<br />`
       }
 
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customAtt" value=0></label> <br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                   <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input name="customDmg" value=0></label> <br />`;
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input type="number" class="small" name="customDmg" value=0></label> <br />`;
                   
       if (this.actor.type =="character" && isMeleeAttack){ 
         content += `<label>${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}: ${this.actor.data.data.attackStats.meleeBonus} </label><br />`
@@ -1601,13 +1935,23 @@ export default class WitcherActorSheet extends ActorSheet {
                     touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-1`: `${attFormula}-1[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     break;
-                  case "arm":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                  case "L. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
-                  case "leg":
-                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                  case "R. Arm":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-3`: `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "L. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+                    attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
+                    LocationFormula = `*0.5`;
+                    break;
+                  case "R. Leg":
+                    touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")}  ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
                     attFormula = !displayRollDetails ? `${attFormula}-2`: `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
                     LocationFormula = `*0.5`;
                     break;
@@ -1811,6 +2155,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "seduction": this.actor.update({ 'data.skills.emp.seduction.isOpened': this.actor.data.data.skills.emp.seduction.isOpened ? false : true}); break;
       }
     }
+
     _onSkillDisplay(event) {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".skill");
@@ -1872,6 +2217,23 @@ export default class WitcherActorSheet extends ActorSheet {
           this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
           break;
       }
+    }
+    
+    async _onExportLoot(event) {
+      let newLoot = await Actor.create(this.actor.data);
+      await newLoot.update({
+        "name" : newLoot.data.name + "--loot",
+        "type" : "loot"
+      });
+      
+      newLoot.items.forEach((item)=>{
+        if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
+          let roll = new Roll(item.data.data.quantity).roll()
+          item.update({ 'data.quantity': Math.ceil(roll.total)})
+        }
+      });
+
+      newLoot.sheet.render(true)
     }
 
     calc_total_skills_profession(data){
