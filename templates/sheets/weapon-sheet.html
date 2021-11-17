@@ -55,13 +55,13 @@
         <tr>
             <td class="weapon-dmg-type">
                 <label>{{localize "WITCHER.Enhancement.Slashing"}}</label>
-                <input title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" name="data.usingslashingdmg" {{checked data.usingslashingdmg}}/>
+                <input class="damage-type" title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" id="slashing" {{checked data.type.slashing}}/>
                 <label>{{localize "WITCHER.Enhancement.Percing"}}</label>
-                <input title="{{localize "WITCHER.Armor.Percing"}}" type="checkbox" name="data.usingpiersingdmg" {{checked data.usingpiersingdmg}}/>
+                <input class="damage-type" title="{{localize "WITCHER.Armor.Percing"}}" type="checkbox" id="percing" {{checked data.type.percing}}/>
                 <label>{{localize "WITCHER.Enhancement.Bludgeoning"}}</label>
-                <input title="{{localize "WITCHER.Armor.Bludgeoning"}}" type="checkbox" name="data.usingbludgeoningdmg" {{checked data.usingbludgeoningdmg}}/>
+                <input class="damage-type" title="{{localize "WITCHER.Armor.Bludgeoning"}}" type="checkbox" id="bludgeoning" {{checked data.type.bludgeoning}}/>
                 <label>{{localize "WITCHER.Enhancement.Elemental"}}</label>
-                <input title="{{localize "WITCHER.Armor.Elemental"}}" type="checkbox" name="data.usingelementaldmg" {{checked data.usingelementaldmg}}/>
+                <input class="damage-type" title="{{localize "WITCHER.Armor.Elemental"}}" type="checkbox" id="elemental" {{checked data.type.elemental}}/>
             </td>
             {{#unless data.isAmmo}}
             <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>

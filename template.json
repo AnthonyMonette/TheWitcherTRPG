@@ -1035,7 +1035,13 @@
     },
     "weapon": {
       "templates": ["base"],
-      "type": "",
+      "type": {
+        "text": "",
+        "slashing": false,
+        "percing": false,
+        "bludgeoning": false,
+        "elemental": false
+      },
       "isAmmo": false,
       "usingAmmo": false,
       "accuracy": 0,
