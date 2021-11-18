@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Percentuale",
     "WITCHER.DC": "CD",
 
-    "WITCHER.Item.Availability": "Disp.",
+    "WITCHER.Item.Short.Availability": "Disp.",
     "WITCHER.Item.Weight": "Peso",
     "WITCHER.Item.Cost": "Costo",
     "WITCHER.Item.Effect": "Effetti",
@@ -29,13 +29,13 @@
     "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.WeaponAccuracy": "PA",
-    "WITCHER.Weapon.Damage": "DAN",
-    "WITCHER.Weapon.Reliability": "Aff.",
-    "WITCHER.Weapon.MaxReliability": "Max. Aff.",
+    "WITCHER.Weapon.Short.WA": "PA",
+    "WITCHER.Weapon.Short.Damage": "DAN",
+    "WITCHER.Weapon.Short.Reliability": "Aff.",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Aff.",
     "WITCHER.Weapon.Hands": "Mani",
-    "WITCHER.Weapon.Concealement": "Occ.",
-    "WITCHER.Weapon.Enhancement": "POT",
+    "WITCHER.Weapon.Short.Concealement": "Occ.",
+    "WITCHER.Weapon.Short.Enhancements": "POT",
     "WITCHER.Weapon.Range": "GIT",
     "WITCHER.Weapon.Elderfolk": "RA",
 
@@ -43,7 +43,7 @@
     "WITCHER.Weapon.MeleeBonus": "Bonus in Mischia",
     
     "WITCHER.Weapon.isAmmunition": "Sono Munizioni",
-    "WITCHER.Weapon.rateOfFire": "N°Att",
+    "WITCHER.Weapon.Short.RateOfFire": "N°Att",
 
     "WITCHER.Armor.StoppingPower": "PR",
     "WITCHER.Armor.MaxStoppingPower": "Max. PR",
@@ -54,7 +54,7 @@
     "WITCHER.Armor.Resistances": "Resistenze",
     "WITCHER.Armor.Bludgeoning": "Contundente",
     "WITCHER.Armor.Slashing": "Tagliente",
-    "WITCHER.Armor.Percing": "Perforante",
+    "WITCHER.Armor.Piercing": "Perforante",
 
     "WITCHER.Armor.LocationHead": "Testa",
     "WITCHER.Armor.LocationTorso": "Torso",
@@ -81,7 +81,7 @@
     "WITCHER.Enhancement.Stopping": "Protezione",
     "WITCHER.Enhancement.Bludgeoning": "C",
     "WITCHER.Enhancement.Slashing": "T",
-    "WITCHER.Enhancement.Percing": "P",
+    "WITCHER.Enhancement.Piercing": "P",
 
     "WITCHER.Enhancement.Armor": "Armatura",
     "WITCHER.Enhancement.Rune": "Runa",

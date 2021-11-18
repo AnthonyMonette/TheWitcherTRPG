@@ -96,7 +96,7 @@ export default class WitcherItemSheet extends ItemSheet {
       newval[element.id] = !newval[element.id]
       let types=[]
       if(newval.slashing) types.push(game.i18n.localize("WITCHER.Armor.Slashing"))
-      if(newval.percing) types.push(game.i18n.localize("WITCHER.Armor.Percing"))
+      if(newval.Piercing) types.push(game.i18n.localize("WITCHER.Armor.Piercing"))
       if(newval.bludgeoning) types.push(game.i18n.localize("WITCHER.Armor.Bludgeoning"))
       if(newval.elemental) types.push(game.i18n.localize("WITCHER.Armor.Elemental"))
       newval.text = types.join(", ")

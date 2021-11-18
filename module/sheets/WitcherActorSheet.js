@@ -461,7 +461,7 @@ export default class WitcherActorSheet extends ActorSheet {
                                 "data.rightLegMaxStopping": item.data.data.rightLegMaxStopping + choosedEnhancement.data.data.stopping,
                                 'data.bludgeoning': choosedEnhancement.data.data.bludgeoning,
                                 'data.slashing': choosedEnhancement.data.data.slashing,
-                                'data.percing': choosedEnhancement.data.data.percing,
+                                'data.Piercing': choosedEnhancement.data.data.Piercing,
                                 'data.effects': allEffects})
                 }
                 else {
@@ -1772,10 +1772,10 @@ export default class WitcherActorSheet extends ActorSheet {
                 let damageFormula = formula;
 
                 if (item.data.data.accuracy < 0){
-                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WA")}]`
                 }
                 if (item.data.data.accuracy > 0){
-                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WA")}]`
                 }
                 if (targetOutsideLOS) {attFormula += "-3";}
                 if (outsideLOS) {attFormula += "+3";}

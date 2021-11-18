@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Процент",
     "WITCHER.DC": "СЛ",
 
-    "WITCHER.Item.Availability": "Дос",
+    "WITCHER.Item.Short.Availability": "Дос",
     "WITCHER.Item.Weight": "Вес",
     "WITCHER.Item.Cost": "Цена",
     "WITCHER.Item.Effect": "Эффект",
@@ -29,13 +29,13 @@
     "Witcher.Item.CantHide": "Н/С",
 
     "WITCHER.Weapon.Type": "Тип",
-    "WITCHER.Weapon.WeaponAccuracy": "Т",
-    "WITCHER.Weapon.Damage": "У",
-    "WITCHER.Weapon.Reliability": "Н",
-    "WITCHER.Weapon.MaxReliability": "Макс. Н",
+    "WITCHER.Weapon.Short.WA": "Т",
+    "WITCHER.Weapon.Short.Damage": "У",
+    "WITCHER.Weapon.Short.Reliability": "Н",
+    "WITCHER.Weapon.Short.MaxReliability": "Макс. Н",
     "WITCHER.Weapon.Hands": "Х",
-    "WITCHER.Weapon.Concealement": "Скр",
-    "WITCHER.Weapon.Enhancement": "Ус",
+    "WITCHER.Weapon.Short.Concealement": "Скр",
+    "WITCHER.Weapon.Short.Enhancements": "Ус",
     "WITCHER.Weapon.Range": "Дис",
     "WITCHER.Weapon.Elderfolk": "Ст. народ",
 
@@ -43,7 +43,7 @@
     "WITCHER.Weapon.MeleeBonus": "Доп. урон в ближнем бою",
 
     "WITCHER.Weapon.isAmmunition": "Является боеприпасом",
-    "WITCHER.Weapon.rateOfFire": "Скорость атаки",
+    "WITCHER.Weapon.Short.RateOfFire": "Скорость атаки",
 
     "WITCHER.Armor.StoppingPower": "ПБ",
     "WITCHER.Armor.MaxStoppingPower": "Макс. ПБ",
@@ -55,7 +55,7 @@
     "WITCHER.Armor.Res": "Сопр.",
     "WITCHER.Armor.Bludgeoning": "Дробящее",
     "WITCHER.Armor.Slashing": "Рубящее",
-    "WITCHER.Armor.Percing": "Колющее",
+    "WITCHER.Armor.Piercing": "Колющее",
     "WITCHER.Armor.Elemental": "Стихийное",
     "WITCHER.Armor.Type": "Тип",
 
@@ -91,7 +91,7 @@
     "WITCHER.Enhancement.Stopping": "Stopping",
     "WITCHER.Enhancement.Bludgeoning": "Д",
     "WITCHER.Enhancement.Slashing": "Р",
-    "WITCHER.Enhancement.Percing": "К",
+    "WITCHER.Enhancement.Piercing": "К",
 
     "WITCHER.Enhancement.Armor": "Броня",
     "WITCHER.Enhancement.Rune": "Руна",

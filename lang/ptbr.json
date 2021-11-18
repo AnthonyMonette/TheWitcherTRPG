@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Porcentagem",
     "WITCHER.DC": "ND",
 
-    "WITCHER.Item.Availability": "Disp.",
+    "WITCHER.Item.Short.Availability": "Disp.",
     "WITCHER.Item.Weight": "Peso",
     "WITCHER.Item.Cost": "Custo",
     "WITCHER.Item.Effect": "Efeitos",
@@ -29,13 +29,13 @@
     "Witcher.Item.CantHide": "IE",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.WeaponAccuracy": "PA",
-    "WITCHER.Weapon.Damage": "DANO",
-    "WITCHER.Weapon.Reliability": "DURA",
-    "WITCHER.Weapon.MaxReliability": "DURA MAX",
+    "WITCHER.Weapon.Short.WA": "PA",
+    "WITCHER.Weapon.Short.Damage": "DANO",
+    "WITCHER.Weapon.Short.Reliability": "DURA",
+    "WITCHER.Weapon.Short.MaxReliability": "DURA MAX",
     "WITCHER.Weapon.Hands": "Mãos",
-    "WITCHER.Weapon.Concealement": "PORTE",
-    "WITCHER.Weapon.Enhancement": "MEL",
+    "WITCHER.Weapon.Short.Concealement": "PORTE",
+    "WITCHER.Weapon.Short.Enhancements": "MEL",
     "WITCHER.Weapon.Range": "ALC",
     "WITCHER.Weapon.Elderfolk": "Anc.",
 
@@ -53,7 +53,7 @@
     "WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Concussiva",
     "WITCHER.Armor.Slashing": "Cortante",
-    "WITCHER.Armor.Percing": "Perfurante",
+    "WITCHER.Armor.Piercing": "Perfurante",
     "WITCHER.Armor.Elemental": "Elemental",
     "WITCHER.Armor.Type": "Tipo",
 
@@ -91,7 +91,7 @@
     "WITCHER.Enhancement.Stopping": "Parada",
     "WITCHER.Enhancement.Bludgeoning": "CC",
     "WITCHER.Enhancement.Slashing": "CO",
-    "WITCHER.Enhancement.Percing": "PE",
+    "WITCHER.Enhancement.Piercing": "PE",
 
     "WITCHER.Mount.Dex": "Des + Atl",
     "WITCHER.Mount.Dexterity": "Des",
@@ -587,7 +587,7 @@
     "WITCHER.Chat.SaveText": "Para ter sucesso você deve rolar abaixo",
 
     "WITCHER.Weapon.isAmmunition": "É uma munição",
-    "WITCHER.Weapon.rateOfFire": "CT",
+    "WITCHER.Weapon.Short.RateOfFire": "CT",
 
     "WITCHER.Enhancement.Armor": "Armadura",
     "WITCHER.Enhancement.Rune": "Runa",

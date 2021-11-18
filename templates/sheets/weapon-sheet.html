@@ -39,28 +39,30 @@
         <tr>
             <th>{{localize "WITCHER.Dialog.damageType"}}</th>
             {{#unless data.isAmmo}}
-            <th>{{localize "WITCHER.Weapon.WeaponAccuracy"}}</th>
+            <th title="{{localize "WITCHER.Weapon.WeaponAccuracy"}}">{{localize "WITCHER.Weapon.Short.WA"}}</th>
             <th>{{localize "WITCHER.Weapon.Hands"}}</th>
-            <th>{{localize "WITCHER.Weapon.Enhancement"}}</th>
+            <th title="{{localize "WITCHER.Weapon.Enhancements"}}">{{localize "WITCHER.Weapon.Short.Enhancements"}}</th>
             {{/unless}}
-            <th>{{localize "WITCHER.Item.Availability"}}</th>
-            <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
-            <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
-            <th>{{localize "WITCHER.Weapon.Concealement"}}</th>
+            <th title="{{localize "WITCHER.Item.Availability"}}">{{localize "WITCHER.Item.Short.Availability"}}</th>
+            <th title="{{localize "WITCHER.Weapon.Reliability"}}">{{localize "WITCHER.Weapon.Short.Reliability"}}</th>
+            <th title="{{localize "WITCHER.Weapon.MaxReliability"}}">{{localize "WITCHER.Weapon.Short.MaxReliability"}}</th>
+            <th title="{{localize "WITCHER.Weapon.Concealement"}}">{{localize "WITCHER.Weapon.Short.Concealement"}}</th>
             {{#unless data.isAmmo}}
-            <th>{{localize "WITCHER.Weapon.rateOfFire"}}</th>
+            <th title="{{localize "WITCHER.Weapon.RateOfFire"}}">{{localize "WITCHER.Weapon.Short.RateOfFire"}}</th>
             {{/unless}}
 
         </tr>
         <tr class="weapon-stat-table">
             <td class="weapon-dmg-type">
                 <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Slashing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" id="slashing" {{checked data.type.slashing}}/></label>
-                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Percing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Percing"}}" type="checkbox" id="percing" {{checked data.type.percing}}/></label>
+                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Piercing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Piercing"}}" type="checkbox" id="Piercing" {{checked data.type.Piercing}}/></label>
                 <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Bludgeoning"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Bludgeoning"}}" type="checkbox" id="bludgeoning" {{checked data.type.bludgeoning}}/></label>
                 <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Elemental"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Elemental"}}" type="checkbox" id="elemental" {{checked data.type.elemental}}/></label>
             </td>
             {{#unless data.isAmmo}}
-            <td><input class="double-digit" type="number" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
+            <td>
+                <input class="double-digit" type="number" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/>
+            </td>
             <td>
                 <select name="data.hands" id="hands-select">
                     {{#select data.hands}}
@@ -115,14 +117,14 @@
         {{/unless}}
         <table class="weapon-bottom-table">
             <tr>
-                <th><a class="add-effect"><i class="fas fa-plus"></i></a></th>
+                <th><a class="add-effect" title="{{localize "WITCHER.Item.AddEffect"}}"><i class="fas fa-plus"></i></a></th>
                 <th>{{localize "WITCHER.Item.Effect"}}</th>
                 <th><label>{{localize "WITCHER.Percentage"}}</label></th>
             </tr>
             {{#each data.effects as |effect name|}}
             <tr>
                 <th class="list-item"  data-id="{{effect.id}}">
-                    <a class="remove-effect"><i class="fas fa-minus"></i></a>
+                    <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>
                 </th>
                 <td class="list-item"  data-id="{{effect.id}}">
                     <input  class="list-edit weapon-effect" data-field="name" type="text" value="{{effect.name}}"/>

@@ -1038,7 +1038,7 @@
       "type": {
         "text": "",
         "slashing": false,
-        "percing": false,
+        "Piercing": false,
         "bludgeoning": false,
         "elemental": false
       },
@@ -1095,7 +1095,7 @@
       "equiped": false,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "Piercing": false
     },
     "enhancement": {
       "templates": ["base"],
@@ -1110,7 +1110,7 @@
       "stopping": 0,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "Piercing": false
     },
     "mount": {
       "templates": ["base"],

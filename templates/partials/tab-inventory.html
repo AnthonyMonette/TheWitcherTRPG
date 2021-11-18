@@ -60,7 +60,7 @@
                                 <td></td> 
                                 <td></td> 
                                 {{/if}}
-                                <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Concealement"}} :</b></label>{{weapon.data.conceal}}</div></td>
+                                <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Short.Concealement"}} :</b></label>{{weapon.data.conceal}}</div></td>
                                 <td><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Weight"}} :</b></label>{{weapon.data.weight}}</div></td>
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
@@ -68,7 +68,7 @@
                             <tr >
                                 <td colspan="8">
                                     <div class="flex">
-                                        {{localize "WITCHER.Weapon.Enhancement"}}:
+                                        {{localize "WITCHER.Weapon.Short.Enhancements"}}:
                                         {{#each weapon.data.enhancementItems as |enhancement id|}}
                                             {{#if enhancement.img}}
                                                 <div class="item item-enhancement" data-item-id="{{enhancement._id}}">
@@ -222,7 +222,7 @@
                         
                     <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}} disabled /></td>
                     <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} disabled /></td>
-                    <td><input type="checkbox" name="data.percing" {{checked data.percing}} disabled /></td>
+                    <td><input type="checkbox" name="data.Piercing" {{checked data.Piercing}} disabled /></td>
                     
                 </tr>
                 <tr class="item-info hidden">
@@ -231,7 +231,7 @@
                             <tr >
                                 <td colspan="8">
                                     <div class="flex">
-                                        {{localize "WITCHER.Weapon.Enhancement"}}:
+                                        {{localize "WITCHER.Weapon.Short.Enhancements"}}:
                                         {{#each armor.data.enhancementItems as |enhancement id|}}
                                             {{#if enhancement.img}}
                                                 <div class="item item-enhancement" data-item-id="{{enhancement._id}}">
