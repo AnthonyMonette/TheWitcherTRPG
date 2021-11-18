@@ -535,6 +535,7 @@
     "WITCHER.Monster.Senses": "Capacidades",
     
     "WITCHER.Loot.TotalWeight": "Peso total",
+	"WITCHER.Loot.MaxWeight": "Peso Máximo",
     "WITCHER.Loot.TotalCost": "Coste total",
     "WITCHER.Loot.Weapons": "Armas",
     "WITCHER.Loot.Armors": "Armaduras",
@@ -563,6 +564,7 @@
 
     "WITCHER.Button.Cancel": "Cancelar",
     "WITCHER.Button.Continue": "Continuar",
+	 "WITCHER.Button.All": "Todo",
 
     "WITCHER.Spell.type": "Tipo",
     "WITCHER.Spell.Spells": "Hechizo",
@@ -610,8 +612,11 @@
 
     "WITCHER.Dialog.Crafting": "Elaboración de un",
     "WITCHER.Dialog.AlchemyTitle": "Realizar una acción de alquimia",
-    "WITCHER.Dialog.ButtonCraft": "Artesanía´",
+    "WITCHER.Dialog.ButtonCraft": "Artesanía",
     "WITCHER.Dialog.CraftingAlchemycal": "Elaboración de una alquimia",
+	"WITCHER.Dialog.NoComponents": "No hay suficientes componentes",
+    "WITCHER.Dialog.CraftingDiagram": "Tienes el diagrama",
+    "WITCHER.Dialog.Diagram": "Diagrama",
 
     "WITCHER.Dialog.ButtonDodge": "Esquivar",
     "WITCHER.Dialog.ButtonReposition": "Reposicionarse",
@@ -680,8 +685,8 @@
     "WITCHER.Dialog.attackCustomDmg": "Modificadores de daño personalizados",
     "WITCHER.Dialog.attackWith": "Realizar un ataque con",
     
-    "WITCHER.Dialog.chooseAmmunition": " Elige municiones",
-    "WITCHER.Dialog.NoAmmunation": " No hay munición disponible",
+    "WITCHER.Dialog.chooseAmmunition": "Elige municiones",
+    "WITCHER.Dialog.NoAmmunation": "No hay munición disponible",
     "WITCHER.Dialog.Ammunation": "Munición",
 
     "WITCHER.Dialog.ButtonRoll": "Tirar los dados",
@@ -736,9 +741,9 @@
 	
     "WITCHER.Settings.specialFont": "Usa la fuente especial de The Witcher",
 	
-	"WITCHER.SKill.profession": "Prof",
-    "WITCHER.SKill.pickup": "Recoger",
-    "WITCHER.SKill.learn": "Aprender",
+	"WITCHER.SKill.profession": "Profesión",
+    "WITCHER.SKill.pickup": "Hab. a elección",
+    "WITCHER.SKill.learn": "Aprendizaje",
 
     "WITCHER.Items.transferTitle": "Transferir objetos",
     "WITCHER.Items.transferMany": "¿Cuántos objetos quieres transferir?",
@@ -772,12 +777,21 @@
     "WITCHER.Heal.title": "Circustancias Curativas",
 
     "WITCHER.Heal.resting": "Pasar el día descansando",
-    "WITCHER.Heal.sterilized": "Recibió liquido desinfectante",
+    "WITCHER.Heal.sterilized": "Recibió líquido desinfectante",
     "WITCHER.Heal.healinghand": "Recibidas manos que curan",
     "WITCHER.Heal.healingTent": "Recibió hospital de campaña",
 
-    "WITCHER.Heal.recovered": " se ha recuperado de un",
+    "WITCHER.Heal.recovered": " Se ha recuperado de un",
     "WITCHER.Heal.restful": "Descansado",
-    "WITCHER.Heal.active": "activo",
-    "WITCHER.Heal.day": "día"
+    "WITCHER.Heal.active": "Activo",
+    "WITCHER.Heal.day": "Día",
+	
+	"WITCHER.Loot.NotEnough": "No hay suficientes monedas",
+    "WITCHER.Loot.InitialCost": "Coste inicial",
+    "WITCHER.Loot.HowMany": "¿Cuántos artículos?",
+    "WITCHER.Loot.ItemCost": "Coste por artículo",
+    "WITCHER.Loot.Percent": "Aplicar porcentaje",
+
+    "WITCHER.Loot.BuyTitle": "Comprar/Vender artículos",
+    "WITCHER.Monster.exportLoot": "Exportar a botín"
 }
