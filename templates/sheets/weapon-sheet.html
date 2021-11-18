@@ -52,19 +52,15 @@
             {{/unless}}
 
         </tr>
-        <tr>
+        <tr class="weapon-stat-table">
             <td class="weapon-dmg-type">
-                <label>{{localize "WITCHER.Enhancement.Slashing"}}</label>
-                <input class="damage-type" title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" id="slashing" {{checked data.type.slashing}}/>
-                <label>{{localize "WITCHER.Enhancement.Percing"}}</label>
-                <input class="damage-type" title="{{localize "WITCHER.Armor.Percing"}}" type="checkbox" id="percing" {{checked data.type.percing}}/>
-                <label>{{localize "WITCHER.Enhancement.Bludgeoning"}}</label>
-                <input class="damage-type" title="{{localize "WITCHER.Armor.Bludgeoning"}}" type="checkbox" id="bludgeoning" {{checked data.type.bludgeoning}}/>
-                <label>{{localize "WITCHER.Enhancement.Elemental"}}</label>
-                <input class="damage-type" title="{{localize "WITCHER.Armor.Elemental"}}" type="checkbox" id="elemental" {{checked data.type.elemental}}/>
+                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Slashing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" id="slashing" {{checked data.type.slashing}}/></label>
+                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Percing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Percing"}}" type="checkbox" id="percing" {{checked data.type.percing}}/></label>
+                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Bludgeoning"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Bludgeoning"}}" type="checkbox" id="bludgeoning" {{checked data.type.bludgeoning}}/></label>
+                <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Elemental"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Elemental"}}" type="checkbox" id="elemental" {{checked data.type.elemental}}/></label>
             </td>
             {{#unless data.isAmmo}}
-            <td><input type="text" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
+            <td><input class="double-digit" type="number" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/></td>
             <td>
                 <select name="data.hands" id="hands-select">
                     {{#select data.hands}}
@@ -73,7 +69,7 @@
                         {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+            <td><input class="double-digit" type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
             {{/unless}}
             <td>
                 <select name="data.avail" id="avail-select">
@@ -84,8 +80,8 @@
                 {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
-            <td><input type="text" name="data.maxReliability" value="{{data.maxReliability}}" data-dtype="Number"/></td>
+            <td><input class="double-digit" type="number" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
+            <td><input class="double-digit" type="number" name="data.maxReliability" value="{{data.maxReliability}}" data-dtype="Number"/></td>
             <td>
                 <select name="data.conceal" id="avail-select">
                     {{#select data.conceal}}
@@ -96,36 +92,46 @@
                 </select>
             </td>
             {{#unless data.isAmmo}}
-            <td><input type="text" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
+            <td><input class="double-digit" type="number" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
             {{/unless}}
         </tr>
     </table>
     <div class="flex">
         {{#unless data.isAmmo}}
-        <div class="flex">
-            <div>
-                <b>{{localize "WITCHER.Weapon.Damage"}}</b><input type="text" name="data.damage" value="{{data.damage}}"/>
-            </div>
-            <div>
-                <b>{{localize "WITCHER.Weapon.Range"}}</b><input type="text" name="data.range" value="{{data.range}}"/>
-            </div>
-        </div>
+        <table class="weapon-bottom-table weapon-bottom-table-one">
+            <tr>
+                <th>{{localize "WITCHER.Weapon.Damage"}}</th>
+                <th>{{localize "WITCHER.Weapon.Range"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="data.damage" value="{{data.damage}}"/>
+                </td>
+                <td>
+                    </b><input type="text" name="data.range" value="{{data.range}}"/>
+                </td>
+            </tr>
+        </table>
         {{/unless}}
-        <div>
-            <div class="flex">
-                <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
-            </div>
+        <table class="weapon-bottom-table">
+            <tr>
+                <th><a class="add-effect"><i class="fas fa-plus"></i></a></th>
+                <th>{{localize "WITCHER.Item.Effect"}}</th>
+                <th><label>{{localize "WITCHER.Percentage"}}</label></th>
+            </tr>
             {{#each data.effects as |effect name|}}
-            <div class="flex list-item"  data-id="{{effect.id}}">
-                <a class="remove-effect"><i class="fas fa-minus"></i></a>
-                <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
-                <div  class="flex">
-                    <label>{{localize "WITCHER.Percentage"}}:</label>
-                    <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
-                    %
-                </div>
-            </div>
+            <tr>
+                <th class="list-item"  data-id="{{effect.id}}">
+                    <a class="remove-effect"><i class="fas fa-minus"></i></a>
+                </th>
+                <td class="list-item"  data-id="{{effect.id}}">
+                    <input  class="list-edit weapon-effect" data-field="name" type="text" value="{{effect.name}}"/>
+                </td>
+                <td class="list-item"  data-id="{{effect.id}}">
+                    <input class="list-edit" data-field="percentage" type="number"  value="{{effect.percentage}}" data-dtype="Number" />
+                </td>
+            </tr>
             {{/each}}
-        </div>        
+        </table>
     </div>
 </form>
