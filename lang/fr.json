@@ -29,7 +29,7 @@
     "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Type",
-    "WITCHER.Weapon.Short.WA": "PrA",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "PrA",
     "WITCHER.Weapon.Short.Damage": "DMG",
     "WITCHER.Weapon.Short.Reliability": "Fia.",
     "WITCHER.Weapon.Short.MaxReliability": "Max. Fia.",

@@ -32,7 +32,7 @@
     "Witcher.Item.CantHide": "I",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.Short.WA": "PA",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "PA",
     "WITCHER.Weapon.Short.Damage": "Daño",
     "WITCHER.Weapon.Short.Reliability": "Fiab",
     "WITCHER.Weapon.Short.MaxReliability": "Max. Fiab",

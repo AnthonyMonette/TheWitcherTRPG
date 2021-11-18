@@ -29,7 +29,7 @@
     "Witcher.Item.CantHide": "IE",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.Short.WA": "PA",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "PA",
     "WITCHER.Weapon.Short.Damage": "DANO",
     "WITCHER.Weapon.Short.Reliability": "DURA",
     "WITCHER.Weapon.Short.MaxReliability": "DURA MAX",

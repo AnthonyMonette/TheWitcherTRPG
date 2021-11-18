@@ -33,7 +33,7 @@
     "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Type",
-    "WITCHER.Weapon.Short.WA": "WA",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "WA",
     "WITCHER.Weapon.Short.Damage": "DMG",
     "WITCHER.Weapon.Short.Reliability": "Rel.",
     "WITCHER.Weapon.Short.MaxReliability": "Max. Rel.",
