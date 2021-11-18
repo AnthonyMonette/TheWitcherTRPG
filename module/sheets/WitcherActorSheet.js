@@ -461,7 +461,7 @@ export default class WitcherActorSheet extends ActorSheet {
                                 "data.rightLegMaxStopping": item.data.data.rightLegMaxStopping + choosedEnhancement.data.data.stopping,
                                 'data.bludgeoning': choosedEnhancement.data.data.bludgeoning,
                                 'data.slashing': choosedEnhancement.data.data.slashing,
-                                'data.Piercing': choosedEnhancement.data.data.Piercing,
+                                'data.piercing': choosedEnhancement.data.data.piercing,
                                 'data.effects': allEffects})
                 }
                 else {

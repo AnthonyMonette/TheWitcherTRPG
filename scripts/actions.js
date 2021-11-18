@@ -214,7 +214,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
             }
             break;
         case "Piercing":
-            if (armorSet["lightArmor"]?.data.data.Piercing || armorSet["mediumArmor"]?.data.data.Piercing || armorSet["heavyArmor"]?.data.data.Piercing){
+            if (armorSet["lightArmor"]?.data.data.piercing || armorSet["mediumArmor"]?.data.data.piercing || armorSet["heavyArmor"]?.data.data.piercing){
                 totalDamage *= 0.5
             }
             break;
