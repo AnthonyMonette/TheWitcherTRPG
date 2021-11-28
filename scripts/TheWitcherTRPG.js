@@ -25,6 +25,7 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/monster-details-tab.html",
         "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html",
         "systems/TheWitcherTRPG/templates/partials/skill-display.html",
+        "systems/TheWitcherTRPG/templates/partials/loot-item-display.html",
         "systems/TheWitcherTRPG/templates/partials/item-header.html"
     ];
     return loadTemplates(templatePath); 
@@ -70,7 +71,7 @@ Hooks.once("ready", async function() {
     }
   });
 
-  Hooks.once("dragRuler.ready", (SpeedProvider) => {
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
     class FictionalGameSystemSpeedProvider extends SpeedProvider {
         get colors() {
             return [

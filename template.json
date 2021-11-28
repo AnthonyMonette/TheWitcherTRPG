@@ -1022,7 +1022,8 @@
         "description": "",
         "quantity": 1,
         "weight": 0,
-        "cost": 0
+        "cost": 0,
+        "isHidden": false
       }
     },
     "valuable": {

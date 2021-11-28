@@ -149,7 +149,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (this.actor.data.data.pannels == undefined){
         this.actor.update({ 'data.pannels':{}});
       }
-
+      data.isGM = game.user.isGM
       return data;
     }
 
@@ -168,6 +168,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
       html.find(".item-buy").on("click", this._onItemBuy.bind(this));
+      html.find(".item-hide").on("click", this._onItemHide.bind(this));
       html.find(".add-item").on("click", this._onItemAdd.bind(this));
       html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
@@ -305,7 +306,9 @@ export default class WitcherActorSheet extends ActorSheet {
       if (dragData.type === "itemDrop") {
         let previousActor = game.actors.get(dragData.actor._id)
         let token = previousActor.token ?? previousActor.getActiveTokens()[0]
-        previousActor = token.actor
+        if (token){
+          previousActor = token.actor  
+        }
 
         if (previousActor == this.actor){
           return;
@@ -1595,6 +1598,13 @@ export default class WitcherActorSheet extends ActorSheet {
             break;
         }
       }
+    }
+    
+    _onItemHide(event){
+      event.preventDefault(); 
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+      item.update({"data.isHidden": !item.data.data.isHidden})
     }
 
     _onItemDisplayInfo(event) {

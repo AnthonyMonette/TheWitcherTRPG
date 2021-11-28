@@ -183,6 +183,5 @@ export function addChatMessageContextOptions(html, options){
       }
     }
   );
-  console.log(options)
   return options;
 }
