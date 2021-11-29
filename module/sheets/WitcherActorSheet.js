@@ -1078,8 +1078,27 @@ export default class WitcherActorSheet extends ActorSheet {
       if (spellItem.data.data.staminaIsVar){
         content += `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1> <br />`
       }
-      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br />`;
+
+      let focusOptions = `<option value="0"> </option>`
+      if (this.actor.data.data.focus1.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus1.value}" selected> ${this.actor.data.data.focus1.name} (${this.actor.data.data.focus1.value}) </option>`;
+      }
+      if (this.actor.data.data.focus2.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus2.value}"> ${this.actor.data.data.focus2.name} (${this.actor.data.data.focus2.value}) </option>`;
+      }
+      if (this.actor.data.data.focus3.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus3.value}"> ${this.actor.data.data.focus3.name} (${this.actor.data.data.focus3.value}) </option>`;
+      }
+      if (this.actor.data.data.focus4.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus4.value}"> ${this.actor.data.data.focus4.name} (${this.actor.data.data.focus4.value}) </option>`;
+      }
+      if (this.actor.data.data.focus1.name || this.actor.data.data.focus2.name || this.actor.data.data.focus3.name || this.actor.data.data.focus4.name){
+        content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseFocus")}: <select name="focus">${focusOptions}</select></label> <br />`
+      }
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br /><br />`;
       let cancel = true
+      let focusValue = 0
+
       let dialogData = {
         buttons : [
         [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
@@ -1088,6 +1107,9 @@ export default class WitcherActorSheet extends ActorSheet {
           }
           customModifier = html.find("[name=customMod]")[0].value;
           isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
+          if (html.find("[name=focus]")[0]) {
+            focusValue = html.find("[name=focus]")[0].value;
+          }
           cancel = false
         } ]],
         title : game.i18n.localize("WITCHER.Spell.MagicCost"),
@@ -1108,12 +1130,8 @@ export default class WitcherActorSheet extends ActorSheet {
         });
       }
       let staCostdisplay = staCostTotal;
-      let staFocus = 0 
-      if (this.actor.data.data.focus1) {
-        staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
-      }
       
-      staCostTotal -= staFocus
+      staCostTotal -= focusValue
       if (staCostTotal < 0) {
         staCostTotal = 0
       }
@@ -1126,7 +1144,7 @@ export default class WitcherActorSheet extends ActorSheet {
       this.actor.update({ 
         'data.derivedStats.sta.value': newSta
       });
-      staCostdisplay += `-${staFocus}[Focus]`
+      staCostdisplay += `-${focusValue}[Focus]`
 	
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
@@ -1175,7 +1193,6 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let tokens = canvas.tokens.controlled.slice()
       let token;
-      console.log(tokens)
       if (tokens.length == 0) {
         if (game.user.character){
           token = game.user.character.token
@@ -1202,8 +1219,6 @@ export default class WitcherActorSheet extends ActorSheet {
           y: token.data.y  + (token.data.height * 100) / 2,
           fillColor: game.user.color
         }
-
-
         await MeasuredTemplate.create(templateData);
       }
     }
