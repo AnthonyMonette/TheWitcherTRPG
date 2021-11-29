@@ -160,14 +160,17 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 break;
             case "R. Leg":
             case "L. Leg":
+              totalSP = actor.data.data.armorLower;
+              displaySP = actor.data.data.armorLower;
+              break;
             case "Tail/wing":
-                totalSP = actor.data.data.armorLower;
-                displaySP = actor.data.data.armorLower;
-                break;
+              totalSP = actor.data.data.armorTailWing;
+              displaySP = actor.data.data.armorTailWing;
+              break;
         }
     }
     
-    if (!armorSet) {
+    if (actor.type =="character" && !armorSet) {
         return
     }
 
@@ -227,56 +230,80 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
       totalDamage *= 2
     }
     let infoAfterResistance = totalDamage
-
-    switch(location){
+    if (actor.type =="character") {
+      switch(location){
+          case "Head":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.headStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.headStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.headStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.headStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.headStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.headStopping': heavyArmorSP})}
+              break;
+          case "Torso":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.torsoStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.torsoStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.torsoStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.torsoStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.torsoStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.torsoStopping': heavyArmorSP})}
+              break;
+          case "R. Arm":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.rightArmStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.rightArmStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.rightArmStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.rightArmStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.rightArmStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.rightArmStopping': heavyArmorSP})}
+              break;
+          case "L. Arm":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.leftArmStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.leftArmStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.leftArmStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.leftArmStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.leftArmStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.leftArmStopping': heavyArmorSP})}
+              break;
+          case "R. Leg":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.rightLegStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.rightLegStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.rightLegStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.rightLegStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.rightLegStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.rightLegStopping': heavyArmorSP})}
+              break;
+          case "L. Leg":
+              if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.leftLegStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
+                  armorSet["lightArmor"].update({ 'data.leftLegStopping': lightArmorSP})}
+              if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.leftLegStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
+                  armorSet["mediumArmor"].update({ 'data.leftLegStopping': mediumArmorSP})}
+              if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.leftLegStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
+                  armorSet["heavyArmor"].update({ 'data.leftLegStopping': heavyArmorSP})}
+              break;
+      }
+    }else {
+      let newArmorSP = 0
+      switch(location){
         case "Head":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.headStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.headStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.headStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.headStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.headStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.headStopping': heavyArmorSP})}
-            break;
+          newArmorSP = actor.data.data.armorHead -1; 
+          actor.update({ 'data.armorHead': newArmorSP < 0 ? 0 : newArmorSP});
+          break;
         case "Torso":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.torsoStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.torsoStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.torsoStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.torsoStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.torsoStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.torsoStopping': heavyArmorSP})}
-            break;
         case "R. Arm":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.rightArmStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.rightArmStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.rightArmStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.rightArmStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.rightArmStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.rightArmStopping': heavyArmorSP})}
-            break;
         case "L. Arm":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.leftArmStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.leftArmStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.leftArmStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.leftArmStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.leftArmStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.leftArmStopping': heavyArmorSP})}
-            break;
+          newArmorSP = actor.data.data.armorUpper -1; 
+          actor.update({ 'data.armorUpper': newArmorSP < 0 ? 0 : newArmorSP});
+          break;
         case "R. Leg":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.rightLegStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.rightLegStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.rightLegStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.rightLegStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.rightLegStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.rightLegStopping': heavyArmorSP})}
-            break;
         case "L. Leg":
-            if (armorSet["lightArmor"]) { let lightArmorSP = armorSet["lightArmor"].data.data.leftLegStopping -1; if (lightArmorSP < 0) {lightArmorSP = 0}
-                armorSet["lightArmor"].update({ 'data.leftLegStopping': lightArmorSP})}
-            if (armorSet["mediumArmor"]) {let mediumArmorSP = armorSet["mediumArmor"].data.data.leftLegStopping -1; if (mediumArmorSP < 0) {mediumArmorSP = 0}
-                armorSet["mediumArmor"].update({ 'data.leftLegStopping': mediumArmorSP})}
-            if (armorSet["heavyArmor"]) { let heavyArmorSP = armorSet["heavyArmor"].data.data.leftLegStopping -1; if (heavyArmorSP < 0) {heavyArmorSP = 0}
-                armorSet["heavyArmor"].update({ 'data.leftLegStopping': heavyArmorSP})}
-            break;
+          newArmorSP = actor.data.data.armorLower -1; 
+          actor.update({ 'data.armorLower': newArmorSP < 0 ? 0 : newArmorSP});
+          break;
+        case "Tail/wing":
+          newArmorSP = actor.data.data.armorTailWing -1; 
+          actor.update({ 'data.armorTailWing': newArmorSP < 0 ? 0 : newArmorSP});
+          break;
+      }
     }
     let messageContent = `${game.i18n.localize("WITCHER.Damage.initial")}: ${infoTotalDmg} <br />
     ${game.i18n.localize("WITCHER.Damage.totalSP")}: ${displaySP}<br />

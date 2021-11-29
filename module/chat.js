@@ -114,7 +114,7 @@ function onDamage(event) {
 
 export async function rollDamage(img, name, damageFormula, location, locationFormula, strike, effects, damageType) {
   let messageData = {}
-  messageData.flavor = `<div class="damage-message" data-location="${location}" data-dmg-type="${damageType}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
+  messageData.flavor = `<div class="damage-message" data-location="${location}" data-dmg-type="${damageType}" data-strike="${strike}" data-effects='${effects}'><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
 
   if (strike == "strong") {
     damageFormula = `(${damageFormula})*2`;
