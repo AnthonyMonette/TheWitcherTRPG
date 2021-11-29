@@ -514,6 +514,8 @@
     "WITCHER.Monster.DetailsTab": "Details",
     "WITCHER.Monster.SpellsTab": "Spells",
 
+    "WITCHER.Monster.SkillList": "Display specific skills",
+
     "WITCHER.Monster.Type.Humanoid": "Humanoid",
     "WITCHER.Monster.Type.Necrophage": "Necrophage",
     "WITCHER.Monster.Type.Specter": "Specter",

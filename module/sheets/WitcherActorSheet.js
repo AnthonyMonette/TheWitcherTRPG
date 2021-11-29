@@ -1,6 +1,7 @@
 import { buttonDialog, rollDamage } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight } from "../witcher.js";
+import { exportLoot, onChangeSkillList } from "./MonsterSheet.js"
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -179,7 +180,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
       html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
 
-      html.find(".export-loot").on("click", this._onExportLoot.bind(this));
+      html.find(".export-loot").on("click",  function () {exportLoot(thisActor)});
       
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -204,6 +205,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
       html.find(".skill-mod-edit").on("blur", this._onSkillModifierEdit.bind(this));
 
+      html.find(".change-skill-list").on("click",  function () {onChangeSkillList(thisActor)});
+      
       html.find(".enhancement-weapon-slot").on("click", this._chooseEnhancement.bind(this));
       html.find(".enhancement-armor-slot").on("click", this._chooseEnhancement.bind(this));
 
@@ -1299,7 +1302,8 @@ export default class WitcherActorSheet extends ActorSheet {
       ExecuteDefense(this.actor)
     }
 
-    async _onHeal(){let dialogTemplate = `
+    async _onHeal(){
+    let dialogTemplate = `
       <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
       <div class="flex">
         <div>
@@ -2227,23 +2231,6 @@ export default class WitcherActorSheet extends ActorSheet {
           this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
           break;
       }
-    }
-    
-    async _onExportLoot(event) {
-      let newLoot = await Actor.create(this.actor.data);
-      await newLoot.update({
-        "name" : newLoot.data.name + "--loot",
-        "type" : "loot"
-      });
-      
-      newLoot.items.forEach((item)=>{
-        if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
-          let roll = new Roll(item.data.data.quantity).roll()
-          item.update({ 'data.quantity': Math.ceil(roll.total)})
-        }
-      });
-
-      newLoot.sheet.render(true)
     }
 
     calc_total_skills_profession(data){
