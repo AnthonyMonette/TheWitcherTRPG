@@ -1080,24 +1080,31 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let focusOptions = `<option value="0"> </option>`
+      let secondFocusOptions = `<option value="0" selected> </option>`
       if (this.actor.data.data.focus1.name) {
         focusOptions += `<option value="${this.actor.data.data.focus1.value}" selected> ${this.actor.data.data.focus1.name} (${this.actor.data.data.focus1.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus1.value}"> ${this.actor.data.data.focus1.name} (${this.actor.data.data.focus1.value}) </option>`;
       }
       if (this.actor.data.data.focus2.name) {
         focusOptions += `<option value="${this.actor.data.data.focus2.value}"> ${this.actor.data.data.focus2.name} (${this.actor.data.data.focus2.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus2.value}"> ${this.actor.data.data.focus2.name} (${this.actor.data.data.focus2.value}) </option>`;
       }
       if (this.actor.data.data.focus3.name) {
         focusOptions += `<option value="${this.actor.data.data.focus3.value}"> ${this.actor.data.data.focus3.name} (${this.actor.data.data.focus3.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus3.value}"> ${this.actor.data.data.focus3.name} (${this.actor.data.data.focus3.value}) </option>`;
       }
       if (this.actor.data.data.focus4.name) {
         focusOptions += `<option value="${this.actor.data.data.focus4.value}"> ${this.actor.data.data.focus4.name} (${this.actor.data.data.focus4.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus4.value}"> ${this.actor.data.data.focus4.name} (${this.actor.data.data.focus4.value}) </option>`;
       }
       if (this.actor.data.data.focus1.name || this.actor.data.data.focus2.name || this.actor.data.data.focus3.name || this.actor.data.data.focus4.name){
         content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseFocus")}: <select name="focus">${focusOptions}</select></label> <br />`
+        content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseExpandedFocus")}: <select name="secondFocus">${secondFocusOptions}</select></label> <br />`
       }
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br /><br />`;
       let cancel = true
       let focusValue = 0
+      let secondFocusValue = 0
 
       let dialogData = {
         buttons : [
@@ -1109,6 +1116,9 @@ export default class WitcherActorSheet extends ActorSheet {
           isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
           if (html.find("[name=focus]")[0]) {
             focusValue = html.find("[name=focus]")[0].value;
+          }
+          if (html.find("[name=secondFocus]")[0]) {
+            secondFocusValue = html.find("[name=secondFocus]")[0].value;
           }
           cancel = false
         } ]],
@@ -1131,7 +1141,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       let staCostdisplay = staCostTotal;
       
-      staCostTotal -= focusValue
+      staCostTotal -= focusValue - secondFocusValue
       if (staCostTotal < 0) {
         staCostTotal = 0
       }
@@ -1144,7 +1154,7 @@ export default class WitcherActorSheet extends ActorSheet {
       this.actor.update({ 
         'data.derivedStats.sta.value': newSta
       });
-      staCostdisplay += `-${focusValue}[Focus]`
+      staCostdisplay += `-${Number(focusValue) + Number(secondFocusValue)}[Focus]`
 	
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
