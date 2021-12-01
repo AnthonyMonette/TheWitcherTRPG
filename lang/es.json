@@ -486,8 +486,9 @@
     "WITCHER.table.Equipped": "Eq",
 
     "WITCHER.Monster.HeadArmor": "Arm.cabeza",
-    "WITCHER.Monster.UpperArmor": "Arm.torso",
-    "WITCHER.Monster.LowerArmor": "Arm.piernas",
+    "WITCHER.Monster.UpperArmor": "Arm.superior",
+    "WITCHER.Monster.LowerArmor": "Arm.inferior",
+	"WITCHER.Monster.WingTailArmor": "Arm. Ala/Cola",
     "WITCHER.Monster.CustomHP/STA": "Personalizar PV/AGU",
 
     "WITCHER.Monster.Easy": "Fácil",
@@ -793,5 +794,5 @@
     "WITCHER.Loot.Percent": "Aplicar porcentaje",
 
     "WITCHER.Loot.BuyTitle": "Comprar/Vender artículos",
-    "WITCHER.Monster.exportLoot": "Exportar a botín"
+	 "WITCHER.Monster.exportLoot": "Exportar a botín"
 }
