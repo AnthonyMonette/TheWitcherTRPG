@@ -77,7 +77,6 @@ export default class WitcherItemSheet extends ItemSheet {
 
     _onModifierEdit(event) {
       event.preventDefault();
-      console.log(`test`)
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
       let field = element.dataset.field;
@@ -184,7 +183,6 @@ export default class WitcherItemSheet extends ItemSheet {
         newModifierList = this.item.data.data.derived
       }
       newModifierList.push({id: genId(), derivedStat: "none", modifier: 0})
-      console.log(newModifierList)
       this.item.update({'data.derived': newModifierList});
     }
     
