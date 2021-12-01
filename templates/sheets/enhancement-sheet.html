@@ -15,11 +15,11 @@
     {{#if (eq data.type "armor")}}
     <table>
         <tr>
-            <th>{{localize "WITCHER.Item.Availability"}}</th>
+            <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th>{{localize "WITCHER.Enhancement.Stopping"}}</th>
             <th>{{localize "WITCHER.Enhancement.Bludgeoning"}}</th>
             <th>{{localize "WITCHER.Enhancement.Slashing"}}</th>
-            <th>{{localize "WITCHER.Enhancement.Percing"}}</th>
+            <th>{{localize "WITCHER.Enhancement.Piercing"}}</th>
         </tr>
         <tr>
             <td>
@@ -34,7 +34,7 @@
             <td><input type="text" name="data.stopping" value="{{data.stopping}}" data-dtype="Number"/></td>
             <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
             <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
-            <td><input type="checkbox" name="data.percing" {{checked data.percing}} /></td>
+            <td><input type="checkbox" name="data.piercing" {{checked data.piercing}} /></td>
         </tr>
         <tr >
             <td colspan="5">

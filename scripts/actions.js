@@ -13,7 +13,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     let damageTypeOption = `
     <option value="Slashing"> ${game.i18n.localize("WITCHER.Armor.Slashing")} </option>
     <option value="Blundgeoning"> ${game.i18n.localize("WITCHER.Armor.Bludgeoning")} </option>
-    <option value="Percing"> ${game.i18n.localize("WITCHER.Armor.Percing")} </option>
+    <option value="Piercing"> ${game.i18n.localize("WITCHER.Armor.Piercing")} </option>
     <option value="Elemental"> ${game.i18n.localize("WITCHER.Armor.Elemental")} </option>
     `;
     
@@ -213,8 +213,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
                 totalDamage *= 0.5
             }
             break;
-        case "Percing":
-            if (armorSet["lightArmor"]?.data.data.percing || armorSet["mediumArmor"]?.data.data.percing || armorSet["heavyArmor"]?.data.data.percing){
+        case "Piercing":
+            if (armorSet["lightArmor"]?.data.data.piercing || armorSet["mediumArmor"]?.data.data.piercing || armorSet["heavyArmor"]?.data.data.piercing){
                 totalDamage *= 0.5
             }
             break;

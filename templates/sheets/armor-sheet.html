@@ -15,15 +15,15 @@
         </div>
         <div class="item-collum">
             <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Armor.Percing"}} {{localize "WITCHER.Armor.Res"}}</label>
-                <input type="checkbox" name="data.percing" {{checked data.percing}} />
+                <label>{{localize "WITCHER.Armor.Piercing"}} {{localize "WITCHER.Armor.Res"}}</label>
+                <input type="checkbox" name="data.piercing" {{checked data.piercing}} />
             </div>
         </div>
     </div>
         {{!-- Attributes Tab --}}
     <table>
         <tr>
-            <th>{{localize "WITCHER.Item.Availability"}}</th>
+            <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th>{{localize "WITCHER.Armor.Enhancement"}}</th>
             <th>{{localize "WITCHER.Armor.EncumbranceValue"}}</th>
             <th>{{localize "WITCHER.Armor.Location"}}</th>
@@ -73,8 +73,8 @@
                 <th>{{localize "WITCHER.Armor.MaxStoppingPower"}}</th>
                 {{/unless}}
                 {{#if (eq data.location "Shield")}}
-                <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
-                <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
+                <th>{{localize "WITCHER.Weapon.Short.Reliability"}}</th>
+                <th>{{localize "WITCHER.Weapon.Short.MaxReliability"}}</th>
                 {{/if}}
             </tr>
             {{#if (eq data.location "Head")}}

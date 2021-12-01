@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Prozent",
     "WITCHER.DC": "DC",
 
-    "WITCHER.Item.Availability": "Vork.",
+    "WITCHER.Item.Short.Availability": "Vork.",
     "WITCHER.Item.Weight": "Gewicht",
     "WITCHER.Item.Cost": "Kosten",
     "WITCHER.Item.Effect": "Effekte",
@@ -29,13 +29,13 @@
     "Witcher.Item.CantHide": "N",
 
     "WITCHER.Weapon.Type": "Art",
-    "WITCHER.Weapon.WeaponAccuracy": "WG",
-    "WITCHER.Weapon.Damage": "SCH",
-    "WITCHER.Weapon.Reliability": "Bestä.",
-    "WITCHER.Weapon.MaxReliability": "Max. Bestä.",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "WG",
+    "WITCHER.Weapon.Short.Damage": "SCH",
+    "WITCHER.Weapon.Short.Reliability": "Bestä.",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Bestä.",
     "WITCHER.Weapon.Hands": "Hände",
-    "WITCHER.Weapon.Concealement": "VERB.",
-    "WITCHER.Weapon.Enhancement": "ER",
+    "WITCHER.Weapon.Short.Concealement": "VERB.",
+    "WITCHER.Weapon.Short.Enhancements": "ER",
     "WITCHER.Weapon.Range": "RW",
     "WITCHER.Weapon.Elderfolk": "Eld.",
 
@@ -43,7 +43,7 @@
     "WITCHER.Weapon.MeleeBonus": "Nahkampf Bonus",
     
     "WITCHER.Weapon.isAmmunition": "Ist Munition?",
-    "WITCHER.Weapon.rateOfFire": "FR",
+    "WITCHER.Weapon.Short.RateOfFire": "FR",
 
     "WITCHER.Armor.StoppingPower": "AK",
     "WITCHER.Armor.MaxStoppingPower": "Max. AK",
@@ -54,7 +54,7 @@
     "WITCHER.Armor.Resistances": "Widerstände",
     "WITCHER.Armor.Bludgeoning": "Wuchtschaden",
     "WITCHER.Armor.Slashing": "Hiebschaden",
-    "WITCHER.Armor.Percing": "Stichschaden",
+    "WITCHER.Armor.Piercing": "Stichschaden",
 
     "WITCHER.Armor.LocationHead": "Kopf",
     "WITCHER.Armor.LocationTorso": "Körper",
@@ -81,7 +81,7 @@
     "WITCHER.Enhancement.Stopping": "AK",
     "WITCHER.Enhancement.Bludgeoning": "W",
     "WITCHER.Enhancement.Slashing": "H",
-    "WITCHER.Enhancement.Percing": "S",
+    "WITCHER.Enhancement.Piercing": "S",
 
     "WITCHER.Enhancement.Armor": "Rüstung",
     "WITCHER.Enhancement.Rune": "Rune",

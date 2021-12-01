@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Percentage",
     "WITCHER.DC": "DC",
 
-    "WITCHER.Item.Availability": "Avail.",
+    "WITCHER.Item.Short.Availability": "Avail.",
     "WITCHER.Item.Weight": "Weight",
     "WITCHER.Item.Cost": "Cost",
     "WITCHER.Item.Effect": "Effects",
@@ -11,6 +11,10 @@
     "WITCHER.Item.Description": "Description",
     "WITCHER.Item.Attribute": "Attributes",
     "WITCHER.Item.ROF": "ROF",
+
+    "WITCHER.Item.Availability": "Availability",
+    "WITCHER.Item.AddEffect": "Add Effect",
+    "WITCHER.Item.RemoveEffect": "Remove Effect",
 
     "WITCHER.Item.CraftingMaterial": "Crafting Material",
     "WITCHER.Item.Hides&AnimalParts": "Hides & Animal Parts",
@@ -29,21 +33,29 @@
     "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Type",
-    "WITCHER.Weapon.WeaponAccuracy": "WA",
-    "WITCHER.Weapon.Damage": "DMG",
-    "WITCHER.Weapon.Reliability": "Rel.",
-    "WITCHER.Weapon.MaxReliability": "Max. Rel.",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "WA",
+    "WITCHER.Weapon.Short.Damage": "DMG",
+    "WITCHER.Weapon.Short.Reliability": "Rel.",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Rel.",
     "WITCHER.Weapon.Hands": "Hands",
-    "WITCHER.Weapon.Concealement": "Conc.",
-    "WITCHER.Weapon.Enhancement": "EN",
+    "WITCHER.Weapon.Short.Concealement": "Conc.",
+    "WITCHER.Weapon.Short.Enhancements": "EN",
     "WITCHER.Weapon.Range": "Range",
     "WITCHER.Weapon.Elderfolk": "Eld.",
+    "WITCHER.Weapon.Short.RateOfFire": "ROF",
+
+    "WITCHER.Weapon.WeaponAccuracy": "Weapon Accuracy",
+    "WITCHER.Weapon.Enhancements": "Enhancements",
+    "WITCHER.Weapon.Reliability": "Current Reliability",
+    "WITCHER.Weapon.MaxReliability": "Maximum Reliability",
+    "WITCHER.Weapon.RateOfFire": "Rate Of Fire",
+    "WITCHER.Weapon.Damage": "Damage",
+    "WITCHER.Weapon.Concealement": "Concealement",
 
     "WITCHER.Weapon.AttackSkill": "Attack Skill",
     "WITCHER.Weapon.MeleeBonus": "Melee Bonus",
     
     "WITCHER.Weapon.isAmmunition": "Is an ammunition",
-    "WITCHER.Weapon.rateOfFire": "ROF",
 
     "WITCHER.Armor.StoppingPower": "SP",
     "WITCHER.Armor.MaxStoppingPower": "Max. SP",
@@ -55,7 +67,7 @@
     "WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Bludgeoning",
     "WITCHER.Armor.Slashing": "Slashing",
-    "WITCHER.Armor.Percing": "Percing",
+    "WITCHER.Armor.Piercing": "Piercing",
     "WITCHER.Armor.Elemental": "Elemental",
     "WITCHER.Armor.Type": "Type",
     
@@ -91,7 +103,8 @@
     "WITCHER.Enhancement.Stopping": "Stopping",
     "WITCHER.Enhancement.Bludgeoning": "B",
     "WITCHER.Enhancement.Slashing": "S",
-    "WITCHER.Enhancement.Percing": "P",
+    "WITCHER.Enhancement.Piercing": "P",
+    "WITCHER.Enhancement.Elemental": "E",
 
     "WITCHER.Enhancement.Armor": "Armor",
     "WITCHER.Enhancement.Rune": "Rune",

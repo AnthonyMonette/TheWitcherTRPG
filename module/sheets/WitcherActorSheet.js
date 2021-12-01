@@ -461,7 +461,7 @@ export default class WitcherActorSheet extends ActorSheet {
                                 "data.rightLegMaxStopping": item.data.data.rightLegMaxStopping + choosedEnhancement.data.data.stopping,
                                 'data.bludgeoning': choosedEnhancement.data.data.bludgeoning,
                                 'data.slashing': choosedEnhancement.data.data.slashing,
-                                'data.percing': choosedEnhancement.data.data.percing,
+                                'data.piercing': choosedEnhancement.data.data.piercing,
                                 'data.effects': allEffects})
                 }
                 else {
@@ -1772,10 +1772,10 @@ export default class WitcherActorSheet extends ActorSheet {
                 let damageFormula = formula;
 
                 if (item.data.data.accuracy < 0){
-                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
                 if (item.data.data.accuracy > 0){
-                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
                 if (targetOutsideLOS) {attFormula += "-3";}
                 if (outsideLOS) {attFormula += "+3";}
@@ -1992,7 +1992,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type.text}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;

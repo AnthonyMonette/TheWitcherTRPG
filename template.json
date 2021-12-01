@@ -1035,7 +1035,13 @@
     },
     "weapon": {
       "templates": ["base"],
-      "type": "",
+      "type": {
+        "text": "",
+        "slashing": false,
+        "piercing": false,
+        "bludgeoning": false,
+        "elemental": false
+      },
       "isAmmo": false,
       "usingAmmo": false,
       "accuracy": 0,
@@ -1089,7 +1095,7 @@
       "equiped": false,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "piercing": false
     },
     "enhancement": {
       "templates": ["base"],
@@ -1104,7 +1110,7 @@
       "stopping": 0,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "piercing": false
     },
     "mount": {
       "templates": ["base"],

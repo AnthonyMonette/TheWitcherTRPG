@@ -58,6 +58,7 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".modifiers-edit-skills").on("change", this._onModifierSkillsEdit.bind(this));
       html.find(".modifiers-edit-derived").on("change", this._onModifierDerivedEdit.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
+      html.find(".damage-type").on("change", this._onDamageTypeEdit.bind(this));
     }
 
 
@@ -86,6 +87,20 @@ export default class WitcherItemSheet extends ItemSheet {
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
       this.item.update({'data.stats': effects});
+    }
+    
+    _onDamageTypeEdit (event) {
+      event.preventDefault();
+      let element = event.currentTarget;
+      let newval = Object.assign({}, this.item.data.data.type)
+      newval[element.id] = !newval[element.id]
+      let types=[]
+      if(newval.slashing) types.push(game.i18n.localize("WITCHER.Armor.Slashing"))
+      if(newval.piercing) types.push(game.i18n.localize("WITCHER.Armor.piercing"))
+      if(newval.bludgeoning) types.push(game.i18n.localize("WITCHER.Armor.Bludgeoning"))
+      if(newval.elemental) types.push(game.i18n.localize("WITCHER.Armor.Elemental"))
+      newval.text = types.join(", ")
+      this.item.update({'data.type': newval});
     }
     
     _onModifierDerivedEdit(event) {
