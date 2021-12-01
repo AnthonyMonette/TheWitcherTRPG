@@ -58,7 +58,7 @@ function onCritRoll(event) {
     totalValue -= Number(rollResult.total)
   }
   let messageData = {}
-  messageData.flavor = `<div>${game.i18n.localize("WITCHER.CritTotal")}: ${totalValue}</div>`
+  messageData.flavor = `<h2>${game.i18n.localize("WITCHER.CritTotal")}: ${totalValue}</h2>`
   rollResult.toMessage(messageData)
 }
 
