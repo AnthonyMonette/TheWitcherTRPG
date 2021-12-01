@@ -358,7 +358,6 @@ function getArmorSp(lightArmorSP, mediumArmorSP, heavyArmorSP){
             displaySP +=  "+" + diff
         }
         else  {
-            console.log()
             displaySP = mediumArmorSP
             totalSP = mediumArmorSP
         }

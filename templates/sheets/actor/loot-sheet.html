@@ -54,8 +54,6 @@
                 <td><b>{{localize "WITCHER.Item.Cost"}}</b></td>
                 <td></td> 
             </tr>
-            
-<span>{{isGM}}</span> 
             {{#each weapons as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
