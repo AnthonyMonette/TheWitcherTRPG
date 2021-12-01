@@ -55,81 +55,31 @@
                 <td></td> 
             </tr>
             {{#each weapons as |item id|}}
-            <tbody class="item" data-item-id="{{item._id}}">
-                <tr>
-                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
-                    <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit item-name" data-field="name" type="text" value="{{item.name}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-                    <td><input class="inline-edit Cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" placeholder="" /></td>
-                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-            </tbody>
+{{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Armors"}} <a class="add-item" data-itemType="armor"><i class="fas fa-plus"></i></a></h2>
         <table class="armor-table">
             {{#each armors as |item id|}}
-            <tbody class="item" data-item-id="{{item._id}}">
-                <tr>
-                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
-                    <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-                    <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-            </tbody>
+{{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Valuables"}} <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
         <table class="armor-table">
             {{#each valuables as |item id|}}
-            <tbody class="item" data-item-id="{{item._id}}">
-                <tr>
-                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
-                    <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-                    <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-            </tbody>
+{{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Diagrams"}} <a class="add-item" data-itemType="diagrams"><i class="fas fa-plus"></i></a></h2>
         <table class="armor-table">
             {{#each diagrams as |item id|}}
-            <tbody class="item" data-item-id="{{item._id}}">
-                <tr>
-                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
-                    <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-                    <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-            </tbody>
+{{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Components"}} <a class="add-item" data-itemType="component"><i class="fas fa-plus"></i></a></h2>
         <table class="armor-table">
             {{#each allComponents as |item id|}}
-            <tbody class="item" data-item-id="{{item._id}}">
-                <tr>
-                    <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
-                    <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
-                    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-                    <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
-                    <td><a class="item-buy"><i class="fas fa-coins"></i></a><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
-            </tbody>
+{{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
     </di>

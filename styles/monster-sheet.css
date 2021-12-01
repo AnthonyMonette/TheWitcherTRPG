@@ -4,7 +4,7 @@
 
 .monster-main {
   display: flex;
-  height: 620px;
+  height: 630px;
 }
 
 .monster-sheet-left-column {
@@ -12,13 +12,11 @@
 }
 
 .monster-left-sidebar {
-  width: 140px;
+  width: 155px;
 }
 
 .monster-left-sidebar input {
-  display: flex;
   font-weight: bold;
-  width: 35px;
   margin-right: 1px;
   margin-bottom: 1px;
   text-align: center;
@@ -142,17 +140,17 @@
 }
 
 .cat-img{
-  position: relative;
+  position: absolute;
   height: 75px;
   width: 75px;
-  top: -535px;
+  top: 10px;
   left: 10px;
   border: none;
 }
 
 .monster-info {
-  position: relative;
-  top: -220px;
+  position: absolute;
+  top: 410px;
   left: 10px;
   width: 250px;
   background-color: silver;
@@ -221,4 +219,8 @@
 
 .modifier-flex {
   flex: 1
+}
+
+.img-view {
+  position: relative;
 }

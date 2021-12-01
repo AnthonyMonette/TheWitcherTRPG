@@ -1,3 +1,4 @@
+<a class="change-skill-list"><i class="fas fa-list"></i></a>
 <div class="skill" data-skilltype="int">
     <div class="monster-skill">
         {{#unless data.pannels.intIsOpen}}
@@ -13,15 +14,8 @@
     {{#if data.pannels.intIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.int as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.int.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.int as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="int"}}
     {{/each}}
     </table>
 </div>
@@ -35,20 +29,13 @@
         {{/if}}
     </div>
     {{#unless data.pannels.refIsOpen}}
-        <table class="skill-list hidden">
+    <table class="skill-list hidden">
     {{/unless}}
     {{#if data.pannels.refIsOpen}}
-        <table class="skill-list">
+    <table class="skill-list">
     {{/if}}
-    {{#each data.skills.ref as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.ref.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.ref as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="ref"}}
     {{/each}}
     </table>
 </div>
@@ -67,15 +54,8 @@
     {{#if data.pannels.dexIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.dex as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.dex.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.dex as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="dex"}}
     {{/each}}
     </table>
 </div>
@@ -94,15 +74,8 @@
     {{#if data.pannels.bodyIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.body as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.body.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.body as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="body"}}
     {{/each}}
     </table>
 </div>
@@ -121,15 +94,8 @@
     {{#if data.pannels.empIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.emp as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.emp.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.emp as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="emp"}}
     {{/each}}
     </table>
 </div>
@@ -148,15 +114,8 @@
     {{#if data.pannels.craIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.cra as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.cra.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.cra as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="cra"}}
     {{/each}}
     </table>
 </div>
@@ -175,15 +134,8 @@
     {{#if data.pannels.willIsOpen}}
         <table class="skill-list">
     {{/if}}
-    {{#each data.skills.will as |skill st|}}
-    <tr>
-        <td class="{{st}} skill">
-            <a><span class="rollable skill {{st}}" id="{{st}}-rollable">{{localize skill.label}}</span></a>
-        </td>
-        <td class="input-skill">
-            <input class="stats {{st}}" name="data.skills.will.{{st}}.value" type="number" value="{{skill.value}}" placeholder="0"/>
-        </td>
-    </tr>
+    {{#each data.skills.will as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="will"}}
     {{/each}}
     </table>
 </div>

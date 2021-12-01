@@ -18,7 +18,6 @@
     color: white;
     padding: 4px;
     border-style: solid;
-    width: 140px;
     height: 30px;
 }
 
@@ -28,6 +27,12 @@
     box-shadow: 0 0 10px #9ecaed;
 }
 
+.char-input-skill {
+    width: 10px;
+}
+.char-input-skill-icon {
+    width: 10px;
+}
 .char-input-skill input {
     font-weight: bold;
     width: 30px;

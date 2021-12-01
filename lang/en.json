@@ -498,6 +498,7 @@
     "WITCHER.Monster.HeadArmor": "Armor Head",
     "WITCHER.Monster.UpperArmor": "Armor Upper",
     "WITCHER.Monster.LowerArmor": "Armor Lower",
+    "WITCHER.Monster.WingTailArmor": "Ar. Wing/Tail",
     "WITCHER.Monster.CustomHP/STA": "Custom HP/STA",
 
     "WITCHER.Monster.Easy": "Easy",
@@ -525,6 +526,8 @@
     "WITCHER.Monster.InventryTab": "Att/Loot",
     "WITCHER.Monster.DetailsTab": "Details",
     "WITCHER.Monster.SpellsTab": "Spells",
+
+    "WITCHER.Monster.SkillList": "Display specific skills",
 
     "WITCHER.Monster.Type.Humanoid": "Humanoid",
     "WITCHER.Monster.Type.Necrophage": "Necrophage",
@@ -617,6 +620,9 @@
     "WITCHER.Spell.staminaDialog": "How many stamina do you use?",
     "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
     "WITCHER.Spell.MagicCost": "Magic Costs",
+
+    "WITCHER.Spell.ChooseFocus": "Use a focus",
+    "WITCHER.Spell.ChooseExpandedFocus": "Use Expanded Magic focus",
 
     "WITCHER.Chat.SaveText": "To succeed you need to roll below",
 

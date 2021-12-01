@@ -1,6 +1,7 @@
 import { buttonDialog, rollDamage } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight } from "../witcher.js";
+import { exportLoot, onChangeSkillList } from "./MonsterSheet.js"
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -149,7 +150,7 @@ export default class WitcherActorSheet extends ActorSheet {
       if (this.actor.data.data.pannels == undefined){
         this.actor.update({ 'data.pannels':{}});
       }
-
+      data.isGM = game.user.isGM
       return data;
     }
 
@@ -168,6 +169,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".item-delete").on("click", this._onItemDelete.bind(this));
       html.find(".item-buy").on("click", this._onItemBuy.bind(this));
+      html.find(".item-hide").on("click", this._onItemHide.bind(this));
       html.find(".add-item").on("click", this._onItemAdd.bind(this));
       html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
@@ -178,7 +180,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
       html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
 
-      html.find(".export-loot").on("click", this._onExportLoot.bind(this));
+      html.find(".export-loot").on("click",  function () {exportLoot(thisActor)});
       
       html.find(".init-roll").on("click", this._onInitRoll.bind(this));
       html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
@@ -203,6 +205,8 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
       html.find(".skill-mod-edit").on("blur", this._onSkillModifierEdit.bind(this));
 
+      html.find(".change-skill-list").on("click",  function () {onChangeSkillList(thisActor)});
+      
       html.find(".enhancement-weapon-slot").on("click", this._chooseEnhancement.bind(this));
       html.find(".enhancement-armor-slot").on("click", this._chooseEnhancement.bind(this));
 
@@ -305,7 +309,9 @@ export default class WitcherActorSheet extends ActorSheet {
       if (dragData.type === "itemDrop") {
         let previousActor = game.actors.get(dragData.actor._id)
         let token = previousActor.token ?? previousActor.getActiveTokens()[0]
-        previousActor = token.actor
+        if (token){
+          previousActor = token.actor  
+        }
 
         if (previousActor == this.actor){
           return;
@@ -1072,8 +1078,34 @@ export default class WitcherActorSheet extends ActorSheet {
       if (spellItem.data.data.staminaIsVar){
         content += `${game.i18n.localize("WITCHER.Spell.staminaDialog")}<input class="small" name="staCost" value=1> <br />`
       }
-      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br />`;
+
+      let focusOptions = `<option value="0"> </option>`
+      let secondFocusOptions = `<option value="0" selected> </option>`
+      if (this.actor.data.data.focus1.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus1.value}" selected> ${this.actor.data.data.focus1.name} (${this.actor.data.data.focus1.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus1.value}"> ${this.actor.data.data.focus1.name} (${this.actor.data.data.focus1.value}) </option>`;
+      }
+      if (this.actor.data.data.focus2.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus2.value}"> ${this.actor.data.data.focus2.name} (${this.actor.data.data.focus2.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus2.value}"> ${this.actor.data.data.focus2.name} (${this.actor.data.data.focus2.value}) </option>`;
+      }
+      if (this.actor.data.data.focus3.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus3.value}"> ${this.actor.data.data.focus3.name} (${this.actor.data.data.focus3.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus3.value}"> ${this.actor.data.data.focus3.name} (${this.actor.data.data.focus3.value}) </option>`;
+      }
+      if (this.actor.data.data.focus4.name) {
+        focusOptions += `<option value="${this.actor.data.data.focus4.value}"> ${this.actor.data.data.focus4.name} (${this.actor.data.data.focus4.value}) </option>`;
+        secondFocusOptions += `<option value="${this.actor.data.data.focus4.value}"> ${this.actor.data.data.focus4.name} (${this.actor.data.data.focus4.value}) </option>`;
+      }
+      if (this.actor.data.data.focus1.name || this.actor.data.data.focus2.name || this.actor.data.data.focus3.name || this.actor.data.data.focus4.name){
+        content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseFocus")}: <select name="focus">${focusOptions}</select></label> <br />`
+        content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseExpandedFocus")}: <select name="secondFocus">${secondFocusOptions}</select></label> <br />`
+      }
+      content += `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input class="small" name="customMod" value=0></label> <br /><br />`;
       let cancel = true
+      let focusValue = 0
+      let secondFocusValue = 0
+
       let dialogData = {
         buttons : [
         [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
@@ -1082,6 +1114,12 @@ export default class WitcherActorSheet extends ActorSheet {
           }
           customModifier = html.find("[name=customMod]")[0].value;
           isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
+          if (html.find("[name=focus]")[0]) {
+            focusValue = html.find("[name=focus]")[0].value;
+          }
+          if (html.find("[name=secondFocus]")[0]) {
+            secondFocusValue = html.find("[name=secondFocus]")[0].value;
+          }
           cancel = false
         } ]],
         title : game.i18n.localize("WITCHER.Spell.MagicCost"),
@@ -1102,12 +1140,8 @@ export default class WitcherActorSheet extends ActorSheet {
         });
       }
       let staCostdisplay = staCostTotal;
-      let staFocus = 0 
-      if (this.actor.data.data.focus1) {
-        staFocus = Number(this.actor.data.data.focus1.value) + Number(this.actor.data.data.focus2.value) + Number(this.actor.data.data.focus3.value) + Number(this.actor.data.data.focus4.value) 
-      }
       
-      staCostTotal -= staFocus
+      staCostTotal -= focusValue - secondFocusValue
       if (staCostTotal < 0) {
         staCostTotal = 0
       }
@@ -1120,7 +1154,7 @@ export default class WitcherActorSheet extends ActorSheet {
       this.actor.update({ 
         'data.derivedStats.sta.value': newSta
       });
-      staCostdisplay += `-${staFocus}[Focus]`
+      staCostdisplay += `-${Number(focusValue) + Number(secondFocusValue)}[Focus]`
 	
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
@@ -1169,7 +1203,6 @@ export default class WitcherActorSheet extends ActorSheet {
 
       let tokens = canvas.tokens.controlled.slice()
       let token;
-      console.log(tokens)
       if (tokens.length == 0) {
         if (game.user.character){
           token = game.user.character.token
@@ -1196,8 +1229,6 @@ export default class WitcherActorSheet extends ActorSheet {
           y: token.data.y  + (token.data.height * 100) / 2,
           fillColor: game.user.color
         }
-
-
         await MeasuredTemplate.create(templateData);
       }
     }
@@ -1296,7 +1327,8 @@ export default class WitcherActorSheet extends ActorSheet {
       ExecuteDefense(this.actor)
     }
 
-    async _onHeal(){let dialogTemplate = `
+    async _onHeal(){
+    let dialogTemplate = `
       <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
       <div class="flex">
         <div>
@@ -1595,6 +1627,13 @@ export default class WitcherActorSheet extends ActorSheet {
             break;
         }
       }
+    }
+    
+    _onItemHide(event){
+      event.preventDefault(); 
+      let itemId = event.currentTarget.closest(".item").dataset.itemId;
+      let item = this.actor.items.get(itemId);
+      item.update({"data.isHidden": !item.data.data.isHidden})
     }
 
     _onItemDisplayInfo(event) {
@@ -2217,23 +2256,6 @@ export default class WitcherActorSheet extends ActorSheet {
           this.actor.update({ 'data.pannels.fulgurIsOpen': this.actor.data.data.pannels.fulgurIsOpen ? false : true});
           break;
       }
-    }
-    
-    async _onExportLoot(event) {
-      let newLoot = await Actor.create(this.actor.data);
-      await newLoot.update({
-        "name" : newLoot.data.name + "--loot",
-        "type" : "loot"
-      });
-      
-      newLoot.items.forEach((item)=>{
-        if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
-          let roll = new Roll(item.data.data.quantity).roll()
-          item.update({ 'data.quantity': Math.ceil(roll.total)})
-        }
-      });
-
-      newLoot.sheet.render(true)
     }
 
     calc_total_skills_profession(data){

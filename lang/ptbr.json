@@ -450,6 +450,7 @@
     
     "WITCHER.Crit": "Crítico",
     "WITCHER.Fumble": "Vacilo",
+    "WITCHER.CritTotal": "Para um total de",
 
     "WITCHER.table.Quantity": "Qtd",
     "WITCHER.table.Range": "ALC",
@@ -513,6 +514,7 @@
     "WITCHER.Monster.Senses": "Sentidos",
     
     "WITCHER.Loot.TotalWeight": "Peso Total",
+    "WITCHER.Loot.MaxWeight": "Peso Máximo",
     "WITCHER.Loot.TotalCost": "Custo Total",
     "WITCHER.Loot.Weapons": "Armas",
     "WITCHER.Loot.Armors": "Armaduras",
@@ -541,6 +543,7 @@
 
     "WITCHER.Button.Cancel": "Cancelar",
     "WITCHER.Button.Continue": "Continuar",
+    "WITCHER.Button.All": "Tudo",
 
     "WITCHER.Spell.type": "Tipo",
     "WITCHER.Spell.Spells": "Feitiços",
@@ -689,8 +692,7 @@
     "WITCHER.Currency.floren" : "Florim",
     "WITCHER.Currency.crown" : "Coroa",
     "WITCHER.Currency.oren" : "Oren",
-    "WITCHER.Currency.falsecoin" : "Falsa"
-    
+    "WITCHER.Currency.falsecoin" : "Falsa",
     "WITCHER.background.activeEffect" : "Efeitos Ativos",
 
     "WITCHER.Spell.CreateTemplate": "Criar um Modelo",
@@ -700,29 +702,29 @@
     "WITCHER.Spell.Square": "Quadrado",
     "WITCHER.Spell.Circle": "Circulo",
     "WITCHER.Spell.Cone": "Cone",
-    "WITCHER.Spell.Ray": "Raio"
+    "WITCHER.Spell.Ray": "Raio",
     
     "WITCHER.Settings.displayRollDetails": "Exibir detalhes de rolagem",
-    "WITCHER.Settings.displayRollDetailsHint": "Exibir detalhes nas rolagens : 1d10+2[atrib]+4[perícia]-3[aparar]",
+    "WITCHER.Settings.displayRollDetailsHint": "Exibir detalhes nas rolagens : 1d10+2[atributo]+4[perícia]-3[aparar]",
     "WITCHER.Settings.Custom": "Personalizado",
-    "WITCHER.Settings.modifiers": "Mods"
+    "WITCHER.Settings.modifiers": "Mods",
     
     "WITCHER.Resources.modifiers": "Modificadores de Recurso",
-    "WITCHER.Weapon.onlyDmg": "Rolar só dano"
+    "WITCHER.Weapon.onlyDmg": "Rolar só dano",
     "WITCHER.Weapon.useAmmo": "Usar Munição",
     
     "WITCHER.Spell.Damage": "Causa Dano",
     "WITCHER.Damage.RemoveSP": "Remover PP antes de aplicar Localização.",
-    "WITCHER.Effect.Rolled": "Rolado"
+    "WITCHER.Effect.Rolled": "Rolado",
     
     "WITCHER.Settings.specialFont": "Usar a fonte especial do Witcher",
 
     "WITCHER.SKill.profession": "Prof",
     "WITCHER.SKill.pickup": "Pick",
-    "WITCHER.SKill.learn": "Learn"
+    "WITCHER.SKill.learn": "Learn",
     
     "WITCHER.Items.transferTitle": "Transferencia de itens",
-    "WITCHER.Items.transferMany": "Quantos transferir"
+    "WITCHER.Items.transferMany": "Quantos transferir",
     
     
     "WITCHER.Damage.damageType": "Qual tipo de dano",
@@ -737,10 +739,39 @@
     "WITCHER.Damage.afterResistances": "Dano após resistência",
     "WITCHER.Damage.totalApplied": "Dano Final",
     "WITCHER.Damage.NotEnough": "Dano não é suficiente",
+    "WITCHER.Damage.isVulnerable": "Vulnerável ao Ataque",
+    "WITCHER.Damage.oilDmg": "Dano de óleo (+5)",
+    "WITCHER.Damage.silverDmg": "Dano de Prata",
+    "WITCHER.Damage.silver": "Prata",
+    "WITCHER.Damage.oil": "Óleo",
+
 
     "WITCHER.Context.applyDmg": "Aplicar Dano",
     "WITCHER.Context.Defense": "Defender",
     "WITCHER.Context.SelectActor": "Ao menos 1 ator deve estar selecionado.",
 
-    "WITCHER.Armor.tooMuch": "Muitas armaduras do mesmo tipo equipadas"
+    "WITCHER.Armor.tooMuch": "Muitas armaduras do mesmo tipo equipadas",
+
+    "WITCHER.Heal.button": "Cura",
+    "WITCHER.Heal.dialogTitle": "Cura após Descanso",
+    "WITCHER.Heal.title": "Circumstâncias de Cura",
+
+    "WITCHER.Heal.resting": "Passou o dia descansando",
+    "WITCHER.Heal.sterilized": "Recebeu Fluido Esterilizador",
+    "WITCHER.Heal.healinghand": "Recebeu Mãos que Curam",
+    "WITCHER.Heal.healingTent": "Recebeu Tenda de Cura",
+
+    "WITCHER.Heal.recovered": " se recuperou de um",
+    "WITCHER.Heal.restful": "em repouso",
+    "WITCHER.Heal.active": "ativa",
+    "WITCHER.Heal.day": "dia",
+    
+    
+    "WITCHER.Loot.NotEnough": "Não tem moedas o suficiente",
+    "WITCHER.Loot.InitialCost": "Custo Inicial",
+    "WITCHER.Loot.HowMany": "Quantos Itens",
+    "WITCHER.Loot.ItemCost": "Custo p/Item",
+    "WITCHER.Loot.Percent": "Aplicar Porcentagem",
+
+    "WITCHER.Loot.BuyTitle": "Comprar/Vender Items"
 }

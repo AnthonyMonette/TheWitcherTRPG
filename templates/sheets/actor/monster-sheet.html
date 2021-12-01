@@ -10,9 +10,30 @@
                 {{#each data.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display monster-stat-display" data-stat="{{stat}}">
-                        <a class="monster-stat-button stat-roll">{{localize details.label}}</a></label> 
-                        <input class="stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-                        <input class="stat stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                        <div>
+                            <div class="flex">
+                                <a class="monster-stat-button stat-roll">{{localize details.label}}</a></label> 
+                                <input class="small" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+                                <input class="small stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+
+                                {{#unless details.isOpened}}
+                                <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
+                                {{/unless}}
+                                {{#if details.isOpened}}
+                                <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                                {{/if}}
+                            </div>
+                            {{#if details.isOpened}}
+                                <a class="add-modifier"><i class="fas fa-plus"></i></a>
+                                {{#each details.modifiers as |modifier value|}}
+                                <div class="list-modifiers"  data-id="{{modifier.id}}">
+                                    <input  class="medium list-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                                    <input  class="small list-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
+                                    <a class="delete-stat"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                                </div>
+                                {{/each}}
+                            {{/if}}
+                        </div>
                     </div>
                     {{/unless}}
                 {{/each}}
@@ -20,43 +41,47 @@
                 {{#each data.coreStats as |details coreStat|}}
                 <div class="monster-stat-display">
                     <label>{{localize details.label}}</label>
-                    <input name="data.coreStats.{{coreStat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                    <input name="data.coreStats.{{coreStat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input class="small" name="data.coreStats.{{coreStat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input class="small" name="data.coreStats.{{coreStat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
                 </div>
                 {{/each}}
                 <div class="monster-stat-display">
                     <label>{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
-                    <input name="data.derivedStats.vigor.value" type="number" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
+                    <input class="small" name="data.derivedStats.vigor.value" type="number" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 <hr />
                 <div class="monster-custom">
                     <label>{{localize "WITCHER.Monster.CustomHP/STA"}}</label>
-                    <input type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+                    <input class="small" type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
                 </div>
                 <div class="monster-HPSTA">
                     <label>{{localize "WITCHER.Actor.Hp"}}</label> 
-                    <input name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
+                    <input class="small" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
                     /
-                    <input name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
+                    <input class="small" name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
                 </div>
                 <div class="monster-HPSTA">
                     <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label> 
-                    <input name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
+                    <input class="small" name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
                     /
-                    <input name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
+                    <input class="small" name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
                 </div>
                 <div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.HeadArmor"}}</label> 
-                        <input name="data.armorHead" type="number" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="data.armorHead" type="number" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.UpperArmor"}}</label> 
-                        <input name="data.armorUpper" type="number" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="data.armorUpper" type="number" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.LowerArmor"}}</label> 
-                        <input name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
+                    </div>
+                    <div class="monster-armor"> 
+                        <label>{{localize "WITCHER.Monster.WingTailArmor"}}</label> 
+                        <input class="small" name="data.armorTailWing" type="number" value="{{data.armorTailWing}}" placeholder="0" data-dtype="Number"/>
                     </div>
                 </div>
             </div>
@@ -97,43 +122,43 @@
                         <input name="data.bounty" type="text" value="{{data.bounty}}"/>
                     </div>
                 </div>
-                    <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-                        {{#if (eq data.category "Humanoid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Humanoids.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Necrophage")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Necrophages.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Specter")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Specters.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Beast")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Beasts.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "CursedOne")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/CursedOnes.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Hybrid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Hybrids.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Insectoid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Insectoids.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Elementa")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Elementa.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Relict")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Relicts.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Ogroid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Ogroids.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Draconid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Draconids.png" class="cat-img" /> 
-                        {{/if}}
-                        {{#if (eq data.category "Vampire")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Vampires.png" class="cat-img" /> 
-                        {{/if}}
+                <div class="img-view">
+                    {{#if (eq data.category "Humanoid")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Humanoids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Necrophage")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Necrophages.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Specter")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Specters.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Beast")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Beasts.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "CursedOne")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/CursedOnes.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Hybrid")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Hybrids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Insectoid")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Insectoids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Elementa")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Elementa.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Relict")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Relicts.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Ogroid")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Ogroids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Draconid")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Draconids.png" class="cat-img" /> 
+                    {{/if}}
+                    {{#if (eq data.category "Vampire")}}
+                    <img src="systems/TheWitcherTRPG/assets/images/Monsters/Vampires.png" class="cat-img" /> 
+                    {{/if}}
                     <table class="monster-info">
                         <tr><td>{{localize "WITCHER.Monster.Height"}}</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
                         <tr><td>{{localize "WITCHER.Monster.Weight"}}</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
@@ -141,8 +166,8 @@
                         <tr><td>{{localize "WITCHER.Monster.Intelligence"}}</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
                         <tr><td>{{localize "WITCHER.Monster.Organization"}} </td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
                     </table>
+                    <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
                 </div>
-            </div>
         <div class="monster-knowledge">
             <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}<input class="skill-value" name="data.commonSkillValue" type="number" value="{{data.commonSkillValue}}" data-dtype="Number"/></label>
             {{editor content=data.common target="data.common" button=true editable=editable}}

@@ -13,3 +13,11 @@
 .item-section{
     flex: 1
 }
+
+.hidden-view {
+    background-color: silver;
+}
+
+.hidden-from-view {
+    display: none
+}
