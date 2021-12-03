@@ -516,6 +516,8 @@
     "WITCHER.Monster.InventryTab": "Ataques/Botín",
     "WITCHER.Monster.DetailsTab": "Detalles",
     "WITCHER.Monster.SpellsTab": "Hechizos",
+	
+	"WITCHER.Monster.SkillList": "Mostrar capacidades específicas",
 
     "WITCHER.Monster.Type.Humanoid": "Humanoides",
     "WITCHER.Monster.Type.Necrophage": "Necrófagos",
@@ -608,6 +610,9 @@
     "WITCHER.Spell.staminaDialog": "¿Cuánto Aguante vas a usar?",
     "WITCHER.Spell.notEnoughSta": "No hay suficiente aguante.",
     "WITCHER.Spell.MagicCost": "Coste mágico",
+	
+	"WITCHER.Spell.ChooseFocus": "Usa un Foco",
+    "WITCHER.Spell.ChooseExpandedFocus": "Usa Foco mayor",
 
     "WITCHER.Chat.SaveText": "Debes obtener un resultado inferior a este valor",
 
@@ -794,5 +799,5 @@
     "WITCHER.Loot.Percent": "Aplicar porcentaje",
 
     "WITCHER.Loot.BuyTitle": "Comprar/Vender artículos",
-	 "WITCHER.Monster.exportLoot": "Exportar a botín"
+    "WITCHER.Monster.exportLoot": "Exportar a botín"
 }
