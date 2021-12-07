@@ -1108,7 +1108,7 @@
       "equiped": false,
       "effects": [{
           "id": "first",
-          "name": "effect",
+          "name": "",
           "percentage": ""
         }
       ],

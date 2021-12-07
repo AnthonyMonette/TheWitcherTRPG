@@ -40,14 +40,16 @@
             <th>{{localize "WITCHER.Dialog.damageType"}}</th>
             {{#unless data.isAmmo}}
             <th title="{{localize "WITCHER.Weapon.WeaponAccuracy"}}">{{localize "WITCHER.Weapon.Short.WeaponAccuracy"}}</th>
-            <th>{{localize "WITCHER.Weapon.Hands"}}</th>
-            <th title="{{localize "WITCHER.Weapon.Enhancements"}}">{{localize "WITCHER.Weapon.Short.Enhancements"}}</th>
             {{/unless}}
             <th title="{{localize "WITCHER.Item.Availability"}}">{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th title="{{localize "WITCHER.Weapon.Reliability"}}">{{localize "WITCHER.Weapon.Short.Reliability"}}</th>
             <th title="{{localize "WITCHER.Weapon.MaxReliability"}}">{{localize "WITCHER.Weapon.Short.MaxReliability"}}</th>
+            {{#unless data.isAmmo}}
+            <th>{{localize "WITCHER.Weapon.Hands"}}</th>
+            {{/unless}}
             <th title="{{localize "WITCHER.Weapon.Concealement"}}">{{localize "WITCHER.Weapon.Short.Concealement"}}</th>
             {{#unless data.isAmmo}}
+            <th title="{{localize "WITCHER.Weapon.Enhancements"}}">{{localize "WITCHER.Weapon.Short.Enhancements"}}</th>
             <th title="{{localize "WITCHER.Weapon.RateOfFire"}}">{{localize "WITCHER.Weapon.Short.RateOfFire"}}</th>
             {{/unless}}
 
@@ -63,15 +65,6 @@
             <td>
                 <input class="double-digit" type="number" name="data.accuracy" value="{{data.accuracy}}" data-dtype="Number"/>
             </td>
-            <td>
-                <select name="data.hands" id="hands-select">
-                    {{#select data.hands}}
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        {{/select}}
-                </select>
-            </td>
-            <td><input class="double-digit" type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
             {{/unless}}
             <td>
                 <select name="data.avail" id="avail-select">
@@ -84,6 +77,16 @@
             </td>
             <td><input class="double-digit" type="number" name="data.reliable" value="{{data.reliable}}" data-dtype="Number"/></td>
             <td><input class="double-digit" type="number" name="data.maxReliability" value="{{data.maxReliability}}" data-dtype="Number"/></td>
+            {{#unless data.isAmmo}}            
+            <td>
+                <select name="data.hands" id="hands-select">
+                    {{#select data.hands}}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        {{/select}}
+                </select>
+            </td>
+            {{/unless}}
             <td>
                 <select name="data.conceal" id="avail-select">
                     {{#select data.conceal}}
@@ -94,6 +97,7 @@
                 </select>
             </td>
             {{#unless data.isAmmo}}
+            <td><input class="double-digit" type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
             <td><input class="double-digit" type="number" name="data.rateOfFire" value="{{data.rateOfFire}}" data-dtype="Number"/></td>
             {{/unless}}
         </tr>
@@ -107,10 +111,10 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="data.damage" value="{{data.damage}}"/>
+                    <input type="text" name="data.damage" placeholder="2d6+2" value="{{data.damage}}"/>
                 </td>
                 <td>
-                    </b><input type="text" name="data.range" value="{{data.range}}"/>
+                    </b><input type="text" name="data.range" placeholder="0m" value="{{data.range}}"/>
                 </td>
             </tr>
         </table>
@@ -127,10 +131,10 @@
                     <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>
                 </th>
                 <td class="list-item"  data-id="{{effect.id}}">
-                    <input  class="list-edit weapon-effect" data-field="name" type="text" value="{{effect.name}}"/>
+                    <input  class="list-edit weapon-effect" data-field="name" placeholder="{{localize "WITCHER.table.Name"}}" type="text" value="{{effect.name}}"/>
                 </td>
                 <td class="list-item"  data-id="{{effect.id}}">
-                    <input class="list-edit" data-field="percentage" type="number"  value="{{effect.percentage}}" data-dtype="Number" />
+                    <input class="list-edit" data-field="percentage" type="number"  placeholder="%" value="{{effect.percentage}}" data-dtype="Number" />
                 </td>
             </tr>
             {{/each}}
