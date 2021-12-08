@@ -35,7 +35,7 @@
             {{/unless}}
         </div>
     </div>
-    <table class="weapon-table">
+    <table class="item-table">
         <tr>
             <th>{{localize "WITCHER.Dialog.damageType"}}</th>
             {{#unless data.isAmmo}}
@@ -54,7 +54,7 @@
             {{/unless}}
 
         </tr>
-        <tr class="weapon-stat-table">
+        <tr class="item-stat-table">
             <td class="weapon-dmg-type">
                 <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Slashing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Slashing"}}" type="checkbox" id="slashing" {{checked data.type.slashing}}/></label>
                 <label for="slashing" style="float: left;">{{localize "WITCHER.Enhancement.Piercing"}}<input class="damage-type" title="{{localize "WITCHER.Armor.Piercing"}}" type="checkbox" id="piercing" {{checked data.type.piercing}}/></label>
@@ -104,7 +104,7 @@
     </table>
     <div class="flex">
         {{#unless data.isAmmo}}
-        <table class="weapon-bottom-table weapon-bottom-table-one">
+        <table class="item-bottom-table item-bottom-table-one">
             <tr>
                 <th>{{localize "WITCHER.Weapon.Damage"}}</th>
                 <th>{{localize "WITCHER.Weapon.Range"}}</th>
@@ -119,7 +119,7 @@
             </tr>
         </table>
         {{/unless}}
-        <table class="weapon-bottom-table">
+        <table class="item-bottom-table">
             <tr>
                 <th><a class="add-effect" title="{{localize "WITCHER.Item.AddEffect"}}"><i class="fas fa-plus"></i></a></th>
                 <th>{{localize "WITCHER.Item.Effect"}}</th>
@@ -131,7 +131,7 @@
                     <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>
                 </th>
                 <td class="list-item"  data-id="{{effect.id}}">
-                    <input  class="list-edit weapon-effect" data-field="name" placeholder="{{localize "WITCHER.table.Name"}}" type="text" value="{{effect.name}}"/>
+                    <input  class="list-edit item-effect" data-field="name" placeholder="{{localize "WITCHER.table.Name"}}" type="text" value="{{effect.name}}"/>
                 </td>
                 <td class="list-item"  data-id="{{effect.id}}">
                     <input class="list-edit" data-field="percentage" type="number"  placeholder="%" value="{{effect.percentage}}" data-dtype="Number" />

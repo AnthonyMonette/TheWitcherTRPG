@@ -48,7 +48,7 @@
     "WITCHER.Armor.StoppingPower": "PR",
     "WITCHER.Armor.MaxStoppingPower": "Max. PR",
     
-    "WITCHER.Armor.Enhancement": "POA",
+    "WITCHER.Armor.ArmorEnhancement": "POA",
     "WITCHER.Armor.Reliable": "Aff.",
     "WITCHER.Armor.EncumbranceValue": "Ingombro",
     "WITCHER.Armor.Resistances": "Resistenze",

@@ -22,7 +22,7 @@
         </div>
 
         <h2>{{localize  "WITCHER.Inventory.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
-        <table class="weapon-table">
+        <table class="item-table">
             <tr>
                 <td></td> 
                 <td></td> 
@@ -249,8 +249,8 @@
                             </tr>
                             {{#if (eq type "armor")}}
                                 <tr>
-                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Enhancement"}} :</b></label>{{armor.data.enhancements}}</div></td>
-                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.EncumbranceValue"}} :</b></label>{{armor.data.encumb}}</div></td>
+                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Short.ArmorEnhancement"}} :</b></label>{{armor.data.enhancements}}</div></td>
+                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Short.EncumbranceValue"}} :</b></label>{{armor.data.encumb}}</div></td>
                                     <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Item.Weight"}} :</b></label>{{armor.data.weight}}</div></td>
                                     <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                                 </tr>
@@ -267,7 +267,7 @@
                             {{/if}}
                             {{#if (eq type "enhancement")}}
                                 <tr>
-                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.EncumbranceValue"}} :</b></label>{{armor.data.encumb}}</div></td>
+                                    <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Short.EncumbranceValue"}} :</b></label>{{armor.data.encumb}}</div></td>
                                     <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Item.Weight"}} :</b></label>{{armor.data.weight}}</div></td>
                                     <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                                 </tr>

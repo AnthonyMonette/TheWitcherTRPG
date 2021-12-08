@@ -51,7 +51,7 @@
     "WITCHER.Armor.StoppingPower": "CP",
     "WITCHER.Armor.MaxStoppingPower": "Max. CP",
 	
-    "WITCHER.Armor.Enhancement": "MA",
+    "WITCHER.Armor.ArmorEnhancement": "MA",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
     "WITCHER.Armor.Resistances": "Resistencias",

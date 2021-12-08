@@ -99,22 +99,22 @@
     align-items: center;
 }
 
-.weapon-bottom-table {
+.item-bottom-table {
     text-align: center;
 }
 
-.weapon-bottom-table input{
+.item-bottom-table input{
     display: block;
     width: 75px;
     height: 27px;
     margin: auto;
 }
 
-.weapon-effect {
+.item-effect {
     width: 90% !important;
 }
 
-.weapon-bottom-table-one {
+.item-bottom-table-one {
     width: 200px;
 }
 
@@ -125,11 +125,11 @@
     margin: auto !important;
 }
 
-.weapon-stat-table select{
+.item-stat-table select{
     display: block;
     margin: auto;
 }
 
-.weapon-table {
+.item-table {
     text-align: center;
 }

@@ -1141,7 +1141,7 @@
       "enhancementItems": [],
       "effects": [{
           "id": "first",
-          "name": "effect"
+          "name": ""
         }
       ],
       "encumb": 0,

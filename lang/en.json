@@ -56,13 +56,9 @@
     "WITCHER.Weapon.MeleeBonus": "Melee Bonus",
     
     "WITCHER.Weapon.isAmmunition": "Is an ammunition",
-
-    "WITCHER.Armor.StoppingPower": "SP",
-    "WITCHER.Armor.MaxStoppingPower": "Max. SP",
     
-    "WITCHER.Armor.Enhancement": "AE",
-    "WITCHER.Armor.Reliable": "Rel.",
-    "WITCHER.Armor.EncumbranceValue": "Encumbrance",
+    "WITCHER.Armor.ArmorEnhancement": "Armor Enhancment",
+    "WITCHER.Armor.EncumbranceValue": "Encumbrance Value",
     "WITCHER.Armor.Resistances": "Resistances",
     "WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Bludgeoning",
@@ -70,6 +66,13 @@
     "WITCHER.Armor.Piercing": "Piercing",
     "WITCHER.Armor.Elemental": "Elemental",
     "WITCHER.Armor.Type": "Type",
+    "WITCHER.Armor.StoppingPower": "Current Stoppingpower",
+    "WITCHER.Armor.MaxStoppingPower": "Maximum Stoppingpower",
+
+    "WITCHER.Armor.Short.ArmorEnhancement": "AE",
+    "WITCHER.Armor.Short.EncumbranceValue": "EV",
+    "WITCHER.Armor.Short.StoppingPower": "SP",
+    "WITCHER.Armor.Short.MaxStoppingPower": "Max. SP",
     
     "WITCHER.Armor.Light": "Light Armor",
     "WITCHER.Armor.Medium": "Medium Armor",
