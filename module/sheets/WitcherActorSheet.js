@@ -1655,15 +1655,18 @@ export default class WitcherActorSheet extends ActorSheet {
         itemId = event.currentTarget.closest(".item").dataset.itemId;
       }
       let item = this.actor.items.get(itemId);
-      let formula = item.data.data.damage
+      let displayDmgFormula = `${item.data.data.damage}`
+      let formula = !displayRollDetails ? `${item.data.data.damage}`: `${item.data.data.damage}[${game.i18n.localize("WITCHER.Diagram.Weapon")}]`
      
       let isMeleeAttack = witcher.meleeSkills.includes(item.data.data.attackSkill)
       if (this.actor.type == "character" && isMeleeAttack){
         if (this.actor.data.data.attackStats.meleeBonus < 0){
-          formula += `${this.actor.data.data.attackStats.meleeBonus}`
+          displayDmgFormula += `${this.actor.data.data.attackStats.meleeBonus}`
+          formula += !displayRollDetails ? `${this.actor.data.data.attackStats.meleeBonus}`: `${this.actor.data.data.attackStats.meleeBonus}[${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}]`
         }
         if (this.actor.data.data.attackStats.meleeBonus > 0){
-          formula += `+${this.actor.data.data.attackStats.meleeBonus}`
+          displayDmgFormula += `+${this.actor.data.data.attackStats.meleeBonus}`
+          formula += !displayRollDetails ? `+${this.actor.data.data.attackStats.meleeBonus}`: `+${this.actor.data.data.attackStats.meleeBonus}[${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}]`
         }
       }
 
@@ -1679,7 +1682,7 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
       <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
       <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
-      <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+      <option value="L. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
       <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
       <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
@@ -1732,7 +1735,7 @@ export default class WitcherActorSheet extends ActorSheet {
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
-                  <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
+                  <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${displayDmgFormula}</h2> 
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input type="number" class="small" name="customDmg" value=0></label> <br />`;
                   
       if (this.actor.type =="character" && isMeleeAttack){ 
@@ -1876,7 +1879,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 if (customAtt != "0") {
-                  attFormula +=  !displayRollDetails ? `+${customAtt}`:  `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
+                  attFormula +=  !displayRollDetails ? `+${customAtt}`: `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
                 }
 
                 switch(range){
@@ -1895,7 +1898,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
                 
                 if (customDmg != "0") {
-                  damageFormula += "+"+customDmg;
+                  damageFormula += !displayRollDetails ? `+${customDmg}`: `+${customDmg}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
                 }                
                 let touchedLocation = ""
                 let LocationFormula = `(${game.i18n.localize("WITCHER.Chat.FullDmg")})`
