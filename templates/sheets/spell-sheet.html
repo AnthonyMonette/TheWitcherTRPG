@@ -77,10 +77,17 @@
         <label>{{localize "WITCHER.Spell.Requirements"}}</label>
 <textarea rows="5" name="data.liftRequirement">{{data.liftRequirement}}</textarea>
         {{/if}}
-        <div>
-            <label>{{localize "WITCHER.Spell.CreateTemplate"}}<input type="checkbox" name="data.createTemplate"  {{checked data.createTemplate}}/></label>
-            <label>{{localize "WITCHER.Spell.Damage"}}<input type="checkbox" name="data.causeDamages"  {{checked data.causeDamages}}/></label>
-        </div>
+        <div class="flex">
+            <div class="spell-template-damage">
+                <div>
+                    <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
+                    <input type="checkbox" name="data.createTemplate"  {{checked data.createTemplate}}/>
+                </div>
+                <div>
+                    <label>{{localize "WITCHER.Spell.Damage"}}</label>
+                    <input type="checkbox" name="data.causeDamages"  {{checked data.causeDamages}}/>
+                </div>
+            </div>
             <table class="item-table">
                 <tr>
                     {{#if (eq data.createTemplate true)}}
@@ -114,6 +121,7 @@
                     {{/if}}
                 </tr>
             </table>
+        </div>
             {{#if (eq data.causeDamages true)}}
             <table class="item-bottom-table">
                 <tr>

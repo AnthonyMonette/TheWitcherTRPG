@@ -127,3 +127,19 @@
     text-align: center;
     padding: 0.25em 0.25em;
 }
+
+.spell-template-damage {
+    width: 15em;
+    margin-top: 0.6em;
+}
+
+.spell-template-damage input{
+    float: right;
+}
+
+.spell-template-damage div {
+    display: flex;
+    height: 27px;
+    justify-content: space-between;
+    align-items: center;
+}
