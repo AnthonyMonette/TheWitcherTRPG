@@ -12,7 +12,7 @@
             <th>{{localize "WITCHER.Armor.Location"}}</th>
             <th>{{localize "WITCHER.Armor.Type"}}</th>
         </tr>
-        <tr class="item-stat-table">
+        <tr>
             <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
             <td><input type="checkbox" name="data.piercing" {{checked data.piercing}} /></td>
             <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
@@ -25,8 +25,8 @@
                 {{/select}}
                 </select>
             </td>
-            <td><input class="double-digit" type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
-            <td><input class="double-digit" type="number" name="data.encumb" value="{{data.encumb}}" data-dtype="Number"/></td>
+            <td><input type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
+            <td><input type="number" name="data.encumb" value="{{data.encumb}}" data-dtype="Number"/></td>
             <td>
                 <select name="data.location" id="location-select">
                 {{#select data.location}}
@@ -47,8 +47,9 @@
                     <option value="Natural">{{localize "WITCHER.Armor.Natural"}}</option>
                 {{/select}}
                 </select>
-            </td>    
-        </table>
+            </td>
+        </tr>
+    </table>
     <div class="flex">
         <table class="item-bottom-table">
             <tr>

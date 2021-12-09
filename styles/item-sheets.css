@@ -118,18 +118,12 @@
     width: 200px;
 }
 
-.double-digit {
-    width: 3em !important;
+.item-table input:not(.damage-type)  {
     height: 27px !important;
-    display: block;
-    margin: auto !important;
+    max-width: 120px;
 }
 
-.item-stat-table select{
-    display: block;
-    margin: auto;
-}
-
-.item-table {
+.item-table td {
     text-align: center;
+    padding: 0.25em 0.25em;
 }
