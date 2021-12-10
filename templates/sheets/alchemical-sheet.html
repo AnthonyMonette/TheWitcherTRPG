@@ -2,17 +2,20 @@
 {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
 
     {{!-- Attributes Tab --}}
-    <table>
+    <table class="item-table">
         <tr>
             <th>{{localize "WITCHER.Type"}}</th>
             <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th>{{localize "WITCHER.Alchemy.Duration"}}</th>
+            {{#if (or (eq data.type "potion") (eq data.type "decoction"))}}
             <th>{{localize "WITCHER.Alchemy.Toxicity"}}</th>
+            {{/if}}
         </tr>
         <tr>
             <td>    
                 <select name="data.type" id="type-select">
                     {{#select data.type}}
+                    <option value="alchemical">{{localize "WITCHER.Alchemy.Alchemical"}}</option>
                     <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
                     <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
                     <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
@@ -30,7 +33,9 @@
                 </select>
             </td>
             <td><input type="text" name="data.time" value="{{data.time}}"/></td>
+            {{#if (or (eq data.type "potion") (eq data.type "decoction"))}}
             <td><input type="text" name="data.toxicity" value="{{data.toxicity}}"/></td>
+            {{/if}}
         </tr>
         <tr>
             <td colspan="4">
