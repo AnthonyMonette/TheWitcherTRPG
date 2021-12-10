@@ -1108,7 +1108,7 @@
       "equiped": false,
       "effects": [{
           "id": "first",
-          "name": "effect",
+          "name": "",
           "percentage": ""
         }
       ],
@@ -1141,7 +1141,7 @@
       "enhancementItems": [],
       "effects": [{
           "id": "first",
-          "name": "effect"
+          "name": ""
         }
       ],
       "encumb": 0,

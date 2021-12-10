@@ -99,37 +99,47 @@
     align-items: center;
 }
 
-.weapon-bottom-table {
+.item-bottom-table {
     text-align: center;
 }
 
-.weapon-bottom-table input{
+.item-bottom-table input{
     display: block;
     width: 75px;
     height: 27px;
     margin: auto;
 }
 
-.weapon-effect {
+.item-effect {
     width: 90% !important;
 }
 
-.weapon-bottom-table-one {
+.item-bottom-table-one {
     width: 200px;
 }
 
-.double-digit {
-    width: 3em !important;
+.item-table input:not(.damage-type)  {
     height: 27px !important;
-    display: block;
-    margin: auto !important;
+    max-width: 120px;
 }
 
-.weapon-stat-table select{
-    display: block;
-    margin: auto;
-}
-
-.weapon-table {
+.item-table td {
     text-align: center;
+    padding: 0.25em 0.25em;
+}
+
+.spell-template-damage {
+    width: 15em;
+    margin-top: 0.6em;
+}
+
+.spell-template-damage input{
+    float: right;
+}
+
+.spell-template-damage div {
+    display: flex;
+    height: 27px;
+    justify-content: space-between;
+    align-items: center;
 }

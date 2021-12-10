@@ -48,7 +48,7 @@
     "WITCHER.Armor.StoppingPower": "PR",
     "WITCHER.Armor.MaxStoppingPower": "Max. PR",
     
-    "WITCHER.Armor.Enhancement": "POA",
+    "WITCHER.Armor.ArmorEnhancement": "POA",
     "WITCHER.Armor.Reliable": "Aff.",
     "WITCHER.Armor.EncumbranceValue": "Ingombro",
     "WITCHER.Armor.Resistances": "Resistenze",
@@ -581,7 +581,7 @@
     "WITCHER.Spell.Requirements": "Occorrente per Toglierla",
     "WITCHER.Spell.Effect": "Effetto",
     "WITCHER.Spell.AlternateComponents": "Componenti Alternativi",
-    "WITCHER.SPell.Signs": "Segni",
+    "WITCHER.Spell.Signs": "Segni",
        
     "WITCHER.Spell.StaCost": "Costo in RES",
     "WITCHER.Spell.Variable": "RES Variabile",

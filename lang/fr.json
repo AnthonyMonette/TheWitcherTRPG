@@ -48,7 +48,7 @@
     "WITCHER.Armor.StoppingPower": "PA",
     "WITCHER.Armor.MaxStoppingPower": "Max. PA",
     
-    "WITCHER.Armor.Enhancement": "Ren",
+    "WITCHER.Armor.ArmorEnhancement": "Ren",
     "WITCHER.Armor.Reliable": "Fia.",
     "WITCHER.Armor.EncumbranceValue": "Encombrement",
     "WITCHER.Armor.Resistances": "Résistances",
@@ -568,7 +568,7 @@
     "WITCHER.Spell.Requirements": "Exigences pour soulever",
     "WITCHER.Spell.Effect": "Effet",
     "WITCHER.Spell.AlternateComponents": "Composants alternatifs",
-    "WITCHER.SPell.Signs": "Signes",
+    "WITCHER.Spell.Signs": "Signes",
        
     "WITCHER.Spell.StaCost": "Coût d'ENDU",
     "WITCHER.Spell.Variable": "ENDU Variable",

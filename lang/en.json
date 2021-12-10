@@ -56,13 +56,9 @@
     "WITCHER.Weapon.MeleeBonus": "Melee Bonus",
     
     "WITCHER.Weapon.isAmmunition": "Is an ammunition",
-
-    "WITCHER.Armor.StoppingPower": "SP",
-    "WITCHER.Armor.MaxStoppingPower": "Max. SP",
     
-    "WITCHER.Armor.Enhancement": "AE",
-    "WITCHER.Armor.Reliable": "Rel.",
-    "WITCHER.Armor.EncumbranceValue": "Encumbrance",
+    "WITCHER.Armor.ArmorEnhancement": "Armor Enhancment",
+    "WITCHER.Armor.EncumbranceValue": "Encumbrance Value",
     "WITCHER.Armor.Resistances": "Resistances",
     "WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Bludgeoning",
@@ -70,6 +66,13 @@
     "WITCHER.Armor.Piercing": "Piercing",
     "WITCHER.Armor.Elemental": "Elemental",
     "WITCHER.Armor.Type": "Type",
+    "WITCHER.Armor.StoppingPower": "Current Stoppingpower",
+    "WITCHER.Armor.MaxStoppingPower": "Maximum Stoppingpower",
+
+    "WITCHER.Armor.Short.ArmorEnhancement": "AE",
+    "WITCHER.Armor.Short.EncumbranceValue": "EV",
+    "WITCHER.Armor.Short.StoppingPower": "SP",
+    "WITCHER.Armor.Short.MaxStoppingPower": "Max. SP",
     
     "WITCHER.Armor.Light": "Light Armor",
     "WITCHER.Armor.Medium": "Medium Armor",
@@ -119,6 +122,7 @@
     
     "WITCHER.Alchemy.Duration": "Dura.",
     "WITCHER.Alchemy.Toxicity": "Tox.",
+    "WITCHER.Alchemy.Alchemical": "Alchemical",
     "WITCHER.Alchemy.Potion": "Potion",
     "WITCHER.Alchemy.Decoction": "Decoction",
     "WITCHER.Alchemy.Oil": "Oil",
@@ -600,8 +604,8 @@
     "WITCHER.Spell.Druid": "Druid",
     "WITCHER.Spell.Preacher": "Preacher",
     "WITCHER.Spell.Archpriest": "Arch priest",    
-    "WITCHER.Spell.Basic": "Basic Sign",
-    "WITCHER.Spell.Alt": "Alternate Sign Forms",    
+    "WITCHER.Spell.Basic": "Basic",
+    "WITCHER.Spell.Alt": "Alternate",
     "WITCHER.Spell.Duration": "Duration",
     "WITCHER.Spell.Range": "Range",
     "WITCHER.Spell.Defence": "Defence",
@@ -611,11 +615,15 @@
     "WITCHER.Spell.Requirements": "Requirements To Lift",
     "WITCHER.Spell.Effect": "Effect",
     "WITCHER.Spell.AlternateComponents": "Alternate Components",
-    "WITCHER.SPell.Signs": "Signs",
+    "WITCHER.Spell.Signs": "Signs",
+    "WITCHER.Spell.Sign": "Sign",
     "WITCHER.Spell.Element": "Element",
        
-    "WITCHER.Spell.StaCost": "STA Cost",
-    "WITCHER.Spell.Variable": "STA Variable",
+    "WITCHER.Spell.StaCost": "Stamina Cost",
+    "WITCHER.Spell.Variable": "Variable Stamina",
+    
+    "WITCHER.Spell.Short.StaCost": "STA Cost",
+    "WITCHER.Spell.Short.Variable": "V.STA",
     
     "WITCHER.Spell.staminaDialog": "How many stamina do you use?",
     "WITCHER.Spell.notEnoughSta": "Not enough stamina.",

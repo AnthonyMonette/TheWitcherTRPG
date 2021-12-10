@@ -48,7 +48,7 @@
     "WITCHER.Armor.StoppingPower": "AK",
     "WITCHER.Armor.MaxStoppingPower": "Max. AK",
     
-    "WITCHER.Armor.Enhancement": "RV",
+    "WITCHER.Armor.ArmorEnhancement": "RV",
     "WITCHER.Armor.Reliable": "Best.",
     "WITCHER.Armor.EncumbranceValue": "Behinderungswert",
     "WITCHER.Armor.Resistances": "Widerstände",
@@ -568,7 +568,7 @@
     "WITCHER.Spell.Requirements": "Requirements To Lift",
     "WITCHER.Spell.Effect": "Wirkung",
     "WITCHER.Spell.AlternateComponents": "Alternative Komponenten",
-    "WITCHER.SPell.Signs": "Zeichen",
+    "WITCHER.Spell.Signs": "Zeichen",
        
     "WITCHER.Spell.StaCost": "AUS Kosten",
     "WITCHER.Spell.Variable": "AUS Variabel",
