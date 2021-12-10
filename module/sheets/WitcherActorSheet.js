@@ -467,7 +467,7 @@ export default class WitcherActorSheet extends ActorSheet {
                                 "data.rightLegMaxStopping": item.data.data.rightLegMaxStopping + choosedEnhancement.data.data.stopping,
                                 'data.bludgeoning': choosedEnhancement.data.data.bludgeoning,
                                 'data.slashing': choosedEnhancement.data.data.slashing,
-                                'data.percing': choosedEnhancement.data.data.percing,
+                                'data.piercing': choosedEnhancement.data.data.piercing,
                                 'data.effects': allEffects})
                 }
                 else {
@@ -1655,15 +1655,18 @@ export default class WitcherActorSheet extends ActorSheet {
         itemId = event.currentTarget.closest(".item").dataset.itemId;
       }
       let item = this.actor.items.get(itemId);
-      let formula = item.data.data.damage
+      let displayDmgFormula = `${item.data.data.damage}`
+      let formula = !displayRollDetails ? `${item.data.data.damage}`: `${item.data.data.damage}[${game.i18n.localize("WITCHER.Diagram.Weapon")}]`
      
       let isMeleeAttack = witcher.meleeSkills.includes(item.data.data.attackSkill)
       if (this.actor.type == "character" && isMeleeAttack){
         if (this.actor.data.data.attackStats.meleeBonus < 0){
-          formula += `${this.actor.data.data.attackStats.meleeBonus}`
+          displayDmgFormula += `${this.actor.data.data.attackStats.meleeBonus}`
+          formula += !displayRollDetails ? `${this.actor.data.data.attackStats.meleeBonus}`: `${this.actor.data.data.attackStats.meleeBonus}[${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}]`
         }
         if (this.actor.data.data.attackStats.meleeBonus > 0){
-          formula += `+${this.actor.data.data.attackStats.meleeBonus}`
+          displayDmgFormula += `+${this.actor.data.data.attackStats.meleeBonus}`
+          formula += !displayRollDetails ? `+${this.actor.data.data.attackStats.meleeBonus}`: `+${this.actor.data.data.attackStats.meleeBonus}[${game.i18n.localize("WITCHER.Dialog.attackMeleeBonus")}]`
         }
       }
 
@@ -1679,7 +1682,7 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
       <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
       <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
-      <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+      <option value="L. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
       <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
       <option value="tail"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
       `;
@@ -1732,7 +1735,7 @@ export default class WitcherActorSheet extends ActorSheet {
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
-                  <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${formula}</h2> 
+                  <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${displayDmgFormula}</h2> 
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input type="number" class="small" name="customDmg" value=0></label> <br />`;
                   
       if (this.actor.type =="character" && isMeleeAttack){ 
@@ -1811,10 +1814,10 @@ export default class WitcherActorSheet extends ActorSheet {
                 let damageFormula = formula;
 
                 if (item.data.data.accuracy < 0){
-                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `${item.data.data.accuracy}` : `${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
                 if (item.data.data.accuracy > 0){
-                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.WeaponAccuracy")}]`
+                  attFormula += !displayRollDetails ? `+${item.data.data.accuracy}`: `+${item.data.data.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
                 if (targetOutsideLOS) {attFormula += "-3";}
                 if (outsideLOS) {attFormula += "+3";}
@@ -1876,7 +1879,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 if (customAtt != "0") {
-                  attFormula +=  !displayRollDetails ? `+${customAtt}`:  `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
+                  attFormula +=  !displayRollDetails ? `+${customAtt}`: `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
                 }
 
                 switch(range){
@@ -1895,7 +1898,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
                 
                 if (customDmg != "0") {
-                  damageFormula += "+"+customDmg;
+                  damageFormula += !displayRollDetails ? `+${customDmg}`: `+${customDmg}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
                 }                
                 let touchedLocation = ""
                 let LocationFormula = `(${game.i18n.localize("WITCHER.Chat.FullDmg")})`
@@ -2031,7 +2034,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type.text}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;

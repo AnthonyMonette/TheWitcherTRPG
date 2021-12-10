@@ -6,7 +6,7 @@
     "WITCHER.Percentage": "Porcentaje",
     "WITCHER.DC": "DO",
 
-    "WITCHER.Item.Availability": "Disp.",
+    "WITCHER.Item.Short.Availability": "Disp.",
     "WITCHER.Item.Weight": "Peso",
     "WITCHER.Item.Cost": "Precio",
     "WITCHER.Item.Effect": "Efectos",
@@ -32,13 +32,13 @@
     "Witcher.Item.CantHide": "I",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.WeaponAccuracy": "PA",
-    "WITCHER.Weapon.Damage": "Daño",
-    "WITCHER.Weapon.Reliability": "Fiab",
-    "WITCHER.Weapon.MaxReliability": "Max. Fiab",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "PA",
+    "WITCHER.Weapon.Short.Damage": "Daño",
+    "WITCHER.Weapon.Short.Reliability": "Fiab",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Fiab",
     "WITCHER.Weapon.Hands": "Manos",
-    "WITCHER.Weapon.Concealement": "CD",
-    "WITCHER.Weapon.Enhancement": "Mej",
+    "WITCHER.Weapon.Short.Concealement": "CD",
+    "WITCHER.Weapon.Short.Enhancements": "Mej",
     "WITCHER.Weapon.Range": "Alc",
     "WITCHER.Weapon.Elderfolk": "P.Antiguo",
 
@@ -46,19 +46,19 @@
     "WITCHER.Weapon.MeleeBonus": "Daño adicional",
     
     "WITCHER.Weapon.isAmmunition": "Es munición",
-    "WITCHER.Weapon.rateOfFire": "ATA",
+    "WITCHER.Weapon.Short.RateOfFire": "ATA",
 
     "WITCHER.Armor.StoppingPower": "CP",
     "WITCHER.Armor.MaxStoppingPower": "Max. CP",
 	
-    "WITCHER.Armor.Enhancement": "MA",
+    "WITCHER.Armor.ArmorEnhancement": "MA",
     "WITCHER.Armor.Reliable": "Rel.",
     "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
     "WITCHER.Armor.Resistances": "Resistencias",
 	"WITCHER.Armor.Res": "Res",
     "WITCHER.Armor.Bludgeoning": "Aplastante",
     "WITCHER.Armor.Slashing": "Cortante",
-    "WITCHER.Armor.Percing": "Perforante",
+    "WITCHER.Armor.Piercing": "Perforante",
 	"WITCHER.Armor.Elemental": "Elemental",
 	"WITCHER.Armor.Type": "Tipo",
 	
@@ -94,7 +94,7 @@
     "WITCHER.Enhancement.Stopping": "Capacidad de parada",
     "WITCHER.Enhancement.Bludgeoning": "A",
     "WITCHER.Enhancement.Slashing": "C",
-    "WITCHER.Enhancement.Percing": "P",
+    "WITCHER.Enhancement.Piercing": "P",
 
     "WITCHER.Enhancement.Armor": "Armadura",
     "WITCHER.Enhancement.Rune": "Runa",
@@ -516,6 +516,8 @@
     "WITCHER.Monster.InventryTab": "Ataques/Botín",
     "WITCHER.Monster.DetailsTab": "Detalles",
     "WITCHER.Monster.SpellsTab": "Hechizos",
+	
+	"WITCHER.Monster.SkillList": "Mostrar capacidades específicas",
 
     "WITCHER.Monster.Type.Humanoid": "Humanoides",
     "WITCHER.Monster.Type.Necrophage": "Necrófagos",
@@ -599,7 +601,7 @@
     "WITCHER.Spell.Requirements": "Requisito para conjurar",
     "WITCHER.Spell.Effect": "Efectos",
     "WITCHER.Spell.AlternateComponents": "Componentes alternativos",
-    "WITCHER.SPell.Signs": "Señales",
+    "WITCHER.Spell.Signs": "Señales",
 	"WITCHER.Spell.Element": "Elemental",
        
     "WITCHER.Spell.StaCost": "Coste en AGU",
@@ -608,6 +610,9 @@
     "WITCHER.Spell.staminaDialog": "¿Cuánto Aguante vas a usar?",
     "WITCHER.Spell.notEnoughSta": "No hay suficiente aguante.",
     "WITCHER.Spell.MagicCost": "Coste mágico",
+	
+	"WITCHER.Spell.ChooseFocus": "Usa un Foco",
+    "WITCHER.Spell.ChooseExpandedFocus": "Usa Foco mayor",
 
     "WITCHER.Chat.SaveText": "Debes obtener un resultado inferior a este valor",
 
@@ -794,5 +799,5 @@
     "WITCHER.Loot.Percent": "Aplicar porcentaje",
 
     "WITCHER.Loot.BuyTitle": "Comprar/Vender artículos",
-	 "WITCHER.Monster.exportLoot": "Exportar a botín"
+    "WITCHER.Monster.exportLoot": "Exportar a botín"
 }

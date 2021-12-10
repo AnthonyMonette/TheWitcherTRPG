@@ -48,6 +48,10 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".add-modifier-stat").on("click", this._onAddModifierStat.bind(this));
       html.find(".add-modifier-skill").on("click", this._onAddModifierSkill.bind(this));
       html.find(".add-modifier-derived").on("click", this._onAddModifierDerived.bind(this));
+
+      html.find(".add-component").on("click", this._onAddComponent.bind(this));
+      html.find(".remove-component").on("click", this._onRemoveComponent.bind(this));
+
       html.find(".remove-effect").on("click", this._oRemoveEffect.bind(this));
       html.find(".remove-modifier-stat").on("click", this._onRemoveModifierStat.bind(this));
       html.find(".remove-modifier-skill").on("click", this._onRemoveModifierSkill.bind(this));
@@ -58,6 +62,7 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".modifiers-edit-skills").on("change", this._onModifierSkillsEdit.bind(this));
       html.find(".modifiers-edit-derived").on("change", this._onModifierDerivedEdit.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
+      html.find(".damage-type").on("change", this._onDamageTypeEdit.bind(this));
     }
 
 
@@ -68,11 +73,19 @@ export default class WitcherItemSheet extends ItemSheet {
       
       let field = element.dataset.field;
       let value = element.value
-      let effects = this.item.data.data.effects
-      let objIndex = effects.findIndex((obj => obj.id == itemId));
-      effects[objIndex][field] = value
-      
-      this.item.update({'data.effects': effects});
+      if (this.item.type == "diagrams") {
+        let components = this.item.data.data.craftingComponents
+        let objIndex = components.findIndex((obj => obj.id == itemId));
+        components[objIndex][field] = value
+        this.item.update({'data.craftingComponents': components});
+      }
+      else {
+        let effects = this.item.data.data.effects
+        let objIndex = effects.findIndex((obj => obj.id == itemId));
+        effects[objIndex][field] = value
+
+        this.item.update({'data.effects': effects});
+      }
     }
 
     _onModifierEdit(event) {
@@ -85,6 +98,20 @@ export default class WitcherItemSheet extends ItemSheet {
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
       this.item.update({'data.stats': effects});
+    }
+    
+    _onDamageTypeEdit (event) {
+      event.preventDefault();
+      let element = event.currentTarget;
+      let newval = Object.assign({}, this.item.data.data.type)
+      newval[element.id] = !newval[element.id]
+      let types=[]
+      if(newval.slashing) types.push(game.i18n.localize("WITCHER.Armor.Slashing"))
+      if(newval.piercing) types.push(game.i18n.localize("WITCHER.Armor.Piercing"))
+      if(newval.bludgeoning) types.push(game.i18n.localize("WITCHER.Armor.Bludgeoning"))
+      if(newval.elemental) types.push(game.i18n.localize("WITCHER.Armor.Elemental"))
+      newval.text = types.join(", ")
+      this.item.update({'data.type': newval});
     }
     
     _onModifierDerivedEdit(event) {
@@ -111,6 +138,14 @@ export default class WitcherItemSheet extends ItemSheet {
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
       this.item.update({'data.skills': effects});
+    }
+
+    _onRemoveComponent(event) {
+      event.preventDefault();
+      let element = event.currentTarget;
+      let itemId = element.closest(".list-item").dataset.id;
+      let newComponentList  = this.item.data.data.craftingComponents.filter(item => item.id !== itemId)
+      this.item.update({'data.craftingComponents': newComponentList});
     }
 
     _oRemoveEffect(event) {
@@ -154,6 +189,16 @@ export default class WitcherItemSheet extends ItemSheet {
       }
       newEffectList.push({id: genId(), name: "effect", percentage: ""})
       this.item.update({'data.effects': newEffectList});
+    }
+
+    _onAddComponent(event) {
+      event.preventDefault();
+      let newComponentList  = []
+      if (this.item.data.data.craftingComponents){
+        newComponentList = this.item.data.data.craftingComponents
+      }
+      newComponentList.push({id: genId(), name: "component", percentage: ""})
+      this.item.update({'data.craftingComponents': newComponentList});
     }
 
     _onAddModifierStat(event) {

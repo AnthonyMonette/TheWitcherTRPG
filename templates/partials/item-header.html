@@ -2,7 +2,7 @@
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="item-header-first-collum">
         <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-        <div class="item-header-row">
+        <div class="item-flex-container">
             {{#unless (eq item.type "spell")}}
                 <div class="item-header-second-collum">
                     <label>{{localize "WITCHER.Item.Quantity"}}</label>
@@ -43,16 +43,6 @@
                     </select>
                 </div>
                 <div class="item-header-second-collum item-header-spell">
-                    {{#if (eq data.class "Hexes")}}
-                    <label>{{localize "WITCHER.Spell.Danger"}}</label>
-                    <select name="data.danger" id="level-select">
-                        {{#select data.danger}}
-                        <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
-                        <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
-                        <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
-                        {{/select}}
-                    </select>
-                    {{/if}}
                     {{#unless (eq data.class "Hexes")}}
                     <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                     <select name="data.level" id="level-select">
@@ -65,10 +55,29 @@
                     {{/unless}}
                 </div>
                 <div class="item-header-second-collum item-header-spell">
-                    {{#unless (eq data.staminaIsVar true)}}
-                        <label>{{localize "WITCHER.Spell.StaCost"}}</label>
-                        <input class="sta-input" name="data.stamina" type="text" value="{{data.stamina}}"/>
-                     {{/unless}}
+                    {{#if (or (eq data.class "Spells") 
+                        (eq data.class "Witcher"))}}
+                        <label>{{localize "WITCHER.Spell.Element"}}</label>
+                        <select name="data.source">
+                            {{#select data.source}}
+                            <option value="mixedElements">{{localize "WITCHER.Spell.Mixed"}}</option>
+                            <option value="earth">{{localize "WITCHER.Spell.Earth"}}</option>
+                            <option value="air">{{localize "WITCHER.Spell.Air"}}</option>
+                            <option value="fire">{{localize "WITCHER.Spell.Fire"}}</option>
+                            <option value="Water">{{localize "WITCHER.Spell.Water"}}</option>
+                            {{/select}}
+                        </select>
+                    {{/if}}
+                    {{#if (eq data.class "Invocations")}}
+                        <label>{{localize "WITCHER.Spell.Type"}}</label>
+                        <select name="data.source">
+                            {{#select data.source}}
+                            <option value="druid">{{localize "WITCHER.Spell.Druid"}}</option>
+                            <option value="preacher">{{localize "WITCHER.Spell.Preacher"}}</option>
+                            <option value="arch priest">{{localize "WITCHER.Spell.Archpriest"}}</option>
+                            {{/select}}
+                        </select>
+                    {{/if}}
                 </div>
             {{/if}}
         </div>

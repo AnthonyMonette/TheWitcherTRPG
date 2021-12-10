@@ -1076,7 +1076,8 @@
         "quantity": 1,
         "weight": 0,
         "cost": 0,
-        "isHidden": false
+        "isHidden": false,
+        "associatedDiagram": {}
       }
     },
     "valuable": {
@@ -1089,7 +1090,13 @@
     },
     "weapon": {
       "templates": ["base"],
-      "type": "",
+      "type": {
+        "text": "",
+        "slashing": false,
+        "piercing": false,
+        "bludgeoning": false,
+        "elemental": false
+      },
       "isAmmo": false,
       "usingAmmo": false,
       "accuracy": 0,
@@ -1102,7 +1109,7 @@
       "equiped": false,
       "effects": [{
           "id": "first",
-          "name": "effect",
+          "name": "",
           "percentage": ""
         }
       ],
@@ -1135,7 +1142,7 @@
       "enhancementItems": [],
       "effects": [{
           "id": "first",
-          "name": "effect"
+          "name": ""
         }
       ],
       "encumb": 0,
@@ -1143,7 +1150,7 @@
       "equiped": false,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "piercing": false
     },
     "enhancement": {
       "templates": ["base"],
@@ -1158,7 +1165,7 @@
       "stopping": 0,
       "bludgeoning": false,
       "slashing": false,
-      "percing": false
+      "piercing": false
     },
     "mount": {
       "templates": ["base"],
@@ -1193,6 +1200,12 @@
       "alchemyDC": 0,
       "craftingTime": "",
       "components": "",
+      "craftingComponents": [{
+          "id": "first",
+          "quantity": "",
+          "name": ""
+        }
+      ],
       "investment": 0,
       "learned": false,
       "alchemyComponents": {
@@ -1205,7 +1218,8 @@
         "sol": 0,
         "caelum": 0,
         "fulgur": 0
-      }
+      },
+      "associatedItem": {}
     },
     "mutagen": {
       "templates": ["base"],

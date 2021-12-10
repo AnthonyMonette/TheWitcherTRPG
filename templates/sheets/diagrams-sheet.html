@@ -1,49 +1,48 @@
 <form class="{{cssClass}}" autocomplete="off">
 {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
-    <div class="item-options">
-        <div class="item-collum">
-            <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Diagram.Formulae"}} </label>
-                <input type="checkbox" name="data.isFormulae" {{checked data.isFormulae}}/>
-            </div>
-        </div>
-        <div class="item-collum">
-            <label>{{localize "WITCHER.Type"}}</label>
-            <select name="data.type" id="type-select">
-                {{#select data.type}}
-                {{#if data.isFormulae}}
-                <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
-                <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
-                <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
-                {{/if}}
-                {{#unless data.isFormulae}}
-                <option value="ingredients">{{localize "WITCHER.Diagram.Ingredient"}}</option>
-                <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
-                <option value="armor">{{localize "WITCHER.Diagram.Armor"}}</option>
-                <option value="armor-nhancement">{{localize "WITCHER.Diagram.ArmorEnhancement"}}</option>
-                <option value="elderfolk-weapon">{{localize "WITCHER.Diagram.ElderfolkWeapon"}}</option>
-                <option value="elderfolk-armor">{{localize "WITCHER.Diagram.ElderfolkArmor"}}</option>
-                <option value="Ammunition">{{localize "WITCHER.Diagram.Ammunition"}}</option>
-                <option value="bomb">{{localize  "WITCHER.Diagram.Bomb"}}</option>
-                <option value="traps">{{localize "WITCHER.Diagram.Traps"}}</option>
-                {{/unless}}
-                {{/select}}
-            </select>
-        </div>
-    </div>
-    <table>
-        <tr> 
+    <table class="item-table">
+        <tr>
+            <th>{{localize "WITCHER.Diagram.Formulae"}}</th>
+            <th>{{localize "WITCHER.Type"}}</th>
             <th>{{localize "WITCHER.Actor.Profession.Level"}}</th>
             {{#if data.isFormulae}}
-            <th>{{localize "WITCHER.Diagram.alchemyDC"}}</th>
+            <th title="{{localize "WITCHER.Diagram.alchemyDC"}}">{{localize "WITCHER.DC"}}</th>
             {{/if}}
             {{#unless data.isFormulae}}
-            <th>{{localize "WITCHER.Diagram.craftingDC"}}</th>
+            <th title="{{localize "WITCHER.Diagram.craftingDC"}}">{{localize "WITCHER.DC"}}</th>
             {{/unless}}
             <th>{{localize "WITCHER.Diagram.craftingTime"}}</th>
+            {{#unless data.isFormulae}}
             <th>{{localize "WITCHER.Diagram.investment"}}</th>
+            {{/unless}}
         </tr>
         <tr>
+            <td>
+                <input type="checkbox" name="data.isFormulae" {{checked data.isFormulae}}/>
+            </td>
+            <td>            
+                <select name="data.type" id="type-select">
+                    {{#select data.type}}
+                    {{#if data.isFormulae}}
+                    <option value="alchemical">{{localize "WITCHER.Alchemy.Alchemical"}}</option>
+                    <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
+                    <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
+                    <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
+                    {{/if}}
+                    {{#unless data.isFormulae}}
+                    <option value="ingredients">{{localize "WITCHER.Diagram.Ingredient"}}</option>
+                    <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
+                    <option value="armor">{{localize "WITCHER.Diagram.Armor"}}</option>
+                    <option value="armor-nhancement">{{localize "WITCHER.Diagram.ArmorEnhancement"}}</option>
+                    <option value="elderfolk-weapon">{{localize "WITCHER.Diagram.ElderfolkWeapon"}}</option>
+                    <option value="elderfolk-armor">{{localize "WITCHER.Diagram.ElderfolkArmor"}}</option>
+                    <option value="Ammunition">{{localize "WITCHER.Diagram.Ammunition"}}</option>
+                    <option value="bomb">{{localize  "WITCHER.Diagram.Bomb"}}</option>
+                    <option value="traps">{{localize "WITCHER.Diagram.Traps"}}</option>
+                    {{/unless}}
+                    {{/select}}
+                </select>
+            </td>
             <td>
                 <select name="data.level" id="type-select">
                     {{#select data.level}}
@@ -62,39 +61,66 @@
             <td><input type="text" name="data.craftingDC" value="{{data.craftingDC}}" data-dtype="Number"/></td>
             {{/unless}}
             <td><input type="text" name="data.craftingTime" value="{{data.craftingTime}}"/></td>
+            {{#unless data.isFormulae}}
             <td><input type="text" name="data.investment" value="{{data.investment}}" data-dtype="Number"/></td>
+            {{/unless}}
         </tr>
+        </table>
+        <div class="description">
+            <label class="label-info"><b>{{localize "WITCHER.Item.Description"}}</b></label>
+{{editor content=data.description target="data.description" button=true editable=editable}}
+        </div>
         {{#if data.isFormulae}}
+        <table class="item-table">
+            <tr>
+                <th colspan="9">{{localize "WITCHER.Loot.Components"}}</th>
+            </tr >
+            <tr class="components-display">
+                <th><img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /></th>
+                <th><img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /></th>
+                <th><img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /></th>
+                <th><img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /></th>
+                <th><img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /></th>                   
+                <th><img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /></th>                  
+                <th><img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /></th>        
+                <th><img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /></th>                 
+                <th><img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /></th>               
+            </tr>
+            <tr>
+                <td><input type="number" name="data.alchemyComponents.vitriol" value="{{data.alchemyComponents.vitriol}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.rebis" value="{{data.alchemyComponents.rebis}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.aether" value="{{data.alchemyComponents.aether}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.quebrith" value="{{data.alchemyComponents.quebrith}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.hydragenum" value="{{data.alchemyComponents.hydragenum}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.vermilion" value="{{data.alchemyComponents.vermilion}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.sol" value="{{data.alchemyComponents.sol}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.caelum" value="{{data.alchemyComponents.caelum}}"/></td>
+                <td><input type="number" name="data.alchemyComponents.fulgur" value="{{data.alchemyComponents.fulgur}}"/></td>
+            </tr>
+            {{/if}}
+        {{#unless data.isFormulae}}
         <tr>
-            <td colspan="5">
-                <div class="flex components-display">
-                    <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.vitriol" value="{{data.alchemyComponents.vitriol}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.rebis" value="{{data.alchemyComponents.rebis}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.aether" value="{{data.alchemyComponents.aether}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.quebrith" value="{{data.alchemyComponents.quebrith}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.hydragenum" value="{{data.alchemyComponents.hydragenum}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.vermilion" value="{{data.alchemyComponents.vermilion}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.sol" value="{{data.alchemyComponents.sol}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.caelum" value="{{data.alchemyComponents.caelum}}"/>
-                    <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
-                    <input type="number" name="data.alchemyComponents.fulgur" value="{{data.alchemyComponents.fulgur}}"/>
-                </div>
-            </td>
+            <table class="item-bottom-table">
+                <tr>
+                    <th><a class="add-component" title="{{localize "WITCHER.Item.AddComponent"}}"><i class="fas fa-plus"></i></a></th>
+                    <th>{{localize "WITCHER.Diagram.components"}}</th>
+                    <th><label>{{localize "WITCHER.Item.Quantity"}}</label></th>
+                </tr>
+                {{#each data.craftingComponents as |component name|}}
+                <tr>
+                    <th class="list-item"  data-id="{{component.id}}">
+                        <a class="remove-component" title="{{localize "WITCHER.Item.RemoveComponent"}}"><i class="fas fa-minus"></i></a>
+                    </th>
+                    <td class="list-item"  data-id="{{component.id}}">
+                        <input  class="list-edit item-effect" data-field="name" placeholder="{{localize "WITCHER.table.Name"}}" type="text" value="{{component.name}}"/>
+                    </td>
+                    <td class="list-item"  data-id="{{component.id}}">
+                        <input class="list-edit" data-field="quantity" type="number"  placeholder="0" value="{{component.quantity}}" data-dtype="Number" />
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
         </tr>
-        {{/if}}
-        <tr>
-            <td colspan="5">
-                <label>{{localize "WITCHER.Loot.Components"}}</label>
-<textarea rows=5 name="data.components">{{data.components}}</textarea>
-            </td>
-        </tr>
+        {{/unless}}
     </table>
 </form>

@@ -1,35 +1,21 @@
 <form class="{{cssClass}}" autocomplete="off">
 {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
-    <div class="item-options">
-        <div class="item-collum">
-            <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Armor.Bludgeoning" }} {{localize "WITCHER.Armor.Res"}}</label>
-                <input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/>
-            </div>
-        </div>
-        <div class="item-collum">
-            <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Armor.Slashing"}} {{localize "WITCHER.Armor.Res"}}</label>
-                <input type="checkbox" name="data.slashing" {{checked data.slashing}} />
-            </div>
-        </div>
-        <div class="item-collum">
-            <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Armor.Percing"}} {{localize "WITCHER.Armor.Res"}}</label>
-                <input type="checkbox" name="data.percing" {{checked data.percing}} />
-            </div>
-        </div>
-    </div>
         {{!-- Attributes Tab --}}
-    <table>
+    <table class="item-table">
         <tr>
-            <th>{{localize "WITCHER.Item.Availability"}}</th>
-            <th>{{localize "WITCHER.Armor.Enhancement"}}</th>
-            <th>{{localize "WITCHER.Armor.EncumbranceValue"}}</th>
+            <th title="{{localize "WITCHER.Armor.Slashing"}} {{localize "WITCHER.Armor.Resistances"}}">{{localize "WITCHER.Enhancement.Slashing" }}</th>
+            <th title="{{localize "WITCHER.Armor.Piercing"}} {{localize "WITCHER.Armor.Resistances"}}">{{localize "WITCHER.Enhancement.Piercing" }}</th>
+            <th title="{{localize "WITCHER.Armor.Bludgeoning"}} {{localize "WITCHER.Armor.Resistances"}}">{{localize "WITCHER.Enhancement.Bludgeoning" }}</th>
+            <th title={{localize "WITCHER.Item.Availability"}}>{{localize "WITCHER.Item.Short.Availability"}}</th>
+            <th title={{localize "WITCHER.Armor.Short.ArmorEnhancement"}}>{{localize "WITCHER.Armor.Short.ArmorEnhancement"}}</th>
+            <th title={{localize "WITCHER.Armor.Short.EncumbranceValue"}}>{{localize "WITCHER.Armor.Short.EncumbranceValue"}}</th>
             <th>{{localize "WITCHER.Armor.Location"}}</th>
             <th>{{localize "WITCHER.Armor.Type"}}</th>
         </tr>
         <tr>
+            <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
+            <td><input type="checkbox" name="data.piercing" {{checked data.piercing}} /></td>
+            <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
             <td>
                 <select name="data.avail" id="avail-select">
                 {{#select data.avail}}
@@ -61,20 +47,21 @@
                     <option value="Natural">{{localize "WITCHER.Armor.Natural"}}</option>
                 {{/select}}
                 </select>
-            </td>    
-        </table>
+            </td>
+        </tr>
+    </table>
     <div class="flex">
-        <table class="sp-table">
+        <table class="item-bottom-table">
             <tr>
                 
                 {{#unless (eq data.location "Shield")}}
                 <th class="location-table">{{localize "WITCHER.Armor.Location"}}</th>
-                <th>{{localize "WITCHER.Armor.StoppingPower"}}</th>
-                <th>{{localize "WITCHER.Armor.MaxStoppingPower"}}</th>
+                <th title="{{localize "WITCHER.Armor.StoppingPower"}}">{{localize "WITCHER.Armor.Short.StoppingPower"}}</th>
+                <th title="{{localize "WITCHER.Armor.MaxStoppingPower"}}">{{localize "WITCHER.Armor.Short.MaxStoppingPower"}}</th>
                 {{/unless}}
                 {{#if (eq data.location "Shield")}}
-                <th>{{localize "WITCHER.Weapon.Reliability"}}</th>
-                <th>{{localize "WITCHER.Weapon.MaxReliability"}}</th>
+                <th title="{{localize "WITCHER.Weapon.Reliability"}}">{{localize "WITCHER.Weapon.Short.Reliability"}}</th>
+                <th title="{{localize "WITCHER.Weapon.MaxReliability"}}">{{localize "WITCHER.Weapon.Short.MaxReliability"}}</th>
                 {{/if}}
             </tr>
             {{#if (eq data.location "Head")}}
@@ -153,16 +140,21 @@
                 </tr>
             {{/if}}
         </table>
-        <div class="effect-list">
-            <div class="flex">
-                <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
-            </div>
+        <table class="item-bottom-table">
+            <tr>
+                <th><a class="add-effect"><i class="fas fa-plus"></i></a></th>
+                <th><b>{{localize "WITCHER.Item.Effect"}}</b></th>
+            </tr>
             {{#each data.effects as |effect name|}}
-            <div class="flex list-item"  data-id="{{effect.id}}">
-                <a class="remove-effect"><i class="fas fa-minus"></i></a>
-                <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
-            </div>
+            <tr>
+                <th class="list-item"  data-id="{{effect.id}}">
+                    <a class="remove-effect"><i class="fas fa-minus"></i></a>
+                </th>
+                <td class="list-item"  data-id="{{effect.id}}">
+                    <input  class="list-edit item-effect" placeholder="{{localize "WITCHER.Item.Effect"}} {{localize "WITCHER.table.Name"}}" data-field="name" type="text" value="{{effect.name}}"/>
+                </td>
+            </tr>
             {{/each}}
-        </div>
+        </table>
     </div>
 </form>

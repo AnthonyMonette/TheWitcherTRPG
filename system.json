@@ -98,6 +98,11 @@
         "lang": "ru",
         "name": "Russian",
         "path": "lang/ru.json"
+      },
+      {
+        "lang": "pl",
+        "name": "Polish",
+        "path": "lang/pl.json"
       }
     ],
     "dependencies": [

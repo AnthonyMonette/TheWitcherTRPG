@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Pourcentage",
     "WITCHER.DC": "DC",
 
-    "WITCHER.Item.Availability": "Dispo.",
+    "WITCHER.Item.Short.Availability": "Dispo.",
     "WITCHER.Item.Weight": "Poids",
     "WITCHER.Item.Cost": "Coût",
     "WITCHER.Item.Effect": "Effets",
@@ -29,13 +29,13 @@
     "Witcher.Item.CantHide": "NA",
 
     "WITCHER.Weapon.Type": "Type",
-    "WITCHER.Weapon.WeaponAccuracy": "PrA",
-    "WITCHER.Weapon.Damage": "DMG",
-    "WITCHER.Weapon.Reliability": "Fia.",
-    "WITCHER.Weapon.MaxReliability": "Max. Fia.",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "PrA",
+    "WITCHER.Weapon.Short.Damage": "DMG",
+    "WITCHER.Weapon.Short.Reliability": "Fia.",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Fia.",
     "WITCHER.Weapon.Hands": "Mains",
-    "WITCHER.Weapon.Concealement": "Cach.",
-    "WITCHER.Weapon.Enhancement": "Ren.",
+    "WITCHER.Weapon.Short.Concealement": "Cach.",
+    "WITCHER.Weapon.Short.Enhancements": "Ren.",
     "WITCHER.Weapon.Range": "Dist.",
     "WITCHER.Weapon.Elderfolk": "Aînés",
 
@@ -43,18 +43,18 @@
     "WITCHER.Weapon.MeleeBonus": "Bonus de mêlée",
     
     "WITCHER.Weapon.isAmmunition": "Est une munition",
-    "WITCHER.Weapon.rateOfFire": "CdT",
+    "WITCHER.Weapon.Short.RateOfFire": "CdT",
 
     "WITCHER.Armor.StoppingPower": "PA",
     "WITCHER.Armor.MaxStoppingPower": "Max. PA",
     
-    "WITCHER.Armor.Enhancement": "Ren",
+    "WITCHER.Armor.ArmorEnhancement": "Ren",
     "WITCHER.Armor.Reliable": "Fia.",
     "WITCHER.Armor.EncumbranceValue": "Encombrement",
     "WITCHER.Armor.Resistances": "Résistances",
     "WITCHER.Armor.Bludgeoning": "Contondant",
     "WITCHER.Armor.Slashing": "Tranchant",
-    "WITCHER.Armor.Percing": "Percant",
+    "WITCHER.Armor.Piercing": "Percant",
 
     "WITCHER.Armor.LocationHead": "Tête",
     "WITCHER.Armor.LocationTorso": "Torse",
@@ -81,7 +81,7 @@
     "WITCHER.Enhancement.Stopping": "Arrêt",
     "WITCHER.Enhancement.Bludgeoning": "C",
     "WITCHER.Enhancement.Slashing": "T",
-    "WITCHER.Enhancement.Percing": "P",
+    "WITCHER.Enhancement.Piercing": "P",
 
     "WITCHER.Enhancement.Armor": "Armure",
     "WITCHER.Enhancement.Rune": "Rune",
@@ -568,7 +568,7 @@
     "WITCHER.Spell.Requirements": "Exigences pour soulever",
     "WITCHER.Spell.Effect": "Effet",
     "WITCHER.Spell.AlternateComponents": "Composants alternatifs",
-    "WITCHER.SPell.Signs": "Signes",
+    "WITCHER.Spell.Signs": "Signes",
        
     "WITCHER.Spell.StaCost": "Coût d'ENDU",
     "WITCHER.Spell.Variable": "ENDU Variable",

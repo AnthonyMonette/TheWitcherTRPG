@@ -1,74 +1,75 @@
 <form class="{{cssClass}}" autocomplete="off">
 {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
-    <div class="item-options">
-        <div class="item-collum">
-            <div class="item-option-tickbox">
-                <label>{{localize "WITCHER.Spell.Variable"}}</label>
-                <input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/>
-            </div>
-        </div>
-        <div class="item-collum">
-            {{#if (or (eq data.class "Spells") 
-                      (eq data.class "Witcher"))}}
-                <label>{{localize "WITCHER.Spell.Element"}}</label>
-                <select name="data.source">
-                    {{#select data.source}}
-                    <option value="mixedElements">{{localize "WITCHER.Spell.Mixed"}}</option>
-                    <option value="earth">{{localize "WITCHER.Spell.Earth"}}</option>
-                    <option value="air">{{localize "WITCHER.Spell.Air"}}</option>
-                    <option value="fire">{{localize "WITCHER.Spell.Fire"}}</option>
-                    <option value="Water">{{localize "WITCHER.Spell.Water"}}</option>
-                    {{/select}}
-                </select>
+    <table class="item-table">
+        <tr>
+            <th title="{{localize "WITCHER.Spell.Variable"}}">{{localize "WITCHER.Spell.Short.Variable"}}</th>
+            {{#unless (eq data.staminaIsVar true)}}
+            <th title="{{localize "WITCHER.Spell.StaCost"}}">{{localize "WITCHER.Spell.Short.StaCost"}}</th>
+            {{/unless}}
+            {{#if (eq data.class "Hexes")}}
+                <th>{{localize "WITCHER.Spell.Danger"}}</th>
             {{/if}}
-            {{#if (eq data.class "Invocations")}}
-                <label>{{localize "WITCHER.Spell.Type"}}</label>
-                <select name="data.source">
-                    {{#select data.source}}
-                    <option value="druid">{{localize "WITCHER.Spell.Druid"}}</option>
-                    <option value="preacher">{{localize "WITCHER.Spell.Preacher"}}</option>
-                    <option value="arch priest">{{localize "WITCHER.Spell.Archpriest"}}</option>
-                    {{/select}}
-                </select>
+            {{#unless (eq data.class "Hexes")}}
+                {{#if (eq data.class "Rituals")}}
+                <th>{{localize "WITCHER.Spell.PrepTime"}}</th>
+                <th>{{localize "WITCHER.Spell.DC"}}</th>
+                {{/if}}
+                {{#unless (eq data.class "Rituals")}}
+                <th>{{localize "WITCHER.Spell.Range"}}</th>
+                {{/unless}}
+                <th>{{localize "WITCHER.Spell.Duration"}}</th>
+                {{#unless (eq data.class "Rituals")}}
+                <th>{{localize "WITCHER.Spell.Defence"}}</th>
+                {{/unless}}
+                {{#if (eq data.class "Witcher")}}
+                <th>{{localize "WITCHER.Spell.Sign"}} {{localize "WITCHER.Spell.Type"}}<th>
+                {{/if}}
+            {{/unless}}
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="data.staminaIsVar"  {{checked data.staminaIsVar}}/></td>
+            {{#unless (eq data.staminaIsVar true)}}
+            <td><input name="data.stamina" type="text" value="{{data.stamina}}"/></td>
+            {{/unless}}
+            {{#if (eq data.class "Hexes")}}
+                <td>
+                    <select name="data.danger" id="level-select">
+                        {{#select data.danger}}
+                        <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
+                        <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
+                        <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
+                        {{/select}}
+                    </select>
+                </td>
             {{/if}}
-        </div>
-        <div class="item-collum">
-            {{#if (eq data.class "Witcher")}}
-                <label>{{localize "WITCHER.Spell.Type"}}</label>
-                <select name="data.domain">
-                    {{#select data.domain}}
-                    <option value="basic">{{localize "WITCHER.Spell.Basic"}}</option>
-                    <option value="alternate">{{localize "WITCHER.Spell.Alt"}}</option>
-                    {{/select}}
-                </select>
-            {{/if}}
-        </div>
-    </div>
-
-    <label>{{localize "WITCHER.Item.Effect"}}</label>
+            {{#unless (eq data.class "Hexes")}}
+                {{#if (eq data.class "Rituals")}}
+                    <td><input name="data.preparationTime" type="text" value="{{data.preparationTime}}"/></td>
+                    <td><input name="data.dificultyCheck" type="text" value="{{data.dificultyCheck}}"/></td>
+                {{/if}}                
+                {{#unless (eq data.class "Rituals")}}
+                    <td><input name="data.range" type="text" value="{{data.range}}"/></td>
+                {{/unless}}
+                <td><input name="data.duration" type="text" value="{{data.duration}}"/></td>
+                {{#unless (eq data.class "Rituals")}}
+                    <td><input name="data.defence" type="text" value="{{data.defence}}"/></td>
+                {{/unless}}
+                {{#if (eq data.class "Witcher")}}
+                <td>
+                    <select name="data.domain">
+                        {{#select data.domain}}
+                        <option value="basic">{{localize "WITCHER.Spell.Basic"}}</option>
+                        <option value="alternate">{{localize "WITCHER.Spell.Alt"}}</option>
+                        {{/select}}
+                    </select>
+                </td>
+                {{/if}}
+            {{/unless}}
+        </tr>
+    </table>
+        <label>{{localize "WITCHER.Item.Effect"}}</label>
 <textarea rows="10" name="data.effect">{{data.effect}}</textarea>
-        {{#unless (eq data.class "Hexes")}}
-        <div class="flex">
-            <label>{{localize "WITCHER.Spell.Duration"}}</label>
-            <input name="data.duration" type="text" value="{{data.duration}}"/>
-        </div>
-        {{/unless}}
-
-        {{#unless (eq data.class "Rituals")}}
-        {{#unless (eq data.class "Hexes")}}
-        <div class="flex">
-            <label>{{localize "WITCHER.Spell.Range"}}</label>
-            <input name="data.range" type="text" value="{{data.range}}"/>
-            <label>{{localize "WITCHER.Spell.Defence"}}</label>
-            <input name="data.defence" type="text" value="{{data.defence}}"/>
-        </div>
-        {{/unless}}
-        {{/unless}}
         {{#if (eq data.class "Rituals")}}
-        <label>{{localize "WITCHER.Spell.PrepTime"}}</label>
-        <input name="data.preparationTime" type="text" value="{{data.preparationTime}}"/>
-        <label>{{localize "WITCHER.Spell.DC"}}</label>
-        <input name="data.dificultyCheck" type="text" value="{{data.dificultyCheck}}"/>
         <label>{{localize "WITCHER.Spell.Components"}}</label>
 <textarea rows="4" name="data.components">{{data.components}}</textarea>
         {{/if}}
@@ -76,54 +77,73 @@
         <label>{{localize "WITCHER.Spell.Requirements"}}</label>
 <textarea rows="5" name="data.liftRequirement">{{data.liftRequirement}}</textarea>
         {{/if}}
-
-        <hr />
         <div class="flex">
-            <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
-            <input type="checkbox" name="data.createTemplate"  {{checked data.createTemplate}}/>
-        </div>
-        
-        {{#if (eq data.createTemplate true)}}
-        <div class="flex">
-            <label><b>{{localize "WITCHER.Spell.Size"}}</b></label>
-            <input class="medium" name="data.templateSize" type="text" value="{{data.templateSize}}"/>({{localize "WITCHER.Spell.meters"}})
-            <label><b>{{localize "WITCHER.Spell.Type"}}</b></label>
-            <select name="data.templateType">
-                {{#select data.templateType}}
-                <option value="rect">{{localize "WITCHER.Spell.Square"}}</option>
-                <option value="circle">{{localize "WITCHER.Spell.Circle"}}</option>
-                <option value="cone">{{localize "WITCHER.Spell.Cone"}}</option>
-                <option value="ray">{{localize "WITCHER.Spell.Ray"}}</option>
-                {{/select}}
-            </select>
-        </div>
-        {{/if}}
-
-        <hr />
-        <div class="flex">
-            <label>{{localize "WITCHER.Spell.Damage"}}</label>
-            <input type="checkbox" name="data.causeDamages"  {{checked data.causeDamages}}/>
-        </div>
-        
-        {{#if (eq data.causeDamages true)}}
-        <div class="flex">
-            <label><b>{{localize "WITCHER.Weapon.Damage"}}</b></label>
-            <input class="medium" name="data.damage" type="text" value="{{data.damage}}"/>
-            <div>
-                <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
-                {{#each data.effects as |effect name|}}
-                <div class="flex list-item"  data-id="{{effect.id}}">
-                    <a class="remove-effect"><i class="fas fa-minus"></i></a>
-                    <input  class="list-edit" data-field="name" type="text" value="{{effect.name}}"/>
-                    <div  class="flex">
-                        <label>{{localize "WITCHER.Percentage"}}:</label>
-                        <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
-                        %
-                    </div>
+            <div class="spell-template-damage">
+                <div>
+                    <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
+                    <input type="checkbox" name="data.createTemplate"  {{checked data.createTemplate}}/>
                 </div>
-                {{/each}}
+                <div>
+                    <label>{{localize "WITCHER.Spell.Damage"}}</label>
+                    <input type="checkbox" name="data.causeDamages"  {{checked data.causeDamages}}/>
+                </div>
             </div>
+            <table class="item-table">
+                <tr>
+                    {{#if (eq data.createTemplate true)}}
+                    <th>{{localize "WITCHER.Spell.Size"}} ({{localize "WITCHER.Spell.meters"}})</th>
+                    <th>{{localize "WITCHER.Spell.Type"}}</th>
+                    {{/if}}
+                    {{#if (eq data.causeDamages true)}}
+                    <th>{{localize "WITCHER.Weapon.Short.Damage"}}</th>
+                    {{/if}}
+                </tr>
+                <tr>
+                    {{#if (eq data.createTemplate true)}}
+                    <td>
+                        <input class="medium" placeholder="0" name="data.templateSize" type="text" value="{{data.templateSize}}"/>
+                    </td>
+                    <td>
+                        <select name="data.templateType">
+                            {{#select data.templateType}}
+                            <option value="rect">{{localize "WITCHER.Spell.Square"}}</option>
+                            <option value="circle">{{localize "WITCHER.Spell.Circle"}}</option>
+                            <option value="cone">{{localize "WITCHER.Spell.Cone"}}</option>
+                            <option value="ray">{{localize "WITCHER.Spell.Ray"}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                    {{/if}}
+                    {{#if (eq data.causeDamages true)}}
+                    <td>
+                        <input class="medium" placeholder="1d6+0" name="data.damage" type="text" value="{{data.damage}}"/>
+                    </td>
+                    {{/if}}
+                </tr>
+            </table>
         </div>
-        {{/if}}
+            {{#if (eq data.causeDamages true)}}
+            <table class="item-bottom-table">
+                <tr>
+                    <th><a class="add-effect" title="{{localize "WITCHER.Item.AddEffect"}}"><i class="fas fa-plus"></i></a></th>
+                    <th>{{localize "WITCHER.Item.Effect"}}</th>
+                    <th>{{localize "WITCHER.Percentage"}}</th>
+                </tr>
+                {{#each data.effects as |effect name|}}
+                <tr>
+                    <td class="list-item"  data-id="{{effect.id}}">
+                        <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>
+                    </td>
+                    <td class="list-item"  data-id="{{effect.id}}">
+                        <input  class="list-edit item-effect" placeholder="{{localize "WITCHER.table.Name"}}" data-field="name" type="text" value="{{effect.name}}"/>
+                    </td>
+                    <td class="list-item"  data-id="{{effect.id}}">
+                        <input class="list-edit" placeholder="%" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+            {{/if}}
+        </div>
     </div>
 </form>
