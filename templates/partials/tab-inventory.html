@@ -377,7 +377,10 @@
                             <label class="label-info"><b>{{localize "WITCHER.Diagram.investment"}} :</b></label>{{diagram.data.investement}}
                         </div>
                         <div>
-                            <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}} :</b>{{diagram.data.components}}
+                            <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}} :</b>
+                            {{#each diagram.data.craftingComponents as |component name|}}
+                            <span>{{component.name}}({{component.quantity}})</span>
+                            {{/each}}
                         </div>
                     </td>
                     <td>

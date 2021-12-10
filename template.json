@@ -1076,7 +1076,8 @@
         "quantity": 1,
         "weight": 0,
         "cost": 0,
-        "isHidden": false
+        "isHidden": false,
+        "associatedDiagram": {}
       }
     },
     "valuable": {
@@ -1199,6 +1200,12 @@
       "alchemyDC": 0,
       "craftingTime": "",
       "components": "",
+      "craftingComponents": [{
+          "id": "first",
+          "quantity": "",
+          "name": ""
+        }
+      ],
       "investment": 0,
       "learned": false,
       "alchemyComponents": {
@@ -1211,7 +1218,8 @@
         "sol": 0,
         "caelum": 0,
         "fulgur": 0
-      }
+      },
+      "associatedItem": {}
     },
     "mutagen": {
       "templates": ["base"],

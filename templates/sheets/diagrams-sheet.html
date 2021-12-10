@@ -96,10 +96,26 @@
             {{/if}}
         {{#unless data.isFormulae}}
         <tr>
-            <td colspan="9">
-                <label>{{localize "WITCHER.Loot.Components"}}</label>
-<textarea rows=5 name="data.components">{{data.components}}</textarea>
-            </td>
+            <table class="item-bottom-table">
+                <tr>
+                    <th><a class="add-component" title="{{localize "WITCHER.Item.AddComponent"}}"><i class="fas fa-plus"></i></a></th>
+                    <th>{{localize "WITCHER.Diagram.components"}}</th>
+                    <th><label>{{localize "WITCHER.Item.Quantity"}}</label></th>
+                </tr>
+                {{#each data.craftingComponents as |component name|}}
+                <tr>
+                    <th class="list-item"  data-id="{{component.id}}">
+                        <a class="remove-component" title="{{localize "WITCHER.Item.RemoveComponent"}}"><i class="fas fa-minus"></i></a>
+                    </th>
+                    <td class="list-item"  data-id="{{component.id}}">
+                        <input  class="list-edit item-effect" data-field="name" placeholder="{{localize "WITCHER.table.Name"}}" type="text" value="{{component.name}}"/>
+                    </td>
+                    <td class="list-item"  data-id="{{component.id}}">
+                        <input class="list-edit" data-field="quantity" type="number"  placeholder="0" value="{{component.quantity}}" data-dtype="Number" />
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
         </tr>
         {{/unless}}
     </table>
