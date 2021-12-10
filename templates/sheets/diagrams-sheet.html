@@ -66,6 +66,10 @@
             {{/unless}}
         </tr>
         </table>
+        <div class="description">
+            <label class="label-info"><b>{{localize "WITCHER.Item.Description"}}</b></label>
+{{editor content=data.description target="data.description" button=true editable=editable}}
+        </div>
         {{#if data.isFormulae}}
         <table class="item-table">
             <tr>

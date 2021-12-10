@@ -143,3 +143,12 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.description .editor {
+    height: 75px;
+}
+
+.description label {
+    display: flex;
+    justify-content: center;
+}
