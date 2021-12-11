@@ -1016,7 +1016,7 @@ export default class WitcherActorSheet extends ActorSheet {
               if (!item.data.data.alchemyDC || item.data.data.alchemyDC == 0){
                 stat = this.actor.data.data.stats.cra.current;
                 skill = this.actor.data.data.skills.cra.crafting.value;
-                messageData.flavor = `${game.i18n.localize("WITCHER.DiagramcraftingDC")} ${item.data.data.craftingDC}`;
+                messageData.flavor = `${game.i18n.localize("WITCHER.Diagram.craftingDC")} ${item.data.data.craftingDC}`;
               }
               
             	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${statName}]+${skill}[${skillName}]` ;
