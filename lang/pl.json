@@ -3,7 +3,7 @@
     "WITCHER.Percentage": "Szansa",
     "WITCHER.DC": "ST",
 
-    "WITCHER.Item.Availability": "Dost.",
+    "WITCHER.Item.Short.Availability": "Dost.",
     "WITCHER.Item.Weight": "Waga",
     "WITCHER.Item.Cost": "Koszt",
     "WITCHER.Item.Effect": "Efekty",
@@ -11,6 +11,12 @@
     "WITCHER.Item.Description": "Opis",
     "WITCHER.Item.Attribute": "Atrybuty",
     "WITCHER.Item.ROF": "Ataki",
+
+    "WITCHER.Item.Availability": "Dostępność",
+    "WITCHER.Item.AddEffect": "Dodaj Efekt",
+    "WITCHER.Item.AddComponent": "Dodaj Komponent",
+    "WITCHER.Item.RemoveEffect": "Usuń Efekt",
+    "WITCHER.Item.RemoveComponent": "Usuń Komponent",
 
     "WITCHER.Item.CraftingMaterial": "Materiały",
     "WITCHER.Item.Hides&AnimalParts": "Zwierzęce skóry i organy",
@@ -29,36 +35,47 @@
     "Witcher.Item.CantHide": "Brak",
 
     "WITCHER.Weapon.Type": "Typ",
-    "WITCHER.Weapon.WeaponAccuracy": "Cel.",
-    "WITCHER.Weapon.Damage": "Obr.",
-    "WITCHER.Weapon.Reliability": "Trw.",
-    "WITCHER.Weapon.MaxReliability": "Max. Trw.",
+    "WITCHER.Weapon.Short.WeaponAccuracy": "Cel.",
+    "WITCHER.Weapon.Short.Damage": "Obr.",
+    "WITCHER.Weapon.Short.Reliability": "Trw.",
+    "WITCHER.Weapon.Short.MaxReliability": "Max. Trw.",
     "WITCHER.Weapon.Hands": "Ręcz.",
-    "WITCHER.Weapon.Concealement": "Dyskr.",
-    "WITCHER.Weapon.Enhancement": "Wzm.",
+    "WITCHER.Weapon.Short.Concealement": "Dyskr.",
+    "WITCHER.Weapon.Short.Enhancement": "Wzm.",
     "WITCHER.Weapon.Range": "Zasięg",
-    "WITCHER.Weapon.Elderfolk": "Star.",
+    "WITCHER.Weapon.Short.Elderfolk": "Star.",
+    "WITCHER.Weapon.Short.RateOfFire": "Ataki",
+
+    "WITCHER.Weapon.WeaponAccuracy": "Celność Broni",
+    "WITCHER.Weapon.Enhancements": "Wzmocnienia",
+    "WITCHER.Weapon.Reliability": "Obecna Trwałość",
+    "WITCHER.Weapon.MaxReliability": "Maksymalna Trwałość",
+    "WITCHER.Weapon.RateOfFire": "Ilość Ataków",
+    "WITCHER.Weapon.Damage": "Obrażenia",
+    "WITCHER.Weapon.Concealement": "Dyskrecja",
 
     "WITCHER.Weapon.AttackSkill": "Umiejętność",
     "WITCHER.Weapon.MeleeBonus": "Dodatkowe Obrażenia",
-    
-    "WITCHER.Weapon.isAmmunition": "Amunicja?",
-    "WITCHER.Weapon.rateOfFire": "Ataki",
 
-    "WITCHER.Armor.StoppingPower": "Wyp.",
-    "WITCHER.Armor.MaxStoppingPower": "Max. Wyp.",
-    
-    "WITCHER.Armor.Enhancement": "Wzm.",
-    "WITCHER.Armor.Reliable": "Trw.",
-    "WITCHER.Armor.EncumbranceValue": "Obciążenie",
+    "WITCHER.Weapon.isAmmunition": "Amunicja?",
+
+    "WITCHER.Armor.Enhancement": "Wzmocnienia",
+    "WITCHER.Armor.EncumbranceValue": "Niewygoda",
     "WITCHER.Armor.Resistances": "Odporności",
     "WITCHER.Armor.Res": "Odp.",
     "WITCHER.Armor.Bludgeoning": "Miażdżone",
     "WITCHER.Armor.Slashing": "Cięte",
-    "WITCHER.Armor.Percing": "Kłute",
+    "WITCHER.Armor.Piercing": "Kłute",
     "WITCHER.Armor.Elemental": "Żywioły",
     "WITCHER.Armor.Type": "Typ",
-    
+    "WITCHER.Armor.StoppingPower": "Obecne Wyparowania",
+    "WITCHER.Armor.MaxStoppingPower": "Maksymalne Wyparowania",
+
+    "WITCHER.Armor.Short.ArmorEnhancement": "Wzm.",
+    "WITCHER.Armor.Short.EncumbranceValue": "NW",
+    "WITCHER.Armor.Short.StoppingPower": "Wyp.",
+    "WITCHER.Armor.Short.MaxStoppingPower": "Max. Wyp.", 
+
     "WITCHER.Armor.Light": "Lekka Zbroja",
     "WITCHER.Armor.Medium": "Średnia Zbroja",
     "WITCHER.Armor.Heavy": "Ciężka Zbroja",
@@ -78,7 +95,7 @@
 
     "WITCHER.Location.Left": "Lewa",
     "WITCHER.Location.Right": "Prawa",
-    
+
 
     "WITCHER.Armor.Location": "Lokacja",
 
@@ -87,29 +104,31 @@
     "WITCHER.Component.Quantity": "Ilość",
     "WITCHER.Component.Forage": "PT zdobycia",
 
-    
+
     "WITCHER.Enhancement.Stopping": "Wyparowania",
     "WITCHER.Enhancement.Bludgeoning": "M",
     "WITCHER.Enhancement.Slashing": "C",
-    "WITCHER.Enhancement.Percing": "K",
+    "WITCHER.Enhancement.Piercing": "K",
+    "WITCHER.Enhancement.Elemental": "Ż",
 
     "WITCHER.Enhancement.Armor": "Zbroja",
     "WITCHER.Enhancement.Rune": "Runa",
     "WITCHER.Enhancement.Glyph": "Glif",
 
     "WITCHER.Mount.Dex": "Atletyka",
-    "WITCHER.Mount.Dexterity": "Dex",
+    "WITCHER.Mount.Dexterity": "Atl",
     "WITCHER.Mount.ControlMod": "Modyfikator Kontroli",
     "WITCHER.Mount.Control": "Kontrola",
     "WITCHER.Mount.Speed": "TEMPO",
     "WITCHER.Mount.Hp": "PZ",
-    
+
     "WITCHER.Alchemy.Duration": "Czas działania",
     "WITCHER.Alchemy.Toxicity": "Toksyczność",
+    "WITCHER.Alchemy.Alchemical": "Substancja Alchemiczna",
     "WITCHER.Alchemy.Potion": "Eliksir",
     "WITCHER.Alchemy.Decoction": "Odwar",
     "WITCHER.Alchemy.Oil": "Olej",
-    
+
     "WITCHER.Diagram.alchemyDC": "PT Tworzenia",
     "WITCHER.Diagram.craftingDC": "PT Tworzenia",
     "WITCHER.Diagram.craftingTime": "Czas",
@@ -134,7 +153,7 @@
     "WITCHER.Diagram.Master": "Mistrz",
     "WITCHER.Diagram.GrandMaster": "Arcymistrz",
     "WITCHER.Diagram.Witcher": "Wiedźmin",
-    
+
     "WITCHER.Mutagen.MutSource": "Źródło Mutagenu",
     "WITCHER.Mutagen.AlchemyDC": "PT Alchemii",
     "WITCHER.Mutagen.MinorMutation": "Pomniejsza Mutacja",
@@ -212,7 +231,7 @@
     "WITCHER.Actor.DerStat.Focus": "Fokus",
     "WITCHER.Actor.DerStat.Punch": "Pięść",
     "WITCHER.Actor.DerStat.Kick": "Kop",
-    
+
     "WITCHER.Actor.Initiative": "Inicjatywa",
     "WITCHER.Actor.SavingThrow": "Rzut Obronny",
     "WITCHER.Actor.Crit/Fumble": "Szczęście/Pech",
@@ -514,6 +533,8 @@
     "WITCHER.Monster.DetailsTab": "Szczegóły",
     "WITCHER.Monster.SpellsTab": "Moce",
 
+    "WITCHER.Monster.SkillList": "Pokaż konkretne umiejętności",
+
     "WITCHER.Monster.Type.Humanoid": "Humanoidy",
     "WITCHER.Monster.Type.Necrophage": "Trupojady",
     "WITCHER.Monster.Type.Specter": "Upiory",
@@ -530,8 +551,8 @@
     "WITCHER.Monster.Resistances": "Odporności",
     "WITCHER.Monster.Immunities": "Immunmitety",
     "WITCHER.Monster.Susceptibilities": "Wrażliwy na",
-    "WITCHER.Monster.Senses": "Rozsądek",
-    
+    "WITCHER.Monster.Senses": "Zmysły",
+
     "WITCHER.Loot.TotalWeight": "Waga całkowita",
     "WITCHER.Loot.MaxWeight": "Waga maksymalna",
     "WITCHER.Loot.TotalCost": "Wartość całkowita",
@@ -597,14 +618,21 @@
     "WITCHER.Spell.Effect": "Efekt",
     "WITCHER.Spell.AlternateComponents": "Sprzęt",
     "WITCHER.SPell.Signs": "Znaki",
+    "WITCHER.SPell.Sign": "Znak",
     "WITCHER.Spell.Element": "Żywioł",
-       
+
     "WITCHER.Spell.StaCost": "Koszt PW",
     "WITCHER.Spell.Variable": "Zmienny koszt PW",
-    
+
+    "WITCHER.Spell.Short.StaCost": "Koszt PW",
+    "WITCHER.Spell.Short.Variable": "Zm.PW",
+
     "WITCHER.Spell.staminaDialog": "Ile PW chcesz użyć?",
     "WITCHER.Spell.notEnoughSta": "Not enough stamina.",
     "WITCHER.Spell.MagicCost": "Koszt Czaru",
+
+    "WITCHER.Spell.ChooseFocus": "Użyj Fokusu",
+    "WITCHER.Spell.ChooseExpandedFocus": "Użyj dodatkowy Fokus",
 
     "WITCHER.Chat.SaveText": "Musisz rzucić poniżej",
 
@@ -663,7 +691,7 @@
     "WITCHER.Dialog.rangeMedium": "Średni (1/2 Zasięg)",
     "WITCHER.Dialog.rangeLong": "Długi (Pełny Zaięg)",
     "WITCHER.Dialog.rangeExtreme": "Ekstremalny (2x Zasięg)",
-    
+
     "WITCHER.Dialog.strikeNormal": "Zwykły cios",
     "WITCHER.Dialog.strikeFast": "Szybki cios",
     "WITCHER.Dialog.strikeStrong": "Silny cios",
@@ -682,13 +710,13 @@
     "WITCHER.Dialog.attackMeleeBonus": " Bonus do obrażeń",
     "WITCHER.Dialog.attackCustomDmg": "dodatkowe modyfikatory obrażeń",
     "WITCHER.Dialog.attackWith": "Wykonuje atak za pomocą",
-    
+
     "WITCHER.Dialog.chooseAmmunition": " Wybierz Amunicję",
     "WITCHER.Dialog.NoAmmunation": "Brak amunicji",
     "WITCHER.Dialog.Ammunation": "Amunicja",
 
     "WITCHER.Dialog.ButtonRoll": "Rzuć",
-    
+
     "WITCHER.Chat.FullDmg": "Pełne Obrażenia",
 
     "WITCHER.Enhancement.ChooseTitle": "Wybierz ulepszenie",
@@ -712,7 +740,7 @@
     "WITCHER.Currency.crown" : "Korona",
     "WITCHER.Currency.oren" : "Oren",
     "WITCHER.Currency.falsecoin" : "Fałszowane monety",
-    
+
     "WITCHER.background.activeEffect" : "Aktywne efekty",
 
     "WITCHER.Spell.CreateTemplate": "Stwórz szablon",
@@ -723,7 +751,7 @@
     "WITCHER.Spell.Circle": "Okrąg",
     "WITCHER.Spell.Cone": "Stożek",
     "WITCHER.Spell.Ray": "Promień",
-    
+
     "WITCHER.Settings.displayRollDetails": "Wyświetl szczegóły rzutu",
     "WITCHER.Settings.displayRollDetailsHint": "Wyświietla szczeguły rzutu : 1d10+2[cecha]+4[umiejętność]-3[parowanie]",
     "WITCHER.Settings.Custom": "Dodatkowe",
@@ -790,7 +818,7 @@
     "WITCHER.Loot.HowMany": "Ilość przedmiotów",
     "WITCHER.Loot.ItemCost": "Koszt przedmiotu",
     "WITCHER.Loot.Percent": "Zastosuj procent",
-    
+
     "WITCHER.Loot.BuyTitle": "Kup/Sprzedaj przedmioty",
     "WITCHER.Monster.exportLoot": "Eksportuj do łupów"    
 }
