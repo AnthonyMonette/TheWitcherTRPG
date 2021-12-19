@@ -185,6 +185,7 @@
     "WITCHER.StLuck": "Fart",
     "WITCHER.StSpd": "Tempo",
     "WITCHER.StVigor": "Wigor",
+    "WITCHER.StReputation": "Sława",
 
     "WITCHER.Actor.SkillTab": "Umiejętności",
     "WITCHER.Actor.ProfessionTab": "Profesja i Rasa",
@@ -471,7 +472,7 @@
 
     "WITCHER.SocialStanding": "Status społeczny",
     "WITCHER.Profession": "Profesja",
-    "WITCHER.Reputation": "Reputacja",
+    "WITCHER.Reputation": "Sława",
     "WITCHER.Homeland": "Ojczyzna",
     "WITCHER.Value": "Wartości",
     "WITCHER.ValuedPerson": "Najważniejsza osoba",
@@ -732,6 +733,7 @@
     "WITCHER.Dialog.Skill" : "Test Umiejętności",
     "WITCHER.Chat.Success" : "Sukces",
     "WITCHER.Chat.Fail" : "Porażka",
+    "WITCHER.Dialog.profession.skill" : "Test umiejętności",
 
     "WITCHER.Currency.bizant" : "Bizant",
     "WITCHER.Currency.ducat" : "Dukat",
@@ -756,6 +758,8 @@
     "WITCHER.Settings.displayRollDetailsHint": "Wyświietla szczeguły rzutu : 1d10+2[cecha]+4[umiejętność]-3[parowanie]",
     "WITCHER.Settings.Custom": "Dodatkowe",
     "WITCHER.Settings.modifiers": "Modyfikatory",
+    "WITCHER.Settings.displayReputation": "Pokaż sławe graczom",
+    "WITCHER.Settings.displayReputationHint": "Pozwala graczom widzieć i modyfikować swoją sławe",
 
     "WITCHER.Resources.modifiers": "Modyfikatory zasobów",
     "WITCHER.Weapon.onlyDmg": "Rzuć tylko obrażenia",
@@ -795,6 +799,7 @@
 
     "WITCHER.Context.applyDmg": "Zastosuj obrażenia",
     "WITCHER.Context.Defense": "Obrona",
+    "WITCHER.Context.Blocked": "Zablokowano",
     "WITCHER.Context.SelectActor": "Wybierz przynajmniej jeden cel",
 
     "WITCHER.Armor.tooMuch": "Ubrano za dużo pancerza tego samego typu",
@@ -820,5 +825,12 @@
     "WITCHER.Loot.Percent": "Zastosuj procent",
 
     "WITCHER.Loot.BuyTitle": "Kup/Sprzedaj przedmioty",
-    "WITCHER.Monster.exportLoot": "Eksportuj do łupów"    
+    "WITCHER.Monster.exportLoot": "Eksportuj do łupów",
+
+    "WITCHER.Apply.Mod": "Dodaj modyfikator",
+    "WITCHER.ReputationTitle": "Rzut na sławę",
+    "WITCHER.ReputationButton.Save": "Rzut obronny",
+    "WITCHER.ReputationButton.FaceDown": "Test",
+    "WITCHER.ReputationFaceDown.Title": "Sława",
+    "WITCHER.context.Result": "Wynik"
 }
