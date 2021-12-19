@@ -161,7 +161,13 @@
             "label": "WITCHER.Actor.DerStat.Vigor",
             "modifiers": []
           }
-          
+        },
+        "reputation": {
+          "max": 0,
+          "current": 0,
+          "label": "WITCHER.Actor.CoreStat.Rep",
+          "isOpened": false,
+          "modifiers": []
         },
         "skills": {
           "int": {

@@ -23,4 +23,12 @@ export const registerSettings = function() {
         type: Boolean,
         default: false
       });
+      game.settings.register("TheWitcherTRPG", "displayRep", {
+          name: "WITCHER.Settings.displayReputation",
+          hint: "WITCHER.Settings.displayReputationHint",
+          scope: "world",
+          config: true,
+          type: Boolean,
+          default: false
+        });
 }

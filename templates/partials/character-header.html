@@ -36,6 +36,34 @@
         <label class="total-stats-lable"> {{localize "WITCHER.Actor.TotalStats"}}</label>
         <input class="total-stats-show" type="text" value="{{totalStats}}" placeholder="0" data-dtype="Number" readonly/>
     </div>
+    {{#if (or isGM displayRep)}}     
+    <div class="stat-display char-stat-display" data-type="reputation" data-stat="reputation">
+        <div>
+            <div class="flex">
+                <a class="char-stat-button reputation-button reputation-roll">{{localize "WITCHER.Reputation"}}</a>
+                <input class="header-stat stat-max" name="data.reputation.max" type="number" value="{{data.reputation.max}}" placeholder="0" data-dtype="Number"/>
+        
+                {{#unless data.reputation.isOpened}}
+                    <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
+                {{/unless}}
+                {{#if data.reputation.isOpened}}
+                    <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                {{/if}}
+            </div>
+        {{#if data.reputation.isOpened}}
+            <a class="add-modifier"><i class="fas fa-plus"></i></a>
+            {{#each data.reputation.modifiers as |modifier value|}}
+            <div class="list-modifiers"  data-id="{{modifier.id}}">
+                <input  class="medium list-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                <input  class="small list-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
+                <a class="delete-stat"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+            </div>
+            {{/each}}
+        {{/if}}
+        </div>
+    </div>
+    {{/if}}
+
 </div>
 <div class="header-center">
     <label>{{localize "WITCHER.Actor.Name"}}:</label>
