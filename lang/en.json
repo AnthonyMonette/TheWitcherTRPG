@@ -733,6 +733,7 @@
     "WITCHER.Dialog.Skill" : "Performing a Skill Check",
     "WITCHER.Chat.Success" : "Success",
     "WITCHER.Chat.Fail" : "Fail",
+    "WITCHER.Dialog.profession.skill" : "Performing a profession skill",
 
     "WITCHER.Currency.bizant" : "Bizant",
     "WITCHER.Currency.ducat" : "Ducat",
@@ -798,6 +799,7 @@
 
     "WITCHER.Context.applyDmg": "Apply Damage",
     "WITCHER.Context.Defense": "Defense",
+    "WITCHER.Context.Blocked": "Blocked",
     "WITCHER.Context.SelectActor": "At least one actor must be selected",
 
     "WITCHER.Armor.tooMuch": "There is too much armmor equipped of the same type",

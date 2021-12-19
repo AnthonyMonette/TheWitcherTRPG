@@ -1291,15 +1291,31 @@ export default class WitcherActorSheet extends ActorSheet {
             break;
       }
       let rollFormula = !displayRollDetails ? `1d10+${statValue}+${level}`: `1d10+${statValue}[${game.i18n.localize(statName)}]+${level}[${name}]`;
-      let rollResult = new Roll(rollFormula).roll()
-      let messageData = {flavor: `<h2>${name}</h2>${effet}`}
-      if (rollResult.dice[0].results[0].result == 10){  
-        messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-      }
-      else if(rollResult.dice[0].results[0].result == 1) {  
-        messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-      }
-      rollResult.toMessage(messageData)
+      new Dialog({
+        title: `${game.i18n.localize( "WITCHER.Dialog.profession.skill")}: ${name}`, 
+        content: `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>`,
+        buttons: {
+          continue: {
+          label: game.i18n.localize("WITCHER.Button.Continue"), 
+          callback: (html) => {
+            let customAtt = html.find("[name=customModifiers]")[0].value;
+            if (customAtt < 0){
+              rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+            }
+            if (customAtt > 0){
+              rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+            }
+            let rollResult = new Roll(rollFormula).roll()
+            let messageData = {flavor: `<h2>${name}</h2>${effet}`}
+            if (rollResult.dice[0].results[0].result == 10){  
+              messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+            }
+            else if(rollResult.dice[0].results[0].result == 1) {  
+              messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+            }
+            rollResult.toMessage(messageData)
+          }}
+        }}).render(true) 
     }
 
     async _onInitRoll(event) {

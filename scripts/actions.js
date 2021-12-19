@@ -310,7 +310,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     ${game.i18n.localize("WITCHER.Damage.afterSPReduct")} ${infoAfterSPReduction}<br />
     ${game.i18n.localize("WITCHER.Damage.afterLocationModifier")} ${infoAfterLocation}<br />
     ${game.i18n.localize("WITCHER.Damage.afterResistances")} ${infoAfterResistance}<br /><br />
-    ${game.i18n.localize("WITCHER.Damage.totalApplied")} ${Math.ceil(totalDamage)}
+    ${game.i18n.localize("WITCHER.Damage.totalApplied")} ${Math.floor(totalDamage)}
     `;
     let messageData = {
         user: game.user._id,
@@ -320,7 +320,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     new Roll("1d6").roll().toMessage(messageData)
 
     actor?.update({ 
-        'data.derivedStats.hp.value': actor.data.data.derivedStats.hp.value - Math.ceil(totalDamage)
+        'data.derivedStats.hp.value': actor.data.data.derivedStats.hp.value - Math.floor(totalDamage)
     });
     
 }
@@ -403,6 +403,44 @@ function getArmorDiffBonus(OverArmor, UnderArmor) {
     }
     return 0
 
+}
+
+function BlockAttack(actor){
+  let weapons = actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && witcher.meleeSkills.includes(item.data.data.attackSkill)});
+  let shields = actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
+  let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
+  weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+  shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+
+  const content = `<label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />`;
+
+  new Dialog({
+  title: `${game.i18n.localize("WITCHER.Dialog.DefenseTitle")}`, 
+  content,
+  buttons: {
+    Block: {
+      label: `${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}`, 
+      callback: (html) => {  
+        let item_id = html.find("[name=form]")[0].selectedOptions[0].getAttribute('itemid')
+        let type = html.find("[name=form]")[0].selectedOptions[0].getAttribute('type')
+        if (item_id){
+          let item = actor.items.get(item_id);
+          if (type == "Weapon") {
+            item.update({'data.reliable': item.data.data.reliable - 1})
+            if (item.data.data.reliable - 1 <= 0) {
+              return ui.notifications.error(game.i18n.localize("WITCHER.Weapon.Broken"));
+            }
+          }
+          else {
+            item.update({'data.reliability': item.data.data.reliability - 1})
+            if (item.data.data.reliability - 1 <= 0) {
+              return ui.notifications.error(game.i18n.localize("WITCHER.Shield.Broken"));
+            }
+          }
+        }
+      }
+    }}
+  }).render(true)
 }
 
 function ExecuteDefense(actor){ 
@@ -569,24 +607,6 @@ function ExecuteDefense(actor){
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
               actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
               break;
-          }
-
-          let item_id = html.find("[name=form]")[0].selectedOptions[0].getAttribute('itemid')
-          let type = html.find("[name=form]")[0].selectedOptions[0].getAttribute('type')
-          if (item_id){
-            let item = actor.items.get(item_id);
-            if (type == "Weapon") {
-              item.update({'data.reliable': item.data.data.reliable - 1})
-              if (item.data.data.reliable - 1 <= 0) {
-                return ui.notifications.error(game.i18n.localize("WITCHER.Weapon.Broken"));
-              }
-            }
-            else {
-              item.update({'data.reliability': item.data.data.reliability - 1})
-              if (item.data.data.reliability - 1 <= 0) {
-                return ui.notifications.error(game.i18n.localize("WITCHER.Shield.Broken"));
-              }
-            }
           }
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
@@ -768,4 +788,4 @@ function ExecuteDefense(actor){
   }).render(true)  
 }
 
-export {ExecuteDefense, ApplyDamage};
+export {ExecuteDefense, BlockAttack, ApplyDamage};

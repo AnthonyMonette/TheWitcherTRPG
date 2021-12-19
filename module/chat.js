@@ -1,4 +1,4 @@
-import { ExecuteDefense, ApplyDamage } from "../scripts/actions.js";
+import { ExecuteDefense, BlockAttack, ApplyDamage } from "../scripts/actions.js";
 import { getRandomInt } from "./witcher.js";
 
 export function addChatListeners(html){
@@ -180,6 +180,25 @@ export function addChatMessageContextOptions(html, options){
           defenderActor = defender[0].actor
         }
         ExecuteDefense(defenderActor)
+      }
+    },
+    {
+      name: `${game.i18n.localize("WITCHER.Context.Blocked")}`,
+      icon: '<i class="fas fa-shield-alt"></i>',
+      condition: canDefend,   
+      callback: li => {
+        let defender = canvas.tokens.controlled.slice()
+        let defenderActor;
+        if (defender.length == 0) {
+          if (game.user.character){
+            defenderActor = game.user.character
+          }else {
+            return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
+          }
+        }else {
+          defenderActor = defender[0].actor
+        }
+        BlockAttack(defenderActor)
       }
     }
   );
