@@ -30,6 +30,10 @@
     border-width: 1px;
 }
 
+.reputation-button {
+    width: 100px;
+}
+
 .char-stat-display {
     display: flex;
     text-align: center;

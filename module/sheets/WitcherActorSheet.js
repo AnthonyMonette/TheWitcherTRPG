@@ -26,6 +26,7 @@ export default class WitcherActorSheet extends ActorSheet {
       
       data.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
       data.displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
+      data.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
 
       data.config = CONFIG.witcher;
       CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
@@ -187,6 +188,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
       html.find(".heal-button").on("click", this._onHeal.bind(this));
+      html.find(".reputation-roll").on("click", this._onReputation.bind(this));
       
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
       html.find(".item-roll").on("click", this._onItemRoll.bind(this));
@@ -565,6 +567,8 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }else  if (type == "derivedStat") {
         newModifierList = this.actor.data.data.derivedStats[stat].modifiers
+      }else if (type == "reputation") {
+        newModifierList = this.actor.data.data.reputation.modifiers
       }else {
         if (this.actor.data.data.stats[stat].modifiers){
           newModifierList = this.actor.data.data.stats[stat].modifiers
@@ -593,6 +597,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': newModifierList}); break;
         case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': newModifierList}); break;
         case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': newModifierList}); break;
+        case "reputation": this.actor.update({ 'data.reputation.modifiers': newModifierList}); break;
       }
     }
 
@@ -702,6 +707,8 @@ export default class WitcherActorSheet extends ActorSheet {
         modifiers = this.actor.data.data.coreStats[stat].modifiers;
       }else if (type == "derivedStat") {
         modifiers = this.actor.data.data.derivedStats[stat].modifiers;
+      }else if (type == "reputation") {
+        modifiers = this.actor.data.data.reputation.modifiers;
       }else {
         modifiers = this.actor.data.data.stats[stat].modifiers;
       }
@@ -728,6 +735,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': modifiers}); break;
         case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': modifiers}); break;
         case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': modifiers}); break;
+        case "reputation": this.actor.update({ 'data.reputation.modifiers': modifiers}); break;
       }
       updateDerived(this.actor);
     }
@@ -812,6 +820,8 @@ export default class WitcherActorSheet extends ActorSheet {
         prevModList = this.actor.data.data.coreStats[stat].modifiers;
       }else if(type == "derivedStat"){
         prevModList = this.actor.data.data.derivedStats[stat].modifiers;
+      }else if(type == "reputation"){
+        prevModList = this.actor.data.data.reputation.modifiers;
       }else {
         prevModList = this.actor.data.data.stats[stat].modifiers;
       }
@@ -838,6 +848,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "sta": this.actor.update({ 'data.derivedStats.sta.modifiers': newModList}); break;
         case "resolve": this.actor.update({ 'data.derivedStats.resolve.modifiers': newModList}); break;
         case "focus": this.actor.update({ 'data.derivedStats.focus.modifiers': newModList}); break;
+        case "reputation": this.actor.update({ 'data.reputation.modifiers': newModList}); break;
       }
       updateDerived(this.actor);
   }
@@ -1016,7 +1027,7 @@ export default class WitcherActorSheet extends ActorSheet {
               if (!item.data.data.alchemyDC || item.data.data.alchemyDC == 0){
                 stat = this.actor.data.data.stats.cra.current;
                 skill = this.actor.data.data.skills.cra.crafting.value;
-                messageData.flavor = `${game.i18n.localize("WITCHER.DiagramcraftingDC")} ${item.data.data.craftingDC}`;
+                messageData.flavor = `${game.i18n.localize("WITCHER.Diagram.craftingDC")} ${item.data.data.craftingDC}`;
               }
               
             	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${statName}]+${skill}[${skillName}]` ;
@@ -1280,15 +1291,31 @@ export default class WitcherActorSheet extends ActorSheet {
             break;
       }
       let rollFormula = !displayRollDetails ? `1d10+${statValue}+${level}`: `1d10+${statValue}[${game.i18n.localize(statName)}]+${level}[${name}]`;
-      let rollResult = new Roll(rollFormula).roll()
-      let messageData = {flavor: `<h2>${name}</h2>${effet}`}
-      if (rollResult.dice[0].results[0].result == 10){  
-        messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-      }
-      else if(rollResult.dice[0].results[0].result == 1) {  
-        messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-      }
-      rollResult.toMessage(messageData)
+      new Dialog({
+        title: `${game.i18n.localize( "WITCHER.Dialog.profession.skill")}: ${name}`, 
+        content: `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>`,
+        buttons: {
+          continue: {
+          label: game.i18n.localize("WITCHER.Button.Continue"), 
+          callback: (html) => {
+            let customAtt = html.find("[name=customModifiers]")[0].value;
+            if (customAtt < 0){
+              rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+            }
+            if (customAtt > 0){
+              rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+            }
+            let rollResult = new Roll(rollFormula).roll()
+            let messageData = {flavor: `<h2>${name}</h2>${effet}`}
+            if (rollResult.dice[0].results[0].result == 10){  
+              messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+            }
+            else if(rollResult.dice[0].results[0].result == 1) {  
+              messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+            }
+            rollResult.toMessage(messageData)
+          }}
+        }}).render(true) 
     }
 
     async _onInitRoll(event) {
@@ -1303,6 +1330,9 @@ export default class WitcherActorSheet extends ActorSheet {
     async _onDeathSaveRoll(event) {
       let rollResult = new Roll("1d10").roll()
       let stunBase = Math.floor((this.actor.data.data.stats.body.max + this.actor.data.data.stats.will.max)/2);
+      if (this.actor.data.data.derivedStats.hp.value != 0) {
+        stunBase = this.actor.data.data.coreStats.stun.current
+      }
       if(stunBase > 10){
         stunBase = 10;
       }
@@ -1327,6 +1357,72 @@ export default class WitcherActorSheet extends ActorSheet {
       ExecuteDefense(this.actor)
     }
 
+    async _onReputation(event) { 
+      let dialogTemplate = `
+      <h1>${game.i18n.localize("WITCHER.Reputation")}</h1>`;
+      if (this.actor.data.data.reputation.modifiers.length > 0){
+        dialogTemplate += `<label>${game.i18n.localize("WITCHER.Apply.Mod")}</label>`;
+        this.actor.data.data.reputation.modifiers.forEach(mod => dialogTemplate += `<div><input id="${mod.name}" type="checkbox" unchecked/> ${mod.name}(${mod.value})</div>`)
+      }
+      new Dialog({
+        title: game.i18n.localize("WITCHER.ReputationTitle"),
+        content: dialogTemplate,
+        buttons: {
+          t1: {
+            label:`${game.i18n.localize("WITCHER.ReputationButton.Save")}`, 
+            callback:(html =>{
+              let statValue = this.actor.data.data.reputation.max
+
+              this.actor.data.data.reputation.modifiers.forEach(mod => {
+                if(html.find(`#${mod.name}`)[0].checked) {
+                  statValue += Number(mod.value)
+                }
+              });
+
+              let rollResult = new Roll("1d10").roll()
+              let messageData = {}
+              messageData.flavor = `
+              <h2>${game.i18n.localize("WITCHER.Reputation")}</h2>
+              <div class="roll-summary">
+                  <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${statValue}</b></div>
+              </div>
+              <hr />`
+              if (rollResult.total < statValue) {
+                messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
+              }
+              else {
+                messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
+              }
+              rollResult.toMessage(messageData);
+            })
+          },
+          t2: {
+            label:`${game.i18n.localize("WITCHER.ReputationButton.FaceDown")}`, 
+            callback:(html =>{
+              let repValue = this.actor.data.data.reputation.max
+
+              this.actor.data.data.reputation.modifiers.forEach(mod => {
+                if(html.find(`#${mod.name}`)[0].checked) {
+                  repValue += Number(mod.value)
+                }
+              });
+              
+              let rollResult = new Roll("1d10").roll()
+              let messageData = {}
+
+              let faceDownValue = rollResult.total + Number(repValue) + Number(this.actor.data.data.stats.will.current)
+              messageData.flavor = `
+              <h2>${game.i18n.localize("WITCHER.ReputationFaceDown.Title")}</h2>
+              <div class="roll-summary">
+                  <div class="dice-formula">1d10+${game.i18n.localize("WITCHER.StWill")}+${game.i18n.localize("WITCHER.Reputation")}</b></div>
+                  <div><b>${game.i18n.localize("WITCHER.context.Result")}: ${faceDownValue}</b></div>
+              </div>
+              <hr />`
+              rollResult.toMessage(messageData);
+            })
+          }}}).render(true);
+    }
+    
     async _onHeal(){
     let dialogTemplate = `
       <h1>${game.i18n.localize("WITCHER.Heal.title")}</h1>
@@ -1447,6 +1543,10 @@ export default class WitcherActorSheet extends ActorSheet {
         case "luck":
             statValue = this.actor.data.data.stats.luck.current;
             statName = "WITCHER.StLuck";
+            break;
+        case "reputation":
+            statValue = this.actor.data.data.reputation.max;
+            statName = "WITCHER.StReputation";
             break;
       }
 
@@ -1717,6 +1817,24 @@ export default class WitcherActorSheet extends ActorSheet {
       <option value="strong"> ${game.i18n.localize("WITCHER.Dialog.strikeStrong")} </option>
       <option value="joint"> ${game.i18n.localize("WITCHER.Dialog.strikeJoint")} </option>
       `;
+      let DamageOptions = '';
+      if (item.data.data.type.slashing){
+        DamageOptions += `<option value="slashing"> ${game.i18n.localize("WITCHER.Armor.Slashing")} </option>`
+      }
+      if (item.data.data.type.piercing){
+        DamageOptions += `<option value="piercing"> ${game.i18n.localize("WITCHER.Armor.Piercing")} </option>`
+      }
+      if (item.data.data.type.bludgeoning){
+        DamageOptions += `<option value="bludgeoning"> ${game.i18n.localize("WITCHER.Armor.Bludgeoning")} </option>`
+      }
+      if (item.data.data.type.elemental){
+        DamageOptions += `<option value="elemental"> ${game.i18n.localize("WITCHER.Armor.Elemental")} </option>`;
+      }
+      if (!item.data.data.type.slashing && !item.data.data.type.piercing && !item.data.data.type.bludgeoning && !item.data.data.type.elemental) {
+        DamageOptions += `<option value="unavailable">${game.i18n.localize("WITCHER.context.unavailable")}</option>`;
+      }
+
+
       let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${item.data.data.attackSkill}</h2> 
                      <div class="flex">
                       <label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />
@@ -1733,6 +1851,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.damageType")}: <select name="damageType">${DamageOptions}</select></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                   <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${displayDmgFormula}</h2> 
@@ -1791,7 +1910,7 @@ export default class WitcherActorSheet extends ActorSheet {
               let range = item.data.data.range ? html.find("[name=range]")[0].value: null;
               let customAtt = html.find("[name=customAtt]")[0].value;
               let strike = html.find("[name=strike]")[0].value;
-
+              let damageType = html.find("[name=damageType]")[0].value;
               let customDmg = html.find("[name=customDmg]")[0].value;
               let attacknumber = 1;
               
@@ -2034,7 +2153,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 let effects = JSON.stringify(item.data.data.effects)
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
-                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${item.data.data.type.text}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+                messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -2044,7 +2163,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 };
                 
                 if (item.data.data.rollOnlyDmg) {
-                  rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.data.data.effects, item.data.data.type)
+                  rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.data.data.effects, damageType)
                 }
                 else{
                   roll.toMessage(messageData);
@@ -2126,6 +2245,7 @@ export default class WitcherActorSheet extends ActorSheet {
         case "enc": this.actor.update({ 'data.coreStats.enc.isOpened': this.actor.data.data.coreStats.enc.isOpened ? false : true}); break;
         case "rec": this.actor.update({ 'data.coreStats.rec.isOpened': this.actor.data.data.coreStats.rec.isOpened ? false : true}); break;
         case "woundTreshold": this.actor.update({ 'data.coreStats.woundTreshold.isOpened': this.actor.data.data.coreStats.woundTreshold.isOpened ? false : true}); break;
+        case "reputation": this.actor.update({ 'data.reputation.isOpened': this.actor.data.data.reputation.isOpened ? false : true}); break;
       }
     }
 
