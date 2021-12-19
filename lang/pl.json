@@ -733,6 +733,7 @@
     "WITCHER.Dialog.Skill" : "Test Umiejętności",
     "WITCHER.Chat.Success" : "Sukces",
     "WITCHER.Chat.Fail" : "Porażka",
+    "WITCHER.Dialog.profession.skill" : "Test umiejętności",
 
     "WITCHER.Currency.bizant" : "Bizant",
     "WITCHER.Currency.ducat" : "Dukat",
@@ -798,6 +799,7 @@
 
     "WITCHER.Context.applyDmg": "Zastosuj obrażenia",
     "WITCHER.Context.Defense": "Obrona",
+    "WITCHER.Context.Blocked": "Zablokowano",
     "WITCHER.Context.SelectActor": "Wybierz przynajmniej jeden cel",
 
     "WITCHER.Armor.tooMuch": "Ubrano za dużo pancerza tego samego typu",
