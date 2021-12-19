@@ -9,14 +9,15 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     let legArmors = armors.filter(function(item) {return item.data.data.location =="Leg" || item.data.data.location == "FullCover"})
 
     let naturalArmors = armors.filter(function(item) {return item.data.data.type == "Natural"})
-
-    let damageTypeOption = `
-    <option value="Slashing"> ${game.i18n.localize("WITCHER.Armor.Slashing")} </option>
-    <option value="Blundgeoning"> ${game.i18n.localize("WITCHER.Armor.Bludgeoning")} </option>
-    <option value="Piercing"> ${game.i18n.localize("WITCHER.Armor.Piercing")} </option>
-    <option value="Elemental"> ${game.i18n.localize("WITCHER.Armor.Elemental")} </option>
-    `;
     
+    let damageTypeloc =""
+    switch(dmgType) {
+      case"slashing": damageTypeloc = "WITCHER.Armor.Slashing"; break;
+      case"bludgeoning": damageTypeloc = "WITCHER.Armor.Bludgeoning"; break;
+      case"piercing": damageTypeloc = "WITCHER.Armor.Piercing"; break;
+      case"elemental": damageTypeloc = "WITCHER.Armor.Elemental"; break;
+    }
+
     const locationOptions = `
     <option value="Empty"></option>
     <option value="Head"> ${game.i18n.localize("WITCHER.Dialog.attackHead")} </option>
@@ -36,7 +37,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <option value="5d6">5d6</option>
     `;
 
-    let content = `<label>${game.i18n.localize("WITCHER.Damage.damageType")}: <select name="damageType">${damageTypeOption}</select></label> <br />
+    let content = `<label>${game.i18n.localize("WITCHER.Damage.damageType")}: <b>${game.i18n.localize(damageTypeloc)}</b></label> <br />
+      <label>${game.i18n.localize("WITCHER.Damage.CurrentLocation")}: <b>${location}</b></label> <br />
       <label>${game.i18n.localize("WITCHER.Damage.ChangeLocation")}: <select name="changeLocation">${locationOptions}</select></label> <br />`
 
     if (actor.type == "monster"){ 

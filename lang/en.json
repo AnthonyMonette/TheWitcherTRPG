@@ -780,6 +780,7 @@
 
     "WITCHER.Damage.damageType": "What type of damage",
     "WITCHER.Damage.ChangeLocation": "Change The Location",
+    "WITCHER.Damage.CurrentLocation": "Current location",
     "WITCHER.Damage.resistSilver": "Apply Resistance to non-silver",
     "WITCHER.Damage.resistMeteorite": "Apply Resistance to non-meteorite",
 
@@ -832,5 +833,7 @@
     "WITCHER.ReputationButton.Save": "Save",
     "WITCHER.ReputationButton.FaceDown": "Face-Down",
     "WITCHER.ReputationFaceDown.Title": "Reputation Face-Down",
-    "WITCHER.context.Result": "Result"
+    "WITCHER.context.Result": "Result",
+
+    "WITCHER.context.unavailable": "N/A"
 }
