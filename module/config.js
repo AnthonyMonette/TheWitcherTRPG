@@ -106,7 +106,7 @@ witcher.CritModDescription = {
     SimpleDisfiguringScar: { None: "WITCHER.CritWound.Mod.SimpleDisfiguringScar.None", Stabilized: "WITCHER.CritWound.Mod.SimpleDisfiguringScar.Stabilized", Treated: "WITCHER.CritWound.Mod.SimpleDisfiguringScar.Treated"},
     SimpleCrackedRibs: { None: "WITCHER.CritWound.Mod.SimpleCrackedRibs.None", Stabilized: "WITCHER.CritWound.Mod.SimpleCrackedRibs.Stabilized", Treated: "WITCHER.CritWound.Mod.SimpleCrackedRibs.Treated"},
     SimpleForeignObject: { None: "WITCHER.CritWound.Mod.SimpleForeignObject.None", Stabilized: "WITCHER.CritWound.Mod.SimpleForeignObject.Stabilized", Treated: "WITCHER.CritWound.Mod.SimpleForeignObject.Treated"},
-    SimpleSprainedArm: { None: "WITCHER.CritWound.Mod.SimpleSprainedArm.None", Stabilized: "WITCHER.CritWound.Mod.SimpleSprainedArm.Stabilized.", Treated: "WITCHER.CritWound.Mod.SimpleSprainedArm.Treated"},
+    SimpleSprainedArm: { None: "WITCHER.CritWound.Mod.SimpleSprainedArm.None", Stabilized: "WITCHER.CritWound.Mod.SimpleSprainedArm.Stabilized", Treated: "WITCHER.CritWound.Mod.SimpleSprainedArm.Treated"},
     SimpleSprainedLeg: { None: "WITCHER.CritWound.Mod.SimpleSprainedLeg.None", Stabilized: "WITCHER.CritWound.Mod.SimpleSprainedLeg.Stabilized", Treated: "WITCHER.CritWound.Mod.SimpleSprainedLeg.Treated"},
     ComplexMinorHeadWound: { None: "WITCHER.CritWound.Mod.ComplexMinorHeadWound.None", Stabilized: "WITCHER.CritWound.Mod.ComplexMinorHeadWound.Stabilized", Treated: "WITCHER.CritWound.Mod.ComplexMinorHeadWound.Treated"},
     ComplexLostTeeth: { None: "WITCHER.CritWound.Mod.ComplexLostTeeth.None", Stabilized: "WITCHER.CritWound.Mod.ComplexLostTeeth.Stabilized", Treated: "WITCHER.CritWound.Mod.ComplexLostTeeth.Treated"},
