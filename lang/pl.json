@@ -779,7 +779,8 @@
     "WITCHER.Items.transferMany": "Ile przedmiotów przenieść?",
 
     "WITCHER.Damage.damageType": "Rodzaj obrażeń",
-    "WITCHER.Damage.ChangeLocation": "Zmień lokacje trafienia",
+    "WITCHER.Damage.ChangeLocation": "Zmień miejsce trafienia",
+    "WITCHER.Damage.CurrentLocation": "Miejsce trafienia",
     "WITCHER.Damage.resistSilver": "Zastosuj odporność na nie srebro",
     "WITCHER.Damage.resistMeteorite": "Zastosuj odporność na stal nie meteorytową",
 
@@ -832,5 +833,7 @@
     "WITCHER.ReputationButton.Save": "Rzut obronny",
     "WITCHER.ReputationButton.FaceDown": "Test",
     "WITCHER.ReputationFaceDown.Title": "Sława",
-    "WITCHER.context.Result": "Wynik"
+    "WITCHER.context.Result": "Wynik",
+
+    "WITCHER.context.unavailable": "Brak"
 }
