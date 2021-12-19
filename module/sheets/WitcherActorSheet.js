@@ -1359,9 +1359,11 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onReputation(event) { 
       let dialogTemplate = `
-      <h1>${game.i18n.localize("WITCHER.Reputation")}</h1>
-      <label>${game.i18n.localize("WITCHER.Apply.Mod")}</label>`;
-      this.actor.data.data.reputation.modifiers.forEach(mod => dialogTemplate += `<div><input id="${mod.name}" type="checkbox" unchecked/> ${mod.name}(${mod.value})</div>`)
+      <h1>${game.i18n.localize("WITCHER.Reputation")}</h1>`;
+      if (this.actor.data.data.reputation.modifiers.length > 0){
+        dialogTemplate += `<label>${game.i18n.localize("WITCHER.Apply.Mod")}</label>`;
+        this.actor.data.data.reputation.modifiers.forEach(mod => dialogTemplate += `<div><input id="${mod.name}" type="checkbox" unchecked/> ${mod.name}(${mod.value})</div>`)
+      }
       new Dialog({
         title: game.i18n.localize("WITCHER.ReputationTitle"),
         content: dialogTemplate,
