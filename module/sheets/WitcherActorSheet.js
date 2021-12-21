@@ -1,7 +1,7 @@
 import { buttonDialog, rollDamage } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight } from "../witcher.js";
-import { exportLoot, onChangeSkillList } from "./MonsterSheet.js"
+import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -324,7 +324,7 @@ export default class WitcherActorSheet extends ActorSheet {
             flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
           }
     
-          let roll = await new Roll(dragData.item.data.quantity).roll().toMessage(messageData)
+          let roll = (await new Roll(dragData.item.data.quantity).roll()).toMessage(messageData)
           this._addItem(this.actor, dragData.item, Math.floor(roll.roll.total))
           if (previousActor) {
             previousActor.deleteOwnedItem(dragData.item._id)
@@ -1045,7 +1045,8 @@ export default class WitcherActorSheet extends ActorSheet {
                 rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
               }
 
-              let roll = new Roll(rollFormula).roll()
+              let roll = new Roll(rollFormula)
+              roll.roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
@@ -1169,7 +1170,7 @@ export default class WitcherActorSheet extends ActorSheet {
 	
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
-      let rollResult = new Roll(formula).roll()
+      let rollResult = await new Roll(formula).roll()
       let messageData = {flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
           <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`}
@@ -1305,7 +1306,8 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0){
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
-            let rollResult = new Roll(rollFormula).roll()
+            let rollResult = new Roll(rollFormula)
+            rollResult.roll()
             let messageData = {flavor: `<h2>${name}</h2>${effet}`}
             if (rollResult.dice[0].results[0].result == 10){  
               messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1323,12 +1325,12 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     async _onCritRoll(event) {
-      let rollResult = new Roll("1d10x10").roll()
+      let rollResult = await new Roll("1d10x10").roll()
       rollResult.toMessage()
     }
 
     async _onDeathSaveRoll(event) {
-      let rollResult = new Roll("1d10").roll()
+      let rollResult = await new Roll("1d10").roll()
       let stunBase = Math.floor((this.actor.data.data.stats.body.max + this.actor.data.data.stats.will.max)/2);
       if (this.actor.data.data.derivedStats.hp.value != 0) {
         stunBase = this.actor.data.data.coreStats.stun.current
@@ -1379,7 +1381,8 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
               });
 
-              let rollResult = new Roll("1d10").roll()
+              let rollResult = new Roll("1d10")
+              rollResult.roll()
               let messageData = {}
               messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.Reputation")}</h2>
@@ -1407,7 +1410,8 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
               });
               
-              let rollResult = new Roll("1d10").roll()
+              let rollResult = new Roll("1d10")
+              rollResult.roll()
               let messageData = {}
 
               let faceDownValue = rollResult.total + Number(repValue) + Number(this.actor.data.data.stats.will.current)
@@ -1550,7 +1554,7 @@ export default class WitcherActorSheet extends ActorSheet {
             break;
       }
 
-      let rollResult = new Roll("1d10").roll()
+      let rollResult = await new Roll("1d10").roll()
       let messageData = {}
       messageData.flavor = `
       <h2>${game.i18n.localize(statName)}</h2>
@@ -2154,7 +2158,8 @@ export default class WitcherActorSheet extends ActorSheet {
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
                 messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
-                let roll = new Roll(attFormula).roll()
+                let roll = new Roll(attFormula)
+                roll.roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
                 };

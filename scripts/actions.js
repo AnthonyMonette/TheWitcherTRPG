@@ -79,7 +79,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     await buttonDialog(dialogData)
 
     if (silverDmg){
-      let silverRoll = new Roll(silverDmg).roll()
+      let silverRoll = new Roll(silverDmg)
+      silverRoll.roll()
       totalDamage = Number(totalDamage) + silverRoll.total
       infoTotalDmg += `+${silverRoll.total}[${game.i18n.localize("WITCHER.Damage.silver")}]`
     }
@@ -195,7 +196,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
             content: messageContent,
             speaker: {alias: actor.name},
         }
-        new Roll("1d6").roll().toMessage(messageData);
+        (await new Roll("1d6").roll()).toMessage(messageData);
         return
     }
     switch(location){
@@ -319,7 +320,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         content: messageContent,
         speaker: {alias: actor.name},
     }
-    new Roll("1d6").roll().toMessage(messageData)
+    (await new Roll("1d6").roll()).toMessage(messageData)
 
     actor?.update({ 
         'data.derivedStats.hp.value': actor.data.data.derivedStats.hp.value - Math.floor(totalDamage)
@@ -503,7 +504,8 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = new Roll(rollFormula)
+          roll.roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -547,7 +549,8 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = new Roll(rollFormula)
+          roll.roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -624,7 +627,8 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = new Roll(rollFormula)
+          roll.roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -700,7 +704,8 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = new Roll(rollFormula)
+          roll.roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -776,7 +781,8 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = new Roll(rollFormula)
+          roll.roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };

@@ -366,7 +366,8 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 					rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 
-				let roll = new Roll(rollFormula).roll()
+				let roll = new Roll(rollFormula)
+				roll.roll()
 				if (roll.dice[0].results[0].result == 10){  
 				  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
 				};
