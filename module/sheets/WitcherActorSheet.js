@@ -327,7 +327,7 @@ export default class WitcherActorSheet extends ActorSheet {
           let roll = (await new Roll(dragData.item.data.quantity).roll()).toMessage(messageData)
           this._addItem(this.actor, dragData.item, Math.floor(roll.roll.total))
           if (previousActor) {
-            previousActor.deleteOwnedItem(dragData.item._id)
+            await previousActor.items.get(dragData.item._id).delete()
           }
           return
         }
@@ -363,7 +363,7 @@ export default class WitcherActorSheet extends ActorSheet {
           }else {
             this._addItem(this.actor, dragData.item)
             if (previousActor) {
-              previousActor.deleteOwnedItem(dragData.item._id)
+              await previousActor.items.get(dragData.item._id).delete()
             }
           }
         }
@@ -376,7 +376,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let foundItem = actor.items.get(itemId)
       let newQuantity = foundItem.data.data.quantity - quantityToRemove
       if (newQuantity <= 0 ){
-        await actor.deleteOwnedItem(itemId)
+        await actor.items.get(itemId).delete()
       }else {
         await foundItem.update({'data.quantity': newQuantity < 0 ? 0 : newQuantity})
       }
@@ -896,7 +896,7 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }
 
-      this.actor.createOwnedItem(itemData)
+      await Item.create(itemData, {parent: this.actor})
     }
 
     async _onAddActiveEffect(){
@@ -904,7 +904,7 @@ export default class WitcherActorSheet extends ActorSheet {
         name: `new effect`, 
         type: "effect"
       }
-      this.actor.createOwnedItem(itemData)
+      await Item.create(itemData, {parent: this.actor})
     }
 
     async _alchemyCraft(event) {
@@ -1597,10 +1597,10 @@ export default class WitcherActorSheet extends ActorSheet {
       item.sheet.render(true)
     }
     
-    _onItemDelete(event) {
+    async _onItemDelete(event) {
       event.preventDefault(); 
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
-      return this.actor.deleteOwnedItem(itemId);
+      return await this.actor.items.get(itemId).delete();
     }
 
     async _onItemBuy(event) {
