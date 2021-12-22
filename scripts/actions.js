@@ -79,8 +79,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     await buttonDialog(dialogData)
 
     if (silverDmg){
-      let silverRoll = new Roll(silverDmg)
-      silverRoll.roll()
+      let silverRoll = await new Roll(silverDmg).roll()
       totalDamage = Number(totalDamage) + silverRoll.total
       infoTotalDmg += `+${silverRoll.total}[${game.i18n.localize("WITCHER.Damage.silver")}]`
     }
@@ -473,7 +472,7 @@ function ExecuteDefense(actor){
     buttons: {
       Dodge: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}`, 
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -504,8 +503,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula)
-          roll.roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -517,7 +515,7 @@ function ExecuteDefense(actor){
       },
       Reposition: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -549,8 +547,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula)
-          roll.roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -562,7 +559,7 @@ function ExecuteDefense(actor){
       },
       Block: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -627,8 +624,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula)
-          roll.roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -640,7 +636,7 @@ function ExecuteDefense(actor){
       },
       Parry: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -704,8 +700,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula)
-          roll.roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -717,7 +712,7 @@ function ExecuteDefense(actor){
       },
       ParryAgainstThrown: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -781,8 +776,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula)
-          roll.roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };

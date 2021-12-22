@@ -1014,7 +1014,7 @@ export default class WitcherActorSheet extends ActorSheet {
         buttons: {
           Craft: {
             label: `${game.i18n.localize("WITCHER.Dialog.ButtonCraft")}`, 
-            callback: (html) => {
+            callback: async html => {
               let stat = this.actor.data.data.stats.cra.current;
               let statName = game.i18n.localize(this.actor.data.data.stats.cra.label);
               let skill = this.actor.data.data.skills.cra.alchemy.value;
@@ -1045,8 +1045,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
               }
 
-              let roll = new Roll(rollFormula)
-              roll.roll()
+              let roll = await new Roll(rollFormula).roll()
               if (roll.dice[0].results[0].result == 10){  
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
@@ -1298,7 +1297,7 @@ export default class WitcherActorSheet extends ActorSheet {
         buttons: {
           continue: {
           label: game.i18n.localize("WITCHER.Button.Continue"), 
-          callback: (html) => {
+          callback: async html => {
             let customAtt = html.find("[name=customModifiers]")[0].value;
             if (customAtt < 0){
               rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
@@ -1306,8 +1305,7 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0){
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
-            let rollResult = new Roll(rollFormula)
-            rollResult.roll()
+            let rollResult = await new Roll(rollFormula).roll()
             let messageData = {flavor: `<h2>${name}</h2>${effet}`}
             if (rollResult.dice[0].results[0].result == 10){  
               messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
@@ -1372,7 +1370,7 @@ export default class WitcherActorSheet extends ActorSheet {
         buttons: {
           t1: {
             label:`${game.i18n.localize("WITCHER.ReputationButton.Save")}`, 
-            callback:(html =>{
+            callback:( async html =>{
               let statValue = this.actor.data.data.reputation.max
 
               this.actor.data.data.reputation.modifiers.forEach(mod => {
@@ -1381,8 +1379,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
               });
 
-              let rollResult = new Roll("1d10")
-              rollResult.roll()
+              let rollResult = await new Roll("1d10").roll()
               let messageData = {}
               messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.Reputation")}</h2>
@@ -1401,7 +1398,7 @@ export default class WitcherActorSheet extends ActorSheet {
           },
           t2: {
             label:`${game.i18n.localize("WITCHER.ReputationButton.FaceDown")}`, 
-            callback:(html =>{
+            callback:(async html =>{
               let repValue = this.actor.data.data.reputation.max
 
               this.actor.data.data.reputation.modifiers.forEach(mod => {
@@ -1410,8 +1407,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
               });
               
-              let rollResult = new Roll("1d10")
-              rollResult.roll()
+              let rollResult = await new Roll("1d10").roll()
               let messageData = {}
 
               let faceDownValue = rollResult.total + Number(repValue) + Number(this.actor.data.data.stats.will.current)
@@ -1751,7 +1747,7 @@ export default class WitcherActorSheet extends ActorSheet {
       event.currentTarget.select();
     }
 
-    _onItemRoll(event, itemId = null) {
+    async _onItemRoll(event, itemId = null) {
       
       let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
 
@@ -1888,7 +1884,7 @@ export default class WitcherActorSheet extends ActorSheet {
         buttons: {
           Roll: {
             label: `${game.i18n.localize("WITCHER.Dialog.ButtonRoll")}`,
-            callback: (html) => {
+            callback: async html => {
               let isExtraAttack = html.find("[name=isExtraAttack]").prop("checked");
 
               let location = html.find("[name=location]")[0].value;
@@ -2158,8 +2154,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
                 messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
-                let roll = new Roll(attFormula)
-                roll.roll()
+                let roll = await new Roll(attFormula).roll()
                 if (roll.dice[0].results[0].result == 10){  
                   messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
                 };

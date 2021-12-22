@@ -82,10 +82,9 @@ async function  exportLoot(actor) {
       "type" : "loot"
     });
     
-    newLoot.items.forEach((item)=>{
+    newLoot.items.forEach(async item=>{
       if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
-        let roll = new Roll(item.data.data.quantity)
-        roll.roll()
+        let roll = await new Roll(item.data.data.quantity).roll()
         item.update({ 'data.quantity': Math.ceil(roll.total)})
       }
     });
