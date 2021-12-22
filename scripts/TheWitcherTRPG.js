@@ -37,8 +37,8 @@ Hooks.once("init", function () {
     console.log("TheWItcherTRPG | init system");
 
     CONFIG.witcher = witcher
-    CONFIG.Item.entityClass = WitcherItem;
-    CONFIG.Actor.entityClass = WitcherActor;
+    CONFIG.Item.documentClass = WitcherItem;
+    CONFIG.Actor.documentClass = WitcherActor;
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("witcher", WitcherItemSheet, {makeDefault: true});
