@@ -191,7 +191,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         ${game.i18n.localize("WITCHER.Damage.NotEnough")}
         `;
         let messageData = {
-            user: game.user._id,
+            user: game.user.id,
             content: messageContent,
             speaker: {alias: actor.name},
         }
@@ -315,7 +315,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     ${game.i18n.localize("WITCHER.Damage.totalApplied")} ${Math.floor(totalDamage)}
     `;
     let messageData = {
-        user: game.user._id,
+        user: game.user.id,
         content: messageContent,
         speaker: {alias: actor.name},
     }
@@ -411,8 +411,8 @@ function BlockAttack(actor){
   let weapons = actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && witcher.meleeSkills.includes(item.data.data.attackSkill)});
   let shields = actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
   let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-  weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
-  shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+  weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
 
   const content = `<label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />`;
 
@@ -451,8 +451,8 @@ function ExecuteDefense(actor){
     let weapons = actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && witcher.meleeSkills.includes(item.data.data.attackSkill)});
     let shields = actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
     let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-    weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
-    shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+    weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+    shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
 
     const content = `
     <div class="flex">
