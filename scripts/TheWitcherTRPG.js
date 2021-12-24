@@ -169,11 +169,11 @@ async function createBoilerplateMacro(data, slot) {
         return ui.notifications.warn("You can only create macro buttons for owned Items");
     }
     else if(data.item.type == 'weapon'){
-        const item = data.item;
+        const weapon = data.item;
         let foundActor = null
         game.actors.forEach(actor => {
             actor.items.forEach(item => {
-                if(data.item._id == item._id) {
+                if(weapon._id == item.id) {
                     foundActor = actor
                 }
             });
@@ -182,14 +182,14 @@ async function createBoilerplateMacro(data, slot) {
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
         const command = 
-`let actor = game.actors.get('${foundActor._id}');
-actor.rollItem("${item._id}")`;
-        let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+`let actor = game.actors.get('${foundActor.id}');
+actor.rollItem("${weapon._id}")`;
+        let macro = game.macros.find(m => (m.name === weapon.name) && (m.command === command));
         if (!macro) {
             macro = await Macro.create({
-            name: item.name,
+            name: weapon.name,
             type: "script",
-            img: item.img,
+            img: weapon.img,
             command: command,
             flags: { "boilerplate.itemMacro": true }
             });
@@ -198,11 +198,11 @@ actor.rollItem("${item._id}")`;
         return false;
     }
     else if(data.item.type == 'spell'){
-        const item = data.item;
+        const spell = data.item;
         let foundActor = null
         game.actors.forEach(actor => {
             actor.items.forEach(item => {
-                if(data.item._id == item._id) {
+                if(spell._id == item.id) {
                     foundActor = actor
                 }
             });
@@ -211,14 +211,14 @@ actor.rollItem("${item._id}")`;
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
         const command = 
-`let actor = game.actors.get('${foundActor._id}');
-actor.rollSpell("${item._id}")`;
-        let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+`let actor = game.actors.get('${foundActor.id}');
+actor.rollSpell("${spell._id}")`;
+        let macro = game.macros.find(m => (m.name === spell.name) && (m.command === command));
         if (!macro) {
             macro = await Macro.create({
-            name: item.name,
+            name: spell.name,
             type: "script",
-            img: item.img,
+            img: spell.img,
             command: command,
             flags: { "boilerplate.itemMacro": true }
             });
