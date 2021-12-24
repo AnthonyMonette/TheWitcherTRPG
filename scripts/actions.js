@@ -49,8 +49,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <label>${game.i18n.localize("WITCHER.Damage.oilDmg")}: <input type="checkbox" name="oilDmg"></label><br />
     <label>${game.i18n.localize("WITCHER.Damage.silverDmg")}: <select name="silverDmg">${silverOptions}</select></label><br />`
 
-    let cancel = true
-    let damageType = 0
+    let cancel = true;
+    let damageType = dmgType.capitalize();
     let resistSilver = false;
     let resistMeteorite = false;
     let newLocation = false;
@@ -64,7 +64,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         buttons : [
             [`${game.i18n.localize("WITCHER.Button.Continue")}`, 
              (html)=>{  
-                damageType = html.find("[name=damageType]")[0].value;
                 newLocation = html.find("[name=changeLocation]")[0].value;
                 resistSilver = html.find("[name=resistNonSilver]").prop("checked");
                 resistMeteorite = html.find("[name=resistNonMeteorite]").prop("checked");
@@ -77,6 +76,10 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         content : content
     }
     await buttonDialog(dialogData)
+
+    if (cancel) {
+      return
+  }
 
     if (silverDmg){
       let silverRoll = await new Roll(silverDmg).roll()
@@ -179,10 +182,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     totalDamage -= totalSP < 0 ? 0: totalSP;
 
     let infoAfterSPReduction = totalDamage < 0 ? 0: totalDamage
-    
-    if (cancel) {
-        return
-    }
 
     if (totalDamage <=0){
         let messageContent = `${game.i18n.localize("WITCHER.Damage.initial")}: ${infoTotalDmg} <br />
