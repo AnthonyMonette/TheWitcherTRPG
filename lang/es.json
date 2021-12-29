@@ -14,6 +14,12 @@
     "WITCHER.Item.Description": "Descripción",
     "WITCHER.Item.Attribute": "Atributos",
     "WITCHER.Item.ROF": "ATA",
+	
+	"WITCHER.Item.Availability": "Disponibilidad",
+    "WITCHER.Item.AddEffect": "Añadir efecto",
+    "WITCHER.Item.AddComponent": "Añadir componente",
+    "WITCHER.Item.RemoveEffect": "Eliminar efecto",
+    "WITCHER.Item.RemoveComponent": "Eliminar componente",
 
     "WITCHER.Item.CraftingMaterial": "Materiales de artesanía",
     "WITCHER.Item.Hides&AnimalParts": "Pieles y origen animal",
@@ -32,27 +38,31 @@
     "Witcher.Item.CantHide": "I",
 
     "WITCHER.Weapon.Type": "Tipo",
-    "WITCHER.Weapon.Short.WeaponAccuracy": "PA",
-    "WITCHER.Weapon.Short.Damage": "Daño",
-    "WITCHER.Weapon.Short.Reliability": "Fiab",
-    "WITCHER.Weapon.Short.MaxReliability": "Max. Fiab",
-    "WITCHER.Weapon.Hands": "Manos",
-    "WITCHER.Weapon.Short.Concealement": "CD",
+	"WITCHER.Weapon.Short.WeaponAccuracy": "PA",
+	"WITCHER.Weapon.Short.Damage": "Daño",
+	"WITCHER.Weapon.Short.Reliability": "Fiab.",
+    "WITCHER.Weapon.Short.MaxReliability": "Fiab.Max",
+	"WITCHER.Weapon.Hands": "Manos",
+	"WITCHER.Weapon.Short.Concealement": "CD.",
     "WITCHER.Weapon.Short.Enhancements": "Mej",
-    "WITCHER.Weapon.Range": "Alc",
-    "WITCHER.Weapon.Elderfolk": "P.Antiguo",
-
+	"WITCHER.Weapon.Range": "Alcance",
+	"WITCHER.Weapon.Elderfolk": "P.Antiguo",
+	"WITCHER.Weapon.Short.RateOfFire": "ATA",
+	
+	"WITCHER.Weapon.WeaponAccuracy": "Precisión del arma",
+	"WITCHER.Weapon.Enhancements": "Mejoras",
+    "WITCHER.Weapon.Reliability": "Fiabilidad actual",
+    "WITCHER.Weapon.MaxReliability": "Fiabilidad máxima",
+	"WITCHER.Weapon.Damage": "Daño",
+	"WITCHER.Weapon.RateOfFire": "Numero de ataques",
+    "WITCHER.Weapon.Concealement": "Capacidad de disimulo",
+	
     "WITCHER.Weapon.AttackSkill": "Hab. de ataque",
     "WITCHER.Weapon.MeleeBonus": "Daño adicional",
     
     "WITCHER.Weapon.isAmmunition": "Es munición",
-    "WITCHER.Weapon.Short.RateOfFire": "ATA",
-
-    "WITCHER.Armor.StoppingPower": "CP",
-    "WITCHER.Armor.MaxStoppingPower": "Max. CP",
 	
-    "WITCHER.Armor.ArmorEnhancement": "MA",
-    "WITCHER.Armor.Reliable": "Rel.",
+	"WITCHER.Armor.ArmorEnhancement": "Mejora de armadura",
     "WITCHER.Armor.EncumbranceValue": "Valor de estorbo",
     "WITCHER.Armor.Resistances": "Resistencias",
 	"WITCHER.Armor.Res": "Res",
@@ -61,6 +71,13 @@
     "WITCHER.Armor.Piercing": "Perforante",
 	"WITCHER.Armor.Elemental": "Elemental",
 	"WITCHER.Armor.Type": "Tipo",
+	"WITCHER.Armor.StoppingPower": "CP",
+    "WITCHER.Armor.MaxStoppingPower": "Max. CP",
+	
+	"WITCHER.Armor.Short.ArmorEnhancement": "MA",
+    "WITCHER.Armor.Short.EncumbranceValue": "VE",
+    "WITCHER.Armor.Short.StoppingPower": "CP",
+    "WITCHER.Armor.Short.MaxStoppingPower": "Max. CP",
 	
 	"WITCHER.Armor.Light": "Armadura ligera",
     "WITCHER.Armor.Medium": "Armadura media",
@@ -94,7 +111,8 @@
     "WITCHER.Enhancement.Stopping": "Capacidad de parada",
     "WITCHER.Enhancement.Bludgeoning": "A",
     "WITCHER.Enhancement.Slashing": "C",
-    "WITCHER.Enhancement.Piercing": "P",
+	"WITCHER.Enhancement.Piercing": "P",
+    "WITCHER.Enhancement.Elemental": "E",
 
     "WITCHER.Enhancement.Armor": "Armadura",
     "WITCHER.Enhancement.Rune": "Runa",
@@ -109,6 +127,7 @@
     
     "WITCHER.Alchemy.Duration": "Duración",
     "WITCHER.Alchemy.Toxicity": "Toxicidad",
+	"WITCHER.Alchemy.Alchemical": "De alquimia",
     "WITCHER.Alchemy.Potion": "Poción",
     "WITCHER.Alchemy.Decoction": "Extracto",
     "WITCHER.Alchemy.Oil": "Aceite",
@@ -169,6 +188,7 @@
     "WITCHER.StLuck": "Suerte",
     "WITCHER.StSpd": "Velocidad",
     "WITCHER.StVigor": "Vigor",
+	"WITCHER.StReputation": "Rep",
 
     "WITCHER.Actor.SkillTab": "Habilidades",
     "WITCHER.Actor.ProfessionTab": "Profesión y raza",
@@ -601,11 +621,15 @@
     "WITCHER.Spell.Requirements": "Requisito para conjurar",
     "WITCHER.Spell.Effect": "Efectos",
     "WITCHER.Spell.AlternateComponents": "Componentes alternativos",
-    "WITCHER.Spell.Signs": "Señales",
+	"WITCHER.Spell.Signs": "Señales",
+    "WITCHER.Spell.Sign": "Señal",
 	"WITCHER.Spell.Element": "Elemental",
        
     "WITCHER.Spell.StaCost": "Coste en AGU",
     "WITCHER.Spell.Variable": "AGU variable",
+	
+	"WITCHER.Spell.Short.StaCost": "AGU cost",
+    "WITCHER.Spell.Short.Variable": "AGU var",
     
     "WITCHER.Spell.staminaDialog": "¿Cuánto Aguante vas a usar?",
     "WITCHER.Spell.notEnoughSta": "No hay suficiente aguante.",
@@ -709,9 +733,10 @@
     "WITCHER.Settings.Adrenaline": "Use la regla opcional de adrenalina",
     "WITCHER.Settings.AdrenalineDetails": "La adrenalina es la fuerza de voluntad para seguir adelante y luchar más duro en situaciones extremas.",
 
-    "WITCHER.Dialog.Skill" : "Realización de una prueba de habilidad",
+    "WITCHER.Dialog.Skill" : "Hacer una prueba de habilidad",
     "WITCHER.Chat.Success" : "Éxito",
     "WITCHER.Chat.Fail" : "Fallo",
+	"WITCHER.Dialog.profession.skill" : "Hacer una prueba de profesión",
 
     "WITCHER.Currency.bizant" : "Bizant",
     "WITCHER.Currency.ducat" : "Ducado",
@@ -734,8 +759,10 @@
 	
 	"WITCHER.Settings.displayRollDetails": "Mostrar detalles de la tirada",
     "WITCHER.Settings.displayRollDetailsHint": "Mostrar detalles al lanzar los dados: 1d10 + 2 [estadística] +4 [habilidad] -3 [parada]",
-    "WITCHER.Settings.Custom": "Personalizar",
+    "WITCHER.Settings.Custom": "Modificador",
     "WITCHER.Settings.modifiers": "Modificadores",
+	"WITCHER.Settings.displayReputation": "Mostrar reputación a los jugadores",
+    "WITCHER.Settings.displayReputationHint": "Permite a los jugadores ver y modificar su reputación.",
 
     "WITCHER.Resources.modifiers": "Modificadores de recursos",
     "WITCHER.Weapon.onlyDmg": "Solo tiradas de daño",
@@ -756,6 +783,7 @@
 	
 	"WITCHER.Damage.damageType": "Tipo de daño",
 	"WITCHER.Damage.ChangeLocation": "Cambiar localización",
+	"WITCHER.Damage.CurrentLocation": "Localización actual",
     "WITCHER.Damage.resistSilver": "Aplicar resistencia a la plata",
     "WITCHER.Damage.resistMeteorite": "Aplicar resistencia meteoríca ",
 
@@ -774,6 +802,7 @@
 
     "WITCHER.Context.applyDmg": "Aplicar daño",
     "WITCHER.Context.Defense": "Defensa",
+	"WITCHER.Context.Blocked": "Bloqueado",
     "WITCHER.Context.SelectActor": "Debes seleccionar al menos un actor",
 
     "WITCHER.Armor.tooMuch": "Hay demasiada armadura equipada del mismo tipo ",
@@ -799,5 +828,14 @@
     "WITCHER.Loot.Percent": "Aplicar porcentaje",
 
     "WITCHER.Loot.BuyTitle": "Comprar/Vender artículos",
-    "WITCHER.Monster.exportLoot": "Exportar a botín"
+	"WITCHER.Monster.exportLoot": "Exportar a botín",
+	
+    "WITCHER.Apply.Mod": "Aplicar un modificador",
+    "WITCHER.ReputationTitle": "Realizar una tirada de reputación",
+    "WITCHER.ReputationButton.Save": "Salvación",
+    "WITCHER.ReputationButton.FaceDown": "Amedrentar",
+    "WITCHER.ReputationFaceDown.Title": "Tirada de Amedrentar",
+    "WITCHER.context.Result": "Resultado",
+
+    "WITCHER.context.unavailable": "N/A"	
 }
