@@ -49,8 +49,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <label>${game.i18n.localize("WITCHER.Damage.oilDmg")}: <input type="checkbox" name="oilDmg"></label><br />
     <label>${game.i18n.localize("WITCHER.Damage.silverDmg")}: <select name="silverDmg">${silverOptions}</select></label><br />`
 
-    let cancel = true
-    let damageType = 0
+    let cancel = true;
+    let damageType = dmgType.capitalize();
     let resistSilver = false;
     let resistMeteorite = false;
     let newLocation = false;
@@ -64,7 +64,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         buttons : [
             [`${game.i18n.localize("WITCHER.Button.Continue")}`, 
              (html)=>{  
-                damageType = html.find("[name=damageType]")[0].value;
                 newLocation = html.find("[name=changeLocation]")[0].value;
                 resistSilver = html.find("[name=resistNonSilver]").prop("checked");
                 resistMeteorite = html.find("[name=resistNonMeteorite]").prop("checked");
@@ -78,8 +77,12 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     }
     await buttonDialog(dialogData)
 
+    if (cancel) {
+      return
+  }
+
     if (silverDmg){
-      let silverRoll = new Roll(silverDmg).roll()
+      let silverRoll = await new Roll(silverDmg).roll()
       totalDamage = Number(totalDamage) + silverRoll.total
       infoTotalDmg += `+${silverRoll.total}[${game.i18n.localize("WITCHER.Damage.silver")}]`
     }
@@ -179,10 +182,6 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     totalDamage -= totalSP < 0 ? 0: totalSP;
 
     let infoAfterSPReduction = totalDamage < 0 ? 0: totalDamage
-    
-    if (cancel) {
-        return
-    }
 
     if (totalDamage <=0){
         let messageContent = `${game.i18n.localize("WITCHER.Damage.initial")}: ${infoTotalDmg} <br />
@@ -191,11 +190,11 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         ${game.i18n.localize("WITCHER.Damage.NotEnough")}
         `;
         let messageData = {
-            user: game.user._id,
+            user: game.user.id,
             content: messageContent,
             speaker: {alias: actor.name},
         }
-        new Roll("1d6").roll().toMessage(messageData);
+        (await new Roll("1d6").roll()).toMessage(messageData);
         return
     }
     switch(location){
@@ -315,11 +314,11 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     ${game.i18n.localize("WITCHER.Damage.totalApplied")} ${Math.floor(totalDamage)}
     `;
     let messageData = {
-        user: game.user._id,
+        user: game.user.id,
         content: messageContent,
         speaker: {alias: actor.name},
     }
-    new Roll("1d6").roll().toMessage(messageData)
+    (await new Roll("1d6").roll()).toMessage(messageData)
 
     actor?.update({ 
         'data.derivedStats.hp.value': actor.data.data.derivedStats.hp.value - Math.floor(totalDamage)
@@ -411,8 +410,8 @@ function BlockAttack(actor){
   let weapons = actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && witcher.meleeSkills.includes(item.data.data.attackSkill)});
   let shields = actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
   let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-  weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
-  shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+  weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
 
   const content = `<label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />`;
 
@@ -451,8 +450,8 @@ function ExecuteDefense(actor){
     let weapons = actor.items.filter(function(item) {return item.type=="weapon" &&  !item.data.data.isAmmo && witcher.meleeSkills.includes(item.data.data.attackSkill)});
     let shields = actor.items.filter(function(item) {return item.type=="armor" &&  item.data.data.location == "Shield"});
     let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-    weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item._id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
-    shields.forEach(item => options += `<option value="Melee" itemId="${item._id}" type="Shield"> ${item.name} (Melee)</option>`);
+    weapons.forEach(item => options += `<option value="${item.data.data.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.data.data.attackSkill})</option>`);
+    shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
 
     const content = `
     <div class="flex">
@@ -472,7 +471,7 @@ function ExecuteDefense(actor){
     buttons: {
       Dodge: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}`, 
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -503,7 +502,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -515,7 +514,7 @@ function ExecuteDefense(actor){
       },
       Reposition: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -547,7 +546,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -559,7 +558,7 @@ function ExecuteDefense(actor){
       },
       Block: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -624,7 +623,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -636,7 +635,7 @@ function ExecuteDefense(actor){
       },
       Parry: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -700,7 +699,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -712,7 +711,7 @@ function ExecuteDefense(actor){
       },
       ParryAgainstThrown: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`,
-        callback: (html) => {
+        callback: async html => {
           let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefense) {
@@ -776,7 +775,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
           }
 
-          let roll = new Roll(rollFormula).roll()
+          let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };

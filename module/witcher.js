@@ -357,7 +357,7 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 		buttons: {
 		  LocationRandom: {
 			label: game.i18n.localize("WITCHER.Button.Continue"), 
-			callback: (html) => {
+			callback: async html => {
 				let customAtt = html.find("[name=customModifiers]")[0].value;
 				if (customAtt < 0){
 					rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
@@ -366,7 +366,7 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 					rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 
-				let roll = new Roll(rollFormula).roll()
+				let roll = await new Roll(rollFormula).roll()
 				if (roll.dice[0].results[0].result == 10){  
 				  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
 				};
