@@ -1170,9 +1170,12 @@ export default class WitcherActorSheet extends ActorSheet {
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       let rollResult = await new Roll(formula).roll()
-      let messageData = {flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
+      let messageData = {
+        speaker: {alias: this.actor.name},
+        flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
-          <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`}
+          <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`
+      }
       if (spellItem.data.data.range) {
         messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Spell.Range")}: </b>${spellItem.data.data.range}</div>`
       }
@@ -1306,7 +1309,10 @@ export default class WitcherActorSheet extends ActorSheet {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
             let rollResult = await new Roll(rollFormula).roll()
-            let messageData = {flavor: `<h2>${name}</h2>${effet}`}
+            let messageData = {
+              speaker: {alias: this.actor.name},
+              flavor: `<h2>${name}</h2>${effet}`
+            }
             if (rollResult.dice[0].results[0].result == 10){  
               messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
             }
@@ -1324,7 +1330,10 @@ export default class WitcherActorSheet extends ActorSheet {
 
     async _onCritRoll(event) {
       let rollResult = await new Roll("1d10x10").roll()
-      rollResult.toMessage()
+      let messageData = {
+        speaker: {alias: this.actor.name}
+      }
+      rollResult.toMessage(messageData)
     }
 
     async _onDeathSaveRoll(event) {
@@ -1338,12 +1347,15 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       stunBase -= this.actor.data.data.deathSaves
       
-      let messageData = {flavor: `
-      <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
-      <div class="roll-summary">
-          <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${stunBase}</b></div>
-      </div>
-      <hr />`}
+      let messageData = {
+        speaker: {alias: this.actor.name},
+        flavor: `
+        <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
+        <div class="roll-summary">
+            <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${stunBase}</b></div>
+        </div>
+        <hr />`
+      }
       if (rollResult.total < stunBase) {
         messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
       }
@@ -1380,7 +1392,7 @@ export default class WitcherActorSheet extends ActorSheet {
               });
 
               let rollResult = await new Roll("1d10").roll()
-              let messageData = {}
+              let messageData = {speaker: {alias: this.actor.name}}
               messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.Reputation")}</h2>
               <div class="roll-summary">
@@ -1408,7 +1420,7 @@ export default class WitcherActorSheet extends ActorSheet {
               });
               
               let rollResult = await new Roll("1d10").roll()
-              let messageData = {}
+              let messageData = {speaker: {alias: this.actor.name}}
 
               let faceDownValue = rollResult.total + Number(repValue) + Number(this.actor.data.data.stats.will.current)
               messageData.flavor = `
@@ -1551,7 +1563,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       let rollResult = await new Roll("1d10").roll()
-      let messageData = {}
+      let messageData = {speaker: {alias: this.actor.name}}
       messageData.flavor = `
       <h2>${game.i18n.localize(statName)}</h2>
       <div class="roll-summary">

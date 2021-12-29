@@ -194,7 +194,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
             content: messageContent,
             speaker: {alias: actor.name},
         }
-        (await new Roll("1d6").roll()).toMessage(messageData);
+        let rollResult = await new Roll("1").roll()
+        rollResult.toMessage(messageData)
         return
     }
     switch(location){
@@ -318,7 +319,8 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
         content: messageContent,
         speaker: {alias: actor.name},
     }
-    (await new Roll("1d6").roll()).toMessage(messageData)
+    let rollResult = await new Roll("1").roll()
+    rollResult.toMessage(messageData)
 
     actor?.update({ 
         'data.derivedStats.hp.value': actor.data.data.derivedStats.hp.value - Math.floor(totalDamage)
