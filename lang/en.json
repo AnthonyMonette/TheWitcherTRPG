@@ -650,6 +650,7 @@
     "WITCHER.Dialog.ButtonParry": "Parry",
     "WITCHER.Dialog.ButtonBlock": "Block",
     "WITCHER.Dialog.ButtonParryThrown": "Parry thrown weapon",
+    "WITCHER.Dialog.ButtonMagicResist": "Magic Resist",
     "WITCHER.Dialog.Defense": "Defense",
     "WITCHER.Dialog.DefenseExtra": "Extra defense",
     "WITCHER.Dialog.DefenseWith": "Defense with",

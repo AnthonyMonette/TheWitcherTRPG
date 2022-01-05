@@ -108,20 +108,20 @@
             <tr>
                 <td><b>{{localize "WITCHER.Actor.Race"}}</b></td>
                 <td>{{race.name}}</td>
-                <td><b>{{localize "WITCHER.Reputation"}}</b></td>
-                <td><input class="header-stat" name="data.reputation.value" type="number" value="{{data.reputation.value}}" /></td>
+                <td><b>{{localize "WITCHER.Profession"}}</b></td>
+                <td>{{profession.name}}</td>
             </tr>
             <tr>
                 <td><b>{{localize "WITCHER.Actor.Gender"}}</b></td>
-                <td><input name="data.gender" type="text" value="{{data.gender}}" placeholder=""/></td>
+                <td><input class="medium" name="data.gender" type="text" value="{{data.gender}}" placeholder=""/></td>
                 <td><b>{{localize "WITCHER.Actor.Age"}}</b></td>
                 <td><input class="header-stat" name="data.general.age" type="number" value="{{data.general.age}}" placeholder="0" data-dtype="Number"/></td>
             </tr>
             <tr>
-                <td><b>{{localize "WITCHER.Profession"}}</b></td>
-                <td>{{profession.name}}</td>
                 <td><b>{{localize "WITCHER.Homeland"}}</b></td>
                 <td>{{data.general.homeland.value}}</td>
+                <td></td>
+                <td></td>
             </tr>
         </tbody>
     </table>

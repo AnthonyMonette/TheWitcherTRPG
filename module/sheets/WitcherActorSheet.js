@@ -1153,8 +1153,8 @@ export default class WitcherActorSheet extends ActorSheet {
       let staCostdisplay = staCostTotal;
       
       staCostTotal -= focusValue - secondFocusValue
-      if (staCostTotal < 0) {
-        staCostTotal = 0
+      if (staCostTotal < 1) {
+        staCostTotal = 1
       }
 
       newSta -= staCostTotal
@@ -1170,10 +1170,20 @@ export default class WitcherActorSheet extends ActorSheet {
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       let rollResult = await new Roll(formula).roll()
+      let spellSource = ''
+      switch(spellItem.data.data.source){
+        case "mixedElements": spellSource = "WITCHER.Spell.Mixed"; break;
+        case "earth": spellSource = "WITCHER.Spell.Earth"; break;
+        case "air": spellSource = "WITCHER.Spell.Air"; break;
+        case "fire": spellSource = "WITCHER.Spell.Fire"; break;
+        case "Water": spellSource = "WITCHER.Spell.Water"; break;
+      }
+
       let messageData = {
         speaker: {alias: this.actor.name},
         flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
+          <div><b>${game.i18n.localize("WITCHER.Mutagen.Source")}: </b>${game.i18n.localize(spellSource)}</div>
           <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`
       }
       if (spellItem.data.data.range) {

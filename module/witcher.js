@@ -214,8 +214,8 @@ function updateDerived(actor){
 	if (thisActor.data.data.customStat != true){
 		curHp = Math.floor((base * 5 + hpTotalModifiers)/hpDivider)
 		curSta = Math.floor((base * 5 + staTotalModifiers)/staDivider) 
-		curRes = Math.floor((curWill + curInt)/2*5) + resTotalModifiers
-		curFocus = Math.floor((curWill + curInt)/2*3) + focusTotalModifiers
+		curRes = (Math.floor((curWill + curInt)/2)*5) + resTotalModifiers
+		curFocus = (Math.floor((curWill + curInt)/2)*3) + focusTotalModifiers
 	}
 
 	thisActor.update({ 
