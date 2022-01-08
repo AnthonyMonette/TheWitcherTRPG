@@ -136,6 +136,9 @@
             <div class="char-button-collum">
                 <a class="button-roll crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
                 <a class="button-roll defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+                {{#if useVerbalCombat}}
+                <a class="button-roll verbal-button">{{localize "WITCHER.verbalCombat.Title"}}</a>
+                {{/if}}
             </div>
         </div>
         <div class="death-section">
@@ -177,11 +180,13 @@
                 </div>
             </div>
             <div class="right-row">
+                {{#if useVerbalCombat}}
                 <div class="right-element">
                     <label>{{localize data.derivedStats.resolve.label}} ({{data.derivedStats.resolve.max}})</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
                     <input class="right-value" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
+                {{/if}}
                 <div class="right-element">
                     <label>{{localize data.derivedStats.focus.label}} ({{data.derivedStats.focus.max}})</label> 
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
