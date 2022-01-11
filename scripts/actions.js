@@ -24,7 +24,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <option value="Torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
     <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
     <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
-    <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+    <option value="L. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
     <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
     <option value="Tail/wing"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
     `;    
