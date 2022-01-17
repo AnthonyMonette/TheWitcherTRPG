@@ -1386,7 +1386,7 @@ export default class WitcherActorSheet extends ActorSheet {
       <h1>${game.i18n.localize("WITCHER.Reputation")}</h1>`;
       if (this.actor.data.data.reputation.modifiers.length > 0){
         dialogTemplate += `<label>${game.i18n.localize("WITCHER.Apply.Mod")}</label>`;
-        this.actor.data.data.reputation.modifiers.forEach(mod => dialogTemplate += `<div><input id="${mod.name}" type="checkbox" unchecked/> ${mod.name}(${mod.value})</div>`)
+        this.actor.data.data.reputation.modifiers.forEach(mod => dialogTemplate += `<div><input id="${mod.name.replace(/\s/g, '')}" type="checkbox" unchecked/> ${mod.name}(${mod.value})</div>`)
       }
       new Dialog({
         title: game.i18n.localize("WITCHER.ReputationTitle"),
@@ -1398,7 +1398,8 @@ export default class WitcherActorSheet extends ActorSheet {
               let statValue = this.actor.data.data.reputation.max
 
               this.actor.data.data.reputation.modifiers.forEach(mod => {
-                if(html.find(`#${mod.name}`)[0].checked) {
+                const noSpacesName = mod.name.replace(/\s/g, '')
+                if(html.find(`#${noSpacesName}`)[0].checked) {
                   statValue += Number(mod.value)
                 }
               });
@@ -1426,7 +1427,8 @@ export default class WitcherActorSheet extends ActorSheet {
               let repValue = this.actor.data.data.reputation.max
 
               this.actor.data.data.reputation.modifiers.forEach(mod => {
-                if(html.find(`#${mod.name}`)[0].checked) {
+                const noSpacesName = mod.name.replace(/\s/g, '')
+                if(html.find(`#${noSpacesName}`)[0].checked) {
                   repValue += Number(mod.value)
                 }
               });
