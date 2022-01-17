@@ -1558,7 +1558,7 @@ export default class WitcherActorSheet extends ActorSheet {
           <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>
         </div>`;
       new Dialog({
-        title: "Performing a verbal combat action",
+        title: game.i18n.localize("WITCHER.verbalCombat.DialogTitle"),
         content: dialogTemplate,
         buttons: {
           t1: {
