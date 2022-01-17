@@ -26,6 +26,7 @@ export default class WitcherActorSheet extends ActorSheet {
       
       data.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
       data.displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
+      data.useVerbalCombat = game.settings.get("TheWitcherTRPG", "useOptionnalVerbalCombat")
       data.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
 
       data.config = CONFIG.witcher;
@@ -188,6 +189,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
       html.find(".defence-roll").on("click", this._onDefenceRoll.bind(this));
       html.find(".heal-button").on("click", this._onHeal.bind(this));
+      html.find(".verbal-button").on("click", this._onVerbalCombat.bind(this));
       html.find(".reputation-roll").on("click", this._onReputation.bind(this));
       
       html.find(".stat-roll").on("click", this._onStatSaveRoll.bind(this));
@@ -323,9 +325,9 @@ export default class WitcherActorSheet extends ActorSheet {
             speaker: {alias: this.actor.name},
             flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
           }
-    
-          let roll = (await new Roll(dragData.item.data.quantity).roll()).toMessage(messageData)
-          this._addItem(this.actor, dragData.item, Math.floor(roll.roll.total))
+          let roll = await new Roll(dragData.item.data.quantity).roll()
+          roll.toMessage(messageData)
+          this._addItem(this.actor, dragData.item, Math.floor(roll.total))
           if (previousActor) {
             await previousActor.items.get(dragData.item._id).delete()
           }
@@ -1153,8 +1155,8 @@ export default class WitcherActorSheet extends ActorSheet {
       let staCostdisplay = staCostTotal;
       
       staCostTotal -= focusValue - secondFocusValue
-      if (staCostTotal < 0) {
-        staCostTotal = 0
+      if (staCostTotal < 1) {
+        staCostTotal = 1
       }
 
       newSta -= staCostTotal
@@ -1170,10 +1172,20 @@ export default class WitcherActorSheet extends ActorSheet {
       if (customModifier < 0){formula += !displayRollDetails ? `${customModifier}`: `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       if (customModifier > 0){formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]`}
       let rollResult = await new Roll(formula).roll()
+      let spellSource = ''
+      switch(spellItem.data.data.source){
+        case "mixedElements": spellSource = "WITCHER.Spell.Mixed"; break;
+        case "earth": spellSource = "WITCHER.Spell.Earth"; break;
+        case "air": spellSource = "WITCHER.Spell.Air"; break;
+        case "fire": spellSource = "WITCHER.Spell.Fire"; break;
+        case "Water": spellSource = "WITCHER.Spell.Water"; break;
+      }
+
       let messageData = {
         speaker: {alias: this.actor.name},
         flavor:`<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
+          <div><b>${game.i18n.localize("WITCHER.Mutagen.Source")}: </b>${game.i18n.localize(spellSource)}</div>
           <div><b>${game.i18n.localize("WITCHER.Spell.Effect")}: </b>${spellItem.data.data.effect}</div>`
       }
       if (spellItem.data.data.range) {
@@ -1513,6 +1525,246 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       },
     }).render(true);
+    }
+
+    _onVerbalCombat(){
+      let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
+      let dialogTemplate = `
+        <h1>${game.i18n.localize("WITCHER.verbalCombat.Title")}</h1>
+        <div>
+          <h2>${game.i18n.localize("WITCHER.verbalCombat.EmpatheticAttacks")}</h2>
+          <div><input name="verbalCombat" type="radio" id="Seduce" value="Seduce"/><label for="Seduce">${game.i18n.localize("WITCHER.verbalCombat.Seduce")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Persuade" value="Persuade"/><label for="Persuade">${game.i18n.localize("WITCHER.verbalCombat.Persuade")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Appeal" value="Appeal"/><label for="Appeal">${game.i18n.localize("WITCHER.verbalCombat.Appeal")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Befriend" value="Befriend"/><label for="Befriend">${game.i18n.localize("WITCHER.verbalCombat.Befriend")}</label></div>
+          <h2>${game.i18n.localize("WITCHER.verbalCombat.AntagonisticAttacks")}</h2>
+          <div><input name="verbalCombat" type="radio" id="Deceive" value="Deceive"/><label for="Deceive">${game.i18n.localize("WITCHER.verbalCombat.Deceive")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Ridicule" value="Ridicule"/><label for="Ridicule">${game.i18n.localize("WITCHER.verbalCombat.Ridicule")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Intimidate" value="Intimidate"/><label for="Intimidate">${game.i18n.localize("WITCHER.verbalCombat.Intimidate")}</label></div>
+          <h2>${game.i18n.localize("WITCHER.verbalCombat.Defences")}</h2>
+          <div><input name="verbalCombat" type="radio" id="Ignore" value="Ignore"/><label for="Ignore">${game.i18n.localize("WITCHER.verbalCombat.Ignore")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Counterargue" value="Counterargue"/><label for="Counterargue">${game.i18n.localize("WITCHER.verbalCombat.Counterargue")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="ChangeSubject" value="ChangeSubject"/><label for="ChangeSubject">${game.i18n.localize("WITCHER.verbalCombat.ChangeSubject")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Disengage" value="Disengage"/><label for="Disengage">${game.i18n.localize("WITCHER.verbalCombat.Disengage")}</label></div>
+          <h2>${game.i18n.localize("WITCHER.verbalCombat.EmpatheticTools")}</h2>
+          <div><input name="verbalCombat" type="radio" id="Romance" value="Romance"/><label for="Romance">${game.i18n.localize("WITCHER.verbalCombat.Romance")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Study" value="Study"/><label for="Study">${game.i18n.localize("WITCHER.verbalCombat.Study")}</label></div>
+          <h2>${game.i18n.localize("WITCHER.verbalCombat.AntagonisticTools")}</h2>
+          <div><input name="verbalCombat" type="radio" id="ImplyPersuade" value="ImplyPersuade"/><label for="ImplyPersuade">${game.i18n.localize("WITCHER.verbalCombat.ImplyPersuade")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="ImplyDeceit" value="ImplyDeceit"/><label for="ImplyDeceit">${game.i18n.localize("WITCHER.verbalCombat.ImplyDeceit")}</label></div>
+          <div><input name="verbalCombat" type="radio" id="Bribe" value="Bribe"/><label for="Bribe">${game.i18n.localize("WITCHER.verbalCombat.Bribe")}</label></div>
+          <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>
+        </div>`;
+      new Dialog({
+        title: "Performing a verbal combat action",
+        content: dialogTemplate,
+        buttons: {
+          t1: {
+            label: "Roll",
+            callback: async (html) => {
+              let verbal = document.querySelector('input[name="verbalCombat"]:checked').value;
+              console.log(verbal)
+              let vcName;
+              let vcStatName;
+              let vcStat;
+              let vcSkillName;
+              let vcSkill;
+              let vcDmg;
+              let effect;
+              let totalModifiers = 0;
+              switch(verbal){
+                case "Seduce":
+                    vcName = "WITCHER.verbalCombat.Seduce";
+                    vcStatName = "WITCHER.Actor.Stat.Emp";
+                    vcStat = this.actor.data.data.stats.emp.current;
+                    vcSkillName = "WITCHER.SkEmpSeduction";
+                    vcSkill = this.actor.data.data.skills.emp.seduction.value;
+                    this.actor.data.data.skills.emp.seduction.modifiers.forEach(item => totalModifiers += Number(item.value));
+                    vcDmg = `1d6+${this.actor.data.data.stats.emp.current}[${game.i18n.localize(vcStatName)}]`
+                    effect = "WITCHER.verbalCombat.SeduceEffect"
+                    break;
+                case "Persuade":
+                  vcName = "WITCHER.verbalCombat.Persuade";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpPersuasion";
+                  vcSkill = this.actor.data.data.skills.emp.persuasion.value;
+                  this.actor.data.data.skills.emp.persuasion.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d6/2+${this.actor.data.data.stats.emp.current}[${game.i18n.localize(vcStatName)}]`
+                  effect = "WITCHER.verbalCombat.PersuadeEffect"
+                  break;
+                case "Appeal":
+                  vcName = "WITCHER.verbalCombat.Appeal";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpLeadership";
+                  vcSkill = this.actor.data.data.skills.emp.leadership.value;
+                  this.actor.data.data.skills.emp.leadership.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d10+${this.actor.data.data.stats.emp.current}[${game.i18n.localize(vcStatName)}]`
+                  effect = "WITCHER.verbalCombat.AppealEffect"
+                  break;
+                case "Befriend":
+                  vcName = "WITCHER.verbalCombat.Befriend";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpCharisma";
+                  vcSkill = this.actor.data.data.skills.emp.charisma.value;
+                  this.actor.data.data.skills.emp.charisma.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d6+${this.actor.data.data.stats.emp.current}[${game.i18n.localize(vcStatName)}]`
+                  effect = "WITCHER.verbalCombat.BefriendEffect"
+                  break;
+                case "Deceive":
+                  vcName = "WITCHER.verbalCombat.Deceive";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpDeceit";
+                  vcSkill = this.actor.data.data.skills.emp.deceit.value;
+                  this.actor.data.data.skills.emp.deceit.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d6+${this.actor.data.data.stats.int.current}[${game.i18n.localize("WITCHER.Actor.Stat.Int")}]`
+                  effect = "WITCHER.verbalCombat.DeceiveEffect"
+                  break;
+                case "Ridicule":
+                  vcName = "WITCHER.verbalCombat.Ridicule";
+                  vcStatName = "WITCHER.Actor.Stat.Int";
+                  vcStat = this.actor.data.data.stats.int.current;
+                  vcSkillName = "WITCHER.SkIntSocialEt";
+                  vcSkill = this.actor.data.data.skills.int.socialetq.value;
+                  this.actor.data.data.skills.int.socialetq.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d6+${this.actor.data.data.stats.will.current}[${game.i18n.localize("WITCHER.Actor.Stat.Will")}]`
+                  effect = "WITCHER.verbalCombat.RidiculeEffect"
+                  break;
+                case "Intimidate":
+                  vcName = "WITCHER.verbalCombat.Intimidate";
+                  vcStatName = "WITCHER.Actor.Stat.Will";
+                  vcStat = this.actor.data.data.stats.will.current;
+                  vcSkillName = "WITCHER.SkWillIntim";
+                  vcSkill = this.actor.data.data.skills.will.intimidation.value;
+                  this.actor.data.data.skills.will.intimidation.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d10+${this.actor.data.data.stats.will.current}[${game.i18n.localize("WITCHER.Actor.Stat.Will")}]`
+                  effect = "WITCHER.verbalCombat.IntimidateEffect"
+                  break;
+                case "Ignore":
+                  vcName = "WITCHER.verbalCombat.Ignore";
+                  vcStatName = "WITCHER.Actor.Stat.Will";
+                  vcStat = this.actor.data.data.stats.will.current;
+                  vcSkillName = "WITCHER.SkWillResistCoer";
+                  vcSkill = this.actor.data.data.skills.will.resistcoerc.value;
+                  this.actor.data.data.skills.will.resistcoerc.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d10+${this.actor.data.data.stats.emp.current}[${game.i18n.localize("WITCHER.Actor.Stat.Emp")}]`
+                  effect = "WITCHER.verbalCombat.None"
+                  break;
+                case "Counterargue":
+                  vcName = "WITCHER.verbalCombat.Counterargue";
+                  vcStatName = "WITCHER.context.unavailable";
+                  vcStat = 0;
+                  vcSkillName = "WITCHER.context.unavailable";
+                  vcSkill = 0;
+                  vcDmg = `${game.i18n.localize("WITCHER.verbalCombat.CounterargueDmg")}`
+                  effect = "WITCHER.verbalCombat.CounterargueEffect"
+                  break;
+                case "ChangeSubject":
+                  vcName = "WITCHER.verbalCombat.ChangeSubject";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpPersuasion";
+                  vcSkill = this.actor.data.data.skills.emp.persuasion.value;
+                  this.actor.data.data.skills.emp.persuasion.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = `1d6+${this.actor.data.data.stats.int.current}[${game.i18n.localize("WITCHER.Actor.Stat.Int")}]`
+                  effect = "WITCHER.verbalCombat.None"
+                  break;
+                case "Disengage":
+                  vcName = "WITCHER.verbalCombat.Disengage";
+                  vcStatName = "WITCHER.Actor.Stat.Will";
+                  vcStat = this.actor.data.data.stats.will.current;
+                  vcSkillName = "WITCHER.SkWillResistCoer";
+                  vcSkill = this.actor.data.data.skills.will.resistcoerc.value;
+                  this.actor.data.data.skills.will.resistcoerc.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.DisengageEffect"
+                  break;
+                case "Romance":
+                  vcName = "WITCHER.verbalCombat.Romance";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpCharisma";
+                  vcSkill = this.actor.data.data.skills.emp.charisma.value;
+                  this.actor.data.data.skills.emp.charisma.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.RomanceEffect"
+                  break;
+                case "Study":
+                  vcName = "WITCHER.verbalCombat.Study";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpHumanPerc";
+                  vcSkill = this.actor.data.data.skills.emp.perception.value;
+                  this.actor.data.data.skills.emp.perception.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.StudyEffect"
+                  break;
+                case "ImplyPersuade":
+                  vcName = "WITCHER.verbalCombat.ImplyPersuade";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpPersuasion";
+                  vcSkill = this.actor.data.data.skills.emp.persuasion.value;
+                  this.actor.data.data.skills.emp.persuasion.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.ImplyEffect"
+                  break;
+                case "ImplyDeceit":
+                  vcName = "WITCHER.verbalCombat.ImplyDeceit";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpDeceit";
+                  vcSkill = this.actor.data.data.skills.emp.deceit.value;
+                  this.actor.data.data.skills.emp.deceit.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.ImplyEffect"
+                  break;
+                case "Bribe":
+                  vcName = "WITCHER.verbalCombat.Bribe";
+                  vcStatName = "WITCHER.Actor.Stat.Emp";
+                  vcStat = this.actor.data.data.stats.emp.current;
+                  vcSkillName = "WITCHER.SkEmpGambling";
+                  vcSkill = this.actor.data.data.skills.emp.gambling.value;
+                  this.actor.data.data.skills.emp.gambling.modifiers.forEach(item => totalModifiers += Number(item.value));
+                  vcDmg = game.i18n.localize("WITCHER.verbalCombat.None")
+                  effect = "WITCHER.verbalCombat.BribeEffect"
+                  break;
+              }
+              let rollFormula = !displayRollDetails ? `1d10+${vcStat}+${vcSkill}`: `1d10+${vcStat}[${game.i18n.localize(vcStatName)}]+${vcSkill}[${game.i18n.localize(vcSkillName)}]`
+              if(totalModifiers != 0){
+                rollFormula += !displayRollDetails ? `+${totalModifiers}`: `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+              }      
+              let customAtt = html.find("[name=customModifiers]")[0].value;
+              if (customAtt < 0){
+                rollFormula += !displayRollDetails ? `${customAtt}`: `${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+              }
+              if (customAtt > 0){
+                rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
+              }        
+              let rollResult = await new Roll(rollFormula).roll()
+              let messageData = {speaker: {alias: this.actor.name}}
+              messageData.flavor = `
+              <h2>Verbal Combat: ${game.i18n.localize(vcName)}</h2>
+              <b>${game.i18n.localize("WITCHER.Weapon.Damage")}</b>: ${vcDmg} <br />
+              ${game.i18n.localize(effect)}
+              <hr />`
+              if (rollResult.dice[0].results[0].result == 10){  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+              }
+              else if(rollResult.dice[0].results[0].result == 1) {  
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+              }
+              rollResult.toMessage(messageData);
+            }
+          },
+          t2: {
+            label:`${game.i18n.localize("WITCHER.Button.Cancel")}`, 
+          }
+        },
+      }).render(true);
     }
 
     async _onStatSaveRoll(event) {

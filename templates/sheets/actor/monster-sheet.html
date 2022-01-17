@@ -66,6 +66,14 @@
                     /
                     <input class="small" name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
                 </div>
+                {{#if useVerbalCombat}}
+                <div class="monster-HPSTA">
+                    <label>{{localize "WITCHER.Actor.DerStat.Resolve"}}</label> 
+                    <input class="small" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}"/>
+                    /
+                    <input class="small" name="data.derivedStats.resolve.max" type="number" value="{{data.derivedStats.resolve.max}}"/>
+                </div>
+                {{/if}}
                 <div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.HeadArmor"}}</label> 

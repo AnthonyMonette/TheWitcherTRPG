@@ -24,7 +24,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage){
     <option value="Torso"> ${game.i18n.localize("WITCHER.Dialog.attackTorso")} </option>
     <option value="L. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackLArm")} </option>
     <option value="R. Arm"> ${game.i18n.localize("WITCHER.Dialog.attackRArm")} </option>
-    <option value="L. leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
+    <option value="L. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackLLeg")} </option>
     <option value="R. Leg"> ${game.i18n.localize("WITCHER.Dialog.attackRLeg")} </option>
     <option value="Tail/wing"> ${game.i18n.localize("WITCHER.Dialog.attackTail")} </option>
     `;    
@@ -786,7 +786,50 @@ function ExecuteDefense(actor){
           };
           roll.toMessage(messageData);
         }
-      }
+      },
+      MagicResist: {
+        label: `${game.i18n.localize("WITCHER.Dialog.ButtonMagicResist")}`, 
+        callback: async html => {
+          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let customDef = html.find("[name=customDef]")[0].value;
+          if (isExtraDefense) {
+            let newSta = actor.data.data.derivedStats.sta.value - 1
+            if (newSta < 0) {
+              return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
+            }
+            actor.update({ 
+              'data.derivedStats.sta.value': newSta
+            });
+          }
+          let stat = actor.data.data.stats.will.current;
+          let skill = actor.data.data.skills.will.resistmagic.value;
+          let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Will")} + ${game.i18n.localize("WITCHER.SkWillResistMagLable")}`;
+          messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonMagicResist")}</h1><p>${displayFormula}</p>`;
+          let rollFormula =  !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Will")}]+${skill}[${game.i18n.localize("WITCHER.SkWillResistMagLable")}]`;
+
+          if (customDef != "0") {
+            rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
+          }
+
+          let totalModifiers = 0;
+          actor.data.data.skills.ref.dodge.modifiers.forEach(item => totalModifiers += Number(item.value));
+          if (totalModifiers < 0){
+            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
+          }
+          if (totalModifiers > 0){
+            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
+          }
+
+          let roll = await new Roll(rollFormula).roll()
+          if (roll.dice[0].results[0].result == 10){  
+            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+          };
+          if (roll.dice[0].results[0].result == 1){  
+            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+          };
+          roll.toMessage(messageData);
+        }
+      },
     }
   }).render(true)  
 }

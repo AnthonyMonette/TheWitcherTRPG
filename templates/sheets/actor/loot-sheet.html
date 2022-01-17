@@ -46,38 +46,38 @@
         <h2>{{localize "WITCHER.Loot.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
         <table class="item-table">
             <tr>
-                <td></td> 
+                <td class="table-empty-space"></td> 
                 <td></td> 
                 <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
                 <td><b>{{localize "WITCHER.table.Name"}}</b></td>
                 <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
                 <td><b>{{localize "WITCHER.Item.Cost"}}</b></td>
-                <td></td> 
+                <td class="table-empty-end-space"></td> 
             </tr>
             {{#each weapons as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Armors"}} <a class="add-item" data-itemType="armor"><i class="fas fa-plus"></i></a></h2>
-        <table class="armor-table">
+        <table class="item-table">
             {{#each armors as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Valuables"}} <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
-        <table class="armor-table">
+        <table class="item-table">
             {{#each valuables as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Diagrams"}} <a class="add-item" data-itemType="diagrams"><i class="fas fa-plus"></i></a></h2>
-        <table class="armor-table">
+        <table class="item-table">
             {{#each diagrams as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
         <h2>{{localize "WITCHER.Loot.Components"}} <a class="add-item" data-itemType="component"><i class="fas fa-plus"></i></a></h2>
-        <table class="armor-table">
+        <table class="item-table">
             {{#each allComponents as |item id|}}
 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}

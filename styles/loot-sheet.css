@@ -21,3 +21,11 @@
 .hidden-from-view {
     display: none
 }
+
+.table-empty-space {
+    width: 30px;
+}
+
+.table-empty-end-space {
+    width: 75px;
+}

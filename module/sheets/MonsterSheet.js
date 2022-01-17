@@ -78,6 +78,7 @@ function onChangeSkillList(actor) {
 async function  exportLoot(actor) {
     let newLoot = await Actor.create(actor.data);
     await newLoot.update({
+      "folder": null,
       "name" : newLoot.data.name + "--loot",
       "type" : "loot"
     });
