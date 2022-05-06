@@ -2100,8 +2100,36 @@ export default class WitcherActorSheet extends ActorSheet {
         DamageOptions += `<option value="unavailable">${game.i18n.localize("WITCHER.context.unavailable")}</option>`;
       }
 
+      let attackSkill = "";
 
-      let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${item.data.data.attackSkill}</h2> 
+      switch(item.data.data.attackSkill){
+        case "Brawling":
+          attackSkill = game.i18n.localize("WITCHER.SkRefBrawling");
+          break;
+        case "Melee":
+          attackSkill = game.i18n.localize("WITCHER.SkRefMelee");
+          break;
+        case "Small Blades":
+          attackSkill = game.i18n.localize("WITCHER.SkRefSmall");
+          break;
+        case "Staff/Spear":
+          attackSkill = game.i18n.localize("WITCHER.SkRefStaff");
+          break;
+        case "Swordsmanship":
+          attackSkill = game.i18n.localize("WITCHER.SkRefSwordmanship");
+          break;
+        case "Archery":
+          attackSkill = game.i18n.localize("WITCHER.SkDexArchery");
+          break;
+        case "Athletics":
+          attackSkill = game.i18n.localize("WITCHER.SkDexAthletics");
+          break;
+        case "Crossbow":
+          attackSkill = game.i18n.localize("WITCHER.SkDexCrossbow");
+          break;
+      }
+
+      let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${attackSkill}</h2> 
                      <div class="flex">
                       <label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />
                      </div>
