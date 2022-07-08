@@ -1,0 +1,36 @@
+.substances-section span{
+  display: block;
+  text-align: center;
+  border: 1px solid var(--color-border-light-tertiary);
+  margin: 1px;
+  border-radius: 10px;
+}
+
+.substances {
+  display: flex;
+}
+
+.substances-section table {
+  margin: 0 0 0.5em 0;
+}
+
+.substance-type-subheader {
+  font-size: large;
+  border-bottom: 1px solid var(--color-underline-header);
+}
+
+.substance-img {
+  height: 30px;
+  width: 30px;
+  margin: 0 2px 0 2px;
+  border: none;
+  border-radius: 50%;
+}
+
+.item-substance-display:hover{
+  box-shadow: 0 0 10px 5px darkred;
+}
+
+.item-substance-display:active {
+  transform:scale(1.2);
+}

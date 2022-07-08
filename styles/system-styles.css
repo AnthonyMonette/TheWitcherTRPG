@@ -248,26 +248,7 @@ input.stopping-info {
   margin-right: 10px;
 }
 .valuable-table {
-  width: 450px;
-}
-
-.substance-img {
-  height: 30px;
-  width: 30px;
-  margin-right: 5px;
-}
-.substance-header {
-  display: flex;
-  align-items: center;
-}
-.substance-header label {
-  width: 100px;
-  margin-right: 5px;
-  text-align: end;
-}
-
-.item-substance-display {
-  margin-left: 5px;
+  width: 410px;
 }
 
 .component-section {
@@ -388,9 +369,6 @@ input.skill-value {
 
 .add-item {
   margin-right: 5px;
-}
-.substance-img {
-  border: none;
 }
 
 .item-img{
