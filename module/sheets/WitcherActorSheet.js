@@ -2100,8 +2100,36 @@ export default class WitcherActorSheet extends ActorSheet {
         DamageOptions += `<option value="unavailable">${game.i18n.localize("WITCHER.context.unavailable")}</option>`;
       }
 
+      let attackSkill = "";
 
-      let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${item.data.data.attackSkill}</h2> 
+      switch(item.data.data.attackSkill){
+        case "Brawling":
+          attackSkill = game.i18n.localize("WITCHER.SkRefBrawling");
+          break;
+        case "Melee":
+          attackSkill = game.i18n.localize("WITCHER.SkRefMelee");
+          break;
+        case "Small Blades":
+          attackSkill = game.i18n.localize("WITCHER.SkRefSmall");
+          break;
+        case "Staff/Spear":
+          attackSkill = game.i18n.localize("WITCHER.SkRefStaff");
+          break;
+        case "Swordsmanship":
+          attackSkill = game.i18n.localize("WITCHER.SkRefSwordmanship");
+          break;
+        case "Archery":
+          attackSkill = game.i18n.localize("WITCHER.SkDexArchery");
+          break;
+        case "Athletics":
+          attackSkill = game.i18n.localize("WITCHER.SkDexAthletics");
+          break;
+        case "Crossbow":
+          attackSkill = game.i18n.localize("WITCHER.SkDexCrossbow");
+          break;
+      }
+
+      let content = `<h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackUse")}: ${attackSkill}</h2> 
                      <div class="flex">
                       <label>${game.i18n.localize("WITCHER.Dialog.attackExtra")}: <input type="checkbox" name="isExtraAttack"></label> <br />
                      </div>
@@ -2417,7 +2445,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
 
                 let effects = JSON.stringify(item.data.data.effects)
-                messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />Attack: ${item.name}</h1>`;
+                messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />${game.i18n.localize("WITCHER.Attack")}: ${item.name}</h1>`;
                 messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
                 messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
                 let roll = await new Roll(attFormula).roll()
