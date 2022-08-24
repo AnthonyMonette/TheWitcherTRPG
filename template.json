@@ -756,6 +756,7 @@
         "vitriolIsOpen": false,
         "rebisIsOpen": false,
         "aetherIsOpen": false,
+        "quebrithIsOpen": false,
         "hydragenumIsOpen": false,
         "vermilionIsOpen": false,
         "solIsOpen": false,
@@ -1264,6 +1265,7 @@
       ]
     },
     "profession": {
+      "notes": "",
       "definingSkill": {
         "skillName": "",
         "stat": "",

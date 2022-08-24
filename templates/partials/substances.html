@@ -1,24 +1,47 @@
 <div class="substances-section">
-    <h2>{{localize "WITCHER.Inventory.Substances"}}</h2>
-    <div class="substance" data-subtype="vitriol">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Vitriol"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="vitriol"><i class="fas fa-plus"></i></a>
-            <span>{{vitriolCount}}</span> 
-            {{#unless data.pannels.vitriolIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.vitriolIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.vitriolIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.vitriolIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-vitriol-table">
+    <div class="">
+        <h2 title="Click picture to expand list">{{localize "WITCHER.Inventory.Substances"}}</h2>
+    </div>
+    <table>
+        <tr>
+            <th><input {{#if data.pannels.vitriolIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.vitriolIsOpen}} class="substance-img item-substance-display substance"{{/unless}} type="image" data-subtype="vitriol" src="systems/TheWitcherTRPG/assets/images/vitriol.png" title="{{localize "WITCHER.Inventory.Vitriol"}}"/></th>
+            <th><input {{#if data.pannels.rebisIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.rebisIsOpen}} class="substance-img item-substance-display substance"{{/unless}} type="image" data-subtype="rebis" src="systems/TheWitcherTRPG/assets/images/rebis.png" title="{{localize "WITCHER.Inventory.Rebis"}}" /></th>
+            <th><input {{#if data.pannels.aetherIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.aetherIsOpen}} class="substance-img item-substance-display substance"{{/unless}} type="image" data-subtype="aether" src="systems/TheWitcherTRPG/assets/images/aether.png" title="{{localize "WITCHER.Inventory.Aether"}}" /></th>
+            <th><input {{#if data.pannels.quebrithIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.quebrithIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="quebrith" src="systems/TheWitcherTRPG/assets/images/quebrith.png" title="{{localize "WITCHER.Inventory.Quebrith"}}" /></th>
+            <th><input {{#if data.pannels.hydragenumIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.hydragenumIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="hydragenum" src="systems/TheWitcherTRPG/assets/images/hydragenum.png" title="{{localize "WITCHER.Inventory.Hydragenum"}}" /></th>
+            <th><input {{#if data.pannels.vermilionIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.vermilionIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="vermilion" src="systems/TheWitcherTRPG/assets/images/vermilion.png" title="{{localize "WITCHER.Inventory.Vermilion"}}" /></th>
+            <th><input {{#if data.pannels.solIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.solIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="sol" src="systems/TheWitcherTRPG/assets/images/sol.png" title="{{localize "WITCHER.Inventory.Sol"}}" /></th>
+            <th><input{{#if data.pannels.caelumIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.caelumIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="caelum" src="systems/TheWitcherTRPG/assets/images/caelum.png" title="{{localize "WITCHER.Inventory.Caelum"}}" /></th>
+            <th><input {{#if data.pannels.fulgurIsOpen}} class="sub-open substance-img item-substance-display substance"{{/if}}
+            {{#unless data.pannels.fulgurIsOpen}} class="substance-img item-substance-display substance"{{/unless}}type="image" data-subtype="fulgur" src="systems/TheWitcherTRPG/assets/images/fulgur.png" title="{{localize "WITCHER.Inventory.Fulgur"}}" /></th>
+        </tr>
+        <tr>
+            <td><span>{{vitriolCount}}</span></td>
+            <td><span>{{rebisCount}}</span></td>
+            <td><span>{{aetherCount}}</span></td>
+            <td><span>{{quebrithCount}}</span></td>
+            <td><span>{{hydragenumCount}}</span></td>
+            <td><span>{{vermilionCount}}</span></td>
+            <td><span>{{solCount}}</span></td>
+            <td><span>{{caelumCount}}</span></td>
+            <td><span>{{fulgurCount}}</span></td>
+        </tr>
+    </table>
+    {{#if data.pannels.vitriolIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Vitriol"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="vitriol"><i class="fas fa-plus"></i></a>
+            </tr>
+            <tr>
                 {{#each substancesVitriol as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -28,29 +51,16 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="rebis">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Rebis"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="rebis"><i class="fas fa-plus"></i></a>
-            <span>{{rebisCount}}</span> 
-            {{#unless data.pannels.rebisIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.rebisIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.rebisIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.rebisIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-rebis-table">
+            </tr>
+        </table>
+    {{/if}}
+    {{#if data.pannels.rebisIsOpen}}
+        <table> 
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Rebis"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="rebis"><i class="fas fa-plus"></i></a>
+            </tr>
+            <tr>
                 {{#each substancesRebis as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -60,29 +70,16 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="aether"> 
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Aether"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="aether"><i class="fas fa-plus"></i></a>
-            <span>{{aetherCount}}</span> 
-            {{#unless data.pannels.aetherIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.aetherIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.aetherIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.aetherIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-aether-table">
+            </tr>
+        </table>
+    {{/if}}
+    {{#if data.pannels.aetherIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Aether"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="aether"><i class="fas fa-plus"></i></a>
+            </tr>
+            <tr>
                 {{#each substancesAether as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -92,29 +89,16 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="quebrith"> 
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Quebrith"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="quebrith"><i class="fas fa-plus"></i></a>
-            <span>{{quebrithCount}}</span> 
-            {{#unless data.pannels.quebrithIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.quebrithIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.quebrithIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.quebrithIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-quebrith-table">
+            </tr>
+        </table>
+    {{/if}}
+    {{#if data.pannels.quebrithIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Quebrith"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="quebrith"><i class="fas fa-plus"></i></a>
+            </tr>
+            <tr>
                 {{#each substancesQuebrith as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -124,29 +108,15 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="hydragenum">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Hydragenum"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="hydragenum"><i class="fas fa-plus"></i></a>
-            <span>{{hydragenumCount}}</span> 
-            {{#unless data.pannels.hydragenumIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.hydragenumIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.hydragenumIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.hydragenumIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-hydragenum-table">
+            </tr>
+        </table>
+    {{/if}}
+    {{#if data.pannels.hydragenumIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Hydragenum"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="hydragenum"><i class="fas fa-plus"></i></a>
+            </tr>
                 {{#each substancesHydragenum as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -156,29 +126,14 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="vermilion">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Vermilion"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="vermilion"><i class="fas fa-plus"></i></a>
-            <span>{{vermilionCount}}</span> 
-            {{#unless data.pannels.vermilionIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.vermilionIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.vermilionIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.vermilionIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-vermilion-table">
+        </table>
+    {{/if}}
+    {{#if data.pannels.vermilionIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Vermilion"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="vermilion"><i class="fas fa-plus"></i></a>
+            </tr>
                 {{#each substancesVermilion as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -188,29 +143,14 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="sol">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Sol"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="sol"><i class="fas fa-plus"></i></a>
-            <span>{{solCount}}</span> 
-            {{#unless data.pannels.solIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.solIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.solIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.solIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-sol-table">
+        </table>
+    {{/if}}
+    {{#if data.pannels.solIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Sol"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="sol"><i class="fas fa-plus"></i></a>
+            </tr>
                 {{#each substancesSol as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -220,29 +160,14 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="caelum">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Caelum"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="caelum"><i class="fas fa-plus"></i></a>
-            <span>{{caelumCount}}</span> 
-            {{#unless data.pannels.caelumIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.caelumIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.caelumIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.caelumIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-caelum-table">
+        </table>
+    {{/if}}
+    {{#if data.pannels.caelumIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Caelum"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="caelum"><i class="fas fa-plus"></i></a>
+            </tr>
                 {{#each substancesCaelum as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -252,29 +177,14 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
-
-    <div class="substance" data-subtype="fulgur">
-        <div class="substance-header">
-            <label>{{localize "WITCHER.Inventory.Fulgur"}}</label>
-            <img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> 
-            <a class="add-item" data-itemType="component" data-subtype="fulgur"><i class="fas fa-plus"></i></a>
-            <span>{{fulgurCount}}</span> 
-            {{#unless data.pannels.fulgurIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-right"></i></a></div>
-            {{/unless}}
-            {{#if data.pannels.fulgurIsOpen}}
-            <a class="item-substance-display"><i class="fas fa-chevron-down"></i></a></div>
-            {{/if}}
-        {{#unless data.pannels.fulgurIsOpen}}
-        <div class="substance-list hidden">
-        {{/unless}}
-        {{#if data.pannels.fulgurIsOpen}}
-        <div class="substance-list">
-        {{/if}}
-            <table class="substances-fulgur-table">
+        </table>
+    {{/if}}
+    {{#if data.pannels.fulgurIsOpen}}
+        <table>
+            <tr class="substance-type-subheader">
+                <label>{{localize "WITCHER.Inventory.Fulgur"}}</label>
+                <a class="add-item" data-itemType="component" data-subtype="fulgur"><i class="fas fa-plus"></i></a>
+            </tr>
                 {{#each substancesFulgur as |substance id|}}
                     <tr  class="item" data-item-id="{{substance._id}}">
                         <td><img src={{substance.img}} class="substance-img dragable" draggable="true" data-id="{{substance._id}}"/> </td>
@@ -284,7 +194,7 @@
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
                 {{/each}}
-            </table>
-        </div>
-    </div>
+        </table>
+    {{/if}}
 </div>
+

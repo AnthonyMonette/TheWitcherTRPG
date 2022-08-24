@@ -112,6 +112,7 @@
                                 <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
                                 <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
                                 <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
+                                <option value="exeptional">{{localize "WITCHER.Monster.Exeptional"}}</option>
                             {{/select}}
                         </select>
                     </div>
@@ -192,6 +193,9 @@
             <div class="monster-button-roll">
                 <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
                 <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+                {{#if useVerbalCombat}}
+                    <a class="button-roll verbal-button">{{localize "WITCHER.verbalCombat.Title"}}</a>
+                {{/if}}
             </div>
         </div>
         <div class="death-section">

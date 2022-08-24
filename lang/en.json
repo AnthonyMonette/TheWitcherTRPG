@@ -95,7 +95,8 @@
 
     "WITCHER.Location.Left": "Left",
     "WITCHER.Location.Right": "Right",
-    
+
+    "WITCHER.Attack": "Attack",
 
     "WITCHER.Armor.Location": "Location",
 
@@ -511,6 +512,7 @@
     "WITCHER.Monster.Easy": "Easy",
     "WITCHER.Monster.Normal": "Normal",
     "WITCHER.Monster.Hard": "Hard",
+    "WITCHER.Monster.Exeptional": "Exeptional",
     "WITCHER.Monster.Simple": "Simple",
     "WITCHER.Monster.Complex": "Complex",
     "WITCHER.Monster.Difficult": "Difficult",

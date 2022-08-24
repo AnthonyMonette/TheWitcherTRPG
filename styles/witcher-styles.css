@@ -10,6 +10,7 @@
 @import "./profession-sheet.css";
 @import "./crit-wounds-table.css";
 @import "./item-sheets.css";
+@import "./substances.css";
 
 @font-face {
     font-family:'Thewitcher';
