@@ -46,7 +46,10 @@ function updateDerived(actor){
 	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
 	
 	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
-	activeEffects.forEach(item => 
+	activeEffects.forEach(item => {
+		if (!item.data.data.isActive) {
+			return
+		}
 		item.data.data.stats.forEach(stat => {
 			switch(stat.stat){
 				case "WITCHER.Actor.Stat.Int": 
@@ -86,7 +89,7 @@ function updateDerived(actor){
 					else {luckTotalModifiers += Number(stat.modifier)}
 					break;
 			}
-		}));
+		})});
 
 	let stunTotalModifiers = 0;
 	let runTotalModifiers = 0;
@@ -117,7 +120,10 @@ function updateDerived(actor){
 	}
 	let armorEnc = getArmorEcumbrance(thisActor)
 
-	activeEffects.forEach(item => 
+	activeEffects.forEach(item => {
+		if (!item.data.data.isActive) {
+			return
+		}
 		item.data.data.derived.forEach(derived => {
 			switch(derived.derivedStat){
 				case "WITCHER.Actor.CoreStat.Stun":
@@ -145,7 +151,7 @@ function updateDerived(actor){
 					else {wtTotalModifiers += Number(derived.modifier)}
 					break;
 			}
-		}));
+		})});
 
 	let curInt =  Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers) / intDivider);
 	let curRef =  Math.floor((thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff) / refDivider);
@@ -189,7 +195,7 @@ function updateDerived(actor){
 	thisActor.data.data.derivedStats.sta.modifiers.forEach(item => staTotalModifiers += Number(item.value));
 	thisActor.data.data.derivedStats.resolve.modifiers.forEach(item => resTotalModifiers += Number(item.value));
 	thisActor.data.data.derivedStats.focus.modifiers.forEach(item => focusTotalModifiers += Number(item.value));
-	activeEffects.forEach(item => 
+	activeEffects.forEach(item => {
 		item.data.data.derived.forEach(derived => {
 			switch(derived.derivedStat){
 				case "WITCHER.Actor.DerStat.HP": 
@@ -201,7 +207,7 @@ function updateDerived(actor){
 					else {staTotalModifiers += Number(derived.modifier)}
 					break;
 			}
-		}));
+		})});
 
 	let curHp = thisActor.data.data.derivedStats.hp.max + hpTotalModifiers;
 	let curSta = thisActor.data.data.derivedStats.sta.max + staTotalModifiers;
@@ -339,13 +345,16 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	}
 
 	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
-	activeEffects.forEach(item => 
+	activeEffects.forEach(item => {
+		if (!item.data.data.isActive) {
+			return
+		}
 		item.data.data.skills.forEach(skill => {
 			if (skillName == game.i18n.localize(skill.skill)){
 				if (skill.modifier.includes("/")){rollFormula += !displayRollDetails ? `/${Number(skill.modifier.replace("/", ''))}` : `/${Number(skill.modifier.replace("/", ''))}[${item.name}]`}
 				else {rollFormula += !displayRollDetails ? `+${skill.modifier}` : `+${skill.modifier}[${item.name}]`}
 			}
-		}));
+		})});
 
 	let armorEnc = getArmorEcumbrance(thisActor)
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")){

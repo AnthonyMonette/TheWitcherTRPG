@@ -30,7 +30,13 @@
     <div class="item flex" data-item-id="{{effect._id}}">
         <a class="item-edit"><i class="fas fa-edit"></i></a>
         <img src="{{effect.img}}" class="item-img"/>
-        <label class="modifier-display"><b>{{effect.name}}</b></label>
+        <div class="modifier-display">
+            <label><b>{{effect.name}}</b></label>
+            <div class="flex">
+                <label>{{localize "WITCHER.effect.isActive"}}</label>
+                <input class="inline-edit" data-field="data.isActive" type="checkbox" value={{checked data.isActive}} {{checked data.isActive}}/>
+            </div>
+        </div>
         <div class="modifier-display">
             {{#each effect.data.stats as |stat index|}}
                 <div>{{localize stat.stat}} :{{stat.modifier}}</div> 

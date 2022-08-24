@@ -1360,6 +1360,7 @@
     },
     "effect": {
       "description": "",
+      "isActive": true,
       "stats" : [{
         "id": "first",
         "stat": "",
