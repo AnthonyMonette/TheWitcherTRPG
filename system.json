@@ -4,7 +4,7 @@
     "description": "The Witcher TRPG System.",
     "minimumCoreVersion" : "9",
     "compatibleCoreVersion" : "9",
-    "version": 0.79,
+    "version": 0.8,
     "author": "TechAntho",
     "scripts": [
     ],
