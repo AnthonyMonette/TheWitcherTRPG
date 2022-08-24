@@ -407,7 +407,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let content = ""
       let enhancements = []
       if (type == "weapon"){
-        enhancements = this.actor.items.filter(function(item) {return item.type == "enhancement" && item.data.data.type == "rune" && item.data.data.applied == false});
+        enhancements = this.actor.items.filter(function(item) {return item.type == "enhancement" && item.data.data.applied == false && (item.data.data.type == "rune" || item.data.data.type == "weapon")});
       }
       else {
         enhancements = this.actor.items.filter(function(item) {return item.type == "enhancement" && item.data.data.applied == false && (item.data.data.type == "armor" || item.data.data.type == "glyph")});
@@ -1515,7 +1515,7 @@ export default class WitcherActorSheet extends ActorSheet {
             let newCritList = []
             critList.forEach(crit => {
               crit.daysHealed += 1
-              if ( crit.daysHealed < crit.healingTime ){
+              if (crit.healingTime <= 0 || crit.daysHealed < crit.healingTime ){
                 newCritList.push(crit)
               }
             });
@@ -2006,7 +2006,7 @@ export default class WitcherActorSheet extends ActorSheet {
       event.preventDefault(); 
       let section = event.currentTarget.closest(".item");
       let editor = $(section).find(".item-info")
-      editor.toggleClass("hidden");
+      editor.toggleClass("invisible");
     }
 
     _onFocusIn(event) {

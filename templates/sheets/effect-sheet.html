@@ -1,8 +1,12 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-        <div class="header-fields">
+        <div class="flex header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <div class="flex">
+                <label>{{localize "WITCHER.effect.isActive"}}</label>
+                <input type="checkbox" name="data.isActive" {{checked data.isActive}}/>
+            </div>
         </div>
     </header>
     <label><b>{{localize "WITCHER.Item.Description"}}</b></label>

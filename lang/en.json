@@ -879,5 +879,7 @@
     "WITCHER.verbalCombat.ImplyEffect": "Implying allows you to suggest something good or bad about your current argument. If you succeed, you lower your opponent’s defenses by -4. You can only use Imply once per combat",
     "WITCHER.verbalCombat.Bribe": "Bribe",
     "WITCHER.verbalCombat.BribeEffect": "For every 50 Crowns you offer, you gain +1 to your empathetic Verbal Combat rolls for the rest of the fightif you succeed on your Gambling roll.",
-    "WITCHER.verbalCombat.None": "NONE"
+    "WITCHER.verbalCombat.None": "NONE",
+
+    "WITCHER.effect.isActive": "Is Active"
 }

@@ -47,7 +47,7 @@
                     <td><div class="flex"><input class="inline-edit reliable-info" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" data-dtype="Number"/>/{{weapon.data.maxReliability}}</div></td>
                     <td><input class="inline-edit" data-field="data.equiped" type="checkbox" value={{checked data.equiped}} {{checked data.equiped}}/></td>
                 </tr>
-                <tr class="item-info hidden" >
+                <tr class="item-info invisible" >
                     <td colspan="7">
                         <table>
                             <tr>
@@ -225,7 +225,7 @@
                     <td><input type="checkbox" name="data.Piercing" {{checked data.piercing}} disabled /></td>
                     
                 </tr>
-                <tr class="item-info hidden">
+                <tr class="item-info invisible">
                     <td colspan="9">
                         <table>
                             <tr >
@@ -308,7 +308,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit weight-data" data-field="data.weight" type="text" value="{{valuable.data.weight}}" data-dtype="Number"/></td>
                 </tr>
-                <tr class="item-info hidden">
+                <tr class="item-info invisible">
                     {{#if (eq type "valuable")}}
                     <td colspan="4"><div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Description"}} :</b></label> <div>{{valuable.data.description}}</div></div></td>
                     {{/if}}
@@ -368,7 +368,7 @@
                     <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}" placeholder="name" /></td>
                     <td><input class="inline-edit" data-field="data.learned" type="checkbox" value="{{data.learned}}" {{checked data.learned}}/>
                 </tr>
-                <tr class="item-info hidden">
+                <tr class="item-info invisible">
                     {{#unless diagram.data.isFormulae}}
                     <td colspan="4">
                         <div>
