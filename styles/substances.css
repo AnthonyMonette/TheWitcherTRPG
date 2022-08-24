@@ -34,3 +34,7 @@
 .item-substance-display:active {
   transform:scale(1.2);
 }
+
+.sub-open {
+  border: solid 2px darkred;
+}

@@ -193,6 +193,9 @@
             <div class="monster-button-roll">
                 <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
                 <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+                {{#if useVerbalCombat}}
+                    <a class="button-roll verbal-button">{{localize "WITCHER.verbalCombat.Title"}}</a>
+                {{/if}}
             </div>
         </div>
         <div class="death-section">

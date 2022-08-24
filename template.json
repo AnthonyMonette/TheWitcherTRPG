@@ -1265,6 +1265,7 @@
       ]
     },
     "profession": {
+      "notes": "",
       "definingSkill": {
         "skillName": "",
         "stat": "",

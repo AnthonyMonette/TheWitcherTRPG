@@ -10,3 +10,8 @@
 .profession-card i {
     margin: 5px;
 }
+
+.profession-notes .editor {
+    height: 200px;
+    width: 700px;
+}
