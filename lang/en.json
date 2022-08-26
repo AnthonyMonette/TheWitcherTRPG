@@ -614,7 +614,7 @@
     "WITCHER.Spell.Duration": "Duration",
     "WITCHER.Spell.Range": "Range",
     "WITCHER.Spell.Defence": "Defence",
-    "WITCHER.Spell.PrepTime": "Preparation Time",
+    "WITCHER.Spell.PrepTime": "Prep Time",
     "WITCHER.Spell.DC": "Dificulty Check",    
     "WITCHER.Spell.Components": "Components",
     "WITCHER.Spell.Requirements": "Requirements To Lift",
@@ -746,6 +746,7 @@
     "WITCHER.Currency.oren" : "Oren",
     "WITCHER.Currency.falsecoin" : "FalseCoin",
     
+    "WITCHER.background.other" : "Other",
     "WITCHER.background.activeEffect" : "Active Effects",
 
     "WITCHER.Spell.CreateTemplate": "Create a Template",

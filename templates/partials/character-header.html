@@ -119,7 +119,12 @@
             </tr>
             <tr>
                 <td><b>{{localize "WITCHER.Homeland"}}</b></td>
-                <td>{{data.general.homeland.value}}</td>
+                {{#if (eq data.general.homeland.value "Other")}}
+                    <td>{{data.general.homeland.otherValue}}</td>
+                {{/if}}
+                {{#unless (eq data.general.homeland.value "Other")}}
+                    <td>{{data.general.homeland.value}}</td>
+                {{/unless}}
                 <td></td>
                 <td></td>
             </tr>
