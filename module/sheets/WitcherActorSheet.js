@@ -176,6 +176,7 @@ export default class WitcherActorSheet extends ActorSheet {
       html.find(".add-active-effect").on("click", this._onAddActiveEffect.bind(this));
       html.find(".skill-display").on("click", this._onSkillDisplay.bind(this));
       html.find(".item-substance-display").on("click", this._onSubstanceDisplay.bind(this));
+      html.find(".item-spell-display").on("click", this._onItemDisplayInfo.bind(this));
       html.find(".spell-display").on("click", this._onSpellDisplay.bind(this));
       html.find(".life-event-display").on("click", this._onLifeEventDisplay.bind(this));
       html.find(".stat-modifier-display").on("click", this._onStatModifierDisplay.bind(this));

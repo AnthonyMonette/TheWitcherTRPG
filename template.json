@@ -813,6 +813,7 @@
         },
         "homeland": {
           "value": "",
+          "otherValue": "",
           "label": "WITCHER.Homeland"
         },
         "reputation": {

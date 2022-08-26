@@ -27,13 +27,15 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{noviceSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{noviceSpell.data.effect}}
                             </div>
-                            <div class="flex">
-                                <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{noviceSpell.data.source}}
-                                <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{noviceSpell.data.range}}
-                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{noviceSpell.data.duration}}
-                                <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{noviceSpell.data.defense}}
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                            </div>
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -69,13 +71,15 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{journeymanSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{journeymanSpell.data.effect}}
                             </div>
-                            <div class="flex">
-                               <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{journeymanSpell.data.source}}
-                               <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{journeymanSpell.data.range}}
-                               <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{journeymanSpell.data.duration}}
-                               <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{journeymanSpell.data.defense}}
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                            </div>
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -111,13 +115,15 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{masterSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{masterSpell.data.effect}}
                             </div>
-                            <div class="flex">
-                                <label><b>{{localize "WITCHER.Mutagen.Source"}} :</b></label> {{masterSpell.data.source}}
-                                <label><b>{{localize "WITCHER.Spell.Range"}} :</b></label> {{masterSpell.data.range}}
-                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{masterSpell.data.duration}}
-                                <label><b>{{localize "WITCHER.Spell.Defence"}} :</b></label> {{masterSpell.data.defense}}
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                            </div>
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -176,15 +182,15 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{ritual.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{ritual.data.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Components"}} :</b></label> {{ritual.data.components}}
+                                <label><b>{{localize "WITCHER.Spell.Components"}}:</b></label> {{ritual.data.components}}
                             </div>
-                            <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.PrepTime"}}:</b></label> {{ritual.data.preparationTime}}
-                                <label><b>{{localize "WITCHER.DC"}} :</b></label> {{ritual.data.dificultyCheck}}
-                                <label><b>{{localize "WITCHER.Spell.Duration"}} :</b></label> {{ritual.data.duration}}
+                            <div class="flex justify">
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.PrepTime"}}:</b></label><br /> {{ritual.data.preparationTime}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.DC"}}:</b></label><br />  {{ritual.data.dificultyCheck}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label><br />  {{ritual.data.duration}}</div>
                             </div>
                         </div>
                     </td>
@@ -219,7 +225,7 @@
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}} :</b></label> {{hex.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{hex.data.effect}}
                             </div>
                             <div class="flex">
                                 <label><b>{{localize "WITCHER.Spell.Requirements"}}</b></label> {{hex.data.liftRequirement}}

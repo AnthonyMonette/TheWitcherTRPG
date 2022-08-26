@@ -4,6 +4,7 @@
     <h1 class="flex flex-header" >
         <label>{{localize "WITCHER.Profession"}}:</label>
         <input class="inline-edit" data-field="name" type="text" value="{{profession.name}}" placeholder="Name" />
+        <a class="item-edit"><i class="fas fa-edit"></i></a>
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
     </h1>
     <div class="profession-layout">
@@ -27,9 +28,9 @@
                 <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                 <input class="inline-edit profession-level" data-field="data.definingSkill.level" type="number" value="{{profession.data.definingSkill.level}}" placeholder=""/>
             </div>
-<textarea class="inline-edit" rows=10 data-field="data.definingSkill.definition"  value="{{profession.data.definingSkill.level}}">{{profession.data.definingSkill.definition}}</textarea>
+            {{editor content=profession.data.definingSkill.definition target="profession.data.skillPath2.skill2.definition" button=true editable=editable}}
         </div>
-        <div class="profession-path flexrow">
+        <div class="profession-path flex">
             <div>
                 <input class="inline-edit" data-field="data.skillPath1.pathName" type="text" value="{{profession.data.skillPath1.pathName}}" placeholder=""/>
                 <div class="profession-card first-path">
@@ -52,7 +53,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath1.skill1.level" type="number" value="{{profession.data.skillPath1.skill1.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath1.skill1.definition" value="{{profession.data.skillPath1.skill1.definition}}">{{profession.data.skillPath1.skill1.definition}}</textarea>
+                    {{editor content=profession.data.skillPath1.skill1.definition target="profession.data.skillPath1.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card first-path">
                     <div class="flex first-path-header profession-display" 
@@ -74,7 +75,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath1.skill2.level" type="number" value="{{profession.data.skillPath1.skill2.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath1.skill2.definition" value="{{profession.data.skillPath1.skill2.definition}}">{{profession.data.skillPath1.skill2.definition}}</textarea>
+                    {{editor content=profession.data.skillPath1.skill2.definition target="profession.data.skillPath1.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card first-path">
                     <div class="flex first-path-header profession-display" 
@@ -96,7 +97,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath1.skill3.level" type="number" value="{{profession.data.skillPath1.skill3.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath1.skill3.definition" value="{{profession.data.skillPath1.skill3.definition}}">{{profession.data.skillPath1.skill3.definition}}</textarea>
+                    {{editor content=profession.data.skillPath1.skill3.definition target="profession.data.skillPath1.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
             <div>
@@ -121,7 +122,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath2.skill1.level" type="number" value="{{profession.data.skillPath2.skill1.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath2.skill1.definition" value="{{profession.data.skillPath2.skill1.definition}}">{{profession.data.skillPath2.skill1.definition}}</textarea>
+                    {{editor content=profession.data.skillPath2.skill1.definition target="profession.data.skillPath2.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card second-path">
                     <div class="flex second-path-header profession-display" 
@@ -143,7 +144,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath2.skill2.level" type="number" value="{{profession.data.skillPath2.skill2.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath2.skill2.definition" value="{{profession.data.skillPath2.skill2.definition}}">{{profession.data.skillPath2.skill2.definition}}</textarea>
+                    {{editor content=profession.data.skillPath2.skill2.definition target="profession.data.skillPath2.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card second-path">
                     <div class="flex second-path-header profession-display" 
@@ -165,7 +166,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath2.skill3.level" type="number" value="{{profession.data.skillPath2.skill3.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath2.skill3.definition" value="{{profession.data.skillPath2.skill3.definition}}">{{profession.data.skillPath2.skill3.definition}}</textarea>
+                    {{editor content=profession.data.skillPath2.skill3.definition target="profession.data.skillPath2.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
             <div>
@@ -190,7 +191,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath3.skill1.level" type="number" value="{{profession.data.skillPath3.skill1.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath3.skill1.definition" value="{{profession.data.skillPath3.skill1.definition}}">{{profession.data.skillPath3.skill1.definition}}</textarea>
+                    {{editor content=profession.data.skillPath3.skill1.definition target="profession.data.skillPath3.skill1.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card third-path">
                     <div class="flex third-path-header profession-display" 
@@ -212,7 +213,7 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath3.skill2.level" type="number" value="{{profession.data.skillPath3.skill2.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath3.skill2.definition" value="{{profession.data.skillPath3.skill2.definition}}">{{profession.data.skillPath3.skill2.definition}}</textarea>
+                    {{editor content=profession.data.skillPath3.skill2.definition target="profession.data.skillPath3.skill2.definition" button=true editable=editable}}
                 </div>
                 <div class="profession-card third-path">
                     <div class="flex third-path-header profession-display" 
@@ -234,13 +235,13 @@
                         <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
                         <input class="inline-edit profession-level" data-field="data.skillPath3.skill3.level" type="number" value="{{profession.data.skillPath3.skill3.level}}" placeholder=""/>
                     </div>
-<textarea class="inline-edit" rows=10 data-field="data.skillPath3.skill3.definition" value="{{profession.data.skillPath3.skill3.definition}}">{{profession.data.skillPath3.skill3.definition}}</textarea>
+                {{editor content=profession.data.skillPath3.skill3.definition target="profession.data.skillPath3.skill3.definition" button=true editable=editable}}
                 </div>
             </div>
-            <div>
-                <label>{{localize "WITCHER.Notes"}}</label>
-                {{editor content=profession.data.notes target="profession.data.notes" button=true editable=editable}}
-            </div>
+        </div>
+        <div class="preffesion-notes">
+            <label>{{localize "WITCHER.Notes"}}</label> 
+            {{editor content=profession.data.notes target="profession.data.notes" button=true editable=editable}}
         </div>
     </div>
 </div>
@@ -254,27 +255,28 @@
     <h1 class="flex flex-header" >
         <label>{{localize "WITCHER.Actor.Race"}}:</label>
         <input  class="inline-edit"  data-field="name" type="text" value="{{race.name}}"/>
+        <a class="item-edit"><i class="fas fa-edit"></i></a>
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
     </h1>
     <h2>{{localize "WITCHER.Actor.Perks"}}</h2>
     <div class="flexrow">
         <div class="perk">
             <h3><input  class="inline-edit"  data-field="data.perk1.name" type="text" value="{{race.data.perk1.name}}"/></h3>
-<textarea class="inline-edit" rows=7 data-field="data.perk1.description">{{race.data.perk1.description}}</textarea>
+            {{editor content=race.data.perk1.description target="race.data.perk1.description" button=true editable=editable}}
         </div>
         <div class="perk">
             <h3><input  class="inline-edit"  data-field="data.perk2.name" type="text" value="{{race.data.perk2.name}}"/></h3>
-<textarea class="inline-edit" rows=7 data-field="data.perk2.description">{{race.data.perk2.description}}</textarea>
+            {{editor content=race.data.perk2.description target="race.data.perk2.description" button=true editable=editable}}
         </div>
     </div>
     <div class="flexrow">
         <div class="perk">
             <h3><input  class="inline-edit"  data-field="data.perk3.name" type="text" value="{{race.data.perk3.name}}"/></h3>
-<textarea class="inline-edit" rows=7 data-field="data.perk3.description">{{race.data.perk3.description}}</textarea>
+            {{editor content=race.data.perk3.description target="race.data.perk3.description" button=true editable=editable}}
         </div>
         <div class="perk">
             <h3><input  class="inline-edit"  data-field="data.perk4.name" type="text" value="{{race.data.perk4.name}}"/></h3>
-<textarea class="inline-edit" rows=7 data-field="data.perk4.description">{{race.data.perk4.description}}</textarea>
+            {{editor content=race.data.perk4.description target="race.data.perk4.description" button=true editable=editable}}
         </div>
     </div>
 </div>

@@ -86,6 +86,14 @@
   align-items: center;
 }
 
+.preffesion-notes {
+  width: 90%;
+}
+
+.preffesion-notes .editor{
+  height: 200px;
+}
+
 input.profession-level {
   color: white;
   width: 35px;
@@ -385,4 +393,8 @@ input.skill-value {
 
 .error-display {
   color:red;
+}
+
+.justify {
+  justify-content: space-between;
 }

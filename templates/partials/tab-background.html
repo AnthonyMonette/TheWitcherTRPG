@@ -5,11 +5,15 @@
             
             <select name="data.general.homeland.value" id="homeland-select">
             {{#select data.general.homeland.value}}
-            {{#each data.config.homelands as |name value|}}
+                    <option value="Other">{{localize "WITCHER.background.other"}}</option>
+                {{#each data.config.homelands as |name value|}}
                     <option value="{{name}}">{{name}}</option>
-            {{/each}}
+                {{/each}}
             {{/select}}
             </select>
+            {{#if (eq data.general.homeland.value "Other")}}
+                <input class="details hometailOther" name="data.general.homeland.otherValue" type="text" value="{{data.general.homeland.otherValue}}" />
+            {{/if}}
             {{#each data.general.details as |details dt|}}
             {{localize details.label}}
             <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text" value="{{details.value}}" />
@@ -39,17 +43,17 @@
         </div>
         <div class="modifier-display">
             {{#each effect.data.stats as |stat index|}}
-                <div>{{localize stat.stat}} :{{stat.modifier}}</div> 
+                <div>{{localize stat.stat}}:{{stat.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-display">
             {{#each effect.data.derived as |derived index|}}
-                <div>{{localize derived.derivedStat}} :{{derived.modifier}}</div> 
+                <div>{{localize derived.derivedStat}}:{{derived.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-display">
             {{#each effect.data.skills as |skill index|}}
-                <div>{{localize skill.skill}} :{{skill.modifier}}</div> 
+                <div>{{localize skill.skill}}:{{skill.modifier}}</div> 
             {{/each}}
         </div>
 <textarea rows=3 >{{effect.data.description}}</textarea>

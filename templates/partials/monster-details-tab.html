@@ -24,17 +24,17 @@
     <div class="flex">
         <div class="modifier-flex">
             {{#each effect.data.stats as |stat index|}}
-                <div>{{localize stat.stat}} :{{stat.modifier}}</div> 
+                <div>{{localize stat.stat}}:{{stat.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-flex">
             {{#each effect.data.derived as |derived index|}}
-                <div>{{localize derived.derivedStat}} :{{derived.modifier}}</div> 
+                <div>{{localize derived.derivedStat}}:{{derived.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-flex">
             {{#each effect.data.skills as |skill index|}}
-                <div>{{localize skill.skill}} :{{skill.modifier}}</div> 
+                <div>{{localize skill.skill}}:{{skill.modifier}}</div> 
             {{/each}}
         </div>
     </div>
