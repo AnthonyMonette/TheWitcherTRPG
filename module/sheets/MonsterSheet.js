@@ -1,3 +1,5 @@
+import { buttonDialog } from "../chat.js";
+
 function onChangeSkillList(actor) {
     let content = ``
     for (let parent in actor.data.data.skills) {
@@ -76,21 +78,51 @@ function onChangeSkillList(actor) {
 }
     
 async function  exportLoot(actor) {
-    let newLoot = await Actor.create(actor.data);
-    await newLoot.update({
-      "folder": null,
-      "name" : newLoot.data.name + "--loot",
-      "type" : "loot"
-    });
-    
-    newLoot.items.forEach(async item=>{
-      if (typeof(item.data.data.quantity) === 'string' && item.data.data.quantity.includes("d")){
-        let roll = await new Roll(item.data.data.quantity).roll()
-        item.update({ 'data.quantity': Math.ceil(roll.total)})
-      }
-    });
+    let content =  `${ game.i18n.localize("WITCHER.Loot.MultipleExport")} <input type="number" class="small" name="multiple" value=1><br />`
+    let cancel = true
+    let multiplier = 0
+    let dialogData = {
+        buttons : [
+        [`${game.i18n.localize("WITCHER.Button.Cancel")}`, ()=>{} ],
+        [`${game.i18n.localize("WITCHER.Button.Continue")}`, (html)=>{  
+            multiplier = html.find("[name=multiple]")[0].value;
+            cancel = false
+        } ]
+    ],
+        title : game.i18n.localize("WITCHER.Monster.exportLoot"),
+        content : content
+    }
+    await buttonDialog(dialogData)
+    if (cancel) {
+        return
+    } else {
 
-    newLoot.sheet.render(true)
+        let newLoot = await Actor.create(actor.data);
+        await newLoot.update({
+            "folder": null,
+            "name" : newLoot.data.name + "--loot",
+            "type" : "loot"
+        });
+        
+        newLoot.items.forEach(async item=>{
+            let newQuantity = item.data.data.quantity
+            if (typeof(newQuantity) === 'string' && item.data.data.quantity.includes("d")){
+                let total = 0
+                for (let i = 0; i < multiplier; i++) {
+                    let roll = await new Roll(item.data.data.quantity).roll()
+                    total +=  Math.ceil(roll.total)
+                }
+                newQuantity = total
+            } else {
+                
+                newQuantity = Number(newQuantity) * multiplier
+            }
+            item.update({ 'data.quantity': newQuantity})
+        });
+    
+        newLoot.sheet.render(true)
+
+    }
 }
 
 export { onChangeSkillList, exportLoot};

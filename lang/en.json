@@ -830,6 +830,8 @@
     "WITCHER.Loot.HowMany": "How Many Items",
     "WITCHER.Loot.ItemCost": "Cost by item",
     "WITCHER.Loot.Percent": "Apply Percent",
+
+    "WITCHER.Loot.MultipleExport": "Export How Many Times?",
     
     "WITCHER.Loot.BuyTitle": "Buy/Sell Items",
     "WITCHER.Monster.exportLoot": "Export To loot",    

@@ -98,6 +98,8 @@
 
     "WITCHER.Location.Left": "Izq.",
     "WITCHER.Location.Right": "Der.",
+	
+	"WITCHER.Attack": "Ataque",
     
 
     "WITCHER.Armor.Location": "Localización",
@@ -514,6 +516,7 @@
     "WITCHER.Monster.Easy": "Fácil",
     "WITCHER.Monster.Normal": "Normal",
     "WITCHER.Monster.Hard": "Díficil",
+	"WITCHER.Monster.Exeptional": "Excepcional",
     "WITCHER.Monster.Simple": "Sencillo",
     "WITCHER.Monster.Complex": "Complejo",
     "WITCHER.Monster.Difficult": "Intermedio",
@@ -843,6 +846,7 @@
 	"WITCHER.context.unavailable": "N/A",
 
     "WITCHER.verbalCombat.Title": "Combate verbal",
+	"WITCHER.verbalCombat.DialogTitle" : "Realizando una acción de combate verbal",
     "WITCHER.verbalCombat.EmpatheticAttacks": "Ataques Empáticos",
     "WITCHER.verbalCombat.AntagonisticAttacks": "Ataques Antagónicos",
     "WITCHER.verbalCombat.Defences": "Defensas",
@@ -878,5 +882,7 @@
     "WITCHER.verbalCombat.ImplyEffect": "Insinuar te permite sugerir algo bueno o malo sobre tu argumento actual. Si tienes éxito, las defensas de tu oponente sufren un -4. Solo puedes usar Insinuar una vez por combate.",
     "WITCHER.verbalCombat.Bribe": "Sobornar",
     "WITCHER.verbalCombat.BribeEffect": "Si tienes éxito, por cada 50 coronas que ofrezcas, recibes un +1 a tus tiradas de Combate Verbal durante el resto del enfrentamiento.",
-    "WITCHER.verbalCombat.None": "Ninguno"
+    "WITCHER.verbalCombat.None": "Ninguno",
+
+    "WITCHER.effect.isActive": "Está activo"
 }
