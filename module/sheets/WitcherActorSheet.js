@@ -293,7 +293,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       const newDragDrop = new DragDrop({
         dragSelector:`.dragable`,
-        dropSelector:`.items`,
+        dropSelector:`.window-content`,
         permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDragDrop.bind(this) },
         callbacks: { dragstart: this._onDragStart.bind(this), drop: this._onDrop.bind(this) }
       })
@@ -356,18 +356,31 @@ export default class WitcherActorSheet extends ActorSheet {
             await buttonDialog(dialogData)
             if (cancel) {
               return
-            }else {
+            } else {
               this._removeItem(previousActor, dragData.item._id, numberOfItem)
               if (numberOfItem > dragData.item.data.quantity) {
                 numberOfItem = dragData.item.data.quantity
               }
               this._addItem(this.actor, dragData.item, numberOfItem)
             }
-          }else {
-            this._addItem(this.actor, dragData.item)
+          } else {
+            this._addItem(this.actor, dragData.item, 1)
             if (previousActor) {
               await previousActor.items.get(dragData.item._id).delete()
             }
+          }
+        }
+      } else if (dragData.type === "Item") {
+        let dragEventData = TextEditor.getDragEventData(event)
+        if (dragEventData.pack){
+          let pack = await game.packs.get(dragEventData.pack)
+          pack.getDocument(dragEventData.id).then(item => {
+            this._addItem(this.actor, item.data, 1)
+          })
+        } else {
+          let item = game.items.get(dragEventData.id)
+          if (item) {
+            this._addItem(this.actor, item.data, 1)
           }
         }
       } else {

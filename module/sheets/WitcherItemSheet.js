@@ -9,6 +9,10 @@ export default class WitcherItemSheet extends ItemSheet {
         width: 520,
         height: 480,
         tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
+        dragDrop: [{
+          dragSelector: ".items-list .item",
+          dropSelector: null
+        }],
       });
     }
 
@@ -63,8 +67,54 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".modifiers-edit-derived").on("change", this._onModifierDerivedEdit.bind(this));
       html.find("input").focusin(ev => this._onFocusIn(ev));
       html.find(".damage-type").on("change", this._onDamageTypeEdit.bind(this));
+      html.find(".dragable").on("dragstart", (ev) => {
+        let itemId = ev.target.dataset.id
+        let item = this.actor.items.get(itemId);
+        ev.originalEvent.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({
+            item: item,
+            actor: this.actor,
+            type: "itemDrop",
+            }),
+          )});
+
+      const newDragDrop = new DragDrop({
+        dragSelector:`.dragable`,
+        dropSelector:`.window-content`,
+        permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDragDrop.bind(this) },
+        callbacks: { dragstart: this._onDragStart.bind(this), drop: this._onDrop.bind(this) }
+      })
+      this._dragDrop.push(newDragDrop);
     }
 
+    _onDrop(event) {
+      if (this.item.type == "diagrams") {
+        let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
+        let dragEventData = TextEditor.getDragEventData(event)
+        if(dragEventData.pack) {
+          let pack = game.packs.get(dragEventData.pack)
+          pack.getDocument(dragEventData.id).then(item => {
+            let newComponentList  = []
+            if (this.item.data.data.craftingComponents){
+              newComponentList = this.item.data.data.craftingComponents
+            }
+            newComponentList.push({id: genId(), name: item.data.name, quantity: 1})
+            this.item.update({'data.craftingComponents': newComponentList});
+          })
+        } else {
+          let item = game.items.get(dragEventData.id)
+          if (item) {
+            let newComponentList  = []
+            if (this.item.data.data.craftingComponents){
+              newComponentList = this.item.data.data.craftingComponents
+            }
+            newComponentList.push({id: genId(), name: item.data.name, quantity: 1})
+            this.item.update({'data.craftingComponents': newComponentList});
+          }
+        }
+      }
+    }
 
     _onEffectEdit(event) {
       event.preventDefault();
@@ -197,7 +247,7 @@ export default class WitcherItemSheet extends ItemSheet {
       if (this.item.data.data.craftingComponents){
         newComponentList = this.item.data.data.craftingComponents
       }
-      newComponentList.push({id: genId(), name: "component", percentage: ""})
+      newComponentList.push({id: genId(), name: "component", quantity: ""})
       this.item.update({'data.craftingComponents': newComponentList});
     }
 
