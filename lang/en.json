@@ -640,12 +640,16 @@
     "WITCHER.Chat.SaveText": "To succeed you need to roll below",
 
     "WITCHER.Dialog.Crafting": "Crafting a",
+    "WITCHER.Dialog.CraftingTitle": "Performing a crafting action",
     "WITCHER.Dialog.AlchemyTitle": "Performing an alchemy action",
     "WITCHER.Dialog.ButtonCraft": "Craft",
     "WITCHER.Dialog.CraftingAlchemycal": "Crafting an alchemical",
+    "WITCHER.Dialog.CraftingItem": "Crafting an item",
     "WITCHER.Dialog.NoComponents": "Not Enough Component",
     "WITCHER.Dialog.CraftingDiagram": "You have the diagram",
     "WITCHER.Dialog.Diagram": "Diagram",
+
+    "WITCHER.Dialog.after": "After",
 
     "WITCHER.Dialog.ButtonDodge": "Dodge",
     "WITCHER.Dialog.ButtonReposition": "Reposition",
@@ -884,5 +888,19 @@
     "WITCHER.verbalCombat.BribeEffect": "For every 50 Crowns you offer, you gain +1 to your empathetic Verbal Combat rolls for the rest of the fightif you succeed on your Gambling roll.",
     "WITCHER.verbalCombat.None": "NONE",
 
-    "WITCHER.effect.isActive": "Is Active"
+    "WITCHER.effect.isActive": "Is Active",
+
+    "WITCHER.character.socialStanding": "Social Standing",
+    "WITCHER.socialStanding.equal": "Equal",
+    "WITCHER.socialStanding.tolerated": "Tolerated",
+    "WITCHER.socialStanding.hated": "Hated",
+    "WITCHER.socialStanding.feared": "Feared",
+    "WITCHER.socialStanding.hatedFeared": "Hated & Feared",
+
+    
+    "WITCHER.socialStanding.north": "The North",
+    "WITCHER.socialStanding.nilfgaard": "Nilfgaard",
+    "WITCHER.socialStanding.skellige": "Skellige",
+    "WITCHER.socialStanding.dolBlathanna": "Dol Blathanna",
+    "WITCHER.socialStanding.mahakam": "Mahakam"
 }

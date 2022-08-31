@@ -279,6 +279,74 @@
             {{editor content=race.data.perk4.description target="race.data.perk4.description" button=true editable=editable}}
         </div>
     </div>
+    <div class="flexrow">
+        <table>
+            <tr>
+                <th>{{localize "WITCHER.socialStanding.north"}}</th>
+                <th>{{localize "WITCHER.socialStanding.nilfgaard"}}</th>
+                <th>{{localize "WITCHER.socialStanding.skellige"}}</th>
+                <th>{{localize "WITCHER.socialStanding.dolBlathanna"}}</th>
+                <th>{{localize "WITCHER.socialStanding.mahakam"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <select class="inline-edit" data-field="data.socialStanding.north" id="socialStandingNorth-select">
+                    {{#select race.data.socialStanding.north}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <select class="inline-edit" data-field="data.socialStanding.nilfgaard" id="socialStandingNilfgaard-select">
+                    {{#select race.data.socialStanding.nilfgaard}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <select class="inline-edit" data-field="data.socialStanding.skellige" id="socialStandingSkellige-select">
+                    {{#select race.data.socialStanding.skellige}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <select class="inline-edit" data-field="data.socialStanding.dolBlathanna" id="socialStandingDolBlathanna-select">
+                    {{#select race.data.socialStanding.dolBlathanna}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <select class="inline-edit" data-field="data.socialStanding.mahakam" id="socialStandingMahakam-select">
+                    {{#select race.data.socialStanding.mahakam}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 {{/if}}
 {{#unless race}}
