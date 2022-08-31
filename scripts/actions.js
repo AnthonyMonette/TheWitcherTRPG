@@ -1,5 +1,6 @@
-import {witcher} from "../module/config.js";
+import { witcher } from "../module/config.js";
 import { buttonDialog } from "../module/chat.js";
+import { addModifiers } from "../module/witcher.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage){ 
     let armors = actor.items.filter(function(item) {return item.type=="armor" && item.data.data.equiped})
@@ -495,14 +496,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
 
-          let totalModifiers = 0;
-          actor.data.data.skills.ref.dodge.modifiers.forEach(item => totalModifiers += Number(item.value));
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+          rollFormula = addModifiers(actor.data.data.skills.ref.dodge.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
@@ -538,15 +532,7 @@ function ExecuteDefense(actor){
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
 
-
-          let totalModifiers = 0;
-          actor.data.data.skills.dex.athletics.modifiers.forEach(item => totalModifiers += Number(item.value));
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+          rollFormula = addModifiers(actor.data.data.skills.dex.athletics.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
@@ -576,39 +562,38 @@ function ExecuteDefense(actor){
           let stat = actor.data.data.stats.ref.current;
           let skill = 0;
           let skillName = "";
+          let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
-          
-          let totalModifiers = 0;
           switch(defense){
             case "Brawling":
               skill = actor.data.data.skills.ref.brawling.value;
               skillName = actor.data.data.skills.ref.brawling.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
-              actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.brawling.modifiers
               break;
             case "Melee":
               skill = actor.data.data.skills.ref.melee.value;
               skillName = actor.data.data.skills.ref.melee.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
-              actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.melee.modifiers
               break;
             case "Small Blades":
               skill = actor.data.data.skills.ref.smallblades.value;
               skillName = actor.data.data.skills.ref.smallblades.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
-              actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.smallblades.modifiers
               break;
             case "Staff/Spear":
               skill = actor.data.data.skills.ref.staffspear.value;
               skillName = actor.data.data.skills.ref.staffspear.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
-              actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.staffspear.modifiers
               break;
             case "Swordsmanship":
               skill = actor.data.data.skills.ref.swordsmanship.value;
               skillName = actor.data.data.skills.ref.swordsmanship.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
-              actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.swordsmanship.modifiers
               break;
           }
 
@@ -617,13 +602,7 @@ function ExecuteDefense(actor){
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
-          
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+          rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
@@ -653,38 +632,38 @@ function ExecuteDefense(actor){
           let stat = actor.data.data.stats.ref.current;
           let skill = 0;
           let skillName = "";
+          let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
-          let totalModifiers = 0;
           switch(defense){
             case "Brawling":
               skill = actor.data.data.skills.ref.brawling.value;
               skillName = actor.data.data.skills.ref.brawling.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
-              actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.brawling.modifiers
               break;
             case "Melee":
               skill = actor.data.data.skills.ref.melee.value;
               skillName = actor.data.data.skills.ref.melee.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
-              actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.melee.modifiers
               break;
             case "Small Blades":
               skill = actor.data.data.skills.ref.smallblades.value;
               skillName = actor.data.data.skills.ref.smallblades.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
-              actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.smallblades.modifiers
               break;
             case "Staff/Spear":
               skill = actor.data.data.skills.ref.staffspear.value;
               skillName = actor.data.data.skills.ref.staffspear.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
-              actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.staffspear.modifiers
               break;
             case "Swordsmanship":
               skill = actor.data.data.skills.ref.swordsmanship.value;
               skillName = actor.data.data.skills.ref.swordsmanship.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 3`;
-              actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.swordsmanship.modifiers
               break;
           }
 
@@ -693,13 +672,7 @@ function ExecuteDefense(actor){
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
-          
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+          rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
@@ -730,37 +703,36 @@ function ExecuteDefense(actor){
           let skill = 0;
           let skillName = ""
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
-          let totalModifiers = 0;
           switch(defense){
             case "Brawling":
               skill = actor.data.data.skills.ref.brawling.value;
               skillName = actor.data.data.skills.ref.brawling.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 5`;
-              actor.data.data.skills.ref.brawling.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.brawling.modifiers
               break;
             case "Melee":
               skill = actor.data.data.skills.ref.melee.value;
               skillName = actor.data.data.skills.ref.melee.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 5`;
-              actor.data.data.skills.ref.melee.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.melee.modifiers
               break;
             case "Small Blades":
               skill = actor.data.data.skills.ref.smallblades.value;
               skillName = actor.data.data.skills.ref.smallblades.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 5`;
-              actor.data.data.skills.ref.smallblades.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.smallblades.modifiers
               break;
             case "Staff/Spear":
               skill = actor.data.data.skills.ref.staffspear.value;
               skillName = actor.data.data.skills.ref.staffspear.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 5`;
-              actor.data.data.skills.ref.staffspear.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.staffspear.modifiers
               break;
             case "Swordsmanship":
               skill = actor.data.data.skills.ref.swordsmanship.value;
               skillName = actor.data.data.skills.ref.swordsmanship.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 5`;
-              actor.data.data.skills.ref.swordsmanship.modifiers.forEach(item => totalModifiers += Number(item.value));
+              modifiers = actor.data.data.skills.ref.swordsmanship.modifiers
               break;
           }
 
@@ -769,13 +741,7 @@ function ExecuteDefense(actor){
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
-          
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+          rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  
@@ -810,15 +776,8 @@ function ExecuteDefense(actor){
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}`: `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]` ;
           }
-
-          let totalModifiers = 0;
-          actor.data.data.skills.ref.dodge.modifiers.forEach(item => totalModifiers += Number(item.value));
-          if (totalModifiers < 0){
-            rollFormula +=  !displayRollDetails ? `${totalModifiers}` :  `${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]`
-          }
-          if (totalModifiers > 0){
-            rollFormula += !displayRollDetails ? `+${totalModifiers}`:  `+${totalModifiers}[${game.i18n.localize("WITCHER.Settings.modifiers")}]` 
-          }
+    
+          rollFormula = addModifiers(actor.data.data.skills.ref.dodge.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).roll()
           if (roll.dice[0].results[0].result == 10){  

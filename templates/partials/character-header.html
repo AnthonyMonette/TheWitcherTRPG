@@ -128,6 +128,21 @@
                 <td></td>
                 <td></td>
             </tr>
+            <tr>
+                <td><b>{{localize "WITCHER.character.socialStanding"}}</b></td>
+                <td colspan="2">
+                    <select name="data.general.socialStanding" id="socialStanding-select">
+                    {{#select data.general.socialStanding}}
+                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                    {{/select}}
+                    </select>
+                </td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 </div>    

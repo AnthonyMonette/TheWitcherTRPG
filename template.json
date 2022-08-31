@@ -820,6 +820,7 @@
           "value": "",
           "label": "WITCHER.Reputation"
         },
+        "socialStanding": "",
         "name": "",
         "race": "",
         "gender": "",
@@ -1357,6 +1358,13 @@
       "perk4": {
         "name": "",
         "description": ""
+      },
+      "socialStanding": {
+        "north": "",
+        "nilfgaard": "",
+        "skellige": "",
+        "dolBlathanna": "",
+        "mahakam": ""
       }
     },
     "effect": {
