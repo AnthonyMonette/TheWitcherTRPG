@@ -18,9 +18,9 @@
                 <img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/>
             </td>
             <td><a class="item-roll">{{weapon.name}}</a></td>
-            <td><input class="inline-edit" data-field="data.damage" type="text" value="{{weapon.data.damage}}" placeholder="" /></td>
-            <td><input class="inline-edit small" data-field="data.reliable" type="text" value="{{weapon.data.reliable}}" placeholder="" /></td>
-            <td><input class="inline-edit small" data-field="data.rateOfFire" type="text" value="{{weapon.data.rateOfFire}}" data-dtype="Number"/></td>
+            <td><input class="inline-edit" data-field="system.damage" type="text" value="{{weapon.system.damage}}" placeholder="" /></td>
+            <td><input class="inline-edit small" data-field="system.reliable" type="text" value="{{weapon.system.reliable}}" placeholder="" /></td>
+            <td><input class="inline-edit small" data-field="system.rateOfFire" type="text" value="{{weapon.system.rateOfFire}}" data-dtype="Number"/></td>
         </tr>
         <tr class="item-info invisible" >
             <td>
@@ -28,7 +28,7 @@
             </td>
             <td colspan="3">
                 <div class="monster-flex"><b>{{localize "WITCHER.Spell.Effect"}}:</b></label>
-                    {{#each weapon.data.effects as |effect id|}}
+                    {{#each weapon.system.effects as |effect id|}}
                         <div class="monster-flex">
                         {{effect.name}}
                         {{#if effect.percentage}}
@@ -51,7 +51,7 @@
     {{#each loots as |valuable id|}}
     <tr class="item" data-item-id="{{valuable._id}}">
         <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
-        <td><input class="small-medium inline-edit" data-field="data.quantity" type="text" value="{{data.quantity}}"  placeholder="1d6" /></td>
+        <td><input class="small-medium inline-edit" data-field="system.quantity" type="text" value="{{system.quantity}}"  placeholder="1d6" /></td>
         <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
     </tr>

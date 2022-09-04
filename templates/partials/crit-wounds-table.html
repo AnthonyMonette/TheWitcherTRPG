@@ -1,11 +1,11 @@
 <table class="crit-wounds-table">
     <tbody>
-        {{#each data.critWounds as |critWound i| }}
+        {{#each system.critWounds as |critWound i| }}
         <tr>
             <td class="flex">
                 <div class="critwound-left">
-                    <input type="hidden" name="data.critWounds.{{i}}.id" type="text" value="{{critWound.id}}" />
-                    <select name="data.critWounds.{{i}}.effect">
+                    <input type="hidden" name="system.critWounds.{{i}}.id" type="text" value="{{critWound.id}}" />
+                    <select name="system.critWounds.{{i}}.effect">
                         {{#select (lookup this "effect") }}
                         {{#each (lookup ../config "CritSimple") as |critEffect j|}}
                         <option value="{{j}}">{{localize "WITCHER.CritWound.Simple"}} - {{localize critEffect}}</option>
@@ -21,7 +21,7 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    <select name="data.critWounds.{{i}}.mod">
+                    <select name="system.critWounds.{{i}}.mod">
                         {{#select (lookup this "mod") }}
                         {{#each (lookup ../config "CritMod") as |critWoundModifier j|}}
                         <option value="{{j}}">{{localize critWoundModifier}}</option>
@@ -31,16 +31,16 @@
                     <a class="delete-crit"><i class="fas fa-trash-alt" data-id="{{critWound.id}}"></i></a>
                     <div class="critwounds-second-line">
                         <label class="healing-time-lable">{{localize "WITCHER.CritWound.HealingTime.Label"}}:</label>
-                        <input class="days-healed" name="data.critWounds.{{i}}.daysHealed" type="number" data-dtype="Number" value="{{critWound.daysHealed}}" />
+                        <input class="days-healed" name="system.critWounds.{{i}}.daysHealed" type="number" data-dtype="Number" value="{{critWound.daysHealed}}" />
                         /
-                        <input class="healing-time" name="data.critWounds.{{i}}.healingTime" type="number" data-dtype="Number" value="{{critWound.healingTime}}" />
+                        <input class="healing-time" name="system.critWounds.{{i}}.healingTime" type="number" data-dtype="Number" value="{{critWound.healingTime}}" />
                     </div>
-<textarea rows=3 name="data.critWounds.{{i}}.notes">{{critWound.notes}}</textarea>
+<textarea rows=3 name="system.critWounds.{{i}}.notes">{{critWound.notes}}</textarea>
                 </div>
                 <div class="critwounds-right">
-                    <div class="crit-wound-description" name="data.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{localize (lookup ../config.CritDescription critWound.effect)}}</div>
+                    <div class="crit-wound-description" name="system.critWounds.{{i}}.description" data-id="CritDescription.{{critWound.effect}}">{{localize (lookup ../config.CritDescription critWound.effect)}}</div>
                     <br />
-                    <div class="crit-wound-mod-description" name="data.critWounds.{{i}}.modDescription" data-id="CritModDescription.{{critWound.effect}}.{{critWound.mod}}">{{localize (lookup (lookup ../config.CritModDescription critWound.effect) critWound.mod)}}</div>
+                    <div class="crit-wound-mod-description" name="system.critWounds.{{i}}.modDescription" data-id="CritModDescription.{{critWound.effect}}.{{critWound.mod}}">{{localize (lookup (lookup ../config.CritModDescription critWound.effect) critWound.mod)}}</div>
                 </div>
             </td>
         </tr>

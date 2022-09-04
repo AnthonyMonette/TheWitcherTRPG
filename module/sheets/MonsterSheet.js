@@ -2,8 +2,8 @@ import { buttonDialog } from "../chat.js";
 
 function onChangeSkillList(actor) {
     let content = ``
-    for (let parent in actor.data.data.skills) {
-        let skills =  actor.data.data.skills[parent]
+    for (let parent in actor.system.skills) {
+        let skills =  actor.system.skills[parent]
         content += `<h2>${parent}</h2>`
         for (let skill in skills) {
             content += `<input type="checkbox" name="display${skill}" ${skills[skill].isVisible? "checked": "unchecked"}> ${game.i18n.localize(skills[skill].label)}<br />`
@@ -19,58 +19,58 @@ function onChangeSkillList(actor) {
             Apply: {
                 label: `${game.i18n.localize("WITCHER.Dialog.Apply")}`, 
                 callback: (html) => {
-                actor.update({ 'data.skills.int.awareness.isVisible': html.find("[name=displayawareness]").prop("checked"),
-                    'data.skills.int.business.isVisible': html.find("[name=displaybusiness]").prop("checked"),
-                    'data.skills.int.deduction.isVisible': html.find("[name=displaydeduction]").prop("checked"),
-                    'data.skills.int.education.isVisible': html.find("[name=displayeducation]").prop("checked"),
-                    'data.skills.int.commonsp.isVisible': html.find("[name=displaycommonsp]").prop("checked"),
-                    'data.skills.int.eldersp.isVisible': html.find("[name=displayeldersp]").prop("checked"),
-                    'data.skills.int.dwarven.isVisible': html.find("[name=displaydwarven]").prop("checked"),
-                    'data.skills.int.monster.isVisible': html.find("[name=displaymonster]").prop("checked"),
-                    'data.skills.int.socialetq.isVisible': html.find("[name=displaysocialetq]").prop("checked"),
-                    'data.skills.int.streetwise.isVisible': html.find("[name=displaystreetwise]").prop("checked"),
-                    'data.skills.int.tactics.isVisible': html.find("[name=displaytactics]").prop("checked"),
-                    'data.skills.int.teaching.isVisible': html.find("[name=displayteaching]").prop("checked"),
-                    'data.skills.int.wilderness.isVisible': html.find("[name=displaywilderness]").prop("checked"),
-                    'data.skills.ref.brawling.isVisible': html.find("[name=displaybrawling]").prop("checked"),
-                    'data.skills.ref.dodge.isVisible': html.find("[name=displaydodge]").prop("checked"),
-                    'data.skills.ref.melee.isVisible': html.find("[name=displaymelee]").prop("checked"),
-                    'data.skills.ref.riding.isVisible': html.find("[name=displayriding]").prop("checked"),
-                    'data.skills.ref.sailing.isVisible': html.find("[name=displaysailing]").prop("checked"),
-                    'data.skills.ref.smallblades.isVisible': html.find("[name=displaysmallblades]").prop("checked"),
-                    'data.skills.ref.staffspear.isVisible': html.find("[name=displaystaffspear]").prop("checked"),
-                    'data.skills.ref.swordsmanship.isVisible': html.find("[name=displayswordsmanship]").prop("checked"),
-                    'data.skills.will.courage.isVisible': html.find("[name=displaycourage]").prop("checked"),
-                    'data.skills.will.hexweave.isVisible': html.find("[name=displayhexweave]").prop("checked"),
-                    'data.skills.will.intimidation.isVisible': html.find("[name=displayintimidation]").prop("checked"),
-                    'data.skills.will.spellcast.isVisible': html.find("[name=displayspellcast]").prop("checked"),
-                    'data.skills.will.resistmagic.isVisible': html.find("[name=displayresistmagic]").prop("checked"),
-                    'data.skills.will.resistcoerc.isVisible': html.find("[name=displayresistcoerc]").prop("checked"),
-                    'data.skills.will.ritcraft.isVisible': html.find("[name=displayritcraft]").prop("checked"),
-                    'data.skills.dex.archery.isVisible': html.find("[name=displayarchery]").prop("checked"),
-                    'data.skills.dex.athletics.isVisible': html.find("[name=displayathletics]").prop("checked"),
-                    'data.skills.dex.crossbow.isVisible': html.find("[name=displaycrossbow]").prop("checked"),
-                    'data.skills.dex.sleight.isVisible': html.find("[name=displaysleight]").prop("checked"),
-                    'data.skills.dex.stealth.isVisible': html.find("[name=displaystealth]").prop("checked"),
-                    'data.skills.cra.alchemy.isVisible': html.find("[name=displayalchemy]").prop("checked"),
-                    'data.skills.cra.crafting.isVisible': html.find("[name=displaycrafting]").prop("checked"),
-                    'data.skills.cra.disguise.isVisible': html.find("[name=displaydisguise]").prop("checked"),
-                    'data.skills.cra.firstaid.isVisible': html.find("[name=displayfirstaid]").prop("checked"),
-                    'data.skills.cra.forgery.isVisible': html.find("[name=displayforgery]").prop("checked"),
-                    'data.skills.cra.picklock.isVisible': html.find("[name=displaypicklock]").prop("checked"),
-                    'data.skills.cra.trapcraft.isVisible': html.find("[name=displaytrapcraft]").prop("checked"),
-                    'data.skills.body.physique.isVisible': html.find("[name=displayphysique]").prop("checked"),
-                    'data.skills.body.endurance.isVisible': html.find("[name=displayendurance]").prop("checked"),
-                    'data.skills.emp.charisma.isVisible': html.find("[name=displaycharisma]").prop("checked"),
-                    'data.skills.emp.deceit.isVisible': html.find("[name=displaydeceit]").prop("checked"),
-                    'data.skills.emp.finearts.isVisible': html.find("[name=displayfinearts]").prop("checked"),
-                    'data.skills.emp.gambling.isVisible': html.find("[name=displaygambling]").prop("checked"),
-                    'data.skills.emp.grooming.isVisible': html.find("[name=displaygrooming]").prop("checked"),
-                    'data.skills.emp.perception.isVisible': html.find("[name=displayperception]").prop("checked"),
-                    'data.skills.emp.leadership.isVisible': html.find("[name=displayleadership]").prop("checked"),
-                    'data.skills.emp.persuasion.isVisible': html.find("[name=displaypersuasion]").prop("checked"),
-                    'data.skills.emp.performance.isVisible': html.find("[name=displayperformance]").prop("checked"),
-                    'data.skills.emp.seduction.isVisible': html.find("[name=displayseduction]").prop("checked"),
+                actor.update({ 'system.skills.int.awareness.isVisible': html.find("[name=displayawareness]").prop("checked"),
+                    'system.skills.int.business.isVisible': html.find("[name=displaybusiness]").prop("checked"),
+                    'system.skills.int.deduction.isVisible': html.find("[name=displaydeduction]").prop("checked"),
+                    'system.skills.int.education.isVisible': html.find("[name=displayeducation]").prop("checked"),
+                    'system.skills.int.commonsp.isVisible': html.find("[name=displaycommonsp]").prop("checked"),
+                    'system.skills.int.eldersp.isVisible': html.find("[name=displayeldersp]").prop("checked"),
+                    'system.skills.int.dwarven.isVisible': html.find("[name=displaydwarven]").prop("checked"),
+                    'system.skills.int.monster.isVisible': html.find("[name=displaymonster]").prop("checked"),
+                    'system.skills.int.socialetq.isVisible': html.find("[name=displaysocialetq]").prop("checked"),
+                    'system.skills.int.streetwise.isVisible': html.find("[name=displaystreetwise]").prop("checked"),
+                    'system.skills.int.tactics.isVisible': html.find("[name=displaytactics]").prop("checked"),
+                    'system.skills.int.teaching.isVisible': html.find("[name=displayteaching]").prop("checked"),
+                    'system.skills.int.wilderness.isVisible': html.find("[name=displaywilderness]").prop("checked"),
+                    'system.skills.ref.brawling.isVisible': html.find("[name=displaybrawling]").prop("checked"),
+                    'system.skills.ref.dodge.isVisible': html.find("[name=displaydodge]").prop("checked"),
+                    'system.skills.ref.melee.isVisible': html.find("[name=displaymelee]").prop("checked"),
+                    'system.skills.ref.riding.isVisible': html.find("[name=displayriding]").prop("checked"),
+                    'system.skills.ref.sailing.isVisible': html.find("[name=displaysailing]").prop("checked"),
+                    'system.skills.ref.smallblades.isVisible': html.find("[name=displaysmallblades]").prop("checked"),
+                    'system.skills.ref.staffspear.isVisible': html.find("[name=displaystaffspear]").prop("checked"),
+                    'system.skills.ref.swordsmanship.isVisible': html.find("[name=displayswordsmanship]").prop("checked"),
+                    'system.skills.will.courage.isVisible': html.find("[name=displaycourage]").prop("checked"),
+                    'system.skills.will.hexweave.isVisible': html.find("[name=displayhexweave]").prop("checked"),
+                    'system.skills.will.intimidation.isVisible': html.find("[name=displayintimidation]").prop("checked"),
+                    'system.skills.will.spellcast.isVisible': html.find("[name=displayspellcast]").prop("checked"),
+                    'system.skills.will.resistmagic.isVisible': html.find("[name=displayresistmagic]").prop("checked"),
+                    'system.skills.will.resistcoerc.isVisible': html.find("[name=displayresistcoerc]").prop("checked"),
+                    'system.skills.will.ritcraft.isVisible': html.find("[name=displayritcraft]").prop("checked"),
+                    'system.skills.dex.archery.isVisible': html.find("[name=displayarchery]").prop("checked"),
+                    'system.skills.dex.athletics.isVisible': html.find("[name=displayathletics]").prop("checked"),
+                    'system.skills.dex.crossbow.isVisible': html.find("[name=displaycrossbow]").prop("checked"),
+                    'system.skills.dex.sleight.isVisible': html.find("[name=displaysleight]").prop("checked"),
+                    'system.skills.dex.stealth.isVisible': html.find("[name=displaystealth]").prop("checked"),
+                    'system.skills.cra.alchemy.isVisible': html.find("[name=displayalchemy]").prop("checked"),
+                    'system.skills.cra.crafting.isVisible': html.find("[name=displaycrafting]").prop("checked"),
+                    'system.skills.cra.disguise.isVisible': html.find("[name=displaydisguise]").prop("checked"),
+                    'system.skills.cra.firstaid.isVisible': html.find("[name=displayfirstaid]").prop("checked"),
+                    'system.skills.cra.forgery.isVisible': html.find("[name=displayforgery]").prop("checked"),
+                    'system.skills.cra.picklock.isVisible': html.find("[name=displaypicklock]").prop("checked"),
+                    'system.skills.cra.trapcraft.isVisible': html.find("[name=displaytrapcraft]").prop("checked"),
+                    'system.skills.body.physique.isVisible': html.find("[name=displayphysique]").prop("checked"),
+                    'system.skills.body.endurance.isVisible': html.find("[name=displayendurance]").prop("checked"),
+                    'system.skills.emp.charisma.isVisible': html.find("[name=displaycharisma]").prop("checked"),
+                    'system.skills.emp.deceit.isVisible': html.find("[name=displaydeceit]").prop("checked"),
+                    'system.skills.emp.finearts.isVisible': html.find("[name=displayfinearts]").prop("checked"),
+                    'system.skills.emp.gambling.isVisible': html.find("[name=displaygambling]").prop("checked"),
+                    'system.skills.emp.grooming.isVisible': html.find("[name=displaygrooming]").prop("checked"),
+                    'system.skills.emp.perception.isVisible': html.find("[name=displayperception]").prop("checked"),
+                    'system.skills.emp.leadership.isVisible': html.find("[name=displayleadership]").prop("checked"),
+                    'system.skills.emp.persuasion.isVisible': html.find("[name=displaypersuasion]").prop("checked"),
+                    'system.skills.emp.performance.isVisible': html.find("[name=displayperformance]").prop("checked"),
+                    'system.skills.emp.seduction.isVisible': html.find("[name=displayseduction]").prop("checked"),
                 })}
             }
         }
@@ -97,19 +97,19 @@ async function  exportLoot(actor) {
         return
     } else {
 
-        let newLoot = await Actor.create(actor.data);
+        let newLoot = await Actor.create(actor);
         await newLoot.update({
             "folder": null,
-            "name" : newLoot.data.name + "--loot",
+            "name" : newLoot.name + "--loot",
             "type" : "loot"
         });
         
         newLoot.items.forEach(async item=>{
-            let newQuantity = item.data.data.quantity
-            if (typeof(newQuantity) === 'string' && item.data.data.quantity.includes("d")){
+            let newQuantity = item.system.quantity
+            if (typeof(newQuantity) === 'string' && item.system.quantity.includes("d")){
                 let total = 0
                 for (let i = 0; i < multiplier; i++) {
-                    let roll = await new Roll(item.data.data.quantity).roll()
+                    let roll = await new Roll(item.system.quantity).evaluate({async: true})
                     total +=  Math.ceil(roll.total)
                 }
                 newQuantity = total
@@ -117,7 +117,7 @@ async function  exportLoot(actor) {
                 
                 newQuantity = Number(newQuantity) * multiplier
             }
-            item.update({ 'data.quantity': newQuantity})
+            item.update({ 'system.quantity': newQuantity})
         });
     
         newLoot.sheet.render(true)

@@ -83,7 +83,7 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
         }
 
         getRanges(token) {
-            let baseSpeed = token.actor.data.data.stats.spd.current
+            let baseSpeed = token.actor.system.stats.spd.current
 			// A character can always walk it's base speed and dash twice it's base speed
 			let moveSpeed = baseSpeed %2 == 0 ? baseSpeed : baseSpeed+1;
             let runspeed = (baseSpeed * 3) %2 ==0 ?baseSpeed * 3: baseSpeed * 3 + 1;
@@ -120,13 +120,13 @@ Hooks.once("polyglot.init", (LanguageProvider) => {
             let known_languages = new Set();
             let literate_languages = new Set();
             known_languages.add("common")
-            if (actor.data.data.skills.int.eldersp.isProffession || actor.data.data.skills.int.eldersp.isPickup || actor.data.data.skills.int.eldersp.isLearned || actor.data.data.skills.int.eldersp.value > 0){
+            if (actor.system.skills.int.eldersp.isProffession || actor.system.skills.int.eldersp.isPickup || actor.system.skills.int.eldersp.isLearned || actor.system.skills.int.eldersp.value > 0){
                 known_languages.add("elder")
             }
-            if (actor.data.data.skills.int.dwarven.isProffession || actor.data.data.skills.int.dwarven.isPickup || actor.data.data.skills.int.dwarven.isLearned || actor.data.data.skills.int.dwarven.value > 0 ){
+            if (actor.system.skills.int.dwarven.isProffession || actor.system.skills.int.dwarven.isPickup || actor.system.skills.int.dwarven.isLearned || actor.system.skills.int.dwarven.value > 0 ){
                 known_languages.add("dwarven")
             }
-            if (actor.data.data.skills.int.commonsp.isProffession || actor.data.data.skills.int.commonsp.isPickup || actor.data.data.skills.int.commonsp.isLearned || actor.data.data.skills.int.commonsp.value > 0 ){
+            if (actor.system.skills.int.commonsp.isProffession || actor.system.skills.int.commonsp.isPickup || actor.system.skills.int.commonsp.isLearned || actor.system.skills.int.commonsp.value > 0 ){
                 known_languages.add("common")
             }
             return [known_languages, literate_languages];
@@ -158,7 +158,7 @@ async function createBoilerplateMacro(data, slot) {
             macro = await Macro.create({
                 name: actor.name,
                 type: 'script',
-                img: actor.data.img,
+                img: actor.system.img,
                 command: command
             }, {renderSheet: false});
         }

@@ -3,8 +3,8 @@
     <div class="item-options">
         <div class="item-collum item-selector">
             <label>{{localize "WITCHER.Type"}}</label>
-            <select name="data.type" id="type-select">
-                {{#select data.type}}
+            <select name="system.type" id="type-select">
+                {{#select item.system.type}}
                 <option value="toolkit">{{localize "WITCHER.Valueble.Toolkit"}}</option>
                 <option value="genera">{{localize "WITCHER.Valueble.General"}}</option>
                 <option value="containers">{{localize "WITCHER.Valueble.Containers"}}</option>
@@ -20,8 +20,8 @@
             <div class="item-row">
                 <div class="item-second-collum">
                     <label>{{localize "WITCHER.Item.Short.Availability"}}</label>
-                    <select name="data.avail" id="avail-select">
-                        {{#select data.avail}}
+                    <select name="system.avail" id="avail-select">
+                        {{#select item.system.avail}}
                         {{#each config.Avalability as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>
                         {{/each}}
@@ -30,8 +30,8 @@
                 </div>
                 <div class="item-second-collum">
                     <th>{{localize "WITCHER.Valuable.Conceal"}}</th>
-                    <select name="data.conceal" id="avail-select">
-                        {{#select data.conceal}}
+                    <select name="system.conceal" id="avail-select">
+                        {{#select item.system.conceal}}
                         {{#each config.Concealment as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>
                         {{/each}}
@@ -43,6 +43,6 @@
     </div>
     {{!-- effect Tab --}}
     <div class="description">
-<textarea rows=5 name="data.description">{{data.description}}</textarea>
+<textarea rows=5 name="system.description">{{system.description}}</textarea>
     </div>
 </form>

@@ -2,9 +2,9 @@
     "name": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
-    "minimumCoreVersion" : "9",
-    "compatibleCoreVersion" : "9",
-    "version": 0.85,
+    "minimumCoreVersion" : "10",
+    "compatibleCoreVersion" : "10",
+    "version": 0.86,
     "author": "TechAntho",
     "scripts": [
     ],
@@ -86,9 +86,9 @@
         "path": "lang/fr.json"
       },
       {
-        "lang": "deu",
+        "lang": "de",
         "name": "German",
-        "path": "lang/deu.json"
+        "path": "lang/de.json"
       },
       {
         "lang": "it",

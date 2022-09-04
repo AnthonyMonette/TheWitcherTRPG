@@ -50,7 +50,7 @@ async function onCritRoll(event) {
   }
   let isSuccess = event.currentTarget.getElementsByClassName("dice-sucess")
   let totalValue = Number(current[0].innerText)
-  let rollResult = await new Roll("1d10x10").roll()
+  let rollResult = await new Roll("1d10x10").evaluate({async: true})
   if (isSuccess.length){
     totalValue += Number(rollResult.total)
   }else {
@@ -141,7 +141,7 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
       messageData.flavor += `</div>`;
     });
   }
-  (await new Roll(damageFormula).roll()).toMessage(messageData)
+  (await new Roll(damageFormula).evaluate({async: true})).toMessage(messageData)
 }
 
 export function addChatMessageContextOptions(html, options){

@@ -11,7 +11,7 @@ with the Hand to Hand Table, page 48 of Witcher TRPG Handbook.
 */
 function updateDerived(actor){
 	const thisActor = actor;
-	const stats = thisActor.data.data.stats;
+	const stats = thisActor.system.stats;
 	const base = Math.floor((stats.body.current + stats.will.current)/2);
 	const baseMax = Math.floor((stats.body.max + stats.will.max)/2);
 	const meleeBonus = Math.ceil((stats.body.current-6)/2)*2;
@@ -34,22 +34,22 @@ function updateDerived(actor){
 	let craDivider = 1;
 	let willDivider = 1;
 	let luckDivider = 1;
-	thisActor.data.data.stats.int.modifiers.forEach(item => intTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.ref.modifiers.forEach(item => refTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.dex.modifiers.forEach(item => dexTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.body.modifiers.forEach(item => bodyTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.spd.modifiers.forEach(item => spdTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.emp.modifiers.forEach(item => empTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
-	thisActor.data.data.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
+	thisActor.system.stats.int.modifiers.forEach(item => intTotalModifiers += Number(item.value));
+	thisActor.system.stats.ref.modifiers.forEach(item => refTotalModifiers += Number(item.value));
+	thisActor.system.stats.dex.modifiers.forEach(item => dexTotalModifiers += Number(item.value));
+	thisActor.system.stats.body.modifiers.forEach(item => bodyTotalModifiers += Number(item.value));
+	thisActor.system.stats.spd.modifiers.forEach(item => spdTotalModifiers += Number(item.value));
+	thisActor.system.stats.emp.modifiers.forEach(item => empTotalModifiers += Number(item.value));
+	thisActor.system.stats.cra.modifiers.forEach(item => craTotalModifiers += Number(item.value));
+	thisActor.system.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
+	thisActor.system.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
 	
 	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
 	activeEffects.forEach(item => {
-		if (!item.data.data.isActive) {
+		if (!item.system.isActive) {
 			return
 		}
-		item.data.data.stats.forEach(stat => {
+		item.system.stats.forEach(stat => {
 			switch(stat.stat){
 				case "WITCHER.Actor.Stat.Int": 
 					if (stat.modifier.includes("/")){intDivider = Number(stat.modifier.replace("/", ''));}
@@ -102,17 +102,17 @@ function updateDerived(actor){
 	let encDivider = 1;
 	let recDivider = 1;
 	let wtDivider= 1;
-	thisActor.data.data.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
-	thisActor.data.data.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.stun.modifiers.forEach(item => stunTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.run.modifiers.forEach(item => runTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.leap.modifiers.forEach(item => leapTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.enc.modifiers.forEach(item => encTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.rec.modifiers.forEach(item => recTotalModifiers += Number(item.value));
+	thisActor.system.coreStats.woundTreshold.modifiers.forEach(item => wtTotalModifiers += Number(item.value));
 
-	let curentEncumbrance = (thisActor.data.data.stats.body.max + bodyTotalModifiers) * 10  + encTotalModifiers
+	let curentEncumbrance = (thisActor.system.stats.body.max + bodyTotalModifiers) * 10  + encTotalModifiers
 	var totalWeights = 0
-	thisActor.items.forEach(item => {if (item.data.data.weight && item.data.data.quantity) {totalWeights += (Number(item.data.data.weight) *  Number(item.data.data.quantity))}})
-	totalWeights += calc_currency_weight(thisActor.data.data.currency);
+	thisActor.items.forEach(item => {if (item.system.weight && item.system.quantity) {totalWeights += (Number(item.system.weight) *  Number(item.system.quantity))}})
+	totalWeights += calc_currency_weight(thisActor.system.currency);
 	let encDiff = 0
 	if (curentEncumbrance < totalWeights){
 		encDiff = Math.ceil((totalWeights-curentEncumbrance) / 5)
@@ -120,10 +120,10 @@ function updateDerived(actor){
 	let armorEnc = getArmorEcumbrance(thisActor)
 
 	activeEffects.forEach(item => {
-		if (!item.data.data.isActive) {
+		if (!item.system.isActive) {
 			return
 		}
-		item.data.data.derived.forEach(derived => {
+		item.system.derived.forEach(derived => {
 			switch(derived.derivedStat){
 				case "WITCHER.Actor.CoreStat.Stun":
 					if (derived.modifier.includes("/")){stunDivider = Number(derived.modifier.replace("/", ''));}
@@ -152,36 +152,36 @@ function updateDerived(actor){
 			}
 		})});
 
-	let curInt =  Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers) / intDivider);
-	let curRef =  Math.floor((thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff) / refDivider);
-	let curDex =  Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc - encDiff) / dexDivider);
-	let curBody =  Math.floor((thisActor.data.data.stats.body.max + bodyTotalModifiers) / bodyDivider);
-	let curSpd =  Math.floor((thisActor.data.data.stats.spd.max + spdTotalModifiers - encDiff) / spdDivider);
-	let curEmp =  Math.floor((thisActor.data.data.stats.emp.max + empTotalModifiers) / empDivider);
-	let curCra =  Math.floor((thisActor.data.data.stats.cra.max + craTotalModifiers) / craDivider);
-	let curWill =  Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers) / willDivider);
-	let curLuck =  Math.floor((thisActor.data.data.stats.luck.max + luckTotalModifiers) / luckDivider);
+	let curInt =  Math.floor((thisActor.system.stats.int.max + intTotalModifiers) / intDivider);
+	let curRef =  Math.floor((thisActor.system.stats.ref.max + refTotalModifiers - armorEnc - encDiff) / refDivider);
+	let curDex =  Math.floor((thisActor.system.stats.dex.max + dexTotalModifiers - armorEnc - encDiff) / dexDivider);
+	let curBody =  Math.floor((thisActor.system.stats.body.max + bodyTotalModifiers) / bodyDivider);
+	let curSpd =  Math.floor((thisActor.system.stats.spd.max + spdTotalModifiers - encDiff) / spdDivider);
+	let curEmp =  Math.floor((thisActor.system.stats.emp.max + empTotalModifiers) / empDivider);
+	let curCra =  Math.floor((thisActor.system.stats.cra.max + craTotalModifiers) / craDivider);
+	let curWill =  Math.floor((thisActor.system.stats.will.max + willTotalModifiers) / willDivider);
+	let curLuck =  Math.floor((thisActor.system.stats.luck.max + luckTotalModifiers) / luckDivider);
 	let isDead = false;
 	let isWounded = false;
-	let HPvalue = thisActor.data.data.derivedStats.hp.value;
+	let HPvalue = thisActor.system.derivedStats.hp.value;
 	if (HPvalue <= 0) {
 		isDead = true
-		curInt = Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers)/3/intDivider)
-		curRef =Math.floor(( thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff)/3/dexDivider)
-		curDex = Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc - encDiff)/3/refDivider)
-		curBody = Math.floor((thisActor.data.data.stats.body.max + bodyTotalModifiers)/3/bodyDivider)
-		curSpd = Math.floor((thisActor.data.data.stats.spd.max + spdTotalModifiers - encDiff)/3/spdDivider)
-		curEmp = Math.floor((thisActor.data.data.stats.emp.max + empTotalModifiers)/3/empDivider)
-		curCra = Math.floor((thisActor.data.data.stats.cra.max + craTotalModifiers)/3/craDivider)
-		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/3/willDivider)
-		curLuck = Math.floor((thisActor.data.data.stats.luck.max + luckTotalModifiers)/3/luckDivider)
+		curInt = Math.floor((thisActor.system.stats.int.max + intTotalModifiers)/3/intDivider)
+		curRef =Math.floor(( thisActor.system.stats.ref.max + refTotalModifiers - armorEnc - encDiff)/3/dexDivider)
+		curDex = Math.floor((thisActor.system.stats.dex.max + dexTotalModifiers - armorEnc - encDiff)/3/refDivider)
+		curBody = Math.floor((thisActor.system.stats.body.max + bodyTotalModifiers)/3/bodyDivider)
+		curSpd = Math.floor((thisActor.system.stats.spd.max + spdTotalModifiers - encDiff)/3/spdDivider)
+		curEmp = Math.floor((thisActor.system.stats.emp.max + empTotalModifiers)/3/empDivider)
+		curCra = Math.floor((thisActor.system.stats.cra.max + craTotalModifiers)/3/craDivider)
+		curWill = Math.floor((thisActor.system.stats.will.max + willTotalModifiers)/3/willDivider)
+		curLuck = Math.floor((thisActor.system.stats.luck.max + luckTotalModifiers)/3/luckDivider)
 	}
-	else if (HPvalue < thisActor.data.data.coreStats.woundTreshold.current > 0) {
+	else if (HPvalue < thisActor.system.coreStats.woundTreshold.current > 0) {
 		isWounded = true
-		curRef = Math.floor((thisActor.data.data.stats.ref.max + refTotalModifiers - armorEnc - encDiff)/2/refDivider)
-		curDex = Math.floor((thisActor.data.data.stats.dex.max + dexTotalModifiers - armorEnc - encDiff)/2/dexDivider)
-		curInt = Math.floor((thisActor.data.data.stats.int.max + intTotalModifiers)/2/intDivider)
-		curWill = Math.floor((thisActor.data.data.stats.will.max + willTotalModifiers)/2/willDivider)
+		curRef = Math.floor((thisActor.system.stats.ref.max + refTotalModifiers - armorEnc - encDiff)/2/refDivider)
+		curDex = Math.floor((thisActor.system.stats.dex.max + dexTotalModifiers - armorEnc - encDiff)/2/dexDivider)
+		curInt = Math.floor((thisActor.system.stats.int.max + intTotalModifiers)/2/intDivider)
+		curWill = Math.floor((thisActor.system.stats.will.max + willTotalModifiers)/2/willDivider)
 	}
 
 	let hpTotalModifiers = 0;
@@ -190,12 +190,12 @@ function updateDerived(actor){
 	let focusTotalModifiers = 0;
 	let hpDivider = 1;
 	let staDivider = 1;
-	thisActor.data.data.derivedStats.hp.modifiers.forEach(item => hpTotalModifiers += Number(item.value));
-	thisActor.data.data.derivedStats.sta.modifiers.forEach(item => staTotalModifiers += Number(item.value));
-	thisActor.data.data.derivedStats.resolve.modifiers.forEach(item => resTotalModifiers += Number(item.value));
-	thisActor.data.data.derivedStats.focus.modifiers.forEach(item => focusTotalModifiers += Number(item.value));
+	thisActor.system.derivedStats.hp.modifiers.forEach(item => hpTotalModifiers += Number(item.value));
+	thisActor.system.derivedStats.sta.modifiers.forEach(item => staTotalModifiers += Number(item.value));
+	thisActor.system.derivedStats.resolve.modifiers.forEach(item => resTotalModifiers += Number(item.value));
+	thisActor.system.derivedStats.focus.modifiers.forEach(item => focusTotalModifiers += Number(item.value));
 	activeEffects.forEach(item => {
-		item.data.data.derived.forEach(derived => {
+		item.system.derived.forEach(derived => {
 			switch(derived.derivedStat){
 				case "WITCHER.Actor.DerStat.HP": 
 					if (derived.modifier.includes("/")){hpDivider = Number(derived.modifier.replace("/", ''));}
@@ -208,15 +208,15 @@ function updateDerived(actor){
 			}
 		})});
 
-	let curHp = thisActor.data.data.derivedStats.hp.max + hpTotalModifiers;
-	let curSta = thisActor.data.data.derivedStats.sta.max + staTotalModifiers;
-	let curRes = thisActor.data.data.derivedStats.resolve.max + resTotalModifiers;
-	let curFocus = thisActor.data.data.derivedStats.focus.max + focusTotalModifiers;
+	let curHp = thisActor.system.derivedStats.hp.max + hpTotalModifiers;
+	let curSta = thisActor.system.derivedStats.sta.max + staTotalModifiers;
+	let curRes = thisActor.system.derivedStats.resolve.max + resTotalModifiers;
+	let curFocus = thisActor.system.derivedStats.focus.max + focusTotalModifiers;
 
 	
 	let unmodifiedMaxHp = baseMax * 5
 
-	if (thisActor.data.data.customStat != true){
+	if (thisActor.system.customStat != true){
 		curHp = Math.floor((base * 5 + hpTotalModifiers)/hpDivider)
 		curSta = Math.floor((base * 5 + staTotalModifiers)/staDivider) 
 		curRes = (Math.floor((curWill + curInt)/2)*5) + resTotalModifiers
@@ -224,45 +224,45 @@ function updateDerived(actor){
 	}
 
 	thisActor.update({ 
-        'data.deathStateApplied': isDead,
-        'data.woundTresholdApplied': isWounded,
-        'data.stats.int.current': curInt,
-        'data.stats.ref.current': curRef,
-        'data.stats.dex.current': curDex,
-        'data.stats.body.current': curBody,
-        'data.stats.spd.current': curSpd,
-        'data.stats.emp.current': curEmp,
-        'data.stats.cra.current': curCra,
-        'data.stats.will.current': curWill,
-        'data.stats.luck.current': curLuck,
+        'system.deathStateApplied': isDead,
+        'system.woundTresholdApplied': isWounded,
+        'system.stats.int.current': curInt,
+        'system.stats.ref.current': curRef,
+        'system.stats.dex.current': curDex,
+        'system.stats.body.current': curBody,
+        'system.stats.spd.current': curSpd,
+        'system.stats.emp.current': curEmp,
+        'system.stats.cra.current': curCra,
+        'system.stats.will.current': curWill,
+        'system.stats.luck.current': curLuck,
 
-		'data.derivedStats.hp.max': curHp,
-		'data.derivedStats.hp.unmodifiedMax': unmodifiedMaxHp,
-		'data.derivedStats.sta.max': curSta,
-		'data.derivedStats.resolve.max': curRes,
-		'data.derivedStats.focus.max': curFocus,
+		'system.derivedStats.hp.max': curHp,
+		'system.derivedStats.hp.unmodifiedMax': unmodifiedMaxHp,
+		'system.derivedStats.sta.max': curSta,
+		'system.derivedStats.resolve.max': curRes,
+		'system.derivedStats.focus.max': curFocus,
 
-		'data.coreStats.stun.current': Math.floor((Math.clamped(base, 1, 10) + stunTotalModifiers)/stunDivider),
-		'data.coreStats.stun.max': Math.clamped(baseMax, 1, 10),
+		'system.coreStats.stun.current': Math.floor((Math.clamped(base, 1, 10) + stunTotalModifiers)/stunDivider),
+		'system.coreStats.stun.max': Math.clamped(baseMax, 1, 10),
 
-		'data.coreStats.enc.current': Math.floor((stats.body.current*10  + encTotalModifiers)/encDivider),
-		'data.coreStats.enc.max': stats.body.current*10,
+		'system.coreStats.enc.current': Math.floor((stats.body.current*10  + encTotalModifiers)/encDivider),
+		'system.coreStats.enc.max': stats.body.current*10,
 
-		'data.coreStats.run.current':  Math.floor((stats.spd.current*3 +runTotalModifiers)/runDivider),
-		'data.coreStats.run.max': stats.spd.current*3,
+		'system.coreStats.run.current':  Math.floor((stats.spd.current*3 +runTotalModifiers)/runDivider),
+		'system.coreStats.run.max': stats.spd.current*3,
 
-		'data.coreStats.leap.current': Math.floor((stats.spd.current*3/5)+leapTotalModifiers)/leapDivider,
-		'data.coreStats.leap.max': Math.floor(stats.spd.max*3/5),
+		'system.coreStats.leap.current': Math.floor((stats.spd.current*3/5)+leapTotalModifiers)/leapDivider,
+		'system.coreStats.leap.max': Math.floor(stats.spd.max*3/5),
 
-		'data.coreStats.rec.current': Math.floor((base + recTotalModifiers)/recDivider),
-		'data.coreStats.rec.max': baseMax,
+		'system.coreStats.rec.current': Math.floor((base + recTotalModifiers)/recDivider),
+		'system.coreStats.rec.max': baseMax,
 		
-		'data.coreStats.woundTreshold.current': Math.floor((baseMax+wtTotalModifiers)/wtDivider),
-		'data.coreStats.woundTreshold.max': baseMax,
+		'system.coreStats.woundTreshold.current': Math.floor((baseMax+wtTotalModifiers)/wtDivider),
+		'system.coreStats.woundTreshold.max': baseMax,
 
-		'data.attackStats.meleeBonus': meleeBonus,
-		'data.attackStats.punch.value': `1d6+${meleeBonus}`,
-		'data.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
+		'system.attackStats.meleeBonus': meleeBonus,
+		'system.attackStats.punch.value': `1d6+${meleeBonus}`,
+		'system.attackStats.kick.value': `1d6+${4 + meleeBonus}`,
 	});
 }
 
@@ -270,8 +270,8 @@ function getArmorEcumbrance(actor){
 	let encumbranceModifier = 0
 	let armors = actor.items.filter(function(item) {return item.type=="armor"});
 	armors.forEach(item => {
-		if (item.data.data.equiped || item.data.data.equiped == "checked") {
-			encumbranceModifier += item.data.data.encumb
+		if (item.system.equiped || item.system.equiped == "checked") {
+			encumbranceModifier += item.system.encumb
 		}
 	});
 	return encumbranceModifier
@@ -288,37 +288,37 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 		case 0:
 			parentStat = game.i18n.localize("WITCHER.StInt");
 			array = getIntSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.int.current;
+			stat = thisActor.system.stats.int.current;
 			break;
 		case 1:
 			parentStat = game.i18n.localize("WITCHER.StRef");
 			array = getRefSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.ref.current;
+			stat = thisActor.system.stats.ref.current;
 			break;
 		case 2:
 			parentStat = game.i18n.localize("WITCHER.StDex");
 			array = getDexSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.dex.current;
+			stat = thisActor.system.stats.dex.current;
 			break;
 		case 3:
 			parentStat = game.i18n.localize("WITCHER.StBody");
 			array = getBodySkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.body.current;
+			stat = thisActor.system.stats.body.current;
 			break;
 		case 4:
 			parentStat = game.i18n.localize("WITCHER.StEmp");
 			array = getEmpSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.emp.current;
+			stat = thisActor.system.stats.emp.current;
 			break;
 		case 5:
 			parentStat = game.i18n.localize("WITCHER.StCra");
 			array = getCraSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.cra.current;
+			stat = thisActor.system.stats.cra.current;
 			break;
 		case 6:
 			parentStat = game.i18n.localize("WITCHER.StWill");
 			array = getWillSkillMod(thisActor, skillNum);
-			stat = thisActor.data.data.stats.will.current;
+			stat = thisActor.system.stats.will.current;
 			break;
 	}
 	let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
@@ -333,16 +333,16 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]` ;
 
     if (statNum == 4 && (skillNum == 0 || skillNum == 6 || skillNum == 7 || skillNum == 9)){
-		if (thisActor.data.data.general.socialStanding == "tolerated") {
+		if (thisActor.system.general.socialStanding == "tolerated") {
 			rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.tolerated")}]` ;
-		} else if (thisActor.data.data.general.socialStanding == "hated" || thisActor.data.data.general.socialStanding == "hatedFeared") {
+		} else if (thisActor.system.general.socialStanding == "hated" || thisActor.system.general.socialStanding == "hatedFeared") {
 			rollFormula += !displayRollDetails ? `-2` : `-2[${game.i18n.localize("WITCHER.socialStanding.hated")}]` ;
 		} 
 	}
-	if (statNum == 4 && skillNum == 0 && (thisActor.data.data.general.socialStanding == "feared" || thisActor.data.data.general.socialStanding == "hatedFeared")){
+	if (statNum == 4 && skillNum == 0 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared")){
 		rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.feared")}]` ;
 	}
-	if (statNum == 6 && skillNum == 2 && (thisActor.data.data.general.socialStanding == "feared" || thisActor.data.data.general.socialStanding == "hatedFeared")){
+	if (statNum == 6 && skillNum == 2 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared")){
 		rollFormula += !displayRollDetails ? `+1` : `+1[${game.i18n.localize("WITCHER.socialStanding.feared")}]` ;
 	}
 
@@ -353,10 +353,10 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 
 	let activeEffects =  thisActor.items.filter(function(item) {return item.type=="effect"});
 	activeEffects.forEach(item => {
-		if (!item.data.data.isActive) {
+		if (!item.system.isActive) {
 			return
 		}
-		item.data.data.skills.forEach(skill => {
+		item.system.skills.forEach(skill => {
 			if (skillName == game.i18n.localize(skill.skill)){
 				if (skill.modifier.includes("/")){rollFormula += !displayRollDetails ? `/${Number(skill.modifier.replace("/", ''))}` : `/${Number(skill.modifier.replace("/", ''))}[${item.name}]`}
 				else {rollFormula += !displayRollDetails ? `+${skill.modifier}` : `+${skill.modifier}[${item.name}]`}
@@ -382,7 +382,7 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 					rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 
-				let roll = await new Roll(rollFormula).roll()
+				let roll = await new Roll(rollFormula).evaluate({async: true})
 				if (roll.dice[0].results[0].result == 10){  
 				  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
 				};
@@ -398,139 +398,139 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 function getIntSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkIntAwareness"), actor.data.data.skills.int.awareness.value,  actor.data.data.skills.int.awareness.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntAwareness"), actor.system.skills.int.awareness.value,  actor.system.skills.int.awareness.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkIntBusiness"), actor.data.data.skills.int.business.value, actor.data.data.skills.int.business.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntBusiness"), actor.system.skills.int.business.value, actor.system.skills.int.business.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkIntDeduction"), actor.data.data.skills.int.deduction.value, actor.data.data.skills.int.deduction.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntDeduction"), actor.system.skills.int.deduction.value, actor.system.skills.int.deduction.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkIntEducation"), actor.data.data.skills.int.education.value, actor.data.data.skills.int.education.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntEducation"), actor.system.skills.int.education.value, actor.system.skills.int.education.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkIntCommon"), actor.data.data.skills.int.commonsp.value, actor.data.data.skills.int.commonsp.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntCommon"), actor.system.skills.int.commonsp.value, actor.system.skills.int.commonsp.modifiers]
 		case 5:
-			return [game.i18n.localize("WITCHER.SkIntElder"), actor.data.data.skills.int.eldersp.value, actor.data.data.skills.int.eldersp.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntElder"), actor.system.skills.int.eldersp.value, actor.system.skills.int.eldersp.modifiers]
 		case 6:
-			return [game.i18n.localize("WITCHER.SkIntDwarven"), actor.data.data.skills.int.dwarven.value, actor.data.data.skills.int.dwarven.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntDwarven"), actor.system.skills.int.dwarven.value, actor.system.skills.int.dwarven.modifiers]
 		case 7:
-			return [game.i18n.localize("WITCHER.SkIntMonster"), actor.data.data.skills.int.monster.value, actor.data.data.skills.int.monster.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntMonster"), actor.system.skills.int.monster.value, actor.system.skills.int.monster.modifiers]
 		case 8:
-			return [game.i18n.localize("WITCHER.SkIntSocialEt"), actor.data.data.skills.int.socialetq.value, actor.data.data.skills.int.socialetq.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntSocialEt"), actor.system.skills.int.socialetq.value, actor.system.skills.int.socialetq.modifiers]
 		case 9:
-			return [game.i18n.localize("WITCHER.SkIntStreet"), actor.data.data.skills.int.streetwise.value, actor.data.data.skills.int.streetwise.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntStreet"), actor.system.skills.int.streetwise.value, actor.system.skills.int.streetwise.modifiers]
 		case 10:
-			return [game.i18n.localize("WITCHER.SkIntTactics"), actor.data.data.skills.int.tactics.value, actor.data.data.skills.int.tactics.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntTactics"), actor.system.skills.int.tactics.value, actor.system.skills.int.tactics.modifiers]
 		case 11:
-			return [game.i18n.localize("WITCHER.SkIntTeaching"), actor.data.data.skills.int.teaching.value, actor.data.data.skills.int.teaching.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntTeaching"), actor.system.skills.int.teaching.value, actor.system.skills.int.teaching.modifiers]
 		case 12:
-			return [game.i18n.localize("WITCHER.SkIntWilderness"), actor.data.data.skills.int.wilderness.value, actor.data.data.skills.int.wilderness.modifiers]
+			return [game.i18n.localize("WITCHER.SkIntWilderness"), actor.system.skills.int.wilderness.value, actor.system.skills.int.wilderness.modifiers]
 	}
 }
 
 function getRefSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkRefBrawling"), actor.data.data.skills.ref.brawling.value, actor.data.data.skills.ref.brawling.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefBrawling"), actor.system.skills.ref.brawling.value, actor.system.skills.ref.brawling.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkRefDodge"), actor.data.data.skills.ref.dodge.value, actor.data.data.skills.ref.dodge.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefDodge"), actor.system.skills.ref.dodge.value, actor.system.skills.ref.dodge.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkRefMelee"), actor.data.data.skills.ref.melee.value, actor.data.data.skills.ref.melee.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefMelee"), actor.system.skills.ref.melee.value, actor.system.skills.ref.melee.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkRefRiding"), actor.data.data.skills.ref.riding.value, actor.data.data.skills.ref.riding.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefRiding"), actor.system.skills.ref.riding.value, actor.system.skills.ref.riding.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkRefSailing"), actor.data.data.skills.ref.sailing.value, actor.data.data.skills.ref.sailing.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefSailing"), actor.system.skills.ref.sailing.value, actor.system.skills.ref.sailing.modifiers]
 		case 5:
-			return [game.i18n.localize("WITCHER.SkRefSmall"), actor.data.data.skills.ref.smallblades.value, actor.data.data.skills.ref.smallblades.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefSmall"), actor.system.skills.ref.smallblades.value, actor.system.skills.ref.smallblades.modifiers]
 		case 6:
-			return [game.i18n.localize("WITCHER.SkRefStaff"), actor.data.data.skills.ref.staffspear.value, actor.data.data.skills.ref.staffspear.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefStaff"), actor.system.skills.ref.staffspear.value, actor.system.skills.ref.staffspear.modifiers]
 		case 7:
-			return [game.i18n.localize("WITCHER.SkRefSwordmanship"), actor.data.data.skills.ref.swordsmanship.value, actor.data.data.skills.ref.swordsmanship.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefSwordmanship"), actor.system.skills.ref.swordsmanship.value, actor.system.skills.ref.swordsmanship.modifiers]
 	}
 }
 
 function getDexSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkDexArchery"), actor.data.data.skills.dex.archery.value, actor.data.data.skills.dex.archery.modifiers]
+			return [game.i18n.localize("WITCHER.SkDexArchery"), actor.system.skills.dex.archery.value, actor.system.skills.dex.archery.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkDexAthletics"), actor.data.data.skills.dex.athletics.value, actor.data.data.skills.dex.athletics.modifiers]
+			return [game.i18n.localize("WITCHER.SkDexAthletics"), actor.system.skills.dex.athletics.value, actor.system.skills.dex.athletics.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkDexCrossbow"), actor.data.data.skills.dex.crossbow.value, actor.data.data.skills.dex.crossbow.modifiers]
+			return [game.i18n.localize("WITCHER.SkDexCrossbow"), actor.system.skills.dex.crossbow.value, actor.system.skills.dex.crossbow.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkDexSleight"), actor.data.data.skills.dex.sleight.value, actor.data.data.skills.dex.sleight.modifiers]
+			return [game.i18n.localize("WITCHER.SkDexSleight"), actor.system.skills.dex.sleight.value, actor.system.skills.dex.sleight.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkDexStealth"), actor.data.data.skills.dex.stealth.value, actor.data.data.skills.dex.stealth.modifiers]
+			return [game.i18n.localize("WITCHER.SkDexStealth"), actor.system.skills.dex.stealth.value, actor.system.skills.dex.stealth.modifiers]
 	}
 }
 
 function getBodySkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkBodyPhys"), actor.data.data.skills.body.physique.value, actor.data.data.skills.body.physique.modifiers]
+			return [game.i18n.localize("WITCHER.SkBodyPhys"), actor.system.skills.body.physique.value, actor.system.skills.body.physique.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkBodyEnd"), actor.data.data.skills.body.endurance.value, actor.data.data.skills.body.endurance.modifiers]
+			return [game.i18n.localize("WITCHER.SkBodyEnd"), actor.system.skills.body.endurance.value, actor.system.skills.body.endurance.modifiers]
 	}
 }
 
 function getEmpSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkEmpCharisma"), actor.data.data.skills.emp.charisma.value, actor.data.data.skills.emp.charisma.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpCharisma"), actor.system.skills.emp.charisma.value, actor.system.skills.emp.charisma.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkEmpDeceit"), actor.data.data.skills.emp.deceit.value, actor.data.data.skills.emp.deceit.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpDeceit"), actor.system.skills.emp.deceit.value, actor.system.skills.emp.deceit.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkEmpArts"), actor.data.data.skills.emp.finearts.value, actor.data.data.skills.emp.finearts.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpArts"), actor.system.skills.emp.finearts.value, actor.system.skills.emp.finearts.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkEmpGambling"), actor.data.data.skills.emp.gambling.value, actor.data.data.skills.emp.gambling.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpGambling"), actor.system.skills.emp.gambling.value, actor.system.skills.emp.gambling.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkEmpGrooming"), actor.data.data.skills.emp.grooming.value, actor.data.data.skills.emp.grooming.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpGrooming"), actor.system.skills.emp.grooming.value, actor.system.skills.emp.grooming.modifiers]
 		case 5:
-			return [game.i18n.localize("WITCHER.SkEmpHumanPerc"), actor.data.data.skills.emp.perception.value, actor.data.data.skills.emp.perception.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpHumanPerc"), actor.system.skills.emp.perception.value, actor.system.skills.emp.perception.modifiers]
 		case 6:
-			return [game.i18n.localize("WITCHER.SkEmpLeadership"), actor.data.data.skills.emp.leadership.value, actor.data.data.skills.emp.leadership.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpLeadership"), actor.system.skills.emp.leadership.value, actor.system.skills.emp.leadership.modifiers]
 		case 7:
-			return [game.i18n.localize("WITCHER.SkEmpPersuasion"), actor.data.data.skills.emp.persuasion.value, actor.data.data.skills.emp.persuasion.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpPersuasion"), actor.system.skills.emp.persuasion.value, actor.system.skills.emp.persuasion.modifiers]
 		case 8:
-			return [game.i18n.localize("WITCHER.SkEmpPerformance"), actor.data.data.skills.emp.performance.value, actor.data.data.skills.emp.performance.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpPerformance"), actor.system.skills.emp.performance.value, actor.system.skills.emp.performance.modifiers]
 		case 9:
-			return [game.i18n.localize("WITCHER.SkEmpSeduction"), actor.data.data.skills.emp.seduction.value, actor.data.data.skills.emp.seduction.modifiers]
+			return [game.i18n.localize("WITCHER.SkEmpSeduction"), actor.system.skills.emp.seduction.value, actor.system.skills.emp.seduction.modifiers]
 	}
 }
 
 function getCraSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkCraAlchemy"), actor.data.data.skills.cra.alchemy.value, actor.data.data.skills.cra.alchemy.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraAlchemy"), actor.system.skills.cra.alchemy.value, actor.system.skills.cra.alchemy.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkCraCrafting"), actor.data.data.skills.cra.crafting.value, actor.data.data.skills.cra.crafting.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraCrafting"), actor.system.skills.cra.crafting.value, actor.system.skills.cra.crafting.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkCraDisguise"), actor.data.data.skills.cra.disguise.value, actor.data.data.skills.cra.disguise.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraDisguise"), actor.system.skills.cra.disguise.value, actor.system.skills.cra.disguise.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkCraAid"), actor.data.data.skills.cra.firstaid.value, actor.data.data.skills.cra.firstaid.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraAid"), actor.system.skills.cra.firstaid.value, actor.system.skills.cra.firstaid.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkCraForge"), actor.data.data.skills.cra.forgery.value, actor.data.data.skills.cra.forgery.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraForge"), actor.system.skills.cra.forgery.value, actor.system.skills.cra.forgery.modifiers]
 		case 5:
-			return [game.i18n.localize("WITCHER.SkCraPick"), actor.data.data.skills.cra.picklock.value, actor.data.data.skills.cra.picklock.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraPick"), actor.system.skills.cra.picklock.value, actor.system.skills.cra.picklock.modifiers]
 		case 6:
-			return [game.i18n.localize("WITCHER.SkCraTrapCraft"), actor.data.data.skills.cra.trapcraft.value, actor.data.data.skills.cra.trapcraft.modifiers]
+			return [game.i18n.localize("WITCHER.SkCraTrapCraft"), actor.system.skills.cra.trapcraft.value, actor.system.skills.cra.trapcraft.modifiers]
 	}
 }
 
 function getWillSkillMod(actor, skillNum){
 	switch(skillNum){
 		case 0:
-			return [game.i18n.localize("WITCHER.SkWillCourage"), actor.data.data.skills.will.courage.value, actor.data.data.skills.will.courage.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillCourage"), actor.system.skills.will.courage.value, actor.system.skills.will.courage.modifiers]
 		case 1:
-			return [game.i18n.localize("WITCHER.SkWillHex"), actor.data.data.skills.will.hexweave.value, actor.data.data.skills.will.hexweave.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillHex"), actor.system.skills.will.hexweave.value, actor.system.skills.will.hexweave.modifiers]
 		case 2:
-			return [game.i18n.localize("WITCHER.SkWillIntim"), actor.data.data.skills.will.intimidation.value, actor.data.data.skills.will.intimidation.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillIntim"), actor.system.skills.will.intimidation.value, actor.system.skills.will.intimidation.modifiers]
 		case 3:
-			return [game.i18n.localize("WITCHER.SkWillSpellcast"), actor.data.data.skills.will.spellcast.value, actor.data.data.skills.will.spellcast.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillSpellcast"), actor.system.skills.will.spellcast.value, actor.system.skills.will.spellcast.modifiers]
 		case 4:
-			return [game.i18n.localize("WITCHER.SkWillResistMag"), actor.data.data.skills.will.resistmagic.value, actor.data.data.skills.will.resistmagic.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillResistMag"), actor.system.skills.will.resistmagic.value, actor.system.skills.will.resistmagic.modifiers]
 		case 5:
-			return [game.i18n.localize("WITCHER.SkWillResistCoer"), actor.data.data.skills.will.resistcoerc.value, actor.data.data.skills.will.resistcoerc.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillResistCoer"), actor.system.skills.will.resistcoerc.value, actor.system.skills.will.resistcoerc.modifiers]
 		case 6:
-			return [game.i18n.localize("WITCHER.SkWillRitCraft"), actor.data.data.skills.will.ritcraft.value, actor.data.data.skills.will.ritcraft.modifiers]
+			return [game.i18n.localize("WITCHER.SkWillRitCraft"), actor.system.skills.will.ritcraft.value, actor.system.skills.will.ritcraft.modifiers]
 	}
 }
 

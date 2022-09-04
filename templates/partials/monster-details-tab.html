@@ -1,11 +1,11 @@
 <label>{{localize "WITCHER.Monster.Resistances"}}</label>
-<input type="text" name="data.resistances" value="{{data.resistances}}" placeholder="" />
+<input type="text" name="system.resistances" value="{{system.resistances}}" placeholder="" />
 <label>{{localize "WITCHER.Monster.Immunities"}}</label>
-<input type="text" name="data.immunities" value="{{data.immunities}}" placeholder="" />
+<input type="text" name="system.immunities" value="{{system.immunities}}" placeholder="" />
 <label>{{localize "WITCHER.Monster.Susceptibilities"}}</label>
-<input type="text" name="data.susceptibilities" value="{{data.susceptibilities}}" placeholder="" />
+<input type="text" name="system.susceptibilities" value="{{system.susceptibilities}}" placeholder="" />
 <label>{{localize "WITCHER.Monster.Senses"}}</label>
-<input type="text" name="data.senses" value="{{data.senses}}" placeholder="" />
+<input type="text" name="system.senses" value="{{system.senses}}" placeholder="" />
 
 <div class="monster-crit-wounds-section">
     <h2>{{localize "WITCHER.CritWound.Header"}}<a class="add-crit" data-itemType="note"><i class="fas fa-plus"></i></a></h2>
@@ -23,22 +23,22 @@
     </div>
     <div class="flex">
         <div class="modifier-flex">
-            {{#each effect.data.stats as |stat index|}}
+            {{#each effect.system.stats as |stat index|}}
                 <div>{{localize stat.stat}}:{{stat.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-flex">
-            {{#each effect.data.derived as |derived index|}}
+            {{#each effect.system.derived as |derived index|}}
                 <div>{{localize derived.derivedStat}}:{{derived.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-flex">
-            {{#each effect.data.skills as |skill index|}}
+            {{#each effect.system.skills as |skill index|}}
                 <div>{{localize skill.skill}}:{{skill.modifier}}</div> 
             {{/each}}
         </div>
     </div>
-<textarea rows=3 >{{effect.data.description}}</textarea>
+<textarea rows=3 >{{effect.system.description}}</textarea>
 </div>
 {{/each}}
 
@@ -50,6 +50,6 @@
         <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
     </div>
-<textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
+<textarea class="inline-edit" rows="5" data-field="system.description">{{system.description}}</textarea>
 </div>
 {{/each}}

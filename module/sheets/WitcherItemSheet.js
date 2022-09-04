@@ -17,28 +17,29 @@ export default class WitcherItemSheet extends ItemSheet {
     }
 
     get template() {
-        return `systems/TheWitcherTRPG/templates/sheets/${this.item.data.type}-sheet.html`;
+        return `systems/TheWitcherTRPG/templates/sheets/${this.object.type}-sheet.html`;
     }
 
     /** @override */
     getData() {
       const data = super.getData();
       data.config = CONFIG.witcher;
-      if (data.data.data) {
-        data.data = data.data.data
+    
+      this.options.classes.push(`item-${this.item.type}`)
+      if (data.item) {
+        data.data = data.item.system
       }
-      this.options.classes.push(`item-${this.item.data.type}`)
 
       if (this.item.type == "weapon") {
         let appliedId = false;
-        this.item.data.data.effects.forEach(element => {
+        this.item.system.effects.forEach(element => {
           if (element.id == undefined) {
             appliedId = true
             element.id = genId()
           }
         });
         if (appliedId) {
-          this.item.update({'data.effects': this.item.data.data.effects});
+          this.item.update({'system.effects': this.item.system.effects});
         }
       }
       return data;
@@ -96,21 +97,21 @@ export default class WitcherItemSheet extends ItemSheet {
           let pack = game.packs.get(dragEventData.pack)
           pack.getDocument(dragEventData.id).then(item => {
             let newComponentList  = []
-            if (this.item.data.data.craftingComponents){
-              newComponentList = this.item.data.data.craftingComponents
+            if (this.item.system.craftingComponents){
+              newComponentList = this.item.system.craftingComponents
             }
-            newComponentList.push({id: genId(), name: item.data.name, quantity: 1})
-            this.item.update({'data.craftingComponents': newComponentList});
+            newComponentList.push({id: genId(), name: item.system.name, quantity: 1})
+            this.item.update({'system.craftingComponents': newComponentList});
           })
         } else {
           let item = game.items.get(dragEventData.id)
           if (item) {
             let newComponentList  = []
-            if (this.item.data.data.craftingComponents){
-              newComponentList = this.item.data.data.craftingComponents
+            if (this.item.system.craftingComponents){
+              newComponentList = this.item.system.craftingComponents
             }
-            newComponentList.push({id: genId(), name: item.data.name, quantity: 1})
-            this.item.update({'data.craftingComponents': newComponentList});
+            newComponentList.push({id: genId(), name: item.system.name, quantity: 1})
+            this.item.update({'system.craftingComponents': newComponentList});
           }
         }
       }
@@ -124,17 +125,17 @@ export default class WitcherItemSheet extends ItemSheet {
       let field = element.dataset.field;
       let value = element.value
       if (this.item.type == "diagrams") {
-        let components = this.item.data.data.craftingComponents
+        let components = this.item.system.craftingComponents
         let objIndex = components.findIndex((obj => obj.id == itemId));
         components[objIndex][field] = value
-        this.item.update({'data.craftingComponents': components});
+        this.item.update({'system.craftingComponents': components});
       }
       else {
-        let effects = this.item.data.data.effects
+        let effects = this.item.system.effects
         let objIndex = effects.findIndex((obj => obj.id == itemId));
         effects[objIndex][field] = value
 
-        this.item.update({'data.effects': effects});
+        this.item.update({'system.effects': effects});
       }
     }
 
@@ -144,16 +145,16 @@ export default class WitcherItemSheet extends ItemSheet {
       let itemId = element.closest(".list-item").dataset.id;
       let field = element.dataset.field;
       let value = element.value
-      let effects = this.item.data.data.stats
+      let effects = this.item.system.stats
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
-      this.item.update({'data.stats': effects});
+      this.item.update({'system.stats': effects});
     }
     
     _onDamageTypeEdit (event) {
       event.preventDefault();
       let element = event.currentTarget;
-      let newval = Object.assign({}, this.item.data.data.type)
+      let newval = Object.assign({}, this.item.system.type)
       newval[element.id] = !newval[element.id]
       let types=[]
       if(newval.slashing) types.push(game.i18n.localize("WITCHER.Armor.Slashing"))
@@ -161,7 +162,7 @@ export default class WitcherItemSheet extends ItemSheet {
       if(newval.bludgeoning) types.push(game.i18n.localize("WITCHER.Armor.Bludgeoning"))
       if(newval.elemental) types.push(game.i18n.localize("WITCHER.Armor.Elemental"))
       newval.text = types.join(", ")
-      this.item.update({'data.type': newval});
+      this.item.update({'system.type': newval});
     }
     
     _onModifierDerivedEdit(event) {
@@ -171,10 +172,10 @@ export default class WitcherItemSheet extends ItemSheet {
       
       let field = element.dataset.field;
       let value = element.value
-      let effects = this.item.data.data.derived
+      let effects = this.item.system.derived
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
-      this.item.update({'data.derived': effects});
+      this.item.update({'system.derived': effects});
     }
 
     _onModifierSkillsEdit(event) {
@@ -184,101 +185,101 @@ export default class WitcherItemSheet extends ItemSheet {
       
       let field = element.dataset.field;
       let value = element.value
-      let effects = this.item.data.data.skills
+      let effects = this.item.system.skills
       let objIndex = effects.findIndex((obj => obj.id == itemId));
       effects[objIndex][field] = value
-      this.item.update({'data.skills': effects});
+      this.item.update({'system.skills': effects});
     }
 
     _onRemoveComponent(event) {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
-      let newComponentList  = this.item.data.data.craftingComponents.filter(item => item.id !== itemId)
-      this.item.update({'data.craftingComponents': newComponentList});
+      let newComponentList  = this.item.system.craftingComponents.filter(item => item.id !== itemId)
+      this.item.update({'system.craftingComponents': newComponentList});
     }
 
     _oRemoveEffect(event) {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
-      let newEffectList  = this.item.data.data.effects.filter(item => item.id !== itemId)
-      this.item.update({'data.effects': newEffectList});
+      let newEffectList  = this.item.system.effects.filter(item => item.id !== itemId)
+      this.item.update({'system.effects': newEffectList});
     }
 
     _onRemoveModifierStat(event) {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
-      let newModifierList  = this.item.data.data.stats.filter(item => item.id !== itemId)
-      this.item.update({'data.stats': newModifierList});
+      let newModifierList  = this.item.system.stats.filter(item => item.id !== itemId)
+      this.item.update({'system.stats': newModifierList});
     }
 
     _onRemoveModifierSkill(event) {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
-      let newModifierList  = this.item.data.data.skills.filter(item => item.id !== itemId)
-      this.item.update({'data.skills': newModifierList});
+      let newModifierList  = this.item.system.skills.filter(item => item.id !== itemId)
+      this.item.update({'system.skills': newModifierList});
     }
 
     _onRemoveModifierDerived(event) {
       event.preventDefault();
       let element = event.currentTarget;
       let itemId = element.closest(".list-item").dataset.id;
-      let newModifierList  = this.item.data.data.derived.filter(item => item.id !== itemId)
-      this.item.update({'data.derived': newModifierList});
+      let newModifierList  = this.item.system.derived.filter(item => item.id !== itemId)
+      this.item.update({'system.derived': newModifierList});
     }
 
     
     _onAddEffect(event) {
       event.preventDefault();
       let newEffectList  = []
-      if (this.item.data.effects){
-        newEffectList = this.item.data.data.effects
+      if (this.item.system.effects){
+        newEffectList = this.item.system.effects
       }
       newEffectList.push({id: genId(), name: "effect", percentage: ""})
-      this.item.update({'data.effects': newEffectList});
+      this.item.update({'system.effects': newEffectList});
     }
 
     _onAddComponent(event) {
       event.preventDefault();
       let newComponentList  = []
-      if (this.item.data.data.craftingComponents){
-        newComponentList = this.item.data.data.craftingComponents
+      if (this.item.system.craftingComponents){
+        newComponentList = this.item.system.craftingComponents
       }
       newComponentList.push({id: genId(), name: "component", quantity: ""})
-      this.item.update({'data.craftingComponents': newComponentList});
+      this.item.update({'system.craftingComponents': newComponentList});
     }
 
     _onAddModifierStat(event) {
       event.preventDefault();
       let newModifierList  = []
-      if (this.item.data.data.stats){
-        newModifierList = this.item.data.data.stats
+      if (this.item.system.stats){
+        newModifierList = this.item.system.stats
       }
       newModifierList.push({id: genId(), stat: "none", modifier: 0})
-      this.item.update({'data.stats': newModifierList});
+      this.item.update({'system.stats': newModifierList});
     }
 
     _onAddModifierSkill(event) {
       event.preventDefault();
       let newModifierList  = []
-      if (this.item.data.data.skills){
-        newModifierList = this.item.data.data.skills
+      if (this.item.system.skills){
+        newModifierList = this.item.system.skills
       }
       newModifierList.push({id: genId(), skill: "none", modifier: 0})
-      this.item.update({'data.skills': newModifierList});
+      this.item.update({'system.skills': newModifierList});
     }
 
     _onAddModifierDerived(event) {
       event.preventDefault();
       let newModifierList  = []
-      if (this.item.data.data.derived){
-        newModifierList = this.item.data.data.derived
+      if (this.item.system.derived){
+        newModifierList = this.item.system.derived
       }
       newModifierList.push({id: genId(), derivedStat: "none", modifier: 0})
-      this.item.update({'data.derived': newModifierList});
+      this.item.update({'system.derived': newModifierList});
     }
     
     _onFocusIn(event) {

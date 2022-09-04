@@ -3,13 +3,13 @@
         <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
         <label>{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
     </div>
-    {{#each data.stats as |details stat|}}
+    {{#each system.stats as |details stat|}}
     <div class="stat-display char-stat-display" data-stat="{{stat}}">
         <div>
             <div class="flex">
                 <a class="char-stat-button stat-roll">{{localize details.label}}</a>
-                <input class="header-stat" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                <input class="header-stat stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                <input class="header-stat" name="system.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                <input class="header-stat stat-max" name="system.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
                 
                 {{#unless details.isOpened}}
                 <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
@@ -41,18 +41,18 @@
         <div>
             <div class="flex">
                 <a class="char-stat-button reputation-button reputation-roll">{{localize "WITCHER.Reputation"}}</a>
-                <input class="header-stat stat-max" name="data.reputation.max" type="number" value="{{data.reputation.max}}" placeholder="0" data-dtype="Number"/>
+                <input class="header-stat stat-max" name="system.reputation.max" type="number" value="{{system.reputation.max}}" placeholder="0" data-dtype="Number"/>
         
-                {{#unless data.reputation.isOpened}}
+                {{#unless system.reputation.isOpened}}
                     <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
                 {{/unless}}
-                {{#if data.reputation.isOpened}}
+                {{#if system.reputation.isOpened}}
                     <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
                 {{/if}}
             </div>
-        {{#if data.reputation.isOpened}}
+        {{#if system.reputation.isOpened}}
             <a class="add-modifier"><i class="fas fa-plus"></i></a>
-            {{#each data.reputation.modifiers as |modifier value|}}
+            {{#each system.reputation.modifiers as |modifier value|}}
             <div class="list-modifiers"  data-id="{{modifier.id}}">
                 <input  class="medium list-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
                 <input  class="small list-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
@@ -73,7 +73,7 @@
         <div class="core-stats-list">
             <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
             <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
-            {{#each data.coreStats as |details coreStat|}}
+            {{#each system.coreStats as |details coreStat|}}
             <div class="stat-display char-stat-display" data-type="coreStat" data-stat="{{coreStat}}">
                 <div>
                     <div class="flex">
@@ -113,17 +113,17 @@
             </tr>
             <tr>
                 <td><b>{{localize "WITCHER.Actor.Gender"}}</b></td>
-                <td><input class="medium" name="data.gender" type="text" value="{{data.gender}}" placeholder=""/></td>
+                <td><input class="medium" name="system.gender" type="text" value="{{system.gender}}" placeholder=""/></td>
                 <td><b>{{localize "WITCHER.Actor.Age"}}</b></td>
-                <td><input class="header-stat" name="data.general.age" type="number" value="{{data.general.age}}" placeholder="0" data-dtype="Number"/></td>
+                <td><input class="header-stat" name="system.general.age" type="number" value="{{system.general.age}}" placeholder="0" data-dtype="Number"/></td>
             </tr>
             <tr>
                 <td><b>{{localize "WITCHER.Homeland"}}</b></td>
-                {{#if (eq data.general.homeland.value "Other")}}
-                    <td>{{data.general.homeland.otherValue}}</td>
+                {{#if (eq system.general.homeland.value "Other")}}
+                    <td>{{system.general.homeland.otherValue}}</td>
                 {{/if}}
-                {{#unless (eq data.general.homeland.value "Other")}}
-                    <td>{{data.general.homeland.value}}</td>
+                {{#unless (eq system.general.homeland.value "Other")}}
+                    <td>{{system.general.homeland.value}}</td>
                 {{/unless}}
                 <td></td>
                 <td></td>
@@ -131,8 +131,8 @@
             <tr>
                 <td><b>{{localize "WITCHER.character.socialStanding"}}</b></td>
                 <td colspan="2">
-                    <select name="data.general.socialStanding" id="socialStanding-select">
-                    {{#select data.general.socialStanding}}
+                    <select name="system.general.socialStanding" id="socialStanding-select">
+                    {{#select system.general.socialStanding}}
                         <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
                         <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
                         <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
@@ -163,81 +163,81 @@
         </div>
         <div class="death-section">
             <a class="death-minus"><i class="fas fa-minus"></i></a>
-            {{#if (gt data.deathSaves 0)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 0)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 1)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 1)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 2)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 2)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 3)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 3)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 4)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 4)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 5)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 5)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 6)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 6)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 7)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 7)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 8)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 8)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 0)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 0)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 1)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 1)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 2)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 2)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 3)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 3)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 4)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 4)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 5)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 5)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 6)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 6)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 7)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 7)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 8)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 8)}}<i class="fas fa-skull"></i>.{{/unless}}
             <a class="death-plus"><i class="fas fa-plus"></i></a>
         </div>
         <div class="right-bottom">
             <div class="right-row">
                 <div class="right-element">
-                    <label>{{localize "WITCHER.Actor.Hp"}} ({{data.derivedStats.hp.max}})/{{data.derivedStats.hp.unmodifiedMax}}</label>
-                    {{#if data.deathStateApplied}}
+                    <label>{{localize "WITCHER.Actor.Hp"}} ({{system.derivedStats.hp.max}})/{{system.derivedStats.hp.unmodifiedMax}}</label>
+                    {{#if system.deathStateApplied}}
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-dead.png"/>
                     {{/if}}
-                    {{#if data.woundTresholdApplied}}
-                      {{#unless data.deathStateApplied}}
+                    {{#if system.woundTresholdApplied}}
+                      {{#unless system.deathStateApplied}}
                         <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
                       {{/unless}}
                     {{/if}}
-                    {{#unless data.woundTresholdApplied}}
-                      {{#unless data.deathStateApplied}}
+                    {{#unless system.woundTresholdApplied}}
+                      {{#unless system.deathStateApplied}}
                         <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
                       {{/unless}}
                     {{/unless}}
-                    <input class="right-value hp-value" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value hp-value" name="system.derivedStats.hp.value" type="number" value="{{system.derivedStats.hp.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
                 <div class="right-element">
-                    <label>{{localize "WITCHER.Actor.Stamina"}} ({{data.derivedStats.sta.max}})</label>
+                    <label>{{localize "WITCHER.Actor.Stamina"}} ({{system.derivedStats.sta.max}})</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
-                    <input class="right-value" style="bottom:48px;" name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value" style="bottom:48px;" name="system.derivedStats.sta.value" type="number" value="{{system.derivedStats.sta.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
             </div>
             <div class="right-row">
                 {{#if useVerbalCombat}}
                 <div class="right-element">
-                    <label>{{localize data.derivedStats.resolve.label}} ({{data.derivedStats.resolve.max}})</label>
+                    <label>{{localize system.derivedStats.resolve.label}} ({{system.derivedStats.resolve.max}})</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
-                    <input class="right-value" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value" name="system.derivedStats.resolve.value" type="number" value="{{system.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
                 {{/if}}
                 <div class="right-element">
-                    <label>{{localize data.derivedStats.focus.label}} ({{data.derivedStats.focus.max}})</label> 
+                    <label>{{localize system.derivedStats.focus.label}} ({{system.derivedStats.focus.max}})</label> 
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
-                    <input class="right-value" name="data.derivedStats.focus.current" type="number" value="{{data.derivedStats.focus.current}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value" name="system.derivedStats.focus.current" type="number" value="{{system.derivedStats.focus.current}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
             </div>
             <div class="right-row">
                 <div class="right-element">
-                    <label>{{localize "WITCHER.StLuck"}} ({{data.stats.luck.current}})</label>
+                    <label>{{localize "WITCHER.StLuck"}} ({{system.stats.luck.current}})</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/clover.png"/>
-                    <input class="right-value" name="data.stats.luck.total" type="number" value="{{data.stats.luck.total}}" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value" name="system.stats.luck.total" type="number" value="{{system.stats.luck.total}}" max="99" placeholder="0" data-dtype="Number"/>
                 </div>
                 <div class="right-element">
                 {{#if useAdrenaline}}
                     <label>{{localize "WITCHER.Actor.Adrenaline"}}</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/adrenaline.png"/>
-                    <input class="right-value" name="data.adrenaline" type="number" value="{{data.adrenaline}}" min="0" max="99" placeholder="0" data-dtype="Number"/>
+                    <input class="right-value" name="system.adrenaline" type="number" value="{{system.adrenaline}}" min="0" max="99" placeholder="0" data-dtype="Number"/>
                 {{/if}}
                 </div>
             </div>
         </div>
         <label>{{localize "WITCHER.Resources.modifiers"}}</label>
-        {{#unless data.derivedStats.modifiersIsOpened}}
+        {{#unless system.derivedStats.modifiersIsOpened}}
             <a class="derived-modifier-display"><i class="fas fa-chevron-right"></i></a>
         {{/unless}}
-        {{#if data.derivedStats.modifiersIsOpened}}
+        {{#if system.derivedStats.modifiersIsOpened}}
             <a class="derived-modifier-display"><i class="fas fa-chevron-down"></i></a>
         {{/if}}
         
-        {{#if data.derivedStats.modifiersIsOpened}}
-            {{#each data.derivedStats as |details derivedStats|}}
+        {{#if system.derivedStats.modifiersIsOpened}}
+            {{#each system.derivedStats as |details derivedStats|}}
                 {{#unless (eq derivedStats "vigor")}}
                 {{#unless (eq derivedStats "modifiersIsOpened")}}
                 <div class="stat-display" data-type="derivedStat" data-stat="{{derivedStats}}">

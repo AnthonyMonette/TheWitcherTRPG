@@ -7,14 +7,14 @@
             <th>{{localize "WITCHER.Type"}}</th>
             <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th>{{localize "WITCHER.Alchemy.Duration"}}</th>
-            {{#if (or (eq data.type "potion") (eq data.type "decoction"))}}
+            {{#if (or (eq item.system.type "potion") (eq item.system.type "decoction"))}}
             <th>{{localize "WITCHER.Alchemy.Toxicity"}}</th>
             {{/if}}
         </tr>
         <tr>
             <td>    
-                <select name="data.type" id="type-select">
-                    {{#select data.type}}
+                <select name="system.type" id="type-select">
+                    {{#select item.system.type}}
                     <option value="alchemical">{{localize "WITCHER.Alchemy.Alchemical"}}</option>
                     <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
                     <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
@@ -23,8 +23,8 @@
                 </select>
             </td>
             <td>
-                <select name="data.avail" id="avail-select">
-                {{#select data.avail}}
+                <select name="system.avail" id="avail-select">
+                {{#select item.system.avail}}
                 {{#each config.Avalability as |name value|}}
                     <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
@@ -32,16 +32,16 @@
                 {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.time" value="{{data.time}}"/></td>
-            {{#if (or (eq data.type "potion") (eq data.type "decoction"))}}
-            <td><input type="text" name="data.toxicity" value="{{data.toxicity}}"/></td>
+            <td><input type="text" name="system.time" value="{{item.system.time}}"/></td>
+            {{#if (or (eq item.system.type "potion") (eq item.system.type "decoction"))}}
+            <td><input type="text" name="system.toxicity" value="{{item.system.toxicity}}"/></td>
             {{/if}}
         </tr>
         <tr>
             <td colspan="4">
                 <div>
                     <label>{{localize "WITCHER.Item.Effect"}}</label>
-<textarea rows=10 name="data.effect">{{data.effect}}</textarea>
+<textarea rows=10 name="system.effect">{{system.effect}}</textarea>
                 </div>
             </td>
         </tr>

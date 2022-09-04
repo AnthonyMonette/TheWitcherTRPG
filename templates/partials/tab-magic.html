@@ -20,22 +20,22 @@
                     </td>
                     <td><img src="{{noviceSpell.img}}" class="item-img dragable" draggable="true" data-id="{{noviceSpell._id}}"/></td>
                     <td><a class="spell-roll">{{noviceSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{noviceSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{noviceSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{noviceSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{noviceSpell.system.effect}}
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.system.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.system.range}}</div>
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.system.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.system.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -64,22 +64,22 @@
                     </td>
                     <td><img src="{{journeymanSpell.img}}" class="item-img dragable" draggable="true" data-id="{{journeymanSpell._id}}"/></td>
                     <td><a class="spell-roll">{{journeymanSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{journeymanSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{journeymanSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{journeymanSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{journeymanSpell.system.effect}}
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.system.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.system.range}}</div>
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.system.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.system.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -108,22 +108,22 @@
                     </td>
                     <td><img src="{{masterSpell.img}}" class="item-img dragable" draggable="true" data-id="{{masterSpell._id}}"/></td>
                     <td><a class="spell-roll">{{masterSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{masterSpell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{masterSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{masterSpell.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{masterSpell.system.effect}}
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.data.source}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.data.range}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Mutagen.Source"}}:</b></label> {{noviceSpell.system.source}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Range"}}:</b></label> {{noviceSpell.system.range}}</div>
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.data.duration}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.data.defense}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label> {{noviceSpell.system.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Defence"}}:</b></label> {{noviceSpell.system.defense}}</div>
                             </div>
                         </div>
                     </td>
@@ -136,23 +136,23 @@
         <div class="magic-info">
             <div class="stat-display">
                 <label>{{localize "WITCHER.StVigor"}}</label> 
-                <input class="focus-value" name="data.derivedStats.vigor.value" type="text" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
+                <input class="focus-value" name="system.derivedStats.vigor.value" type="text" value="{{system.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
             </div>
             <div class="flex">
-                <input class="focus" name="data.focus1.name" type="text" value="{{data.focus1.name}}" placeholder="First Focus" />
-                <input class="focus-value" name="data.focus1.value" type="text" value="{{data.focus1.value}}" placeholder="0" />
+                <input class="focus" name="system.focus1.name" type="text" value="{{system.focus1.name}}" placeholder="First Focus" />
+                <input class="focus-value" name="system.focus1.value" type="text" value="{{system.focus1.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.focus2.name" type="text" value="{{data.focus2.name}}" placeholder="Second Focus" />
-                <input class="focus-value" name="data.focus2.value" type="text" value="{{data.focus2.value}}" placeholder="0" />
+                <input class="focus" name="system.focus2.name" type="text" value="{{system.focus2.name}}" placeholder="Second Focus" />
+                <input class="focus-value" name="system.focus2.value" type="text" value="{{system.focus2.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.focus3.name" type="text" value="{{data.focus3.name}}" placeholder="Third Focus" />
-                <input class="focus-value" name="data.focus3.value" type="text" value="{{data.focus3.value}}" placeholder="0" />
+                <input class="focus" name="system.focus3.name" type="text" value="{{system.focus3.name}}" placeholder="Third Focus" />
+                <input class="focus-value" name="system.focus3.value" type="text" value="{{system.focus3.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="focus" name="data.focus4.name" type="text" value="{{data.focus4.name}}" placeholder="Fourth Focus" />
-                <input class="focus-value" name="data.v.value" type="text" value="{{data.focus4.value}}" placeholder="0" />
+                <input class="focus" name="system.focus4.name" type="text" value="{{system.focus4.name}}" placeholder="Fourth Focus" />
+                <input class="focus-value" name="system.v.value" type="text" value="{{system.focus4.value}}" placeholder="0" />
             </div>
         </div>
         <h2> {{localize "WITCHER.Spell.Rituals"}} <a class="add-item" data-itemType="spell" data-spellType="rituals"><i class="fas fa-plus"></i></a> </h2>
@@ -175,22 +175,22 @@
                     </td>
                     <td><img src="{{ritual.img}}" class="item-img dragable" draggable="true" data-id="{{ritual._id}}"/></td>
                     <td><a class="spell-roll">{{ritual.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{ritual.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{ritual.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{ritual.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{ritual.system.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Components"}}:</b></label> {{ritual.data.components}}
+                                <label><b>{{localize "WITCHER.Spell.Components"}}:</b></label> {{ritual.system.components}}
                             </div>
                             <div class="flex justify">
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.PrepTime"}}:</b></label><br /> {{ritual.data.preparationTime}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.DC"}}:</b></label><br />  {{ritual.data.dificultyCheck}}</div>
-                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label><br />  {{ritual.data.duration}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.PrepTime"}}:</b></label><br /> {{ritual.system.preparationTime}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.DC"}}:</b></label><br />  {{ritual.system.dificultyCheck}}</div>
+                                <div class="flex1"><label><b>{{localize "WITCHER.Spell.Duration"}}:</b></label><br />  {{ritual.system.duration}}</div>
                             </div>
                         </div>
                     </td>
@@ -218,17 +218,17 @@
                     </td>
                     <td><img src="{{hex.img}}" class="item-img dragable" draggable="true" data-id="{{hex._id}}"/></td>
                     <td><a class="spell-roll">{{hex.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{hex.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{hex.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
                     <td colspan="4">
                         <div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{hex.data.effect}}
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{hex.system.effect}}
                             </div>
                             <div class="flex">
-                                <label><b>{{localize "WITCHER.Spell.Requirements"}}</b></label> {{hex.data.liftRequirement}}
+                                <label><b>{{localize "WITCHER.Spell.Requirements"}}</b></label> {{hex.system.liftRequirement}}
                             </div>
                         </div>
                     </td>

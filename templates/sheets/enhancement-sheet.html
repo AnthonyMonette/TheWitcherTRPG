@@ -3,8 +3,8 @@
     <div class="item-options">
         <div class="item-collum">
             <label>{{localize "WITCHER.Type"}}:</label>
-            <select name="data.type" id="type-select">
-                {{#select data.type}}
+            <select name="system.type" id="type-select">
+                {{#select item.system.type}}
                 <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
                 <option value="rune">{{localize "WITCHER.Enhancement.Rune"}}</option>
                 <option value="armor">{{localize "WITCHER.Enhancement.Armor"}}</option>
@@ -13,7 +13,7 @@
             </select>
         </div>
     </div>
-    {{#if (eq data.type "armor")}}
+    {{#if (eq item.system.type "armor")}}
     <table>
         <tr>
             <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
@@ -24,18 +24,18 @@
         </tr>
         <tr>
             <td>
-                <select name="data.avail" id="avail-select">
-                {{#select data.avail}}
+                <select name="system.avail" id="avail-select">
+                {{#select item.system.avail}}
                 {{#each config.Avalability as |name value|}}
                         <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.stopping" value="{{data.stopping}}" data-dtype="Number"/></td>
-            <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
-            <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
-            <td><input type="checkbox" name="data.piercing" {{checked data.piercing}} /></td>
+            <td><input type="text" name="system.stopping" value="{{item.system.stopping}}" data-dtype="Number"/></td>
+            <td><input type="checkbox" name="system.bludgeoning" {{checked item.system.bludgeoning}}/></td>
+            <td><input type="checkbox" name="system.slashing" {{checked item.system.slashing}} /></td>
+            <td><input type="checkbox" name="system.piercing" {{checked item.system.piercing}} /></td>
         </tr>
         <tr >
             <td colspan="5">
@@ -46,7 +46,7 @@
     <div class="flex">
         <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each data.effects as |effect name|}}
+    {{#each system.effects as |effect name|}}
     <div class="flex list-item"  data-id="{{effect.id}}">
         <a class="remove-effect"><i class="fas fa-minus"></i></a>
 <textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>

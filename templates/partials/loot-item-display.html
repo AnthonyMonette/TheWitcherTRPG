@@ -1,4 +1,4 @@
-{{#if item.data.isHidden}}
+{{#if item.system.isHidden}}
     {{#if isGM}}      
         <tr class="item hidden-view" data-item-id="{{item._id}}">
     {{else}}   
@@ -9,10 +9,10 @@
 {{/if}}
     <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
     <td><img src="{{item.img}}" class="item-img dragable" draggable="true" data-id="{{item._id}}"/></td>
-    <td><input class="inline-edit item-quantity" data-field="data.quantity" type="text" value="{{item.data.quantity}}" data-dtype="Number"/></td>
+    <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text" value="{{item.system.quantity}}" data-dtype="Number"/></td>
     <td><input class="inline-edit" data-field="name" type="text" value="{{item.name}}" placeholder="name" /></td>
-    <td><input class="inline-edit Weight-info" data-field="data.weight" type="text" value="{{item.data.weight}}" placeholder="" /></td>
-    <td><input class="inline-edit cost-info" data-field="data.cost" type="text" value="{{item.data.cost}}" data-dtype="Number"/></td>
+    <td><input class="inline-edit Weight-info" data-field="system.weight" type="text" value="{{item.system.weight}}" placeholder="" /></td>
+    <td><input class="inline-edit cost-info" data-field="system.cost" type="text" value="{{item.system.cost}}" data-dtype="Number"/></td>
     <td><a class="item-buy"><i class="fas fa-coins"></i></a>
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
         {{#if isGM}}     
