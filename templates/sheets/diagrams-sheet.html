@@ -106,7 +106,7 @@
                     <th>{{localize "WITCHER.Diagram.components"}}</th>
                     <th><label>{{localize "WITCHER.Item.Quantity"}}</label></th>
                 </tr>
-                {{#each system.craftingComponents as |component name|}}
+                {{#each item.system.craftingComponents as |component name|}}
                 <tr>
                     <th class="list-item"  data-id="{{component.id}}">
                         <a class="remove-component" title="{{localize "WITCHER.Item.RemoveComponent"}}"><i class="fas fa-minus"></i></a>

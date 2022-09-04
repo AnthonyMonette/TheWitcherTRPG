@@ -333,16 +333,16 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]` ;
 
     if (statNum == 4 && (skillNum == 0 || skillNum == 6 || skillNum == 7 || skillNum == 9)){
-		if (thisActor.system.general.socialStanding == "tolerated") {
+		if (thisActor.system.general.socialStanding == "tolerated" || thisActor.system.general.socialStanding == "toleratedFeared") {
 			rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.tolerated")}]` ;
 		} else if (thisActor.system.general.socialStanding == "hated" || thisActor.system.general.socialStanding == "hatedFeared") {
 			rollFormula += !displayRollDetails ? `-2` : `-2[${game.i18n.localize("WITCHER.socialStanding.hated")}]` ;
 		} 
 	}
-	if (statNum == 4 && skillNum == 0 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared")){
+	if (statNum == 4 && skillNum == 0 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared" || thisActor.system.general.socialStanding == "toleratedFeared")){
 		rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.feared")}]` ;
 	}
-	if (statNum == 6 && skillNum == 2 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared")){
+	if (statNum == 6 && skillNum == 2 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared" || thisActor.system.general.socialStanding == "toleratedFeared")){
 		rollFormula += !displayRollDetails ? `+1` : `+1[${game.i18n.localize("WITCHER.socialStanding.feared")}]` ;
 	}
 

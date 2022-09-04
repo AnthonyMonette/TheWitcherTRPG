@@ -89,30 +89,18 @@ export default class WitcherItemSheet extends ItemSheet {
       this._dragDrop.push(newDragDrop);
     }
 
-    _onDrop(event) {
+    async _onDrop(event) {
       if (this.item.type == "diagrams") {
         let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
         let dragEventData = TextEditor.getDragEventData(event)
-        if(dragEventData.pack) {
-          let pack = game.packs.get(dragEventData.pack)
-          pack.getDocument(dragEventData.id).then(item => {
-            let newComponentList  = []
-            if (this.item.system.craftingComponents){
-              newComponentList = this.item.system.craftingComponents
-            }
-            newComponentList.push({id: genId(), name: item.system.name, quantity: 1})
-            this.item.update({'system.craftingComponents': newComponentList});
-          })
-        } else {
-          let item = game.items.get(dragEventData.id)
-          if (item) {
-            let newComponentList  = []
-            if (this.item.system.craftingComponents){
-              newComponentList = this.item.system.craftingComponents
-            }
-            newComponentList.push({id: genId(), name: item.system.name, quantity: 1})
-            this.item.update({'system.craftingComponents': newComponentList});
+        let item = await fromUuid(dragEventData.uuid)
+        if (item) {
+          let newComponentList  = []
+          if (this.item.system.craftingComponents){
+            newComponentList = this.item.system.craftingComponents
           }
+          newComponentList.push({id: genId(), name: item.name, quantity: 1})
+          this.item.update({'system.craftingComponents': newComponentList});
         }
       }
     }
