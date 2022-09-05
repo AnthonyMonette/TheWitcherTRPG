@@ -139,6 +139,10 @@
                     <td><img src="{{armor.img}}" class="item-img dragable" draggable="true" data-id="{{armor._id}}"/></td>
                     <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text" value="{{armor.system.quantity}}" data-dtype="Number"/></td>
                     <td><input class="inline-edit" data-field="name" type="text" value="{{armor.name}}" placeholder="name" /></td>
+                    {{#if (eq type "enhancement")}}
+                        <td colspan="2"></td>
+                    {{/if}}
+                    {{#unless (eq type "enhancement")}}
                     <td><input class="inline-edit" data-field="system.equiped" type="checkbox" value={{checked armor.system.equiped}} {{checked armor.system.equiped}}/></td>
                     <td>
                         {{#if (eq armor.system.location "Head")}}
@@ -219,7 +223,7 @@
                         {{/if}}
 
                     </td>
-                        
+                    {{/unless}}
                     <td><input type="checkbox" name="system.bludgeoning" {{checked armor.system.bludgeoning}} disabled /></td>
                     <td><input type="checkbox" name="system.slashing" {{checked armor.system.slashing}} disabled /></td>
                     <td><input type="checkbox" name="system.Piercing" {{checked armor.system.piercing}} disabled /></td>

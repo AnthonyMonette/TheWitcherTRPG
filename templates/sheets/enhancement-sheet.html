@@ -46,7 +46,7 @@
     <div class="flex">
         <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.effects as |effect name|}}
+    {{#each item.system.effects as |effect name|}}
     <div class="flex list-item"  data-id="{{effect.id}}">
         <a class="remove-effect"><i class="fas fa-minus"></i></a>
 <textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>

@@ -392,9 +392,9 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
-    async _addItem(actor, Additem, numberOfItem) {
+    async _addItem(actor, Additem, numberOfItem, forcecreate=false) {
       let foundItem = (actor.items).find(item => item.name == Additem.name);
-      if (foundItem){
+      if (foundItem && !forcecreate){
         await foundItem.update({'system.quantity': Number(foundItem.system.quantity) + Number(numberOfItem)})
       }
       else {
@@ -427,7 +427,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }else {
         let enhancementsOption = ``
         enhancements.forEach(element => {
-          enhancementsOption += `<option value="${element.system._id}"> ${element.system.name}(${element.system.quantity}) </option>`;
+          enhancementsOption += `<option value="${element._id}"> ${element.name}(${element.system.quantity}) </option>`;
         });
         content += `<div><label>${game.i18n.localize("WITCHER.Dialog.Enhancement")}: <select name="enhancement">${enhancementsOption}</select></label></div>`
       }
@@ -484,9 +484,16 @@ export default class WitcherActorSheet extends ActorSheet {
                 }
                 else {
                   item.update({'system.effects': allEffects})
-                }
-                choosedEnhancement.update({ 'system.applied': true,
-                                            'system.weight': 0})
+                }  
+              }            
+              let newName = choosedEnhancement.name+"(Applied)"
+              let newQuantity = choosedEnhancement.system.quantity
+              choosedEnhancement.update({'name': newName, 
+                                         'system.applied': true, 
+                                         'system.quantity': 1})
+              if (newQuantity > 1) {
+                newQuantity -=1
+                this._addItem(this.actor, choosedEnhancement, newQuantity, true)
               }
             }
           }
@@ -922,7 +929,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.items.get(itemId);
 
-      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.system.name}</label> <br />`;
+      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
@@ -1032,7 +1039,7 @@ export default class WitcherActorSheet extends ActorSheet {
               let hasDiagram = html.find("[name=hasDiagram]").prop("checked");
               skillName = skillName.replace(" (2)", "");
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingAlchemycal")}</h1>`,
-              messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")}:</label> <b>${item.system.name}</b> <br />`,
+              messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")}:</label> <b>${item.name}</b> <br />`,
               messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.after")}:</label> <b>${item.system.craftingTime}</b> <br />`,
               messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.alchemyDC")} ${item.system.alchemyDC}`;
               
@@ -1068,7 +1075,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let itemId = event.currentTarget.closest(".item").dataset.itemId;
       let item = this.actor.items.get(itemId);
 
-      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.system.name}</label> <br />`;
+      let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
       let messageData = {
         speaker: {alias: this.actor.name},
@@ -1104,7 +1111,7 @@ export default class WitcherActorSheet extends ActorSheet {
               let hasDiagram = html.find("[name=hasDiagram]").prop("checked");
               skillName = skillName.replace(" (2)", "");
               messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingItem")}</h1>`,
-              messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")}:</label> <b>${item.system.name}</b> <br />`,
+              messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")}:</label> <b>${item.name}</b> <br />`,
               messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.after")}:</label> <b>${item.system.craftingTime}</b> <br />`,
               messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.craftingDC")} ${item.system.craftingDC}`;
     
@@ -1987,9 +1994,9 @@ export default class WitcherActorSheet extends ActorSheet {
       for(let actor of game.actors){
         if (actor.testUserPermission(game.user, "OWNER")){
           if (actor == game.user.character) {
-            Characteroptions += `<option value="${actor.system._id}" selected>${actor.system.name}</option>`
+            Characteroptions += `<option value="${actor._id}" selected>${actor.name}</option>`
           }else {
-            Characteroptions += `<option value="${actor.system._id}">${actor.system.name}</option>`
+            Characteroptions += `<option value="${actor._id}">${actor.name}</option>`
           }
         };
       }
@@ -2225,7 +2232,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
 
       if (item.system.usingAmmo){
-        let ammunitions = this.actor.items.filter(function(item) {return item.system.type=="weapon" &&  item.system.isAmmo});
+        let ammunitions = this.actor.items.filter(function(item) {return item.type=="weapon" &&  item.system.isAmmo});
         let quantity = ammunitions.sum("quantity")
         content += `<h2>${game.i18n.localize("WITCHER.Dialog.chooseAmmunition")}</h2> `
         if (quantity <= 0) {
@@ -2234,7 +2241,7 @@ export default class WitcherActorSheet extends ActorSheet {
         else {
           let ammunationOption = ``
           ammunitions.forEach(element => {
-            ammunationOption += `<option value="${element.system._id}"> ${element.system.name}(${element.system.quantity}) </option>`;
+            ammunationOption += `<option value="${element._id}"> ${element.name}(${element.system.quantity}) </option>`;
           });
           content += ` <label>${game.i18n.localize("WITCHER.Dialog.Ammunation")}: <select name="ammunation">${ammunationOption}</select></label> <br /><br />`
         }
