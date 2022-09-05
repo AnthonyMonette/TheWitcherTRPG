@@ -3,23 +3,23 @@
         <div class="flexcol background scrollable">
             {{localize "WITCHER.Homeland"}}
             
-            <select name="data.general.homeland.value" id="homeland-select">
-            {{#select data.general.homeland.value}}
+            <select name="system.general.homeland.value" id="homeland-select">
+            {{#select system.general.homeland.value}}
                     <option value="Other">{{localize "WITCHER.background.other"}}</option>
-                {{#each data.config.homelands as |name value|}}
+                {{#each system.config.homelands as |name value|}}
                     <option value="{{name}}">{{name}}</option>
                 {{/each}}
             {{/select}}
             </select>
-            {{#if (eq data.general.homeland.value "Other")}}
-                <input class="details hometailOther" name="data.general.homeland.otherValue" type="text" value="{{data.general.homeland.otherValue}}" />
+            {{#if (eq system.general.homeland.value "Other")}}
+                <input class="details hometailOther" name="system.general.homeland.otherValue" type="text" value="{{system.general.homeland.otherValue}}" />
             {{/if}}
-            {{#each data.general.details as |details dt|}}
+            {{#each system.general.details as |details dt|}}
             {{localize details.label}}
-            <input class="details {{dt}}" name="data.general.details.{{dt}}.value" type="text" value="{{details.value}}" />
+            <input class="details {{dt}}" name="system.general.details.{{dt}}.value" type="text" value="{{details.value}}" />
             {{/each}}
         </div>
-        {{editor content=data.general.background.value target="data.general.background.value" button=true editable=editable}}
+        {{editor system.general.background.value target="system.general.background.value" button=true editable=editable}}
     </div>
     <div class="flex">
         <div class="crit-wounds">
@@ -38,25 +38,25 @@
             <label><b>{{effect.name}}</b></label>
             <div class="flex">
                 <label>{{localize "WITCHER.effect.isActive"}}</label>
-                <input class="inline-edit" data-field="data.isActive" type="checkbox" value={{checked data.isActive}} {{checked data.isActive}}/>
+                <input class="inline-edit" data-field="system.isActive" type="checkbox" value={{checked system.isActive}} {{checked system.isActive}}/>
             </div>
         </div>
         <div class="modifier-display">
-            {{#each effect.data.stats as |stat index|}}
+            {{#each effect.system.stats as |stat index|}}
                 <div>{{localize stat.stat}}:{{stat.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-display">
-            {{#each effect.data.derived as |derived index|}}
+            {{#each effect.system.derived as |derived index|}}
                 <div>{{localize derived.derivedStat}}:{{derived.modifier}}</div> 
             {{/each}}
         </div>
         <div class="modifier-display">
-            {{#each effect.data.skills as |skill index|}}
+            {{#each effect.system.skills as |skill index|}}
                 <div>{{localize skill.skill}}:{{skill.modifier}}</div> 
             {{/each}}
         </div>
-<textarea rows=3 >{{effect.data.description}}</textarea>
+<textarea rows=3 >{{effect.system.description}}</textarea>
         <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
     </div>
     {{/each}}
@@ -74,11 +74,11 @@
                     <th>{{localize "WITCHER.Event"}}</th>
                     <th></th>
                 </tr>
-                {{#each data.general.lifeEvents as |events ev|}}
+                {{#each system.general.lifeEvents as |events ev|}}
                 <tr class="tablerow lifeEvents {{ev}}" data-event="{{ev}}" >
                     <td class="{{ev}} events">{{ev}}</td>
                     <td>
-                        <input class="input lifeEvents" name="data.general.lifeEvents.{{ev}}.value" type="text"
+                        <input class="input lifeEvents" name="system.general.lifeEvents.{{ev}}.value" type="text"
                             value="{{events.value}}"/>
                     </td>
                     <td>
@@ -93,7 +93,7 @@
                 {{#if events.isOpened}}
                 <tr>
                     <td colspan="3">  
-<textarea name="data.general.lifeEvents.{{ev}}.details">{{events.details}}</textarea>
+<textarea name="system.general.lifeEvents.{{ev}}.details">{{events.details}}</textarea>
                     </td>
                 </tr>
                 {{/if}}
@@ -110,7 +110,7 @@
                 <input class="inline-edit" data-field="name" type="text" value="{{note.name}}" placeholder="name" />
                 <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </div>
-<textarea class="inline-edit" rows="5" data-field="data.description">{{data.description}}</textarea>
+<textarea class="inline-edit" rows="5" data-field="system.description">{{system.description}}</textarea>
         </div>
         {{/each}}
     </div>

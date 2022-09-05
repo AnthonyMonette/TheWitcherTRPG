@@ -3,8 +3,8 @@
     <div class="item-options">
         <div class="item-collum">
             <label>{{localize "WITCHER.Type"}}</label>
-            <select name="data.type" id="type-select">
-                {{#select data.type}}
+            <select name="system.type" id="type-select">
+                {{#select item.system.type}}
                 <option value="crafting-material">{{localize "WITCHER.Item.CraftingMaterial"}}</option>
                 <option value="animal-parts">{{localize "WITCHER.Item.Hides&AnimalParts"}}</option>
                 <option value="alchemical">{{localize "WITCHER.Item.AlchemicalTreatments"}}</option>
@@ -14,10 +14,10 @@
             </select>
         </div>
         <div class="item-collum">
-            {{#if (eq data.type "substances")}}
+            {{#if (eq item.system.type "substances")}}
                 <label>{{localize "WITCHER.Inventory.Substance"}}:</label>
-                <select name="data.substanceType" id="substanceType-select">
-                    {{#select data.substanceType}}
+                <select name="system.substanceType" id="substanceType-select">
+                    {{#select item.system.substanceType}}
                     {{#each config.substanceTypes as |name type|}}
                     <option value="{{type}}">{{localize name}}</option>
                     {{/each}}
@@ -36,17 +36,17 @@
         </tr>
         <tr>
             <td>
-                <select name="data.rarity" id="avail-select">
-                {{#select data.rarity}}
+                <select name="system.rarity" id="avail-select">
+                {{#select item.system.rarity}}
                 {{#each config.Avalability as |name value|}}
                         <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
                 </select>
             </td>
-            <td><input type="text" name="data.location" value="{{data.location}}"/></td>
-            <td><input type="text" name="data.quantityObtainable" value="{{data.quantityObtainable}}"/></td>
-            <td><input type="text" name="data.forage" value="{{data.forage}}"/></td>
+            <td><input type="text" name="system.location" value="{{item.system.location}}"/></td>
+            <td><input type="text" name="system.quantityObtainable" value="{{item.system.quantityObtainable}}"/></td>
+            <td><input type="text" name="system.forage" value="{{item.system.forage}}"/></td>
         </tr>
     </table>
 </form>

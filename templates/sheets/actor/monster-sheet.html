@@ -7,14 +7,14 @@
                     <label class="monster-stat-lable">{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
                     <label class="monster-stat-modmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
                 </div>
-                {{#each data.stats as |details stat|}}
+                {{#each system.stats as |details stat|}}
                     {{#unless (eq stat "luck")}}
                     <div class="stat-display monster-stat-display" data-stat="{{stat}}">
                         <div>
                             <div class="flex">
                                 <a class="monster-stat-button stat-roll">{{localize details.label}}</a></label> 
-                                <input class="small" name="data.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-                                <input class="small stat-max" name="data.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+                                <input class="small" name="system.stats.{{stat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number"/>
+                                <input class="small stat-max" name="system.stats.{{stat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number"/>
 
                                 {{#unless details.isOpened}}
                                 <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
@@ -38,58 +38,58 @@
                     {{/unless}}
                 {{/each}}
                 <hr />
-                {{#each data.coreStats as |details coreStat|}}
+                {{#each system.coreStats as |details coreStat|}}
                 <div class="monster-stat-display">
                     <label>{{localize details.label}}</label>
-                    <input class="small" name="data.coreStats.{{coreStat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                    <input class="small" name="data.coreStats.{{coreStat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input class="small" name="system.coreStats.{{coreStat}}.current" type="number" value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
+                    <input class="small" name="system.coreStats.{{coreStat}}.max" type="number" value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
                 </div>
                 {{/each}}
                 <div class="monster-stat-display">
                     <label>{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
-                    <input class="small" name="data.derivedStats.vigor.value" type="number" value="{{data.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
+                    <input class="small" name="system.derivedStats.vigor.value" type="number" value="{{system.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
                 </div>
                 <hr />
                 <div class="monster-custom">
                     <label>{{localize "WITCHER.Monster.CustomHP/STA"}}</label>
-                    <input class="small" type="checkbox" name="data.customStat"  {{checked data.customStat}}/>
+                    <input class="small" type="checkbox" name="system.customStat"  {{checked system.customStat}}/>
                 </div>
                 <div class="monster-HPSTA">
                     <label>{{localize "WITCHER.Actor.Hp"}}</label> 
-                    <input class="small" name="data.derivedStats.hp.value" type="number" value="{{data.derivedStats.hp.value}}"/>
+                    <input class="small" name="system.derivedStats.hp.value" type="number" value="{{system.derivedStats.hp.value}}"/>
                     /
-                    <input class="small" name="data.derivedStats.hp.max" type="number" value="{{data.derivedStats.hp.max}}"/>
+                    <input class="small" name="system.derivedStats.hp.max" type="number" value="{{system.derivedStats.hp.max}}"/>
                 </div>
                 <div class="monster-HPSTA">
                     <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label> 
-                    <input class="small" name="data.derivedStats.sta.value" type="number" value="{{data.derivedStats.sta.value}}"/>
+                    <input class="small" name="system.derivedStats.sta.value" type="number" value="{{system.derivedStats.sta.value}}"/>
                     /
-                    <input class="small" name="data.derivedStats.sta.max" type="number" value="{{data.derivedStats.sta.max}}"/>
+                    <input class="small" name="system.derivedStats.sta.max" type="number" value="{{system.derivedStats.sta.max}}"/>
                 </div>
                 {{#if useVerbalCombat}}
                 <div class="monster-HPSTA">
                     <label>{{localize "WITCHER.Actor.DerStat.Resolve"}}</label> 
-                    <input class="small" name="data.derivedStats.resolve.value" type="number" value="{{data.derivedStats.resolve.value}}"/>
+                    <input class="small" name="system.derivedStats.resolve.value" type="number" value="{{system.derivedStats.resolve.value}}"/>
                     /
-                    <input class="small" name="data.derivedStats.resolve.max" type="number" value="{{data.derivedStats.resolve.max}}"/>
+                    <input class="small" name="system.derivedStats.resolve.max" type="number" value="{{system.derivedStats.resolve.max}}"/>
                 </div>
                 {{/if}}
                 <div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.HeadArmor"}}</label> 
-                        <input class="small" name="data.armorHead" type="number" value="{{data.armorHead}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="system.armorHead" type="number" value="{{system.armorHead}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.UpperArmor"}}</label> 
-                        <input class="small" name="data.armorUpper" type="number" value="{{data.armorUpper}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="system.armorUpper" type="number" value="{{system.armorUpper}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.LowerArmor"}}</label> 
-                        <input class="small" name="data.armorLower" type="number" value="{{data.armorLower}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="system.armorLower" type="number" value="{{system.armorLower}}" placeholder="0" data-dtype="Number"/>
                     </div>
                     <div class="monster-armor"> 
                         <label>{{localize "WITCHER.Monster.WingTailArmor"}}</label> 
-                        <input class="small" name="data.armorTailWing" type="number" value="{{data.armorTailWing}}" placeholder="0" data-dtype="Number"/>
+                        <input class="small" name="system.armorTailWing" type="number" value="{{system.armorTailWing}}" placeholder="0" data-dtype="Number"/>
                     </div>
                 </div>
             </div>
@@ -97,8 +97,8 @@
                 <div class="monster-center-top">
                     <div class="monster-type">
                         <label>{{localize "WITCHER.Monster.Type.Lable"}}</label>
-                        <select name="data.category">
-                            {{#select data.category}}
+                        <select name="system.category">
+                            {{#select system.category}}
                             {{#each config.MonsterTypes as | name value|}}
                                     <option value="{{value}}">{{localize name}}</option>
                             {{/each}}
@@ -107,8 +107,8 @@
                     </div>
                     <div class="monster-difficulity">
                         <label>{{localize "WITCHER.Monster.Difficulty"}}</label>
-                        <select name="data.threat">
-                            {{#select data.threat}}
+                        <select name="system.threat">
+                            {{#select system.threat}}
                                 <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
                                 <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
                                 <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
@@ -118,8 +118,8 @@
                     </div>
                     <div class="monster-complexity">
                         <label>{{localize "WITCHER.Monster.Complexity"}}</label> 
-                        <select name="data.difficulty">
-                            {{#select data.difficulty}}
+                        <select name="system.difficulty">
+                            {{#select system.difficulty}}
                                 <option value="simple">{{localize "WITCHER.Monster.Simple"}}</option>
                                 <option value="complex">{{localize "WITCHER.Monster.Complex"}}</option>
                                 <option value="difficult">{{localize "WITCHER.Monster.Difficult"}}</option>
@@ -128,60 +128,60 @@
                     </div>
                     <div class="monster-bounty">
                         <label>{{localize "WITCHER.Monster.Bounty"}}</label>
-                        <input name="data.bounty" type="text" value="{{data.bounty}}"/>
+                        <input name="system.bounty" type="text" value="{{system.bounty}}"/>
                     </div>
                 </div>
                 <div class="img-view">
-                    {{#if (eq data.category "Humanoid")}}
+                    {{#if (eq system.category "Humanoid")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Humanoids.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Necrophage")}}
+                    {{#if (eq system.category "Necrophage")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Necrophages.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Specter")}}
+                    {{#if (eq system.category "Specter")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Specters.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Beast")}}
+                    {{#if (eq system.category "Beast")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Beasts.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "CursedOne")}}
+                    {{#if (eq system.category "CursedOne")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/CursedOnes.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Hybrid")}}
+                    {{#if (eq system.category "Hybrid")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Hybrids.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Insectoid")}}
+                    {{#if (eq system.category "Insectoid")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Insectoids.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Elementa")}}
+                    {{#if (eq system.category "Elementa")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Elementa.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Relict")}}
+                    {{#if (eq system.category "Relict")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Relicts.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Ogroid")}}
+                    {{#if (eq system.category "Ogroid")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Ogroids.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Draconid")}}
+                    {{#if (eq system.category "Draconid")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Draconids.png" class="cat-img" /> 
                     {{/if}}
-                    {{#if (eq data.category "Vampire")}}
+                    {{#if (eq system.category "Vampire")}}
                     <img src="systems/TheWitcherTRPG/assets/images/Monsters/Vampires.png" class="cat-img" /> 
                     {{/if}}
                     <table class="monster-info">
-                        <tr><td>{{localize "WITCHER.Monster.Height"}}</td><td><input type="text" name="data.height" value="{{data.height}}"/></td></tr>
-                        <tr><td>{{localize "WITCHER.Monster.Weight"}}</td><td><input type="text" name="data.weight" value="{{data.weight}}"/></td></tr>
-                        <tr><td>{{localize "WITCHER.Monster.Environment"}} </td><td><input type="text" name="data.environment" value="{{data.environment}}"/></td></tr>
-                        <tr><td>{{localize "WITCHER.Monster.Intelligence"}}</td><td><input type="text" name="data.intelligence" value="{{data.intelligence}}"/></td></tr>
-                        <tr><td>{{localize "WITCHER.Monster.Organization"}} </td><td><input type="text" name="data.organization" value="{{data.organization}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Height"}}</td><td><input type="text" name="system.height" value="{{system.height}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Weight"}}</td><td><input type="text" name="system.weight" value="{{system.weight}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Environment"}} </td><td><input type="text" name="system.environment" value="{{system.environment}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Intelligence"}}</td><td><input type="text" name="system.intelligence" value="{{system.intelligence}}"/></td></tr>
+                        <tr><td>{{localize "WITCHER.Monster.Organization"}} </td><td><input type="text" name="system.organization" value="{{system.organization}}"/></td></tr>
                     </table>
                     <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
                 </div>
         <div class="monster-knowledge">
-            <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}<input class="skill-value" name="data.commonSkillValue" type="number" value="{{data.commonSkillValue}}" data-dtype="Number"/></label>
-            {{editor content=data.common target="data.common" button=true editable=editable}}
-            <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}<input class="skill-value" name="data.monsterLoreSkillValue" type="number" value="{{data.monsterLoreSkillValue}}" data-dtype="Number"/></label>
-            {{editor content=data.monsterLore target="data.monsterLore" button=true editable=editable}}
+            <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}<input class="skill-value" name="system.commonSkillValue" type="number" value="{{system.commonSkillValue}}" data-dtype="Number"/></label>
+            {{editor system.common target="system.common" button=true editable=editable}}
+            <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}<input class="skill-value" name="system.monsterLoreSkillValue" type="number" value="{{system.monsterLoreSkillValue}}" data-dtype="Number"/></label>
+            {{editor system.monsterLore target="system.monsterLore" button=true editable=editable}}
         </div>
     </div>
     <div class="monster-right-sidebar">
@@ -200,15 +200,15 @@
         </div>
         <div class="death-section">
             <a class="death-minus"><i class="fas fa-minus"></i></a>
-            {{#if (gt data.deathSaves 0)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 0)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 1)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 1)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 2)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 2)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 3)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 3)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 4)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 4)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 5)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 5)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 6)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 6)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 7)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 7)}}<i class="fas fa-skull"></i>.{{/unless}}
-            {{#if (gt data.deathSaves 8)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt data.deathSaves 8)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 0)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 0)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 1)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 1)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 2)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 2)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 3)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 3)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 4)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 4)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 5)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 5)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 6)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 6)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 7)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 7)}}<i class="fas fa-skull"></i>.{{/unless}}
+            {{#if (gt system.deathSaves 8)}}<i class="death fas fa-skull-crossbones"></i>.{{/if}}{{#unless (gt system.deathSaves 8)}}<i class="fas fa-skull"></i>.{{/unless}}
             <a class="death-plus"><i class="fas fa-plus"></i></a>
         </div>
         <nav class="sheet-tabs tabs" data-group="primary">

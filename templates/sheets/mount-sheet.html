@@ -11,7 +11,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-<textarea name="data.description">{{data.description}}</textarea>
+<textarea name="system.description">{{system.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}
@@ -24,10 +24,10 @@
                     <th>{{localize "WITCHER.Mount.Hp"}}</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="data.dex" value="{{data.dex}}"/></td>
-                    <td><input type="text" name="data.control" value="{{data.control}}"/></td>
-                    <td><input type="text" name="data.speed" value="{{data.speed}}"/></td>
-                    <td><input type="text" name="data.hp" value="{{data.hp}}" data-dtype="Number"/></td>
+                    <td><input type="text" name="system.dex" value="{{item.system.dex}}"/></td>
+                    <td><input type="text" name="system.control" value="{{item.system.control}}"/></td>
+                    <td><input type="text" name="system.speed" value="{{item.system.speed}}"/></td>
+                    <td><input type="text" name="system.hp" value="{{item.system.hp}}" data-dtype="Number"/></td>
                 </tr>
             </table>
         </div>

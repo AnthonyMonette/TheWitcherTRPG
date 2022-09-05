@@ -2,7 +2,7 @@
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Intelligence"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.int as |skill name|}}
+            {{#each system.skills.int as |skill name|}}
 {{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="int"}}
             {{/each}}
         </table>
@@ -10,65 +10,65 @@
             <h3>{{localize "WITCHER.Actor.ImprovementPoints"}}</h3>
             <div class="flex">
                 <label>{{localize "WITCHER.Actor.CurrentIP"}}</label> 
-                <input class="IP-value" name="data.improvementPoints" type="number" value="{{data.improvementPoints}}" placeholder="0" data-dtype="Number"/>
+                <input class="IP-value" name="system.improvementPoints" type="number" value="{{system.improvementPoints}}" placeholder="0" data-dtype="Number"/>
             </div>
             <div class="flex">
-                <input class="extra-skill-name" name="data.skillTraining1.name" type="text" value="{{data.skillTraining1.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
-                <input class="extra-skill-value"name="data.skillTraining1.value" type="number" value="{{data.skillTraining1.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="system.skillTraining1.name" type="text" value="{{system.skillTraining1.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value"name="system.skillTraining1.value" type="number" value="{{system.skillTraining1.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="extra-skill-name" name="data.skillTraining2.name" type="text" value="{{data.skillTraining2.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
-                <input class="extra-skill-value" name="data.skillTraining2.value" type="number" value="{{data.skillTraining2.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="system.skillTraining2.name" type="text" value="{{system.skillTraining2.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="system.skillTraining2.value" type="number" value="{{system.skillTraining2.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="extra-skill-name" name="data.skillTraining3.name" type="text" value="{{data.skillTraining3.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
-                <input class="extra-skill-value" name="data.skillTraining3.value" type="number" value="{{data.skillTraining3.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="system.skillTraining3.name" type="text" value="{{system.skillTraining3.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="system.skillTraining3.value" type="number" value="{{system.skillTraining3.value}}" placeholder="0" />
             </div>
             <div class="flex">
-                <input class="extra-skill-name" name="data.skillTraining4.name" type="text" value="{{data.skillTraining4.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
-                <input class="extra-skill-value" name="data.skillTraining4.value" type="number" value="{{data.skillTraining4.value}}" placeholder="0" />
+                <input class="extra-skill-name" name="system.skillTraining4.name" type="text" value="{{system.skillTraining4.name}}" placeholder='{{localize "WITCHER.Actor.SkillName"}}' />
+                <input class="extra-skill-value" name="system.skillTraining4.value" type="number" value="{{system.skillTraining4.value}}" placeholder="0" />
             </div>
         </div>
     </div>
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Reflex"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.ref as |skill name|}}
+            {{#each system.skills.ref as |skill name|}}
 {{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="ref"}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Willpower"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.will as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="will" skill-data=data}}
+            {{#each system.skills.will as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="will" skill-data=system}}
             {{/each}}
         </table>
     </div>
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Dexterity"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.dex as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="dex" skill-data=data}}
+            {{#each system.skills.dex as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="dex" skill-data=system}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Crafting"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.cra as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="cra" skill-data=data}}
+            {{#each system.skills.cra as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="cra" skill-data=system}}
             {{/each}}
         </table>
     </div>
     <div class="skill-column">
         <h1>{{localize "WITCHER.Actor.Skill.Body"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.body as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="body" skill-data=data}}
+            {{#each system.skills.body as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="body" skill-data=system}}
             {{/each}}
         </table>
         <h1>{{localize "WITCHER.Actor.Skill.Empathy"}}</h1>
         <table class="table-skills">
-            {{#each data.skills.emp as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="emp" skill-data=data}}
+            {{#each system.skills.emp as |skill name|}}
+{{> "systems/TheWitcherTRPG/templates/partials/skill-display.html" skill=skill name=name stat="emp" skill-data=system}}
             {{/each}}
         </table>
         <div>

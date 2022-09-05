@@ -1,34 +1,34 @@
 
 <div class="magic-info">
     <div class="flex">
-        <input class="focus" name="data.focus1.name" type="text" value="{{data.focus1.name}}" placeholder="First Focus" />
-        <input class="focus-value" name="data.focus1.value" type="text" value="{{data.focus1.value}}" placeholder="0" />
+        <input class="focus" name="system.focus1.name" type="text" value="{{system.focus1.name}}" placeholder="First Focus" />
+        <input class="focus-value" name="system.focus1.value" type="text" value="{{system.focus1.value}}" placeholder="0" />
     </div>
     <div class="flex">
-        <input class="focus" name="data.focus2.name" type="text" value="{{data.focus2.name}}" placeholder="Second Focus" />
-        <input class="focus-value" name="data.focus2.value" type="text" value="{{data.focus2.value}}" placeholder="0" />
+        <input class="focus" name="system.focus2.name" type="text" value="{{system.focus2.name}}" placeholder="Second Focus" />
+        <input class="focus-value" name="system.focus2.value" type="text" value="{{system.focus2.value}}" placeholder="0" />
     </div>
     <div class="flex">
-        <input class="focus" name="data.focus3.name" type="text" value="{{data.focus3.name}}" placeholder="Third Focus" />
-        <input class="focus-value" name="data.focus3.value" type="text" value="{{data.focus3.value}}" placeholder="0" />
+        <input class="focus" name="system.focus3.name" type="text" value="{{system.focus3.name}}" placeholder="Third Focus" />
+        <input class="focus-value" name="system.focus3.value" type="text" value="{{system.focus3.value}}" placeholder="0" />
     </div>
     <div class="flex">
-        <input class="focus" name="data.focus4.name" type="text" value="{{data.focus4.name}}" placeholder="Third Focus" />
-        <input class="focus-value" name="data.focus4.value" type="text" value="{{data.focus4.value}}" placeholder="0" />
+        <input class="focus" name="system.focus4.name" type="text" value="{{system.focus4.name}}" placeholder="Third Focus" />
+        <input class="focus-value" name="system.focus4.value" type="text" value="{{system.focus4.value}}" placeholder="0" />
     </div>
 </div>
 <div class="spell" data-spelltype="noviceSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Novice"}}
-        {{#unless data.pannels.noviceSpellIsOpen}}
+        {{#unless system.pannels.noviceSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
-        {{#if data.pannels.noviceSpellIsOpen}}
+        {{#if system.pannels.noviceSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
         {{/if}}
-    {{#unless data.pannels.noviceSpellIsOpen}}
+    {{#unless system.pannels.noviceSpellIsOpen}}
     <table class="skill-list invisible">
     {{/unless}}
-    {{#if data.pannels.noviceSpellIsOpen}}
+    {{#if system.pannels.noviceSpellIsOpen}}
     <table class="skill-list">
     {{/if}}
         <tr> 
@@ -46,7 +46,7 @@
                 </td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
         </tbody>
@@ -55,16 +55,16 @@
 </div>
 <div class="spell" data-spelltype="journeymanSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Journeyman"}}
-        {{#unless data.pannels.journeymanSpellIsOpen}}
+        {{#unless system.pannels.journeymanSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
-        {{#if data.pannels.journeymanSpellIsOpen}}
+        {{#if system.pannels.journeymanSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
         {{/if}}
-    {{#unless data.pannels.journeymanSpellIsOpen}}
+    {{#unless system.pannels.journeymanSpellIsOpen}}
     <table class="skill-list invisible">
     {{/unless}}
-    {{#if data.pannels.journeymanSpellIsOpen}}
+    {{#if system.pannels.journeymanSpellIsOpen}}
     <table class="skill-list">
     {{/if}}
         <tr> 
@@ -82,7 +82,7 @@
                 </td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
         </tbody>
@@ -91,16 +91,16 @@
 </div>
 <div class="spell" data-spelltype="masterSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Master"}}
-        {{#unless data.pannels.masterSpellIsOpen}}
+        {{#unless system.pannels.masterSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
-        {{#if data.pannels.masterSpellIsOpen}}
+        {{#if system.pannels.masterSpellIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
         {{/if}}
-    {{#unless data.pannels.masterSpellIsOpen}}
+    {{#unless system.pannels.masterSpellIsOpen}}
     <table class="skill-list invisible">
     {{/unless}}
-    {{#if data.pannels.masterSpellIsOpen}}
+    {{#if system.pannels.masterSpellIsOpen}}
     <table class="skill-list">
     {{/if}}
         <tr> 
@@ -118,7 +118,7 @@
                 </td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{spell.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
         </tbody>
@@ -127,16 +127,16 @@
 </div>
 <div class="spell" data-spelltype="ritual">
     <h3>Rituals 
-        {{#unless data.pannels.ritualIsOpen}}
+        {{#unless system.pannels.ritualIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
-        {{#if data.pannels.ritualIsOpen}}
+        {{#if system.pannels.ritualIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
         {{/if}}
-    {{#unless data.pannels.ritualIsOpen}}
+    {{#unless system.pannels.ritualIsOpen}}
     <table class="skill-list invisible">
     {{/unless}}
-    {{#if data.pannels.ritualIsOpen}}
+    {{#if system.pannels.ritualIsOpen}}
     <table class="skill-list">
     {{/if}}
         <tr> 
@@ -154,7 +154,7 @@
                 </td>
                 <td><img src="{{ritual.img}}" class="item-img dragable" draggable="true" data-id="{{ritual._id}}"/></td>
                 <td><a class="spell-roll">{{ritual.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{ritual.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{ritual.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
         </tbody>
@@ -163,16 +163,16 @@
 </div>
 <div class="spell" data-spelltype="hex">
     <h3>Hexes 
-        {{#unless data.pannels.hexIsOpen}}
+        {{#unless system.pannels.hexIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
         {{/unless}}
-        {{#if data.pannels.hexIsOpen}}
+        {{#if system.pannels.hexIsOpen}}
         <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
         {{/if}}
-    {{#unless data.pannels.hexIsOpen}}
+    {{#unless system.pannels.hexIsOpen}}
     <table class="skill-list invisible">
     {{/unless}}
-    {{#if data.pannels.hexIsOpen}}
+    {{#if system.pannels.hexIsOpen}}
     <table class="skill-list">
     {{/if}}
         <tr> 
@@ -190,7 +190,7 @@
                 </td>
                 <td><img src="{{hex.img}}" class="item-img dragable" draggable="true" data-id="{{hex._id}}"/></td>
                 <td><a class="spell-roll">{{hex.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="data.stamina" type="text" value="{{hex.data.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{hex.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
         </tbody>

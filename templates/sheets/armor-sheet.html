@@ -13,23 +13,23 @@
             <th>{{localize "WITCHER.Armor.Type"}}</th>
         </tr>
         <tr>
-            <td><input type="checkbox" name="data.slashing" {{checked data.slashing}} /></td>
-            <td><input type="checkbox" name="data.piercing" {{checked data.piercing}} /></td>
-            <td><input type="checkbox" name="data.bludgeoning" {{checked data.bludgeoning}}/></td>
+            <td><input type="checkbox" name="system.slashing" {{checked item.system.slashing}} /></td>
+            <td><input type="checkbox" name="system.piercing" {{checked item.system.piercing}} /></td>
+            <td><input type="checkbox" name="system.bludgeoning" {{checked item.system.bludgeoning}}/></td>
             <td>
-                <select name="data.avail" id="avail-select">
-                {{#select data.avail}}
+                <select name="system.avail" id="avail-select">
+                {{#select item.system.avail}}
                 {{#each config.Avalability as |name value|}}
                         <option value="{{value}}">{{localize name}}</option>
                 {{/each}}
                 {{/select}}
                 </select>
             </td>
-            <td><input type="number" name="data.enhancements" value="{{data.enhancements}}" data-dtype="Number"/></td>
-            <td><input type="number" name="data.encumb" value="{{data.encumb}}" data-dtype="Number"/></td>
+            <td><input type="number" name="system.enhancements" value="{{item.system.enhancements}}" data-dtype="Number"/></td>
+            <td><input type="number" name="system.encumb" value="{{item.system.encumb}}" data-dtype="Number"/></td>
             <td>
-                <select name="data.location" id="location-select">
-                {{#select data.location}}
+                <select name="system.location" id="location-select">
+                {{#select item.system.location}}
                     <option value="Head">{{localize "WITCHER.Armor.LocationHead"}}</option>
                     <option value="Torso">{{localize "WITCHER.Armor.LocationTorso"}}</option>
                     <option value="Leg">{{localize "WITCHER.Armor.LocationLeg"}}</option>
@@ -39,8 +39,8 @@
                 </select>
             </td>    
             <td>
-                <select name="data.type" id="type-select">
-                {{#select data.type}}
+                <select name="system.type" id="type-select">
+                {{#select item.system.type}}
                     <option value="Light">{{localize "WITCHER.Armor.Light"}}</option>
                     <option value="Medium">{{localize "WITCHER.Armor.Medium"}}</option>
                     <option value="Heavy">{{localize "WITCHER.Armor.Heavy"}}</option>
@@ -53,90 +53,89 @@
     <div class="flex">
         <table class="item-bottom-table">
             <tr>
-                
-                {{#unless (eq data.location "Shield")}}
+                {{#unless (eq item.system.location "Shield")}}
                 <th class="location-table">{{localize "WITCHER.Armor.Location"}}</th>
                 <th title="{{localize "WITCHER.Armor.StoppingPower"}}">{{localize "WITCHER.Armor.Short.StoppingPower"}}</th>
                 <th title="{{localize "WITCHER.Armor.MaxStoppingPower"}}">{{localize "WITCHER.Armor.Short.MaxStoppingPower"}}</th>
                 {{/unless}}
-                {{#if (eq data.location "Shield")}}
+                {{#if (eq item.system.location "Shield")}}
                 <th title="{{localize "WITCHER.Weapon.Reliability"}}">{{localize "WITCHER.Weapon.Short.Reliability"}}</th>
                 <th title="{{localize "WITCHER.Weapon.MaxReliability"}}">{{localize "WITCHER.Weapon.Short.MaxReliability"}}</th>
                 {{/if}}
             </tr>
-            {{#if (eq data.location "Head")}}
+            {{#if (eq item.system.location "Head")}}
                 <tr>
                     <td>{{localize "WITCHER.Armor.LocationHead"}}</td>
-                    <td><input type="number" name="data.headStopping" value="{{data.headStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.headMaxStopping" value="{{data.headMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.headStopping" value="{{item.system.headStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.headMaxStopping" value="{{item.system.headMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
             {{/if}}
-            {{#if (eq data.location "Torso")}}
+            {{#if (eq item.system.location "Torso")}}
             <tr>
                 <td>{{localize "WITCHER.Armor.LocationTorso"}}</td>
-                <td><input type="number" name="data.torsoStopping" value="{{data.torsoStopping}}" data-dtype="Number"/></td>
-                <td><input type="number" name="data.torsoMaxStopping" value="{{data.torsoMaxStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.torsoStopping" value="{{item.system.torsoStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.torsoMaxStopping" value="{{item.system.torsoMaxStopping}}" data-dtype="Number"/></td>
             </tr>
             <tr>
                 <td>{{localize "WITCHER.Location.Left"}} {{localize "WITCHER.Armor.LocationArm"}}</td>
-                <td><input type="number" name="data.leftArmStopping" value="{{data.leftArmStopping}}" data-dtype="Number"/></td>
-                <td><input type="number" name="data.leftArmMaxStopping" value="{{data.leftArmMaxStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.leftArmStopping" value="{{item.system.leftArmStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.leftArmMaxStopping" value="{{item.system.leftArmMaxStopping}}" data-dtype="Number"/></td>
             </tr>
             <tr>
                 <td> {{localize "WITCHER.Location.Right"}} {{localize "WITCHER.Armor.LocationArm"}}</td>
-                <td><input type="number" name="data.rightArmStopping" value="{{data.rightArmStopping}}" data-dtype="Number"/></td>
-                <td><input type="number" name="data.rightArmMaxStopping" value="{{data.rightArmMaxStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.rightArmStopping" value="{{item.system.rightArmStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.rightArmMaxStopping" value="{{item.system.rightArmMaxStopping}}" data-dtype="Number"/></td>
             </tr>
             {{/if}}
-            {{#if (eq data.location "Leg")}}
+            {{#if (eq item.system.location "Leg")}}
             <tr>
                 <td>{{localize "WITCHER.Location.Left"}} {{localize "WITCHER.Armor.LocationLeg"}}</td>
-                <td><input type="number" name="data.leftLegStopping" value="{{data.leftLegStopping}}" data-dtype="Number"/></td>
-                <td><input type="number" name="data.leftLegMaxStopping" value="{{data.leftLegMaxStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.leftLegStopping" value="{{item.system.leftLegStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.leftLegMaxStopping" value="{{item.system.leftLegMaxStopping}}" data-dtype="Number"/></td>
             </tr>
             <tr>
                 <td>{{localize "WITCHER.Location.Right"}} {{localize "WITCHER.Armor.LocationLeg"}}</td>
-                <td><input type="number" name="data.rightLegStopping" value="{{data.rightLegStopping}}" data-dtype="Number"/></td>
-                <td><input type="number" name="data.rightLegMaxStopping" value="{{data.rightLegMaxStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.rightLegStopping" value="{{item.system.rightLegStopping}}" data-dtype="Number"/></td>
+                <td><input type="number" name="system.rightLegMaxStopping" value="{{item.system.rightLegMaxStopping}}" data-dtype="Number"/></td>
             </tr>
             {{/if}}
 
-            {{#if (eq data.location "FullCover")}}
+            {{#if (eq item.system.location "FullCover")}}
                 <tr>
                     <td>{{localize "WITCHER.Armor.LocationHead"}}</td>
-                    <td><input type="number" name="data.headStopping" value="{{data.headStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.headMaxStopping" value="{{data.headMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.headStopping" value="{{item.system.headStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.headMaxStopping" value="{{item.system.headMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "WITCHER.Armor.LocationTorso"}}</td>
-                    <td><input type="number" name="data.torsoStopping" value="{{data.torsoStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.torsoMaxStopping" value="{{data.torsoMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.torsoStopping" value="{{item.system.torsoStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.torsoMaxStopping" value="{{item.system.torsoMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "WITCHER.Location.Left"}} {{localize "WITCHER.Armor.LocationArm"}}</td>
-                    <td><input type="number" name="data.leftArmStopping" value="{{data.leftArmStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.leftArmMaxStopping" value="{{data.leftArmMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.leftArmStopping" value="{{item.system.leftArmStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.leftArmMaxStopping" value="{{item.system.leftArmMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "WITCHER.Location.Right"}} {{localize "WITCHER.Armor.LocationArm"}}</td>
-                    <td><input type="number" name="data.rightArmStopping" value="{{data.rightArmStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.rightArmMaxStopping" value="{{data.rightArmMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.rightArmStopping" value="{{item.system.rightArmStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.rightArmMaxStopping" value="{{item.system.rightArmMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "WITCHER.Location.Left"}} {{localize "WITCHER.Armor.LocationLeg"}}</td>
-                    <td><input type="number" name="data.leftLegStopping" value="{{data.leftLegStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.leftLegMaxStopping" value="{{data.leftLegMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.leftLegStopping" value="{{item.system.leftLegStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.leftLegMaxStopping" value="{{item.system.leftLegMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "WITCHER.Location.Right"}} {{localize "WITCHER.Armor.LocationLeg"}}</td>
-                    <td><input type="number" name="data.rightLegStopping" value="{{data.rightLegStopping}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.rightLegMaxStopping" value="{{data.rightLegMaxStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.rightLegStopping" value="{{item.system.rightLegStopping}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.rightLegMaxStopping" value="{{item.system.rightLegMaxStopping}}" data-dtype="Number"/></td>
                 </tr>
             {{/if}}
-            {{#if (eq data.location "Shield")}}
+            {{#if (eq item.system.location "Shield")}}
                 <tr>
-                    <td><input type="number" name="data.reliability" value="{{data.reliability}}" data-dtype="Number"/></td>
-                    <td><input type="number" name="data.reliabilityMax" value="{{data.reliabilityMax}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.reliability" value="{{item.system.reliability}}" data-dtype="Number"/></td>
+                    <td><input type="number" name="system.reliabilityMax" value="{{item.system.reliabilityMax}}" data-dtype="Number"/></td>
                 </tr>
             {{/if}}
         </table>
@@ -145,7 +144,7 @@
                 <th><a class="add-effect"><i class="fas fa-plus"></i></a></th>
                 <th><b>{{localize "WITCHER.Item.Effect"}}</b></th>
             </tr>
-            {{#each data.effects as |effect name|}}
+            {{#each item.system.effects as |effect name|}}
             <tr>
                 <th class="list-item"  data-id="{{effect.id}}">
                     <a class="remove-effect"><i class="fas fa-minus"></i></a>

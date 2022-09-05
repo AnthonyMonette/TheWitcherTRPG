@@ -1,15 +1,15 @@
 <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-{{#if (gt data.maxWeight 0)}}
+{{#if (gt system.maxWeight 0)}}
 <div class="wrapper">
     <div class="weight-value">
-        <span>{{totalWeight}}/{{data.maxWeight}} </span>
+        <span>{{totalWeight}}/{{system.maxWeight}} </span>
     </div>
 
-    {{#if (gte totalWeight data.maxWeight)}}
+    {{#if (gte totalWeight system.maxWeight)}}
     <div class="weightbar-overweight"></div>
     {{/if}}    
-    {{#if (lt totalWeight data.maxWeight)}}
-    <progress class="weightbar" value="{{totalWeight}}" max="{{data.maxWeight}}"></progress>
+    {{#if (lt totalWeight system.maxWeight)}}
+    <progress class="weightbar" value="{{totalWeight}}" max="{{system.maxWeight}}"></progress>
     {{/if}}  
 </div>
 {{/if}}  
@@ -20,7 +20,7 @@
                 <label>{{localize "WITCHER.Loot.MaxWeight"}}:</label> 
             </div>
             <div>
-                <span><input name="data.maxWeight" type="number" value="{{data.maxWeight}}" data-dtype="number"/></span>
+                <span><input name="system.maxWeight" type="number" value="{{system.maxWeight}}" data-dtype="number"/></span>
             </div>
             <div>
                 <label>{{localize "WITCHER.Loot.TotalCost"}}:</label> 
@@ -35,13 +35,13 @@
     </div>
     <di class="item-section">
         <div class="flex">
-            <div class="currency"> <label>{{localize "WITCHER.Currency.bizant"}}</label><input class="small-medium" name="data.currency.bizant" type="number" value="{{data.currency.bizant}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.ducat"}}</label><input class="small-medium" name="data.currency.ducat" type="number" value="{{data.currency.ducat}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.lintar"}}</label><input class="small-medium" name="data.currency.lintar" type="number" value="{{data.currency.lintar}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.floren"}}</label><input class="small-medium" name="data.currency.floren" type="number" value="{{data.currency.floren}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.crown"}}</label><input class="small-medium" name="data.currency.crown" type="number" value="{{data.currency.crown}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.oren"}}</label><input class="small-medium" name="data.currency.oren" type="number" value="{{data.currency.oren}}" placeholder="0" data-dtype="Number"/></div>
-            <div class="currency"> <label>{{localize "WITCHER.Currency.falsecoin"}}</label><input class="small-medium" name="data.currency.falsecoin" type="number" value="{{data.currency.falsecoin}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.bizant"}}</label><input class="small-medium" name="system.currency.bizant" type="number" value="{{system.currency.bizant}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.ducat"}}</label><input class="small-medium" name="system.currency.ducat" type="number" value="{{system.currency.ducat}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.lintar"}}</label><input class="small-medium" name="system.currency.lintar" type="number" value="{{system.currency.lintar}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.floren"}}</label><input class="small-medium" name="system.currency.floren" type="number" value="{{system.currency.floren}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.crown"}}</label><input class="small-medium" name="system.currency.crown" type="number" value="{{system.currency.crown}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.oren"}}</label><input class="small-medium" name="system.currency.oren" type="number" value="{{system.currency.oren}}" placeholder="0" data-dtype="Number"/></div>
+            <div class="currency"> <label>{{localize "WITCHER.Currency.falsecoin"}}</label><input class="small-medium" name="system.currency.falsecoin" type="number" value="{{system.currency.falsecoin}}" placeholder="0" data-dtype="Number"/></div>
         </div>
         <h2>{{localize "WITCHER.Loot.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
         <table class="item-table">
