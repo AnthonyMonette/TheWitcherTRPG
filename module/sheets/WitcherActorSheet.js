@@ -1727,7 +1727,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   vcStat = this.actor.system.stats.will.current;
                   vcSkillName = "WITCHER.SkWillResistCoer";
                   vcSkill = this.actor.system.skills.will.resistcoerc.value;
-                  modifiers = this.actor.system.skills.will.resistcoerc.modifiers;
+                  modifiers = [];
                   vcDmg = `1d10+${this.actor.system.stats.emp.current}[${game.i18n.localize("WITCHER.Actor.Stat.Emp")}]`
                   effect = "WITCHER.verbalCombat.None"
                   break;
@@ -1737,6 +1737,7 @@ export default class WitcherActorSheet extends ActorSheet {
                   vcStat = 0;
                   vcSkillName = "WITCHER.context.unavailable";
                   vcSkill = 0;
+                  modifiers = this.actor.system.skills.emp.persuasion.modifiers;
                   vcDmg = `${game.i18n.localize("WITCHER.verbalCombat.CounterargueDmg")}`
                   effect = "WITCHER.verbalCombat.CounterargueEffect"
                   break;
