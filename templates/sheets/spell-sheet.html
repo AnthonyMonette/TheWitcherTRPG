@@ -129,7 +129,7 @@
                     <th>{{localize "WITCHER.Item.Effect"}}</th>
                     <th>{{localize "WITCHER.Percentage"}}</th>
                 </tr>
-                {{#each system.effects as |effect name|}}
+                {{#each item.system.effects as |effect name|}}
                 <tr>
                     <td class="list-item"  data-id="{{effect.id}}">
                         <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>

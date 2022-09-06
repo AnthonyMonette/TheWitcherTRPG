@@ -10,11 +10,11 @@
         </div>
     </header>
     <label><b>{{localize "WITCHER.Item.Description"}}</b></label>
-<textarea rows=5 name="system.description">{{system.description}}</textarea>
+<textarea rows=5 name="system.description">{{item.system.description}}</textarea>
     <div class="flex">
         <div class="effect-column">
             <b>{{localize "WITCHER.Actor.StatTitle.LableLeft"}} </b><a class="add-modifier-stat"><i class="fas fa-plus"></i></a>
-            {{#each system.stats as |stat index|}}
+            {{#each item.system.stats as |stat index|}}
             <div class="flex list-item"  data-id="{{stat.id}}" data-type="stat">
                 <a class="remove-modifier-stat"><i class="fas fa-minus"></i></a>
                 <select class="modifiers-edit" data-field="stat">
@@ -37,7 +37,7 @@
         </div>
         <div class="effect-column">
             <b>{{localize "WITCHER.Actor.StatTitle.Derived"}} </b><a class="add-modifier-derived"><i class="fas fa-plus"></i></a>
-            {{#each system.derived as |derived index|}}
+            {{#each item.system.derived as |derived index|}}
             <div class="flex list-item"  data-id="{{derived.id}}" data-type="derived">
                 <a class="remove-modifier-derived"><i class="fas fa-minus"></i></a>
                 <select class="modifiers-edit-derived" data-field="derivedStat">
@@ -59,7 +59,7 @@
         </div>
         <div class="effect-column">
             <b>{{localize "WITCHER.Monster.SkillTab"}} </b><a class="add-modifier-skill"><i class="fas fa-plus"></i></a>
-            {{#each system.skills as |skill index|}}
+            {{#each item.system.skills as |skill index|}}
             <div class="flex list-item"  data-id="{{skill.id}}">
                 <a class="remove-modifier-skill"><i class="fas fa-minus"></i></a>
                 <select class="modifiers-edit-skills" data-field="skill">
