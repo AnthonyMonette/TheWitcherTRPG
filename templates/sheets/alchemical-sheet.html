@@ -1,5 +1,5 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
 
     {{!-- Attributes Tab --}}
     <table class="item-table">
@@ -8,40 +8,40 @@
             <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
             <th>{{localize "WITCHER.Alchemy.Duration"}}</th>
             {{#if (or (eq item.system.type "potion") (eq item.system.type "decoction"))}}
-            <th>{{localize "WITCHER.Alchemy.Toxicity"}}</th>
+                <th>{{localize "WITCHER.Alchemy.Toxicity"}}</th>
             {{/if}}
         </tr>
         <tr>
-            <td>    
+            <td>
                 <select name="system.type" id="type-select">
                     {{#select item.system.type}}
-                    <option value="alchemical">{{localize "WITCHER.Alchemy.Alchemical"}}</option>
-                    <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
-                    <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
-                    <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
+                        <option value="alchemical">{{localize "WITCHER.Alchemy.Alchemical"}}</option>
+                        <option value="potion">{{localize "WITCHER.Alchemy.Potion"}}</option>
+                        <option value="decoction">{{localize "WITCHER.Alchemy.Decoction"}}</option>
+                        <option value="oil">{{localize "WITCHER.Alchemy.Oil"}}</option>
                     {{/select}}
                 </select>
             </td>
             <td>
                 <select name="system.avail" id="avail-select">
-                {{#select item.system.avail}}
-                {{#each config.Avalability as |name value|}}
-                    <option value="{{value}}">{{localize name}}</option>
-                {{/each}}
-                    <option value="Witcher">{{localize "WITCHER.Item.Avalability.Witcher"}}</option>
-                {{/select}}
+                    {{#select item.system.avail}}
+                        {{#each config.Availability as |name value|}}
+                            <option value="{{value}}">{{localize name}}</option>
+                        {{/each}}
+                        <option value="Witcher">{{localize "WITCHER.Item.AvailabilityWitcher"}}</option>
+                    {{/select}}
                 </select>
             </td>
             <td><input type="text" name="system.time" value="{{item.system.time}}"/></td>
             {{#if (or (eq item.system.type "potion") (eq item.system.type "decoction"))}}
-            <td><input type="text" name="system.toxicity" value="{{item.system.toxicity}}"/></td>
+                <td><input type="text" name="system.toxicity" value="{{item.system.toxicity}}"/></td>
             {{/if}}
         </tr>
         <tr>
             <td colspan="4">
                 <div>
                     <label>{{localize "WITCHER.Item.Effect"}}</label>
-<textarea rows=10 name="system.effect">{{item.system.effect}}</textarea>
+                    <textarea rows=10 name="system.effect">{{item.system.effect}}</textarea>
                 </div>
             </td>
         </tr>

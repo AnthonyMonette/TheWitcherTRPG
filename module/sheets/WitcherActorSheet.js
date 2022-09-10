@@ -2132,18 +2132,18 @@ export default class WitcherActorSheet extends ActorSheet {
 
       const AttackModifierOptions = `
       <div id="attackModifiers" class="flex">
-        <label><input type="checkbox" name="outsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
-        <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackisFastDraw")}</label> <br />
-        <label><input type="checkbox" name="isProne">${game.i18n.localize("WITCHER.Dialog.attackisProne")}</label> <br />
-        <label><input type="checkbox" name="isPinned"> ${game.i18n.localize("WITCHER.Dialog.attackisPinned")}</label> <br />
-        <label><input type="checkbox" name="isActivelyDodging"> ${game.i18n.localize("WITCHER.Dialog.attackisActivelyDodging")}</label> <br />
-        <label><input type="checkbox" name="isMoving"> ${game.i18n.localize("WITCHER.Dialog.attackisMoving")}</label> <br />
-        <label><input type="checkbox" name="targetOutsideLOS"> ${game.i18n.localize("WITCHER.Dialog.attacktargetOutsideLOS")}</label> <br />
-        <label><input type="checkbox" name="isAmbush"> ${game.i18n.localize("WITCHER.Dialog.attackisAmbush")}</label> <br />
-        <label><input type="checkbox" name="isRicochet"> ${game.i18n.localize("WITCHER.Dialog.attackisRicochet")}</label> <br />
-        <label><input type="checkbox" name="isBlinded"> ${game.i18n.localize("WITCHER.Dialog.attackisBlinded")}</label> <br />
-        <label><input type="checkbox" name="isSilhouetted"> ${game.i18n.localize("WITCHER.Dialog.attackisSilhouetted")}</label> <br />
-        <label><input type="checkbox" name="isAiming"> ${game.i18n.localize("WITCHER.Dialog.attackisAiming")}: </label> <input  type="number" class="small" name="customAim" value=0> <br />
+        <label><input type="checkbox" name="outsideLOS">${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}</label> <br />
+        <label><input type="checkbox" name="isFastDraw">${game.i18n.localize("WITCHER.Dialog.attackIsFastDraw")}</label> <br />
+        <label><input type="checkbox" name="isProne">${game.i18n.localize("WITCHER.Dialog.attackIsProne")}</label> <br />
+        <label><input type="checkbox" name="isPinned">${game.i18n.localize("WITCHER.Dialog.attackIsPinned")}</label> <br />
+        <label><input type="checkbox" name="isActivelyDodging">${game.i18n.localize("WITCHER.Dialog.attackIsActivelyDodging")}</label> <br />
+        <label><input type="checkbox" name="isMoving">${game.i18n.localize("WITCHER.Dialog.attackIsMoving")}</label> <br />
+        <label><input type="checkbox" name="targetOutsideLOS">${game.i18n.localize("WITCHER.Dialog.attackTargetOutsideLOS")}</label> <br />
+        <label><input type="checkbox" name="isAmbush">${game.i18n.localize("WITCHER.Dialog.attackIsAmbush")}</label> <br />
+        <label><input type="checkbox" name="isRicochet">${game.i18n.localize("WITCHER.Dialog.attackIsRicochet")}</label> <br />
+        <label><input type="checkbox" name="isBlinded">${game.i18n.localize("WITCHER.Dialog.attackIsBlinded")}</label> <br />
+        <label><input type="checkbox" name="isSilhouetted">${game.i18n.localize("WITCHER.Dialog.attackIsSilhouetted")}</label> <br />
+        <label><input type="checkbox" name="isAiming">${game.i18n.localize("WITCHER.Dialog.attackIsAiming")}: </label> <input  type="number" class="small" name="customAim" value=0> <br />
     </div>
       `;
       const rangeOptions = `
@@ -2193,7 +2193,7 @@ export default class WitcherActorSheet extends ActorSheet {
           attackSkill = game.i18n.localize("WITCHER.SkRefStaff");
           break;
         case "Swordsmanship":
-          attackSkill = game.i18n.localize("WITCHER.SkRefSwordmanship");
+          attackSkill = game.i18n.localize("WITCHER.SkRefSwordsmanship");
           break;
         case "Archery":
           attackSkill = game.i18n.localize("WITCHER.SkDexArchery");
@@ -2224,7 +2224,7 @@ export default class WitcherActorSheet extends ActorSheet {
       content += `<label>${game.i18n.localize("WITCHER.Dialog.attackStrike")}: <select name="strike">${StrikeOptions}</select></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.damageType")}: <select name="damageType">${DamageOptions}</select></label> <br />
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="number" class="small" name="customAtt" value=0></label> <br />
-                  <label>${game.i18n.localize("WITCHER.Dialog.attackModifierse")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
+                  <label>${game.i18n.localize("WITCHER.Dialog.attackModifiers")}: <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a></label> <br />${AttackModifierOptions}<br />
                   <h2>${item.name} ${game.i18n.localize("WITCHER.Dialog.attackDamage")}: ${displayDmgFormula}</h2> 
                   <label>${game.i18n.localize("WITCHER.Dialog.attackCustomDmg")}: <input type="number" class="small" name="customDmg" value=0></label> <br />`;
                   
@@ -2237,14 +2237,14 @@ export default class WitcherActorSheet extends ActorSheet {
         let quantity = ammunitions.sum("quantity")
         content += `<h2>${game.i18n.localize("WITCHER.Dialog.chooseAmmunition")}</h2> `
         if (quantity <= 0) {
-          content += `<div class="error-display">${game.i18n.localize("WITCHER.Dialog.NoAmmunation")}</h2>`
+          content += `<div class="error-display">${game.i18n.localize("WITCHER.Dialog.NoAmmunition")}</h2>`
         }
         else {
-          let ammunationOption = ``
+          let ammunitionOption = ``
           ammunitions.forEach(element => {
-            ammunationOption += `<option value="${element._id}"> ${element.name}(${element.system.quantity}) </option>`;
+            ammunitionOption += `<option value="${element._id}"> ${element.name}(${element.system.quantity}) </option>`;
           });
-          content += ` <label>${game.i18n.localize("WITCHER.Dialog.Ammunation")}: <select name="ammunation">${ammunationOption}</select></label> <br /><br />`
+          content += ` <label>${game.i18n.localize("WITCHER.Dialog.Ammunition")}: <select name="ammunition">${ammunitionOption}</select></label> <br /><br />`
         }
       }
               
@@ -2260,8 +2260,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let location = html.find("[name=location]")[0].value;
               let ammunition = undefined
-              if (html.find("[name=ammunation]")[0]) {
-                ammunition = html.find("[name=ammunation]")[0].value;
+              if (html.find("[name=ammunition]")[0]) {
+                ammunition = html.find("[name=ammunition]")[0].value;
               }
 
               let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
@@ -2348,7 +2348,7 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                   case "Swordsmanship":
                     attFormula += !displayRollDetails ? `+${this.actor.system.stats.ref.current}+${this.actor.system.skills.ref.swordsmanship.value}`:
-                      `+${this.actor.system.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.system.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordmanship")}]`;
+                      `+${this.actor.system.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.system.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordsmanship")}]`;
                       modifiers = this.actor.system.skills.ref.swordsmanship.modifiers;
                     break;
                   case "Archery":
