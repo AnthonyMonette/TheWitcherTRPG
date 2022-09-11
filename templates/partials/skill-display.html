@@ -1,49 +1,54 @@
 <tbody class="skill" data-skill="{{name}}" data-stat={{stat}}>
-    <tr>
-        {{#if (or skill.isProffession skill.isPickup)}}
-        <td class="{{name}} char-skill" class="{{name}}" id="{{name}}-rollable">
-        {{/if}}
-        {{#if skill.isLearned}}
-            {{#unless (or skill.isProffession skill.isPickup)}}
-                <td class="{{name}} char-skill learned-skilled" class="{{name}}" id="{{name}}-rollable">
-            {{/unless}}
-        {{/if}}
-        {{#unless (or skill.isProffession skill.isPickup skill.isLearned)}}
-        <td class="{{name}} char-skill not-skilled" class="{{name}}" id="{{name}}-rollable">
+<tr>
+    {{#if (or skill.isProffession skill.isPickup)}}
+    <td class="{{name}} char-skill" class="{{name}}" id="{{name}}-rollable">
+    {{/if}}
+    {{#if skill.isLearned}}
+        {{#unless (or skill.isProffession skill.isPickup)}}
+        <td class="{{name}} char-skill learned-skilled" class="{{name}}" id="{{name}}-rollable">
         {{/unless}}
-            <a><span>{{localize skill.label}}</span></a>
-        </td>
-        <td class="char-input-skill">
-            <input class="{{name}}" name="system.skills.{{stat}}.{{name}}.value" type="number" value="{{skill.value}}" />
-        </td>
-        <td>
-            {{#unless skill.isOpened}}
-            <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-            {{/unless}}
-            {{#if skill.isOpened}}
+    {{/if}}
+    {{#unless (or skill.isProffession skill.isPickup skill.isLearned)}}
+    <td class="{{name}} char-skill not-skilled" class="{{name}}" id="{{name}}-rollable">
+    {{/unless}}
+    <a><span>{{localize skill.label}}</span></a>
+</td>
+    <td class="char-input-skill">
+        <input class="{{name}}" name="system.skills.{{stat}}.{{name}}.value" type="number" value="{{skill.value}}"/>
+    </td>
+    <td>
+        {{#if skill.isOpened}}
             <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
-            {{/if}}
-        </td>
-    </tr>
-    {{#if skill.isOpened}}
+        {{else}}
+            <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
+        {{/if}}
+    </td>
+</tr>
+{{#if skill.isOpened}}
     <tr>
         <td colspan="3">
-            <label>{{localize "WITCHER.SKill.profession"}}: <input class="skill-checkbox" type="checkbox" name="system.skills.{{stat}}.{{name}}.isProffession" {{checked skill.isProffession}}/></label>
-            <label>{{localize "WITCHER.SKill.pickup"}}: <input class="skill-checkbox" type="checkbox" name="system.skills.{{stat}}.{{name}}.isPickup" {{checked skill.isPickup}} /></label>
-            <label>{{localize "WITCHER.SKill.learn"}}: <input class="skill-checkbox" type="checkbox" name="system.skills.{{stat}}.{{name}}.isLearned" {{checked skill.isLearned}}/></label>
+            <label>{{localize "WITCHER.SKill.profession"}}: <input class="skill-checkbox" type="checkbox"
+                                                                   name="system.skills.{{stat}}.{{name}}.isProffession" {{checked
+                        skill.isProffession}}/></label>
+            <label>{{localize "WITCHER.SKill.pickup"}}: <input class="skill-checkbox" type="checkbox"
+                                                               name="system.skills.{{stat}}.{{name}}.isPickup" {{checked
+                        skill.isPickup}} /></label>
+            <label>{{localize "WITCHER.SKill.learn"}}: <input class="skill-checkbox" type="checkbox"
+                                                              name="system.skills.{{stat}}.{{name}}.isLearned" {{checked
+                        skill.isLearned}}/></label>
         </td>
     </tr>
     <tr>
         <td colspan="3">
             <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
             {{#each skill.modifiers as |modifier value|}}
-            <div class="list-modifiers"  data-id="{{modifier.id}}">
-                <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-            </div>
+                <div class="list-modifiers" data-id="{{modifier.id}}">
+                    <input class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                    <input class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
+                    <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                </div>
             {{/each}}
         </td>
     </tr>
-    {{/if}}
+{{/if}}
 </tbody>

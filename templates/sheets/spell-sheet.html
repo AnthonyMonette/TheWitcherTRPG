@@ -1,149 +1,149 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <table class="item-table">
         <tr>
             <th title="{{localize "WITCHER.Spell.Variable"}}">{{localize "WITCHER.Spell.Short.Variable"}}</th>
             {{#unless (eq item.system.staminaIsVar true)}}
-            <th title="{{localize "WITCHER.Spell.StaCost"}}">{{localize "WITCHER.Spell.Short.StaCost"}}</th>
+                <th title="{{localize "WITCHER.Spell.StaCost"}}">{{localize "WITCHER.Spell.Short.StaCost"}}</th>
             {{/unless}}
             {{#if (eq item.system.class "Hexes")}}
                 <th>{{localize "WITCHER.Spell.Danger"}}</th>
-            {{/if}}
-            {{#unless (eq item.system.class "Hexes")}}
+            {{else}}
                 {{#if (eq item.system.class "Rituals")}}
-                <th>{{localize "WITCHER.Spell.PrepTime"}}</th>
-                <th>{{localize "WITCHER.Spell.DC"}}</th>
+                    <th>{{localize "WITCHER.Spell.PrepTime"}}</th>
+                    <th>{{localize "WITCHER.Spell.DC"}}</th>
+                {{else}}
+                    <th>{{localize "WITCHER.Spell.Range"}}</th>
                 {{/if}}
-                {{#unless (eq item.system.class "Rituals")}}
-                <th>{{localize "WITCHER.Spell.Range"}}</th>
-                {{/unless}}
                 <th>{{localize "WITCHER.Spell.Duration"}}</th>
                 {{#unless (eq item.system.class "Rituals")}}
-                <th>{{localize "WITCHER.Spell.Defence"}}</th>
+                    <th>{{localize "WITCHER.Spell.Defence"}}</th>
                 {{/unless}}
                 {{#if (eq item.system.class "Witcher")}}
-                <th>{{localize "WITCHER.Spell.Sign"}} {{localize "WITCHER.Spell.Type"}}<th>
+                    <th>{{localize "WITCHER.Spell.Sign"}} {{localize "WITCHER.Spell.Type"}}
+                <th>
                 {{/if}}
-            {{/unless}}
+            {{/if}}
         </tr>
         <tr>
             <td><input type="checkbox" name="system.staminaIsVar"  {{checked item.system.staminaIsVar}}/></td>
             {{#unless (eq item.system.staminaIsVar true)}}
-            <td><input name="system.stamina" type="text" value="{{item.system.stamina}}"/></td>
+                <td><input name="system.stamina" type="text" value="{{item.system.stamina}}"/></td>
             {{/unless}}
             {{#if (eq item.system.class "Hexes")}}
                 <td>
                     <select name="system.danger" id="level-select">
                         {{#select item.system.danger}}
-                        <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
-                        <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
-                        <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
+                            <option value="Low">{{localize "WITCHER.Spell.DangerLow"}}</option>
+                            <option value="Medium">{{localize "WITCHER.Spell.DangerMedium"}}</option>
+                            <option value="High">{{localize "WITCHER.Spell.DangerHigh"}}</option>
                         {{/select}}
                     </select>
                 </td>
-            {{/if}}
-            {{#unless (eq item.system.class "Hexes")}}
+            {{else}}
                 {{#if (eq item.system.class "Rituals")}}
                     <td><input name="system.preparationTime" type="text" value="{{item.system.preparationTime}}"/></td>
                     <td><input name="system.dificultyCheck" type="text" value="{{item.system.dificultyCheck}}"/></td>
-                {{/if}}                
-                {{#unless (eq item.system.class "Rituals")}}
+                {{else}}
                     <td><input name="system.range" type="text" value="{{item.system.range}}"/></td>
-                {{/unless}}
+                {{/if}}
                 <td><input name="system.duration" type="text" value="{{item.system.duration}}"/></td>
                 {{#unless (eq item.system.class "Rituals")}}
                     <td><input name="system.defence" type="text" value="{{item.system.defence}}"/></td>
                 {{/unless}}
                 {{#if (eq item.system.class "Witcher")}}
-                <td>
-                    <select name="system.domain">
-                        {{#select item.system.domain}}
-                        <option value="basic">{{localize "WITCHER.Spell.Basic"}}</option>
-                        <option value="alternate">{{localize "WITCHER.Spell.Alt"}}</option>
-                        {{/select}}
-                    </select>
-                </td>
+                    <td>
+                        <select name="system.domain">
+                            {{#select item.system.domain}}
+                                <option value="basic">{{localize "WITCHER.Spell.Basic"}}</option>
+                                <option value="alternate">{{localize "WITCHER.Spell.Alt"}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
                 {{/if}}
-            {{/unless}}
+            {{/if}}
         </tr>
     </table>
-        <label>{{localize "WITCHER.Item.Effect"}}</label>
-<textarea rows="10" name="system.effect">{{item.system.effect}}</textarea>
-        {{#if (eq item.system.class "Rituals")}}
+    <label>{{localize "WITCHER.Item.Effect"}}</label>
+    <textarea rows="10" name="system.effect">{{item.system.effect}}</textarea>
+    {{#if (eq item.system.class "Rituals")}}
         <label>{{localize "WITCHER.Spell.Components"}}</label>
-<textarea rows="4" name="system.components">{{item.system.components}}</textarea>
-        {{/if}}
-        {{#if (eq item.system.class "Hexes")}}
+        <textarea rows="4" name="system.components">{{item.system.components}}</textarea>
+    {{else if (eq item.system.class "Hexes")}}
         <label>{{localize "WITCHER.Spell.Requirements"}}</label>
-<textarea rows="5" name="system.liftRequirement">{{item.system.liftRequirement}}</textarea>
-        {{/if}}
-        <div class="flex">
-            <div class="spell-template-damage">
-                <div>
-                    <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
-                    <input type="checkbox" name="system.createTemplate"  {{checked item.system.createTemplate}}/>
-                </div>
-                <div>
-                    <label>{{localize "WITCHER.Spell.Damage"}}</label>
-                    <input type="checkbox" name="system.causeDamages"  {{checked item.system.causeDamages}}/>
-                </div>
+        <textarea rows="5" name="system.liftRequirement">{{item.system.liftRequirement}}</textarea>
+    {{/if}}
+    <div class="flex">
+        <div class="spell-template-damage">
+            <div>
+                <label>{{localize "WITCHER.Spell.CreateTemplate"}}</label>
+                <input type="checkbox" name="system.createTemplate"  {{checked item.system.createTemplate}}/>
             </div>
-            <table class="item-table">
-                <tr>
-                    {{#if (eq item.system.createTemplate true)}}
+            <div>
+                <label>{{localize "WITCHER.Spell.Damage"}}</label>
+                <input type="checkbox" name="system.causeDamages"  {{checked item.system.causeDamages}}/>
+            </div>
+        </div>
+        <table class="item-table">
+            <tr>
+                {{#if (eq item.system.createTemplate true)}}
                     <th>{{localize "WITCHER.Spell.Size"}} ({{localize "WITCHER.Spell.meters"}})</th>
                     <th>{{localize "WITCHER.Spell.Type"}}</th>
-                    {{/if}}
-                    {{#if (eq item.system.causeDamages true)}}
+                {{/if}}
+                {{#if (eq item.system.causeDamages true)}}
                     <th>{{localize "WITCHER.Weapon.Short.Damage"}}</th>
-                    {{/if}}
-                </tr>
-                <tr>
-                    {{#if (eq item.system.createTemplate true)}}
+                {{/if}}
+            </tr>
+            <tr>
+                {{#if (eq item.system.createTemplate true)}}
                     <td>
-                        <input class="medium" placeholder="0" name="system.templateSize" type="text" value="{{item.system.templateSize}}"/>
+                        <input class="medium" placeholder="0" name="system.templateSize" type="text"
+                               value="{{item.system.templateSize}}"/>
                     </td>
                     <td>
                         <select name="system.templateType">
                             {{#select item.system.templateType}}
-                            <option value="rect">{{localize "WITCHER.Spell.Square"}}</option>
-                            <option value="circle">{{localize "WITCHER.Spell.Circle"}}</option>
-                            <option value="cone">{{localize "WITCHER.Spell.Cone"}}</option>
-                            <option value="ray">{{localize "WITCHER.Spell.Ray"}}</option>
+                                <option value="rect">{{localize "WITCHER.Spell.Square"}}</option>
+                                <option value="circle">{{localize "WITCHER.Spell.Circle"}}</option>
+                                <option value="cone">{{localize "WITCHER.Spell.Cone"}}</option>
+                                <option value="ray">{{localize "WITCHER.Spell.Ray"}}</option>
                             {{/select}}
                         </select>
                     </td>
-                    {{/if}}
-                    {{#if (eq item.system.causeDamages true)}}
+                {{/if}}
+                {{#if (eq item.system.causeDamages true)}}
                     <td>
-                        <input class="medium" placeholder="1d6+0" name="system.damage" type="text" value="{{item.system.damage}}"/>
+                        <input class="medium" placeholder="1d6+0" name="system.damage" type="text"
+                               value="{{item.system.damage}}"/>
                     </td>
-                    {{/if}}
-                </tr>
-            </table>
-        </div>
-            {{#if (eq item.system.causeDamages true)}}
-            <table class="item-bottom-table">
-                <tr>
-                    <th><a class="add-effect" title="{{localize "WITCHER.Item.AddEffect"}}"><i class="fas fa-plus"></i></a></th>
-                    <th>{{localize "WITCHER.Item.Effect"}}</th>
-                    <th>{{localize "WITCHER.Percentage"}}</th>
-                </tr>
-                {{#each item.system.effects as |effect name|}}
-                <tr>
-                    <td class="list-item"  data-id="{{effect.id}}">
-                        <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i class="fas fa-minus"></i></a>
-                    </td>
-                    <td class="list-item"  data-id="{{effect.id}}">
-                        <input  class="list-edit item-effect" placeholder="{{localize "WITCHER.table.Name"}}" data-field="name" type="text" value="{{effect.name}}"/>
-                    </td>
-                    <td class="list-item"  data-id="{{effect.id}}">
-                        <input class="list-edit" placeholder="%" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
-                    </td>
-                </tr>
-                {{/each}}
-            </table>
-            {{/if}}
-        </div>
+                {{/if}}
+            </tr>
+        </table>
     </div>
+    {{#if (eq item.system.causeDamages true)}}
+        <table class="item-bottom-table">
+            <tr>
+                <th><a class="add-effect" title="{{localize "WITCHER.Item.AddEffect"}}"><i class="fas fa-plus"></i></a>
+                </th>
+                <th>{{localize "WITCHER.Item.Effect"}}</th>
+                <th>{{localize "WITCHER.Percentage"}}</th>
+            </tr>
+            {{#each item.system.effects as |effect name|}}
+                <tr>
+                    <td class="list-item" data-id="{{effect.id}}">
+                        <a class="remove-effect" title="{{localize "WITCHER.Item.RemoveEffect"}}"><i
+                                class="fas fa-minus"></i></a>
+                    </td>
+                    <td class="list-item" data-id="{{effect.id}}">
+                        <input class="list-edit item-effect" placeholder="{{localize "WITCHER.table.Name"}}"
+                               data-field="name" type="text" value="{{effect.name}}"/>
+                    </td>
+                    <td class="list-item" data-id="{{effect.id}}">
+                        <input class="list-edit" placeholder="%" data-field="percentage" type="text"
+                               value="{{effect.percentage}}" data-dtype="Number"/>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    {{/if}}
 </form>

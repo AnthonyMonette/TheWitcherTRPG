@@ -1,141 +1,115 @@
 <a class="change-skill-list"><i class="fas fa-list"></i></a>
 <div class="skill" data-skilltype="int">
     <div class="monster-skill">
-        {{#unless system.pannels.intIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.intIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Intelligence"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.intIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.intIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.int as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="int"}}
-    {{/each}}
+    <table {{#if system.pannels.intIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.int as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="int"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="ref">
     <div class="monster-skill">
-        {{#unless system.pannels.refIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.refIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Reflex"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.refIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.refIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.ref as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="ref"}}
-    {{/each}}
+    <table {{#if system.pannels.refIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.ref as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="ref"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="dex">
     <div class="monster-skill">
-        {{#unless system.pannels.dexIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.dexIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Dexterity"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.dexIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.dexIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.dex as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="dex"}}
-    {{/each}}
+    <table {{#if system.pannels.dexIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.dex as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="dex"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="body">
     <div class="monster-skill">
-        {{#unless system.pannels.bodyIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.bodyIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Body"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.bodyIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.bodyIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.body as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="body"}}
-    {{/each}}
+    <table {{#if system.pannels.bodyIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.body as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="body"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="emp">
     <div class="monster-skill">
-        {{#unless system.pannels.empIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.empIsOpen}}
-        <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Empathy"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.empIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.empIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.emp as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="emp"}}
-    {{/each}}
+    <table {{#if system.pannels.empIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.emp as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="emp"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="cra">
     <div class="monster-skill">
-        {{#unless system.pannels.craIsOpen}}
-            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.craIsOpen}}
-            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Crafting"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.craIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.craIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.cra as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="cra"}}
-    {{/each}}
+    <table {{#if system.pannels.craIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.cra as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="cra"}}
+        {{/each}}
     </table>
 </div>
 <div class="skill" data-skilltype="will">
     <div class="monster-skill">
-        {{#unless system.pannels.willIsOpen}}
-            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}<i class="expander fas fa-chevron-right"></i></a>
-        {{/unless}}
         {{#if system.pannels.willIsOpen}}
-            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}<i class="expander fas fa-chevron-down"></i></a>
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}
+                <i class="expander fas fa-chevron-down"></i></a>
+
+        {{else}}
+            <a class="skill-display">{{localize "WITCHER.Actor.Skill.Willpower"}}
+                <i class="expander fas fa-chevron-right"></i></a>
         {{/if}}
     </div>
-    {{#unless system.pannels.willIsOpen}}
-        <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.willIsOpen}}
-        <table class="skill-list">
-    {{/if}}
-    {{#each system.skills.will as |skill name|}}
-{{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="will"}}
-    {{/each}}
+    <table {{#if system.pannels.willIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        {{#each system.skills.will as |skill name|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html" skill=skill name=name stat="will"}}
+        {{/each}}
     </table>
 </div>

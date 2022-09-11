@@ -9,7 +9,7 @@
         <td><b>{{localize "WITCHER.Item.ROF"}}</b></td>
     </tr>
     {{#each weapons as |weapon id|}}
-    <tbody class="item" data-item-id="{{weapon._id}}">
+        <tbody class="item" data-item-id="{{weapon._id}}">
         <tr>
             <td>
                 <a class="item-weapon-display"><i class="fas fa-info"></i></a>
@@ -18,42 +18,50 @@
                 <img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/>
             </td>
             <td><a class="item-roll">{{weapon.name}}</a></td>
-            <td><input class="inline-edit" data-field="system.damage" type="text" value="{{weapon.system.damage}}" placeholder="" /></td>
-            <td><input class="inline-edit small" data-field="system.reliable" type="text" value="{{weapon.system.reliable}}" placeholder="" /></td>
-            <td><input class="inline-edit small" data-field="system.rateOfFire" type="text" value="{{weapon.system.rateOfFire}}" data-dtype="Number"/></td>
+            <td><input class="inline-edit" data-field="system.damage" type="text" value="{{weapon.system.damage}}"
+                       placeholder=""/></td>
+            <td><input class="inline-edit small" data-field="system.reliable" type="text"
+                       value="{{weapon.system.reliable}}" placeholder=""/></td>
+            <td><input class="inline-edit small" data-field="system.rateOfFire" type="text"
+                       value="{{weapon.system.rateOfFire}}" data-dtype="Number"/></td>
         </tr>
-        <tr class="item-info invisible" >
+        <tr class="item-info invisible">
             <td>
                 <a class="item-edit"><i class="fas fa-edit"></i></a>
             </td>
-            <td colspan="3">
-                <div class="monster-flex"><b>{{localize "WITCHER.Spell.Effect"}}:</b></label>
-                    {{#each weapon.system.effects as |effect id|}}
-                        <div class="monster-flex">
-                        {{effect.name}}
-                        {{#if effect.percentage}}
-                            ({{effect.percentage}})%   
-                        {{/if}}
-                        ,
-                        </div>
-                    {{/each}}
-                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+            <td>
+                <div class="monster-flex">
+                    <label>{{localize "WITCHER.Spell.Effect"}}:</label>
+                </div>
             </td>
+            <td colspan="2">
+                <div class="monster-flex">
+                    {{#each weapon.system.effects as |effect id|}}
+                        <div class="monster-flex-small">{{effect.name}}
+                            {{#if effect.percentage}}
+                                ({{effect.percentage}})%
+                            {{/if}}</div>
+                    {{/each}}
+                </div>
+            <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
-    </tbody>
+        </tbody>
     {{/each}}
 </table>
 <div class="flex">
-    <h2 class="flex1">Loot <a class="add-item" data-itemType="valuable"><i class="fas fa-plus"></i></a></h2>
+    <h2 class="flex1">{{localize "WITCHER.Loot.Name"}} <a class="add-item" data-itemType="valuable"><i
+            class="fas fa-plus"></i></a></h2>
     <a class="button-roll export-loot">{{localize "WITCHER.Monster.exportLoot"}}</a>
 </div>
 <table>
     {{#each loots as |valuable id|}}
-    <tr class="item" data-item-id="{{valuable._id}}">
-        <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
-        <td><input class="small-medium inline-edit" data-field="system.quantity" type="text" value="{{system.quantity}}"  placeholder="1d6" /></td>
-        <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name" /></td>
-        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
-    </tr>
+        <tr class="item" data-item-id="{{valuable._id}}">
+            <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>
+            <td><input class="small-medium inline-edit" data-field="system.quantity" type="text"
+                       value="{{system.quantity}}" placeholder="1d6"/></td>
+            <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name"/>
+            </td>
+            <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
+        </tr>
     {{/each}}
 </table>

@@ -100,7 +100,7 @@ async function  exportLoot(actor) {
         let newLoot = await Actor.create(actor);
         await newLoot.update({
             "folder": null,
-            "name" : newLoot.name + "--loot",
+            "name" : newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
             "type" : "loot"
         });
         
