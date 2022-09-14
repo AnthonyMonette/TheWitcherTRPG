@@ -2565,6 +2565,9 @@ export default class WitcherActorSheet extends ActorSheet {
         case "hex":
           this.actor.update({ 'system.pannels.hexIsOpen': this.actor.system.pannels.hexIsOpen ? false : true});
           break;
+        case "magicalgift":
+          this.actor.update({ 'system.pannels.magicalgiftIsOpen': this.actor.system.pannels.magicalgiftIsOpen ? false : true});
+          break;
       }
     }
 
