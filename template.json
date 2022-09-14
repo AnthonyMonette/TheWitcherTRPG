@@ -1255,6 +1255,7 @@
       "dificultyCheck": "",
       "danger": "",
       "liftRequirement": "",
+      "sideEffect": "",
       "createTemplate" : false,
       "templateSize": "",
       "templateType": "",
