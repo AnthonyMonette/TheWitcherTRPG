@@ -236,5 +236,43 @@
             </tbody>
             {{/each}}
         </table>
+        <h2> {{localize "WITCHER.Spell.MagicalGift"}} <a class="add-item" data-itemType="spell" data-spellType="magicalgift"><i class="fas fa-plus"></i></a> </h2>
+        <table class="magicalgift-table">
+            <tr> 
+                <td></td>
+                <td></td>
+                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
+                <td></td>
+            </tr>
+            {{#each magicalgift as |magicalgift id|}}
+            <tbody class="item" data-item-id="{{magicalgift._id}}">
+                <tr>
+                    <td>
+                        <div class="flex">
+                            <a class="item-spell-display"><i class="fas fa-info"></i></a>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                    </td>
+                    <td><img src="{{magicalgift.img}}" class="item-img dragable" draggable="true" data-id="{{magicalgift._id}}"/></td>
+                    <td><a class="spell-roll">{{magicalgift.name}}</a></td>
+                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{magicalgift.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                </tr>
+                <tr class="item-info invisible">
+                    <td colspan="4">
+                        <div>
+                            <div class="flex">
+                                <label><b>{{localize "WITCHER.Spell.Effect"}}:</b></label> {{magicalgift.system.effect}}
+                            </div>
+                            <div class="flex">
+                                <label><b>{{localize "WITCHER.Spell.SideEffect"}}</b></label> {{magicalgift.system.sideEffect}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
     </div>
 </div>

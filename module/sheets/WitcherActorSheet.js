@@ -148,6 +148,7 @@ export default class WitcherActorSheet extends ActorSheet {
       data.masterSpells = data.items.filter(function(item) {return item.type=="spell" &&  item.system.level=="master" && (item.system.class=="Spells" || item.system.class=="Invocations" || item.system.class=="Witcher")});
       data.hexes = data.items.filter(function(item) {return item.type=="spell" &&  item.system.class=="Hexes"});
       data.rituals = data.items.filter(function(item) {return item.type=="spell" &&  item.system.class=="Rituals"});
+      data.magicalgift = data.items.filter(function(item) {return item.type=="spell" &&  item.system.class=="MagicalGift"});
 
       if (this.actor.system.pannels == undefined){
         this.actor.update({ 'system.pannels':{}});
@@ -902,6 +903,9 @@ export default class WitcherActorSheet extends ActorSheet {
           break;
         case  "hexes":
           itemData.system={ class: "Hexes"}
+          break;
+        case  "magicalgift":
+          itemData.system={ class: "MagicalGift"}
           break;
       }
 
