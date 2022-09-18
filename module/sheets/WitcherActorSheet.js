@@ -1609,34 +1609,9 @@ export default class WitcherActorSheet extends ActorSheet {
     }).render(true);
     }
 
-    _onVerbalCombat(){
+    async _onVerbalCombat(){
       let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
-      let dialogTemplate = `
-        <h1>${game.i18n.localize("WITCHER.verbalCombat.Title")}</h1>
-        <div>
-          <h2>${game.i18n.localize("WITCHER.verbalCombat.EmpatheticAttacks")}</h2>
-          <div><input name="verbalCombat" type="radio" id="Seduce" value="Seduce"/><label for="Seduce">${game.i18n.localize("WITCHER.verbalCombat.Seduce")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Persuade" value="Persuade"/><label for="Persuade">${game.i18n.localize("WITCHER.verbalCombat.Persuade")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Appeal" value="Appeal"/><label for="Appeal">${game.i18n.localize("WITCHER.verbalCombat.Appeal")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Befriend" value="Befriend"/><label for="Befriend">${game.i18n.localize("WITCHER.verbalCombat.Befriend")}</label></div>
-          <h2>${game.i18n.localize("WITCHER.verbalCombat.AntagonisticAttacks")}</h2>
-          <div><input name="verbalCombat" type="radio" id="Deceive" value="Deceive"/><label for="Deceive">${game.i18n.localize("WITCHER.verbalCombat.Deceive")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Ridicule" value="Ridicule"/><label for="Ridicule">${game.i18n.localize("WITCHER.verbalCombat.Ridicule")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Intimidate" value="Intimidate"/><label for="Intimidate">${game.i18n.localize("WITCHER.verbalCombat.Intimidate")}</label></div>
-          <h2>${game.i18n.localize("WITCHER.verbalCombat.Defences")}</h2>
-          <div><input name="verbalCombat" type="radio" id="Ignore" value="Ignore"/><label for="Ignore">${game.i18n.localize("WITCHER.verbalCombat.Ignore")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Counterargue" value="Counterargue"/><label for="Counterargue">${game.i18n.localize("WITCHER.verbalCombat.Counterargue")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="ChangeSubject" value="ChangeSubject"/><label for="ChangeSubject">${game.i18n.localize("WITCHER.verbalCombat.ChangeSubject")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Disengage" value="Disengage"/><label for="Disengage">${game.i18n.localize("WITCHER.verbalCombat.Disengage")}</label></div>
-          <h2>${game.i18n.localize("WITCHER.verbalCombat.EmpatheticTools")}</h2>
-          <div><input name="verbalCombat" type="radio" id="Romance" value="Romance"/><label for="Romance">${game.i18n.localize("WITCHER.verbalCombat.Romance")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Study" value="Study"/><label for="Study">${game.i18n.localize("WITCHER.verbalCombat.Study")}</label></div>
-          <h2>${game.i18n.localize("WITCHER.verbalCombat.AntagonisticTools")}</h2>
-          <div><input name="verbalCombat" type="radio" id="ImplyPersuade" value="ImplyPersuade"/><label for="ImplyPersuade">${game.i18n.localize("WITCHER.verbalCombat.ImplyPersuade")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="ImplyDeceit" value="ImplyDeceit"/><label for="ImplyDeceit">${game.i18n.localize("WITCHER.verbalCombat.ImplyDeceit")}</label></div>
-          <div><input name="verbalCombat" type="radio" id="Bribe" value="Bribe"/><label for="Bribe">${game.i18n.localize("WITCHER.verbalCombat.Bribe")}</label></div>
-          <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>
-        </div>`;
+      const dialogTemplate = await renderTemplate("systems/TheWitcherTRPG/templates/sheets/verbal-combat.html");
       new Dialog({
         title: game.i18n.localize("WITCHER.verbalCombat.DialogTitle"),
         content: dialogTemplate,
