@@ -232,6 +232,7 @@
                 <tr class="item-info invisible">
                     <td colspan="9">
                         <table>
+                            {{#unless (eq type "enhancement")}}
                             <tr >
                                 <td colspan="8">
                                     <div class="flex">
@@ -251,6 +252,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            {{/unless}}
                             {{#if (eq type "armor")}}
                                 <tr>
                                     <td><div class="flex"> <label class="label-info"><b>{{localize "WITCHER.Armor.Short.ArmorEnhancement"}}:</b></label>{{armor.system.enhancements}}</div></td>
