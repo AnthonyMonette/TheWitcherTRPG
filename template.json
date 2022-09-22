@@ -768,6 +768,7 @@
         "masterSpellIsOpen": false,
         "ritualIsOpen": false,
         "hexIsOpen": false,
+        "magicalgiftIsOpen": false,
 
         "intIsOpen": false,
         "refIsOpen": false,
@@ -1255,6 +1256,7 @@
       "dificultyCheck": "",
       "danger": "",
       "liftRequirement": "",
+      "sideEffect": "",
       "createTemplate" : false,
       "templateSize": "",
       "templateType": "",
