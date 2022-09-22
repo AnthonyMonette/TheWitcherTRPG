@@ -1,10 +1,11 @@
 {
+    "name": "TheWitcherTRPG",
     "id": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
     "minimumCoreVersion" : "10",
     "compatibleCoreVersion" : "10",
-    "version": 0.91,
+    "version": 0.92,
     "authors": {
       "name": "TechAntho"
     },
@@ -108,7 +109,7 @@
         "path": "lang/pl.json"
       }
     ],
-    "relationshios": {
+    "relationships": {
       "requires": [
         {
           "id": "compendium-folders",
