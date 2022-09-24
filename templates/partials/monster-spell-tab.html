@@ -175,3 +175,39 @@
         {{/each}}
     </table>
 </div>
+<div class="spell" data-spelltype="magicalgift">
+    <h3>{{localize "WITCHER.Spell.MagicalGift"}}
+        {{#unless system.pannels.magicalgiftIsOpen}}
+        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
+        {{/unless}}
+        {{#if system.pannels.magicalgiftIsOpen}}
+        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+        {{/if}}
+    {{#unless system.pannels.magicalgiftIsOpen}}
+    <table class="skill-list invisible">
+    {{/unless}}
+    {{#if system.pannels.magicalgiftIsOpen}}
+    <table class="skill-list">
+    {{/if}}
+        <tr> 
+            <td></td> 
+            <td></td> 
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
+            <td></td> 
+        </tr>
+        {{#each magicalgift as |magicalgift id|}}
+        <tbody class="item" data-item-id="{{magicalgift._id}}">
+            <tr>
+                <td>
+                    <a class="item-edit"><i class="fas fa-edit"></i></a>
+                </td>
+                <td><img src="{{magicalgift.img}}" class="item-img dragable" draggable="true" data-id="{{magicalgift._id}}"/></td>
+                <td><a class="spell-roll">{{magicalgift.name}}</a></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{magicalgift.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>

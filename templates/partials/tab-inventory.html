@@ -343,6 +343,7 @@
                 <tr class="item-info invisible">
                     <td colspan="9">
                         <table>
+                            {{#unless (eq type "enhancement")}}
                             <tr>
                                 <td colspan="8">
                                     <div class="flex">
@@ -364,6 +365,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            {{/unless}}
                             {{#if (eq type "armor")}}
                                 <tr>
                                     <td>

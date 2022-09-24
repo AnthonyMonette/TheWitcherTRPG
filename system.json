@@ -1,11 +1,13 @@
 {
-    "name": "TheWitcherTRPG",
+    "id": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
     "minimumCoreVersion" : "10",
     "compatibleCoreVersion" : "10",
-    "version": 0.89,
-    "author": "TechAntho",
+    "version": 0.92,
+    "authors": {
+      "name": "TechAntho"
+    },
     "scripts": [
     ],
     "esmodules": [
@@ -106,11 +108,15 @@
         "path": "lang/pl.json"
       }
     ],
-    "dependencies": [
-      {
-        "name": "compendium-folders",
-        "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/master/module.json"
-      }],
+    "relationships": {
+      "requires": [
+        {
+          "id": "compendium-folders",
+          "type": "module",
+          "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/master/module.json"
+        }
+      ]
+    },
     "socket": false,
     "initiative": "1d10",
     "gridDistance": 2,

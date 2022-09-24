@@ -39,20 +39,32 @@
                             <option value="Witcher">{{localize "WITCHER.Spell.Witcher"}}</option>
                             <option value="Rituals">{{localize "WITCHER.Spell.Rituals"}}</option>
                             <option value="Hexes">{{localize "WITCHER.Spell.Hexes"}}</option>
+                            <option value="MagicalGift">{{localize "WITCHER.Spell.MagicalGift"}}</option>
                         {{/select}}
                     </select>
                 </div>
                 <div class="item-header-second-collum item-header-spell">
                     {{#unless (eq item.system.class "Hexes")}}
-                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
-                        <select name="system.level" id="level-select">
-                            {{#select item.system.level}}
+                        {{#unless (eq item.system.class "MagicalGift")}}
+                            <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
+                            <select name="system.level" id="level-select">
+                                {{#select item.system.level}}
                                 <option value="novice">{{localize "WITCHER.Spell.Novice"}}</option>
                                 <option value="journeyman">{{localize "WITCHER.Spell.Journeyman"}}</option>
                                 <option value="master">{{localize "WITCHER.Spell.Master"}}</option>
+                                {{/select}}
+                            </select>
+                        {{/unless}}
+                    {{/unless}}
+                    {{#if (eq item.system.class "MagicalGift")}}
+                        <label>{{localize "WITCHER.Actor.Profession.Level"}}</label>
+                        <select name="system.level" id="level-select">
+                            {{#select item.system.level}}
+                            <option value="minor gift">{{localize "WITCHER.Spell.MinorGift"}}</option>
+                            <option value="major gift">{{localize "WITCHER.Spell.MajorGift"}}</option>
                             {{/select}}
                         </select>
-                    {{/unless}}
+                    {{/if}}
                 </div>
                 <div class="item-header-second-collum item-header-spell">
                     {{#if (or (eq item.system.class "Spells")
