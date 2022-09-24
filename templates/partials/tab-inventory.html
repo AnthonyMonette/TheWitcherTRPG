@@ -12,51 +12,65 @@
 <div class="flex">
     <div class="weapon-section">
         <div class="flex">
-            <div class="currency"><label>{{localize "WITCHER.Currency.bizant"}}</label><input class="small-medium"
-                                                                                              name="system.currency.bizant"
-                                                                                              type="number"
-                                                                                              value="{{system.currency.bizant}}"
-                                                                                              placeholder="0"
-                                                                                              data-dtype="Number"/>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.bizant"}}</label>
+                <input class="small-medium"
+                       name="system.currency.bizant"
+                       type="number"
+                       value="{{system.currency.bizant}}"
+                       placeholder="0"
+                       data-dtype="Number"/>
             </div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.ducat"}}</label><input class="small-medium"
-                                                                                             name="system.currency.ducat"
-                                                                                             type="number"
-                                                                                             value="{{system.currency.ducat}}"
-                                                                                             placeholder="0"
-                                                                                             data-dtype="Number"/></div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.lintar"}}</label><input class="small-medium"
-                                                                                              name="system.currency.lintar"
-                                                                                              type="number"
-                                                                                              value="{{system.currency.lintar}}"
-                                                                                              placeholder="0"
-                                                                                              data-dtype="Number"/>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.ducat"}}</label>
+                <input class="small-medium"
+                       name="system.currency.ducat"
+                       type="number"
+                       value="{{system.currency.ducat}}"
+                       placeholder="0"
+                       data-dtype="Number"/></div>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.lintar"}}</label>
+                <input class="small-medium"
+                       name="system.currency.lintar"
+                       type="number"
+                       value="{{system.currency.lintar}}"
+                       placeholder="0"
+                       data-dtype="Number"/>
             </div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.floren"}}</label><input class="small-medium"
-                                                                                              name="system.currency.floren"
-                                                                                              type="number"
-                                                                                              value="{{system.currency.floren}}"
-                                                                                              placeholder="0"
-                                                                                              data-dtype="Number"/>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.floren"}}</label>
+                <input class="small-medium"
+                       name="system.currency.floren"
+                       type="number"
+                       value="{{system.currency.floren}}"
+                       placeholder="0"
+                       data-dtype="Number"/>
             </div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.crown"}}</label><input class="small-medium"
-                                                                                             name="system.currency.crown"
-                                                                                             type="number"
-                                                                                             value="{{system.currency.crown}}"
-                                                                                             placeholder="0"
-                                                                                             data-dtype="Number"/></div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.oren"}}</label><input class="small-medium"
-                                                                                            name="system.currency.oren"
-                                                                                            type="number"
-                                                                                            value="{{system.currency.oren}}"
-                                                                                            placeholder="0"
-                                                                                            data-dtype="Number"/></div>
-            <div class="currency"><label>{{localize "WITCHER.Currency.falsecoin"}}</label><input class="small-medium"
-                                                                                                 name="system.currency.falsecoin"
-                                                                                                 type="number"
-                                                                                                 value="{{system.currency.falsecoin}}"
-                                                                                                 placeholder="0"
-                                                                                                 data-dtype="Number"/>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.crown"}}</label>
+                <input class="small-medium"
+                       name="system.currency.crown"
+                       type="number"
+                       value="{{system.currency.crown}}"
+                       placeholder="0"
+                       data-dtype="Number"/></div>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.oren"}}</label>
+                <input class="small-medium"
+                       name="system.currency.oren"
+                       type="number"
+                       value="{{system.currency.oren}}"
+                       placeholder="0"
+                       data-dtype="Number"/></div>
+            <div class="currency">
+                <label>{{localize "WITCHER.Currency.falsecoin"}}</label>
+                <input class="small-medium"
+                       name="system.currency.falsecoin"
+                       type="number"
+                       value="{{system.currency.falsecoin}}"
+                       placeholder="0"
+                       data-dtype="Number"/>
             </div>
         </div>
 
@@ -567,8 +581,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../vitriolCount diagram.system.alchemyComponents.vitriol)}}
                                             <span>{{diagram.system.alchemyComponents.vitriol}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../vitriolCount diagram.system.alchemyComponents.vitriol)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.vitriol}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -577,8 +590,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../rebisCount diagram.system.alchemyComponents.rebis)}}
                                             <span>{{diagram.system.alchemyComponents.rebis}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../rebisCount diagram.system.alchemyComponents.rebis)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.rebis}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -587,8 +599,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../aetherCount diagram.system.alchemyComponents.aether)}}
                                             <span>{{diagram.system.alchemyComponents.aether}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../aetherCount diagram.system.alchemyComponents.aether)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.aether}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -597,8 +608,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../quebrithCount diagram.system.alchemyComponents.quebrith)}}
                                             <span>{{diagram.system.alchemyComponents.quebrith}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../quebrithCount diagram.system.alchemyComponents.quebrith)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.quebrith}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -607,8 +617,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../hydragenumCount diagram.system.alchemyComponents.hydragenum)}}
                                             <span>{{diagram.system.alchemyComponents.hydragenum}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../hydragenumCount diagram.system.alchemyComponents.hydragenum)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.hydragenum}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -617,8 +626,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../vermilionCount diagram.system.alchemyComponents.vermilion)}}
                                             <span>{{diagram.system.alchemyComponents.vermilion}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../vermilionCount diagram.system.alchemyComponents.vermilion)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.vermilion}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -626,8 +634,7 @@
                                         <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img"/>
                                         {{#if (gte ../solCount diagram.system.alchemyComponents.sol)}}
                                             <span>{{diagram.system.alchemyComponents.sol}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../solCount diagram.system.alchemyComponents.sol)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.sol}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -636,8 +643,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../caelumCount diagram.system.alchemyComponents.caelum)}}
                                             <span>{{diagram.system.alchemyComponents.caelum}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../caelumCount diagram.system.alchemyComponents.caelum)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.caelum}}</span>
                                         {{/if}}
                                     {{/if}}
@@ -646,8 +652,7 @@
                                              class="substance-img"/>
                                         {{#if (gte ../fulgurCount diagram.system.alchemyComponents.fulgur)}}
                                             <span>{{diagram.system.alchemyComponents.fulgur}}</span>
-                                        {{/if}}
-                                        {{#if (lt ../fulgurCount diagram.system.alchemyComponents.fulgur)}}
+                                        {{else}}
                                             <span class="error-display">{{diagram.system.alchemyComponents.fulgur}}</span>
                                         {{/if}}
                                     {{/if}}
