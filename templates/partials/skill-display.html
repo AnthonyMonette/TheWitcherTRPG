@@ -27,15 +27,18 @@
 {{#if skill.isOpened}}
     <tr>
         <td colspan="3">
-            <label>{{localize "WITCHER.SKill.profession"}}: <input class="skill-checkbox" type="checkbox"
-                                                                   name="system.skills.{{stat}}.{{name}}.isProffession" {{checked
-                        skill.isProffession}}/></label>
-            <label>{{localize "WITCHER.SKill.pickup"}}: <input class="skill-checkbox" type="checkbox"
-                                                               name="system.skills.{{stat}}.{{name}}.isPickup" {{checked
-                        skill.isPickup}} /></label>
-            <label>{{localize "WITCHER.SKill.learn"}}: <input class="skill-checkbox" type="checkbox"
-                                                              name="system.skills.{{stat}}.{{name}}.isLearned" {{checked
-                        skill.isLearned}}/></label>
+            <label>{{localize "WITCHER.SKill.profession"}}:
+                <input class="skill-checkbox" type="checkbox"
+                       name="system.skills.{{stat}}.{{name}}.isProffession" {{checked skill.isProffession}}/>
+            </label>
+            <label>{{localize "WITCHER.SKill.pickup"}}:
+                <input class="skill-checkbox" type="checkbox"
+                       name="system.skills.{{stat}}.{{name}}.isPickup" {{checked skill.isPickup}}/>
+            </label>
+            <label>{{localize "WITCHER.SKill.learn"}}:
+                <input class="skill-checkbox" type="checkbox"
+                       name="system.skills.{{stat}}.{{name}}.isLearned" {{checked skill.isLearned}}/>
+            </label>
         </td>
     </tr>
     <tr>
