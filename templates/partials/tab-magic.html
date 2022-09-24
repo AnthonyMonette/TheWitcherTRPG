@@ -1,10 +1,11 @@
 <div class="flex">
     <div class="spell-section">
         <h2> {{localize "WITCHER.Spell.Novice"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize
-                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}} <a class="add-item"
-                                                                                     data-itemType="spell"
-                                                                                     data-spellType="spellNovice"><i
-                class="fas fa-plus"></i></a></h2>
+                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}}
+            <a class="add-item" data-itemType="spell" data-spellType="spellNovice">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="novice-spell-table">
             <tr>
                 <td></td>
@@ -22,11 +23,15 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
-                    <td><img src="{{noviceSpell.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{noviceSpell._id}}"/></td>
+                    <td>
+                        <img src="{{noviceSpell.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{noviceSpell._id}}"/>
+                    </td>
                     <td><a class="spell-roll">{{noviceSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
-                               value="{{noviceSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td>
+                        <input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                               value="{{noviceSpell.system.stamina}}" placeholder="1" data-dtype="Number"/>
+                    </td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
@@ -55,10 +60,11 @@
         </table>
 
         <h2> {{localize "WITCHER.Spell.Journeyman"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize
-                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}} <a class="add-item"
-                                                                                     data-itemType="spell"
-                                                                                     data-spellType="spellJourneyman"><i
-                class="fas fa-plus"></i></a></h2>
+                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}}
+            <a class="add-item" data-itemType="spell" data-spellType="spellJourneyman">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="journeyman-spell-table">
             <tr>
                 <td></td>
@@ -76,11 +82,15 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
-                    <td><img src="{{journeymanSpell.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{journeymanSpell._id}}"/></td>
+                    <td>
+                        <img src="{{journeymanSpell.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{journeymanSpell._id}}"/>
+                    </td>
                     <td><a class="spell-roll">{{journeymanSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
-                               value="{{journeymanSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td>
+                        <input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                               value="{{journeymanSpell.system.stamina}}" placeholder="1" data-dtype="Number"/>
+                    </td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
@@ -110,10 +120,11 @@
         </table>
 
         <h2> {{localize "WITCHER.Spell.Master"}} - {{localize "WITCHER.Spell.Spells"}}, {{localize
-                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}} <a class="add-item"
-                                                                                     data-itemType="spell"
-                                                                                     data-spellType="spellMaster"><i
-                class="fas fa-plus"></i></a></h2>
+                "WITCHER.Spell.Invocations"}}, {{localize "WITCHER.Spell.Signs"}}
+            <a class="add-item" data-itemType="spell" data-spellType="spellMaster">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="master-spell-table">
             <tr>
                 <td></td>
@@ -131,11 +142,15 @@
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
                         </div>
                     </td>
-                    <td><img src="{{masterSpell.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{masterSpell._id}}"/></td>
+                    <td>
+                        <img src="{{masterSpell.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{masterSpell._id}}"/>
+                    </td>
                     <td><a class="spell-roll">{{masterSpell.name}}</a></td>
-                    <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
-                               value="{{masterSpell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                    <td>
+                        <input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                               value="{{masterSpell.system.stamina}}" placeholder="1" data-dtype="Number"/>
+                    </td>
                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                 </tr>
                 <tr class="item-info invisible">
