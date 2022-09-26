@@ -1,0 +1,106 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <h1>{{localize "WITCHER.Dialog.attackUse"}} {{attackSkill}}</h1>
+    <div class="flex">
+        <label>{{localize "WITCHER.Dialog.attackExtra"}} <input type="checkbox" name="isExtraAttack"></label> <br />
+    </div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("attackModifiers");
+          x.style.display = x.style.display === "none" ? "block" : "none";
+        }
+    </script>
+    <label>{{localize "WITCHER.Dialog.attackLocation"}}: 
+        <select name="location">
+            <option value="randomHuman"> {{localize "WITCHER.Dialog.attackRandomHuman"}} </option>
+            <option value="randomMonster"> {{localize "WITCHER.Dialog.attackRandomMonster"}} </option>
+            <option value="head"> {{localize "WITCHER.Dialog.attackHead"}} </option>
+            <option value="torso"> {{localize "WITCHER.Dialog.attackTorso"}} </option>
+            <option value="L. Arm"> {{localize "WITCHER.Dialog.attackLArm"}} </option>
+            <option value="R. Arm"> {{localize "WITCHER.Dialog.attackRArm"}} </option>
+            <option value="L. Leg"> {{localize "WITCHER.Dialog.attackLLeg"}} </option>
+            <option value="R. Leg"> {{localize "WITCHER.Dialog.attackRLeg"}} </option>
+            <option value="tail"> {{localize "WITCHER.Dialog.attackTail"}} </option>
+        </select>
+    </label> 
+    <br/>
+    {{#if item.system.range}}
+        <label>{{localize "WITCHER.Dialog.attackRange"}}:</label>
+            <select name="range">
+                <option value="none"> {{localize "WITCHER.Dialog.rangeNone"}} </option>
+                <option value="pointBlank"> {{localize "WITCHER.Dialog.rangePointBlank"}} </option>
+                <option value="close"> {{localize "WITCHER.Dialog.rangeClose"}}</option>
+                <option value="medium"> {{localize "WITCHER.Dialog.rangeMedium"}} </option>
+                <option value="long"> {{localize "WITCHER.Dialog.rangeLong"}} </option>
+                <option value="extreme"> {{localize "WITCHER.Dialog.rangeExtreme"}} </option>
+            </select>
+            <br />
+        {{item.system.range}}
+    {{/if}}
+    <label>{{localize "WITCHER.Dialog.attackStrike"}}: <select name="strike">
+        <option value="normal"> {{localize "WITCHER.Dialog.strikeNormal"}} </option>
+        <option value="fast"> {{localize "WITCHER.Dialog.strikeFast"}} </option>
+        <option value="strong"> {{localize "WITCHER.Dialog.strikeStrong"}} </option>
+        <option value="joint"> {{localize "WITCHER.Dialog.strikeJoint"}} </option>
+        </select>
+    </label> 
+    <br />
+    <label>{{localize "WITCHER.Dialog.damageType"}}: 
+        <select name="damageType">
+            {{#if item.system.type.slashing}}
+                <option value="slashing"> {{localize "WITCHER.Armor.Slashing"}} </option>
+            {{/if}}
+            {{#if item.system.type.piercing}}
+              <option value="piercing"> {{localize "WITCHER.Armor.Piercing"}} </option>
+            {{/if}}
+            {{#if item.system.type.bludgeoning}}
+              <option value="bludgeoning"> {{localize "WITCHER.Armor.Bludgeoning"}} </option>
+            {{/if}}
+            {{#if item.system.type.elemental}}
+              <option value="elemental"> {{localize "WITCHER.Armor.Elemental"}} </option>
+            {{/if}}
+            {{#if (and (eq item.system.type.slashing "false")(eq false item.system.type.piercing "false")(eq item.system.type.bludgeoning "false")(eq item.system.type.elemental "false"))}}
+              <option value="unavailable">{{localize "WITCHER.context.unavailable"}}</option>
+            {{/if}}
+        </select>
+    </label> 
+    <br />
+    <label>{{localize "WITCHER.Dialog.attackCustom"}}: 
+        <input type="number" class="small" name="customAtt" value=0>
+    </label> 
+    <br />
+    <label>{{localize "WITCHER.Dialog.attackModifierse"}}:
+        <a onclick="myFunction()"><i class="fas fa-chevron-right"></i></a>
+    </label>
+    <br />
+    <div id="attackModifiers" class="flex">
+        <label><input type="checkbox" name="outsideLOS"> {{localize "WITCHER.Dialog.attackOutsideLOS"}}</label> <br />
+        <label><input type="checkbox" name="isFastDraw">{{localize "WITCHER.Dialog.attackisFastDraw"}}</label> <br />
+        <label><input type="checkbox" name="isProne">{{localize "WITCHER.Dialog.attackisProne"}}</label> <br />
+        <label><input type="checkbox" name="isPinned"> {{localize "WITCHER.Dialog.attackisPinned"}}</label> <br />
+        <label><input type="checkbox" name="isActivelyDodging"> {{localize "WITCHER.Dialog.attackisActivelyDodging"}}</label> <br />
+        <label><input type="checkbox" name="isMoving"> {{localize "WITCHER.Dialog.attackisMoving"}}</label> <br />
+        <label><input type="checkbox" name="targetOutsideLOS"> {{localize "WITCHER.Dialog.attacktargetOutsideLOS"}}</label> <br />
+        <label><input type="checkbox" name="isAmbush"> {{localize "WITCHER.Dialog.attackisAmbush"}}</label> <br />
+        <label><input type="checkbox" name="isRicochet"> {{localize "WITCHER.Dialog.attackisRicochet"}}</label> <br />
+        <label><input type="checkbox" name="isBlinded"> {{localize "WITCHER.Dialog.attackisBlinded"}}</label> <br />
+        <label><input type="checkbox" name="isSilhouetted"> {{localize "WITCHER.Dialog.attackisSilhouetted"}}</label> <br />
+        <label><input type="checkbox" name="isAiming"> {{localize "WITCHER.Dialog.attackisAiming"}}: </label> <input  type="number" class="small" name="customAim" value=0> <br />
+      </div>
+    <br />
+    <h2>{{item.name}} {{localize "WITCHER.Dialog.attackDamage"}}: {{displayDmgFormula}}</h2> 
+    <label>{{localize "WITCHER.Dialog.attackCustomDmg"}}: <input type="number" class="small" name="customDmg" value=0></label> <br />
+    {{#if (and (eq this.actor.type "character")(isMeleeAttack))}} 
+        <label>{{localize "WITCHER.Dialog.attackMeleeBonus"}}: {{this.actor.system.attackStats.meleeBonus}} </label><br />
+    {{/if}}
+    {{#if item.system.usingAmmo}}
+        {{#if (eq noAmmo 1)}}
+            <div class="error-display">{{localize "WITCHER.Dialog.NoAmmunation"}}</h2>
+        {{else}}
+            <label>{{localize "WITCHER.Dialog.Ammunation"}}: 
+                <select name="ammunation">
+                    {{{ammunitionOption}}}
+                </select>
+            </label>
+        {{/if}}
+    {{/if}}
+</form>
