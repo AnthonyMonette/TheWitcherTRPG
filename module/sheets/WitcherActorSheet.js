@@ -2142,7 +2142,9 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }
       
-      let data = {item, attackSkill, displayDmgFormula, noAmmo, ammunitionOption, ammunitions}
+      let Mymelebonus=this.actor.system.attackStats.meleeBonus
+      let data = {item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, ammunitionOption, ammunitions, Mymelebonus}
+      const myDialogOptions ={width: 500}
       const dialogTemplate = await renderTemplate("systems/TheWitcherTRPG/templates/sheets/weapon-attack.html", data)
       
       new Dialog({
@@ -2171,7 +2173,6 @@ export default class WitcherActorSheet extends ActorSheet {
               let isRicochet = html.find("[name=isRicochet]").prop("checked");
               let isBlinded = html.find("[name=isBlinded]").prop("checked");
               let isSilhouetted = html.find("[name=isSilhouetted]").prop("checked");
-              let isAiming = html.find("[name=isAiming]").prop("checked");
               let customAim = html.find("[name=customAim]")[0].value;
 
               let range = item.system.range ? html.find("[name=range]")[0].value: null;
@@ -2217,7 +2218,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (isRicochet) { attFormula += "-5"; }
                 if (isBlinded) { attFormula += "-3"; }
                 if (isSilhouetted) { attFormula += "+2"; }
-                if (isAiming) { attFormula += `+${customAim}`}
+                if (customAim>0) { attFormula += `+${customAim}`}
 
                 let modifiers;
 
@@ -2434,7 +2435,7 @@ export default class WitcherActorSheet extends ActorSheet {
             }
           }
         }
-      }).render(true)  
+      },myDialogOptions).render(true)  
     
     }
 
