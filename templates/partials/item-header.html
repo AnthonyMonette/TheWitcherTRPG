@@ -1,31 +1,31 @@
 <header class="item-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
     <div class="item-header-first-collum">
-        <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+        <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         <div class="item-flex-container">
             {{#unless (eq item.type "spell")}}
                 <div class="item-header-second-collum">
                     <label>{{localize "WITCHER.Item.Quantity"}}</label>
-                    <input type="text" name="system.quantity" value="{{item.system.quantity}}" data-dtype="Number" />
+                    <input type="text" name="system.quantity" value="{{item.system.quantity}}" data-dtype="Number"/>
                 </div>
                 <div class="item-header-second-collum">
                     <label>{{localize "WITCHER.Item.Weight"}}</label>
-                    <input type="text" name="system.weight" value="{{item.system.weight}}" data-dtype="Number" />
+                    <input type="text" name="system.weight" value="{{item.system.weight}}" data-dtype="Number"/>
                 </div>
                 <div class="item-header-second-collum">
                     {{#if (eq item.type "mutagen")}}
-                            <label>{{localize "WITCHER.Type"}}</label>
-                            <select name="system.type" id="type-select">
+                        <label>{{localize "WITCHER.Type"}}</label>
+                        <select name="system.type" id="type-select">
                             {{#select item.system.type}}
-                            <option value="red">{{localize "WITCHER.Mutagen.Red"}}</option>
-                            <option value="green">{{localize "WITCHER.Mutagen.Green"}}</option>
-                            <option value="blue">{{localize "WITCHER.Mutagen.Blue"}}</option>
+                                <option value="red">{{localize "WITCHER.Mutagen.Red"}}</option>
+                                <option value="green">{{localize "WITCHER.Mutagen.Green"}}</option>
+                                <option value="blue">{{localize "WITCHER.Mutagen.Blue"}}</option>
                             {{/select}}
-                            </select>
+                        </select>
                     {{/if}}
                     {{#unless (eq item.type "mutagen")}}
-                            <label>{{localize "WITCHER.Item.Cost"}}</label>
-                            <input type="text" name="system.cost" value="{{item.system.cost}}" data-dtype="Number"/>
+                        <label>{{localize "WITCHER.Item.Cost"}}</label>
+                        <input type="text" name="system.cost" value="{{item.system.cost}}" data-dtype="Number"/>
                     {{/unless}}
                 </div>
             {{/unless}}
@@ -33,14 +33,14 @@
                 <div class="item-header-second-collum item-header-spell">
                     <label>{{localize "WITCHER.Spell.type"}}</label>
                     <select name="system.class" id="profession-select">
-                    {{#select item.system.class}}
-                        <option value="Spells">{{localize "WITCHER.Spell.Spells"}}</option>
-                        <option value="Invocations">{{localize "WITCHER.Spell.Invocations"}}</option>
-                        <option value="Witcher">{{localize "WITCHER.Spell.Witcher"}}</option>
-                        <option value="Rituals">{{localize "WITCHER.Spell.Rituals"}}</option>
-                        <option value="Hexes">{{localize "WITCHER.Spell.Hexes"}}</option>
-                        <option value="MagicalGift">{{localize "WITCHER.Spell.MagicalGift"}}</option>
-                    {{/select}}
+                        {{#select item.system.class}}
+                            <option value="Spells">{{localize "WITCHER.Spell.Spells"}}</option>
+                            <option value="Invocations">{{localize "WITCHER.Spell.Invocations"}}</option>
+                            <option value="Witcher">{{localize "WITCHER.Spell.Witcher"}}</option>
+                            <option value="Rituals">{{localize "WITCHER.Spell.Rituals"}}</option>
+                            <option value="Hexes">{{localize "WITCHER.Spell.Hexes"}}</option>
+                            <option value="MagicalGift">{{localize "WITCHER.Spell.MagicalGift"}}</option>
+                        {{/select}}
                     </select>
                 </div>
                 <div class="item-header-second-collum item-header-spell">
@@ -67,16 +67,16 @@
                     {{/if}}
                 </div>
                 <div class="item-header-second-collum item-header-spell">
-                    {{#if (or (eq item.system.class "Spells") 
-                        (eq item.system.class "Witcher"))}}
+                    {{#if (or (eq item.system.class "Spells")
+                                  (eq item.system.class "Witcher"))}}
                         <label>{{localize "WITCHER.Spell.Element"}}</label>
                         <select name="system.source">
                             {{#select item.system.source}}
-                            <option value="mixedElements">{{localize "WITCHER.Spell.Mixed"}}</option>
-                            <option value="earth">{{localize "WITCHER.Spell.Earth"}}</option>
-                            <option value="air">{{localize "WITCHER.Spell.Air"}}</option>
-                            <option value="fire">{{localize "WITCHER.Spell.Fire"}}</option>
-                            <option value="Water">{{localize "WITCHER.Spell.Water"}}</option>
+                                <option value="mixedElements">{{localize "WITCHER.Spell.Mixed"}}</option>
+                                <option value="earth">{{localize "WITCHER.Spell.Earth"}}</option>
+                                <option value="air">{{localize "WITCHER.Spell.Air"}}</option>
+                                <option value="fire">{{localize "WITCHER.Spell.Fire"}}</option>
+                                <option value="Water">{{localize "WITCHER.Spell.Water"}}</option>
                             {{/select}}
                         </select>
                     {{/if}}
@@ -84,9 +84,9 @@
                         <label>{{localize "WITCHER.Spell.Type"}}</label>
                         <select name="system.source">
                             {{#select item.system.source}}
-                            <option value="druid">{{localize "WITCHER.Spell.Druid"}}</option>
-                            <option value="preacher">{{localize "WITCHER.Spell.Preacher"}}</option>
-                            <option value="arch priest">{{localize "WITCHER.Spell.Archpriest"}}</option>
+                                <option value="druid">{{localize "WITCHER.Spell.Druid"}}</option>
+                                <option value="preacher">{{localize "WITCHER.Spell.Preacher"}}</option>
+                                <option value="arch priest">{{localize "WITCHER.Spell.Archpriest"}}</option>
                             {{/select}}
                         </select>
                     {{/if}}

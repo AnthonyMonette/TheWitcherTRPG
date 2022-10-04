@@ -1,5 +1,5 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="description">{{localize "WITCHER.Item.Description"}}</a>
@@ -11,7 +11,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-<textarea name="system.description">{{item.system.description}}</textarea>
+            <textarea name="system.description">{{item.system.description}}</textarea>
         </div>
 
         {{!-- Attributes Tab --}}

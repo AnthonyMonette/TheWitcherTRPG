@@ -1,15 +1,15 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
         <div class="item-collum">
             <label>{{localize "WITCHER.Type"}}</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
-                <option value="crafting-material">{{localize "WITCHER.Item.CraftingMaterial"}}</option>
-                <option value="animal-parts">{{localize "WITCHER.Item.Hides&AnimalParts"}}</option>
-                <option value="alchemical">{{localize "WITCHER.Item.AlchemicalTreatments"}}</option>
-                <option value="minerals">{{localize "WITCHER.Item.Ingots&Minerals"}}</option>
-                <option value="substances">{{localize "WITCHER.Inventory.Substances"}}</option>
+                    <option value="crafting-material">{{localize "WITCHER.Item.CraftingMaterial"}}</option>
+                    <option value="animal-parts">{{localize "WITCHER.Item.Hides&AnimalParts"}}</option>
+                    <option value="alchemical">{{localize "WITCHER.Item.AlchemicalTreatments"}}</option>
+                    <option value="minerals">{{localize "WITCHER.Item.Ingots&Minerals"}}</option>
+                    <option value="substances">{{localize "WITCHER.Inventory.Substances"}}</option>
                 {{/select}}
             </select>
         </div>
@@ -18,15 +18,15 @@
                 <label>{{localize "WITCHER.Inventory.Substance"}}:</label>
                 <select name="system.substanceType" id="substanceType-select">
                     {{#select item.system.substanceType}}
-                    {{#each config.substanceTypes as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
+                        {{#each config.substanceTypes as |name type|}}
+                            <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
                     {{/select}}
                 </select>
             {{/if}}
         </div>
     </div>
-    
+
     <table>
         <tr>
             <th>{{localize "WITCHER.Component.Rarity"}}</th>
@@ -37,11 +37,11 @@
         <tr>
             <td>
                 <select name="system.rarity" id="avail-select">
-                {{#select item.system.rarity}}
-                {{#each config.Avalability as |name value|}}
-                        <option value="{{value}}">{{localize name}}</option>
-                {{/each}}
-                {{/select}}
+                    {{#select item.system.rarity}}
+                        {{#each config.Availability as |name value|}}
+                            <option value="{{value}}">{{localize name}}</option>
+                        {{/each}}
+                    {{/select}}
                 </select>
             </td>
             <td><input type="text" name="system.location" value="{{item.system.location}}"/></td>

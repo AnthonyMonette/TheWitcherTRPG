@@ -1,8 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         </div>
     </header>
     <div>
@@ -40,62 +40,67 @@
             <tr>
                 <td>
                     <select name="system.socialStanding.north" id="socialStandingNorth-select">
-                    {{#select item.system.socialStanding.north}}
-                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
-                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
-                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
-                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
-                        <option value="toleratedFeared">{{localize "WITCHER.socialStanding.toleratedFeared"}}</option>
-                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
-                    {{/select}}
+                        {{#select item.system.socialStanding.north}}
+                            <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                            <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                            <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                            <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                            <option value="toleratedFeared">{{localize
+                                    "WITCHER.socialStanding.toleratedFeared"}}</option>
+                            <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                        {{/select}}
                     </select>
                 </td>
                 <td>
                     <select name="system.socialStanding.nilfgaard" id="socialStandingNilfgaard-select">
-                    {{#select item.system.socialStanding.nilfgaard}}
-                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
-                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
-                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
-                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
-                        <option value="toleratedFeared">{{localize "WITCHER.socialStanding.toleratedFeared"}}</option>
-                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
-                    {{/select}}
+                        {{#select item.system.socialStanding.nilfgaard}}
+                            <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                            <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                            <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                            <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                            <option value="toleratedFeared">{{localize
+                                    "WITCHER.socialStanding.toleratedFeared"}}</option>
+                            <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                        {{/select}}
                     </select>
                 </td>
                 <td>
                     <select name="system.socialStanding.skellige" id="socialStandingSkellige-select">
-                    {{#select item.system.socialStanding.skellige}}
-                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
-                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
-                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
-                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
-                        <option value="toleratedFeared">{{localize "WITCHER.socialStanding.toleratedFeared"}}</option>
-                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
-                    {{/select}}
+                        {{#select item.system.socialStanding.skellige}}
+                            <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                            <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                            <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                            <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                            <option value="toleratedFeared">{{localize
+                                    "WITCHER.socialStanding.toleratedFeared"}}</option>
+                            <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                        {{/select}}
                     </select>
                 </td>
                 <td>
                     <select name="system.socialStanding.dolBlathanna" id="socialStandingDolBlathanna-select">
-                    {{#select item.system.socialStanding.dolBlathanna}}
-                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
-                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
-                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
-                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
-                        <option value="toleratedFeared">{{localize "WITCHER.socialStanding.toleratedFeared"}}</option>
-                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
-                    {{/select}}
+                        {{#select item.system.socialStanding.dolBlathanna}}
+                            <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                            <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                            <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                            <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                            <option value="toleratedFeared">{{localize
+                                    "WITCHER.socialStanding.toleratedFeared"}}</option>
+                            <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                        {{/select}}
                     </select>
                 </td>
                 <td>
                     <select name="system.socialStanding.mahakam" id="socialStandingMahakam-select">
-                    {{#select item.system.socialStanding.mahakam}}
-                        <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
-                        <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
-                        <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
-                        <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
-                        <option value="toleratedFeared">{{localize "WITCHER.socialStanding.toleratedFeared"}}</option>
-                        <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
-                    {{/select}}
+                        {{#select item.system.socialStanding.mahakam}}
+                            <option value="equal">{{localize "WITCHER.socialStanding.equal"}}</option>
+                            <option value="tolerated">{{localize "WITCHER.socialStanding.tolerated"}}</option>
+                            <option value="hated">{{localize "WITCHER.socialStanding.hated"}}</option>
+                            <option value="feared">{{localize "WITCHER.socialStanding.feared"}}</option>
+                            <option value="toleratedFeared">{{localize
+                                    "WITCHER.socialStanding.toleratedFeared"}}</option>
+                            <option value="hatedFeared">{{localize "WITCHER.socialStanding.hatedFeared"}}</option>
+                        {{/select}}
                     </select>
                 </td>
             </tr>

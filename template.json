@@ -5,7 +5,7 @@
       "monster",
       "loot"
     ],
-    "templates":{
+    "templates": {
       "baseActor": {
         "woundTresholdApplied": false,
         "deathStateApplied": false,
@@ -375,7 +375,7 @@
             },
             "swordsmanship": {
               "value": 0,
-              "label": "WITCHER.SkRefSwordmanship",
+              "label": "WITCHER.SkRefSwordsmanship",
               "isOpened": false,
               "isVisible": true,
               "modifiers": [],
@@ -706,13 +706,15 @@
           }
         },
         "adrenaline": {
-            "current": 0,
-            "label": "WITCHER.Actor.Adrenaline"
-          }
+          "current": 0,
+          "label": "WITCHER.Actor.Adrenaline"
+        }
       }
     },
     "character": {
-      "templates": ["baseActor"],
+      "templates": [
+        "baseActor"
+      ],
       "critWounds": [],
       "config": {
         "CritDescription": {},
@@ -724,7 +726,7 @@
         "CritComplex": {},
         "CritDifficult": {},
         "CritDeadly": {},
-        "homelands":{
+        "homelands": {
           "aedirn": "Aedirn",
           "angren": "Angren",
           "cidaris": "Cidaris",
@@ -742,7 +744,7 @@
           "mahakam": "Mahakam",
           "mettina": "Mettina",
           "nazair": "Nazair",
-          "nilfgaard":"Nilfgaard",
+          "nilfgaard": "Nilfgaard",
           "poviss": "Poviss",
           "redania": "Redania",
           "rivia": "Rivia",
@@ -762,14 +764,12 @@
         "solIsOpen": false,
         "caelumIsOpen": false,
         "fulgurIsOpen": false,
-
         "noviceSpellIsOpen": false,
         "journeymanSpellIsOpen": false,
         "masterSpellIsOpen": false,
         "ritualIsOpen": false,
         "hexIsOpen": false,
         "magicalgiftIsOpen": false,
-
         "intIsOpen": false,
         "refIsOpen": false,
         "dexIsOpen": false,
@@ -830,121 +830,121 @@
           "10": {
             "decade": 1,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "20": {
             "decade": 2,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "30": {
             "decade": 3,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "40": {
             "decade": 4,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "50": {
             "decade": 5,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "60": {
             "decade": 6,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "70": {
             "decade": 7,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "80": {
             "decade": 8,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "90": {
             "decade": 9,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "100": {
             "decade": 10,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "110": {
             "decade": 11,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "120": {
             "decade": 12,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "130": {
             "decade": 13,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "140": {
             "decade": 14,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "150": {
             "decade": 15,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "160": {
             "decade": 16,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "170": {
             "decade": 17,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "180": {
             "decade": 18,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "190": {
             "decade": 19,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           },
           "200": {
             "decade": 20,
             "value": "",
-            "detais":"",
+            "detais": "",
             "isOpened": false
           }
         }
@@ -995,7 +995,9 @@
       }
     },
     "monster": {
-      "templates": ["baseActor"],
+      "templates": [
+        "baseActor"
+      ],
       "critWounds": [],
       "config": {
         "CritDescription": {},
@@ -1011,11 +1013,11 @@
       "category": "Humanoid",
       "threat": "",
       "difficulty": "",
-      "bounty":0,
-      "armorHead":0,
-      "armorUpper":0,
-      "armorLower":0,
-      "armorTailWing":0,
+      "bounty": 0,
+      "armorHead": 0,
+      "armorUpper": 0,
+      "armorLower": 0,
+      "armorTailWing": 0,
       "regen": 0,
       "resistances": "",
       "immunities": "",
@@ -1049,7 +1051,9 @@
       }
     },
     "loot": {
-      "templates": ["baseActor"],
+      "templates": [
+        "baseActor"
+      ],
       "description": "",
       "maxWeight": 0,
       "currency": {
@@ -1080,7 +1084,7 @@
       "race",
       "effect"
     ],
-    "templates":{
+    "templates": {
       "base": {
         "description": "",
         "quantity": 1,
@@ -1091,15 +1095,19 @@
       }
     },
     "valuable": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "avail": "",
-      "effect":"",
+      "effect": "",
       "conceal": "",
       "quality": ""
     },
     "weapon": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": {
         "text": "",
         "slashing": false,
@@ -1117,7 +1125,8 @@
       "hands": 0,
       "range": "",
       "equiped": false,
-      "effects": [{
+      "effects": [
+        {
           "id": "first",
           "name": "",
           "percentage": ""
@@ -1126,12 +1135,14 @@
       "conceal": "",
       "enhancements": 0,
       "enhancementItems": [],
-      "rateOfFire":1,
+      "rateOfFire": 1,
       "attackSkill": "",
       "rollOnlyDmg": false
     },
     "armor": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "reliability": 0,
       "reliabilityMax": 0,
       "headStopping": 0,
@@ -1150,24 +1161,28 @@
       "avail": "",
       "enhancements": 0,
       "enhancementItems": [],
-      "effects": [{
+      "effects": [
+        {
           "id": "first",
           "name": ""
         }
       ],
       "encumb": 0,
-      "location":"Head",
+      "location": "Head",
       "equiped": false,
       "bludgeoning": false,
       "slashing": false,
       "piercing": false
     },
     "enhancement": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "applied": "",
       "avail": "",
-      "effects": [{
+      "effects": [
+        {
           "id": "first",
           "name": "effect"
         }
@@ -1178,14 +1193,18 @@
       "piercing": false
     },
     "mount": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "dex": "",
       "control": "",
       "speed": "",
       "hp": 0
     },
     "alchemical": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "avail": "",
       "effect": "",
@@ -1193,7 +1212,9 @@
       "toxicity": ""
     },
     "component": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "rarity": "",
       "location": "",
@@ -1202,15 +1223,18 @@
       "substanceType": ""
     },
     "diagrams": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "level": "",
-      "isFormulae": false, 
+      "isFormulae": false,
       "craftingDC": 0,
       "alchemyDC": 0,
       "craftingTime": "",
       "components": "",
-      "craftingComponents": [{
+      "craftingComponents": [
+        {
           "id": "first",
           "quantity": "",
           "name": ""
@@ -1232,7 +1256,9 @@
       "associatedItem": {}
     },
     "mutagen": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "",
       "source": "",
       "effect": "",
@@ -1262,7 +1288,8 @@
       "templateType": "",
       "causeDamages": false,
       "damage": "",
-      "effects": [{
+      "effects": [
+        {
           "id": "first",
           "name": "effect"
         }
@@ -1372,22 +1399,25 @@
     "effect": {
       "description": "",
       "isActive": true,
-      "stats" : [{
-        "id": "first",
-        "stat": "",
-        "modifier": 0
+      "stats": [
+        {
+          "id": "first",
+          "stat": "",
+          "modifier": 0
         }
       ],
-      "derived" : [{
-        "id": "first",
-        "derivedStat": "",
-        "modifier": 0
+      "derived": [
+        {
+          "id": "first",
+          "derivedStat": "",
+          "modifier": 0
         }
       ],
-      "skills" : [{
-        "id": "first",
-        "skill": "",
-        "modifier": 0
+      "skills": [
+        {
+          "id": "first",
+          "skill": "",
+          "modifier": 0
         }
       ]
     }
