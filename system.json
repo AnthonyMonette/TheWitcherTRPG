@@ -2,9 +2,11 @@
     "id": "TheWitcherTRPG",
     "title": "TheWitcherTRPG - fvtt",
     "description": "The Witcher TRPG System.",
-    "minimumCoreVersion" : "10",
-    "compatibleCoreVersion" : "10",
-    "version": 0.92,
+    "compatibility" : {
+      "minimum" : "10",
+      "verified" : "10.284"
+    },
+    "version": 0.93,
     "authors": {
       "name": "TechAntho"
     },
