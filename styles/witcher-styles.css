@@ -12,6 +12,7 @@
 @import "./crit-wounds-table.css";
 @import "./item-sheets.css";
 @import "./substances.css";
+@import "./weapon-roll.css";
 
 @font-face {
     font-family:'Thewitcher';
