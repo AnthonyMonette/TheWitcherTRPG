@@ -2130,7 +2130,7 @@ export default class WitcherActorSheet extends ActorSheet {
       let noAmmo = 0
       let ammunitionOption = ``
       if (item.system.usingAmmo){
-        ammunitions= this.actor.items.filter(function(item) {return item.type=="weapon" &&  item.system.isAmmo});
+        ammunitions = this.actor.items.filter(function(item) {return item.type=="weapon" && item.system.isAmmo});
         let quantity = ammunitions.sum("quantity")
         if (quantity <= 0) {
           noAmmo = 1;
@@ -2142,7 +2142,7 @@ export default class WitcherActorSheet extends ActorSheet {
         }
       }
       
-      let Mymelebonus=this.actor.system.attackStats.meleeBonus
+      let Mymelebonus = this.actor.system.attackStats.meleeBonus
       let data = {item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, ammunitionOption, ammunitions, Mymelebonus}
       const myDialogOptions ={width: 500}
       const dialogTemplate = await renderTemplate("systems/TheWitcherTRPG/templates/sheets/weapon-attack.html", data)
@@ -2218,7 +2218,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 if (isRicochet) { attFormula += "-5"; }
                 if (isBlinded) { attFormula += "-3"; }
                 if (isSilhouetted) { attFormula += "+2"; }
-                if (customAim>0) { attFormula += `+${customAim}`}
+                if (customAim > 0) { attFormula += `+${customAim}`}
 
                 let modifiers;
 
@@ -2435,7 +2435,7 @@ export default class WitcherActorSheet extends ActorSheet {
             }
           }
         }
-      },myDialogOptions).render(true)  
+      }, myDialogOptions).render(true)  
     
     }
 
