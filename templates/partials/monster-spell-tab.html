@@ -1,199 +1,177 @@
-
 <div class="magic-info">
     <div class="flex">
-        <input class="focus" name="system.focus1.name" type="text" value="{{system.focus1.name}}" placeholder="First Focus" />
-        <input class="focus-value" name="system.focus1.value" type="text" value="{{system.focus1.value}}" placeholder="0" />
+        <input class="focus" name="system.focus1.name" type="text" value="{{system.focus1.name}}"
+               placeholder="First Focus"/>
+        <input class="focus-value" name="system.focus1.value" type="text" value="{{system.focus1.value}}"
+               placeholder="0"/>
     </div>
     <div class="flex">
-        <input class="focus" name="system.focus2.name" type="text" value="{{system.focus2.name}}" placeholder="Second Focus" />
-        <input class="focus-value" name="system.focus2.value" type="text" value="{{system.focus2.value}}" placeholder="0" />
+        <input class="focus" name="system.focus2.name" type="text" value="{{system.focus2.name}}"
+               placeholder="Second Focus"/>
+        <input class="focus-value" name="system.focus2.value" type="text" value="{{system.focus2.value}}"
+               placeholder="0"/>
     </div>
     <div class="flex">
-        <input class="focus" name="system.focus3.name" type="text" value="{{system.focus3.name}}" placeholder="Third Focus" />
-        <input class="focus-value" name="system.focus3.value" type="text" value="{{system.focus3.value}}" placeholder="0" />
+        <input class="focus" name="system.focus3.name" type="text" value="{{system.focus3.name}}"
+               placeholder="Third Focus"/>
+        <input class="focus-value" name="system.focus3.value" type="text" value="{{system.focus3.value}}"
+               placeholder="0"/>
     </div>
     <div class="flex">
-        <input class="focus" name="system.focus4.name" type="text" value="{{system.focus4.name}}" placeholder="Third Focus" />
-        <input class="focus-value" name="system.focus4.value" type="text" value="{{system.focus4.value}}" placeholder="0" />
+        <input class="focus" name="system.focus4.name" type="text" value="{{system.focus4.name}}"
+               placeholder="Third Focus"/>
+        <input class="focus-value" name="system.focus4.value" type="text" value="{{system.focus4.value}}"
+               placeholder="0"/>
     </div>
 </div>
 <div class="spell" data-spelltype="noviceSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Novice"}}
-        {{#unless system.pannels.noviceSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
-        {{/unless}}
         {{#if system.pannels.noviceSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+            <a class="spell-display"><i class="fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
-    {{#unless system.pannels.noviceSpellIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.noviceSpellIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-        <tr> 
-            <td></td> 
-            <td></td> 
+    </h3>
+    <table {{#if system.pannels.noviceSpellIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        <tr>
+            <td></td>
+            <td></td>
             <td><b>{{localize "WITCHER.table.Name"}}</b></td>
             <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
-            <td></td> 
+            <td></td>
         </tr>
         {{#each noviceSpells as |spell id|}}
-        <tbody class="item" data-item-id="{{spell._id}}">
+            <tbody class="item" data-item-id="{{spell._id}}">
             <tr>
-                <td>
-                    <a class="item-edit"><i class="fas fa-edit"></i></a>
-                </td>
+                <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                           value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
-        </tbody>
+            </tbody>
         {{/each}}
     </table>
 </div>
 <div class="spell" data-spelltype="journeymanSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Journeyman"}}
-        {{#unless system.pannels.journeymanSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
-        {{/unless}}
         {{#if system.pannels.journeymanSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+            <a class="spell-display"><i class="fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
-    {{#unless system.pannels.journeymanSpellIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.journeymanSpellIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-        <tr> 
-            <td></td> 
-            <td></td> 
+    </h3>
+    <table {{#if system.pannels.journeymanSpellIsOpen}}
+    class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        <tr>
+            <td></td>
+            <td></td>
             <td><b>{{localize "WITCHER.table.Name"}}</b></td>
             <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
-            <td></td> 
+            <td></td>
         </tr>
         {{#each journeymanSpells as |spell id|}}
-        <tbody class="item" data-item-id="{{spell._id}}">
+            <tbody class="item" data-item-id="{{spell._id}}">
             <tr>
-                <td>
-                    <a class="item-edit"><i class="fas fa-edit"></i></a>
-                </td>
+                <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                           value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
-        </tbody>
+            </tbody>
         {{/each}}
     </table>
 </div>
 <div class="spell" data-spelltype="masterSpell">
     <h3>{{localize "WITCHER.Spell.Spells"}} - {{localize "WITCHER.Spell.Master"}}
-        {{#unless system.pannels.masterSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
-        {{/unless}}
         {{#if system.pannels.masterSpellIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+            <a class="spell-display"><i class="fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
-    {{#unless system.pannels.masterSpellIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.masterSpellIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-        <tr> 
-            <td></td> 
-            <td></td> 
+    </h3>
+    <table {{#if system.pannels.masterSpellIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        <tr>
+            <td></td>
+            <td></td>
             <td><b>{{localize "WITCHER.table.Name"}}</b></td>
             <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
-            <td></td> 
+            <td></td>
         </tr>
         {{#each masterSpells as |spell id|}}
-        <tbody class="item" data-item-id="{{spell._id}}">
+            <tbody class="item" data-item-id="{{spell._id}}">
             <tr>
-                <td>
-                    <a class="item-edit"><i class="fas fa-edit"></i></a>
-                </td>
+                <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                           value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
-        </tbody>
+            </tbody>
         {{/each}}
     </table>
 </div>
 <div class="spell" data-spelltype="ritual">
-    <h3>Rituals 
-        {{#unless system.pannels.ritualIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
-        {{/unless}}
+    <h3>{{localize "WITCHER.Spell.Rituals"}}
         {{#if system.pannels.ritualIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+            <a class="spell-display"><i class="fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
-    {{#unless system.pannels.ritualIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.ritualIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-        <tr> 
-            <td></td> 
-            <td></td> 
+    </h3>
+    <table {{#if system.pannels.ritualIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        <tr>
+            <td></td>
+            <td></td>
             <td><b>{{localize "WITCHER.table.Name"}}</b></td>
             <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
-            <td></td> 
+            <td></td>
         </tr>
         {{#each rituals as |ritual id|}}
-        <tbody class="item" data-item-id="{{ritual._id}}">
+            <tbody class="item" data-item-id="{{ritual._id}}">
             <tr>
-                <td>
-                    <a class="item-edit"><i class="fas fa-edit"></i></a>
-                </td>
+                <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{ritual.img}}" class="item-img dragable" draggable="true" data-id="{{ritual._id}}"/></td>
                 <td><a class="spell-roll">{{ritual.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{ritual.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                           value="{{ritual.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
-        </tbody>
+            </tbody>
         {{/each}}
     </table>
 </div>
 <div class="spell" data-spelltype="hex">
-    <h3>Hexes 
-        {{#unless system.pannels.hexIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-right"></i></a></h3>
-        {{/unless}}
+    <h3>{{localize "WITCHER.Spell.Hexes"}}
         {{#if system.pannels.hexIsOpen}}
-        <a class="spell-display"><i class="fas fa-chevron-down"></i></a></h3>
+            <a class="spell-display"><i class="fas fa-chevron-down"></i></a>
+        {{else}}
+            <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
-    {{#unless system.pannels.hexIsOpen}}
-    <table class="skill-list invisible">
-    {{/unless}}
-    {{#if system.pannels.hexIsOpen}}
-    <table class="skill-list">
-    {{/if}}
-        <tr> 
-            <td></td> 
-            <td></td> 
+    </h3>
+    <table {{#if system.pannels.hexIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+        <tr>
+            <td></td>
+            <td></td>
             <td><b>{{localize "WITCHER.table.Name"}}</b></td>
             <td><b>{{localize "WITCHER.Spell.StaCost"}}</b></td>
-            <td></td> 
+            <td></td>
         </tr>
         {{#each hexes as |hex id|}}
-        <tbody class="item" data-item-id="{{hex._id}}">
+            <tbody class="item" data-item-id="{{hex._id}}">
             <tr>
-                <td>
-                    <a class="item-edit"><i class="fas fa-edit"></i></a>
-                </td>
+                <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{hex.img}}" class="item-img dragable" draggable="true" data-id="{{hex._id}}"/></td>
                 <td><a class="spell-roll">{{hex.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{hex.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
+                           value="{{hex.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
-        </tbody>
+            </tbody>
         {{/each}}
     </table>
 </div>

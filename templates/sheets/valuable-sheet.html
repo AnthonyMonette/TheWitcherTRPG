@@ -1,18 +1,18 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
         <div class="item-collum item-selector">
             <label>{{localize "WITCHER.Type"}}</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
-                <option value="toolkit">{{localize "WITCHER.Valueble.Toolkit"}}</option>
-                <option value="genera">{{localize "WITCHER.Valueble.General"}}</option>
-                <option value="containers">{{localize "WITCHER.Valueble.Containers"}}</option>
-                <option value="food-drink">{{localize "WITCHER.Valueble.Food&Drinks"}}</option>
-                <option value="clothing">{{localize "WITCHER.Valueble.Clothings"}}</option>
-                <option value="service">{{localize "WITCHER.Valueble.Service"}}</option>
-                <option value="lodging">{{localize "WITCHER.Valueble.Loging"}}</option>
-                <option value="mount-accessories">{{localize "WITCHER.Valueble.MountAccessories"}}</option>
+                    <option value="toolkit">{{localize "WITCHER.Valuable.Toolkit"}}</option>
+                    <option value="genera">{{localize "WITCHER.Valuable.General"}}</option>
+                    <option value="containers">{{localize "WITCHER.Valuable.Containers"}}</option>
+                    <option value="food-drink">{{localize "WITCHER.Valuable.Food&Drinks"}}</option>
+                    <option value="clothing">{{localize "WITCHER.Valuable.Clothings"}}</option>
+                    <option value="service">{{localize "WITCHER.Valuable.Service"}}</option>
+                    <option value="lodging">{{localize "WITCHER.Valuable.Loging"}}</option>
+                    <option value="mount-accessories">{{localize "WITCHER.Valuable.MountAccessories"}}</option>
                 {{/select}}
             </select>
         </div>
@@ -22,19 +22,19 @@
                     <label>{{localize "WITCHER.Item.Short.Availability"}}</label>
                     <select name="system.avail" id="avail-select">
                         {{#select item.system.avail}}
-                        {{#each config.Avalability as |name value|}}
+                            {{#each config.Availability as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>
-                        {{/each}}
+                            {{/each}}
                         {{/select}}
                     </select>
                 </div>
                 <div class="item-second-collum">
-                    <th>{{localize "WITCHER.Valuable.Conceal"}}</th>
+                    <div>{{localize "WITCHER.Valuable.Conceal"}}</div>
                     <select name="system.conceal" id="avail-select">
                         {{#select item.system.conceal}}
-                        {{#each config.Concealment as |name value|}}
+                            {{#each config.Concealment as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>
-                        {{/each}}
+                            {{/each}}
                         {{/select}}
                     </select>
                 </div>
@@ -43,6 +43,6 @@
     </div>
     {{!-- effect Tab --}}
     <div class="description">
-<textarea rows=5 name="system.description">{{item.system.description}}</textarea>
+        <textarea rows=5 name="system.description">{{item.system.description}}</textarea>
     </div>
 </form>

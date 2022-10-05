@@ -1,60 +1,62 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
         <div class="item-collum">
             <label>{{localize "WITCHER.Type"}}:</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
-                <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
-                <option value="rune">{{localize "WITCHER.Enhancement.Rune"}}</option>
-                <option value="armor">{{localize "WITCHER.Enhancement.Armor"}}</option>
-                <option value="glyph">{{localize "WITCHER.Enhancement.Glyph"}}</option>
+                    <option value="weapon">{{localize "WITCHER.Diagram.Weapon"}}</option>
+                    <option value="rune">{{localize "WITCHER.Enhancement.Rune"}}</option>
+                    <option value="armor">{{localize "WITCHER.Enhancement.Armor"}}</option>
+                    <option value="glyph">{{localize "WITCHER.Enhancement.Glyph"}}</option>
                 {{/select}}
             </select>
         </div>
     </div>
     {{#if (eq item.system.type "armor")}}
-    <table>
-        <tr>
-            <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
-            <th>{{localize "WITCHER.Enhancement.Stopping"}}</th>
-            <th>{{localize "WITCHER.Enhancement.Bludgeoning"}}</th>
-            <th>{{localize "WITCHER.Enhancement.Slashing"}}</th>
-            <th>{{localize "WITCHER.Enhancement.Piercing"}}</th>
-        </tr>
-        <tr>
-            <td>
-                <select name="system.avail" id="avail-select">
-                {{#select item.system.avail}}
-                {{#each config.Avalability as |name value|}}
-                        <option value="{{value}}">{{localize name}}</option>
-                {{/each}}
-                {{/select}}
-                </select>
-            </td>
-            <td><input type="text" name="system.stopping" value="{{item.system.stopping}}" data-dtype="Number"/></td>
-            <td><input type="checkbox" name="system.bludgeoning" {{checked item.system.bludgeoning}}/></td>
-            <td><input type="checkbox" name="system.slashing" {{checked item.system.slashing}} /></td>
-            <td><input type="checkbox" name="system.piercing" {{checked item.system.piercing}} /></td>
-        </tr>
-        <tr >
-            <td colspan="5">
-            </td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <th>{{localize "WITCHER.Item.Short.Availability"}}</th>
+                <th>{{localize "WITCHER.Enhancement.Stopping"}}</th>
+                <th>{{localize "WITCHER.Enhancement.Bludgeoning"}}</th>
+                <th>{{localize "WITCHER.Enhancement.Slashing"}}</th>
+                <th>{{localize "WITCHER.Enhancement.Piercing"}}</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="system.avail" id="avail-select">
+                        {{#select item.system.avail}}
+                            {{#each config.Availability as |name value|}}
+                                <option value="{{value}}">{{localize name}}</option>
+                            {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td><input type="text" name="system.stopping" value="{{item.system.stopping}}" data-dtype="Number"/>
+                </td>
+                <td><input type="checkbox" name="system.bludgeoning" {{checked item.system.bludgeoning}}/></td>
+                <td><input type="checkbox" name="system.slashing" {{checked item.system.slashing}} /></td>
+                <td><input type="checkbox" name="system.piercing" {{checked item.system.piercing}} /></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                </td>
+            </tr>
+        </table>
     {{/if}}
     <div class="flex">
         <b>{{localize "WITCHER.Item.Effect"}} </b><a class="add-effect"><i class="fas fa-plus"></i></a>
     </div>
     {{#each item.system.effects as |effect name|}}
-    <div class="flex list-item"  data-id="{{effect.id}}">
-        <a class="remove-effect"><i class="fas fa-minus"></i></a>
-<textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>
-        <div  class="flex">
-            <label>{{localize "WITCHER.Percentage"}}:</label>
-            <input class="list-edit" data-field="percentage" type="text"  value="{{effect.percentage}}" data-dtype="Number"/>
-            %
+        <div class="flex list-item" data-id="{{effect.id}}">
+            <a class="remove-effect"><i class="fas fa-minus"></i></a>
+            <textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>
+            <div class="flex">
+                <label>{{localize "WITCHER.Percentage"}}:</label>
+                <input class="list-edit" data-field="percentage" type="text" value="{{effect.percentage}}"
+                       data-dtype="Number"/>
+                %
+            </div>
         </div>
-    </div>
     {{/each}}
 </form>

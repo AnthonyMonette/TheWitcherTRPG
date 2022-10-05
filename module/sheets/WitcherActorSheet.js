@@ -2113,7 +2113,7 @@ export default class WitcherActorSheet extends ActorSheet {
           attackSkill = game.i18n.localize("WITCHER.SkRefStaff");
           break;
         case "Swordsmanship":
-          attackSkill = game.i18n.localize("WITCHER.SkRefSwordmanship");
+          attackSkill = game.i18n.localize("WITCHER.SkRefSwordsmanship");
           break;
         case "Archery":
           attackSkill = game.i18n.localize("WITCHER.SkDexArchery");
@@ -2158,8 +2158,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let location = html.find("[name=location]")[0].value;
               let ammunition = undefined
-              if (html.find("[name=ammunation]")[0]) {
-                ammunition = html.find("[name=ammunation]")[0].value;
+              if (html.find("[name=ammunition]")[0]) {
+                ammunition = html.find("[name=ammunition]")[0].value;
               }
 
               let targetOutsideLOS = html.find("[name=targetOutsideLOS]").prop("checked");
@@ -2245,7 +2245,7 @@ export default class WitcherActorSheet extends ActorSheet {
                     break;
                   case "Swordsmanship":
                     attFormula += !displayRollDetails ? `+${this.actor.system.stats.ref.current}+${this.actor.system.skills.ref.swordsmanship.value}`:
-                      `+${this.actor.system.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.system.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordmanship")}]`;
+                      `+${this.actor.system.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.system.skills.ref.swordsmanship.value}[${game.i18n.localize("WITCHER.SkRefSwordsmanship")}]`;
                       modifiers = this.actor.system.skills.ref.swordsmanship.modifiers;
                     break;
                   case "Archery":

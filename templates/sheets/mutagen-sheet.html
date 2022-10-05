@@ -1,5 +1,5 @@
 <form class="{{cssClass}}" autocomplete="off">
-{{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
+    {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <table>
         <tr>
             <th>{{localize "WITCHER.Mutagen.MutSource"}}</th>
@@ -12,7 +12,10 @@
             <td><input type="text" name="system.alchemyDC" value="{{item.system.alchemyDC}}"/></td>
         </tr>
         <tr>
-            <td colspan="3"><label><b>{{localize "WITCHER.Mutagen.MinorMutation"}}</b></label><input type="text" name="system.minorMutation" value="{{item.system.minorMutation}}"/></td>
+            <td colspan="3"><label><b>{{localize "WITCHER.Mutagen.MinorMutation"}}</b></label><input type="text"
+                                                                                                     name="system.minorMutation"
+                                                                                                     value="{{item.system.minorMutation}}"/>
+            </td>
         </tr>
     </table>
 </form>
