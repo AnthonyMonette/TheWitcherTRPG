@@ -1,5 +1,5 @@
 <h2>{{localize "WITCHER.Loot.Weapons"}} <a class="add-item" data-itemType="weapon"><i class="fas fa-plus"></i></a></h2>
-<table class="item-table">
+<table class="item-table item-list">
     <tr>
         <td></td>
         <td></td>
@@ -53,7 +53,7 @@
             class="fas fa-plus"></i></a></h2>
     <a class="button-roll export-loot">{{localize "WITCHER.Monster.exportLoot"}}</a>
 </div>
-<table>
+<table class="item-list">
     {{#each loots as |valuable id|}}
         <tr class="item" data-item-id="{{valuable._id}}">
             <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/></td>

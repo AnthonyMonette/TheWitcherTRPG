@@ -311,7 +311,11 @@ export default class WitcherActorSheet extends ActorSheet {
       this.actor.update({ "system.deathSaves": this.actor.system.deathSaves + 1 });
     }
     
-    async _onDrop(event, data) {
+    async _onDropItem(event, data) {
+      if ( !this.actor.isOwner ) return false;
+      const item = await Item.implementation.fromDropData(data);
+      const itemData = item.toObject();
+      if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
       let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
       if (dragData.type === "itemDrop") {
         let previousActor = game.actors.get(dragData.actor._id)

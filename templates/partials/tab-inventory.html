@@ -76,7 +76,7 @@
 
         <h2>{{localize  "WITCHER.Inventory.Weapons"}} <a class="add-item" data-itemType="weapon"><i
                 class="fas fa-plus"></i></a></h2>
-        <table class="item-table">
+        <table class="item-table item-list">
             <tr>
                 <td></td>
                 <td></td>
@@ -197,7 +197,7 @@
         <h2>{{localize  "WITCHER.Inventory.Armor"}} <a class="add-item" data-itemType="armor"><i
                 class="fas fa-plus"></i></a></h2>
 
-        <table class="armor-table">
+        <table class="armor-table item-list">
             <tr>
                 <td></td>
                 <td></td>
@@ -334,8 +334,7 @@
 
                         </td>
                     {{/unless}}
-                    <td><input type="checkbox" name="system.bludgeoning" {{checked armor.system.bludgeoning}} disabled/>
-                    </td>
+                    <td><input type="checkbox" name="system.bludgeoning" {{checked armor.system.bludgeoning}} disabled/></td>
                     <td><input type="checkbox" name="system.slashing" {{checked armor.system.slashing}} disabled/></td>
                     <td><input type="checkbox" name="system.Piercing" {{checked armor.system.piercing}} disabled/></td>
 
@@ -421,7 +420,6 @@
                             {{/if}}
                         </table>
                     </td>
-
                 </tr>
                 </tbody>
             {{/each}}
@@ -432,29 +430,32 @@
     <div class="valuable-section">
         <h2>{{localize  "WITCHER.Inventory.Valuables"}} <a class="add-item" data-itemType="valuable"><i
                 class="fas fa-plus"></i></a></h2>
-        <table class="valuable-table">
-            <tr>
-                <td></td>
+        <table class="valuable-table item-list">
+            <th>
                 <td></td>
                 <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
                 <td><b>{{localize "WITCHER.table.Name"}}</b></td>
                 <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
                 <td></td>
-            </tr>
+            </th>
             {{#each valuables as |valuable id|}}
                 <tbody class="item" data-item-id="{{valuable._id}}">
                 <tr>
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{valuable.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{valuable._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
-                               value="{{valuable.system.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}"
-                               placeholder="name"/></td>
-                    <td><input class="inline-edit weight-data" data-field="system.weight" type="text"
-                               value="{{valuable.system.weight}}" data-dtype="Number"/></td>
+                    <td>
+                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text" value="{{valuable.system.quantity}}" data-dtype="Number"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit weight-data" data-field="system.weight" type="text" value="{{valuable.system.weight}}" data-dtype="Number"/>
+                    </td>
                 </tr>
                 <tr class="item-info invisible">
                     {{#if (eq type "valuable")}}
@@ -514,7 +515,7 @@
         </table>
         <h2>{{localize  "WITCHER.Inventory.Diagrams"}} <a class="add-item" data-itemType="diagrams"><i
                 class="fas fa-plus"></i></a></h2>
-        <table class="diagram-table">
+        <table class="diagram-table item-list">
             <tr>
                 <td></td>
                 <td></td>
@@ -686,7 +687,7 @@
         <div class="components">
             <h2>{{localize  "WITCHER.Inventory.Components"}} <a class="add-item" data-itemType="component"><i
                     class="fas fa-plus"></i></a></h2>
-            <table class="component-table">
+            <table class="component-table item-list">
                 <tr>
                     <td></td>
                     <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
