@@ -25,18 +25,18 @@ witcher.substanceTypes = {
     fulgur: "WITCHER.Inventory.Fulgur",
 }
 
-witcher.Avalability = {
-    Everywhere: "WITCHER.Item.Avalability.Everywhere",
-    Common: "WITCHER.Item.Avalability.Common",
-    Poor: "WITCHER.Item.Avalability.Poor",
-    Rare: "WITCHER.Item.Avalability.Rare",
+witcher.Availability = {
+    Everywhere: "WITCHER.Item.AvailabilityEverywhere",
+    Common: "WITCHER.Item.AvailabilityCommon",
+    Poor: "WITCHER.Item.AvailabilityPoor",
+    Rare: "WITCHER.Item.AvailabilityRare",
 }
 
 witcher.Concealment = {
-    T: "Witcher.Item.Tiny",
-    S: "Witcher.Item.Small",
-    L: "Witcher.Item.Large",
-    NA: "Witcher.Item.CantHide",
+    T: "WITCHER.Item.Tiny",
+    S: "WITCHER.Item.Small",
+    L: "WITCHER.Item.Large",
+    NA: "WITCHER.Item.CantHide",
 }
 
 witcher.MonsterTypes = {

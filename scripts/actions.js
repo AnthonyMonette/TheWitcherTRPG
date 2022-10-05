@@ -592,7 +592,7 @@ function ExecuteDefense(actor){
             case "Swordsmanship":
               skill = actor.system.skills.ref.swordsmanship.value;
               skillName = actor.system.skills.ref.swordsmanship.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")}`;
+              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")}`;
               modifiers = actor.system.skills.ref.swordsmanship.modifiers
               break;
           }
@@ -662,7 +662,7 @@ function ExecuteDefense(actor){
             case "Swordsmanship":
               skill = actor.system.skills.ref.swordsmanship.value;
               skillName = actor.system.skills.ref.swordsmanship.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 3`;
+              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 3`;
               modifiers = actor.system.skills.ref.swordsmanship.modifiers
               break;
           }
@@ -731,7 +731,7 @@ function ExecuteDefense(actor){
             case "Swordsmanship":
               skill = actor.system.skills.ref.swordsmanship.value;
               skillName = actor.system.skills.ref.swordsmanship.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordmanship")} - 5`;
+              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 5`;
               modifiers = actor.system.skills.ref.swordsmanship.modifiers
               break;
           }

@@ -1,34 +1,34 @@
 {{#if skill.isVisible}}
-<tbody class="skill" data-skill="{{name}}" data-stat={{stat}}>
+    <tbody class="skill" data-skill="{{name}}" data-stat={{stat}}>
     <tr>
-        <td class="{{name}} char-skill" class="{{name}}" id="{{name}}-rollable">
+        <td class="{{name}} char-skill" id="{{name}}-rollable">
             <a>{{localize skill.label}}</a>
         </td>
         <td class="char-input-skill">
-            <input class="{{name}}" name="system.skills.{{stat}}.{{name}}.value" type="number" value="{{skill.value}}" />
+            <input class="{{name}}" name="system.skills.{{stat}}.{{name}}.value" type="number" value="{{skill.value}}"/>
         </td>
         <td class="char-input-skill-icon">
-            {{#unless skill.isOpened}}
-            <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
-            {{/unless}}
             {{#if skill.isOpened}}
-            <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                <a class="skill-modifier-display"><i class="fas fa-chevron-down"></i></a>
+            {{else}}
+                <a class="skill-modifier-display"><i class="fas fa-chevron-right"></i></a>
             {{/if}}
         </td>
     </tr>
     {{#if skill.isOpened}}
-    <tr>
-        <td colspan="3">
-            <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
-            {{#each skill.modifiers as |modifier value|}}
-            <div class="list-modifiers"  data-id="{{modifier.id}}">
-                <input  class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
-                <input  class="small skill-mod-edit" data-field="value" type="number" value="{{modifier.value}}"/>
-                <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
-            </div>
-            {{/each}}
-        </td>
-    </tr>
+        <tr>
+            <td colspan="3">
+                <a class="add-skill-modifier"><i class="fas fa-plus"></i></a>
+                {{#each skill.modifiers as |modifier value|}}
+                    <div class="list-modifiers" data-id="{{modifier.id}}">
+                        <input class="medium skill-mod-edit" data-field="name" type="text" value="{{modifier.name}}"/>
+                        <input class="small skill-mod-edit" data-field="value" type="number"
+                               value="{{modifier.value}}"/>
+                        <a class="delete-skill-modifier"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                    </div>
+                {{/each}}
+            </td>
+        </tr>
     {{/if}}
-</tbody>
+    </tbody>
 {{/if}}

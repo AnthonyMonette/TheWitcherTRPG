@@ -444,7 +444,7 @@ function getRefSkillMod(actor, skillNum){
 		case 6:
 			return [game.i18n.localize("WITCHER.SkRefStaff"), actor.system.skills.ref.staffspear.value, actor.system.skills.ref.staffspear.modifiers]
 		case 7:
-			return [game.i18n.localize("WITCHER.SkRefSwordmanship"), actor.system.skills.ref.swordsmanship.value, actor.system.skills.ref.swordsmanship.modifiers]
+			return [game.i18n.localize("WITCHER.SkRefSwordsmanship"), actor.system.skills.ref.swordsmanship.value, actor.system.skills.ref.swordsmanship.modifiers]
 	}
 }
 
