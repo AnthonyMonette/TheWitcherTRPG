@@ -184,7 +184,7 @@ async function createBoilerplateMacro(data, slot) {
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
         const command = 
-`let actor = game.actors.get('${foundActor.id}');
+`actor = game.actors.get('${foundActor.id}');
 actor.rollItem("${weapon._id}")`;
         let macro = game.macros.find(m => (m.name === weapon.name) && (m.command === command));
         if (!macro) {
@@ -213,7 +213,7 @@ actor.rollItem("${weapon._id}")`;
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
         const command = 
-`let actor = game.actors.get('${foundActor.id}');
+`actor = game.actors.get('${foundActor.id}');
 actor.rollSpell("${spell._id}")`;
         let macro = game.macros.find(m => (m.name === spell.name) && (m.command === command));
         if (!macro) {
