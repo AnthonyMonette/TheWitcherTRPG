@@ -32,7 +32,7 @@
             <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
     </h3>
-    <table {{#if system.pannels.noviceSpellIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+    <table {{#if system.pannels.noviceSpellIsOpen}} class="skill-list item-list" {{else}} class="skill-list invisible" {{/if}}>
         <tr>
             <td></td>
             <td></td>
@@ -46,8 +46,7 @@
                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                 <td><img src="{{spell.img}}" class="item-img dragable" draggable="true" data-id="{{spell._id}}"/></td>
                 <td><a class="spell-roll">{{spell.name}}</a></td>
-                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text"
-                           value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
+                <td><input class="inline-edit spell-sta" data-field="system.stamina" type="text" value="{{spell.system.stamina}}" placeholder="1" data-dtype="Number"/></td>
                 <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
             </tr>
             </tbody>
@@ -62,8 +61,7 @@
             <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
     </h3>
-    <table {{#if system.pannels.journeymanSpellIsOpen}}
-    class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+    <table {{#if system.pannels.journeymanSpellIsOpen}} class="skill-list item-list" {{else}} class="skill-list invisible" {{/if}}>
         <tr>
             <td></td>
             <td></td>
@@ -93,7 +91,7 @@
             <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
     </h3>
-    <table {{#if system.pannels.masterSpellIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+    <table {{#if system.pannels.masterSpellIsOpen}} class="skill-list item-list" {{else}} class="skill-list invisible" {{/if}}>
         <tr>
             <td></td>
             <td></td>
@@ -123,7 +121,7 @@
             <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
     </h3>
-    <table {{#if system.pannels.ritualIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+    <table {{#if system.pannels.ritualIsOpen}} class="skill-list item-list" {{else}} class="skill-list invisible" {{/if}}>
         <tr>
             <td></td>
             <td></td>
@@ -153,7 +151,7 @@
             <a class="spell-display"><i class="fas fa-chevron-right"></i></a>
         {{/if}}
     </h3>
-    <table {{#if system.pannels.hexIsOpen}} class="skill-list" {{else}} class="skill-list invisible" {{/if}}>
+    <table {{#if system.pannels.hexIsOpen}} class="skill-list item-list" {{else}} class="skill-list invisible" {{/if}}>
         <tr>
             <td></td>
             <td></td>
@@ -187,7 +185,7 @@
     <table class="skill-list invisible">
     {{/unless}}
     {{#if system.pannels.magicalgiftIsOpen}}
-    <table class="skill-list">
+    <table class="skill-list item-list">
     {{/if}}
         <tr> 
             <td></td> 
