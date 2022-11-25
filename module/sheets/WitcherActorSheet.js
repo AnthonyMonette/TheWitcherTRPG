@@ -2204,25 +2204,66 @@ export default class WitcherActorSheet extends ActorSheet {
                 let attFormula = "1d10"
                 let damageFormula = formula;
 
-                if (item.system.accuracy < 0){
-                  attFormula += !displayRollDetails ? `${item.system.accuracy}` : `${item.system.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
+                if(item.system.accuracy < 0) {
+                  attFormula += !displayRollDetails ? `${item.system.accuracy}` :
+                    `${item.system.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
-                if (item.system.accuracy > 0){
-                  attFormula += !displayRollDetails ? `+${item.system.accuracy}`: `+${item.system.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
+                if(item.system.accuracy > 0) {
+                  attFormula += !displayRollDetails ? `+${item.system.accuracy}` :
+                    `+${item.system.accuracy}[${game.i18n.localize("WITCHER.Weapon.Short.WeaponAccuracy")}]`
                 }
-                if (targetOutsideLOS) {attFormula += "-3";}
-                if (outsideLOS) {attFormula += "+3";}
-                if (isExtraAttack) { attFormula += "-3"; }
-                if (isFastDraw) { attFormula += "-3"; }
-                if (isProne) { attFormula += "-2"; }
-                if (isPinned) { attFormula += "+4"; }
-                if (isActivelyDodging) { attFormula += "-2"; }
-                if (isMoving) { attFormula += "-3"; }
-                if (isAmbush) { attFormula += "+5"; }
-                if (isRicochet) { attFormula += "-5"; }
-                if (isBlinded) { attFormula += "-3"; }
-                if (isSilhouetted) { attFormula += "+2"; }
-                if (customAim > 0) { attFormula += `+${customAim}`}
+                if(targetOutsideLOS) {
+                  attFormula += !displayRollDetails ? `-3` :
+                    `-3[${game.i18n.localize("WITCHER.Dialog.attackTargetOutsideLOS")}]`;
+                }
+                if(outsideLOS) {
+                  attFormula += !displayRollDetails ? `+3` :
+                    `+3[${game.i18n.localize("WITCHER.Dialog.attackOutsideLOS")}]`;
+                }
+                if(isExtraAttack) {
+                  attFormula += !displayRollDetails ? `-3` :
+                    `-3[${game.i18n.localize("WITCHER.Dialog.attackExtra")}]`;
+                }
+                if(isFastDraw) {
+                  attFormula += !displayRollDetails ? `-3` :
+                    `-3[${game.i18n.localize("WITCHER.Dialog.attackIsFastDraw")}]`;
+                }
+                if(isProne) {
+                  attFormula += !displayRollDetails ? `-2` :
+                    `-2[${game.i18n.localize("WITCHER.Dialog.attackIsProne")}]`;
+                }
+                if(isPinned) {
+                  attFormula += !displayRollDetails ? `+4` :
+                    `+4[${game.i18n.localize("WITCHER.Dialog.attackIsPinned")}]`;
+                }
+                if(isActivelyDodging) {
+                  attFormula += !displayRollDetails ? `-2` :
+                    `-2[${game.i18n.localize("WITCHER.Dialog.attackIsActivelyDodging")}]`;
+                }
+                if(isMoving) {
+                  attFormula += !displayRollDetails ? `-3` :
+                    `-3[${game.i18n.localize("WITCHER.Dialog.attackIsMoving")}]`;
+                }
+                if(isAmbush) {
+                  attFormula += !displayRollDetails ? `+5` :
+                    `+5[${game.i18n.localize("WITCHER.Dialog.attackIsAmbush")}]`;
+                }
+                if(isRicochet) {
+                  attFormula += !displayRollDetails ? `-5` :
+                    `-5[${game.i18n.localize("WITCHER.Dialog.attackIsRicochet")}]`;
+                }
+                if(isBlinded) {
+                  attFormula += !displayRollDetails ? `-3` :
+                    `-3[${game.i18n.localize("WITCHER.Dialog.attackIsBlinded")}]`;
+                }
+                if(isSilhouetted) {
+                  attFormula += !displayRollDetails ? `+2` :
+                    `+2[${game.i18n.localize("WITCHER.Dialog.attackIsSilhouetted")}]`;
+                }
+                if(customAim > 0) {
+                  attFormula += !displayRollDetails ? `+${customAim}` :
+                    `+${customAim}[${game.i18n.localize("WITCHER.Dialog.attackCustom")}]`;
+                }
 
                 let modifiers;
 
