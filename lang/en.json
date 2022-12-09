@@ -13,6 +13,8 @@
   "WITCHER.Item.Availability": "Availability",
   "WITCHER.Item.AddEffect": "Add Effect",
   "WITCHER.Item.AddComponent": "Add Component",
+  "WITCHER.Item.AddAssociatedItem": "Add Associated Item",
+  "WITCHER.Item.RemoveAssociatedItem": "Remove Associated Item",
   "WITCHER.Item.RemoveEffect": "Remove Effect",
   "WITCHER.Item.RemoveComponent": "Remove Component",
   "WITCHER.Item.CraftingMaterial": "Crafting Material",

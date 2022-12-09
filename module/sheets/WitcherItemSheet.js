@@ -45,7 +45,6 @@ export default class WitcherItemSheet extends ItemSheet {
       return data;
     }
 
-    
     activateListeners(html) {
       super.activateListeners(html);
 
@@ -55,6 +54,7 @@ export default class WitcherItemSheet extends ItemSheet {
       html.find(".add-modifier-derived").on("click", this._onAddModifierDerived.bind(this));
 
       html.find(".add-component").on("click", this._onAddComponent.bind(this));
+      html.find(".add-associated-item").on("click", this._onAddAssociatedItem.bind(this))
       html.find(".remove-component").on("click", this._onRemoveComponent.bind(this));
 
       html.find(".remove-effect").on("click", this._oRemoveEffect.bind(this));
@@ -90,19 +90,24 @@ export default class WitcherItemSheet extends ItemSheet {
     }
 
     async _onDrop(event) {
-      if (this.item.type == "diagrams") {
-        let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
-        let dragEventData = TextEditor.getDragEventData(event)
-        let item = await fromUuid(dragEventData.uuid)
-        if (item) {
-          let newComponentList  = []
-          if (this.item.system.craftingComponents){
-            newComponentList = this.item.system.craftingComponents
-          }
-          newComponentList.push({id: genId(), name: item.name, quantity: 1})
-          this.item.update({'system.craftingComponents': newComponentList});
+        if (this.item.type == "diagrams") {
+            let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
+            let dragEventData = TextEditor.getDragEventData(event)
+            let item = await fromUuid(dragEventData.uuid)
+
+            if (item) {
+                if (event.target.offsetParent.dataset.type == "associatedItem") {
+                    this.item.update({'system.associatedItem': item});
+                } else {
+                    let newComponentList  = []
+                    if (this.item.system.craftingComponents){
+                        newComponentList = this.item.system.craftingComponents
+                    }
+                    newComponentList.push({id: genId(), name: item.name, quantity: 1})
+                    this.item.update({'system.craftingComponents': newComponentList});
+                }
+            }
         }
-      }
     }
 
     _onEffectEdit(event) {
@@ -219,7 +224,6 @@ export default class WitcherItemSheet extends ItemSheet {
       this.item.update({'system.derived': newModifierList});
     }
 
-    
     _onAddEffect(event) {
       event.preventDefault();
       let newEffectList  = []
@@ -238,6 +242,18 @@ export default class WitcherItemSheet extends ItemSheet {
       }
       newComponentList.push({id: genId(), name: "component", quantity: ""})
       this.item.update({'system.craftingComponents': newComponentList});
+    }
+
+    async _onAddAssociatedItem(event) {
+        if (this.item.type == "diagrams") {
+            let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
+            let dragEventData = TextEditor.getDragEventData(event)
+            let item = await fromUuid(dragEventData.uuid)
+
+            if (item) {
+                this.item.update({'system.associatedItem': item});
+            }
+        }
     }
 
     _onAddModifierStat(event) {
