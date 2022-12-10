@@ -656,5 +656,6 @@
   "WITCHER.craft.ItemsSuccessfullyCrafted": "Предмет был успешно создан персонажем ",
   "WITCHER.craft.ItemsNotCrafted": "Попытка крафта была провалена персонажем ",
   "WITCHER.craft.SuccessfulCraftForNothing": "Нужно было добавить предмет, который можно скрафтить при помощи рецепта. Ваши компоненты не пострадали, чего не скажешь о самооценке.",
-  "WITCHER.err.CraftItemDeletion": "Неверное число компонентов было удалено при крафте"
+  "WITCHER.err.CraftItemDeletion": "Неверное число компонентов было удалено при крафте",
+  "WITCHER.craft.AssociatedItemMissing": "Предмет для крафта не связан с рецептом"
 }

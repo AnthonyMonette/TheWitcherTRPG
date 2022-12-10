@@ -55,6 +55,7 @@ export default class WitcherItemSheet extends ItemSheet {
 
     html.find(".add-component").on("click", this._onAddComponent.bind(this));
     html.find(".add-associated-item").on("click", this._onAddAssociatedItem.bind(this))
+    html.find(".remove-associated-item").on("click", this._onRemoveAssociatedItem.bind(this))
     html.find(".remove-component").on("click", this._onRemoveComponent.bind(this));
 
     html.find(".remove-effect").on("click", this._oRemoveEffect.bind(this));
@@ -246,6 +247,14 @@ export default class WitcherItemSheet extends ItemSheet {
 
   async _onAddAssociatedItem(event) {
     //todo implement
+  }
+
+  async _onRemoveAssociatedItem(event) {
+    event.preventDefault();
+    if (this.item.type == "diagrams") {
+        let newAssociatedItem = { id: "", name: "", img: ""};
+        this.item.update({'system.associatedItem': newAssociatedItem});
+    }
   }
 
   _onAddModifierStat(event) {

@@ -788,5 +788,6 @@
   "WITCHER.craft.ItemsSuccessfullyCrafted": "Item was successfully crafted by",
   "WITCHER.craft.ItemsNotCrafted": "Item wasn't successfully crafted by",
   "WITCHER.craft.SuccessfulCraftForNothing": "You should have specified associated item to allow its craft. Your components are in place.",
-  "WITCHER.err.CraftItemDeletion": "Incorrect amount of items were deleted from the actor"
+  "WITCHER.err.CraftItemDeletion": "Incorrect amount of items were deleted from the actor",
+  "WITCHER.craft.AssociatedItemMissing": "No associated item provided"
 }
