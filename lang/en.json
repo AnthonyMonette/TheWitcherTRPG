@@ -13,6 +13,8 @@
   "WITCHER.Item.Availability": "Availability",
   "WITCHER.Item.AddEffect": "Add Effect",
   "WITCHER.Item.AddComponent": "Add Component",
+  "WITCHER.Item.AddAssociatedItem": "Add Associated Item",
+  "WITCHER.Item.RemoveAssociatedItem": "Remove Associated Item",
   "WITCHER.Item.RemoveEffect": "Remove Effect",
   "WITCHER.Item.RemoveComponent": "Remove Component",
   "WITCHER.Item.CraftingMaterial": "Crafting Material",
@@ -565,6 +567,7 @@
   "WITCHER.Dialog.CraftingItem": "Crafting an item",
   "WITCHER.Dialog.NoComponents": "Not Enough Component",
   "WITCHER.Dialog.CraftingDiagram": "You have the diagram",
+  "WITCHER.Dialog.RealCrafting": "Use real craft for diagram",
   "WITCHER.Dialog.Diagram": "Diagram",
   "WITCHER.Dialog.after": "After",
   "WITCHER.Dialog.ButtonDodge": "Dodge",
@@ -779,5 +782,12 @@
   "WITCHER.socialStanding.nilfgaard": "Nilfgaard",
   "WITCHER.socialStanding.skellige": "Skellige",
   "WITCHER.socialStanding.dolBlathanna": "Dol Blathanna",
-  "WITCHER.socialStanding.mahakam": "Mahakam"
+  "WITCHER.socialStanding.mahakam": "Mahakam",
+  "WITCHER.craft.InsufficientComponents": "Not enough components to perform real craft",
+  "WITCHER.craft.ItemsSuccessfullyDeleted": "Items were successfully deleted from actor",
+  "WITCHER.craft.ItemsSuccessfullyCrafted": "Item was successfully crafted by",
+  "WITCHER.craft.ItemsNotCrafted": "Item wasn't successfully crafted by",
+  "WITCHER.craft.SuccessfulCraftForNothing": "You should have specified associated item to allow its craft. Your components are in place.",
+  "WITCHER.err.CraftItemDeletion": "Incorrect amount of items were deleted from the actor",
+  "WITCHER.craft.AssociatedItemMissing": "No associated item provided"
 }
