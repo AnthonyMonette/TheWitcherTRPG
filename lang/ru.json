@@ -11,6 +11,9 @@
   "WITCHER.Item.Attribute": "Атрибуты",
   "WITCHER.Item.ROF": "Скор. атак",
   "WITCHER.Item.CraftingMaterial": "Ремесленные материалы",
+  "WITCHER.Dialog.NoComponents": "Недостаточно компонентов для крафра",
+  "WITCHER.Dialog.CraftingDiagram": "Рецепт перед глазами",
+  "WITCHER.Dialog.RealCrafting": "Использовать настоящий крафт",
   "WITCHER.Item.Hides&AnimalParts": "Шкуры и части животных",
   "WITCHER.Item.AlchemicalTreatments": "Алхимические пропитки и составы",
   "WITCHER.Item.Ingots&Minerals": "Слитки и минералы",
@@ -648,5 +651,10 @@
   "WITCHER.Context.applyDmg": "Нанести урон",
   "WITCHER.Context.Defense": "Защита",
   "WITCHER.Context.SelectActor": "Должен быть выбран хотя бы один персонаж",
-  "WITCHER.Armor.tooMuch": "Слишком много одинакового оружия экипировано"
+  "WITCHER.Armor.tooMuch": "Слишком много одинакового оружия экипировано",
+  "WITCHER.craft.ItemsSuccessfullyDeleted": "Компонент успешно удален при крафте",
+  "WITCHER.craft.ItemsSuccessfullyCrafted": "Предмет был успешно создан персонажем ",
+  "WITCHER.craft.ItemsNotCrafted": "Попытка крафта была провалена персонажем ",
+  "WITCHER.craft.SuccessfulCraftForNothing": "Нужно было добавить предмет, который можно скрафтить при помощи рецепта. Ваши компоненты не пострадали, чего не скажешь о самооценке.",
+  "WITCHER.err.CraftItemDeletion": "Неверное число компонентов было удалено при крафте"
 }

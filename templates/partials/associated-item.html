@@ -1,0 +1,31 @@
+<div data-type="associatedItem">
+    <table class="item-bottom-table" data-type="associatedItem">
+        <tr data-type="associatedItem">
+            <th data-type="associatedItem">
+                {{#if item.system.associatedItem.id}}
+                <a data-type="associatedItem" class="remove-associated-item" title="{{localize "
+                    WITCHER.Item.RemoveAssociatedItem"}}">
+                    <i class="fas fa-minus"></i></a>
+
+                {{else}}
+                <a data-type="associatedItem" class="add-associated-item" title="{{localize "
+                    WITCHER.Item.AddAssociatedItem"}}">
+                    <i class="fas fa-plus"></i></a>
+                {{/if}}
+            </th>
+            <th data-type="associatedItem">
+                <header class="sheet-header" data-type="associatedItem">
+                    <img data-type="associatedItem" class="profile-img" src="{{item.system.associatedItem.img}}"
+                        data-edit="img" title="{{item.system.associatedItem.name}}" />
+                </header>
+            </th>
+            <th data-type="associatedItem">
+                <div class="description" data-type="associatedItem">
+                    <label data-type="associatedItem"
+                        class="label-info"><b>{{item.system.associatedItem.name}}</b></label>
+                    {{item.system.associatedItem.description}}
+                </div>
+            </th>
+        </tr>
+    </table>
+</div>

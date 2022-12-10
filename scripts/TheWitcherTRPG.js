@@ -28,6 +28,7 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html",
         "systems/TheWitcherTRPG/templates/partials/loot-item-display.html",
         "systems/TheWitcherTRPG/templates/partials/item-header.html",
+        "systems/TheWitcherTRPG/templates/partials/associated-item.html",
         "systems/TheWitcherTRPG/templates/sheets/verbal-combat.html",
         "systems/TheWitcherTRPG/templates/sheets/weapon-attack.html"
     ];
