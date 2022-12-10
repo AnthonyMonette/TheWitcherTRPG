@@ -663,6 +663,7 @@
   "WITCHER.Spell.meters": "m",
   "WITCHER.Spell.Size": "Size",
   "WITCHER.Spell.Type": "Type",
+  "WITCHER.Spell.VisualEffectDuration": "Visual Duration (sec)",
   "WITCHER.Spell.Square": "Square",
   "WITCHER.Spell.Circle": "Circle",
   "WITCHER.Spell.Cone": "Cone",

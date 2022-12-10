@@ -1348,23 +1348,8 @@ export default class WitcherActorSheet extends ActorSheet {
       token = tokens[0]
     }
 
-    if (token && spellItem.system.createTemplate) {
-      let distance = Number(spellItem.system.templateSize)
-      let direction = 0
-      if (spellItem.system.templateType == "rect") {
-        distance = Math.hypot(Number(spellItem.system.templateSize))
-        direction = 45
-      }
-      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
-        t: spellItem.system.templateType,
-        user: game.user._id,
-        distance: distance,
-        direction: direction,
-        x: token.system.x + (token.system.width * 100) / 2,
-        y: token.system.y + (token.system.height * 100) / 2,
-        fillColor: game.user.color
-      }]);
-    }
+    await spellItem.createSpellVisualEffectIfApplicable(token);
+    await spellItem.deleteSpellVisualEffect();
   }
 
   async _onProfessionRoll(event) {
@@ -2481,7 +2466,7 @@ export default class WitcherActorSheet extends ActorSheet {
               if (isWeaponThrowable(item)) {
                 let newQuantity = item.system.quantity - 1;
                 if (newQuantity < 0) {
-                    return
+                  return
                 }
                 item.update({ "system.quantity": newQuantity })
                 allEffects.push(...item.system.effects)

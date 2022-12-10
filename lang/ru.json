@@ -620,6 +620,7 @@
   "WITCHER.Spell.meters": "м",
   "WITCHER.Spell.Size": "Размер",
   "WITCHER.Spell.Type": "Тип",
+  "WITCHER.Spell.VisualEffectDuration": "Длительность визуальная (сек)",
   "WITCHER.Spell.Square": "Квадрат",
   "WITCHER.Spell.Circle": "Круг",
   "WITCHER.Spell.Cone": "Конус",
