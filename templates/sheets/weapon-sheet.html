@@ -16,6 +16,10 @@
                 <label>{{localize "WITCHER.Weapon.isAmmunition"}}</label>
                 <input type="checkbox" name="system.isAmmo" {{checked item.system.isAmmo}}/>
             </div>
+            <div class="item-option-tickbox">
+                <label>{{localize "WITCHER.Weapon.isThrowable"}}</label>
+                <input type="checkbox" name="system.isThrowable" {{checked item.system.isThrowable}}/>
+            </div>
         </div>
         <div class="item-collum">
             {{#unless item.system.isAmmo}}

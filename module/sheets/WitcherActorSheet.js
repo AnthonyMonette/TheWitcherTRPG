@@ -3,6 +3,7 @@ import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
 import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
 import { craftItem, findNeededComponent } from "./WitcherItemSheet.js";
+import { doesWeaponNeedMeleeSkillToAttack, isWeaponThrowable, isEnoughThrowableWeapon } from "../weapon-helper.js";
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -1149,7 +1150,7 @@ export default class WitcherActorSheet extends ActorSheet {
               if (areCraftComponentsEnough) {
                 craftItem(item, roll);
               } else {
-                let err = {flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}`};
+                let err = { flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}` };
                 roll.toMessage(err)
               }
             } else {
@@ -1167,7 +1168,6 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }).render(true)
   }
-
 
   async _onSpellRoll(event, itemId = null) {
 
@@ -2112,7 +2112,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let displayDmgFormula = `${item.system.damage}`
     let formula = !displayRollDetails ? `${item.system.damage}` : `${item.system.damage}[${game.i18n.localize("WITCHER.Diagram.Weapon")}]`
 
-    let isMeleeAttack = witcher.meleeSkills.includes(item.system.attackSkill)
+    let isMeleeAttack = doesWeaponNeedMeleeSkillToAttack(witcher, item);
     if (this.actor.type == "character" && isMeleeAttack) {
       if (this.actor.system.attackStats.meleeBonus < 0) {
         displayDmgFormula += `${this.actor.system.attackStats.meleeBonus}`
@@ -2166,16 +2166,17 @@ export default class WitcherActorSheet extends ActorSheet {
       let quantity = ammunitions.sum("quantity")
       if (quantity <= 0) {
         noAmmo = 1;
-      }
-      else {
+      } else {
         ammunitions.forEach(element => {
           ammunitionOption += `<option value="${element._id}"> ${element.name}(${element.system.quantity}) </option>`;
         });
       }
     }
 
+    let noThrowable = !isEnoughThrowableWeapon(this.actor, item)
+
     let Mymelebonus = this.actor.system.attackStats.meleeBonus
-    let data = { item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, ammunitionOption, ammunitions, Mymelebonus }
+    let data = { item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, noThrowable, ammunitionOption, ammunitions, Mymelebonus }
     const myDialogOptions = { width: 500 }
     const dialogTemplate = await renderTemplate("systems/TheWitcherTRPG/templates/sheets/weapon-attack.html", data)
 
@@ -2477,6 +2478,15 @@ export default class WitcherActorSheet extends ActorSheet {
                 allEffects.push(...item.system.effects)
               }
 
+              if (isWeaponThrowable(item)) {
+                let newQuantity = item.system.quantity - 1;
+                if (newQuantity < 0) {
+                    return
+                }
+                item.update({ "system.quantity": newQuantity })
+                allEffects.push(...item.system.effects)
+              }
+
               if (item.system.enhancementItems) {
                 item.system.enhancementItems.forEach(element => {
                   if (element && JSON.stringify(element) != '{}') {
@@ -2500,8 +2510,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
               if (item.system.rollOnlyDmg) {
                 rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.system.effects, damageType)
-              }
-              else {
+              } else {
                 roll.toMessage(messageData);
               }
             }

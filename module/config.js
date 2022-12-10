@@ -165,3 +165,4 @@ witcher.CritDeadly = {
 };
 
 witcher.meleeSkills = ["Brawling", "Melee", "Small Blades", "Staff/Spear", "Swordsmanship", "Athletics"];
+witcher.rangedSkills = ["Athletics", "Archery", "Crossbow"];
