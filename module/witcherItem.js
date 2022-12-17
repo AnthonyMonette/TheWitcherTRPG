@@ -120,6 +120,10 @@ export default class WitcherItem extends Item {
     return this.system.alchemyDC && this.system.alchemyDC > 0;
   }
 
+  isWeaponThrowable() {
+    return this.system.isThrowable;
+  }
+
   async realCraft(roll) {
     let craftMessage = {};
 
