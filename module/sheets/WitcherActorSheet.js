@@ -960,104 +960,25 @@ export default class WitcherActorSheet extends ActorSheet {
 
     let areCraftComponentsEnough = true;
 
-    content += `<div class="flex components-display">`
-    if (item.system.alchemyComponents.vitriol > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> ${item.system.alchemyComponents.vitriol}`
-    }
-    if (item.system.alchemyComponents.rebis > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> ${item.system.alchemyComponents.rebis}`
-    }
-    if (item.system.alchemyComponents.aether > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> ${item.system.alchemyComponents.aether}`
-    }
-    if (item.system.alchemyComponents.quebrith > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> ${item.system.alchemyComponents.quebrith}`
-    }
-    if (item.system.alchemyComponents.hydragenum > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> ${item.system.alchemyComponents.hydragenum}`
-    }
-    if (item.system.alchemyComponents.vermilion > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> ${item.system.alchemyComponents.vermilion}`
-    }
-    if (item.system.alchemyComponents.sol > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> ${item.system.alchemyComponents.sol}`
-    }
-    if (item.system.alchemyComponents.caelum > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> ${item.system.alchemyComponents.caelum}`
-    }
-    if (item.system.alchemyComponents.fulgur > 0) {
-      content += `<img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> ${item.system.alchemyComponents.fulgur}`
-    }
+    content += `<div class="components-display">`
+    let alchemyCraftComponents = item.populateAlchemyCraftComponentsList();
+    alchemyCraftComponents
+      .filter(a => a.quantity > 0)
+      .forEach(a => {
+        content += `<div class="flex">${a.content}</div>`
+
+        let ownedSubstance = this.actor.getSubstance(a.name)
+        let ownedSubstanceCount = ownedSubstance.sum("quantity")
+        if (ownedSubstanceCount < Number(a.quantity)) {
+          let missing = a.quantity - ownedSubstanceCount
+          content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${a.alias}</span><br />`
+          areCraftComponentsEnough = false
+        }
+      });
     content += `</div>`
 
     content += `<label>${game.i18n.localize("WITCHER.Dialog.CraftingDiagram")}: <input type="checkbox" name="hasDiagram"></label> <br />`
     content += `<label>${game.i18n.localize("WITCHER.Dialog.RealCrafting")}: <input type="checkbox" name="realCraft"></label> <br />`
-
-    let substancesVitriol = this.actor.getSubstance("vitriol");
-    let vitriolCount = substancesVitriol.sum("quantity");
-    let substancesRebis = this.actor.getSubstance("rebis");
-    let rebisCount = substancesRebis.sum("quantity");
-    let substancesAether = this.actor.getSubstance("aether");
-    let aetherCount = substancesAether.sum("quantity");
-    let substancesQuebrith = this.actor.getSubstance("quebrith");
-    let quebrithCount = substancesQuebrith.sum("quantity");
-    let substancesHydragenum = this.actor.getSubstance("hydragenum");
-    let hydragenumCount = substancesHydragenum.sum("quantity");
-    let substancesVermilion = this.actor.getSubstance("vermilion");
-    let vermilionCount = substancesVermilion.sum("quantity");
-    let substancesSol = this.actor.getSubstance("sol");
-    let solCount = substancesSol.sum("quantity");
-    let substancesCaelum = this.actor.getSubstance("caelum");
-    let caelumCount = substancesCaelum.sum("quantity");
-    let substancesFulgur = this.actor.getSubstance("fulgur");
-    let fulgurCount = substancesFulgur.sum("quantity")
-
-    let missing = 0
-    if (item.system.alchemyComponents.vitriol > 0 && item.system.alchemyComponents.vitriol > vitriolCount) {
-      missing = item.system.alchemyComponents.vitriol - vitriolCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vitriol")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.rebis > 0 && item.system.alchemyComponents.rebis > rebisCount) {
-      missing = item.system.alchemyComponents.rebis - rebisCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Rebis")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.aether > 0 && item.system.alchemyComponents.aether > aetherCount) {
-      missing = item.system.alchemyComponents.aether - aetherCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Aether")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.quebrith > 0 && item.system.alchemyComponents.quebrith > quebrithCount) {
-      missing = item.system.alchemyComponents.quebrith - quebrithCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Quebrith")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.hydragenum > 0 && item.system.alchemyComponents.hydragenum > hydragenumCount) {
-      missing = item.system.alchemyComponents.hydragenum - hydragenumCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Hydragenum")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.vermilion > 0 && item.system.alchemyComponents.vermilion > vermilionCount) {
-      missing = item.system.alchemyComponents.vermilion - vermilionCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vermilion")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.sol > 0 && item.system.alchemyComponents.sol > solCount) {
-      missing = item.system.alchemyComponents.sol - solCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Sol")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.caelum > 0 && item.system.alchemyComponents.caelum > caelumCount) {
-      missing = item.system.alchemyComponents.caelum - caelumCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Caelum")}</span><br />`
-      areCraftComponentsEnough = false
-    }
-    if (item.system.alchemyComponents.fulgur > 0 && item.system.alchemyComponents.fulgur > fulgurCount) {
-      missing = item.system.alchemyComponents.fulgur - fulgurCount
-      content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Fulgur")}</span><br />`
-      areCraftComponentsEnough = false
-    }
 
     new Dialog({
       title: `${game.i18n.localize("WITCHER.Dialog.AlchemyTitle")}`,

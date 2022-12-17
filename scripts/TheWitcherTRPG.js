@@ -230,3 +230,8 @@ actor.rollSpell("${spell._id}")`;
         return false;
     }
 }
+
+Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentName) {
+    let ownedComponent = actor.findNeededComponent(componentName);
+    return ownedComponent.sum("quantity");
+});

@@ -334,7 +334,8 @@
 
                         </td>
                     {{/unless}}
-                    <td><input type="checkbox" name="system.bludgeoning" {{checked armor.system.bludgeoning}} disabled/></td>
+                    <td><input type="checkbox" name="system.bludgeoning" {{checked armor.system.bludgeoning}} disabled/>
+                    </td>
                     <td><input type="checkbox" name="system.slashing" {{checked armor.system.slashing}} disabled/></td>
                     <td><input type="checkbox" name="system.Piercing" {{checked armor.system.piercing}} disabled/></td>
 
@@ -343,27 +344,28 @@
                     <td colspan="9">
                         <table>
                             {{#unless (eq type "enhancement")}}
-                            <tr>
-                                <td colspan="8">
-                                    <div class="flex">
-                                        {{localize "WITCHER.Weapon.Short.Enhancements"}}:
-                                        {{#each armor.system.enhancementItems as |enhancement id|}}
-                                            {{#if enhancement.img}}
-                                                <div class="item item-enhancement" data-item-id="{{enhancement._id}}">
-                                                    <img class="item-edit no-margin" src="{{enhancement.img}}"/>
-                                                </div>
-                                            {{/if}}
-                                            {{#unless enhancement.img}}
-                                                <div class="item-enhancement">
-                                                    <a>
-                                                        <div class="enhancement-slot enhancement-armor-slot"></div>
-                                                    </a>
-                                                </div>
-                                            {{/unless}}
-                                        {{/each}}
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <div class="flex">
+                                            {{localize "WITCHER.Weapon.Short.Enhancements"}}:
+                                            {{#each armor.system.enhancementItems as |enhancement id|}}
+                                                {{#if enhancement.img}}
+                                                    <div class="item item-enhancement"
+                                                         data-item-id="{{enhancement._id}}">
+                                                        <img class="item-edit no-margin" src="{{enhancement.img}}"/>
+                                                    </div>
+                                                {{/if}}
+                                                {{#unless enhancement.img}}
+                                                    <div class="item-enhancement">
+                                                        <a>
+                                                            <div class="enhancement-slot enhancement-armor-slot"></div>
+                                                        </a>
+                                                    </div>
+                                                {{/unless}}
+                                            {{/each}}
+                                        </div>
+                                    </td>
+                                </tr>
                             {{/unless}}
                             {{#if (eq type "armor")}}
                                 <tr>
@@ -432,11 +434,11 @@
                 class="fas fa-plus"></i></a></h2>
         <table class="valuable-table item-list">
             <th>
-                <td></td>
-                <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
-                <td><b>{{localize "WITCHER.table.Name"}}</b></td>
-                <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
-                <td></td>
+            <td></td>
+            <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+            <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
+            <td></td>
             </th>
             {{#each valuables as |valuable id|}}
                 <tbody class="item" data-item-id="{{valuable._id}}">
@@ -445,16 +447,20 @@
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
                     <td>
-                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true" data-id="{{valuable._id}}"/>
+                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{valuable._id}}"/>
                     </td>
                     <td>
-                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text" value="{{valuable.system.quantity}}" data-dtype="Number"/>
+                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                               value="{{valuable.system.quantity}}" data-dtype="Number"/>
                     </td>
                     <td>
-                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}" placeholder="name"/>
+                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}"
+                               placeholder="name"/>
                     </td>
                     <td>
-                        <input class="inline-edit weight-data" data-field="system.weight" type="text" value="{{valuable.system.weight}}" data-dtype="Number"/>
+                        <input class="inline-edit weight-data" data-field="system.weight" type="text"
+                               value="{{valuable.system.weight}}" data-dtype="Number"/>
                     </td>
                 </tr>
                 <tr class="item-info invisible">
@@ -555,7 +561,13 @@
                             <div>
                                 <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}}:</b>
                                     {{#each diagram.system.craftingComponents as |component name|}}
-                                        <span>{{component.name}}({{component.quantity}})</span>
+                                        <span>{{component.name}}</span>
+                                        <span {{#if
+                                                (lt (getOwnedComponentCount ../actor component.name) component.quantity)}}
+                                        class="error-display"
+                                        {{/if}}>
+                                            ({{component.quantity}})
+                                        </span>
                                     {{/each}}
                                 </label>
                             </div>

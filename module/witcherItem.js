@@ -124,6 +124,99 @@ export default class WitcherItem extends Item {
     return this.system.isThrowable;
   }
 
+  populateAlchemyCraftComponentsList() {
+    class alchemyComponent {
+      name = "";
+      alias = "";
+      content = "";
+      quantity = 0;
+
+      constructor(name, alias, content, quantity) {
+        this.name = name;
+        this.alias = alias;
+        this.content = content;
+        this.quantity = quantity;
+      }
+    }
+
+    let alchemyCraftComponents = [];
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "vitriol",
+        game.i18n.localize("WITCHER.Inventory.Vitriol"),
+        `<img src="systems/TheWitcherTRPG/assets/images/vitriol.png" class="substance-img" /> <b>${this.system.alchemyComponents.vitriol}</b>`,
+        this.system.alchemyComponents.vitriol > 0 ? this.system.alchemyComponents.vitriol : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "rebis",
+        game.i18n.localize("WITCHER.Inventory.Rebis"),
+        `<img src="systems/TheWitcherTRPG/assets/images/rebis.png" class="substance-img" /> <b>${this.system.alchemyComponents.rebis}</b>`,
+        this.system.alchemyComponents.rebis > 0 ? this.system.alchemyComponents.rebis : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "aether",
+        game.i18n.localize("WITCHER.Inventory.Aether"),
+        `<img src="systems/TheWitcherTRPG/assets/images/aether.png" class="substance-img" /> <b>${this.system.alchemyComponents.aether}</b>`,
+        this.system.alchemyComponents.aether > 0 ? this.system.alchemyComponents.aether : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "quebrith",
+        game.i18n.localize("WITCHER.Inventory.Quebrith"),
+        `<img src="systems/TheWitcherTRPG/assets/images/quebrith.png" class="substance-img" /> <b>${this.system.alchemyComponents.quebrith}</b>`,
+        this.system.alchemyComponents.quebrith > 0 ? this.system.alchemyComponents.quebrith : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "hydragenum",
+        game.i18n.localize("WITCHER.Inventory.Hydragenum"),
+        `<img src="systems/TheWitcherTRPG/assets/images/hydragenum.png" class="substance-img" /> <b>${this.system.alchemyComponents.hydragenum}</b>`,
+        this.system.alchemyComponents.hydragenum > 0 ? this.system.alchemyComponents.hydragenum : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "vermilion",
+        game.i18n.localize("WITCHER.Inventory.Vermilion"),
+        `<img src="systems/TheWitcherTRPG/assets/images/vermilion.png" class="substance-img" /> <b>${this.system.alchemyComponents.vermilion}</b>`,
+        this.system.alchemyComponents.vermilion > 0 ? this.system.alchemyComponents.vermilion : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "sol",
+        game.i18n.localize("WITCHER.Inventory.Sol"),
+        `<img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img" /> <b>${this.system.alchemyComponents.sol}</b>`,
+        this.system.alchemyComponents.sol > 0 ? this.system.alchemyComponents.sol : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "caelum",
+        game.i18n.localize("WITCHER.Inventory.Caelum"),
+        `<img src="systems/TheWitcherTRPG/assets/images/caelum.png" class="substance-img" /> <b>${this.system.alchemyComponents.caelum}</b>`,
+        this.system.alchemyComponents.caelum > 0 ? this.system.alchemyComponents.caelum : 0
+      )
+    );
+    alchemyCraftComponents.push(
+      new alchemyComponent(
+        "fulgur",
+        game.i18n.localize("WITCHER.Inventory.Fulgur"),
+        `<img src="systems/TheWitcherTRPG/assets/images/fulgur.png" class="substance-img" /> <b>${this.system.alchemyComponents.fulgur}</b>`,
+        this.system.alchemyComponents.fulgur > 0 ? this.system.alchemyComponents.fulgur : 0
+      )
+    );
+
+    this.system.alchemyCraftComponents = alchemyCraftComponents;
+    return alchemyCraftComponents;
+  }
+
   async realCraft(roll) {
     let craftMessage = {};
 
@@ -147,9 +240,15 @@ export default class WitcherItem extends Item {
 
     let craftedItemName;
     if (this.system.associatedItem && this.system.associatedItem.name) {
-      let craftingComponents = this.system.craftingComponents.filter(c => Number(c.quantity) > 0);
+      let craftingComponents = this.isAlchemicalCraft()
+        ? this.system.alchemyCraftComponents.filter(c => Number(c.quantity) > 0)
+        : this.system.craftingComponents.filter(c => Number(c.quantity) > 0);
+
       craftingComponents.forEach(c => {
-        let componentsToDelete = this.actor.findNeededComponent(c.name);
+        let componentsToDelete = this.isAlchemicalCraft()
+          ? this.actor.getSubstance(c.name)
+          : this.actor.findNeededComponent(c.name);
+
         let componentsCountToDelete = Number(c.quantity);
         let componentsLeftToDelete = componentsCountToDelete;
         let componentsCountDeleted = 0;
@@ -161,6 +260,7 @@ export default class WitcherItem extends Item {
           }
 
           if (componentsCountDeleted < componentsCountToDelete) {
+
             this.actor.removeItem(toDelete._id, toDeleteCount)
             componentsCountDeleted += toDeleteCount;
             componentsLeftToDelete -= toDeleteCount;
@@ -169,6 +269,7 @@ export default class WitcherItem extends Item {
         });
 
         if (componentsCountDeleted != componentsCountToDelete || componentsLeftToDelete != 0) {
+
           craftSuccess = false;
           return ui.notifications.error(game.i18n.localize("WITCHER.err.CraftItemDeletion"));
         }
