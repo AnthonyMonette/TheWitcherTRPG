@@ -2,8 +2,6 @@ import { buttonDialog, rollDamage } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
 import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
-import { craftItem, findNeededComponent } from "./WitcherItemSheet.js";
-import { doesWeaponNeedMeleeSkillToAttack, isWeaponThrowable, isEnoughThrowableWeapon } from "../weapon-helper.js";
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -32,12 +30,11 @@ export default class WitcherActorSheet extends ActorSheet {
     data.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
 
     data.config = CONFIG.witcher;
-    CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current"
-    if (data.displayRollDetails) {
-      CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current[REF]"
-    }
+    CONFIG.Combat.initiative.formula = !data.displayRollDetails ? "1d10 + @stats.ref.current" : "1d10 + @stats.ref.current[REF]";
 
-    data.weapons = data.items.filter(function (item) { return item.type == "weapon" });
+    let actor = data.actor;
+    let items = actor.items;
+    data.weapons = actor.getList("weapon");
     data.weapons.forEach((weapon) => {
       if (weapon.system.enhancements > 0 && weapon.system.enhancements != weapon.system.enhancementItems.length) {
         let newEnhancementList = []
@@ -49,12 +46,15 @@ export default class WitcherActorSheet extends ActorSheet {
             newEnhancementList.push({})
           }
         }
-        let item = this.actor.items.get(weapon._id);
+        let item = actor.items.get(weapon._id);
         item.update({ 'system.enhancementItems': newEnhancementList })
       }
     });
 
-    data.armors = data.items.filter(function (item) { return item.type == "armor" || (item.type == "enhancement" && item.system.type == "armor" && item.system.applied == false) });
+    data.armors = items.filter(function (item) {
+      return item.type == "armor" ||
+        (item.type == "enhancement" && item.system.type == "armor" && item.system.applied == false)
+    });
     data.armors.forEach((armor) => {
       if (armor.system.enhancements > 0 && armor.system.enhancements != armor.system.enhancementItems.length) {
         let newEnhancementList = []
@@ -66,21 +66,22 @@ export default class WitcherActorSheet extends ActorSheet {
             newEnhancementList.push({})
           }
         }
-        let item = this.actor.items.get(armor._id);
+        let item = actor.items.get(armor._id);
         item.update({ 'system.enhancementItems': newEnhancementList })
       }
     });
 
-    data.components = data.items.filter(function (item) { return item.type == "component" && item.system.type != "substances" });
-    data.allComponents = data.items.filter(function (item) { return item.type == "component" });
-    data.valuables = data.items.filter(function (item) { return item.type == "valuable" || item.type == "mount" || item.type == "alchemical" || item.type == "mutagen" || (item.type == "enhancement" && item.system.type != "armor" && item.system.applied == false) });
-    data.diagrams = data.items.filter(function (item) { return item.type == "diagrams" });
-    data.spells = data.items.filter(function (item) { return item.type == "spell" });
+    data.allComponents = actor.getList("component");
+    data.components = data.allComponents.filter(i => i.system.type != "substances");
+    data.valuables = items.filter(i => i.type == "valuable" || i.type == "mount" || i.type == "alchemical" ||
+      i.type == "mutagen" || (i.type == "enhancement" && i.system.type != "armor" && i.system.applied == false));
+    data.diagrams = actor.getList("diagrams");
+    data.spells = actor.getList("spell");
 
-    data.professions = data.items.filter(function (item) { return item.type == "profession" });
+    data.professions = actor.getList("profession");
     data.profession = data.professions[0];
 
-    data.races = data.items.filter(function (item) { return item.type == "race" });
+    data.races = actor.getList("race");
     data.race = data.races[0];
 
     Array.prototype.sum = function (prop) {
@@ -118,42 +119,47 @@ export default class WitcherActorSheet extends ActorSheet {
     data.totalSkills = this.calc_total_skills(data)
     data.totalProfSkills = this.calc_total_skills_profession(data)
 
-    data.substancesVitriol = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "vitriol" });
+    data.substancesVitriol = actor.getSubstance("vitriol");
     data.vitriolCount = data.substancesVitriol.sum("quantity");
-    data.substancesRebis = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "rebis" });
+    data.substancesRebis = actor.getSubstance("rebis");
     data.rebisCount = data.substancesRebis.sum("quantity");
-    data.substancesAether = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "aether" });
+    data.substancesAether = actor.getSubstance("aether");
     data.aetherCount = data.substancesAether.sum("quantity");
-    data.substancesQuebrith = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "quebrith" });
+    data.substancesQuebrith = actor.getSubstance("quebrith");
     data.quebrithCount = data.substancesQuebrith.sum("quantity");
-    data.substancesHydragenum = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "hydragenum" });
+    data.substancesHydragenum = actor.getSubstance("hydragenum");
     data.hydragenumCount = data.substancesHydragenum.sum("quantity");
-    data.substancesVermilion = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "vermilion" });
+    data.substancesVermilion = actor.getSubstance("vermilion");
     data.vermilionCount = data.substancesVermilion.sum("quantity");
-    data.substancesSol = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "sol" });
+    data.substancesSol = actor.getSubstance("sol");
     data.solCount = data.substancesSol.sum("quantity");
-    data.substancesCaelum = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "caelum" });
+    data.substancesCaelum = actor.getSubstance("caelum");
     data.caelumCount = data.substancesCaelum.sum("quantity");
-    data.substancesFulgur = data.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "fulgur" });
+    data.substancesFulgur = actor.getSubstance("fulgur");
     data.fulgurCount = data.substancesFulgur.sum("quantity");
 
-    data.loots = data.items.filter(function (item) { return item.type == "component" || item.type == "valuable" || item.type == "diagrams" || item.type == "armor" || item.type == "alchemical" || item.type == "enhancement" || item.type == "mutagen" });
-    data.notes = data.items.filter(function (item) { return item.type == "note" });
+    data.loots = items.filter(i => i.type == "component" || i.type == "valuable" || i.type == "diagrams" ||
+      i.type == "armor" || i.type == "alchemical" || i.type == "enhancement" || i.type == "mutagen");
+    data.notes = actor.getList("note");
 
-    data.activeEffects = data.items.filter(function (item) { return item.type == "effect" });
+    data.activeEffects = actor.getList("effect");
 
     data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
 
-    data.noviceSpells = data.items.filter(function (item) { return item.type == "spell" && item.system.level == "novice" && (item.system.class == "Spells" || item.system.class == "Invocations" || item.system.class == "Witcher") });
-    data.journeymanSpells = data.items.filter(function (item) { return item.type == "spell" && item.system.level == "journeyman" && (item.system.class == "Spells" || item.system.class == "Invocations" || item.system.class == "Witcher") });
-    data.masterSpells = data.items.filter(function (item) { return item.type == "spell" && item.system.level == "master" && (item.system.class == "Spells" || item.system.class == "Invocations" || item.system.class == "Witcher") });
-    data.hexes = data.items.filter(function (item) { return item.type == "spell" && item.system.class == "Hexes" });
-    data.rituals = data.items.filter(function (item) { return item.type == "spell" && item.system.class == "Rituals" });
-    data.magicalgift = data.items.filter(function (item) { return item.type == "spell" && item.system.class == "MagicalGift" });
 
-    if (this.actor.system.pannels == undefined) {
-      this.actor.update({ 'system.pannels': {} });
+    data.noviceSpells = data.spells.filter(s => s.system.level == "novice" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    data.journeymanSpells = data.spells.filter(s => s.system.level == "journeyman" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    data.masterSpells = data.spells.filter(s => s.system.level == "master" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    data.hexes = data.spells.filter(s => s.system.class == "Hexes");
+    data.rituals = data.spells.filter(s => s.system.class == "Rituals");
+    data.magicalgift = data.spells.filter(s => s.system.class == "MagicalGift");
+
+    if (actor.system.pannels == undefined) {
+      actor.update({ 'system.pannels': {} });
     }
     data.isGM = game.user.isGM
     return data;
@@ -391,13 +397,14 @@ export default class WitcherActorSheet extends ActorSheet {
   }
 
   async _removeItem(actor, itemId, quantityToRemove) {
-    let foundItem = actor.items.get(itemId)
-    let newQuantity = foundItem.system.quantity - quantityToRemove
-    if (newQuantity <= 0) {
-      await actor.items.get(itemId).delete()
-    } else {
-      await foundItem.update({ 'system.quantity': newQuantity < 0 ? 0 : newQuantity })
-    }
+    actor.removeItem(itemId, quantityToRemove)
+    //let foundItem = actor.items.get(itemId)
+    //let newQuantity = foundItem.system.quantity - quantityToRemove
+    //if (newQuantity <= 0) {
+    //  await actor.items.get(itemId).delete()
+    //} else {
+    //  await foundItem.update({ 'system.quantity': newQuantity < 0 ? 0 : newQuantity })
+    //}
   }
 
   async _addItem(actor, Additem, numberOfItem, forcecreate = false) {
@@ -421,12 +428,11 @@ export default class WitcherActorSheet extends ActorSheet {
     let type = event.currentTarget.closest(".item").dataset.type;
 
     let content = ""
-    let enhancements = []
+    let enhancements = this.actor.getList("enhancement")
     if (type == "weapon") {
-      enhancements = this.actor.items.filter(function (item) { return item.type == "enhancement" && item.system.applied == false && (item.system.type == "rune" || item.system.type == "weapon") });
-    }
-    else {
-      enhancements = this.actor.items.filter(function (item) { return item.type == "enhancement" && item.system.applied == false && (item.system.type == "armor" || item.system.type == "glyph") });
+      enhancements = enhancements.filter(e => e.system.applied == false && (e.system.type == "rune" || e.system.type == "weapon"));
+    } else {
+      enhancements = enhancements.filter(e => item.system.applied == false && (e.system.type == "armor" || e.system.type == "glyph"));
     }
 
     let quantity = enhancements.sum("quantity")
@@ -893,7 +899,6 @@ export default class WitcherActorSheet extends ActorSheet {
     this.actor.update({ "system.critWounds": newCritList });
   }
 
-
   async _onItemAdd(event) {
     let element = event.currentTarget
     let itemData = {
@@ -953,6 +958,7 @@ export default class WitcherActorSheet extends ActorSheet {
       flavor: `<h1>Crafting</h1>`,
     }
 
+    let areCraftComponentsEnough = true;
 
     content += `<div class="flex components-display">`
     if (item.system.alchemyComponents.vitriol > 0) {
@@ -985,61 +991,72 @@ export default class WitcherActorSheet extends ActorSheet {
     content += `</div>`
 
     content += `<label>${game.i18n.localize("WITCHER.Dialog.CraftingDiagram")}: <input type="checkbox" name="hasDiagram"></label> <br />`
+    content += `<label>${game.i18n.localize("WITCHER.Dialog.RealCrafting")}: <input type="checkbox" name="realCraft"></label> <br />`
 
-    let substancesVitriol = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "vitriol" });
+    let substancesVitriol = this.actor.getSubstance("vitriol");
     let vitriolCount = substancesVitriol.sum("quantity");
-    let substancesRebis = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "rebis" });
+    let substancesRebis = this.actor.getSubstance("rebis");
     let rebisCount = substancesRebis.sum("quantity");
-    let substancesAether = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "aether" });
+    let substancesAether = this.actor.getSubstance("aether");
     let aetherCount = substancesAether.sum("quantity");
-    let substancesQuebrith = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "quebrith" });
+    let substancesQuebrith = this.actor.getSubstance("quebrith");
     let quebrithCount = substancesQuebrith.sum("quantity");
-    let substancesHydragenum = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "hydragenum" });
+    let substancesHydragenum = this.actor.getSubstance("hydragenum");
     let hydragenumCount = substancesHydragenum.sum("quantity");
-    let substancesVermilion = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "vermilion" });
+    let substancesVermilion = this.actor.getSubstance("vermilion");
     let vermilionCount = substancesVermilion.sum("quantity");
-    let substancesSol = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "sol" });
+    let substancesSol = this.actor.getSubstance("sol");
     let solCount = substancesSol.sum("quantity");
-    let substancesCaelum = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "caelum" });
+    let substancesCaelum = this.actor.getSubstance("caelum");
     let caelumCount = substancesCaelum.sum("quantity");
-    let substancesFulgur = this.actor.items.filter(function (item) { return item.type == "component" && item.system.type == "substances" && item.system.substanceType == "fulgur" });
+    let substancesFulgur = this.actor.getSubstance("fulgur");
     let fulgurCount = substancesFulgur.sum("quantity")
+
     let missing = 0
     if (item.system.alchemyComponents.vitriol > 0 && item.system.alchemyComponents.vitriol > vitriolCount) {
       missing = item.system.alchemyComponents.vitriol - vitriolCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vitriol")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.rebis > 0 && item.system.alchemyComponents.rebis > rebisCount) {
       missing = item.system.alchemyComponents.rebis - rebisCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Rebis")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.aether > 0 && item.system.alchemyComponents.aether > aetherCount) {
       missing = item.system.alchemyComponents.aether - aetherCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Aether")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.quebrith > 0 && item.system.alchemyComponents.quebrith > quebrithCount) {
       missing = item.system.alchemyComponents.quebrith - quebrithCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Quebrith")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.hydragenum > 0 && item.system.alchemyComponents.hydragenum > hydragenumCount) {
       missing = item.system.alchemyComponents.hydragenum - hydragenumCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Hydragenum")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.vermilion > 0 && item.system.alchemyComponents.vermilion > vermilionCount) {
       missing = item.system.alchemyComponents.vermilion - vermilionCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Vermilion")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.sol > 0 && item.system.alchemyComponents.sol > solCount) {
       missing = item.system.alchemyComponents.sol - solCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Sol")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.caelum > 0 && item.system.alchemyComponents.caelum > caelumCount) {
       missing = item.system.alchemyComponents.caelum - caelumCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Caelum")}</span><br />`
+      areCraftComponentsEnough = false
     }
     if (item.system.alchemyComponents.fulgur > 0 && item.system.alchemyComponents.fulgur > fulgurCount) {
       missing = item.system.alchemyComponents.fulgur - fulgurCount
       content += `<span class="error-display">${game.i18n.localize("WITCHER.Dialog.NoComponents")}: ${missing} ${game.i18n.localize("WITCHER.Inventory.Fulgur")}</span><br />`
+      areCraftComponentsEnough = false
     }
 
     new Dialog({
@@ -1054,13 +1071,14 @@ export default class WitcherActorSheet extends ActorSheet {
             let skill = this.actor.system.skills.cra.alchemy.value;
             let skillName = game.i18n.localize(this.actor.system.skills.cra.alchemy.label);
             let hasDiagram = html.find("[name=hasDiagram]").prop("checked");
+            let realCraft = html.find("[name=realCraft]").prop("checked");
             skillName = skillName.replace(" (2)", "");
             messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.CraftingAlchemycal")}</h1>`,
               messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")}:</label> <b>${item.name}</b> <br />`,
               messageData.flavor += `<label>${game.i18n.localize("WITCHER.Dialog.after")}:</label> <b>${item.system.craftingTime}</b> <br />`,
               messageData.flavor += `${game.i18n.localize("WITCHER.Diagram.alchemyDC")} ${item.system.alchemyDC}`;
 
-            if (!item.system.alchemyDC || item.system.alchemyDC == 0) {
+            if (!item.isAlchemicalCraft()) {
               stat = this.actor.system.stats.cra.current;
               skill = this.actor.system.skills.cra.crafting.value;
               messageData.flavor = `${game.i18n.localize("WITCHER.Diagram.craftingDC")} ${item.system.craftingDC}`;
@@ -1075,13 +1093,24 @@ export default class WitcherActorSheet extends ActorSheet {
             rollFormula = addModifiers(this.actor.system.skills.cra.alchemy.modifiers, rollFormula)
 
             let roll = await new Roll(rollFormula).evaluate({ async: true })
-            if (roll.dice[0].results[0].result == 10) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-            };
-            if (roll.dice[0].results[0].result == 1) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-            };
-            roll.toMessage(messageData);
+
+            if (realCraft) {
+              if (areCraftComponentsEnough) {
+                item.realCraft(roll);
+              } else {
+                let err = { flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}` };
+                roll.toMessage(err)
+              }
+            } else {
+              // Craft without automatic removal components and without real crafting of an item
+              if (roll.dice[0].results[0].result == 10) {
+                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
+              };
+              if (roll.dice[0].results[0].result == 1) {
+                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
+              };
+              roll.toMessage(messageData);
+            }
           }
         }
       }
@@ -1104,7 +1133,7 @@ export default class WitcherActorSheet extends ActorSheet {
     content += `<div class="components-display">`
     item.system.craftingComponents.forEach(element => {
       content += `<div class="flex"><b>${element.name}</b>(${element.quantity}) </div>`
-      let ownedComponent = findNeededComponent(this.actor.items, element);
+      let ownedComponent = this.actor.findNeededComponent(element.name);
       let componentQuantity = ownedComponent.sum("quantity");
       if (componentQuantity < Number(element.quantity)) {
         let missing = element.quantity - Number(componentQuantity)
@@ -1148,7 +1177,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
             if (realCraft) {
               if (areCraftComponentsEnough) {
-                craftItem(item, roll);
+                item.realCraft(roll);
               } else {
                 let err = { flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}` };
                 roll.toMessage(err)
@@ -1291,7 +1320,7 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     let messageData = {
-      speaker: { alias: this.actor.name },
+      speaker: { this.actor.getSpeaker() },
       flavor: `<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
           <div><b>${game.i18n.localize("WITCHER.Mutagen.Source")}: </b>${game.i18n.localize(spellSource)}</div>
@@ -1336,17 +1365,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     rollResult.toMessage(messageData)
 
-    let tokens = canvas.tokens.controlled.slice()
-    let token;
-    if (tokens.length == 0) {
-      if (game.user.character) {
-        token = game.user.character.token
-      } else {
-        return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
-      }
-    } else {
-      token = tokens[0]
-    }
+    let token = this.actor.getControlledToken();
 
     await spellItem.createSpellVisualEffectIfApplicable(token);
     await spellItem.deleteSpellVisualEffect();
@@ -2087,7 +2106,6 @@ export default class WitcherActorSheet extends ActorSheet {
   }
 
   async _onItemRoll(event, itemId = null) {
-
     let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
 
     if (!itemId) {
@@ -2097,7 +2115,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let displayDmgFormula = `${item.system.damage}`
     let formula = !displayRollDetails ? `${item.system.damage}` : `${item.system.damage}[${game.i18n.localize("WITCHER.Diagram.Weapon")}]`
 
-    let isMeleeAttack = doesWeaponNeedMeleeSkillToAttack(witcher, item);
+    let isMeleeAttack = item.doesWeaponNeedMeleeSkillToAttack();
     if (this.actor.type == "character" && isMeleeAttack) {
       if (this.actor.system.attackStats.meleeBonus < 0) {
         displayDmgFormula += `${this.actor.system.attackStats.meleeBonus}`
@@ -2109,38 +2127,11 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
+    let attackSkill = item.getItemAttackSkill();
     let messageData = {
-      speaker: { alias: this.actor.name },
+      speaker: this.actor.getSpeaker(),
       flavor: `<h1> ${game.i18n.localize("WITCHER.Dialog.attack")}: ${item.name}</h1>`,
-    }
-
-    let attackSkill = "";
-
-    switch (item.system.attackSkill) {
-      case "Brawling":
-        attackSkill = game.i18n.localize("WITCHER.SkRefBrawling");
-        break;
-      case "Melee":
-        attackSkill = game.i18n.localize("WITCHER.SkRefMelee");
-        break;
-      case "Small Blades":
-        attackSkill = game.i18n.localize("WITCHER.SkRefSmall");
-        break;
-      case "Staff/Spear":
-        attackSkill = game.i18n.localize("WITCHER.SkRefStaff");
-        break;
-      case "Swordsmanship":
-        attackSkill = game.i18n.localize("WITCHER.SkRefSwordsmanship");
-        break;
-      case "Archery":
-        attackSkill = game.i18n.localize("WITCHER.SkDexArchery");
-        break;
-      case "Athletics":
-        attackSkill = game.i18n.localize("WITCHER.SkDexAthletics");
-        break;
-      case "Crossbow":
-        attackSkill = game.i18n.localize("WITCHER.SkDexCrossbow");
-        break;
+      flags: item.getAttackSkillFlags(),
     }
 
     let ammunitions = ``
@@ -2158,8 +2149,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     }
 
-    let noThrowable = !isEnoughThrowableWeapon(this.actor, item)
-
+    let noThrowable = !this.actor.isEnoughThrowableWeapon(item)
     let Mymelebonus = this.actor.system.attackStats.meleeBonus
     let data = { item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, noThrowable, ammunitionOption, ammunitions, Mymelebonus }
     const myDialogOptions = { width: 500 }
@@ -2281,7 +2271,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let modifiers;
 
-              switch (item.system.attackSkill) {
+              switch (attackSkill.name) {
                 case "Brawling":
                   attFormula += !displayRollDetails ? `+${this.actor.system.stats.ref.current}+${this.actor.system.skills.ref.brawling.value}` :
                     `+${this.actor.system.stats.ref.current}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${this.actor.system.skills.ref.brawling.value}[${game.i18n.localize("WITCHER.SkRefBrawling")}]`;
@@ -2463,7 +2453,7 @@ export default class WitcherActorSheet extends ActorSheet {
                 allEffects.push(...item.system.effects)
               }
 
-              if (isWeaponThrowable(item)) {
+              if (item.isWeaponThrowable()) {
                 let newQuantity = item.system.quantity - 1;
                 if (newQuantity < 0) {
                   return
