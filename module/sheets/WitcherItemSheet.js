@@ -252,8 +252,8 @@ export default class WitcherItemSheet extends ItemSheet {
   async _onRemoveAssociatedItem(event) {
     event.preventDefault();
     if (this.item.type == "diagrams") {
-        let newAssociatedItem = { id: "", name: "", img: ""};
-        this.item.update({'system.associatedItem': newAssociatedItem});
+      let newAssociatedItem = { id: "", name: "", img: "" };
+      this.item.update({ 'system.associatedItem': newAssociatedItem });
     }
   }
 
@@ -291,78 +291,3 @@ export default class WitcherItemSheet extends ItemSheet {
     event.currentTarget.select();
   }
 }
-
-// Find needed element in the items list based on the component name or based on the exact name of the substance in the players compendium
-// Components in the diagrams are only string fields.
-// It is possible for diagram to have component which is actually the substance
-// That is why we need to check whether specific component name could be a substance
-// Ideally we need to store some flag (substances list for diagrams) to the diagram components 
-// which will indicate whether the component is substance or not.
-// Such modification may require either modification dozens of compendiums, or some additional parsers
-function findNeededComponent(items, element) {
-  return items.filter(function (item) {
-    return item.type == "component" &&
-      (item.name == element.name ||
-        (item.system.type == "substances" &&
-          (game.i18n.localize("WITCHER.Inventory.Vitriol") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Rebis") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Aether") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Quebrith") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Hydragenum") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Vermilion") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Sol") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Caelum") == element.name ||
-            game.i18n.localize("WITCHER.Inventory.Fulgur") == element.name)))
-  });
-}
-
-function craftItem(item, roll) {
-  let craftMessage = {};
-
-  //todo add support for crit rolls & fumbles
-  //if (roll.dice[0].results[0].result == 10) {
-  //  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-  //};
-  //if (roll.dice[0].results[0].result == 1) {
-  //  messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-  //};
-
-  if (roll._total > item.system.craftingDC) {
-    craftMessage.flavor = game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted");
-  } else {
-    craftMessage.flavor = game.i18n.localize("WITCHER.craft.ItemsNotCrafted");
-  }
-  craftMessage.flavor += `<label><b>${item.actor.name}</b></label><br/>`;
-
-  let craftedItemName;
-  if (item.system.associatedItem && item.system.associatedItem.name) {
-    item.system.craftingComponents.forEach(element => {
-      let itemsToDelete = findNeededComponent(item.actor.items, element);
-      let itemCountToDelete = Number(element.quantity);
-      let countDeleted = 0;
-      itemsToDelete.forEach(itemToDelete => {
-        if (countDeleted >= itemCountToDelete) {
-          return ui.notifications.info(`${countDeleted} ${game.i18n.localize("WITCHER.craft.ItemsSuccessfullyDeleted")}`);
-        } else {
-          item.actor.items.get(itemToDelete._id).delete();
-          countDeleted++;
-        }
-      });
-
-      if (countDeleted != itemCountToDelete) {
-        return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
-      }
-    });
-
-    let craftedItem = { ...item.system.associatedItem };
-    Item.create(craftedItem, { parent: item.actor });
-    craftedItemName = craftedItem.name;
-  } else {
-    craftedItemName = game.i18n.localize("WITCHER.craft.SuccessfulCraftForNothing");
-  }
-
-  craftMessage.flavor += `<b>${craftedItemName}</b>`;
-  roll.toMessage(craftMessage);
-}
-
-export { craftItem, findNeededComponent };
