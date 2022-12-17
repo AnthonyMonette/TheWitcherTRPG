@@ -497,7 +497,7 @@
   "WITCHER.Inventory.Valuables": "Valuables",
   "WITCHER.Inventory.Substances": "Substances",
   "WITCHER.Inventory.Components": "Components",
-  "WITCHER.Inventory.Diagrams": "Diagrams & Formlae",
+  "WITCHER.Inventory.Diagrams": "Diagrams & Formulae",
   "WITCHER.Inventory.Substance": "Substance",
   "WITCHER.Inventory.Vitriol": "Vitriol",
   "WITCHER.Inventory.Rebis": "Rebis",
@@ -792,6 +792,8 @@
   "WITCHER.craft.ItemsSuccessfullyCrafted": "Item was successfully crafted by",
   "WITCHER.craft.ItemsNotCrafted": "Item wasn't successfully crafted by",
   "WITCHER.craft.SuccessfulCraftForNothing": "You should have specified associated item to allow its craft. Your components are in place.",
+  "WITCHER.craft.SkipRemovalOfComponent": "Skip removal of component",
   "WITCHER.err.CraftItemDeletion": "Incorrect amount of items were deleted from the actor",
-  "WITCHER.craft.AssociatedItemMissing": "No associated item provided"
+  "WITCHER.craft.AssociatedItemMissing": "No associated item provided",
+  "WITCHER.err.NoItemsOfSpecificType": "No items of specific type are available for actor"
 }

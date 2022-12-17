@@ -1,4 +1,4 @@
-import {witcher} from "../module/config.js";
+import { witcher } from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
 import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
@@ -7,8 +7,8 @@ import * as Chat from "../module/chat.js";
 import { registerSettings } from "../module/settings.js";
 
 
-async function preloadHandlebarsTemplates(){
-    const templatePath =[
+async function preloadHandlebarsTemplates() {
+    const templatePath = [
         "systems/TheWitcherTRPG/templates/sheets/actor/character-sheet.html",
         "systems/TheWitcherTRPG/templates/sheets/actor/monster-sheet.html",
         "systems/TheWitcherTRPG/templates/sheets/actor/loot-sheet.html",
@@ -32,7 +32,7 @@ async function preloadHandlebarsTemplates(){
         "systems/TheWitcherTRPG/templates/sheets/verbal-combat.html",
         "systems/TheWitcherTRPG/templates/sheets/weapon-attack.html"
     ];
-    return loadTemplates(templatePath); 
+    return loadTemplates(templatePath);
 }
 
 
@@ -44,10 +44,10 @@ Hooks.once("init", function () {
     CONFIG.Actor.documentClass = WitcherActor;
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("witcher", WitcherItemSheet, {makeDefault: true});
+    Items.registerSheet("witcher", WitcherItemSheet, { makeDefault: true });
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("witcher", WitcherActorSheet, {makeDefault: true});
+    Actors.registerSheet("witcher", WitcherActorSheet, { makeDefault: true });
 
     preloadHandlebarsTemplates();
     registerSettings();
@@ -61,39 +61,39 @@ Hooks.on("renderChatLog", (app, html, data) => Chat.addChatListeners(html));
 /* -------------------------------------------- */
 
 
-Hooks.once("ready", async function() {
+Hooks.once("ready", async function () {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on("hotbarDrop", (bar, data, slot) => createBoilerplateMacro(data, slot));
-    
+
     if (game.settings.get("TheWitcherTRPG", "useWitcherFont")) {
         let els = document.getElementsByClassName("game")
-        Array.prototype.forEach.call(els, function(el) {
-            if (el) {el.classList.add("witcher-style")}
+        Array.prototype.forEach.call(els, function (el) {
+            if (el) { el.classList.add("witcher-style") }
         });
         let chat = document.getElementById("chat-log")
-        if (chat) {chat.classList.add("witcher-style")}
+        if (chat) { chat.classList.add("witcher-style") }
     }
-  });
+});
 
 Hooks.once("dragRuler.ready", (SpeedProvider) => {
     class FictionalGameSystemSpeedProvider extends SpeedProvider {
         get colors() {
             return [
-                {id: "walk", default: 0x00FF00, name: "my-module-id.speeds.walk"},
-                {id: "dash", default: 0xFFFF00, name: "my-module-id.speeds.dash"},
-                {id: "run", default: 0xFF8000, name: "my-module-id.speeds.run"}
+                { id: "walk", default: 0x00FF00, name: "my-module-id.speeds.walk" },
+                { id: "dash", default: 0xFFFF00, name: "my-module-id.speeds.dash" },
+                { id: "run", default: 0xFF8000, name: "my-module-id.speeds.run" }
             ]
         }
 
         getRanges(token) {
             let baseSpeed = token.actor.system.stats.spd.current
-			// A character can always walk it's base speed and dash twice it's base speed
-			let moveSpeed = baseSpeed %2 == 0 ? baseSpeed : baseSpeed+1;
-            let runspeed = (baseSpeed * 3) %2 ==0 ?baseSpeed * 3: baseSpeed * 3 + 1;
+            // A character can always walk it's base speed and dash twice it's base speed
+            let moveSpeed = baseSpeed % 2 == 0 ? baseSpeed : baseSpeed + 1;
+            let runspeed = (baseSpeed * 3) % 2 == 0 ? baseSpeed * 3 : baseSpeed * 3 + 1;
             const ranges = [
-				{range: moveSpeed, color: "walk"},
-				{range: runspeed, color: "dash"}
-			]
+                { range: moveSpeed, color: "walk" },
+                { range: runspeed, color: "dash" }
+            ]
             return ranges
         }
     }
@@ -118,18 +118,18 @@ Hooks.once("polyglot.init", (LanguageProvider) => {
                 "elder": "elder",
             };
         }
-        
+
         getUserLanguages(actor) {
             let known_languages = new Set();
             let literate_languages = new Set();
             known_languages.add("common")
-            if (actor.system.skills.int.eldersp.isProffession || actor.system.skills.int.eldersp.isPickup || actor.system.skills.int.eldersp.isLearned || actor.system.skills.int.eldersp.value > 0){
+            if (actor.system.skills.int.eldersp.isProffession || actor.system.skills.int.eldersp.isPickup || actor.system.skills.int.eldersp.isLearned || actor.system.skills.int.eldersp.value > 0) {
                 known_languages.add("elder")
             }
-            if (actor.system.skills.int.dwarven.isProffession || actor.system.skills.int.dwarven.isPickup || actor.system.skills.int.dwarven.isLearned || actor.system.skills.int.dwarven.value > 0 ){
+            if (actor.system.skills.int.dwarven.isProffession || actor.system.skills.int.dwarven.isPickup || actor.system.skills.int.dwarven.isLearned || actor.system.skills.int.dwarven.value > 0) {
                 known_languages.add("dwarven")
             }
-            if (actor.system.skills.int.commonsp.isProffession || actor.system.skills.int.commonsp.isPickup || actor.system.skills.int.commonsp.isLearned || actor.system.skills.int.commonsp.value > 0 ){
+            if (actor.system.skills.int.commonsp.isProffession || actor.system.skills.int.commonsp.isPickup || actor.system.skills.int.commonsp.isLearned || actor.system.skills.int.commonsp.value > 0) {
                 known_languages.add("common")
             }
             return [known_languages, literate_languages];
@@ -147,7 +147,7 @@ Hooks.on("getChatLogEntryContext", Chat.addChatMessageContextOptions);
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-async function createBoilerplateMacro(data, slot) { 
+async function createBoilerplateMacro(data, slot) {
     if (data.type == 'Actor') {
         const actor = game.actors.get(data.id);
         if (!actor) {
@@ -156,14 +156,14 @@ async function createBoilerplateMacro(data, slot) {
         const command = `game.actors.get('${data.id}')?.sheet.render(true)`;
         let macro =
             game.macros.entities.find(macro => macro.name === actor.name && macro.command === command);
-    
+
         if (!macro) {
             macro = await Macro.create({
                 name: actor.name,
                 type: 'script',
                 img: actor.system.img,
                 command: command
-            }, {renderSheet: false});
+            }, { renderSheet: false });
         }
         game.user.assignHotbarMacro(macro, slot);
         return false;
@@ -171,12 +171,12 @@ async function createBoilerplateMacro(data, slot) {
     else if (!("item" in data)) {
         return ui.notifications.warn("You can only create macro buttons for owned Items");
     }
-    else if(data.item.type == 'weapon'){
+    else if (data.item.type == 'weapon') {
         const weapon = data.item;
         let foundActor = null
         game.actors.forEach(actor => {
             actor.items.forEach(item => {
-                if(weapon._id == item.id) {
+                if (weapon._id == item.id) {
                     foundActor = actor
                 }
             });
@@ -184,28 +184,28 @@ async function createBoilerplateMacro(data, slot) {
         if (!foundActor) {
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
-        const command = 
-`actor = game.actors.get('${foundActor.id}');
+        const command =
+            `actor = game.actors.get('${foundActor.id}');
 actor.rollItem("${weapon._id}")`;
         let macro = game.macros.find(m => (m.name === weapon.name) && (m.command === command));
         if (!macro) {
             macro = await Macro.create({
-            name: weapon.name,
-            type: "script",
-            img: weapon.img,
-            command: command,
-            flags: { "boilerplate.itemMacro": true }
+                name: weapon.name,
+                type: "script",
+                img: weapon.img,
+                command: command,
+                flags: { "boilerplate.itemMacro": true }
             });
         }
         game.user.assignHotbarMacro(macro, slot);
         return false;
     }
-    else if(data.item.type == 'spell'){
+    else if (data.item.type == 'spell') {
         const spell = data.item;
         let foundActor = null
         game.actors.forEach(actor => {
             actor.items.forEach(item => {
-                if(spell._id == item.id) {
+                if (spell._id == item.id) {
                     foundActor = actor
                 }
             });
@@ -213,17 +213,17 @@ actor.rollItem("${weapon._id}")`;
         if (!foundActor) {
             return ui.notifications.warn("You can only create macro buttons with the original character");
         }
-        const command = 
-`actor = game.actors.get('${foundActor.id}');
+        const command =
+            `actor = game.actors.get('${foundActor.id}');
 actor.rollSpell("${spell._id}")`;
         let macro = game.macros.find(m => (m.name === spell.name) && (m.command === command));
         if (!macro) {
             macro = await Macro.create({
-            name: spell.name,
-            type: "script",
-            img: spell.img,
-            command: command,
-            flags: { "boilerplate.itemMacro": true }
+                name: spell.name,
+                type: "script",
+                img: spell.img,
+                command: command,
+                flags: { "boilerplate.itemMacro": true }
             });
         }
         game.user.assignHotbarMacro(macro, slot);
