@@ -1275,7 +1275,9 @@ export default class WitcherActorSheet extends ActorSheet {
 
     if (spellItem.system.causeDamages) {
       let effects = JSON.stringify(spellItem.system.effects)
-      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.system.damage}" data-location="random" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+      let locationJSON = JSON.stringify(this.actor.getLocationObject("randomSpell"))
+
+      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.system.damage}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
     }
 
     if (rollResult.dice[0].results[0].result == 10) {
@@ -2258,109 +2260,12 @@ export default class WitcherActorSheet extends ActorSheet {
               if (customDmg != "0") {
                 damageFormula += !displayRollDetails ? `+${customDmg}` : `+${customDmg}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
               }
-              let touchedLocation = ""
-              let LocationFormula = `(${game.i18n.localize("WITCHER.Chat.FullDmg")})`
-              switch (location) {
-                case "randomHuman":
-                  let randomHumanLocation = getRandomInt(10)
-                  switch (randomHumanLocation) {
-                    case 1:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
-                      LocationFormula = `*3`;
-                      break;
-                    case 2:
-                    case 3:
-                    case 4:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
-                      break;
-                    case 5:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    case 6:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    case 7:
-                    case 8:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    case 9:
-                    case 10:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    default:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
-                  }
-                  break;
-                case "randomMonster":
-                  let randomMonsterLocation = getRandomInt(10)
-                  switch (randomMonsterLocation) {
-                    case 1:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
-                      LocationFormula = `*3`;
-                      break;
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
-                      break;
-                    case 6:
-                    case 7:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    case 8:
-                    case 9:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    case 10:
-                      touchedLocation = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
-                      LocationFormula = `*0.5`;
-                      break;
-                    default:
-                      touchedLocation = "Torso";
-                  }
-                  break;
-                case "head":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-6` : `${attFormula}-6[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*3`;
-                  break;
-                case "torso":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-1` : `${attFormula}-1[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  break;
-                case "L. Arm":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-3` : `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*0.5`;
-                  break;
-                case "R. Arm":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-3` : `${attFormula}-3[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*0.5`;
-                  break;
-                case "L. Leg":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-2` : `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*0.5`;
-                  break;
-                case "R. Leg":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Armor.LocationRight")}  ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-2` : `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*0.5`;
-                  break;
-                case "tail":
-                  touchedLocation = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
-                  attFormula = !displayRollDetails ? `${attFormula}-2` : `${attFormula}-2[${game.i18n.localize("WITCHER.Armor.Location")}]`;
-                  LocationFormula = `*0.5`;
-                  break;
-              }
+              let touchedLocation = this.actor.getLocationObject(location);
+              let LocationFormula = touchedLocation.locationFormula;
+              attFormula += !displayRollDetails
+                ? `${touchedLocation.modifier}`
+                : `${touchedLocation.modifier}[${touchedLocation.alias}]`;
+
               if (strike == "joint" || strike == "strong") {
                 attFormula = !displayRollDetails ? `${attFormula}-3` : `${attFormula}-3[${game.i18n.localize("WITCHER.Dialog.attackStrike")}]`;
               }
@@ -2395,8 +2300,10 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let effects = JSON.stringify(item.system.effects)
               messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />${game.i18n.localize("WITCHER.Attack")}: ${item.name}</h1>`;
-              messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation} = ${LocationFormula} </span>`;
-              messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location="${touchedLocation}"  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+              messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation.alias} = ${LocationFormula} </span>`;
+
+              let touchedLocationJSON = JSON.stringify(touchedLocation);
+              messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location='${touchedLocationJSON}'  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
               let roll = await new Roll(attFormula).evaluate({ async: true })
               if (roll.dice[0].results[0].result == 10) {
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;

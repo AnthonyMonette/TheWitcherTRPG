@@ -98,11 +98,11 @@ export default class WitcherItem extends Item {
   }
 
   getSpellFlags() {
-      return {
-        "witcher": { "origin": { "name": this.name } },
-        "spell": this,
-        "item": this,
-      }
+    return {
+      "witcher": { "origin": { "name": this.name } },
+      "spell": this,
+      "item": this,
+    }
   }
 
   doesWeaponNeedMeleeSkillToAttack() {

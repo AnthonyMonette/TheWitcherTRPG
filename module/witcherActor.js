@@ -1,4 +1,5 @@
 import { witcher } from "./config.js";
+import { getRandomInt } from "./witcher.js";
 
 export default class WitcherActor extends Actor {
   prepareData() {
@@ -132,5 +133,143 @@ export default class WitcherActor extends Actor {
     } else {
       await foundItem.update({ 'system.quantity': newQuantity < 0 ? 0 : newQuantity })
     }
+  }
+
+  getLocationObject(location) {
+    let alias = "";
+    let locationFormula = `(${game.i18n.localize("WITCHER.Chat.FullDmg")})`;
+    let modifier = `+0`;
+    switch (location) {
+      case "randomHuman":
+        let randomHumanLocation = getRandomInt(10)
+        switch (randomHumanLocation) {
+          case 1:
+            location = "Head";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
+            locationFormula = `*3`;
+            break;
+          case 2:
+          case 3:
+          case 4:
+            location = "Torso";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+            break;
+          case 5:
+            location = "R. Arm";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+            locationFormula = `*0.5`;
+            break;
+          case 6:
+            location = "L. Arm";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+            locationFormula = `*0.5`;
+            break;
+          case 7:
+          case 8:
+            location = "R. Leg";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+            locationFormula = `*0.5`;
+            break;
+          case 9:
+          case 10:
+            location = "L. Leg";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+            locationFormula = `*0.5`;
+            break;
+          default:
+            location = "Torso";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+            break;
+        }
+        break;
+      case "randomMonster":
+        let randomMonsterLocation = getRandomInt(10)
+        switch (randomMonsterLocation) {
+          case 1:
+            location = "Head";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
+            locationFormula = `*3`;
+            break;
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+            location = "Torso";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+            break;
+          case 6:
+          case 7:
+            location = "R. Leg";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
+            locationFormula = `*0.5`;
+            break;
+          case 8:
+          case 9:
+            location = "L. Leg";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Dialog.attackLimb")}`;
+            locationFormula = `*0.5`;
+            break;
+          case 10:
+            location = "Tail/Wing";
+            alias = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
+            locationFormula = `*0.5`;
+            break;
+          default:
+            location = "Torso";
+            alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+            break;
+        }
+        break;
+      case "randomSpell":
+        name = location;
+        alias = `${game.i18n.localize("WITCHER.Location.All")}`;
+        break;
+      case "Head":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationHead")}`;
+        locationFormula = `*3`;
+        modifier = `-6`;
+        break;
+      case "Torso":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+        locationFormula = `*1`;
+        modifier = `-1`;
+        break;
+      case "R. Arm":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+        locationFormula = `*0.5`;
+        modifier = `-3`;
+        break;
+      case "L. Arm":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationArm")}`;
+        locationFormula = `*0.5`;
+        modifier = `-3`;
+        break;
+      case "R. Leg":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationRight")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+        locationFormula = `*0.5`;
+        modifier = `-2`;
+        break;
+      case "L. Leg":
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationLeft")} ${game.i18n.localize("WITCHER.Armor.LocationLeg")}`;
+        locationFormula = `*0.5`;
+        modifier = `-2`;
+        break;
+      case "Tail/Wing":
+        alias = `${game.i18n.localize("WITCHER.Dialog.attackTail")}`;
+        locationFormula = `*0.5`;
+        break;
+      default:
+        alias = `${game.i18n.localize("WITCHER.Armor.LocationTorso")}`;
+        locationFormula = `*1`;
+        modifier = `-2`;
+        break;
+    }
+
+    return {
+      name: location,
+      alias: alias,
+      locationFormula: locationFormula,
+      modifier: modifier
+    };
   }
 }
