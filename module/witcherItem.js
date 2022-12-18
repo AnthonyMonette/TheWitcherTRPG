@@ -37,10 +37,7 @@ export default class WitcherItem extends Item {
         fillColor: game.user.color,
         angle: angle,
         width: width,
-        flags: {
-          "witcher": { "origin": { "name": this.name } },
-          "spell": this
-        }
+        flags: this.getSpellFlags(),
       }], { keepId: true });
 
       this.visualEffectId = effect[0]._id;
@@ -98,6 +95,14 @@ export default class WitcherItem extends Item {
       "attackSkill": this.system.attackSkill,
       "item": this,
     }
+  }
+
+  getSpellFlags() {
+      return {
+        "witcher": { "origin": { "name": this.name } },
+        "spell": this,
+        "item": this,
+      }
   }
 
   doesWeaponNeedMeleeSkillToAttack() {

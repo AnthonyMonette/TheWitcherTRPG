@@ -29,6 +29,20 @@ export default class WitcherActor extends Actor {
     return token;
   }
 
+  getDamageFlags() {
+    return {
+      "witcher": { "origin": { "name": this.name } },
+      "damage": true,
+    }
+  }
+
+  getNoDamageFlags() {
+    return {
+      "witcher": { "origin": { "name": this.name } },
+      "damage": false,
+    }
+  }
+
   getSpeaker() {
     return {
       "alias": this.name,

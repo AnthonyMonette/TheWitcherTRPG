@@ -1242,6 +1242,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     let messageData = {
       speaker: this.actor.getSpeaker(),
+      flags: spellItem.getSpellFlags(),
       flavor: `<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
           <div><b>${game.i18n.localize("WITCHER.Mutagen.Source")}: </b>${game.i18n.localize(spellSource)}</div>
