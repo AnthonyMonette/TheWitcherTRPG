@@ -458,8 +458,8 @@ function BlockAttack(actor) {
   let weapons = actor.items.filter(function (item) { return item.type == "weapon" && !item.system.isAmmo && witcher.meleeSkills.includes(item.system.attackSkill) });
   let shields = actor.items.filter(function (item) { return item.type == "armor" && item.system.location == "Shield" });
   let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-  weapons.forEach(item => options += `<option value="${item.system.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.system.attackSkill})</option>`);
-  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
+  weapons.forEach(item => options += `<option value="${item.system.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.getItemAttackSkill().alias})</option>`);
+  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (${game.i18n.localize("WITCHER.SkRefMelee")})</option>`);
 
   const content = `<label>${game.i18n.localize("WITCHER.Dialog.DefenseWith")}: </label><select name="form">${options}</select><br />`;
 
