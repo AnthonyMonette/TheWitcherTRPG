@@ -499,8 +499,8 @@ function ExecuteDefense(actor) {
   let weapons = actor.items.filter(function (item) { return item.type == "weapon" && !item.system.isAmmo && witcher.meleeSkills.includes(item.system.attackSkill) });
   let shields = actor.items.filter(function (item) { return item.type == "armor" && item.system.location == "Shield" });
   let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
-  weapons.forEach(item => options += `<option value="${item.system.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.system.attackSkill})</option>`);
-  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (Melee)</option>`);
+  weapons.forEach(item => options += `<option value="${item.system.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.getItemAttackSkill().alias})</option>`);
+  shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (${game.i18n.localize("WITCHER.SkRefMelee")})</option>`);
 
   const content = `
     <div class="flex">
@@ -510,7 +510,7 @@ function ExecuteDefense(actor) {
     <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="Number" class="small" name="customDef" value=0></label> <br />`;
 
   let messageData = {
-    speaker: { alias: actor.name },
+    speaker: actor.getSpeaker(),
     flavor: `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}</h1>`,
   }
 
@@ -748,7 +748,8 @@ function ExecuteDefense(actor) {
           let stat = actor.system.stats.ref.current;
           let skill = 0;
           let skillName = ""
-          let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
+          let modifiers
+          let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`;
           switch (defense) {
             case "Brawling":
               skill = actor.system.skills.ref.brawling.value;
@@ -782,8 +783,8 @@ function ExecuteDefense(actor) {
               break;
           }
 
-          messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}-5` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize(skillName)}]-5[${game.i18n.localize("WITCHER.Dialog.ButtonParry")}]`;
+          messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}</h1><p>${displayFormula}</p>`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}-5` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize(skillName)}]-5[${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}]`;
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
@@ -823,7 +824,7 @@ function ExecuteDefense(actor) {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
 
-          rollFormula = addModifiers(actor.system.skills.ref.dodge.modifiers, rollFormula)
+          rollFormula = addModifiers(actor.system.skills.will.resistmagic.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
           if (roll.dice[0].results[0].result == 10) {
