@@ -157,7 +157,10 @@ export function addChatMessageContextOptions(html, options) {
         } else {
           defenderActor = defender[0].actor
         }
-        ExecuteDefense(defenderActor)
+        ExecuteDefense(defenderActor,
+          li.find(".attack-message")[0].dataset.dmgType,
+          li.find(".attack-message")[0].dataset.location,
+          li.find(".dice-total")[0].innerText)
       }
     },
     {

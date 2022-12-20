@@ -37,10 +37,26 @@ export default class WitcherActor extends Actor {
     }
   }
 
+  getDefenceSuccessFlags(defenceSkill) {
+    return {
+      "witcher": { "origin": { "name": this.name } },
+      "defenceSkill": defenceSkill,
+      "defence": true,
+    }
+  }
+
   getNoDamageFlags() {
     return {
       "witcher": { "origin": { "name": this.name } },
       "damage": false,
+    }
+  }
+
+  getDefenceFailFlags(defenceSkill) {
+    return {
+      "witcher": { "origin": { "name": this.name } },
+      "defenceSkill": defenceSkill,
+      "defence": false,
     }
   }
 

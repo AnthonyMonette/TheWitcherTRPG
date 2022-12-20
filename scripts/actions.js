@@ -457,6 +457,7 @@ function getArmorDiffBonus(OverArmor, UnderArmor) {
 function BlockAttack(actor) {
   let weapons = actor.items.filter(function (item) { return item.type == "weapon" && !item.system.isAmmo && witcher.meleeSkills.includes(item.system.attackSkill) });
   let shields = actor.items.filter(function (item) { return item.type == "armor" && item.system.location == "Shield" });
+  //todo do we need the ability to block with arm? Do we need to apply the damage to it?
   let options = `<option value="Brawling"> ${game.i18n.localize("WITCHER.SkRefBrawling")} </option>`;
   weapons.forEach(item => options += `<option value="${item.system.attackSkill}" itemId="${item.id}" type="Weapon"> ${item.name} (${item.getItemAttackSkill().alias})</option>`);
   shields.forEach(item => options += `<option value="Melee" itemId="${item.id}" type="Shield"> ${item.name} (${game.i18n.localize("WITCHER.SkRefMelee")})</option>`);
@@ -493,7 +494,7 @@ function BlockAttack(actor) {
   }).render(true)
 }
 
-function ExecuteDefense(actor) {
+function ExecuteDefense(actor, attackType, location, totalAttack) {
   let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
 
   let weapons = actor.items.filter(function (item) { return item.type == "weapon" && !item.system.isAmmo && witcher.meleeSkills.includes(item.system.attackSkill) });
@@ -533,18 +534,26 @@ function ExecuteDefense(actor) {
             });
           }
           let stat = actor.system.stats.ref.current;
-          let skill = actor.system.skills.ref.dodge.value;
+          let skill = actor.system.skills.ref.dodge;
+          let skillValue = skill.value;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefDodge")}`;
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize("WITCHER.SkRefDodge")}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize("WITCHER.SkRefDodge")}]`;
 
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
 
-          rollFormula = addModifiers(actor.system.skills.ref.dodge.modifiers, rollFormula)
+          rollFormula = addModifiers(skill.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -569,18 +578,26 @@ function ExecuteDefense(actor) {
             });
           }
           let stat = actor.system.stats.dex.current;
-          let skill = actor.system.skills.dex.athletics.value;
+          let skill = actor.system.skills.dex.athletics;
+          let skillValue = skill.value;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.StDex")} + ${game.i18n.localize("WITCHER.SkDexAthletics")}`;
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${game.i18n.localize("WITCHER.StDex")}]+${skill}[${game.i18n.localize("WITCHER.SkDexAthletics")}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}` : `1d10+${stat}[${game.i18n.localize("WITCHER.StDex")}]+${skillValue}[${game.i18n.localize("WITCHER.SkDexAthletics")}]`;
 
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
 
-          rollFormula = addModifiers(actor.system.skills.dex.athletics.modifiers, rollFormula)
+          rollFormula = addModifiers(skill.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -606,51 +623,64 @@ function ExecuteDefense(actor) {
           }
           let defense = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill = 0;
+          let skill;
+          let skillValue = 0;
           let skillName = "";
           let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
           switch (defense) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling.value;
-              skillName = actor.system.skills.ref.brawling.label;
+              skill = actor.system.skills.ref.brawling;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
-              modifiers = actor.system.skills.ref.brawling.modifiers
+              modifiers = skill.modifiers
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee.value;
-              skillName = actor.system.skills.ref.melee.label;
+              skill = actor.system.skills.ref.melee;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
-              modifiers = actor.system.skills.ref.melee.modifiers
+              modifiers = skill.modifiers
               break;
             case "Small Blades":
-              skill = actor.system.skills.ref.smallblades.value;
-              skillName = actor.system.skills.ref.smallblades.label;
+              skill = actor.system.skills.ref.smallblades;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
-              modifiers = actor.system.skills.ref.smallblades.modifiers
+              modifiers = skill.modifiers
               break;
             case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear.value;
-              skillName = actor.system.skills.ref.staffspear.label;
+              skill = actor.system.skills.ref.staffspear;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
-              modifiers = actor.system.skills.ref.staffspear.modifiers
+              modifiers = skill.modifiers
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship.value;
-              skillName = actor.system.skills.ref.swordsmanship.label;
+              skill = actor.system.skills.ref.swordsmanship;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")}`;
-              modifiers = actor.system.skills.ref.swordsmanship.modifiers
+              modifiers = skill.modifiers
               break;
           }
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize(skillName)}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]`;
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -676,51 +706,64 @@ function ExecuteDefense(actor) {
           }
           let defense = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill = 0;
+          let skill;
+          let skillValue = 0;
           let skillName = "";
           let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
           switch (defense) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling.value;
-              skillName = actor.system.skills.ref.brawling.label;
+              skill = actor.system.skills.ref.brawling;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
-              modifiers = actor.system.skills.ref.brawling.modifiers
+              modifiers = skill.modifiers
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee.value;
-              skillName = actor.system.skills.ref.melee.label;
+              skill = actor.system.skills.ref.melee;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
-              modifiers = actor.system.skills.ref.melee.modifiers
+              modifiers = skill.modifiers
               break;
             case "Small Blades":
-              skill = actor.system.skills.ref.smallblades.value;
-              skillName = actor.system.skills.ref.smallblades.label;
+              skill = actor.system.skills.ref.smallblades;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
-              modifiers = actor.system.skills.ref.smallblades.modifiers
+              modifiers = skill.modifiers
               break;
             case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear.value;
-              skillName = actor.system.skills.ref.staffspear.label;
+              skill = actor.system.skills.ref.staffspear;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
-              modifiers = actor.system.skills.ref.staffspear.modifiers
+              modifiers = skill.modifiers
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship.value;
-              skillName = actor.system.skills.ref.swordsmanship.label;
+              skill = actor.system.skills.ref.swordsmanship;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 3`;
-              modifiers = actor.system.skills.ref.swordsmanship.modifiers
+              modifiers = skill.modifiers
               break;
           }
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}-3` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize(skillName)}]-3[${game.i18n.localize("WITCHER.Dialog.ButtonParry")}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}-3` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]-3[${game.i18n.localize("WITCHER.Dialog.ButtonParry")}]`;
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -746,51 +789,64 @@ function ExecuteDefense(actor) {
           }
           let defense = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill = 0;
+          let skill;
+          let skillValue = 0;
           let skillName = ""
           let modifiers
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`;
           switch (defense) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling.value;
-              skillName = actor.system.skills.ref.brawling.label;
+              skill = actor.system.skills.ref.brawling;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 5`;
-              modifiers = actor.system.skills.ref.brawling.modifiers
+              modifiers = skill.modifiers
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee.value;
-              skillName = actor.system.skills.ref.melee.label;
+              skill = actor.system.skills.ref.melee;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 5`;
-              modifiers = actor.system.skills.ref.melee.modifiers
+              modifiers = skill.modifiers
               break;
             case "Small Blades":
-              skill = actor.system.skills.ref.smallblades.value;
-              skillName = actor.system.skills.ref.smallblades.label;
+              skill = actor.system.skills.ref.smallblades;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 5`;
-              modifiers = actor.system.skills.ref.smallblades.modifiers
+              modifiers = skill.modifiers
               break;
             case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear.value;
-              skillName = actor.system.skills.ref.staffspear.label;
+              skill = actor.system.skills.ref.staffspear;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 5`;
-              modifiers = actor.system.skills.ref.staffspear.modifiers
+              modifiers = skill.modifiers
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship.value;
-              skillName = actor.system.skills.ref.swordsmanship.label;
+              skill = actor.system.skills.ref.swordsmanship;
+              skillValue = skill.value;
+              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 5`;
-              modifiers = actor.system.skills.ref.swordsmanship.modifiers
+              modifiers = skill.modifiers
               break;
           }
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}-5` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skill}[${game.i18n.localize(skillName)}]-5[${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}-5` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]-5[${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}]`;
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
@@ -815,18 +871,26 @@ function ExecuteDefense(actor) {
             });
           }
           let stat = actor.system.stats.will.current;
-          let skill = actor.system.skills.will.resistmagic.value;
+          let skill = actor.system.skills.will.resistmagic;
+          let skillValue = skill.value;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Will")} + ${game.i18n.localize("WITCHER.SkWillResistMagLable")}`;
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonMagicResist")}</h1><p>${displayFormula}</p>`;
-          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Will")}]+${skill}[${game.i18n.localize("WITCHER.SkWillResistMagLable")}]`;
+          let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Will")}]+${skillValue}[${game.i18n.localize("WITCHER.SkWillResistMagLable")}]`;
 
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
 
-          rollFormula = addModifiers(actor.system.skills.will.resistmagic.modifiers, rollFormula)
+          rollFormula = addModifiers(skill.modifiers, rollFormula)
 
           let roll = await new Roll(rollFormula).evaluate({ async: true })
+          let defenceSuccess = roll._total >= totalAttack;
+          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += defenceSuccess
+            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
+            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
+
+          //todo upd
           if (roll.dice[0].results[0].result == 10) {
             messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
           };
