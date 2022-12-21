@@ -1013,17 +1013,16 @@ export default class WitcherActorSheet extends ActorSheet {
 
             rollFormula = addModifiers(this.actor.system.skills.cra.alchemy.modifiers, rollFormula)
 
-            let roll = await new Roll(rollFormula).evaluate({ async: true })
-
             if (realCraft) {
               if (areCraftComponentsEnough) {
-                item.realCraft(roll);
+                item.realCraft(skillName, rollFormula, messageData);
               } else {
                 let err = { flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}` };
-                roll.toMessage(err)
+                await new Roll("1").toMessage(err)
               }
             } else {
               // Craft without automatic removal components and without real crafting of an item
+              let roll = await new Roll(rollFormula).evaluate({ async: true })
               if (roll.dice[0].results[0].result == 10) {
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };
@@ -1094,17 +1093,16 @@ export default class WitcherActorSheet extends ActorSheet {
 
             rollFormula = addModifiers(this.actor.system.skills.cra.crafting.modifiers, rollFormula)
 
-            let roll = await new Roll(rollFormula).evaluate({ async: true })
-
             if (realCraft) {
               if (areCraftComponentsEnough) {
-                item.realCraft(roll);
+                item.realCraft(skillName, rollFormula, messageData);
               } else {
                 let err = { flavor: `${game.i18n.localize("WITCHER.Dialog.NoComponents")}` };
-                roll.toMessage(err)
+                await new Roll("1").toMessage(err)
               }
             } else {
               // Craft without automatic removal components and without real crafting of an item
+              let roll = await new Roll(rollFormula).evaluate({ async: true })
               if (roll.dice[0].results[0].result == 10) {
                 messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
               };

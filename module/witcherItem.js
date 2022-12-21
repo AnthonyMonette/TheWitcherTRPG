@@ -1,4 +1,5 @@
 import { witcher } from "./config.js";
+import { extendedRoll } from "../module/chat.js";
 
 export default class WitcherItem extends Item {
   chatTemplate = {
@@ -222,26 +223,21 @@ export default class WitcherItem extends Item {
     return alchemyCraftComponents;
   }
 
-  async realCraft(roll) {
-    let craftMessage = {};
-
-    //if (roll.dice[0].results[0].result == 10) {
-    //  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-    //};
-    //if (roll.dice[0].results[0].result == 1) {
-    //  messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-    //};
-    //roll.toMessage(messageData);
-
+  async realCraft(skillName, rollFormula, messageData) {
     let craftDC = this.isAlchemicalCraft() ? this.system.alchemyDC : this.system.craftingDC;
-    let craftSuccess = roll._total > craftDC;
 
-    if (craftSuccess) {
-      craftMessage.flavor = game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted");
+    //added crit rolls for craft & alchemy
+    let result = await extendedRoll(rollFormula, messageData, craftDC, false)
+    messageData.flavor += result.success
+      ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skillName)}</i></div>`
+      : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skillName)}</i></div>`;
+
+    if (result.success) {
+      messageData.flavor += game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted");
     } else {
-      craftMessage.flavor = game.i18n.localize("WITCHER.craft.ItemsNotCrafted");
+      messageData.flavor += game.i18n.localize("WITCHER.craft.ItemsNotCrafted");
     }
-    craftMessage.flavor += `<label><b> ${this.actor.name}</b></label><br/>`;
+    messageData.flavor += `<label><b> ${this.actor.name}</b></label><br/>`;
 
     let craftedItemName;
     if (this.system.associatedItem && this.system.associatedItem.name) {
@@ -275,12 +271,12 @@ export default class WitcherItem extends Item {
 
         if (componentsCountDeleted != componentsCountToDelete || componentsLeftToDelete != 0) {
 
-          craftSuccess = false;
+          result.success = false;
           return ui.notifications.error(game.i18n.localize("WITCHER.err.CraftItemDeletion"));
         }
       });
 
-      if (craftSuccess) {
+      if (result.success) {
         let craftedItem = { ...this.system.associatedItem };
         Item.create(craftedItem, { parent: this.actor });
         craftedItemName = craftedItem.name;
@@ -289,7 +285,7 @@ export default class WitcherItem extends Item {
       craftedItemName = game.i18n.localize("WITCHER.craft.SuccessfulCraftForNothing");
     }
 
-    craftMessage.flavor += `<b>${craftedItemName}</b>`;
-    roll.toMessage(craftMessage);
+    messageData.flavor += `<b>${craftedItemName}</b>`;
+    result.roll.toMessage(messageData);
   }
 }
