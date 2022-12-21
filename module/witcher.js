@@ -1,3 +1,5 @@
+import { extendedRoll } from "../module/chat.js";
+
 export function getRandomInt(max) {
 	return Math.floor(Math.random() * (max + 1)) + 1;
 }
@@ -327,11 +329,10 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 	skill = array[1];
 	skillName = skillName.replace(" (2)", "");
 	let messageData = {
-		speaker: {alias: thisActor.name},
+		speaker: thisActor.getSpeaker(),
 		flavor: `${parentStat}: ${skillName} Check`,
 	}
 	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]` ;
-
 	if (thisActor.type == "character") {
 		if (statNum == 4 && (skillNum == 0 || skillNum == 6 || skillNum == 7 || skillNum == 9)){
 			if (thisActor.system.general.socialStanding == "tolerated" || thisActor.system.general.socialStanding == "toleratedFeared") {
@@ -383,14 +384,8 @@ function rollSkillCheck(thisActor, statNum, skillNum){
 					rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 				}
 
-				let roll = await new Roll(rollFormula).evaluate({async: true})
-				if (roll.dice[0].results[0].result == 10){  
-				  messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-				};
-				if (roll.dice[0].results[0].result == 1){  
-				  messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-				};
-				roll.toMessage(messageData);
+              let result = await extendedRoll(rollFormula, messageData, 0, false)
+              result.roll.toMessage(messageData);
 			}
 		  }
 		}}).render(true) 

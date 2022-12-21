@@ -2294,18 +2294,13 @@ export default class WitcherActorSheet extends ActorSheet {
 
               let touchedLocationJSON = JSON.stringify(touchedLocation);
               messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location='${touchedLocationJSON}'  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
-              let roll = await new Roll(attFormula).evaluate({ async: true })
-              if (roll.dice[0].results[0].result == 10) {
-                messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-              };
-              if (roll.dice[0].results[0].result == 1) {
-                messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-              };
+
+              let result = await extendedRoll(attFormula, messageData, 0, false)
 
               if (item.system.rollOnlyDmg) {
                 rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.system.effects, damageType)
               } else {
-                roll.toMessage(messageData);
+                result.roll.toMessage(messageData);
               }
             }
           }
