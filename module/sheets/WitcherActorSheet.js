@@ -1346,6 +1346,7 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0) {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
+            //todo modify
             let rollResult = await new Roll(rollFormula).evaluate({ async: true })
             let messageData = {
               speaker: { alias: this.actor.name },
@@ -1432,6 +1433,7 @@ export default class WitcherActorSheet extends ActorSheet {
               }
             });
 
+            //todo modify
             let rollResult = await new Roll("1d10").evaluate({ async: true })
             let messageData = { speaker: { alias: this.actor.name } }
             messageData.flavor = `
@@ -1752,6 +1754,7 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0) {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
+            //todo modify
             let rollResult = await new Roll(rollFormula).evaluate({ async: true })
             let messageData = { speaker: { alias: this.actor.name } }
             messageData.flavor = `
@@ -1822,6 +1825,7 @@ export default class WitcherActorSheet extends ActorSheet {
         break;
     }
 
+    //todo modify
     let rollResult = await new Roll("1d10").evaluate({ async: true })
     let messageData = { speaker: { alias: this.actor.name } }
     messageData.flavor = `
