@@ -1,5 +1,5 @@
 import { witcher } from "../module/config.js";
-import { buttonDialog } from "../module/chat.js";
+import { buttonDialog, extendedRoll } from "../module/chat.js";
 import { addModifiers } from "../module/witcher.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage) {
@@ -546,21 +546,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
       Reposition: {
@@ -590,21 +581,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
       Block: {
@@ -673,21 +655,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
       Parry: {
@@ -756,21 +729,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
       ParryAgainstThrown: {
@@ -839,21 +803,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           }
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
       MagicResist: {
@@ -883,21 +838,12 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let roll = await new Roll(rollFormula).evaluate({ async: true })
-          let defenceSuccess = roll._total >= totalAttack;
-          messageData.flags = defenceSuccess ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += defenceSuccess
+          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
+          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
+          messageData.flavor += result.success
             ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
             : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-
-          //todo upd
-          if (roll.dice[0].results[0].result == 10) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-          };
-          if (roll.dice[0].results[0].result == 1) {
-            messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-          };
-          roll.toMessage(messageData);
+          result.roll.toMessage(messageData);
         }
       },
     }

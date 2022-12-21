@@ -115,6 +115,55 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
   (await new Roll(damageFormula).evaluate({ async: true })).toMessage(messageData)
 }
 
+export async function extendedRoll(rollFormula, messageData, valueToCompare, isDefence) {
+  let roll = await new Roll(rollFormula).evaluate({ async: true })
+  let rollTotal = Number(roll.total);
+
+  //crit/fumble calculation
+  if (isCrit(roll) || isFumble(roll)) {
+    let extraRollDescription = isCrit(roll) ? `${game.i18n.localize("WITCHER.Crit")}` : `${game.i18n.localize("WITCHER.Fumble")}`;
+    messageData.flavor += isCrit(roll)
+      ? `<div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div>`
+      : `<div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div>`;
+
+    messageData.flavor += `<div>${rollFormula} = <b>${rollTotal}</b></div>`;
+
+    //print crit/fumble roll
+    let extraRollFormula = `1d10x10[${extraRollDescription}]`;
+    let extraRoll = await new Roll(extraRollFormula).evaluate({ async: true });
+    let extraRollTotal = Number(extraRoll.total);
+    messageData.flavor += `<div>${extraRollFormula} = <b>${extraRollTotal}</b></div>`;
+
+    //add/subtract extra result from the original one
+    extraRollFormula = `${rollTotal}[${game.i18n.localize("WITCHER.BeforeCrit")}]`;
+    if (isCrit(roll)) {
+      extraRollFormula += `+${extraRollTotal}[${extraRollDescription}]`;
+      rollTotal += extraRollTotal;
+    } else {
+      extraRollFormula += `-${extraRollTotal}[${extraRollDescription}]`;
+      rollTotal -= (extraRollTotal >= rollTotal) ? rollTotal : extraRollTotal;
+    }
+
+    //print add/subtract roll info
+    extraRoll = await new Roll(extraRollFormula).evaluate({ async: true });
+    roll = extraRoll;
+  }
+
+  //calculate overall success/failure for the attack/defence
+  return {
+    "roll": roll,
+    "success": isDefence ? roll.total >= valueToCompare : roll.total > valueToCompare,
+  }
+}
+
+function isCrit(roll) {
+  return roll.dice[0].results[0].result == 10;
+}
+
+function isFumble(roll) {
+  return roll.dice[0].results[0].result == 1;
+}
+
 export function addChatMessageContextOptions(html, options) {
   let canDefend = li => li.find(".attack-message").length
   let canApplyDamage = li => li.find(".damage-message").length
