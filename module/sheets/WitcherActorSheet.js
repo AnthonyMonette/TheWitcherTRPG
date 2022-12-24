@@ -148,7 +148,6 @@ export default class WitcherActorSheet extends ActorSheet {
     data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
 
-
     data.noviceSpells = data.spells.filter(s => s.system.level == "novice" &&
       (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
     data.journeymanSpells = data.spells.filter(s => s.system.level == "journeyman" &&
@@ -316,11 +315,13 @@ export default class WitcherActorSheet extends ActorSheet {
     event.preventDefault();
     this.actor.update({ "system.deathSaves": 0 });
   }
+
   async _addDeathSaves(event) {
     event.preventDefault();
     this.actor.update({ "system.deathSaves": this.actor.system.deathSaves + 1 });
   }
 
+  //todo looks like this is not defined anywhere
   async _onDropItem(event, data) {
     if (!this.actor.isOwner) return false;
     const item = await Item.implementation.fromDropData(data);
@@ -339,7 +340,7 @@ export default class WitcherActorSheet extends ActorSheet {
       }
       if (typeof (dragData.item.system.quantity) === 'string' && dragData.item.system.quantity.includes("d")) {
         let messageData = {
-          speaker: { alias: this.actor.name },
+          speaker: this.actor.getSpeaker(),
           flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
         }
         let roll = await new Roll(dragData.item.system.quantity).evaluate({ async: true })
@@ -1126,19 +1127,19 @@ export default class WitcherActorSheet extends ActorSheet {
       itemId = event.currentTarget.closest(".item").dataset.itemId;
     }
     let spellItem = this.actor.items.get(itemId);
-    let formula = `1d10`
-    formula += !displayRollDetails ? `+${this.actor.system.stats.will.current}` : `+${this.actor.system.stats.will.current}[${game.i18n.localize("WITCHER.StWill")}]`;
+    let rollFormula = `1d10`
+    rollFormula += !displayRollDetails ? `+${this.actor.system.stats.will.current}` : `+${this.actor.system.stats.will.current}[${game.i18n.localize("WITCHER.StWill")}]`;
     switch (spellItem.system.class) {
       case "Witcher":
       case "Invocations":
       case "Spells":
-        formula += !displayRollDetails ? `+${this.actor.system.skills.will.spellcast.value}` : `+${this.actor.system.skills.will.spellcast.value}[${game.i18n.localize("WITCHER.SkWillSpellcastLable")}]`;
+        rollFormula += !displayRollDetails ? `+${this.actor.system.skills.will.spellcast.value}` : `+${this.actor.system.skills.will.spellcast.value}[${game.i18n.localize("WITCHER.SkWillSpellcastLable")}]`;
         break;
       case "Rituals":
-        formula += !displayRollDetails ? `+${this.actor.system.skills.will.ritcraft.value}` : `+${this.actor.system.skills.will.ritcraft.value}[${game.i18n.localize("WITCHER.SkWillRitCraftLable")}]`;
+        rollFormula += !displayRollDetails ? `+${this.actor.system.skills.will.ritcraft.value}` : `+${this.actor.system.skills.will.ritcraft.value}[${game.i18n.localize("WITCHER.SkWillRitCraftLable")}]`;
         break;
       case "Hexes":
-        formula += !displayRollDetails ? `+${this.actor.system.skills.will.hexweave.value}` : `+${this.actor.system.skills.will.hexweave.value}[${game.i18n.localize("WITCHER.SkWillHexLable")}]`;
+        rollFormula += !displayRollDetails ? `+${this.actor.system.skills.will.hexweave.value}` : `+${this.actor.system.skills.will.hexweave.value}[${game.i18n.localize("WITCHER.SkWillHexLable")}]`;
         break;
     }
     let staCostTotal = spellItem.system.stamina;
@@ -1226,10 +1227,10 @@ export default class WitcherActorSheet extends ActorSheet {
     });
     staCostdisplay += `-${Number(focusValue) + Number(secondFocusValue)}[Focus]`
 
-    if (customModifier < 0) { formula += !displayRollDetails ? `${customModifier}` : `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
-    if (customModifier > 0) { formula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
-    if (isExtraAttack) { formula += !displayRollDetails ? `-3` : `-3[${game.i18n.localize("WITCHER.Dialog.attackExtra")}]` }
-    let rollResult = await new Roll(formula).evaluate({ async: true })
+    if (customModifier < 0) { rollFormula += !displayRollDetails ? `${customModifier}` : `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
+    if (customModifier > 0) { rollFormula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
+    if (isExtraAttack) { rollFormula += !displayRollDetails ? `-3` : `-3[${game.i18n.localize("WITCHER.Dialog.attackExtra")}]` }
+
     let spellSource = ''
     switch (spellItem.system.source) {
       case "mixedElements": spellSource = "WITCHER.Spell.Mixed"; break;
@@ -1279,14 +1280,9 @@ export default class WitcherActorSheet extends ActorSheet {
       messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.system.damage}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
     }
 
-    if (rollResult.dice[0].results[0].result == 10) {
-      messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-    }
-    else if (rollResult.dice[0].results[0].result == 1) {
-      messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-    }
-
-    rollResult.toMessage(messageData)
+    let config = new RollConfig()
+    config.showCrit = true
+    await extendedRoll(rollFormula, messageData, config)
 
     let token = this.actor.getControlledToken();
 
@@ -1355,19 +1351,15 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0) {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
-            //todo modify
-            let rollResult = await new Roll(rollFormula).evaluate({ async: true })
+
             let messageData = {
-              speaker: { alias: this.actor.name },
+              speaker: this.actor.getSpeaker(),
               flavor: `<h2>${name}</h2>${effet}`
             }
-            if (rollResult.dice[0].results[0].result == 10) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-            }
-            else if (rollResult.dice[0].results[0].result == 1) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-            }
-            rollResult.toMessage(messageData)
+
+            let config = new RollConfig()
+            config.showCrit = true
+            await extendedRoll(rollFormula, messageData, config)
           }
         }
       }
@@ -1381,13 +1373,12 @@ export default class WitcherActorSheet extends ActorSheet {
   async _onCritRoll(event) {
     let rollResult = await new Roll("1d10x10").evaluate({ async: true })
     let messageData = {
-      speaker: { alias: this.actor.name }
+      speaker: this.actor.getSpeaker()
     }
     rollResult.toMessage(messageData)
   }
 
   async _onDeathSaveRoll(event) {
-    let rollResult = await new Roll("1d10").evaluate({ async: true })
     let stunBase = Math.floor((this.actor.system.stats.body.max + this.actor.system.stats.will.max) / 2);
     if (this.actor.system.derivedStats.hp.value > 0) {
       stunBase = this.actor.system.coreStats.stun.current
@@ -1398,7 +1389,7 @@ export default class WitcherActorSheet extends ActorSheet {
     stunBase -= this.actor.system.deathSaves
 
     let messageData = {
-      speaker: { alias: this.actor.name },
+      speaker: this.actor.getSpeaker(),
       flavor: `
         <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
         <div class="roll-summary">
@@ -1406,13 +1397,13 @@ export default class WitcherActorSheet extends ActorSheet {
         </div>
         <hr />`
     }
-    if (rollResult.total < stunBase) {
-      messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
-    }
-    else {
-      messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
-    }
-    rollResult.toMessage(messageData);
+
+    let config = new RollConfig()
+    config.reversal = true
+    config.showSuccess = true
+    config.threshold = stunBase
+
+    await extendedRoll(`1d10`, messageData, config)
   }
 
   async _onDefenceRoll(event) {
@@ -1442,22 +1433,20 @@ export default class WitcherActorSheet extends ActorSheet {
               }
             });
 
-            //todo modify
-            let rollResult = await new Roll("1d10").evaluate({ async: true })
-            let messageData = { speaker: { alias: this.actor.name } }
+            let messageData = { speaker: this.actor.getSpeaker() }
             messageData.flavor = `
-              <h2>${game.i18n.localize("WITCHER.Reputation")}</h2>
+              <h2>${game.i18n.localize("WITCHER.ReputationTitle")}: ${game.i18n.localize("WITCHER.ReputationSave.Title")}</h2>
               <div class="roll-summary">
-                  <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${statValue}</b></div>
+                <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")}: <b>${statValue}</b></div>
               </div>
               <hr />`
-            if (rollResult.total < statValue) {
-              messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
-            }
-            else {
-              messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
-            }
-            rollResult.toMessage(messageData);
+
+            let config = new RollConfig()
+            config.showSuccess = true
+            config.reversal = true
+            config.threshold = statValue
+
+            await extendedRoll(`1d10`, messageData, config)
           })
         },
         t2: {
@@ -1472,18 +1461,16 @@ export default class WitcherActorSheet extends ActorSheet {
               }
             });
 
-            let rollResult = await new Roll("1d10").evaluate({ async: true })
-            let messageData = { speaker: { alias: this.actor.name } }
-
-            let faceDownValue = rollResult.total + Number(repValue) + Number(this.actor.system.stats.will.current)
+            let messageData = { speaker: this.actor.getSpeaker() }
+            let rollFormula = `1d10 + ${Number(repValue)}[${game.i18n.localize("WITCHER.Reputation")}] + ${Number(this.actor.system.stats.will.current)}[${game.i18n.localize("WITCHER.StWill")}]`
             messageData.flavor = `
-              <h2>${game.i18n.localize("WITCHER.ReputationFaceDown.Title")}</h2>
+              <h2>${game.i18n.localize("WITCHER.ReputationTitle")}: ${game.i18n.localize("WITCHER.ReputationFaceDown.Title")}</h2>
               <div class="roll-summary">
-                  <div class="dice-formula">1d10+${game.i18n.localize("WITCHER.StWill")}+${game.i18n.localize("WITCHER.Reputation")}</b></div>
-                  <div><b>${game.i18n.localize("WITCHER.context.Result")}: ${faceDownValue}</b></div>
+                <div class="dice-formula">${game.i18n.localize("WITCHER.context.Result")}: <b>${rollFormula}</b></div>
               </div>
               <hr />`
-            rollResult.toMessage(messageData);
+
+            await extendedRoll(rollFormula, messageData, new RollConfig())
           })
         }
       }
@@ -1763,21 +1750,17 @@ export default class WitcherActorSheet extends ActorSheet {
             if (customAtt > 0) {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
-            //todo modify
-            let rollResult = await new Roll(rollFormula).evaluate({ async: true })
-            let messageData = { speaker: { alias: this.actor.name } }
+
+            let messageData = { speaker: this.actor.getSpeaker() }
             messageData.flavor = `
-              <h2>Verbal Combat: ${game.i18n.localize(vcName)}</h2>
+              <h2>${game.i18n.localize("WITCHER.verbalCombat.Title")}: ${game.i18n.localize(vcName)}</h2>
               <b>${game.i18n.localize("WITCHER.Weapon.Damage")}</b>: ${vcDmg} <br />
               ${game.i18n.localize(effect)}
               <hr />`
-            if (rollResult.dice[0].results[0].result == 10) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div></a>`;
-            }
-            else if (rollResult.dice[0].results[0].result == 1) {
-              messageData.flavor += `<a class="crit-roll"><div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div></a>`;
-            }
-            rollResult.toMessage(messageData);
+
+            let config = new RollConfig()
+            config.showCrit = true
+            await extendedRoll(rollFormula, messageData, config)
           }
         },
         t2: {
@@ -1834,22 +1817,21 @@ export default class WitcherActorSheet extends ActorSheet {
         break;
     }
 
-    //todo modify
-    let rollResult = await new Roll("1d10").evaluate({ async: true })
-    let messageData = { speaker: { alias: this.actor.name } }
+    let messageData = { speaker: this.actor.getSpeaker() }
     messageData.flavor = `
       <h2>${game.i18n.localize(statName)}</h2>
       <div class="roll-summary">
           <div class="dice-formula">${game.i18n.localize("WITCHER.Chat.SaveText")} <b>${statValue}</b></div>
       </div>
       <hr />`
-    if (rollResult.total < statValue) {
-      messageData.flavor += `<div  class="dice-sucess"> <b>${game.i18n.localize("WITCHER.Chat.Success")}</b></div>`
-    }
-    else {
-      messageData.flavor += `<div  class="dice-fail"><b>${game.i18n.localize("WITCHER.Chat.Fail")}</b></div>`
-    }
-    rollResult.toMessage(messageData);
+
+    let config = new RollConfig()
+    config.showCrit = true
+    config.showSuccess = true
+    config.reversal = true
+    config.threshold = statValue
+    config.thresholdDesc = statName
+    await extendedRoll(`1d10`, messageData, config)
   }
 
   _onHPChanged(event) {

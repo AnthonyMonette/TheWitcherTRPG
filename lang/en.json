@@ -735,6 +735,7 @@
   "WITCHER.ReputationTitle": "Executing a reputation roll",
   "WITCHER.ReputationButton.Save": "Save",
   "WITCHER.ReputationButton.FaceDown": "Face-Down",
+  "WITCHER.ReputationSave.Title": "Save",
   "WITCHER.ReputationFaceDown.Title": "Reputation Face-Down",
   "WITCHER.context.Result": "Result",
   "WITCHER.context.unavailable": "N/A",

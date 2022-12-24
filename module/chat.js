@@ -127,9 +127,12 @@ export async function extendedRoll(rollFormula, messageData, config) {
   //crit/fumble calculation
   if (config.showCrit && (isCrit(roll) || isFumble(roll))) {
     let extraRollDescription = isCrit(roll) ? `${game.i18n.localize("WITCHER.Crit")}` : `${game.i18n.localize("WITCHER.Fumble")}`;
+
+    let critClass = config.reversal ? "dice-fail" : "dice-sucess"
+    let fumbleClass = config.reversal ? "dice-sucess" : "dice-fail"
     messageData.flavor += isCrit(roll)
-      ? `<div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div>`
-      : `<div class="dice-fail"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div>`;
+      ? `<div class="${critClass}"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div>`
+      : `<div class="${fumbleClass}"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div>`;
 
     messageData.flavor += `<div>${rollFormula} = <b>${rollTotal}</b></div>`;
 
@@ -145,8 +148,11 @@ export async function extendedRoll(rollFormula, messageData, config) {
       extraRollFormula += `+${extraRollTotal}[${extraRollDescription}]`;
       rollTotal += extraRollTotal;
     } else {
+      if (extraRollTotal >= rollTotal) {
+        extraRollTotal = rollTotal;
+      }
       extraRollFormula += `-${extraRollTotal}[${extraRollDescription}]`;
-      rollTotal -= (extraRollTotal >= rollTotal) ? rollTotal : extraRollTotal;
+      rollTotal -= extraRollTotal;
     }
 
     //print add/subtract roll info
@@ -156,7 +162,13 @@ export async function extendedRoll(rollFormula, messageData, config) {
 
   //calculate overall success/failure for the attack/defence
   if (config.showSuccess && config.threshold >= 0) {
-    let success = config.defence ? roll.total >= config.threshold : roll.total > config.threshold
+    let success
+    if (!config.reversal) {
+      success = config.defence ? roll.total >= config.threshold : roll.total > config.threshold
+    } else {
+      success = config.defence ? roll.total <= config.threshold : roll.total < config.threshold
+    }
+
     let successHeader = config.thresholdDesc ? `: ${game.i18n.localize(config.thresholdDesc)}` : ""
     messageData.flavor += success
       ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}${successHeader}</i></br>${config.messageOnSuccess}</div>`

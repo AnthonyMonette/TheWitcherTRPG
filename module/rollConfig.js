@@ -7,6 +7,7 @@ export var RollConfig = (function () {
             this.showCrit = false;
             this.showSuccess = false;
             this.showResult = true;
+            this.reversal = false;
             this.thresholdDesc = "";
             this.messageOnSuccess = "";
             this.messageOnFailure = "";
