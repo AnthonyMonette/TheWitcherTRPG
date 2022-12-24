@@ -35,11 +35,13 @@
         </div>
     {{/each}}
 
-    <div class="total-stats">
+    <div class="flex total-stats">
         <label class="total-stats-lable"> {{localize "WITCHER.Actor.TotalStats"}}</label>
-        <input class="total-stats-show" type="text" value="{{totalStats}}" placeholder="0" data-dtype="Number"
+        <input class="total-stats-show" type="text" value="{{totalStats}}" placeholder="0"
+               data-dtype="Number"
                readonly/>
     </div>
+
     {{#if (or isGM displayRep)}}
         <div class="stat-display char-stat-display" data-type="reputation" data-stat="reputation">
             <div>
@@ -71,14 +73,16 @@
     {{/if}}
 
 </div>
-<div class="header-center">
+<div class="char-header-center">
     <label>{{localize "WITCHER.Actor.Name"}}:</label>
     <input class="charname" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
     <div class="char-center-middle">
         <img class="witcher-actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
         <div class="core-stats-list">
-            <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
-            <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
+            <div class="char-stat-title">
+                <label class="core-stats-label">{{localize "WITCHER.Actor.StatTitle.Derived"}}</label>
+                <label class="core-stats-minmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
+            </div>
             {{#each system.coreStats as |details coreStat|}}
                 <div class="stat-display char-stat-display" data-type="coreStat" data-stat="{{coreStat}}">
                     <div>
@@ -118,12 +122,16 @@
         <tr>
             <td><b>{{localize "WITCHER.Actor.Race"}}</b></td>
             <td>{{race.name}}</td>
+        </tr>
+        <tr>
             <td><b>{{localize "WITCHER.Profession"}}</b></td>
             <td>{{profession.name}}</td>
         </tr>
         <tr>
             <td><b>{{localize "WITCHER.Actor.Gender"}}</b></td>
             <td><input class="medium" name="system.gender" type="text" value="{{system.gender}}" placeholder=""/></td>
+        </tr>
+        <tr>
             <td><b>{{localize "WITCHER.Actor.Age"}}</b></td>
             <td><input class="header-stat" name="system.general.age" type="number" value="{{system.general.age}}"
                        placeholder="0" data-dtype="Number"/></td>
@@ -157,7 +165,7 @@
         </tbody>
     </table>
 </div>
-<div class="right-sidebar">
+<div class="char-right-sidebar">
     <div class="right-top">
         <div class="char-button-collum">
             <a class="button-roll init-roll">{{localize "WITCHER.Actor.Initiative"}}</a>

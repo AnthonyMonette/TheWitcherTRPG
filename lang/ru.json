@@ -188,7 +188,7 @@
   "WITCHER.Actor.Stat.Luck": "Удача",
   "WITCHER.Actor.StatTitle.LableLeft": "Статистика",
   "WITCHER.Actor.StatTitle.ModMax": "Мод / Макс",
-  "WITCHER.Actor.StatTitle.Derived": "Полученный",
+  "WITCHER.Actor.StatTitle.Derived": "Доп",
   "WITCHER.Actor.CoreStat.Stun": "Уст",
   "WITCHER.Actor.CoreStat.Run": "Бег",
   "WITCHER.Actor.CoreStat.Leap": "Прж",

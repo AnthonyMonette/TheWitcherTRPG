@@ -3,12 +3,12 @@
 }
 
 .char-left-sidebar {
-    width: 155px;
+    flex-basis: 180px;
     flex: none;
 }
 
 .char-bottom-section {
-    width: 370px;
+    min-width: 370px;
 }
 .char-bottom-section table td {
     padding: 0.35em 0.35em 0.35em 0.5em;
@@ -55,11 +55,11 @@ input.header-stat {
 
 .total-stats {
     text-align: right;
-    margin-right: 19px;
 }
 
 .total-stats label {
     font-weight: bold;
+    width: 100px;
 }
 
 input.total-stats-show {
@@ -76,8 +76,10 @@ input.total-stats-show {
     font-weight: bold;
 }
 
-.header-center {
-    width: 380px;
+.char-header-center {
+    min-width: 380px;
+    flex-grow: 1;
+    margin: 0 20px 0 20px;
 }
 
 .header-center label {
@@ -116,9 +118,9 @@ input.total-stats-show {
 }
 
 
-.right-sidebar {
+.char-right-sidebar {
   padding: 10px;
-  width: 250px;
+  flex-basis: 270px;
   background-color: lightslategray;
   border-radius: 10px;
   color: white;
@@ -174,8 +176,8 @@ input.right-value {
 
 .right-top {
     display: flex;
-    width: 230px;
     margin-bottom: 10px;
+    justify-content: end;
 }
 
 .char-button-collum {
