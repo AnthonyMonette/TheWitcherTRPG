@@ -4,7 +4,7 @@ import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weigh
 import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
 import { RollConfig } from "../rollConfig.js";
 
-import { ExecuteDefense } from "../../scripts/actions.js";
+import { ExecuteDefence } from "../../scripts/actions.js";
 
 export default class WitcherActorSheet extends ActorSheet {
   /** @override */
@@ -1407,7 +1407,7 @@ export default class WitcherActorSheet extends ActorSheet {
   }
 
   async _onDefenceRoll(event) {
-    ExecuteDefense(this.actor)
+    ExecuteDefence(this.actor)
   }
 
   async _onReputation(event) {

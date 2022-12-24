@@ -1,4 +1,4 @@
-import { ExecuteDefense, BlockAttack, ApplyDamage } from "../scripts/actions.js";
+import { ExecuteDefence, BlockAttack, ApplyDamage } from "../scripts/actions.js";
 import { getRandomInt } from "./witcher.js";
 
 export function addChatListeners(html) {
@@ -235,7 +235,7 @@ export function addChatMessageContextOptions(html, options) {
         } else {
           defenderActor = defender[0].actor
         }
-        ExecuteDefense(defenderActor,
+        ExecuteDefence(defenderActor,
           li.find(".attack-message")[0].dataset.dmgType,
           li.find(".attack-message")[0].dataset.location,
           li.find(".dice-total")[0].innerText)

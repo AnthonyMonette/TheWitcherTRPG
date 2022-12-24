@@ -182,6 +182,11 @@ input.item-quantity{
   flex: 1;
 }
 
+.weapon-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .item-info {
   width: 380px;
   background-color: lightgray;
@@ -236,6 +241,11 @@ input.reliable-info {
   margin-left: 10px;
 }
 
+.armor-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .armor-name-header {
   width: 230px;
 }
@@ -257,6 +267,11 @@ input.stopping-info {
   margin-right: 10px;
 }
 
+.valuable-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .valuable-table td {
     text-align: center;
     padding: 0.25em 0.25em;
@@ -264,6 +279,11 @@ input.stopping-info {
 
 .component-section {
   flex: 1;
+}
+
+.component-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .alchemical-effect {
@@ -300,12 +320,24 @@ input.focus {
 }
 
 .spell-section {
-  width: 450px;
+  min-width: 450px;
   margin-right: 10px;
+  flex: 1;
+}
+
+.spell-section .flex label{
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.magic-section .flex label{
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .magic-section {
-  width: 400px;
+  min-width: 400px;
+  flex: 1;
 }
 
 .magic-value-display {

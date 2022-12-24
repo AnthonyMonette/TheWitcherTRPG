@@ -495,7 +495,7 @@ function BlockAttack(actor) {
   }).render(true)
 }
 
-function ExecuteDefense(actor, attackType, location, totalAttack) {
+function ExecuteDefence(actor, attackType, location, totalAttack) {
   let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
 
   let weapons = actor.items.filter(function (item) { return item.type == "weapon" && !item.system.isAmmo && witcher.meleeSkills.includes(item.system.attackSkill) });
@@ -523,9 +523,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       Dodge: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonDodge")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -550,7 +550,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -562,9 +562,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       Reposition: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonReposition")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -589,7 +589,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -601,9 +601,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       Block: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -612,14 +612,14 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
               'system.derivedStats.sta.value': newSta
             });
           }
-          let defense = html.find("[name=form]")[0].value;
+          let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
           let skill;
           let skillValue = 0;
           let skillName = "";
           let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
-          switch (defense) {
+          switch (defence) {
             case "Brawling":
               skill = actor.system.skills.ref.brawling;
               skillValue = skill.value;
@@ -669,7 +669,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -681,9 +681,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       Parry: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefence]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -692,14 +692,14 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
               'system.derivedStats.sta.value': newSta
             });
           }
-          let defense = html.find("[name=form]")[0].value;
+          let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
           let skill;
           let skillValue = 0;
           let skillName = "";
           let modifiers;
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
-          switch (defense) {
+          switch (defence) {
             case "Brawling":
               skill = actor.system.skills.ref.brawling;
               skillValue = skill.value;
@@ -749,7 +749,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -761,9 +761,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       ParryAgainstThrown: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefence]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -772,14 +772,14 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
               'system.derivedStats.sta.value': newSta
             });
           }
-          let defense = html.find("[name=form]")[0].value;
+          let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
           let skill;
           let skillValue = 0;
           let skillName = ""
           let modifiers
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`;
-          switch (defense) {
+          switch (defence) {
             case "Brawling":
               skill = actor.system.skills.ref.brawling;
               skillValue = skill.value;
@@ -829,7 +829,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -841,9 +841,9 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
       MagicResist: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonMagicResist")}`,
         callback: async html => {
-          let isExtraDefense = html.find("[name=isExtraDefense]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
-          if (isExtraDefense) {
+          if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
             if (newSta < 0) {
               return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
@@ -868,7 +868,7 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
           let config = new RollConfig()
           config.showCrit = true
           config.showSuccess = true
-          config.defense = true
+          config.defence = true
           config.threshold = totalAttack
           config.thresholdDesc = skill.label
           config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
@@ -881,4 +881,4 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
   }).render(true)
 }
 
-export { ExecuteDefense, BlockAttack, ApplyDamage };
+export { ExecuteDefence, BlockAttack, ApplyDamage };
