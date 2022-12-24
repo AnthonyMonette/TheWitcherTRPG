@@ -253,14 +253,17 @@ input.stopping-info {
 }
 
 .valuable-section {
+  flex: 1;
   margin-right: 10px;
 }
-.valuable-table {
-  width: 410px;
+
+.valuable-table td {
+    text-align: center;
+    padding: 0.25em 0.25em;
 }
 
 .component-section {
-  width: 500px;
+  flex: 1;
 }
 
 .alchemical-effect {

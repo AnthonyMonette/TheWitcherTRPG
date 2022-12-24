@@ -4,8 +4,7 @@
     </div>
     {{#if (gte totalWeight system.coreStats.enc.current)}}
         <div class="weightbar-overweight"></div>
-    {{/if}}
-    {{#if (lt totalWeight system.coreStats.enc.current)}}
+    {{else}}
         <progress class="weightbar" value="{{totalWeight}}" max="{{system.coreStats.enc.current}}"></progress>
     {{/if}}
 </div>
@@ -74,8 +73,11 @@
             </div>
         </div>
 
-        <h2>{{localize  "WITCHER.Inventory.Weapons"}} <a class="add-item" data-itemType="weapon"><i
-                class="fas fa-plus"></i></a></h2>
+        <h2>{{localize "WITCHER.Inventory.Weapons"}}
+            <a class="add-item" data-itemType="weapon">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="item-table item-list">
             <tr>
                 <td></td>
@@ -116,13 +118,19 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Weapon.Type"}}
-                                        :</b></label>{{weapon.system.type.text}}</div>
+                                    <div class="flex">
+                                        <label class="label-info">
+                                            <b>{{localize "WITCHER.Weapon.Type"}}: </b>
+                                        </label>{{weapon.system.type.text}}
+                                    </div>
                                 </td>
                                 {{#unless weapon.system.isAmmo}}
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Weapon.Hands"}}:</b></label>{{weapon.system.hands}}</div>
+                                        <div class="flex">
+                                            <label class="label-info">
+                                                <b>{{localize "WITCHER.Weapon.Hands"}}: </b>
+                                            </label>{{weapon.system.hands}}
+                                        </div>
                                     </td>
                                 {{/unless}}
                                 {{#if weapon.system.hands}}
@@ -130,13 +138,18 @@
                                     <td></td>
                                 {{/if}}
                                 <td>
-                                    <div class="flex"><label class="label-info"><b>{{localize
-                                            "WITCHER.Weapon.Short.Concealement"}}:</b></label>{{weapon.system.conceal}}
+                                    <div class="flex">
+                                        <label class="label-info">
+                                            <b>{{localize "WITCHER.Weapon.Short.Concealement"}}: </b>
+                                        </label>{{weapon.system.conceal}}
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Weight"}}
-                                        :</b></label>{{weapon.system.weight}}</div>
+                                    <div class="flex">
+                                        <label class="label-info">
+                                            <b>{{localize "WITCHER.Item.Weight"}}: </b>
+                                        </label>{{weapon.system.weight}}
+                                    </div>
                                 </td>
                                 <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                             </tr>
@@ -172,7 +185,7 @@
                                 <td colspan="6">
                                 {{/if}}
                                 <div class="flex">
-                                    <b>{{localize "WITCHER.Item.Effect"}}:</b>
+                                    <b>{{localize "WITCHER.Item.Effect"}}: </b>
                                     {{#each weapon.system.effects as |effect id|}}
                                         <div class="flex">
                                             {{effect.name}}
@@ -194,9 +207,11 @@
         </table>
     </div>
     <div class="armor-section">
-        <h2>{{localize  "WITCHER.Inventory.Armor"}} <a class="add-item" data-itemType="armor"><i
-                class="fas fa-plus"></i></a></h2>
-
+        <h2>{{localize "WITCHER.Inventory.Armor"}}
+            <a class="add-item" data-itemType="armor">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="armor-table item-list">
             <tr>
                 <td></td>
@@ -370,18 +385,19 @@
                             {{#if (eq type "armor")}}
                                 <tr>
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Armor.Short.ArmorEnhancement"}}
-                                            :</b></label>{{armor.system.enhancements}}</div>
+                                        <div class="flex"><label class="label-info">
+                                            <b>{{localize "WITCHER.Armor.Short.ArmorEnhancement"}}: </b>
+                                        </label>{{armor.system.enhancements}}</div>
                                     </td>
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Armor.Short.EncumbranceValue"}}
-                                            :</b></label>{{armor.system.encumb}}</div>
+                                        <div class="flex"><label class="label-info">
+                                            <b>{{localize "WITCHER.Armor.Short.EncumbranceValue"}}: </b>
+                                        </label>{{armor.system.encumb}}</div>
                                     </td>
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Item.Weight"}}:</b></label>{{armor.system.weight}}</div>
+                                        <div class="flex"><label class="label-info">
+                                            <b>{{localize "WITCHER.Item.Weight"}}: </b>
+                                        </label>{{armor.system.weight}}</div>
                                     </td>
                                     <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                                 </tr>
@@ -400,21 +416,23 @@
                             {{#if (eq type "enhancement")}}
                                 <tr>
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Armor.Short.EncumbranceValue"}}
-                                            :</b></label>{{armor.system.encumb}}</div>
+                                        <div class="flex"><label class="label-info">
+                                            <b>{{localize "WITCHER.Armor.Short.EncumbranceValue"}}: </b>
+                                        </label>{{armor.system.encumb}}</div>
                                     </td>
                                     <td>
-                                        <div class="flex"><label class="label-info"><b>{{localize
-                                                "WITCHER.Item.Weight"}}:</b></label>{{armor.system.weight}}</div>
+                                        <div class="flex"><label class="label-info">
+                                            <b>{{localize "WITCHER.Item.Weight"}}: </b>
+                                        </label>{{armor.system.weight}}</div>
                                     </td>
                                     <td><a class="item-edit"><i class="fas fa-edit"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            <label><b>{{localize "WITCHER.Item.Effect"}}
-                                                :</b></label>{{armor.system.effect}}
+                                            <label>
+                                                <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                                            </label>{{armor.system.effect}}
                                         </div>
                                     </td>
                                     <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a></td>
@@ -430,16 +448,19 @@
 </div>
 <div class="flex">
     <div class="valuable-section">
-        <h2>{{localize  "WITCHER.Inventory.Valuables"}} <a class="add-item" data-itemType="valuable"><i
-                class="fas fa-plus"></i></a></h2>
+        <h2>{{localize  "WITCHER.Inventory.Valuables"}}
+            <a class="add-item" data-itemType="valuable">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="valuable-table item-list">
-            <th>
-            <td></td>
-            <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
-            <td><b>{{localize "WITCHER.table.Name"}}</b></td>
-            <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
-            <td></td>
-            </th>
+            <tr>
+                <th></th>
+                <th><b>{{localize "WITCHER.table.Quantity"}}</b></th>
+                <th><b>{{localize "WITCHER.table.Name"}}</b></th>
+                <th><b>{{localize "WITCHER.Item.Weight"}}</b></th>
+                <th></th>
+            </tr>
             {{#each valuables as |valuable id|}}
                 <tbody class="item" data-item-id="{{valuable._id}}">
                 <tr>
@@ -466,16 +487,24 @@
                 <tr class="item-info invisible">
                     {{#if (eq type "valuable")}}
                         <td colspan="4">
-                            <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Item.Description"}}:</b></label>
+                            <div class="flex">
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Item.Description"}}: </b>
+                                </label>
                                 <div>{{valuable.system.description}}</div>
                             </div>
                         </td>
                     {{/if}}
                     {{#if (eq type "alchemical")}}
                         <td colspan="4">
-                            <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Diagram.craftingTime"}}
-                                :</b></label>{{valuable.system.time}}</div>
-                            <label class="label-info"><b>{{localize "WITCHER.Item.Effect"}}:</b></label>
+                            <div class="flex">
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
+                                </label>{{valuable.system.time}}
+                            </div>
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                            </label>
                             <div class="alchemical-effect">
                                 {{valuable.system.effect}}
                             </div>
@@ -484,27 +513,39 @@
                     {{#if (eq type "mount")}}
                         <td colspan="4">
                             <div class="flex">
-                                <label class="label-info"><b>{{localize "WITCHER.Mount.Dexterity"}}:</b></label>
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mount.Dexterity"}}: </b>
+                                </label>
                                 <div>{{valuable.system.dex}}</div>
-                                <label class="label-info"><b>{{localize "WITCHER.Mount.Control"}}:</b></label>
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mount.Control"}}: </b>
+                                </label>
                                 <div>{{valuable.system.control}}</div>
-                                <label class="label-info"><b>{{localize "WITCHER.Mount.Speed"}}:</b></label>
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mount.Speed"}}: </b>
+                                </label>
                                 <div>{{valuable.system.speed}}</div>
-                                <label class="label-info"><b>{{localize "WITCHER.Mount.Hp"}}:</b></label>
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mount.Hp"}}: </b>
+                                </label>
                                 <div>{{valuable.system.hp}}</div>
                             </div>
                         </td>
                     {{/if}}
                     {{#if (eq type "mutagen")}}
                         <td colspan="3">
-                            <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Mutagen.Type"}}
-                                :</b></label>
+                            <div class="flex">
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mutagen.Type"}}: </b>
+                                </label>
                                 <div>{{valuable.system.type}}</div>
                             </div>
                         </td>
                         <td>
-                            <div class="flex"><label class="label-info"><b>{{localize "WITCHER.Mutagen.Source"}}
-                                :</b></label>
+                            <div class="flex">
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Mutagen.Source"}}: </b>
+                                </label>
                                 <div>{{valuable.system.source}}</div>
                             </div>
                         </td>
@@ -519,8 +560,11 @@
                 </tbody>
             {{/each}}
         </table>
-        <h2>{{localize  "WITCHER.Inventory.Diagrams"}} <a class="add-item" data-itemType="diagrams"><i
-                class="fas fa-plus"></i></a></h2>
+        <h2>{{localize  "WITCHER.Inventory.Diagrams"}}
+            <a class="add-item" data-itemType="diagrams">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
         <table class="diagram-table item-list">
             <tr>
                 <td></td>
@@ -551,12 +595,15 @@
                     {{#unless diagram.system.isFormulae}}
                         <td colspan="4">
                             <div>
-                                <label class="label-info"><b>{{localize "WITCHER.Diagram.craftingDC"}}
-                                    :</b></label>{{diagram.system.craftingDC}}
-                                <label class="label-info"><b>{{localize "WITCHER.Diagram.craftingTime"}}
-                                    :</b></label>{{diagram.system.craftingTime}}
-                                <label class="label-info"><b>{{localize "WITCHER.Diagram.investment"}}
-                                    :</b></label>{{diagram.system.investement}}
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.craftingDC"}}: </b>
+                                </label>{{diagram.system.craftingDC}}
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
+                                </label>{{diagram.system.craftingTime}}
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.investment"}}: </b>
+                                </label>{{diagram.system.investment}}
                             </div>
                             <div>
                                 <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}}:</b>
@@ -583,12 +630,12 @@
                     {{#if diagram.system.isFormulae}}
                         <td colspan="4">
                             <div>
-                                <div class="flex">
-                                    <label class="label-info"><b>{{localize "WITCHER.Diagram.alchemyDC"}}
-                                        :</b></label>{{diagram.system.alchemyDC}}
-                                    <label class="label-info"><b>{{localize "WITCHER.Diagram.craftingTime"}}
-                                        :</b></label>{{diagram.system.craftingTime}}
-                                </div>
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.alchemyDC"}}: </b>
+                                </label>{{diagram.system.alchemyDC}}
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
+                                </label>{{diagram.system.craftingTime}}
 
                                 <div class="flex components-display">
                                     {{#if (gt diagram.system.alchemyComponents.vitriol 0)}}
@@ -697,8 +744,11 @@
             {{> "systems/TheWitcherTRPG/templates/partials/substances.html"}}
         </div>
         <div class="components">
-            <h2>{{localize  "WITCHER.Inventory.Components"}} <a class="add-item" data-itemType="component"><i
-                    class="fas fa-plus"></i></a></h2>
+            <h2>{{localize  "WITCHER.Inventory.Components"}}
+                <a class="add-item" data-itemType="component">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </h2>
             <table class="component-table item-list">
                 <tr>
                     <td></td>
