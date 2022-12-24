@@ -2,6 +2,7 @@ import { buttonDialog, rollDamage, extendedRoll } from "../chat.js";
 import { witcher } from "../config.js";
 import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
 import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
+import { RollConfig } from "../rollConfig.js";
 
 import { ExecuteDefense } from "../../scripts/actions.js";
 
@@ -954,7 +955,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
     let messageData = {
-      speaker: { alias: this.actor.name },
+      speaker: this.actor.getSpeaker(),
       flavor: `<h1>Crafting</h1>`,
     }
 
@@ -1013,19 +1014,23 @@ export default class WitcherActorSheet extends ActorSheet {
 
             rollFormula = addModifiers(this.actor.system.skills.cra.alchemy.modifiers, rollFormula)
 
+            let config = new RollConfig();
+            config.showCrit = true
+            config.showSuccess = true
+            config.threshold = item.system.alchemyDC
+            config.thresholdDesc = skillName
+            config.messageOnSuccess = game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted")
+            config.messageOnFailure = game.i18n.localize("WITCHER.craft.ItemsNotCrafted")
+
             if (realCraft) {
               if (areCraftComponentsEnough) {
-                item.realCraft(skillName, rollFormula, messageData);
+                item.realCraft(rollFormula, messageData, config);
               } else {
                 return ui.notifications.error(game.i18n.localize("WITCHER.Dialog.NoComponents") + " " + item.system.associatedItem.name)
               }
             } else {
               // Craft without automatic removal components and without real crafting of an item
-              let result = await extendedRoll(rollFormula, messageData, item.system.alchemyDC, false)
-              messageData.flavor += result.success
-                ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skillName)}</i></div>`
-                : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skillName)}</i></div>`;
-              result.roll.toMessage(messageData);
+              await extendedRoll(rollFormula, messageData, config)
             }
           }
         }
@@ -1041,7 +1046,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
     let messageData = {
-      speaker: { alias: this.actor.name },
+      speaker: this.actor.getSpeaker(),
       flavor: `<h1>Crafting</h1>`,
     }
 
@@ -1089,19 +1094,23 @@ export default class WitcherActorSheet extends ActorSheet {
 
             rollFormula = addModifiers(this.actor.system.skills.cra.crafting.modifiers, rollFormula)
 
+            let config = new RollConfig();
+            config.showCrit = true
+            config.showSuccess = true
+            config.threshold = item.system.craftingDC
+            config.thresholdDesc = skillName
+            config.messageOnSuccess = game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted")
+            config.messageOnFailure = game.i18n.localize("WITCHER.craft.ItemsNotCrafted")
+
             if (realCraft) {
               if (areCraftComponentsEnough) {
-                item.realCraft(skillName, rollFormula, messageData);
+                item.realCraft(rollFormula, messageData, config);
               } else {
                 return ui.notifications.error(game.i18n.localize("WITCHER.Dialog.NoComponents") + " " + item.system.associatedItem.name)
               }
             } else {
               // Craft without automatic removal components and without real crafting of an item
-              let result = await extendedRoll(rollFormula, messageData, item.system.craftingDC, false)
-              messageData.flavor += result.success
-                ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skillName)}</i></div>`
-                : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skillName)}</i></div>`;
-              result.roll.toMessage(messageData);
+              await extendedRoll(rollFormula, messageData, config)
             }
           }
         }
@@ -2299,19 +2308,20 @@ export default class WitcherActorSheet extends ActorSheet {
               let touchedLocationJSON = JSON.stringify(touchedLocation);
               messageData.flavor += `<button class="damage" data-img="${item.img}" data-dmg-type="${damageType}" data-name="${item.name}" data-dmg="${damageFormula}" data-location='${touchedLocationJSON}'  data-location-formula="${LocationFormula}" data-strike="${strike}" data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
 
-              let result = await extendedRoll(attFormula, messageData, 0, false)
+              let config = new RollConfig()
+              config.showResult = false
+              let roll = await extendedRoll(attFormula, messageData, config)
 
               if (item.system.rollOnlyDmg) {
                 rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.system.effects, damageType)
               } else {
-                result.roll.toMessage(messageData);
+                roll.toMessage(messageData);
               }
             }
           }
         }
       }
     }, myDialogOptions).render(true)
-
   }
 
   _onSpellDisplay(event) {
@@ -2338,7 +2348,6 @@ export default class WitcherActorSheet extends ActorSheet {
         break;
     }
   }
-
 
   _onLifeEventDisplay(event) {
     event.preventDefault();

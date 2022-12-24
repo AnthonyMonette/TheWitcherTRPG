@@ -115,12 +115,17 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
   (await new Roll(damageFormula).evaluate({ async: true })).toMessage(messageData)
 }
 
-export async function extendedRoll(rollFormula, messageData, valueToCompare, isDefence) {
+/**
+ * @param {string} rollFormula rollFormula to apply
+ * @param {*} messageData messageData to display
+ * @param {RollConfig} config Configuration for Extended roll
+ */
+export async function extendedRoll(rollFormula, messageData, config) {
   let roll = await new Roll(rollFormula).evaluate({ async: true })
   let rollTotal = Number(roll.total);
 
   //crit/fumble calculation
-  if (isCrit(roll) || isFumble(roll)) {
+  if (config.showCrit && (isCrit(roll) || isFumble(roll))) {
     let extraRollDescription = isCrit(roll) ? `${game.i18n.localize("WITCHER.Crit")}` : `${game.i18n.localize("WITCHER.Fumble")}`;
     messageData.flavor += isCrit(roll)
       ? `<div class="dice-sucess"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div>`
@@ -150,10 +155,22 @@ export async function extendedRoll(rollFormula, messageData, valueToCompare, isD
   }
 
   //calculate overall success/failure for the attack/defence
-  return {
-    "roll": roll,
-    "success": isDefence ? roll.total >= valueToCompare : roll.total > valueToCompare,
+  if (config.showSuccess && config.threshold >= 0) {
+    let success = config.defence ? roll.total >= config.threshold : roll.total > config.threshold
+    let successHeader = config.thresholdDesc ? `: ${game.i18n.localize(config.thresholdDesc)}` : ""
+    messageData.flavor += success
+      ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}${successHeader}</i></br>${config.messageOnSuccess}</div>`
+      : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}${successHeader}</i></br>${config.messageOnFailure}</div>`;
+
+    messageData.flags = success
+      ? config.flagsOnSuccess
+      : config.flagsOnFailure;
   }
+
+  if (config.showResult) {
+    roll.toMessage(messageData)
+  }
+  return config.showResult ? roll.total : roll
 }
 
 function isCrit(roll) {

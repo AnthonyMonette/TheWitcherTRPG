@@ -1,5 +1,6 @@
 import { witcher } from "./config.js";
 import { extendedRoll } from "../module/chat.js";
+import { RollConfig } from "./rollConfig.js";
 
 export default class WitcherItem extends Item {
   chatTemplate = {
@@ -223,22 +224,22 @@ export default class WitcherItem extends Item {
     return alchemyCraftComponents;
   }
 
-  async realCraft(skillName, rollFormula, messageData) {
-    let craftDC = this.isAlchemicalCraft() ? this.system.alchemyDC : this.system.craftingDC;
+  /**
+   * @param {string} skillName 
+   * @param {string} rollFormula 
+   * @param {*} messageData 
+   * @param {RollConfig} config 
+   */
+  async realCraft(rollFormula, messageData, config) {
+    //we want to show message to the chat only after removal of items from inventory
+    config.showResult = false
 
     //added crit rolls for craft & alchemy
-    let result = await extendedRoll(rollFormula, messageData, craftDC, false)
-    messageData.flavor += result.success
-      ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skillName)}</i></div>`
-      : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skillName)}</i></div>`;
+    let roll = await extendedRoll(rollFormula, messageData, config)
 
-    if (result.success) {
-      messageData.flavor += game.i18n.localize("WITCHER.craft.ItemsSuccessfullyCrafted");
-    } else {
-      messageData.flavor += game.i18n.localize("WITCHER.craft.ItemsNotCrafted");
-    }
     messageData.flavor += `<label><b> ${this.actor.name}</b></label><br/>`;
 
+    let result = roll.total > config.threshold;
     let craftedItemName;
     if (this.system.associatedItem && this.system.associatedItem.name) {
       let craftingComponents = this.isAlchemicalCraft()
@@ -261,7 +262,6 @@ export default class WitcherItem extends Item {
           }
 
           if (componentsCountDeleted < componentsCountToDelete) {
-
             this.actor.removeItem(toDelete._id, toDeleteCount)
             componentsCountDeleted += toDeleteCount;
             componentsLeftToDelete -= toDeleteCount;
@@ -270,13 +270,12 @@ export default class WitcherItem extends Item {
         });
 
         if (componentsCountDeleted != componentsCountToDelete || componentsLeftToDelete != 0) {
-
-          result.success = false;
+          result = false;
           return ui.notifications.error(game.i18n.localize("WITCHER.err.CraftItemDeletion"));
         }
       });
 
-      if (result.success) {
+      if (result) {
         let craftedItem = { ...this.system.associatedItem };
         Item.create(craftedItem, { parent: this.actor });
         craftedItemName = craftedItem.name;
@@ -286,6 +285,6 @@ export default class WitcherItem extends Item {
     }
 
     messageData.flavor += `<b>${craftedItemName}</b>`;
-    result.roll.toMessage(messageData);
+    roll.toMessage(messageData);
   }
 }

@@ -1,6 +1,7 @@
 import { witcher } from "../module/config.js";
 import { buttonDialog, extendedRoll } from "../module/chat.js";
 import { addModifiers } from "../module/witcher.js";
+import { RollConfig } from "../module/rollConfig.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage) {
   let armors = actor.getList("armor").filter(a => a.system.equipped);
@@ -546,12 +547,16 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
       Reposition: {
@@ -581,12 +586,16 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
       Block: {
@@ -650,17 +659,23 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonBlock")}</h1><p>${displayFormula}</p>`;
           let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]`;
+
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
+
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
       Parry: {
@@ -724,17 +739,23 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}</h1><p>${displayFormula}</p>`;
           let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}-3` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]-3[${game.i18n.localize("WITCHER.Dialog.ButtonParry")}]`;
+
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
+
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
       ParryAgainstThrown: {
@@ -798,17 +819,23 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           messageData.flavor = `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}: ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}</h1><p>${displayFormula}</p>`;
           let rollFormula = !displayRollDetails ? `1d10+${stat}+${skillValue}-5` : `1d10+${stat}[${game.i18n.localize("WITCHER.Actor.Stat.Ref")}]+${skillValue}[${game.i18n.localize(skillName)}]-5[${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}]`;
+
           if (customDef != "0") {
             rollFormula += !displayFormula ? `+${customDef}` : `+${customDef}[${game.i18n.localize("WITCHER.Settings.Custom")}]`;
           }
+
           rollFormula = addModifiers(modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
       MagicResist: {
@@ -838,12 +865,16 @@ function ExecuteDefense(actor, attackType, location, totalAttack) {
 
           rollFormula = addModifiers(skill.modifiers, rollFormula)
 
-          let result = await extendedRoll(rollFormula, messageData, totalAttack, true)
-          messageData.flags = result.success ? actor.getDefenceSuccessFlags(skill) : actor.getDefenceFailFlags(skill);
-          messageData.flavor += result.success
-            ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}: ${game.i18n.localize(skill.label)}</i></div>`
-            : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}: ${game.i18n.localize(skill.label)}</i></div>`;
-          result.roll.toMessage(messageData);
+          let config = new RollConfig()
+          config.showCrit = true
+          config.showSuccess = true
+          config.defense = true
+          config.threshold = totalAttack
+          config.thresholdDesc = skill.label
+          config.flagsOnSuccess = actor.getDefenceSuccessFlags(skill)
+          config.flagsOnFailure = actor.getDefenceFailFlags(skill)
+
+          await extendedRoll(rollFormula, messageData, config)
         }
       },
     }
