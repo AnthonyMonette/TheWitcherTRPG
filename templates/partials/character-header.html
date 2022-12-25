@@ -1,5 +1,5 @@
 <div class="char-left-sidebar">
-    <div class="char-stat-title">
+    <div class="char-stat-title margin-right">
         <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
         <label>{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
     </div>
@@ -27,7 +27,9 @@
                                    value="{{modifier.name}}"/>
                             <input class="small list-mod-edit" data-field="value" type="number"
                                    value="{{modifier.value}}"/>
-                            <a class="delete-stat"><i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i></a>
+                            <a class="delete-stat">
+                                <i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i>
+                            </a>
                         </div>
                     {{/each}}
                 {{/if}}
@@ -35,7 +37,7 @@
         </div>
     {{/each}}
 
-    <div class="flex total-stats">
+    <div class="flex total-stats margin-right">
         <label class="total-stats-lable"> {{localize "WITCHER.Actor.TotalStats"}}</label>
         <input class="total-stats-show" type="text" value="{{totalStats}}" placeholder="0"
                data-dtype="Number"
@@ -115,6 +117,14 @@
                     </div>
                 </div>
             {{/each}}
+            <div class="stat-display char-stat-display margin-right">
+                <label class="char-stat-label">{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
+                <input class="small" name="system.derivedStats.vigor.value"
+                       type="number"
+                       value="{{system.derivedStats.vigor.value}}"
+                       placeholder="0" data-dtype="Number"
+                       disabled readonly/>
+            </div>
         </div>
     </div>
     <table class="char-bottom-section">
@@ -259,7 +269,7 @@
         <div class="right-row">
             {{#if useVerbalCombat}}
                 <div class="right-element">
-                    <label>{{localize system.derivedStats.resolve.label}} ({{system.derivedStats.resolve.max}})</label>
+                    <label>{{localize "WITCHER.Actor.Resolve"}} ({{system.derivedStats.resolve.max}})</label>
                     <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
                     <input class="right-value" name="system.derivedStats.resolve.value" type="number"
                            value="{{system.derivedStats.resolve.value}}" max="99" placeholder="0" data-dtype="Number"/>

@@ -11,7 +11,7 @@ export default class WitcherActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["witcher", "sheet", "actor"],
-      width: 900,
+      width: 1120,
       height: 600,
       template: "systems/TheWitcherTRPG/templates/sheets/actor/actor-sheet.html",
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],

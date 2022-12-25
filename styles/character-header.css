@@ -10,6 +10,7 @@
 .char-bottom-section {
     min-width: 370px;
 }
+
 .char-bottom-section table td {
     padding: 0.35em 0.35em 0.35em 0.5em;
 }
@@ -17,6 +18,10 @@
 .char-stat-title label {
     font-weight: bold;
     margin-left: 4px;
+}
+
+.char-stat-title {
+    justify-content: flex-end;
 }
 
 .char-stat-button {
@@ -37,6 +42,7 @@
 .char-stat-display {
     display: flex;
     text-align: center;
+    justify-content: flex-end;
 }
 
 .char-stat-button:hover {
@@ -55,6 +61,7 @@ input.header-stat {
 
 .total-stats {
     text-align: right;
+    justify-content: flex-end;
 }
 
 .total-stats label {
@@ -112,18 +119,18 @@ input.total-stats-show {
     width: 60px;
 }
 
-.core-stats.minmax  {
+.core-stats.minmax {
     text-align: center;
     display: inline-block;
 }
 
 
 .char-right-sidebar {
-  padding: 10px;
-  flex-basis: 270px;
-  background-color: lightslategray;
-  border-radius: 10px;
-  color: white;
+    padding: 10px;
+    flex-basis: 270px;
+    background-color: lightslategray;
+    border-radius: 10px;
+    color: white;
 }
 
 .right-element {
@@ -134,7 +141,7 @@ input.total-stats-show {
     text-align: center;
 }
 
-.right-image{
+.right-image {
     height: 75px;
     margin-left: 20px;
     margin-right: 20px;
@@ -144,7 +151,7 @@ input.total-stats-show {
 .right-row {
     size: 75px;
 }
-  
+
 .right-row label {
     position: relative;
 }
