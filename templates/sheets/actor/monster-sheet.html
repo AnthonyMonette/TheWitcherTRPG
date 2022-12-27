@@ -249,13 +249,14 @@
                                 <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
                             {{/unless}}
                         {{/if}}
-                        <input class="right-value hp-value" name="system.derivedStats.hp.value" type="number"
+                        <input class="right-value hp-value"
+                               type="number"
                                value="{{system.derivedStats.hp.value}}"
                                max="99" placeholder="0" data-dtype="Number" disabled readonly/>
                     </div>
                     <div class="right-element" title="{{localize "WITCHER.Actor.Stamina"}}">
                         <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
-                        <input class="right-value" name="system.derivedStats.sta.value"
+                        <input class="right-value"
                                type="number"
                                value="{{system.derivedStats.sta.value}}"
                                max="99" placeholder="0" data-dtype="Number" disabled readonly/>
@@ -263,15 +264,17 @@
                     {{#if useVerbalCombat}}
                         <div class="right-element" title="{{localize "WITCHER.Actor.Resolve"}}">
                             <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
-                            <input class="right-value" name="system.derivedStats.resolve.value" type="number"
+                            <input class="right-value"
+                                   type="number"
                                    value="{{system.derivedStats.resolve.value}}" max="99" placeholder="0"
                                    data-dtype="Number" disabled readonly/>
                         </div>
                     {{/if}}
                     <div class="right-element" title="{{localize "WITCHER.Actor.DerStat.Vigor"}}">
                         <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
-                        <input class="right-value" name="system.derivedStats.vigor.current" type="number"
-                               value="{{system.derivedStats.vigor.current}}" max="99" placeholder="0"
+                        <input class="right-value"
+                               type="number"
+                               value="{{system.derivedStats.vigor.value}}" max="99" placeholder="0"
                                data-dtype="Number" disabled readonly/>
                     </div>
                 </div>

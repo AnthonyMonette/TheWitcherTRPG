@@ -225,8 +225,7 @@ export default class WitcherItem extends Item {
   }
 
   /**
-   * @param {string} skillName 
-   * @param {string} rollFormula 
+   * @param {string} rollFormula
    * @param {*} messageData 
    * @param {RollConfig} config 
    */
