@@ -7,7 +7,7 @@
                 {{#select system.general.homeland.value}}
                     <option value="Other">{{localize "WITCHER.background.other"}}</option>
                     {{#each system.config.homelands as |name value|}}
-                        <option value="{{name}}">{{name}}</option>
+                        <option value="{{value}}">{{localize (concat "WITCHER.Homelands." value "")}}</option>
                     {{/each}}
                 {{/select}}
             </select>
