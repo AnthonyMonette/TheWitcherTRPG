@@ -192,7 +192,8 @@ export default class WitcherActorSheet extends ActorSheet {
     html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
     html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
 
-    html.find(".export-loot").on("click", function () { exportLoot(thisActor) });
+    html.find(".export-loot").on("click", function () { exportLoot(thisActor, false) });
+    html.find(".export-loot-ext").on("click", function () { exportLoot(thisActor, true) });
 
     html.find(".init-roll").on("click", this._onInitRoll.bind(this));
     html.find(".crit-roll").on("click", this._onCritRoll.bind(this));

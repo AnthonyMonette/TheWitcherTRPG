@@ -1,4 +1,5 @@
 import { buttonDialog } from "../chat.js";
+import WitcherActor from "./WitcherActorSheet.js";
 
 function onChangeSkillList(actor) {
     let width = 600;
@@ -98,7 +99,34 @@ function onChangeSkillList(actor) {
     }, { width: width }).render(true)
 }
 
-async function exportLoot(actor) {
+
+async function getOrCreateFolder(extended) {
+    if (extended) {
+        let folderName = `${game.i18n.localize("WITCHER.Loot.Name")}`
+        let type = "Actor"
+        let f = game.folders.filter(f => f.type = type && f.name === folderName)
+        if (!f || f.length == 0) {
+            f = await Folder.create({
+                name: folderName,
+                sorting: "a",
+                content: [],
+                type: type,
+                parent: null
+            })
+        }
+        return f ? f : null
+    } else {
+        return null
+    }
+}
+
+/**
+ * 
+ * @param WitcherActor actor 
+ * @param Boolean extended 
+ * @returns 
+ */
+async function exportLoot(actor, extended) {
     let content = `${game.i18n.localize("WITCHER.Loot.MultipleExport")} <input type="number" class="small" name="multiple" value=1><br />`
     let cancel = true
     let multiplier = 0
@@ -114,13 +142,15 @@ async function exportLoot(actor) {
         content: content
     }
     await buttonDialog(dialogData)
+
     if (cancel) {
         return
     } else {
-
         let newLoot = await Actor.create(actor);
+        let folder = await getOrCreateFolder(extended)
+
         await newLoot.update({
-            "folder": null,
+            "folder": folder != null ? folder.id : null,
             "name": newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
             "type": "loot"
         });
@@ -135,14 +165,21 @@ async function exportLoot(actor) {
                 }
                 newQuantity = total
             } else {
-
                 newQuantity = Number(newQuantity) * multiplier
             }
-            item.update({ 'system.quantity': newQuantity })
+
+
+            let itemGeneratedFromRollTable = false
+            if (extended) {
+                itemGeneratedFromRollTable = item.checkIfItemHasRollTable(newQuantity)
+            }
+
+            if (!itemGeneratedFromRollTable) {
+                item.update({ 'system.quantity': newQuantity })
+            }
         });
 
         newLoot.sheet.render(true)
-
     }
 }
 
