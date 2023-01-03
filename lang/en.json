@@ -758,7 +758,7 @@
   "WITCHER.Loot.MultipleExport": "Export How Many Times?",
   "WITCHER.Loot.BuyTitle": "Buy/Sell Items",
   "WITCHER.Monster.exportLoot": "Export To loot",
-  "WITCHER.Monster.exportLootExt": "Export To loot(ext)",
+  "WITCHER.Monster.exportLootExt": "Export loot(ext)",
   "WITCHER.Monster.exportLootExtGenerated": "Item was successfully generated with help of roll table. It was added to the Loot sheet",
   "WITCHER.Monster.exportLootExtInvalidItemError": "Item doesn't exists in the compendium. Use standard loot generator instead",
   "WITCHER.Monster.exportLootExtToManyRollTablesError": "Too many roll tables for the item found in the compendium. Use standard loot generator instead",
