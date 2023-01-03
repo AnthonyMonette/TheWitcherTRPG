@@ -20,11 +20,13 @@ export default class WitcherActor extends Actor {
     if (tokens.length == 0) {
       if (game.user.character) {
         token = game.user.character.token
+      } else if (this.token) {
+        token = this.token
       } else {
         return ui.notifications.error(game.i18n.localize("WITCHER.Context.SelectActor"));
       }
     } else {
-      token = tokens[0]
+      token = tokens[0].document
     }
 
     return token;
@@ -65,7 +67,7 @@ export default class WitcherActor extends Actor {
       "alias": this.name,
       "actor": this,
       "scene": game.scenes.current,
-      "token": this.getControlledToken().document,
+      "token": this.getControlledToken(),
     };
   }
 

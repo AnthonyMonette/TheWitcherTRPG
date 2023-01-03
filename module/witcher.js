@@ -388,8 +388,10 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 					if (customAtt > 0) {
 						rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
 					}
-
-					await extendedRoll(rollFormula, messageData, new RollConfig())
+					let config = new RollConfig()
+					config.showCrit = true
+					config.showSuccess = true
+					await extendedRoll(rollFormula, messageData, config)
 				}
 			}
 		}
