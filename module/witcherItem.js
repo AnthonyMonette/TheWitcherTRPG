@@ -286,4 +286,59 @@ export default class WitcherItem extends Item {
     messageData.flavor += `<b>${craftedItemName}</b>`;
     roll.toMessage(messageData);
   }
+
+  /**
+   * 
+   * @param Number newQuantity 
+   * @returns info whether we generated item with the help of the roll table
+   */
+  async checkIfItemHasRollTable(newQuantity) {
+    // search for the compendium pack in the world roll tables by name of the generator
+    const compendiumPack = game.packs
+      .filter(p => p.metadata.type === "RollTable")
+      .filter(c => c.index.find(r => r.name === this.name && r.formula))
+
+    if (!compendiumPack || compendiumPack.length == 0) {
+      // Provided item does not have associatted roll table
+      // this item should appear in loot sheet as is
+      return false
+    } else if (compendiumPack.length == 1) {
+      // get id of the needed table generator in the compendium pack
+      const tableId = compendiumPack[0].index.getName(this.name)._id
+
+      for (let i = 0; i < newQuantity; i++) {
+        let roll = await compendiumPack[0].getDocument(tableId).then(el => el.roll())
+        let res = roll.results[0]
+        let pack = game.packs.get(res.documentCollection)
+        await pack.getIndex();
+        let genItem = await pack.getDocument(res.documentId)
+
+        if (!genItem) {
+          return ui.notifications.error(`${game.i18n.localize("WITCHER.Monster.exportLootExtInvalidItemError")}`)
+        }
+
+        // add generated item to the loot sheet
+        await Item.create(genItem, { parent: this.actor })
+
+        let successMessage = `${game.i18n.localize("WITCHER.Monster.exportLootExtGenerated")}: ${genItem.name}`
+        ui.notifications.info(`${successMessage}`)
+
+        //whisper info about generated items from the roll table
+        let chatData = {
+          user: game.user._id,
+          content: `${successMessage} ${res.getChatText()}`,
+          whisper: game.users.filter(u => u.isGM).map(u => u._id)
+        };
+        ChatMessage.create(chatData, {});
+      }
+
+      // remove basic item from the loot sheet
+      // this item used for generation the actual item from the roll table
+      await this.actor.items.get(this.id).delete()
+
+      return true
+    } else {
+      return ui.notifications.error(`${game.i18n.localize("WITCHER.Monster.exportLootExtToManyRollTablesError")}`)
+    }
+  }
 }
