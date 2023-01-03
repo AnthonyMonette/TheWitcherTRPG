@@ -3,9 +3,9 @@
   flex-wrap: wrap;
 }
 
-.monster-flex-small{
-    flex-grow:1;
-    flex-basis: 100%;
+.monster-flex-small {
+  flex-grow: 1;
+  flex-basis: 100%;
 }
 
 .monster-main {
@@ -15,10 +15,12 @@
 
 .monster-sheet-left-column {
   padding-right: 10px;
+  flex-grow: 1;
 }
 
 .monster-left-sidebar {
-  width: 155px;
+  flex-basis: 180px;
+  flex: none;
 }
 
 .monster-left-sidebar input {
@@ -26,6 +28,16 @@
   margin-right: 1px;
   margin-bottom: 1px;
   text-align: center;
+}
+
+.monster-stat-title label {
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.monster-stat-title {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .monster-stat-lable {
@@ -42,6 +54,8 @@
 
 .monster-stat-display {
   display: flex;
+  text-align: center;
+  justify-content: flex-end;
 }
 
 .monster-stat-button {
@@ -53,7 +67,6 @@
   padding: 5px;
   border-style: solid;
   border-width: 1px;
-  text-align: center;
 }
 
 .monster-stat-button:hover {
@@ -73,6 +86,7 @@
 
 .monster-armor {
   display: flex;
+  justify-content: flex-end;
 }
 
 .monster-armor label {
@@ -84,20 +98,23 @@
 
 .monster-custom {
   display: flex;
+  justify-content: flex-end;
 }
 
 .monster-custom label {
   margin: 5px;
+  width: 90px;
   font-weight: bold;
 }
 
 .monster-HPSTA {
   display: flex;
+  justify-content: flex-end;
 }
 
 .monster-HPSTA label {
   font-weight: bold;
-  width: 49px;
+  width: 65px;
   margin: 5px;
   display: flex;
   align-items: center;
@@ -105,7 +122,9 @@
 }
 
 .monster-header-center {
-  width: 380px;
+  min-width: 380px;
+  flex: none;
+  margin: 0 20px 0 20px;
 }
 
 .monster-center-top {
@@ -113,7 +132,9 @@
   margin-bottom: 1px;
 }
 
-.monster-center-top label, .monster-center-top select, .monster-center-top input {
+.monster-center-top label,
+.monster-center-top select,
+.monster-center-top input {
   font-weight: bold;
   text-align: center;
 }
@@ -132,7 +153,8 @@
   width: 110px;
 }
 
-.monster-difficulity,.monster-bounty {
+.monster-difficulity,
+.monster-bounty {
   width: 80px;
 }
 
@@ -145,7 +167,7 @@
   height: 545px;
 }
 
-.cat-img{
+.cat-img {
   position: absolute;
   height: 75px;
   width: 75px;
@@ -172,16 +194,68 @@
 
 .monster-knowledge {
   margin-top: 10px;
+  width: 380px;
   position: relative;
 }
 
-.monster-knowledge label, .monster-knowledge input {
+.monster-knowledge label,
+.monster-knowledge input {
   font-weight: bold;
   text-align: center;
 }
 
-.monster-right-top {
+.monster-right-sidebar {
+  flex-grow: 1;
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+}
+
+.monster-right-buttons {
   display: flex;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+
+.monster-right-attributes {
+  font-size: 15px;
+}
+
+.monster-right-attributes .right-element {
+  height: 45px;
+  width: 45px;
+  margin: 0 0 5px 5px;
+}
+
+.monster-right-attributes .right-image {
+  height: 100%;
+}
+
+.monster-right-attributes .right-value {
+  font-size: 15px;
+  bottom: 40px;
+  position: relative;
+  left: 20px;
+}
+
+.monster-right-attributes .death-section {
+  margin: 10px 0 0 20px
+}
+
+.monster-right-top {
+  padding: 10px;
+  flex-basis: 270px;
+  background-color: lightslategrey;
+  border-radius: 10px;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.monster-right-row {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .monster-crit-wounds-section {
@@ -190,6 +264,11 @@
 
 .monster-button-roll {
   width: 126.5px;
+}
+
+.monster-button-collum {
+  width: 115px;
+  margin-left: 2.5px;
 }
 
 .monster-button-roll a {
@@ -204,7 +283,7 @@
   border-style: solid;
   border-color: white;
   border-width: 1px;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .monster-button-roll a:hover {

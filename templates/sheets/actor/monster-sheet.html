@@ -1,235 +1,281 @@
-<div class="flex">
-    <div class="monster-sheet-left-column">
-        <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-        <div class="monster-main">
-            <div class="monster-left-sidebar">
-                <div>
-                    <label class="monster-stat-lable">{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
-                    <label class="monster-stat-modmax">{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
-                </div>
-                {{#each system.stats as |details stat|}}
-                    {{#unless (eq stat "luck")}}
-                        <div class="stat-display monster-stat-display" data-stat="{{stat}}">
-                            <div>
-                                <div class="flex">
-                                    <label><a class="monster-stat-button stat-roll">{{localize
-                                            details.label}}</a></label>
-                                    <input class="small" name="system.stats.{{stat}}.current" type="number"
-                                           value="{{details.current}}" placeholder="0" data-dtype="Number"/>
-                                    <input class="small stat-max" name="system.stats.{{stat}}.max" type="number"
-                                           value="{{details.max}}" placeholder="0" data-dtype="Number"/>
+<div class="monster-sheet-left-column">
+    <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+</div>
+<div class="flex monster-main">
+    <div class="monster-left-sidebar">
+        <div class="monster-stat-title margin-right">
+            <label>{{localize "WITCHER.Actor.StatTitle.LableLeft"}}</label>
+            <label>{{localize "WITCHER.Actor.StatTitle.ModMax"}}</label>
+        </div>
+        {{#each system.stats as |details stat|}}
+            {{#unless (eq stat "luck")}}
+                <div class="stat-display monster-stat-display" data-stat="{{stat}}">
+                    <div>
+                        <div class="flex">
+                            <a class="monster-stat-button stat-roll">{{localize details.label}}</a>
+                            <input class="header-stat" name="system.stats.{{stat}}.current" type="number"
+                                   value="{{details.current}}" placeholder="0" data-dtype="Number" disabled readonly/>
+                            <input class="header-stat stat-max" name="system.stats.{{stat}}.max" type="number"
+                                   value="{{details.max}}" placeholder="0" data-dtype="Number"/>
 
-                                    {{#if details.isOpened}}
-                                        <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
-                                    {{else}}
-                                        <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
-                                    {{/if}}
-                                </div>
-                                {{#if details.isOpened}}
-                                    <a class="add-modifier"><i class="fas fa-plus"></i></a>
-                                    {{#each details.modifiers as |modifier value|}}
-                                        <div class="list-modifiers" data-id="{{modifier.id}}">
-                                            <input class="medium list-mod-edit" data-field="name" type="text"
-                                                   value="{{modifier.name}}"/>
-                                            <input class="small list-mod-edit" data-field="value" type="number"
-                                                   value="{{modifier.value}}"/>
-                                            <a class="delete-stat"><i class="fas fa-trash-alt"
-                                                                      data-id="{{modifier.id}}"></i></a>
-                                        </div>
-                                    {{/each}}
-                                {{/if}}
-                            </div>
+                            {{#if details.isOpened}}
+                                <a class="stat-modifier-display"><i class="fas fa-chevron-down"></i></a>
+                            {{else}}
+                                <a class="stat-modifier-display"><i class="fas fa-chevron-right"></i></a>
+                            {{/if}}
                         </div>
-                    {{/unless}}
-                {{/each}}
-                <hr/>
-                {{#each system.coreStats as |details coreStat|}}
-                    <div class="monster-stat-display">
-                        <label>{{localize details.label}}</label>
-                        <input class="small" name="system.coreStats.{{coreStat}}.current" type="number"
-                               value="{{details.current}}" placeholder="0" data-dtype="Number" readonly/>
-                        <input class="small" name="system.coreStats.{{coreStat}}.max" type="number"
-                               value="{{details.max}}" placeholder="0" data-dtype="Number" readonly/>
-                    </div>
-                {{/each}}
-                <div class="monster-stat-display">
-                    <label>{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
-                    <input class="small" name="system.derivedStats.vigor.value" type="number"
-                           value="{{system.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
-                </div>
-                <hr/>
-                <div class="monster-custom">
-                    <label>{{localize "WITCHER.Monster.CustomHP/STA"}}</label>
-                    <input class="small" type="checkbox" name="system.customStat"  {{checked system.customStat}}/>
-                </div>
-                <div class="monster-HPSTA">
-                    <label>{{localize "WITCHER.Actor.Hp"}}</label>
-                    <input class="small" name="system.derivedStats.hp.value" type="number"
-                           value="{{system.derivedStats.hp.value}}"/>
-                    /
-                    <input class="small" name="system.derivedStats.hp.max" type="number"
-                           value="{{system.derivedStats.hp.max}}"/>
-                </div>
-                <div class="monster-HPSTA">
-                    <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label>
-                    <input class="small" name="system.derivedStats.sta.value" type="number"
-                           value="{{system.derivedStats.sta.value}}"/>
-                    /
-                    <input class="small" name="system.derivedStats.sta.max" type="number"
-                           value="{{system.derivedStats.sta.max}}"/>
-                </div>
-                {{#if useVerbalCombat}}
-                    <div class="monster-HPSTA">
-                        <label>{{localize "WITCHER.Actor.DerStat.Resolve"}}</label>
-                        <input class="small" name="system.derivedStats.resolve.value" type="number"
-                               value="{{system.derivedStats.resolve.value}}"/>
-                        /
-                        <input class="small" name="system.derivedStats.resolve.max" type="number"
-                               value="{{system.derivedStats.resolve.max}}"/>
-                    </div>
-                {{/if}}
-                <div>
-                    <div class="monster-armor">
-                        <label>{{localize "WITCHER.Monster.HeadArmor"}}</label>
-                        <input class="small" name="system.armorHead" type="number" value="{{system.armorHead}}"
-                               placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="monster-armor">
-                        <label>{{localize "WITCHER.Monster.UpperArmor"}}</label>
-                        <input class="small" name="system.armorUpper" type="number" value="{{system.armorUpper}}"
-                               placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="monster-armor">
-                        <label>{{localize "WITCHER.Monster.LowerArmor"}}</label>
-                        <input class="small" name="system.armorLower" type="number" value="{{system.armorLower}}"
-                               placeholder="0" data-dtype="Number"/>
-                    </div>
-                    <div class="monster-armor">
-                        <label>{{localize "WITCHER.Monster.WingTailArmor"}}</label>
-                        <input class="small" name="system.armorTailWing" type="number" value="{{system.armorTailWing}}"
-                               placeholder="0" data-dtype="Number"/>
-                    </div>
-                </div>
-            </div>
-            <div class="monster-header-center">
-                <div class="monster-center-top">
-                    <div class="monster-type">
-                        <label>{{localize "WITCHER.Monster.Type.Lable"}}</label>
-                        <select name="system.category">
-                            {{#select system.category}}
-                                {{#each config.MonsterTypes as | name value|}}
-                                    <option value="{{value}}">{{localize name}}</option>
-                                {{/each}}
-                            {{/select}}
-                        </select>
-                    </div>
-                    <div class="monster-difficulity">
-                        <label>{{localize "WITCHER.Monster.Difficulty"}}</label>
-                        <select name="system.threat">
-                            {{#select system.threat}}
-                                <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
-                                <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
-                                <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
-                                <option value="exeptional">{{localize "WITCHER.Monster.Exeptional"}}</option>
-                            {{/select}}
-                        </select>
-                    </div>
-                    <div class="monster-complexity">
-                        <label>{{localize "WITCHER.Monster.Complexity"}}</label>
-                        <select name="system.difficulty">
-                            {{#select system.difficulty}}
-                                <option value="simple">{{localize "WITCHER.Monster.Simple"}}</option>
-                                <option value="complex">{{localize "WITCHER.Monster.Complex"}}</option>
-                                <option value="difficult">{{localize "WITCHER.Monster.Difficult"}}</option>
-                            {{/select}}
-                        </select>
-                    </div>
-                    <div class="monster-bounty">
-                        <label>{{localize "WITCHER.Monster.Bounty"}}</label>
-                        <input name="system.bounty" type="text" value="{{system.bounty}}"/>
-                    </div>
-                </div>
-                <div class="img-view">
-                    {{#if (eq system.category "Humanoid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Humanoids.png" class="cat-img"/>
-                    {{else if (eq system.category "Necrophage")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Necrophages.png" class="cat-img"/>
-                    {{else if (eq system.category "Specter")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Specters.png" class="cat-img"/>
-                    {{else if (eq system.category "Beast")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Beasts.png" class="cat-img"/>
-                    {{else if (eq system.category "CursedOne")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/CursedOnes.png" class="cat-img"/>
-                    {{else if (eq system.category "Hybrid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Hybrids.png" class="cat-img"/>
-                    {{else if (eq system.category "Insectoid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Insectoids.png" class="cat-img"/>
-                    {{else if (eq system.category "Elementa")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Elementa.png" class="cat-img"/>
-                    {{else if (eq system.category "Relict")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Relicts.png" class="cat-img"/>
-                    {{else if (eq system.category "Ogroid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Ogroids.png" class="cat-img"/>
-                    {{else if (eq system.category "Draconid")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Draconids.png" class="cat-img"/>
-                    {{else if (eq system.category "Vampire")}}
-                        <img src="systems/TheWitcherTRPG/assets/images/Monsters/Vampires.png" class="cat-img"/>
-                    {{/if}}
-                    <table class="monster-info">
-                        <tr>
-                            <td>{{localize "WITCHER.Monster.Height"}}</td>
-                            <td><input type="text" name="system.height" value="{{system.height}}"/></td>
-                        </tr>
-                        <tr>
-                            <td>{{localize "WITCHER.Monster.Weight"}}</td>
-                            <td><input type="text" name="system.weight" value="{{system.weight}}"/></td>
-                        </tr>
-                        <tr>
-                            <td>{{localize "WITCHER.Monster.Environment"}} </td>
-                            <td><input type="text" name="system.environment" value="{{system.environment}}"/></td>
-                        </tr>
-                        <tr>
-                            <td>{{localize "WITCHER.Monster.Intelligence"}}</td>
-                            <td><input type="text" name="system.intelligence" value="{{system.intelligence}}"/></td>
-                        </tr>
-                        <tr>
-                            <td>{{localize "WITCHER.Monster.Organization"}} </td>
-                            <td><input type="text" name="system.organization" value="{{system.organization}}"/></td>
-                        </tr>
-                    </table>
-                    <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
-                </div>
-                <div class="monster-knowledge">
-                    <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}
-                        <input class="skill-value"
-                               name="system.commonSkillValue"
-                               type="number"
-                               value="{{system.commonSkillValue}}"
-                               data-dtype="Number"/>
-                    </label>
-                    {{editor system.common target="system.common" button=true editable=editable}}
-                    <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}
-                        <input class="skill-value"
-                               name="system.monsterLoreSkillValue"
-                               type="number"
-                               value="{{system.monsterLoreSkillValue}}"
-                               data-dtype="Number"/>
-                    </label>
-                    {{editor system.monsterLore target="system.monsterLore" button=true editable=editable}}
-                </div>
-            </div>
-            <div class="monster-right-sidebar">
-                <div class="monster-right-top">
-                    <div class="monster-button-roll">
-                        <a class="init-roll">{{localize "WITCHER.Actor.Initiative"}}</a>
-                        <a class="death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
-                    </div>
-                    <div class="monster-button-roll">
-                        <a class="crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
-                        <a class="defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
-                        {{#if useVerbalCombat}}
-                            <a class="button-roll verbal-button">{{localize "WITCHER.verbalCombat.Title"}}</a>
+                        {{#if details.isOpened}}
+                            <a class="add-modifier"><i class="fas fa-plus"></i></a>
+                            {{#each details.modifiers as |modifier value|}}
+                                <div class="list-modifiers" data-id="{{modifier.id}}">
+                                    <input class="medium list-mod-edit" data-field="name" type="text"
+                                           value="{{modifier.name}}"/>
+                                    <input class="small list-mod-edit" data-field="value" type="number"
+                                           value="{{modifier.value}}"/>
+                                    <a class="delete-stat">
+                                        <i class="fas fa-trash-alt" data-id="{{modifier.id}}"></i>
+                                    </a>
+                                </div>
+                            {{/each}}
                         {{/if}}
+                    </div>
+                </div>
+            {{/unless}}
+        {{/each}}
+        <hr/>
+        {{#each system.coreStats as |details coreStat|}}
+            <div class="monster-stat-display margin-right">
+                <label>{{localize details.label}}</label>
+                <input class="small" name="system.coreStats.{{coreStat}}.current" type="number"
+                       value="{{details.current}}" placeholder="0" data-dtype="Number" disabled readonly/>
+                <input class="small" name="system.coreStats.{{coreStat}}.max" type="number"
+                       value="{{details.max}}" placeholder="0" data-dtype="Number" disabled readonly/>
+            </div>
+        {{/each}}
+        <div class="monster-stat-display margin-right">
+            <label>{{localize "WITCHER.Actor.DerStat.Vigor"}}</label>
+            <input class="small" name="system.derivedStats.vigor.value"
+                   type="number"
+                   value="{{system.derivedStats.vigor.value}}" placeholder="0" data-dtype="Number"/>
+        </div>
+        <hr/>
+        <div class="monster-custom margin-right">
+            <label>{{localize "WITCHER.Monster.CustomHP/STA"}}</label>
+            <input class="small" type="checkbox" name="system.customStat"  {{checked system.customStat}}/>
+        </div>
+        <div class="monster-HPSTA margin-right">
+            <label>{{localize "WITCHER.Actor.Hp"}}</label>
+            <input class="small" name="system.derivedStats.hp.value" type="number"
+                   value="{{system.derivedStats.hp.value}}" data-dtype="Number"/>
+            /
+            <input class="small" name="system.derivedStats.hp.max" type="number"
+                   value="{{system.derivedStats.hp.max}}" data-dtype="Number"/>
+        </div>
+        <div class="monster-HPSTA margin-right">
+            <label>{{localize "WITCHER.Actor.DerStat.Sta"}}</label>
+            <input class="small" name="system.derivedStats.sta.value" type="number"
+                   value="{{system.derivedStats.sta.value}}" data-dtype="Number"/>
+            /
+            <input class="small" name="system.derivedStats.sta.max" type="number"
+                   value="{{system.derivedStats.sta.max}}" data-dtype="Number"/>
+        </div>
+        {{#if useVerbalCombat}}
+            <div class="monster-HPSTA margin-right">
+                <label>{{localize "WITCHER.Actor.DerStat.Resolve"}}</label>
+                <input class="small" name="system.derivedStats.resolve.value" type="number"
+                       value="{{system.derivedStats.resolve.value}}" data-dtype="Number"/>
+                /
+                <input class="small" name="system.derivedStats.resolve.max" type="number"
+                       value="{{system.derivedStats.resolve.max}}" data-dtype="Number"/>
+            </div>
+        {{/if}}
+        <div>
+            <div class="monster-armor margin-right">
+                <label>{{localize "WITCHER.Monster.HeadArmor"}}</label>
+                <input class="small" name="system.armorHead" type="number" value="{{system.armorHead}}"
+                       placeholder="0" data-dtype="Number"/>
+            </div>
+            <div class="monster-armor margin-right">
+                <label>{{localize "WITCHER.Monster.UpperArmor"}}</label>
+                <input class="small" name="system.armorUpper" type="number" value="{{system.armorUpper}}"
+                       placeholder="0" data-dtype="Number"/>
+            </div>
+            <div class="monster-armor margin-right">
+                <label>{{localize "WITCHER.Monster.LowerArmor"}}</label>
+                <input class="small" name="system.armorLower" type="number" value="{{system.armorLower}}"
+                       placeholder="0" data-dtype="Number"/>
+            </div>
+            <div class="monster-armor margin-right">
+                <label>{{localize "WITCHER.Monster.WingTailArmor"}}</label>
+                <input class="small" name="system.armorTailWing" type="number" value="{{system.armorTailWing}}"
+                       placeholder="0" data-dtype="Number"/>
+            </div>
+        </div>
+    </div>
+    <div class="monster-header-center">
+        <div class="monster-center-top">
+            <div class="monster-type">
+                <label>{{localize "WITCHER.Monster.Type.Lable"}}</label>
+                <select name="system.category">
+                    {{#select system.category}}
+                        {{#each config.MonsterTypes as | name value|}}
+                            <option value="{{value}}">{{localize name}}</option>
+                        {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            <div class="monster-difficulity">
+                <label>{{localize "WITCHER.Monster.Difficulty"}}</label>
+                <select name="system.threat">
+                    {{#select system.threat}}
+                        <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
+                        <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
+                        <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
+                        <option value="exeptional">{{localize "WITCHER.Monster.Exeptional"}}</option>
+                    {{/select}}
+                </select>
+            </div>
+            <div class="monster-complexity">
+                <label>{{localize "WITCHER.Monster.Complexity"}}</label>
+                <select name="system.difficulty">
+                    {{#select system.difficulty}}
+                        <option value="simple">{{localize "WITCHER.Monster.Simple"}}</option>
+                        <option value="complex">{{localize "WITCHER.Monster.Complex"}}</option>
+                        <option value="difficult">{{localize "WITCHER.Monster.Difficult"}}</option>
+                    {{/select}}
+                </select>
+            </div>
+            <div class="monster-bounty">
+                <label>{{localize "WITCHER.Monster.Bounty"}}</label>
+                <input name="system.bounty" type="text" value="{{system.bounty}}"/>
+            </div>
+        </div>
+        <div class="img-view">
+            {{#if (eq system.category "Humanoid")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Humanoids.png" class="cat-img"/>
+            {{else if (eq system.category "Necrophage")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Necrophages.png" class="cat-img"/>
+            {{else if (eq system.category "Specter")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Specters.png" class="cat-img"/>
+            {{else if (eq system.category "Beast")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Beasts.png" class="cat-img"/>
+            {{else if (eq system.category "CursedOne")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/CursedOnes.png" class="cat-img"/>
+            {{else if (eq system.category "Hybrid")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Hybrids.png" class="cat-img"/>
+            {{else if (eq system.category "Insectoid")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Insectoids.png" class="cat-img"/>
+            {{else if (eq system.category "Elementa")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Elementa.png" class="cat-img"/>
+            {{else if (eq system.category "Relict")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Relicts.png" class="cat-img"/>
+            {{else if (eq system.category "Ogroid")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Ogroids.png" class="cat-img"/>
+            {{else if (eq system.category "Draconid")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Draconids.png" class="cat-img"/>
+            {{else if (eq system.category "Vampire")}}
+                <img src="systems/TheWitcherTRPG/assets/images/Monsters/Vampires.png" class="cat-img"/>
+            {{/if}}
+            <table class="monster-info">
+                <tr>
+                    <td>{{localize "WITCHER.Monster.Height"}}</td>
+                    <td><input type="text" name="system.height" value="{{system.height}}"/></td>
+                </tr>
+                <tr>
+                    <td>{{localize "WITCHER.Monster.Weight"}}</td>
+                    <td><input type="text" name="system.weight" value="{{system.weight}}"/></td>
+                </tr>
+                <tr>
+                    <td>{{localize "WITCHER.Monster.Environment"}} </td>
+                    <td><input type="text" name="system.environment" value="{{system.environment}}"/></td>
+                </tr>
+                <tr>
+                    <td>{{localize "WITCHER.Monster.Intelligence"}}</td>
+                    <td><input type="text" name="system.intelligence" value="{{system.intelligence}}"/></td>
+                </tr>
+                <tr>
+                    <td>{{localize "WITCHER.Monster.Organization"}} </td>
+                    <td><input type="text" name="system.organization" value="{{system.organization}}"/></td>
+                </tr>
+            </table>
+            <img class="monster-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+        </div>
+        <div class="monster-knowledge">
+            <label>{{localize "WITCHER.Monster.CommonerSupperstition"}}
+                <input class="skill-value"
+                       name="system.commonSkillValue"
+                       type="number"
+                       value="{{system.commonSkillValue}}"
+                       data-dtype="Number"/>
+            </label>
+            {{editor system.common target="system.common" button=true editable=editable}}
+            <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}
+                <input class="skill-value"
+                       name="system.monsterLoreSkillValue"
+                       type="number"
+                       value="{{system.monsterLoreSkillValue}}"
+                       data-dtype="Number"/>
+            </label>
+            {{editor system.monsterLore target="system.monsterLore" button=true editable=editable}}
+        </div>
+    </div>
+    <div class="monster-right-sidebar">
+        <div class="monster-right-top">
+            <div class="monster-right-buttons">
+                <div class="monster-button-collum">
+                    <a class="button-roll init-roll">{{localize "WITCHER.Actor.Initiative"}}</a>
+                    <a class="button-roll death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
+                </div>
+                <div class="monster-button-collum">
+                    <a class="button-roll crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
+                    <a class="button-roll defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
+                    {{#if useVerbalCombat}}
+                        <a class="button-roll verbal-button">{{localize "WITCHER.verbalCombat.Title"}}</a>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="monster-right-attributes">
+                <div class="monster-right-row">
+                    <div class="right-element" title="{{localize "WITCHER.Actor.Hp"}}">
+                        {{#if system.deathStateApplied}}
+                            <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-dead.png"/>
+                        {{/if}}
+                        {{#if system.woundTresholdApplied}}
+                            {{#unless system.deathStateApplied}}
+                                <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-down.png"/>
+                            {{/unless}}
+                        {{else}}
+                            {{#unless system.deathStateApplied}}
+                                <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health.png"/>
+                            {{/unless}}
+                        {{/if}}
+                        <input class="right-value hp-value"
+                               type="number"
+                               value="{{system.derivedStats.hp.value}}"
+                               max="99" placeholder="0" data-dtype="Number" disabled readonly/>
+                    </div>
+                    <div class="right-element" title="{{localize "WITCHER.Actor.Stamina"}}">
+                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
+                        <input class="right-value"
+                               type="number"
+                               value="{{system.derivedStats.sta.value}}"
+                               max="99" placeholder="0" data-dtype="Number" disabled readonly/>
+                    </div>
+                    {{#if useVerbalCombat}}
+                        <div class="right-element" title="{{localize "WITCHER.Actor.DerStat.Resolve"}}">
+                            <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
+                            <input class="right-value"
+                                   type="number"
+                                   value="{{system.derivedStats.resolve.value}}" max="99" placeholder="0"
+                                   data-dtype="Number" disabled readonly/>
+                        </div>
+                    {{/if}}
+                    <div class="right-element" title="{{localize "WITCHER.Actor.DerStat.Vigor"}}">
+                        <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
+                        <input class="right-value"
+                               type="number"
+                               value="{{system.derivedStats.vigor.value}}" max="99" placeholder="0"
+                               data-dtype="Number" disabled readonly/>
                     </div>
                 </div>
                 <div class="death-section">
@@ -281,29 +327,31 @@
                     {{/if}}
                     <a class="death-plus"><i class="fas fa-plus"></i></a>
                 </div>
-                <nav class="sheet-tabs tabs" data-group="primary">
-                    <a class="item" data-tab="skills"> {{localize "WITCHER.Monster.SkillTab"}}</a>
-                    <a class="item" data-tab="inventory">{{localize "WITCHER.Monster.InventoryTab"}} </a>
-                    <a class="item" data-tab="details"> {{localize "WITCHER.Monster.DetailsTab"}}</a>
-                    <a class="item" data-tab="spells"> {{localize "WITCHER.Monster.SpellsTab"}}</a>
-                </nav>
-
-                {{! Sheet Body }}
-                <section class="sheet-body">
-                    <div class="tab" data-group="primary" data-tab="skills">
-                        {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html"}}
-                    </div>
-                    <div class="tab" data-group="primary" data-tab="inventory">
-                        {{>"systems/TheWitcherTRPG/templates/partials/monster-inventory-tab.html"}}
-                    </div>
-                    <div class="tab" data-group="primary" data-tab="details">
-                        {{>"systems/TheWitcherTRPG/templates/partials/monster-details-tab.html"}}
-                    </div>
-                    <div class="tab" data-group="primary" data-tab="spells">
-                        {{> "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html"}}
-                    </div>
-                </section>
             </div>
         </div>
+
+
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="skills"> {{localize "WITCHER.Monster.SkillTab"}}</a>
+            <a class="item" data-tab="inventory">{{localize "WITCHER.Monster.InventoryTab"}} </a>
+            <a class="item" data-tab="details"> {{localize "WITCHER.Monster.DetailsTab"}}</a>
+            <a class="item" data-tab="spells"> {{localize "WITCHER.Monster.SpellsTab"}}</a>
+        </nav>
+
+        {{! Sheet Body }}
+        <section class="sheet-body">
+            <div class="tab" data-group="primary" data-tab="skills">
+                {{> "systems/TheWitcherTRPG/templates/partials/monster-skill-tab.html"}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="inventory">
+                {{>"systems/TheWitcherTRPG/templates/partials/monster-inventory-tab.html"}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="details">
+                {{>"systems/TheWitcherTRPG/templates/partials/monster-details-tab.html"}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="spells">
+                {{> "systems/TheWitcherTRPG/templates/partials/monster-spell-tab.html"}}
+            </div>
+        </section>
     </div>
 </div>
