@@ -11,9 +11,8 @@
 .crit-wounds-table textarea {
     resize: vertical;
 }
-  
-.add-crit,
 
+.add-crit,
 .delete-crit {
     margin: 5px;
     width: 15px;

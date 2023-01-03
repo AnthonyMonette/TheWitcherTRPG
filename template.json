@@ -157,6 +157,7 @@
             "modifiers": []
           },
           "vigor": {
+            "max": 0,
             "value": 0,
             "label": "WITCHER.Actor.DerStat.Vigor",
             "modifiers": []
@@ -1283,7 +1284,7 @@
       "danger": "",
       "liftRequirement": "",
       "sideEffect": "",
-      "createTemplate" : false,
+      "createTemplate": false,
       "templateSize": "",
       "templateType": "",
       "causeDamages": false,

@@ -81,11 +81,15 @@
             {{/each}}
         </table>
         <div>
-            <b>{{localize "WITCHER.Actor.TotalSkill"}} <input class="total-skills" name="totalSkills" type="number"
-                                                              value="{{totalSkills}}" placeholder="0" readonly/> </b>
-            <b>{{localize "WITCHER.Actor.TotalProfSkill"}} <input class="total-skills" name="totalProfSkills"
+            <b>{{localize "WITCHER.Actor.TotalSkill"}} <input class="total-skills small" name="totalSkills"
+                                                              type="number"
+                                                              value="{{totalSkills}}" placeholder="0"
+                                                              readonly disabled/> </b>
+            <br/>
+            <b>{{localize "WITCHER.Actor.TotalProfSkill"}} <input class="total-skills small" name="totalProfSkills"
                                                                   type="number" value="{{totalProfSkills}}"
-                                                                  placeholder="0" readonly/> </b>
+                                                                  placeholder="0"
+                                                                  readonly disabled/> </b>
         </div>
     </div>
 </div>

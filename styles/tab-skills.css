@@ -1,5 +1,6 @@
 .skill-column {
     margin: 5px;
+    flex-grow: 1;
 }
 
 .char-skill {
@@ -7,7 +8,7 @@
 }
 
 .table-skills {
-    width: 175px;
+    min-width: 175px;
 }
 
 .char-skill a {

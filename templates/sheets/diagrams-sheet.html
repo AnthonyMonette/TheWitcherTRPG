@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="system.isFormulae" {{checked item.system.isFormulae}}/>
+                <input type="checkbox" name="system.isFormulae" {{checked item.system.isFormulae}} />
             </td>
             <td>
                 <select name="system.type" id="type-select">
@@ -35,7 +35,7 @@
                             <option value="elderfolk-weapon">{{localize "WITCHER.Diagram.ElderFolkWeapon"}}</option>
                             <option value="elderfolk-armor">{{localize "WITCHER.Diagram.ElderFolkArmor"}}</option>
                             <option value="Ammunition">{{localize "WITCHER.Diagram.Ammunition"}}</option>
-                            <option value="bomb">{{localize  "WITCHER.Diagram.Bomb"}}</option>
+                            <option value="bomb">{{localize "WITCHER.Diagram.Bomb"}}</option>
                             <option value="traps">{{localize "WITCHER.Diagram.Traps"}}</option>
                         {{/if}}
                     {{/select}}
@@ -66,6 +66,7 @@
             {{/unless}}
         </tr>
     </table>
+    {{>"systems/TheWitcherTRPG/templates/partials/associated-item.html"}}
     <div class="description">
         <label class="label-info"><b>{{localize "WITCHER.Item.Description"}}</b></label>
         {{editor item.system.description target="system.description" button=true editable=editable}}
@@ -99,7 +100,8 @@
                        value="{{item.system.alchemyComponents.hydragenum}}"/></td>
             <td><input type="number" name="system.alchemyComponents.vermilion"
                        value="{{item.system.alchemyComponents.vermilion}}"/></td>
-            <td><input type="number" name="system.alchemyComponents.sol" value="{{item.system.alchemyComponents.sol}}"/>
+            <td><input type="number" name="system.alchemyComponents.sol"
+                       value="{{item.system.alchemyComponents.sol}}"/>
             </td>
             <td><input type="number" name="system.alchemyComponents.caelum"
                        value="{{item.system.alchemyComponents.caelum}}"/></td>
@@ -111,7 +113,7 @@
         <tr>
             <table class="item-bottom-table">
                 <tr>
-                    <th><a class="add-component" title="{{localize "WITCHER.Item.AddComponent"}}"><i
+                    <th><a class="add-component" title="{{localize " WITCHER.Item.AddComponent"}}"><i
                             class="fas fa-plus"></i></a></th>
                     <th>{{localize "WITCHER.Diagram.components"}}</th>
                     <th><label>{{localize "WITCHER.Item.Quantity"}}</label></th>
@@ -119,13 +121,12 @@
                 {{#each item.system.craftingComponents as |component name|}}
                     <tr>
                         <th class="list-item" data-id="{{component.id}}">
-                            <a class="remove-component" title="{{localize "WITCHER.Item.RemoveComponent"}}"><i
+                            <a class="remove-component" title="{{localize " WITCHER.Item.RemoveComponent"}}"><i
                                     class="fas fa-minus"></i></a>
                         </th>
                         <td class="list-item" data-id="{{component.id}}">
-                            <input class="list-edit item-effect" data-field="name"
-                                   placeholder="{{localize "WITCHER.table.Name"}}" type="text"
-                                   value="{{component.name}}"/>
+                            <input class="list-edit item-effect" data-field="name" placeholder="{{localize "
+                            WITCHER.table.Name"}}" type="text" value="{{component.name}}"/>
                         </td>
                         <td class="list-item" data-id="{{component.id}}">
                             <input class="list-edit" data-field="quantity" type="number" placeholder="0"

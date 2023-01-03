@@ -1,0 +1,16 @@
+div.attack-sheet table {
+    table-layout:fixed;
+}
+
+div.attack-sheet table tr td {
+    word-wrap:break-all;
+}
+
+div.attack-sheet select {
+    max-width:90%;
+}
+
+h2 img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

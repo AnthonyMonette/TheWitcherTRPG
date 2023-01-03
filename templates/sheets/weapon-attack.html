@@ -1,13 +1,13 @@
 <form class="{{cssClass}} wepon_roll_sheet" autocomplete="off">
-    <h1>{{localize "WITCHER.Dialog.attackUse"}} {{attackSkill}}</h1>
-    <div class="flex">
+    <h1>{{localize "WITCHER.Dialog.attackUse"}}: {{attackSkill.alias}}</h1>
+    <div class="flex attack-sheet">
         <table>
             <tr>
                 <td>
                     <label>{{localize "WITCHER.Dialog.attackExtra"}}:</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="isExtraAttack"></input>
+                    <input type="checkbox" name="isExtraAttack">
                 </td>
             </tr>
             <tr>
@@ -20,63 +20,26 @@
                             <option value="slashing">{{localize "WITCHER.Armor.Slashing"}}</option>
                         {{/if}}
                         {{#if item.system.type.piercing}}
-                          <option value="piercing">{{localize "WITCHER.Armor.Piercing"}}</option>
+                            <option value="piercing">{{localize "WITCHER.Armor.Piercing"}}</option>
                         {{/if}}
                         {{#if item.system.type.bludgeoning}}
-                          <option value="bludgeoning">{{localize "WITCHER.Armor.Bludgeoning"}}</option>
+                            <option value="bludgeoning">{{localize "WITCHER.Armor.Bludgeoning"}}</option>
                         {{/if}}
                         {{#if item.system.type.elemental}}
-                          <option value="elemental">{{localize "WITCHER.Armor.Elemental"}}</option>
+                            <option value="elemental">{{localize "WITCHER.Armor.Elemental"}}</option>
                         {{/if}}
                         {{#if (or (eq item.system.type.elemental)(eq false item.system.type.piercing)(eq item.system.type.bludgeoning)(eq item.system.type.elemental))}}
-                          <option value="unavailable">{{localize "WITCHER.context.unavailable"}}</option>
+                            <option value="unavailable">{{localize "WITCHER.context.unavailable"}}</option>
                         {{/if}}
-                    </select>
-                </td>
-            </tr>
-            {{#if item.system.range}}
-            <tr>
-                <td colspan="2">
-                    <label>{{localize "WITCHER.Dialog.attackRange"}} ({{item.system.range}}):</label>
-                </td>
-            </tr>
-            {{/if}}
-        </table>
-        <table>
-            <tr>
-                <td>
-                    <label>{{localize "WITCHER.Dialog.attackLocation"}}:</label>
-                </td>
-                <td>
-                    <select name="location">
-                        <option value="randomHuman"> {{localize "WITCHER.Dialog.attackRandomHuman"}} </option>
-                        <option value="randomMonster"> {{localize "WITCHER.Dialog.attackRandomMonster"}} </option>
-                        <option value="head"> {{localize "WITCHER.Dialog.attackHead"}} </option>
-                        <option value="torso"> {{localize "WITCHER.Dialog.attackTorso"}} </option>
-                        <option value="L. Arm"> {{localize "WITCHER.Dialog.attackLArm"}} </option>
-                        <option value="R. Arm"> {{localize "WITCHER.Dialog.attackRArm"}} </option>
-                        <option value="L. Leg"> {{localize "WITCHER.Dialog.attackLLeg"}} </option>
-                        <option value="R. Leg"> {{localize "WITCHER.Dialog.attackRLeg"}} </option>
-                        <option value="tail"> {{localize "WITCHER.Dialog.attackTail"}} </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>{{localize "WITCHER.Dialog.attackStrike"}}:
-                </td>
-                <td>
-                    <select name="strike">
-                        <option value="normal"> {{localize "WITCHER.Dialog.strikeNormal"}} </option>
-                        <option value="fast"> {{localize "WITCHER.Dialog.strikeFast"}} </option>
-                        <option value="strong"> {{localize "WITCHER.Dialog.strikeStrong"}} </option>
-                        <option value="joint"> {{localize "WITCHER.Dialog.strikeJoint"}} </option>
                     </select>
                 </td>
             </tr>
             {{#if item.system.range}}
                 <tr>
-                    <td colspan="2">
+                    <td>
+                        <label>{{localize "WITCHER.Dialog.attackRange"}} ({{item.system.range}}):</label>
+                    </td>
+                    <td>
                         <select name="range">
                             <option value="none"> {{localize "WITCHER.Dialog.rangeNone"}} </option>
                             <option value="pointBlank"> {{localize "WITCHER.Dialog.rangePointBlank"}} </option>
@@ -89,10 +52,43 @@
                 </tr>
             {{/if}}
         </table>
+        <table>
+            <tr>
+                <td>
+                    <label>{{localize "WITCHER.Dialog.attackLocation"}}:</label>
+                </td>
+                <td>
+                    <select name="location" {{#if item.system.isThrowable}}disabled{{/if}}>
+                        <option value="randomHuman"> {{localize "WITCHER.Dialog.attackRandomHuman"}} </option>
+                        <option value="randomMonster"> {{localize "WITCHER.Dialog.attackRandomMonster"}} </option>
+                        <option value="Head"> {{localize "WITCHER.Dialog.attackHead"}} </option>
+                        <option value="Torso"> {{localize "WITCHER.Dialog.attackTorso"}} </option>
+                        <option value="L. Arm"> {{localize "WITCHER.Dialog.attackLArm"}} </option>
+                        <option value="R. Arm"> {{localize "WITCHER.Dialog.attackRArm"}} </option>
+                        <option value="L. Leg"> {{localize "WITCHER.Dialog.attackLLeg"}} </option>
+                        <option value="R. Leg"> {{localize "WITCHER.Dialog.attackRLeg"}} </option>
+                        <option value="Tail/Wing"> {{localize "WITCHER.Dialog.attackTail"}} </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>{{localize "WITCHER.Dialog.attackStrike"}}:</label>
+                </td>
+                <td>
+                    <select name="strike" {{#if item.system.isThrowable}}disabled{{/if}}>
+                        <option value="normal"> {{localize "WITCHER.Dialog.strikeNormal"}} </option>
+                        <option value="fast"> {{localize "WITCHER.Dialog.strikeFast"}} </option>
+                        <option value="strong"> {{localize "WITCHER.Dialog.strikeStrong"}} </option>
+                        <option value="joint"> {{localize "WITCHER.Dialog.strikeJoint"}} </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
     </div>
     <h2>{{localize "WITCHER.Dialog.attackModifiers"}}</h2>
     <div class="flex">
-        <table >
+        <table>
             <tr>
                 <td>
                     <label>{{localize "WITCHER.Dialog.attackOutsideLOS"}} (+3)</label>
@@ -130,7 +126,7 @@
                     <label>{{localize "WITCHER.Dialog.attackIsAiming"}} (+1/round)</label>
                 </td>
                 <td>
-                    <input  type="number" class="small" name="customAim" value=0>
+                    <input type="number" class="small" name="customAim" value=0>
                 </td>
             </tr>
             <tr>
@@ -205,11 +201,15 @@
                 </td>
                 <td>
                     <input type="checkbox" name="isFastDraw">
-                </td>            
+                </td>
             </tr>
         </table>
     </div>
-    <h2>{{item.name}} {{localize "WITCHER.Dialog.attackDamage"}}: {{displayDmgFormula}}</h2>
+    <h2 class="flex">
+        <img class="item-img" src="{{item.img}}" title="{{item.name}}"/>
+        {{item.name}} <br/>
+        {{localize "WITCHER.Dialog.attackDamage"}}: {{displayDmgFormula}}
+    </h2>
     <div class="flex">
         <table>
             <tr>
@@ -234,22 +234,33 @@
                 {{#if item.system.usingAmmo}}
                     {{#if (eq noAmmo 1)}}
                         <td>
-                            <label class="error-display">{{localize "WITCHER.Dialog.NoAmmunation"}}</lable>
+                            <label class="error-display">{{localize "WITCHER.Dialog.NoAmmunition"}}</label>
                         </td>
-                        {{else}}
+                    {{else}}
                         <td>
                             <label>{{localize "WITCHER.Dialog.Ammunition"}}:</label>
                         </td>
                         <td>
-                            <select name="ammunation">
+                            <select name="ammunition">
                                 {{{ammunitionOption}}}
                             </select>
+                        </td>
+                    {{/if}}
+                {{/if}}
+                {{#if item.system.isThrowable}}
+                    {{#if noThrowable }}
+                        <td>
+                            <label class="error-display">{{localize "WITCHER.Dialog.NoThrowable"}}</label>
+                        </td>
+                    {{else}}
+                        <td>
+                            <label><b>{{localize "WITCHER.Dialog.Throwable"}}</b></label>
                         </td>
                     {{/if}}
                 {{/if}}
             </tr>
         </table>
     </div>
-{{log "!!!!! DOCUMENT DATA !!!!!"}}
-{{log this}}
+    {{log "!!!!! DOCUMENT DATA !!!!!"}}
+    {{log this}}
 </form>

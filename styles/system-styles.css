@@ -8,14 +8,14 @@
 
 
 /* Navigation tabs */
-.sheet nav.sheet-tabs { 
+.sheet nav.sheet-tabs {
   height: 32px;
   flex: 0 0 32px;
   margin: 4px 0;
   line-height: 32px;
   border-top: 1px solid #06171E;
   border-bottom: 1px solid #06171E;
-  background-color:#1C6888;
+  background-color: #1C6888;
   color: white;
   text-align: center;
 }
@@ -25,6 +25,7 @@
   min-width: 555px;
   min-height: 400px;
 }
+
 .witcher.sheet.item {
   min-width: 460px;
   min-height: 400px;
@@ -39,16 +40,20 @@
   border-bottom: 1px solid #000;
   background-color: #1C6888;
 }
-.item-spell .window-header{
+
+.item-spell .window-header {
   background-color: #AB0D55;
 }
-.item-diagrams .window-header{
+
+.item-diagrams .window-header {
   background-color: #80471B;
 }
-.item-component .window-header{
+
+.item-component .window-header {
   background-color: #80471B;
 }
-.item-mutagen .window-header{
+
+.item-mutagen .window-header {
   background-color: #2A4E0A;
 }
 
@@ -56,7 +61,7 @@
   display: flex;
 }
 
-.hp-content{
+.hp-content {
   margin-bottom: -20px;
 }
 
@@ -69,6 +74,7 @@
 .armor-display input {
   width: 35px;
 }
+
 .armor-display label {
   width: 95px;
   display: flex;
@@ -90,7 +96,7 @@
   width: 90%;
 }
 
-.preffesion-notes .editor{
+.preffesion-notes .editor {
   height: 200px;
 }
 
@@ -103,7 +109,7 @@ input.profession-skill-input {
   color: white;
 }
 
-.defining-skill-select{
+.defining-skill-select {
   background-color: grey;
   color: white;
 }
@@ -119,7 +125,7 @@ input.profession-skill-input {
   background-color: lightgrey;
 }
 
-.first-path-select{
+.first-path-select {
   background-color: blue;
   color: white;
 }
@@ -135,7 +141,7 @@ input.profession-skill-input {
   background-color: lightskyblue;
 }
 
-.second-path-select{
+.second-path-select {
   background-color: green;
   color: white;
 }
@@ -151,10 +157,11 @@ input.profession-skill-input {
   background-color: lightgreen;
 }
 
-.third-path-select{
+.third-path-select {
   background-color: red;
   color: white;
 }
+
 .third-path-header {
   background-color: red;
   color: white;
@@ -166,7 +173,7 @@ input.profession-skill-input {
   background-color: lightcoral;
 }
 
-input.item-quantity{
+input.item-quantity {
   width: 30px;
 }
 
@@ -182,6 +189,11 @@ input.item-quantity{
   flex: 1;
 }
 
+.weapon-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .item-info {
   width: 380px;
   background-color: lightgray;
@@ -195,38 +207,49 @@ input.item-quantity{
   margin: 5px;
   width: 10px;
 }
+
 .item-delete {
   margin: 5px;
   width: 15px;
 }
+
 .item-edit {
   margin: 5px;
 }
+
 .fa-info {
   margin: 5px;
   width: 10px;
 }
+
 .info-filler {
   width: 45px;
 }
+
 .qty-filler {
   width: 20px;
 }
+
 .weapon-name-header {
   width: 190px;
 }
+
 .damage-header {
   width: 50px;
 }
+
 .range-header {
   width: 50px;
 }
+
 input.range-info {
   width: 70px;
 }
+
 input.damage-info {
   width: 55px;
 }
+
 input.reliable-info {
   width: 35px;
 }
@@ -234,6 +257,11 @@ input.reliable-info {
 .armor-section {
   flex: 1;
   margin-left: 10px;
+}
+
+.armor-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .armor-name-header {
@@ -253,19 +281,33 @@ input.stopping-info {
 }
 
 .valuable-section {
+  flex: 1;
   margin-right: 10px;
 }
-.valuable-table {
-  width: 410px;
+
+.valuable-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.valuable-table td {
+  text-align: center;
+  padding: 0.25em 0.25em;
 }
 
 .component-section {
-  width: 500px;
+  flex: 1;
+}
+
+.component-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .alchemical-effect {
   width: 330px;
 }
+
 .learned-data {
   width: 75px
 }
@@ -274,7 +316,7 @@ input.weight-data {
   width: 30px;
 }
 
-.components-display input{
+.components-display input {
   width: 25px;
 }
 
@@ -297,12 +339,24 @@ input.focus {
 }
 
 .spell-section {
-  width: 450px;
+  min-width: 450px;
   margin-right: 10px;
+  flex: 1;
+}
+
+.spell-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.magic-section .flex label {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .magic-section {
-  width: 400px;
+  min-width: 400px;
+  flex: 1;
 }
 
 .magic-value-display {
@@ -310,11 +364,12 @@ input.focus {
   margin-left: 20px;
 }
 
-.dice-sucess{
+.dice-sucess {
   background-color: lightgreen;
   text-align: center;
 }
-.dice-fail{
+
+.dice-fail {
   background-color: lightpink;
   text-align: center;
 }
@@ -347,15 +402,17 @@ input.spell-roll-value {
   width: 200px;
 }
 
-.weightbar-overweight{
+.weightbar-overweight {
   background-color: red;
   width: 100%;
   height: 15px;
 }
-.prof-name{
+
+.prof-name {
   flex: 1;
 }
-.prof-item-delete{
+
+.prof-item-delete {
   float: right;
 }
 
@@ -368,7 +425,7 @@ input.skill-value {
 }
 
 .perk {
-  margin:5px
+  margin: 5px
 }
 
 .flex-header {
@@ -379,7 +436,7 @@ input.skill-value {
   margin-right: 5px;
 }
 
-.item-img{
+.item-img {
   border: none;
   width: 40px;
   height: 40px;
@@ -392,9 +449,17 @@ input.skill-value {
 }
 
 .error-display {
-  color:red;
+  color: red;
 }
 
 .justify {
   justify-content: space-between;
+}
+
+.margin-right {
+  margin-right: 15px;
+}
+
+.stat-display .stat-modifier-display {
+  width: 15px;
 }
