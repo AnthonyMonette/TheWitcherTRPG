@@ -114,7 +114,7 @@ async function getOrCreateFolder(extended) {
                 parent: null
             })
         }
-        return f ? f : null
+        return f ? (f[0] ? f[0]: f) : null
     } else {
         return null
     }
@@ -149,6 +149,7 @@ async function exportLoot(actor, extended) {
         let newLoot = await Actor.create(actor);
         let folder = await getOrCreateFolder(extended)
 
+        //todo render folder list after adding loot sheet to the folder
         await newLoot.update({
             "folder": folder != null ? folder.id : null,
             "name": newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
