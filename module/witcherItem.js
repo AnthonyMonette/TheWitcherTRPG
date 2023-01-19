@@ -299,7 +299,7 @@ export default class WitcherItem extends Item {
       .filter(c => c.index.find(r => r.name === this.name && r.formula))
 
     if (!compendiumPack || compendiumPack.length == 0) {
-      // Provided item does not have associatted roll table
+      // Provided item does not have associated roll table
       // this item should appear in loot sheet as is
       return false
     } else if (compendiumPack.length == 1) {
@@ -318,7 +318,15 @@ export default class WitcherItem extends Item {
         }
 
         // add generated item to the loot sheet
-        await Item.create(genItem, { parent: this.actor })
+        let itemInLoot = this.actor.items.find(i=> i.name === genItem.name && i.type === genItem.type)
+        if (!itemInLoot) {
+          await Item.create(genItem, { parent: this.actor })
+        } else {
+          // if we have already generated item in the loot sheet - increase it's count instead of creation
+          let itemToUpdate = itemInLoot[0] ? itemInLoot[0] : itemInLoot
+          let itemToUpdateCount = itemToUpdate.system.quantity
+          itemToUpdate.update({ 'system.quantity': ++itemToUpdateCount })
+        }
 
         let successMessage = `${game.i18n.localize("WITCHER.Monster.exportLootExtGenerated")}: ${genItem.name}`
         ui.notifications.info(`${successMessage}`)
