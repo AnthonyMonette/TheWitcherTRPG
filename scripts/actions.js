@@ -4,7 +4,7 @@ import { addModifiers } from "../module/witcher.js";
 import { RollConfig } from "../module/rollConfig.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage) {
-  let armors = actor.getList("armor").filter(a => a.system.equipped);
+  let armors = actor.getList("armor").filter(a => a.system.equiped);
 
   let headArmors = armors.filter(h => h.system.location == "Head" || h.system.location == "FullCover")
   let torsoArmors = armors.filter(t => t.system.location == "Torso" || t.system.location == "FullCover")
