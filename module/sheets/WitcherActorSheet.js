@@ -72,10 +72,14 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     });
 
+    // Crafting section
     data.allComponents = actor.getList("component");
-    data.components = data.allComponents.filter(i => i.system.type != "alchemical");
-    // data.valuables = items.filter(i => i.type == "valuable" || i.type == "mount" || i.type == "alchemical" ||
-    //   i.type == "mutagen" || (i.type == "enhancement" && i.system.type != "armor" && i.system.applied == false));
+    data.craftingMaterials = data.allComponents.filter(i => i.system.type == "crafting-material" || i.system.type == "component");
+    data.ingotsAndMinerals = data.allComponents.filter(i => i.system.type == "minerals");
+    data.hidesAndAnimalParts = data.allComponents.filter(i => i.system.type == "animal-parts");
+    data.enhancements = items.filter(i => i.type == "enhancement" && i.system.type != "armor" && !i.system.applied);
+
+    // Valuables Section
     data.clothingAndContainers = items.filter(i => i.type == "valuable" && (i.system.type == "clothing" || i.system.type == "containers"));
     data.general = items.filter(i => i.type == "valuable" && i.system.type == "genera");
     data.foodAndDrinks = items.filter(i => i.type == "valuable" && i.system.type == "food-drink");
@@ -83,11 +87,15 @@ export default class WitcherActorSheet extends ActorSheet {
     data.questItems = items.filter(i => i.type == "valuable" && i.system.type == "quest-item");
     data.mounts = items.filter(i => i.type == "mount");
     data.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
+
+    // Alchemy section
     data.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
     data.witcherPotions = items.filter(i => i.type == "alchemical" && (i.system.type == "decoction" || i.system.type == "potion"));
     data.oils = items.filter(i => i.type == "alchemical" && i.system.type == "oil");
     data.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
     data.mutagens = items.filter(i => i.type == "mutagen");
+    
+    // Others
     data.diagrams = actor.getList("diagrams");
     data.spells = actor.getList("spell");
 
