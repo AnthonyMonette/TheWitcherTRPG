@@ -73,9 +73,21 @@ export default class WitcherActorSheet extends ActorSheet {
     });
 
     data.allComponents = actor.getList("component");
-    data.components = data.allComponents.filter(i => i.system.type != "substances");
-    data.valuables = items.filter(i => i.type == "valuable" || i.type == "mount" || i.type == "alchemical" ||
-      i.type == "mutagen" || (i.type == "enhancement" && i.system.type != "armor" && i.system.applied == false));
+    data.components = data.allComponents.filter(i => i.system.type != "alchemical");
+    // data.valuables = items.filter(i => i.type == "valuable" || i.type == "mount" || i.type == "alchemical" ||
+    //   i.type == "mutagen" || (i.type == "enhancement" && i.system.type != "armor" && i.system.applied == false));
+    data.clothingAndContainers = items.filter(i => i.type == "valuable" && (i.system.type == "clothing" || i.system.type == "containers"));
+    data.general = items.filter(i => i.type == "valuable" && i.system.type == "genera");
+    data.foodAndDrinks = items.filter(i => i.type == "valuable" && i.system.type == "food-drink");
+    data.toolkits = items.filter(i => i.type == "valuable" && i.system.type == "toolkit");
+    data.questItems = items.filter(i => i.type == "valuable" && i.system.type == "quest-item");
+    data.mounts = items.filter(i => i.type == "mount");
+    data.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
+    data.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
+    data.witcherPotions = items.filter(i => i.type == "alchemical" && (i.system.type == "decoction" || i.system.type == "potion"));
+    data.oils = items.filter(i => i.type == "alchemical" && i.system.type == "oil");
+    data.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
+    data.mutagens = items.filter(i => i.type == "mutagen");
     data.diagrams = actor.getList("diagrams");
     data.spells = actor.getList("spell");
 
