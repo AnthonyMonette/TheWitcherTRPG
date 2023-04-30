@@ -95,8 +95,16 @@ export default class WitcherActorSheet extends ActorSheet {
     data.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
     data.mutagens = items.filter(i => i.type == "mutagen");
     
+    // Formulae
+    data.alchemicalItemDiagrams = actor.getList("diagrams").filter(d => d.system.type == "alchemical").map(sanitizeDescription);
+    data.potionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "potion").map(sanitizeDescription);
+    data.decoctionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "decoction").map(sanitizeDescription);
+    data.oilDiagrams = actor.getList("diagrams").filter(d => d.system.type == "oil").map(sanitizeDescription);
+
+    // Diagrams
+    // TODO: Add diagrams
+
     // Others
-    data.diagrams = actor.getList("diagrams");
     data.spells = actor.getList("spell");
 
     data.professions = actor.getList("profession");
@@ -104,6 +112,25 @@ export default class WitcherActorSheet extends ActorSheet {
 
     data.races = actor.getList("race");
     data.race = data.races[0];
+
+    // Helping functions
+    /** Sanitizes description if it contains forbidden html tags. */
+    function sanitizeDescription(item) {
+      if (!item.system.description) {
+        return item;
+      }
+
+      const regex = /(<.+?>)/g;
+      const whiteList = ["<p>", "</p>"];
+      const tagsInText = item.system.description.match(regex);
+      const itemCopy = JSON.parse(JSON.stringify(item));
+      if (tagsInText.some(i => !whiteList.includes(i))) {
+        const temp = document.createElement('div');
+        temp.textContent = itemCopy.system.description;
+        itemCopy.system.description = temp.innerHTML;
+      }
+      return itemCopy;
+    }
 
     Array.prototype.sum = function (prop) {
       var total = 0
