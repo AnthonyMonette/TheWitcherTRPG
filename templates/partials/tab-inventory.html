@@ -879,6 +879,11 @@
         {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagram.html" diagrams=ingredientDiagrams}}
         {{/if}}
 
+        {{#if ammunitionDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.AmmunitionDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagram.html" diagrams=ammunitionDiagrams}}
+        {{/if}}
+
         {{#if weaponDiagrams}}
         <h3>{{localize "WITCHER.Inventory.WeaponDiagrams"}}</h3>
         {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagram.html" diagrams=weaponDiagrams}}
@@ -897,11 +902,6 @@
         {{#if elderfolkArmorDiagrams}}
         <h3>{{localize "WITCHER.Inventory.ElderfolkArmorDiagrams"}}</h3>
         {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagram.html" diagrams=elderfolkArmorDiagrams}}
-        {{/if}}
-
-        {{#if ammunitionDiagrams}}
-        <h3>{{localize "WITCHER.Inventory.AmmunitionDiagrams"}}</h3>
-        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagram.html" diagrams=ammunitionDiagrams}}
         {{/if}}
 
         {{#if bombDiagrams}}
