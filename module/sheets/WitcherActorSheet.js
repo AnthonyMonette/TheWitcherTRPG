@@ -145,7 +145,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     data.activeEffects = actor.getList("effect");
 
-    data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
+    data.totalWeight = data.items.filter(i => i.type != 'mount').weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
 
     data.noviceSpells = data.spells.filter(s => s.system.level == "novice" &&
