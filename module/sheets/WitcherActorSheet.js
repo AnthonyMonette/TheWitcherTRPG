@@ -100,9 +100,16 @@ export default class WitcherActorSheet extends ActorSheet {
     data.potionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "potion").map(sanitizeDescription);
     data.decoctionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "decoction").map(sanitizeDescription);
     data.oilDiagrams = actor.getList("diagrams").filter(d => d.system.type == "oil").map(sanitizeDescription);
-
+    
     // Diagrams
-    // TODO: Add diagrams
+    data.ingredientDiagrams = actor.getList("diagrams").filter(d => d.system.type == "ingredients").map(sanitizeDescription);
+    data.weaponDiagrams = actor.getList("diagrams").filter(d => d.system.type == "weapon").map(sanitizeDescription);
+    data.armorDiagrams = actor.getList("diagrams").filter(d => d.system.type == "armor").map(sanitizeDescription);
+    data.elderfolkWeaponDiagrams = actor.getList("diagrams").filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
+    data.elderfolkArmorDiagrams = actor.getList("diagrams").filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
+    data.ammunitionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "ammunition").map(sanitizeDescription);
+    data.bombDiagrams = actor.getList("diagrams").filter(d => d.system.type == "bomb").map(sanitizeDescription);
+    data.trapDiagrams = actor.getList("diagrams").filter(d => d.system.type == "traps").map(sanitizeDescription);
 
     // Others
     data.spells = actor.getList("spell");
