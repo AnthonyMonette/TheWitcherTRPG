@@ -81,7 +81,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     // Valuables Section
     data.clothingAndContainers = items.filter(i => i.type == "valuable" && (i.system.type == "clothing" || i.system.type == "containers"));
-    data.general = items.filter(i => i.type == "valuable" && i.system.type == "genera");
+    data.general = items.filter(i => i.type == "valuable" && (i.system.type == "genera" || !i.system.type));
     data.foodAndDrinks = items.filter(i => i.type == "valuable" && i.system.type == "food-drink");
     data.toolkits = items.filter(i => i.type == "valuable" && i.system.type == "toolkit");
     data.questItems = items.filter(i => i.type == "valuable" && i.system.type == "quest-item");
@@ -96,7 +96,7 @@ export default class WitcherActorSheet extends ActorSheet {
     data.mutagens = items.filter(i => i.type == "mutagen");
     
     // Formulae
-    data.alchemicalItemDiagrams = actor.getList("diagrams").filter(d => d.system.type == "alchemical").map(sanitizeDescription);
+    data.alchemicalItemDiagrams = actor.getList("diagrams").filter(d => d.system.type == "alchemical" || !d.system.type).map(sanitizeDescription);
     data.potionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "potion").map(sanitizeDescription);
     data.decoctionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "decoction").map(sanitizeDescription);
     data.oilDiagrams = actor.getList("diagrams").filter(d => d.system.type == "oil").map(sanitizeDescription);
@@ -985,11 +985,21 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     if (element.dataset.itemtype == "component") {
-      if (element.dataset.subtype) {
+      if (element.dataset.subtype == "alchemical") {
+        itemData.system = { type: element.dataset.subtype }
+      } else if (element.dataset.subtype) {
         itemData.system = { type: "substances", substanceType: element.dataset.subtype }
       } else {
         itemData.system = { type: "component", substanceType: element.dataset.subtype }
       }
+    }
+
+    if (element.dataset.itemtype == "valuable") {
+      itemData.system = { type: "genera" };
+    }
+
+    if (element.dataset.itemtype == "diagram") {
+      itemData.system = { type: "alchemical", level: "novice", isFormulae: true };
     }
 
     await Item.create(itemData, { parent: this.actor })

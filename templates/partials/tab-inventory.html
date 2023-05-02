@@ -556,7 +556,11 @@
     </div>
 
     <div class="component-section">
-        <h2>{{localize "WITCHER.Inventory.Alchemy"}}</h2>
+        <h2>{{localize "WITCHER.Inventory.Alchemy"}}
+            <a class="add-item" data-itemType="component" data-subType="alchemical">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
 
         {{#if alchemicalItems}}
         <h3>{{localize "WITCHER.Inventory.AlchemicalItems"}}</h3>
