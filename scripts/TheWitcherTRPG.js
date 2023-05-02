@@ -235,6 +235,10 @@ actor.rollSpell("${spell._id}")`;
 }
 
 Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentName) {
+    if (!actor) {
+        console.warn("'actor' parameter passed into getOwnedComponentCount is undefined. That might be a problem with one of the selected actors diagrams.");
+        return 0;
+    }
     let ownedComponent = actor.findNeededComponent(componentName);
     return ownedComponent.sum("quantity");
 });

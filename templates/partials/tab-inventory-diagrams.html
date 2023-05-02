@@ -61,7 +61,7 @@
                             {{#each diagram.system.craftingComponents as |component name|}}
                                 <span>{{component.name}}</span>
                                 <span {{#if
-                                        (lt (getOwnedComponentCount ../actor component.name) component.quantity)}}
+                                        (lt (getOwnedComponentCount ../../actor component.name) component.quantity)}}
                                 class="error-display"
                                 {{/if}}>
                                     ({{component.quantity}})
