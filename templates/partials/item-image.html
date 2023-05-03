@@ -1,4 +1,4 @@
-{{#if (eq item.system.clickableImage true)}}
+{{#if (and (supportedTypesForClickableImageContainsValue item.type) item.system.clickableImage)}}
 <div class="item-img-wrapper">
     <a class="item-show"><i class="fa fa-magnifying-glass"></i></a>
     <img src="{{item.img}}" class="item-img dragable" draggable="true"

@@ -237,9 +237,20 @@ Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentNa
     return ownedComponent.sum("quantity");
 });
 
-Handlebars.registerHelper('ifIsOneOf', function (value, ...list) {
-  const options = list.pop();
-  return list.includes(value)
-      ? options.fn(this)
-      : options.inverse(this);
+Handlebars.registerHelper("supportedTypesForClickableImageContainsValue", function (itemType) {
+  const supportedTypes = game.settings.get("TheWitcherTRPG", "clickableImageItemTypes")?.split(",").map(s => s.trim()) ?? [];
+  return supportedTypes.includes(itemType);
+});
+
+Handlebars.registerHelper("getSetting", function (setting) {
+  return game.settings.get("TheWitcherTRPG", setting);
+});
+
+Handlebars.registerHelper("window", function (...props) {
+  props.pop();
+  return props.reduce((result, prop) => result[prop], window);
+});
+
+Handlebars.registerHelper("includes", function (str, substr) {
+  return str.includes(substr);
 });

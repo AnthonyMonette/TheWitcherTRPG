@@ -1,5 +1,10 @@
 <header class="item-header">
-    {{#ifIsOneOf item.type "valuable" "weapon" "armor" "component" "alchemical" "diagrams"}}
+    {{#if (and 
+        (includes (getSetting "clickableImageItemTypes") item.type) 
+        (or 
+          (window "game" "user" "isGM")
+          (eq (getSetting "clickableImageCheckboxForGMOnly") false))
+    )}}
     <div class="item-header-wrapper">
         <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div>
@@ -9,7 +14,7 @@
     </div>
     {{else}}
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-    {{/ifIsOneOf}}
+    {{/if}}
     <div class="item-header-first-collum">
         <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         <div class="item-flex-container">
