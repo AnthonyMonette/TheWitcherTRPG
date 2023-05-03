@@ -28,6 +28,7 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html",
         "systems/TheWitcherTRPG/templates/partials/loot-item-display.html",
         "systems/TheWitcherTRPG/templates/partials/item-header.html",
+        "systems/TheWitcherTRPG/templates/partials/item-image.html",
         "systems/TheWitcherTRPG/templates/partials/associated-item.html",
         "systems/TheWitcherTRPG/templates/sheets/verbal-combat.html",
         "systems/TheWitcherTRPG/templates/sheets/weapon-attack.html"
@@ -234,4 +235,11 @@ actor.rollSpell("${spell._id}")`;
 Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentName) {
     let ownedComponent = actor.findNeededComponent(componentName);
     return ownedComponent.sum("quantity");
+});
+
+Handlebars.registerHelper('ifIsOneOf', function (value, ...list) {
+  const options = list.pop();
+  return list.includes(value)
+      ? options.fn(this)
+      : options.inverse(this);
 });

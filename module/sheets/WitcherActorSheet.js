@@ -175,6 +175,7 @@ export default class WitcherActorSheet extends ActorSheet {
     html.find(".hp-value").change(this._onHPChanged.bind(this));
     html.find(".inline-edit").change(this._onInlineEdit.bind(this));
     html.find(".item-edit").on("click", this._onItemEdit.bind(this));
+    html.find(".item-show").on("click", this._onItemShow.bind(this));
     html.find(".item-weapon-display").on("click", this._onItemDisplayInfo.bind(this));
     html.find(".item-armor-display").on("click", this._onItemDisplayInfo.bind(this));
     html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
@@ -1863,6 +1864,21 @@ export default class WitcherActorSheet extends ActorSheet {
     let item = this.actor.items.get(itemId);
 
     item.sheet.render(true)
+  }
+
+  async _onItemShow(event) {
+    event.preventDefault;
+    let itemId = event.currentTarget.closest(".item").dataset.itemId;
+    let item = this.actor.items.get(itemId);
+
+    new Dialog({
+      title: item.name,
+      content: `<img src="${item.img}" alt="${item.img}" width="100%" />`,
+      buttons: {}
+    }, {
+      width: 520,
+      resizable: true
+    }).render(true);
   }
 
   async _onItemDelete(event) {

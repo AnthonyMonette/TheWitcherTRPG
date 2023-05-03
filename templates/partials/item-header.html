@@ -1,5 +1,15 @@
 <header class="item-header">
+    {{#ifIsOneOf item.type "valuable" "weapon" "armor" "component" "alchemical" "diagrams"}}
+    <div class="item-header-wrapper">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div>
+            <input type="checkbox" id="clickable-image-{{item._id}}" name="system.clickableImage" {{checked item.system.clickableImage}}>
+            <label for="clickable-image-{{item._id}}">{{localize "WITCHER.Item.ClickableImage"}}</label>
+        </div>
+    </div>
+    {{else}}
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    {{/ifIsOneOf}}
     <div class="item-header-first-collum">
         <h1 class="itemname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
         <div class="item-flex-container">

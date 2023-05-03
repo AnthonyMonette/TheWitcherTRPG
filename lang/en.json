@@ -2,6 +2,7 @@
   "WITCHER.Type": "Type",
   "WITCHER.Percentage": "Percentage",
   "WITCHER.DC": "DC",
+  "WITCHER.Item.ClickableImage": "Zoomable",
   "WITCHER.Item.Short.Availability": "Avail.",
   "WITCHER.Item.Weight": "Weight",
   "WITCHER.Item.Cost": "Cost",
