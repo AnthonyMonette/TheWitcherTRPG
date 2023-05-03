@@ -237,11 +237,6 @@ Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentNa
     return ownedComponent.sum("quantity");
 });
 
-Handlebars.registerHelper("supportedTypesForClickableImageContainsValue", function (itemType) {
-  const supportedTypes = game.settings.get("TheWitcherTRPG", "clickableImageItemTypes")?.split(",").map(s => s.trim()) ?? [];
-  return supportedTypes.includes(itemType);
-});
-
 Handlebars.registerHelper("getSetting", function (setting) {
   return game.settings.get("TheWitcherTRPG", setting);
 });
