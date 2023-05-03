@@ -246,6 +246,6 @@ Handlebars.registerHelper("window", function (...props) {
   return props.reduce((result, prop) => result[prop], window);
 });
 
-Handlebars.registerHelper("includes", function (str, substr) {
-  return str.includes(substr);
+Handlebars.registerHelper("includes", function (csv, substr) {
+  return csv.split(",").map(v => v.trim()).includes(substr);
 });
