@@ -2,7 +2,7 @@
   "WITCHER.Type": "Typ",
   "WITCHER.Percentage": "Prozent",
   "WITCHER.DC": "DC",
-  "WITCHER.Item.ClickableImage": "Vergrößerbar",
+  "WITCHER.Item.ClickableImage": "Zoombar",
   "WITCHER.Item.Short.Availability": "Vork.",
   "WITCHER.Item.Weight": "Gewicht",
   "WITCHER.Item.Cost": "Kosten",
@@ -583,7 +583,7 @@
   "WITCHER.Settings.useVerbalCombatRule": "Verwende die optionale Regel für verbalen Schlagabtausch",
   "WITCHER.Settings.useVerbalCombatRuleHint": "Erlaubt es Spielern alle Aktionen für verbalen Schlagabtausch zu sehen.",
   "WITCHER.Settings.specialFont": "Benutze die besondere Schriftart von 'The Witcher'",
-  "WITCHER.Settings.clickableImageItemTypes": "Zeige 'Vergrößerbar'-Checkbox bei Items",
+  "WITCHER.Settings.clickableImageItemTypes": "Zeige 'Zoombar'-Checkbox bei Items",
   "WITCHER.Settings.clickableImageItemTypesHint": "Eine kommaseparierte Liste von Item Typen, bei denen eine Checkbox angezeigt werden soll. Wenn die Checkbox angekreuzt ist, können die Spieler im Inventar auf das Item Bild klicken um es zu vergrößern. Mögliche Item Typen sind 'valuable', 'weapon', 'armor', 'alchemical', 'diagrams', 'component'.",
-  "WITCHER.Settings.clickableImageCheckboxForGMOnly": "Zeige 'Vergrößerbar'-Checkbox nur dem GM"
+  "WITCHER.Settings.clickableImageCheckboxForGMOnly": "Zeige 'Zoombar'-Checkbox nur dem GM"
 }
