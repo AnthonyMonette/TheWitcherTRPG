@@ -60,6 +60,7 @@
 .item-img-wrapper .item-show .fa {
   display: none;
   color: rgb(200, 200, 200);
+  font-size: 28px;
 }
 
 .item-img-wrapper .item-show:hover .fa {
