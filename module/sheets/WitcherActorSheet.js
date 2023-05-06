@@ -2548,4 +2548,9 @@ export default class WitcherActorSheet extends ActorSheet {
     }
     return totalStats;
   }
+
+  /** Do not delete. This method is here to give external modules the possibility to make skill rolls. */
+  async _onSkillRoll(statNum, skillNum) {
+    rollSkillCheck(this.actor, statNum, skillNum);
+  }
 }
