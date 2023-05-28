@@ -124,8 +124,8 @@
                 {{/if}}
                 {{#if (eq item.system.causeDamages true)}}
                     <td>
-                        <input class="medium" placeholder="1d6+0" name="system.damage" type="text"
-                               value="{{item.system.damage}}"/>
+                        <input class="medium" name="system.damage" type="text"
+                               value="{{#unless item.system.damage}}1d6+0{{else}}{{item.system.damage}}{{/unless}}"/>
                     </td>
                 {{/if}}
             </tr>

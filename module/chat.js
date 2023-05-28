@@ -87,6 +87,11 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
   let locationJSON = JSON.stringify(location);
   messageData.flavor = `<div class="damage-message" data-location='${locationJSON}' data-dmg-type="${damageType}" data-strike="${strike}" data-effects='${effects}'><h1><img src="${img}" class="item-img" />${game.i18n.localize("WITCHER.table.Damage")}: ${name} </h1>`;
 
+  if (damageFormula == "") {
+    damageFormula = "0"
+    ui.notifications.error(`${game.i18n.localize("WITCHER.NoDamageSpecified")}`)
+  }
+
   if (strike == "strong") {
     damageFormula = `(${damageFormula})*2`;
     messageData.flavor += `<div>${game.i18n.localize("WITCHER.Dialog.strikeStrong")}</div>`;
@@ -101,7 +106,7 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
   }
   messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.damageType")}:</b> ${game.i18n.localize(damageTypeloc)} </div>`;
   messageData.flavor += `<div>${game.i18n.localize("WITCHER.Damage.RemoveSP")}</div>`;
-  if (effects) {
+  if (effects && effects.length > 0) {
     messageData.flavor += `<b>${game.i18n.localize("WITCHER.Item.Effect")}:</b>`;
     effects.forEach(element => {
       messageData.flavor += `<div class="flex">${element.name}`;

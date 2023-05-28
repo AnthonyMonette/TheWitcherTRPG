@@ -1153,23 +1153,30 @@ export default class WitcherActorSheet extends ActorSheet {
 
     let focusOptions = `<option value="0"> </option>`
     let secondFocusOptions = `<option value="0" selected> </option>`
-    if (this.actor.system.focus1.name) {
+
+    let useFocus = false
+    if (this.actor.system.focus1.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus1.value}" selected> ${this.actor.system.focus1.name} (${this.actor.system.focus1.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus1.value}"> ${this.actor.system.focus1.name} (${this.actor.system.focus1.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus2.name) {
+    if (this.actor.system.focus2.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus2.value}"> ${this.actor.system.focus2.name} (${this.actor.system.focus2.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus2.value}"> ${this.actor.system.focus2.name} (${this.actor.system.focus2.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus3.name) {
+    if (this.actor.system.focus3.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus3.value}"> ${this.actor.system.focus3.name} (${this.actor.system.focus3.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus3.value}"> ${this.actor.system.focus3.name} (${this.actor.system.focus3.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus4.name) {
+    if (this.actor.system.focus4.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus4.value}"> ${this.actor.system.focus4.name} (${this.actor.system.focus4.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus4.value}"> ${this.actor.system.focus4.name} (${this.actor.system.focus4.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus1.name || this.actor.system.focus2.name || this.actor.system.focus3.name || this.actor.system.focus4.name) {
+
+    if (useFocus) {
       content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseFocus")}: <select name="focus">${focusOptions}</select></label> <br />`
       content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseExpandedFocus")}: <select name="secondFocus">${secondFocusOptions}</select></label> <br />`
     }
@@ -1201,24 +1208,22 @@ export default class WitcherActorSheet extends ActorSheet {
     if (cancel) {
       return
     }
+    let origStaCost = staCostTotal
     let newSta = this.actor.system.derivedStats.sta.value
-    if (isExtraAttack) {
-      newSta -= 3
-      if (newSta < 0) {
-        return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
-      }
-      this.actor.update({
-        'system.derivedStats.sta.value': newSta
-      });
-    }
-    let staCostdisplay = staCostTotal;
 
-    staCostTotal -= focusValue - secondFocusValue
+    staCostTotal -= Number(focusValue) + Number(secondFocusValue)
+    if (isExtraAttack) {
+      staCostTotal += 3
+    }
+
+    let useMinimalStaCost = false
     if (staCostTotal < 1) {
+      useMinimalStaCost = true
       staCostTotal = 1
     }
 
     newSta -= staCostTotal
+
     if (newSta < 0) {
       return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
     }
@@ -1226,7 +1231,19 @@ export default class WitcherActorSheet extends ActorSheet {
     this.actor.update({
       'system.derivedStats.sta.value': newSta
     });
-    staCostdisplay += `-${Number(focusValue) + Number(secondFocusValue)}[Focus]`
+
+    //todo check whether we need to spent 1 STA even if focus value > STA cost
+    let staCostdisplay = `${origStaCost}[${game.i18n.localize("WITCHER.Spell.Short.StaCost")}]`
+
+    if (isExtraAttack) {
+      staCostdisplay += ` + 3[${game.i18n.localize("WITCHER.Dialog.attackExtra")}]`
+    }
+
+    staCostdisplay += ` - ${Number(focusValue) + Number(secondFocusValue)}[${game.i18n.localize("WITCHER.Actor.DerStat.Focus")}]`
+    staCostdisplay += ` =  ${staCostTotal}`
+    if (useMinimalStaCost) {
+      staCostdisplay += `[${game.i18n.localize("WITCHER.MinValue")}]`
+    }
 
     if (customModifier < 0) { rollFormula += !displayRollDetails ? `${customModifier}` : `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
     if (customModifier > 0) { rollFormula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
@@ -1278,7 +1295,8 @@ export default class WitcherActorSheet extends ActorSheet {
       let effects = JSON.stringify(spellItem.system.effects)
       let locationJSON = JSON.stringify(this.actor.getLocationObject("randomSpell"))
 
-      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.system.damage}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+      let dmg = spellItem.system.damage || "0"
+      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${dmg}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
     }
 
     let config = new RollConfig()
