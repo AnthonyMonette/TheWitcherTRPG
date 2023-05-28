@@ -5,7 +5,7 @@ import { RollConfig } from "../module/rollConfig.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage) {
   //todo fix compendiums and use equipped field rather than equiped which has incorrect spelling
-  let armors = actor.getList("armor").filter(a => a.system.equiped);
+  let armors = actor.getList("armor").filter(a => a.system.equipped || a.system.equiped);
 
   let headArmors = armors.filter(h => h.system.location == "Head" || h.system.location == "FullCover")
   let torsoArmors = armors.filter(t => t.system.location == "Torso" || t.system.location == "FullCover")
