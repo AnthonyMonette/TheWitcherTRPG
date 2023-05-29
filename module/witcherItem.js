@@ -27,6 +27,8 @@ export default class WitcherItem extends Item {
           break;
       }
 
+      token = token.document ? token : token._object
+
       let effect = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
         t: this.system.templateType,
         user: game.user._id,
