@@ -95,7 +95,8 @@
                     <td>
                         <a class="item-weapon-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{weapon.img}}" class="item-img dragable" draggable="true" data-id="{{weapon._id}}"/>
+                    <td style="text-align:left;">
+                      {{> "systems/TheWitcherTRPG/templates/partials/item-image.html" item=weapon}}
                     </td>
                     <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
                                value="{{weapon.system.quantity}}" data-dtype="Number"/></td>
@@ -231,7 +232,8 @@
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
-                    <td><img src="{{armor.img}}" class="item-img dragable" draggable="true" data-id="{{armor._id}}"/>
+                    <td>
+                      {{> "systems/TheWitcherTRPG/templates/partials/item-image.html" item=armor}}
                     </td>
                     <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
                                value="{{armor.system.quantity}}" data-dtype="Number"/></td>
@@ -579,8 +581,7 @@
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
                     </td>
                     <td>
-                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{valuable._id}}"/>
+                        {{> "systems/TheWitcherTRPG/templates/partials/item-image.html" item=valuable}}
                     </td>
                     <td>
                         <input class="inline-edit item-quantity" data-field="system.quantity" type="text"
@@ -676,6 +677,15 @@
                             <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </td>
+                    <td>
+                      {{> "systems/TheWitcherTRPG/templates/partials/item-image.html" item=diagram}}
+                    </td>
+                    <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                               value="{{diagram.system.quantity}}" data-dtype="Number"/></td>
+                    <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}"
+                               placeholder="name"/></td>
+                    <td><input class="inline-edit" data-field="system.learned" type="checkbox"
+                               value="{{diagram.system.learned}}" {{checked diagram.system.learned}}/>
                 </tr>
             </tbody>
             {{/each}}
@@ -857,8 +867,9 @@
                 {{#each craftingMaterials as |component id|}}
                 <tbody class="item" data-item-id="{{component._id}}">
                     <tr>
-                        <td><img src="{{component.img}}" class="item-img dragable" draggable="true"
-                                 data-id="{{component._id}}"/></td>
+                        <td>
+                          {{> "systems/TheWitcherTRPG/templates/partials/item-image.html" item=component}}
+                        </td>
                         <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
                                    value="{{component.system.quantity}}" data-dtype="Number"/></td>
                         <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}"

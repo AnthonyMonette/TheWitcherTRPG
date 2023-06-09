@@ -2,6 +2,7 @@
   "WITCHER.Type": "Typ",
   "WITCHER.Percentage": "Prozent",
   "WITCHER.DC": "DC",
+  "WITCHER.Item.ClickableImage": "Zoombar",
   "WITCHER.Item.Short.Availability": "Vork.",
   "WITCHER.Item.Weight": "Gewicht",
   "WITCHER.Item.Cost": "Kosten",
@@ -598,6 +599,18 @@
   "WITCHER.Dialog.Apply": "Einsetzen",
   "WITCHER.Weapon.Broken": "Deine Waffe ist zerbrochen.",
   "WITCHER.Shield.Broken": "Dein Schild ist zerbrochen.",
-  "WITCHER.Settings.Adrenaline": "Verwende die Adrenalin Optionalregel",
-  "WITCHER.Settings.AdrenalineDetails": "Adrenalin ist der Wille weiter zu machen und zu kämpfen in fatalen Situationen."
+  "WITCHER.Settings.Adrenaline": "Verwende die optionale Regel für Adrenalin",
+  "WITCHER.Settings.AdrenalineDetails": "Adrenalin ist der Wille weiter zu machen und zu kämpfen in fatalen Situationen.",
+  "WITCHER.Settings.displayRollDetails": "Zeige Würfelwurf Details",
+  "WITCHER.Settings.displayRollDetailsHint": "Zeigt Details im Chat bei einem Würfelwurf, z.B. 1d10+2[stat]+4[skill]-3[parry]",
+  "WITCHER.Settings.Custom": "Custom",
+  "WITCHER.Settings.modifiers": "Modifiers",
+  "WITCHER.Settings.displayReputation": "Zeige Spielern ihre Reputation an",
+  "WITCHER.Settings.displayReputationHint": "Erlaubt es Spielern ihre Reputation anzuzeigen und zu verändern.",
+  "WITCHER.Settings.useVerbalCombatRule": "Verwende die optionale Regel für verbalen Schlagabtausch",
+  "WITCHER.Settings.useVerbalCombatRuleHint": "Erlaubt es Spielern alle Aktionen für verbalen Schlagabtausch zu sehen.",
+  "WITCHER.Settings.specialFont": "Benutze die besondere Schriftart von 'The Witcher'",
+  "WITCHER.Settings.clickableImageItemTypes": "Zeige 'Zoombar'-Checkbox bei Items",
+  "WITCHER.Settings.clickableImageItemTypesHint": "Eine kommaseparierte Liste von Item Typen, bei denen eine Checkbox angezeigt werden soll. Wenn die Checkbox angekreuzt ist, können die Spieler im Inventar auf das Item Bild klicken um es zu vergrößern. Mögliche Item Typen sind 'valuable', 'weapon', 'armor', 'alchemical', 'diagrams', 'component'.",
+  "WITCHER.Settings.clickableImageCheckboxForGMOnly": "Zeige 'Zoombar'-Checkbox nur dem GM"
 }

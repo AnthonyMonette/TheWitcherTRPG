@@ -15,6 +15,20 @@
     margin-bottom: 0;
 }
 
+.item-header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-header-wrapper > div {
+  display: flex;
+  align-items: center;
+}
+
+.item-header-wrapper > div input[type="checkbox"] {
+  margin: 3px 5px 0 0;
+}
+
 .item-flex-container {
     display: flex;
     text-align: center;
