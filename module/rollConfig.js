@@ -4,8 +4,8 @@ export var RollConfig = (function () {
         constructor() {
             this.defence = false;
             this.threshold = -1;
-            this.showCrit = false;
-            this.showSuccess = false;
+            this.showCrit = true;
+            this.showSuccess = true;
             this.showResult = true;
             this.reversal = false;
             this.thresholdDesc = "";

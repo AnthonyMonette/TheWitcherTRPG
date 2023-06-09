@@ -453,16 +453,127 @@
                 <i class="fas fa-plus"></i>
             </a>
         </h2>
+
+        {{#if questItems}}
+        <h3>{{localize "WITCHER.Valuable.QuestItem"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=questItems}}
+        {{/if}}
+
+        {{#if general}}
+        <h3>{{localize "WITCHER.Valuable.General"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=general}}
+        {{/if}}
+
+        {{#if foodAndDrinks}}
+        <h3>{{localize "WITCHER.Valuable.Food&Drinks"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=foodAndDrinks}}
+        {{/if}}
+
+        {{#if toolkits}}
+        <h3>{{localize "WITCHER.Valuable.Toolkit"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=toolkits}}
+        {{/if}}
+
+        {{#if clothingAndContainers}}
+        <h3>{{localize "WITCHER.Valuable.Clothings"}} &amp; {{localize "WITCHER.Valuable.Containers"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=clothingAndContainers}}
+        {{/if}}
+
+        {{#if mounts}}
+        <h3>{{localize "WITCHER.Inventory.Mounts"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-mounts.html" mounts=mounts}}
+        {{/if}}
+
+        {{#if mountAccessories}}
+        <h3>{{localize "WITCHER.Valuable.MountAccessories"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=mountAccessories}}
+        {{/if}}
+
+        <h2>{{localize  "WITCHER.Inventory.Diagrams"}}
+            <a class="add-item" data-itemType="diagrams">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
+        {{#if alchemicalItemDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.AlchemicalItemDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=alchemicalItemDiagrams}}
+        {{/if}}
+
+        {{#if oilDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.OilDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=oilDiagrams}}
+        {{/if}}
+
+        {{#if potionDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.PotionDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=potionDiagrams}}
+        {{/if}}
+
+        {{#if decoctionDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.DecoctionDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=decoctionDiagrams}}
+        {{/if}}
+
+        {{#if ingredientDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.IngredientDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=ingredientDiagrams}}
+        {{/if}}
+
+        {{#if ammunitionDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.AmmunitionDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=ammunitionDiagrams}}
+        {{/if}}
+
+        {{#if weaponDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.WeaponDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=weaponDiagrams}}
+        {{/if}}
+
+        {{#if armorDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.ArmorDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=armorDiagrams}}
+        {{/if}}
+
+        {{#if elderfolkWeaponDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.ElderfolkWeaponDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=elderfolkWeaponDiagrams}}
+        {{/if}}
+
+        {{#if elderfolkArmorDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.ElderfolkArmorDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=elderfolkArmorDiagrams}}
+        {{/if}}
+
+        {{#if bombDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.BombDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=bombDiagrams}}
+        {{/if}}
+
+        {{#if trapDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.TrapDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=trapDiagrams}}
+        {{/if}}
+    </div>
+
+    <div class="component-section">
+        <h2>{{localize "WITCHER.Inventory.Alchemy"}}
+            <a class="add-item" data-itemType="component" data-subType="alchemical">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
+
+        {{#if alchemicalItems}}
+        <h3>{{localize "WITCHER.Inventory.AlchemicalItems"}}</h3>
         <table class="valuable-table item-list">
             <tr>
+                <th></th>
                 <th></th>
                 <th><b>{{localize "WITCHER.table.Quantity"}}</b></th>
                 <th><b>{{localize "WITCHER.table.Name"}}</b></th>
                 <th><b>{{localize "WITCHER.Item.Weight"}}</b></th>
-                <th></th>
             </tr>
-            {{#each valuables as |valuable id|}}
-                <tbody class="item" data-item-id="{{valuable._id}}">
+            {{#each alchemicalItems as |valuable id|}}
+            <tbody class="item" data-item-id="{{valuable._id}}">
                 <tr>
                     <td>
                         <a class="item-armor-display"><i class="fas fa-info"></i></a>
@@ -485,71 +596,22 @@
                     </td>
                 </tr>
                 <tr class="item-info invisible">
-                    {{#if (eq type "valuable")}}
-                        <td colspan="4">
-                            <div class="flex">
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Item.Description"}}: </b>
-                                </label>
-                                <div>{{valuable.system.description}}</div>
-                            </div>
-                        </td>
-                    {{/if}}
-                    {{#if (eq type "alchemical")}}
-                        <td colspan="4">
-                            <div class="flex">
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
-                                </label>{{valuable.system.time}}
-                            </div>
+                    <td colspan="4">
+                        <div class="flex">
                             <label class="label-info">
+                                {{#if valuable.system.description}}
+                                <b>{{localize "WITCHER.Item.Description"}}: </b>
+                                {{else}}
                                 <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                                {{/if}}
                             </label>
-                            <div class="alchemical-effect">
-                                {{valuable.system.effect}}
-                            </div>
-                        </td>
-                    {{/if}}
-                    {{#if (eq type "mount")}}
-                        <td colspan="4">
-                            <div class="flex">
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mount.Dexterity"}}: </b>
-                                </label>
-                                <div>{{valuable.system.dex}}</div>
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mount.Control"}}: </b>
-                                </label>
-                                <div>{{valuable.system.control}}</div>
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mount.Speed"}}: </b>
-                                </label>
-                                <div>{{valuable.system.speed}}</div>
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mount.Hp"}}: </b>
-                                </label>
-                                <div>{{valuable.system.hp}}</div>
-                            </div>
-                        </td>
-                    {{/if}}
-                    {{#if (eq type "mutagen")}}
-                        <td colspan="3">
-                            <div class="flex">
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mutagen.Type"}}: </b>
-                                </label>
-                                <div>{{valuable.system.type}}</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="flex">
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Mutagen.Source"}}: </b>
-                                </label>
-                                <div>{{valuable.system.source}}</div>
-                            </div>
-                        </td>
-                    {{/if}}
+                            {{#if valuable.system.description}}
+                            <div>{{valuable.system.description}}</div>
+                            {{else}}
+                            <div>{{valuable.system.effect}}</div>
+                            {{/if}}
+                        </div>
+                    </td>
                     <td>
                         <div>
                             <a class="item-edit"><i class="fas fa-edit"></i></a>
@@ -557,208 +619,204 @@
                         </div>
                     </td>
                 </tr>
-                </tbody>
+            </tbody>
             {{/each}}
         </table>
-        <h2>{{localize  "WITCHER.Inventory.Diagrams"}}
-            <a class="add-item" data-itemType="diagrams">
-                <i class="fas fa-plus"></i>
-            </a>
-        </h2>
-        <table class="diagram-table item-list">
+        {{/if}}
+
+        {{#if oils}}
+        <h3>{{localize "WITCHER.Inventory.Oils"}}</h3>
+        <table class="valuable-table item-list">
             <tr>
-                <td></td>
+                <th></th>
+                <th></th>
+                <th><b>{{localize "WITCHER.table.Quantity"}}</b></th>
+                <th><b>{{localize "WITCHER.table.Name"}}</b></th>
+                <th><b>{{localize "WITCHER.Item.Weight"}}</b></th>
+            </tr>
+            {{#each oils as |valuable id|}}
+            <tbody class="item" data-item-id="{{valuable._id}}">
+                <tr>
+                    <td>
+                        <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                    </td>
+                    <td>
+                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{valuable._id}}"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                               value="{{valuable.system.quantity}}" data-dtype="Number"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}"
+                               placeholder="name"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit weight-data" data-field="system.weight" type="text"
+                               value="{{valuable.system.weight}}" data-dtype="Number"/>
+                    </td>
+                </tr>
+                <tr class="item-info invisible">
+                    <td colspan="4">
+                        <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Alchemy.Duration"}}: </b>
+                            </label>{{valuable.system.time}}
+                        </div>
+                        <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                            </label>{{valuable.system.effect}}
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+        {{/if}}
+
+        {{#if witcherPotions}}
+        <h3>{{localize "WITCHER.Inventory.WitcherPotionsAndDecoctions"}}</h3>
+        <table class="valuable-table item-list">
+            <tr>
+                <th></th>
+                <th></th>
+                <th><b>{{localize "WITCHER.table.Quantity"}}</b></th>
+                <th><b>{{localize "WITCHER.table.Name"}}</b></th>
+                <th><b>{{localize "WITCHER.Item.Weight"}}</b></th>
+            </tr>
+            {{#each witcherPotions as |valuable id|}}
+            <tbody class="item" data-item-id="{{valuable._id}}">
+                <tr>
+                    <td>
+                        <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                    </td>
+                    <td>
+                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{valuable._id}}"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                               value="{{valuable.system.quantity}}" data-dtype="Number"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}"
+                               placeholder="name"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit weight-data" data-field="system.weight" type="text"
+                               value="{{valuable.system.weight}}" data-dtype="Number"/>
+                    </td>
+                </tr>
+                <tr class="item-info invisible">
+                    <td colspan="4">
+                        <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Alchemy.Duration"}}: </b>
+                            </label>{{valuable.system.time}}
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Alchemy.Toxicity"}}: </b>
+                            </label>{{valuable.system.toxicity}}
+                        </div>
+                        <div class="flex">
+                          <label class="label-info">
+                              <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                          </label>{{valuable.system.effect}}
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+        {{/if}}
+
+        {{#if mutagens}}
+        <h3>{{localize "WITCHER.Inventory.Mutagens"}}</h3>
+        <table class="valuable-table item-list">
+            <tr>
+                <th></th>
+                <th></th>
+                <th><b>{{localize "WITCHER.table.Quantity"}}</b></th>
+                <th><b>{{localize "WITCHER.table.Name"}}</b></th>
+                <th><b>{{localize "WITCHER.Item.Weight"}}</b></th>
+            </tr>
+            {{#each mutagens as |valuable id|}}
+            <tbody class="item" data-item-id="{{valuable._id}}">
+                <tr>
+                    <td>
+                        <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                    </td>
+                    <td>
+                        <img src="{{valuable.img}}" class="item-img dragable" draggable="true"
+                             data-id="{{valuable._id}}"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                               value="{{valuable.system.quantity}}" data-dtype="Number"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit" data-field="name" type="text" value="{{valuable.name}}"
+                               placeholder="name"/>
+                    </td>
+                    <td>
+                        <input class="inline-edit weight-data" data-field="system.weight" type="text"
+                               value="{{valuable.system.weight}}" data-dtype="Number"/>
+                    </td>
+                </tr>
+                <tr class="item-info invisible">
+                    <td colspan="3">
+                        <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                            </label>
+                            <div>{{valuable.system.effect}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Mutagen.MinorMutation"}}: </b>
+                            </label>
+                            <div>{{valuable.system.minorMutation}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a class="item-edit"><i class="fas fa-edit"></i></a>
+                            <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+        {{/if}}
+
+        {{#if alchemicalTreatments}}
+        <h3>{{localize "WITCHER.Inventory.AlchemicalTreatments"}}</h3>
+        <table class="valuable-table item-list">
+            <tr>
                 <td></td>
                 <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
                 <td><b>{{localize "WITCHER.table.Name"}}</b></td>
-                <td><b>{{localize "WITCHER.Diagram.Learned"}}</b></td>
+                <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
                 <td></td>
             </tr>
-            {{#each diagrams as |diagram id|}}
-                <tbody class="item" data-item-id="{{diagram._id}}">
-                <tr>
-                    <td>
-                        <div class="flex">
-                            <a class="item-armor-display"><i class="fas fa-info"></i></a>
-                        </div>
-                    </td>
-                    <td><img src="{{diagram.img}}" class="item-img dragable" draggable="true"
-                             data-id="{{diagram._id}}"/></td>
-                    <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
-                               value="{{diagram.system.quantity}}" data-dtype="Number"/></td>
-                    <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}"
-                               placeholder="name"/></td>
-                    <td><input class="inline-edit" data-field="system.learned" type="checkbox"
-                               value="{{diagram.system.learned}}" {{checked diagram.system.learned}}/>
-                </tr>
-                <tr class="item-info invisible">
-                    {{#unless diagram.system.isFormulae}}
-                        <td colspan="4">
-                            <div>
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.craftingDC"}}: </b>
-                                </label>{{diagram.system.craftingDC}}
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
-                                </label>{{diagram.system.craftingTime}}
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.investment"}}: </b>
-                                </label>{{diagram.system.investment}}
-                            </div>
-                            <div>
-                                <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}}:</b>
-                                    {{#each diagram.system.craftingComponents as |component name|}}
-                                        <span>{{component.name}}</span>
-                                        <span {{#if
-                                                (lt (getOwnedComponentCount ../actor component.name) component.quantity)}}
-                                        class="error-display"
-                                        {{/if}}>
-                                            ({{component.quantity}})
-                                        </span>
-                                    {{/each}}
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="learned-data">
-                                <a class="crafting-craft"><i class="fas fa-hammer"></i></a>
-                                <a class="item-edit"><i class="fas fa-edit"></i></a>
-                                <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </td>
-                    {{/unless}}
-                    {{#if diagram.system.isFormulae}}
-                        <td colspan="4">
-                            <div>
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.alchemyDC"}}: </b>
-                                </label>{{diagram.system.alchemyDC}}
-                                <label class="label-info">
-                                    <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
-                                </label>{{diagram.system.craftingTime}}
-
-                                <div class="flex components-display">
-                                    {{#if (gt diagram.system.alchemyComponents.vitriol 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/vitriol.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../vitriolCount diagram.system.alchemyComponents.vitriol)}}
-                                            <span>{{diagram.system.alchemyComponents.vitriol}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.vitriol}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.rebis 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/rebis.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../rebisCount diagram.system.alchemyComponents.rebis)}}
-                                            <span>{{diagram.system.alchemyComponents.rebis}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.rebis}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.aether 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/aether.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../aetherCount diagram.system.alchemyComponents.aether)}}
-                                            <span>{{diagram.system.alchemyComponents.aether}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.aether}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.quebrith 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/quebrith.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../quebrithCount diagram.system.alchemyComponents.quebrith)}}
-                                            <span>{{diagram.system.alchemyComponents.quebrith}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.quebrith}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.hydragenum 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../hydragenumCount diagram.system.alchemyComponents.hydragenum)}}
-                                            <span>{{diagram.system.alchemyComponents.hydragenum}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.hydragenum}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.vermilion 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/vermilion.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../vermilionCount diagram.system.alchemyComponents.vermilion)}}
-                                            <span>{{diagram.system.alchemyComponents.vermilion}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.vermilion}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.sol 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img"/>
-                                        {{#if (gte ../solCount diagram.system.alchemyComponents.sol)}}
-                                            <span>{{diagram.system.alchemyComponents.sol}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.sol}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.caelum 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/caelum.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../caelumCount diagram.system.alchemyComponents.caelum)}}
-                                            <span>{{diagram.system.alchemyComponents.caelum}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.caelum}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                    {{#if (gt diagram.system.alchemyComponents.fulgur 0)}}
-                                        <img src="systems/TheWitcherTRPG/assets/images/fulgur.png"
-                                             class="substance-img"/>
-                                        {{#if (gte ../fulgurCount diagram.system.alchemyComponents.fulgur)}}
-                                            <span>{{diagram.system.alchemyComponents.fulgur}}</span>
-                                        {{else}}
-                                            <span class="error-display">{{diagram.system.alchemyComponents.fulgur}}</span>
-                                        {{/if}}
-                                    {{/if}}
-                                </div>
-                                <div class="flex">
-                                    <label class="label-info"><b>{{localize "WITCHER.Diagram.otherComponents"}}
-                                        :</b>{{diagram.system.components}}
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <a class="alchemy-potion"><i class="fas fa-vial"></i></a>
-                                <a class="item-edit"><i class="fas fa-edit"></i></a>
-                                <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </td>
-                    {{/if}}
-                </tr>
-                </tbody>
-            {{/each}}
-        </table>
-    </div>
-    <div class="component-section">
-        <div>
-            {{> "systems/TheWitcherTRPG/templates/partials/substances.html"}}
-        </div>
-        <div class="components">
-            <h2>{{localize  "WITCHER.Inventory.Components"}}
-                <a class="add-item" data-itemType="component">
-                    <i class="fas fa-plus"></i>
-                </a>
-            </h2>
-            <table class="component-table item-list">
-                <tr>
-                    <td></td>
-                    <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
-                    <td><b>{{localize "WITCHER.table.Name"}}</b></td>
-                    <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
-                    <td></td>
-                </tr>
-                {{#each components as |component id|}}
-                    <tbody class="item" data-item-id="{{component._id}}">
+            {{#each alchemicalTreatments as |component id|}}
+            <tbody class="item" data-item-id="{{component._id}}">
                     <tr>
                         <td><img src="{{component.img}}" class="item-img dragable" draggable="true"
                                  data-id="{{component._id}}"/></td>
@@ -770,9 +828,146 @@
                                    value="{{component.system.weight}}" data-dtype="Number"/></td>
                         <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
                     </tr>
-                    </tbody>
+                </tbody>
+            {{/each}}
+        </table>
+        {{/if}}
+
+        <div>
+            {{> "systems/TheWitcherTRPG/templates/partials/substances.html"}}
+        </div>
+
+        <h2>
+            {{localize "WITCHER.Inventory.Crafting"}}
+            <a class="add-item" data-itemType="component">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h2>
+        <div class="components">
+            {{#if craftingMaterials}}
+            <h3>{{localize  "WITCHER.Inventory.CraftingMaterials"}}</h3>
+            <table class="component-table item-list">
+                <tr>
+                    <td></td>
+                    <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                    <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                    <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
+                    <td></td>
+                </tr>
+                {{#each craftingMaterials as |component id|}}
+                <tbody class="item" data-item-id="{{component._id}}">
+                    <tr>
+                        <td><img src="{{component.img}}" class="item-img dragable" draggable="true"
+                                 data-id="{{component._id}}"/></td>
+                        <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                                   value="{{component.system.quantity}}" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}"
+                                   placeholder="name"/></td>
+                        <td><input class="inline-edit weight-data" data-field="system.weight" type="text"
+                                   value="{{component.system.weight}}" data-dtype="Number"/></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                </tbody>
                 {{/each}}
             </table>
+            {{/if}}
+
+            {{#if ingotsAndMinerals}}
+            <h3>{{localize  "WITCHER.Inventory.IngotsAndMinerals"}}</h3>
+            <table class="component-table item-list">
+                <tr>
+                    <td></td>
+                    <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                    <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                    <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
+                    <td></td>
+                </tr>
+                {{#each ingotsAndMinerals as |component id|}}
+                <tbody class="item" data-item-id="{{component._id}}">
+                    <tr>
+                        <td><img src="{{component.img}}" class="item-img dragable" draggable="true"
+                                 data-id="{{component._id}}"/></td>
+                        <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                                   value="{{component.system.quantity}}" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}"
+                                   placeholder="name"/></td>
+                        <td><input class="inline-edit weight-data" data-field="system.weight" type="text"
+                                   value="{{component.system.weight}}" data-dtype="Number"/></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+            {{/if}}
+
+            {{#if hidesAndAnimalParts}}
+            <h3>{{localize  "WITCHER.Inventory.HidesAndAnimalParts"}}</h3>
+            <table class="component-table item-list">
+                <tr>
+                    <td></td>
+                    <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                    <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                    <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
+                    <td></td>
+                </tr>
+                {{#each hidesAndAnimalParts as |component id|}}
+                <tbody class="item" data-item-id="{{component._id}}">
+                    <tr>
+                        <td><img src="{{component.img}}" class="item-img dragable" draggable="true"
+                                 data-id="{{component._id}}"/></td>
+                        <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                                   value="{{component.system.quantity}}" data-dtype="Number"/></td>
+                        <td><input class="inline-edit" data-field="name" type="text" value="{{component.name}}"
+                                   placeholder="name"/></td>
+                        <td><input class="inline-edit weight-data" data-field="system.weight" type="text"
+                                   value="{{component.system.weight}}" data-dtype="Number"/></td>
+                        <td><a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+            {{/if}}
+
+            {{!-- Uncomment, once enhancements are fixed --}}
+            {{!-- {{#if enhancements}}
+            <h3>{{localize  "WITCHER.Inventory.Enhancements"}}</h3>
+            <table class="component-table item-list">
+                <tr>
+                    <td></td>
+                    <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+                    <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+                    <td><b>{{localize "WITCHER.Item.Weight"}}</b></td>
+                    <td></td>
+                </tr>
+                {{#each enhancements as |valuable id|}}
+                <tbody class="item" data-item-id="{{component._id}}">
+                    <tr>
+                        <td colspan="4">
+                            <div class="flex">
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Alchemy.Duration"}}: </b>
+                                </label>{{valuable.system.time}}
+                                <label class="label-info">
+                                    <b>{{localize "WITCHER.Alchemy.Toxicity"}}: </b>
+                                </label>{{valuable.system.toxicity}}
+                            </div>
+                            <div class="flex">
+                            <label class="label-info">
+                                <b>{{localize "WITCHER.Item.Effect"}}: </b>
+                            </label>{{valuable.system.effect}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a class="item-edit"><i class="fas fa-edit"></i></a>
+                                <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+            {{/if}} --}}
         </div>
     </div>
 </div>

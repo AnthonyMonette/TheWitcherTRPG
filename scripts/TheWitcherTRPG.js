@@ -17,6 +17,9 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
         "systems/TheWitcherTRPG/templates/partials/tab-background.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-mounts.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
@@ -232,6 +235,10 @@ actor.rollSpell("${spell._id}")`;
 }
 
 Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentName) {
+    if (!actor) {
+        console.warn("'actor' parameter passed into getOwnedComponentCount is undefined. That might be a problem with one of the selected actors diagrams.");
+        return 0;
+    }
     let ownedComponent = actor.findNeededComponent(componentName);
     return ownedComponent.sum("quantity");
 });
