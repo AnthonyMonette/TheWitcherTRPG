@@ -1,3 +1,8 @@
+table th {
+    padding: 0.25em;
+    text-align: left;
+}
+
 .enhancement-slot {
     height: 30px;
     width: 30px;

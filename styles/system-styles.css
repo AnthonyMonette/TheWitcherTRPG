@@ -290,9 +290,7 @@ input.stopping-info {
   margin-bottom: 5px;
 }
 
-.valuable-table td,
-.valuable-table th {
-  text-align: left;
+.valuable-table td {
   padding: 0.25em 0.25em;
 }
 
