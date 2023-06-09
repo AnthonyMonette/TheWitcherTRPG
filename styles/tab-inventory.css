@@ -1,3 +1,8 @@
+table th {
+    padding: 0.25em;
+    text-align: left;
+}
+
 .enhancement-slot {
     height: 30px;
     width: 30px;
@@ -34,4 +39,35 @@
     color: white;
     position: absolute;
     right: 10px;
+}
+
+.item-img-wrapper {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    height: 44px;
+}
+
+.item-img-wrapper .item-show {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-img-wrapper .item-show:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.item-img-wrapper .item-show .fa {
+  display: none;
+  color: rgb(200, 200, 200);
+  font-size: 28px;
+}
+
+.item-img-wrapper .item-show:hover .fa {
+  display: inline-block;
 }

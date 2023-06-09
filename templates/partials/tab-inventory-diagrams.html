@@ -1,0 +1,211 @@
+<table class="diagram-table item-list">
+    <tr>
+        <td></td>
+        <td></td>
+        <td><b>{{localize "WITCHER.table.Quantity"}}</b></td>
+        <td><b>{{localize "WITCHER.table.Name"}}</b></td>
+        <td><b>{{localize "WITCHER.Diagram.Learned"}}</b></td>
+        <td></td>
+    </tr>
+    {{#each diagrams as |diagram id|}}
+        <tbody class="item" data-item-id="{{diagram._id}}">
+        <tr>
+            <td>
+                <div class="flex">
+                    <a class="item-armor-display"><i class="fas fa-info"></i></a>
+                </div>
+            </td>
+            <td><img src="{{diagram.img}}" class="item-img dragable" draggable="true"
+                      data-id="{{diagram._id}}"/></td>
+            <td><input class="inline-edit item-quantity" data-field="system.quantity" type="text"
+                        value="{{diagram.system.quantity}}" data-dtype="Number"/></td>
+            <td><input class="inline-edit" data-field="name" type="text" value="{{diagram.name}}"
+                        placeholder="name"/></td>
+            <td><input class="inline-edit" data-field="system.learned" type="checkbox"
+                        value="{{diagram.system.learned}}" {{checked diagram.system.learned}}/>
+        </tr>
+        <tr class="item-info invisible">
+            {{#unless diagram.system.isFormulae}}
+                <td colspan="4">
+                    <div>
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.craftingDC"}}: </b>
+                        </label>{{diagram.system.craftingDC}}
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
+                        </label>{{diagram.system.craftingTime}}
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.investment"}}: </b>
+                        </label>{{diagram.system.investment}}
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.Level"}}: </b>
+                        </label>
+                        {{#if (eq diagram.system.level "novice")}}
+                        {{localize "WITCHER.Diagram.Novice"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "journeyman")}}
+                        {{localize "WITCHER.Diagram.Journeyman"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "master")}}
+                        {{localize "WITCHER.Diagram.Master"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "grand-master")}}
+                        {{localize "WITCHER.Diagram.GrandMaster"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "witcher")}}
+                        {{localize "WITCHER.Diagram.Witcher"}}
+                        {{/if}}
+                    </div>
+                    <div>
+                        <label class="label-info"><b>{{localize "WITCHER.Diagram.components"}}:</b>
+                            {{#each diagram.system.craftingComponents as |component name|}}
+                                <span>{{component.name}}</span>
+                                <span {{#if
+                                        (lt (getOwnedComponentCount ../../actor component.name) component.quantity)}}
+                                class="error-display"
+                                {{/if}}>
+                                    ({{component.quantity}})
+                                </span>
+                            {{/each}}
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="learned-data">
+                        <a class="crafting-craft"><i class="fas fa-hammer"></i></a>
+                        <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </td>
+            {{/unless}}
+            {{#if diagram.system.isFormulae}}
+                <td colspan="4">
+                    <div>
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.alchemyDC"}}: </b>
+                        </label>{{diagram.system.alchemyDC}}
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.craftingTime"}}: </b>
+                        </label>{{diagram.system.craftingTime}}
+                        <label class="label-info">
+                            <b>{{localize "WITCHER.Diagram.Level"}}: </b>
+                        </label>
+                        {{#if (eq diagram.system.level "novice")}}
+                        {{localize "WITCHER.Diagram.Novice"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "journeyman")}}
+                        {{localize "WITCHER.Diagram.Journeyman"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "master")}}
+                        {{localize "WITCHER.Diagram.Master"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "grand-master")}}
+                        {{localize "WITCHER.Diagram.GrandMaster"}}
+                        {{/if}}
+                        {{#if (eq diagram.system.level "witcher")}}
+                        {{localize "WITCHER.Diagram.Witcher"}}
+                        {{/if}}
+
+                        <div class="flex components-display">
+                            {{#if (gt diagram.system.alchemyComponents.vitriol 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/vitriol.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../vitriolCount diagram.system.alchemyComponents.vitriol)}}
+                                    <span>{{diagram.system.alchemyComponents.vitriol}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.vitriol}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.rebis 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/rebis.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../rebisCount diagram.system.alchemyComponents.rebis)}}
+                                    <span>{{diagram.system.alchemyComponents.rebis}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.rebis}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.aether 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/aether.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../aetherCount diagram.system.alchemyComponents.aether)}}
+                                    <span>{{diagram.system.alchemyComponents.aether}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.aether}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.quebrith 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/quebrith.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../quebrithCount diagram.system.alchemyComponents.quebrith)}}
+                                    <span>{{diagram.system.alchemyComponents.quebrith}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.quebrith}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.hydragenum 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/hydragenum.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../hydragenumCount diagram.system.alchemyComponents.hydragenum)}}
+                                    <span>{{diagram.system.alchemyComponents.hydragenum}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.hydragenum}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.vermilion 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/vermilion.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../vermilionCount diagram.system.alchemyComponents.vermilion)}}
+                                    <span>{{diagram.system.alchemyComponents.vermilion}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.vermilion}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.sol 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/sol.png" class="substance-img"/>
+                                {{#if (gte ../solCount diagram.system.alchemyComponents.sol)}}
+                                    <span>{{diagram.system.alchemyComponents.sol}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.sol}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.caelum 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/caelum.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../caelumCount diagram.system.alchemyComponents.caelum)}}
+                                    <span>{{diagram.system.alchemyComponents.caelum}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.caelum}}</span>
+                                {{/if}}
+                            {{/if}}
+                            {{#if (gt diagram.system.alchemyComponents.fulgur 0)}}
+                                <img src="systems/TheWitcherTRPG/assets/images/fulgur.png"
+                                      class="substance-img"/>
+                                {{#if (gte ../fulgurCount diagram.system.alchemyComponents.fulgur)}}
+                                    <span>{{diagram.system.alchemyComponents.fulgur}}</span>
+                                {{else}}
+                                    <span class="error-display">{{diagram.system.alchemyComponents.fulgur}}</span>
+                                {{/if}}
+                            {{/if}}
+                        </div>
+                        {{#if diagram.system.description}}
+                        <div class="flex">
+                            <label class="label-info">
+                                <div>{{{diagram.system.description}}}</div>
+                            </label>
+                        </div>
+                        {{/if}}
+                    </div>
+                </td>
+                <td style="vertical-align: top;">
+                    <div class="flex" style="align-items: center;">
+                        <a class="alchemy-potion"><i class="fas fa-vial"></i></a>
+                        <a class="item-edit"><i class="fas fa-edit"></i></a>
+                        <a class="item-delete"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </td>
+            {{/if}}
+        </tr>
+        </tbody>
+    {{/each}}
+</table>
