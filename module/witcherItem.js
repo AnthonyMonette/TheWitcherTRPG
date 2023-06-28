@@ -298,7 +298,7 @@ export default class WitcherItem extends Item {
     // search for the compendium pack in the world roll tables by name of the generator
     const compendiumPack = game.packs
       .filter(p => p.metadata.type === "RollTable")
-      .filter(c => c.index.find(r => r.name === this.name && r.formula))
+      .filter(c => c.index.find(r => r.name === this.name))
 
     if (!compendiumPack || compendiumPack.length == 0) {
       // Provided item does not have associated roll table
