@@ -40,9 +40,8 @@ async function preloadHandlebarsTemplates() {
     return loadTemplates(templatePath);
 }
 
-
 Hooks.once("init", function () {
-    console.log("TheWItcherTRPG | init system");
+    console.log("TheWitcherTRPG | init system");
 
     CONFIG.witcher = witcher
     CONFIG.Item.documentClass = WitcherItem;
@@ -77,6 +76,14 @@ Hooks.once("ready", async function () {
         });
         let chat = document.getElementById("chat-log")
         if (chat) { chat.classList.add("witcher-style") }
+    }
+
+    // Override custom effects with HUD effects from the compendium
+    if (game.settings.get("TheWitcherTRPG", "loadCustomStatusesFromCompendium")) {
+        let result = await WitcherItem.prototype.getGameEffects();
+        if (result && result.length > 0) {
+            CONFIG.statusEffects = result;
+        }
     }
 });
 

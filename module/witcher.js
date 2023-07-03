@@ -47,11 +47,8 @@ function updateDerived(actor) {
 	thisActor.system.stats.will.modifiers.forEach(item => willTotalModifiers += Number(item.value));
 	thisActor.system.stats.luck.modifiers.forEach(item => luckTotalModifiers += Number(item.value));
 
-	let activeEffects = thisActor.items.filter(function (item) { return item.type == "effect" });
+	let activeEffects = thisActor.getList("effect").filter(e => e.system.isActive);
 	activeEffects.forEach(item => {
-		if (!item.system.isActive) {
-			return
-		}
 		item.system.stats.forEach(stat => {
 			switch (stat.stat) {
 				case "WITCHER.Actor.Stat.Int":
@@ -124,9 +121,6 @@ function updateDerived(actor) {
 	let armorEnc = getArmorEcumbrance(thisActor)
 
 	activeEffects.forEach(item => {
-		if (!item.system.isActive) {
-			return
-		}
 		item.system.derived.forEach(derived => {
 			switch (derived.derivedStat) {
 				case "WITCHER.Actor.CoreStat.Stun":
@@ -357,11 +351,8 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 		rollFormula = addModifiers(array[2], rollFormula)
 	}
 
-	let activeEffects = thisActor.items.filter(function (item) { return item.type == "effect" });
+	let activeEffects = thisActor.getList("effect").filter(e => e.system.isActive);
 	activeEffects.forEach(item => {
-		if (!item.system.isActive) {
-			return
-		}
 		item.system.skills.forEach(skill => {
 			if (skillName == game.i18n.localize(skill.skill)) {
 				if (skill.modifier.includes("/")) { rollFormula += !displayRollDetails ? `/${Number(skill.modifier.replace("/", ''))}` : `/${Number(skill.modifier.replace("/", ''))}[${item.name}]` }
