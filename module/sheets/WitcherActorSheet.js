@@ -210,7 +210,7 @@ export default class WitcherActorSheet extends ActorSheet {
                                    i.type == "mutagen");
     data.notes = actor.getList("note");
 
-    data.activeEffects = actor.getList("effect");
+    data.activeEffects = actor.getList("effect").filter(e => e.system.isActive);
 
     data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
