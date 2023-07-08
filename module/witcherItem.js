@@ -11,38 +11,45 @@ export default class WitcherItem extends Item {
   }
 
   async createSpellVisualEffectIfApplicable(token) {
-    if (this.type == "spell" && token && this.system.createTemplate) {
-      let distance = Number(this.system.templateSize)
-      let direction = 0
-      let angle = 0
-      let width = 1
+    if (this.type == "spell" && token &&
+        this.system.createTemplate &&
+        this.system.templateType &&
+        this.system.templateSize) {
+
+      token = token.document ? token : token._object
+      // todo need to  create some property indicating the initial rotation of the token
+      // token can be classic south oriented or user avatar which may look to the different direction
+      let tokenRotation = 0
+
+      // Prepare template data
+      const templateData = {
+            t: this.system.templateType,
+            user: game.user.id,
+            distance: this.system.templateSize,
+            direction: token.document.rotation - tokenRotation,
+            x: token.center.x,
+            y: token.center.y,
+            fillColor: game.user.color,
+            flags: this.getSpellFlags()
+      };
+
       switch (this.system.templateType) {
         case "rect":
-          distance = Math.hypot(Number(this.system.templateSize))
-          direction = 45
-          width = token.target.value;
+          templateData.distance = Math.hypot(this.system.templateSize, this.system.templateSize);
+          templateData.width = this.system.templateSize;
+          templateData.direction = 45;
+          //distance = Math.hypot(Number(this.system.templateSize))
+          //width = token?.target?.value ?? width
           break;
         case "cone":
-          angle = 45;
+          templateData.angle = 45;
+          break;
+        case "ray":
+          templateData.width = 1;
           break;
       }
 
-      token = token.document ? token : token._object
-
-      let effect = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
-        t: this.system.templateType,
-        user: game.user._id,
-        distance: distance,
-        direction: token.document.rotation - 90,
-        //x: token.system.x + (token.system.width * 100) / 2,
-        x: token.center.x,
-        //y: token.system.y + (token.system.height * 100) / 2,
-        y: token.center.y,
-        fillColor: game.user.color,
-        angle: angle,
-        width: width,
-        flags: this.getSpellFlags(),
-      }], { keepId: true });
+      let effect = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [templateData], { keepId: true });
 
       this.visualEffectId = effect[0]._id;
     }
@@ -314,6 +321,7 @@ export default class WitcherItem extends Item {
                             flatMap(e => ({
                                 id: "@Compendium[" + e.pack + "." + e._id + "]",
                                 name: e.name,
+                                description: "@Compendium[" + e.pack + "." + e._id + "] - " + e.system.description,
                                 label: e.name,
                                 icon: e.img
                              }));
