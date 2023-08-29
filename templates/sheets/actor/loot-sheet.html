@@ -144,5 +144,18 @@
                 {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
             {{/each}}
         </table>
+
+        <h2>{{localize "WITCHER.Loot.Runes"}}</h2>
+        <table class="item-table item-list">
+            {{#each runeItems as |item id|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
+            {{/each}}
+        </table>
+        <h2>{{localize "WITCHER.Loot.Glyphs"}}</h2>
+        <table class="item-table item-list">
+            {{#each glyphItems as |item id|}}
+            {{> "systems/TheWitcherTRPG/templates/partials/loot-item-display.html" item=item isGM=../isGM}}
+            {{/each}}
+        </table>
     </div>
 </div>

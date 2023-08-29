@@ -20,6 +20,7 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-mounts.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-runes-glyphs.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",

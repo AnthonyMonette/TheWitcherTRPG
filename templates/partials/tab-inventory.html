@@ -979,6 +979,16 @@
                 {{/each}}
             </table>
             {{/if}} --}}
+
+            <h2>{{localize  "WITCHER.Inventory.RunesAndGlyphs"}}</h2>
+            {{#if runeItems}}
+            <h3>{{localize  "WITCHER.Inventory.Runes"}}</h3>
+            {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-runes-glyphs.html" enhancements=runeItems}}
+            {{/if}}
+            {{#if glyphItems}}
+            <h3>{{localize  "WITCHER.Inventory.Glyphs"}}</h3>
+            {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-runes-glyphs.html" enhancements=glyphItems}}
+            {{/if}}
         </div>
     </div>
 </div>
