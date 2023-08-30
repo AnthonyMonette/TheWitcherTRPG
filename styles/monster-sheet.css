@@ -8,14 +8,21 @@
   flex-basis: 100%;
 }
 
+.break {
+  height: 0;
+  flex-basis: 100%;
+}
+
 .monster-main {
   display: flex;
   height: 630px;
+  flex-wrap: wrap;
 }
 
 .monster-sheet-left-column {
   padding-right: 10px;
-  flex-grow: 1;
+  flex-basis: 180px;
+  flex: none;
 }
 
 .monster-left-sidebar {
@@ -194,8 +201,8 @@
 
 .monster-knowledge {
   margin-top: 10px;
-  width: 380px;
-  position: relative;
+  flex-basis: 380px;
+  flex-grow: 1;
 }
 
 .monster-knowledge label,
@@ -205,7 +212,8 @@
 }
 
 .monster-right-sidebar {
-  flex-grow: 1;
+  flex: 1 0;
+  overflow: hidden;
   width: 100%;
   width: -moz-available;
   width: -webkit-fill-available;

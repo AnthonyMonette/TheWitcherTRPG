@@ -1,0 +1,10 @@
+{{#if (and (includes (getSetting "clickableImageItemTypes") item.type) item.system.clickableImage)}}
+<div class="item-img-wrapper">
+    <a class="item-show"><i class="fa fa-magnifying-glass"></i></a>
+    <img src="{{item.img}}" class="item-img dragable" draggable="true"
+        data-id="{{item._id}}"/>
+</div>
+{{else}}
+<img src="{{item.img}}" class="item-img dragable" draggable="true"
+        data-id="{{item._id}}"/>
+{{/if}}

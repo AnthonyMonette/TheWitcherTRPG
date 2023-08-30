@@ -72,11 +72,51 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     });
 
+    // Crafting section
     data.allComponents = actor.getList("component");
-    data.components = data.allComponents.filter(i => i.system.type != "substances");
-    data.valuables = items.filter(i => i.type == "valuable" || i.type == "mount" || i.type == "alchemical" ||
-      i.type == "mutagen" || (i.type == "enhancement" && i.system.type != "armor" && i.system.applied == false));
+    data.craftingMaterials = data.allComponents.filter(i => i.system.type == "crafting-material" || i.system.type == "component");
+    data.ingotsAndMinerals = data.allComponents.filter(i => i.system.type == "minerals");
+    data.hidesAndAnimalParts = data.allComponents.filter(i => i.system.type == "animal-parts");
+    data.enhancements = items.filter(i => i.type == "enhancement" && i.system.type != "armor" && !i.system.applied);
+
+    // Valuables Section
+    data.valuables = items.filter(i => i.type == "valuable");
+    data.clothingAndContainers = data.valuables.filter(i => i.system.type == "clothing" || i.system.type == "containers");
+    data.general = data.valuables.filter(i => i.system.type == "genera" || !i.system.type);
+    data.foodAndDrinks = data.valuables.filter(i => i.system.type == "food-drink");
+    data.toolkits = data.valuables.filter(i => i.system.type == "toolkit");
+    data.questItems = data.valuables.filter(i => i.system.type == "quest-item");
+    data.mounts = items.filter(i => i.type == "mount");
+    data.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
+
+    data.runeItems = data.enhancements.filter(e => e.system.type == "rune");
+    data.glyphItems = data.enhancements.filter(e => e.system.type == "glyph");
+
+    // Alchemy section
+    data.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
+    data.witcherPotions = items.filter(i => i.type == "alchemical" && (i.system.type == "decoction" || i.system.type == "potion"));
+    data.oils = items.filter(i => i.type == "alchemical" && i.system.type == "oil");
+    data.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
+    data.mutagens = items.filter(i => i.type == "mutagen");
+    
+    // Formulae
     data.diagrams = actor.getList("diagrams");
+    data.alchemicalItemDiagrams = data.diagrams.filter(d => d.system.type == "alchemical" || !d.system.type).map(sanitizeDescription);
+    data.potionDiagrams = data.diagrams.filter(d => d.system.type == "potion").map(sanitizeDescription);
+    data.decoctionDiagrams = data.diagrams.filter(d => d.system.type == "decoction").map(sanitizeDescription);
+    data.oilDiagrams = data.diagrams.filter(d => d.system.type == "oil").map(sanitizeDescription);
+    
+    // Diagrams
+    data.ingredientDiagrams = data.diagrams.filter(d => d.system.type == "ingredients").map(sanitizeDescription);
+    data.weaponDiagrams = data.diagrams.filter(d => d.system.type == "weapon").map(sanitizeDescription);
+    data.armorDiagrams = data.diagrams.filter(d => d.system.type == "armor").map(sanitizeDescription);
+    data.elderfolkWeaponDiagrams = data.diagrams.filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
+    data.elderfolkArmorDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
+    data.ammunitionDiagrams = data.diagrams.filter(d => d.system.type == "ammunition").map(sanitizeDescription);
+    data.bombDiagrams = data.diagrams.filter(d => d.system.type == "bomb").map(sanitizeDescription);
+    data.trapDiagrams = data.diagrams.filter(d => d.system.type == "traps").map(sanitizeDescription);
+
+    // Others
     data.spells = actor.getList("spell");
 
     data.professions = actor.getList("profession");
@@ -84,6 +124,25 @@ export default class WitcherActorSheet extends ActorSheet {
 
     data.races = actor.getList("race");
     data.race = data.races[0];
+
+    // Helping functions
+    /** Sanitizes description if it contains forbidden html tags. */
+    function sanitizeDescription(item) {
+      if (!item.system.description) {
+        return item;
+      }
+
+      const regex = /(<.+?>)/g;
+      const whiteList = ["<p>", "</p>"];
+      const tagsInText = item.system.description.match(regex);
+      const itemCopy = JSON.parse(JSON.stringify(item));
+      if (tagsInText.some(i => !whiteList.includes(i))) {
+        const temp = document.createElement('div');
+        temp.textContent = itemCopy.system.description;
+        itemCopy.system.description = temp.innerHTML;
+      }
+      return itemCopy;
+    }
 
     Array.prototype.sum = function (prop) {
       var total = 0
@@ -139,11 +198,19 @@ export default class WitcherActorSheet extends ActorSheet {
     data.substancesFulgur = actor.getSubstance("fulgur");
     data.fulgurCount = data.substancesFulgur.sum("quantity");
 
-    data.loots = items.filter(i => i.type == "component" || i.type == "valuable" || i.type == "diagrams" ||
-      i.type == "armor" || i.type == "alchemical" || i.type == "enhancement" || i.type == "mutagen");
+    data.loots = items.filter(i => i.type == "component" ||
+                                   i.type == "crafting-material" ||
+                                   i.type == "enhancement" ||
+                                   i.type == "valuable" ||
+                                   i.type == "animal-parts" ||
+                                   i.type == "diagrams" ||
+                                   i.type == "armor" ||
+                                   i.type == "alchemical" ||
+                                   i.type == "enhancement" ||
+                                   i.type == "mutagen");
     data.notes = actor.getList("note");
 
-    data.activeEffects = actor.getList("effect");
+    data.activeEffects = actor.getList("effect").filter(e => e.system.isActive);
 
     data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
@@ -175,6 +242,7 @@ export default class WitcherActorSheet extends ActorSheet {
     html.find(".hp-value").change(this._onHPChanged.bind(this));
     html.find(".inline-edit").change(this._onInlineEdit.bind(this));
     html.find(".item-edit").on("click", this._onItemEdit.bind(this));
+    html.find(".item-show").on("click", this._onItemShow.bind(this));
     html.find(".item-weapon-display").on("click", this._onItemDisplayInfo.bind(this));
     html.find(".item-armor-display").on("click", this._onItemDisplayInfo.bind(this));
     html.find(".item-valuable-display").on("click", this._onItemDisplayInfo.bind(this));
@@ -322,14 +390,22 @@ export default class WitcherActorSheet extends ActorSheet {
     this.actor.update({ "system.deathSaves": this.actor.system.deathSaves + 1 });
   }
 
-  //todo looks like this is not defined anywhere
   async _onDropItem(event, data) {
     if (!this.actor.isOwner) return false;
     const item = await Item.implementation.fromDropData(data);
     const itemData = item.toObject();
+
+    // Handle item sorting within the same Actor
     if (this.actor.uuid === item.parent?.uuid) return this._onSortItem(event, itemData);
-    let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
-    if (dragData.type === "itemDrop") {
+
+    // dragData should exist for WitcherActorSheet, WitcherItemSheet.
+    // It is populated during the activateListeners phase
+    let witcherDragData = event.dataTransfer.getData("text/plain")
+    let dragData = witcherDragData ? JSON.parse(witcherDragData) : data;
+
+    // handle itemDrop prepared in WitcherActorSheet, WitcherItemSheet
+    // need this to drop item from actor
+    if (witcherDragData && dragData.type === "itemDrop") {
       let previousActor = game.actors.get(dragData.actor._id)
       let token = previousActor.token ?? previousActor.getActiveTokens()[0]
       if (token) {
@@ -339,6 +415,8 @@ export default class WitcherActorSheet extends ActorSheet {
       if (previousActor == this.actor) {
         return;
       }
+
+      // Calculate the rollable amount of items to be dropped from actors' inventory
       if (typeof (dragData.item.system.quantity) === 'string' && dragData.item.system.quantity.includes("d")) {
         let messageData = {
           speaker: this.actor.getSpeaker(),
@@ -346,12 +424,17 @@ export default class WitcherActorSheet extends ActorSheet {
         }
         let roll = await new Roll(dragData.item.system.quantity).evaluate({ async: true })
         roll.toMessage(messageData)
+
+        // Add items to the recipient actor
         this._addItem(this.actor, dragData.item, Math.floor(roll.total))
+
+        // Remove items from donor actor
         if (previousActor) {
           await previousActor.items.get(dragData.item._id).delete()
         }
         return
       }
+
       if (dragData.item.system.quantity != 0) {
         if (dragData.item.system.quantity > 1) {
           let content = `${game.i18n.localize("WITCHER.Items.transferMany")}: <input type="number" class="small" name="numberOfItem" value=1>/${dragData.item.system.quantity} <br />`
@@ -372,27 +455,40 @@ export default class WitcherActorSheet extends ActorSheet {
             content: content
           }
           await buttonDialog(dialogData)
+
           if (cancel) {
             return
           } else {
+            // Remove items from donor actor
             this._removeItem(previousActor, dragData.item._id, numberOfItem)
             if (numberOfItem > dragData.item.system.quantity) {
               numberOfItem = dragData.item.system.quantity
             }
+            // Add items to the recipient actor
             this._addItem(this.actor, dragData.item, numberOfItem)
           }
         } else {
+          // Add item to the recipient actor
           this._addItem(this.actor, dragData.item, 1)
+          // Remove item from donor actor
           if (previousActor) {
             await previousActor.items.get(dragData.item._id).delete()
           }
         }
       }
-    } else if (dragData.type === "Item") {
-      let dragEventData = TextEditor.getDragEventData(event)
-      let item = await fromUuid(dragEventData.uuid)
-      if (item) {
-        this._addItem(this.actor, item, 1)
+    } else if (dragData && dragData.type === "Item") {
+      // Adding items from compendia
+      // We do not have the same dragData object in compendia as for Actor or Item
+      let itemToAdd = item
+
+      // Somehow previous item from passed data object is empty. Let's try to get item from passed event
+      if (!itemToAdd) {
+        let dragEventData = TextEditor.getDragEventData(event)
+        itemToAdd = await fromUuid(dragEventData.uuid)
+      }
+
+      if (itemToAdd) {
+        this._addItem(this.actor, itemToAdd, 1)
       }
     } else {
       super._onDrop(event, data);
@@ -931,11 +1027,21 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     if (element.dataset.itemtype == "component") {
-      if (element.dataset.subtype) {
+      if (element.dataset.subtype == "alchemical") {
+        itemData.system = { type: element.dataset.subtype }
+      } else if (element.dataset.subtype) {
         itemData.system = { type: "substances", substanceType: element.dataset.subtype }
       } else {
         itemData.system = { type: "component", substanceType: element.dataset.subtype }
       }
+    }
+
+    if (element.dataset.itemtype == "valuable") {
+      itemData.system = { type: "genera" };
+    }
+
+    if (element.dataset.itemtype == "diagram") {
+      itemData.system = { type: "alchemical", level: "novice", isFormulae: true };
     }
 
     await Item.create(itemData, { parent: this.actor })
@@ -1153,23 +1259,30 @@ export default class WitcherActorSheet extends ActorSheet {
 
     let focusOptions = `<option value="0"> </option>`
     let secondFocusOptions = `<option value="0" selected> </option>`
-    if (this.actor.system.focus1.name) {
+
+    let useFocus = false
+    if (this.actor.system.focus1.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus1.value}" selected> ${this.actor.system.focus1.name} (${this.actor.system.focus1.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus1.value}"> ${this.actor.system.focus1.name} (${this.actor.system.focus1.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus2.name) {
+    if (this.actor.system.focus2.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus2.value}"> ${this.actor.system.focus2.name} (${this.actor.system.focus2.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus2.value}"> ${this.actor.system.focus2.name} (${this.actor.system.focus2.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus3.name) {
+    if (this.actor.system.focus3.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus3.value}"> ${this.actor.system.focus3.name} (${this.actor.system.focus3.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus3.value}"> ${this.actor.system.focus3.name} (${this.actor.system.focus3.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus4.name) {
+    if (this.actor.system.focus4.value > 0) {
       focusOptions += `<option value="${this.actor.system.focus4.value}"> ${this.actor.system.focus4.name} (${this.actor.system.focus4.value}) </option>`;
       secondFocusOptions += `<option value="${this.actor.system.focus4.value}"> ${this.actor.system.focus4.name} (${this.actor.system.focus4.value}) </option>`;
+      useFocus = true
     }
-    if (this.actor.system.focus1.name || this.actor.system.focus2.name || this.actor.system.focus3.name || this.actor.system.focus4.name) {
+
+    if (useFocus) {
       content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseFocus")}: <select name="focus">${focusOptions}</select></label> <br />`
       content += ` <label>${game.i18n.localize("WITCHER.Spell.ChooseExpandedFocus")}: <select name="secondFocus">${secondFocusOptions}</select></label> <br />`
     }
@@ -1201,24 +1314,22 @@ export default class WitcherActorSheet extends ActorSheet {
     if (cancel) {
       return
     }
+    let origStaCost = staCostTotal
     let newSta = this.actor.system.derivedStats.sta.value
-    if (isExtraAttack) {
-      newSta -= 3
-      if (newSta < 0) {
-        return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
-      }
-      this.actor.update({
-        'system.derivedStats.sta.value': newSta
-      });
-    }
-    let staCostdisplay = staCostTotal;
 
-    staCostTotal -= focusValue - secondFocusValue
+    staCostTotal -= Number(focusValue) + Number(secondFocusValue)
+    if (isExtraAttack) {
+      staCostTotal += 3
+    }
+
+    let useMinimalStaCost = false
     if (staCostTotal < 1) {
+      useMinimalStaCost = true
       staCostTotal = 1
     }
 
     newSta -= staCostTotal
+
     if (newSta < 0) {
       return ui.notifications.error(game.i18n.localize("WITCHER.Spell.notEnoughSta"));
     }
@@ -1226,7 +1337,19 @@ export default class WitcherActorSheet extends ActorSheet {
     this.actor.update({
       'system.derivedStats.sta.value': newSta
     });
-    staCostdisplay += `-${Number(focusValue) + Number(secondFocusValue)}[Focus]`
+
+    //todo check whether we need to spent 1 STA even if focus value > STA cost
+    let staCostdisplay = `${origStaCost}[${game.i18n.localize("WITCHER.Spell.Short.StaCost")}]`
+
+    if (isExtraAttack) {
+      staCostdisplay += ` + 3[${game.i18n.localize("WITCHER.Dialog.attackExtra")}]`
+    }
+
+    staCostdisplay += ` - ${Number(focusValue) + Number(secondFocusValue)}[${game.i18n.localize("WITCHER.Actor.DerStat.Focus")}]`
+    staCostdisplay += ` =  ${staCostTotal}`
+    if (useMinimalStaCost) {
+      staCostdisplay += `[${game.i18n.localize("WITCHER.MinValue")}]`
+    }
 
     if (customModifier < 0) { rollFormula += !displayRollDetails ? `${customModifier}` : `${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
     if (customModifier > 0) { rollFormula += !displayRollDetails ? `+${customModifier}` : `+${customModifier}[${game.i18n.localize("WITCHER.Settings.Custom")}]` }
@@ -1278,7 +1401,8 @@ export default class WitcherActorSheet extends ActorSheet {
       let effects = JSON.stringify(spellItem.system.effects)
       let locationJSON = JSON.stringify(this.actor.getLocationObject("randomSpell"))
 
-      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${spellItem.system.damage}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
+      let dmg = spellItem.system.damage || "0"
+      messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${dmg}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
     }
 
     let config = new RollConfig()
@@ -1863,6 +1987,21 @@ export default class WitcherActorSheet extends ActorSheet {
     let item = this.actor.items.get(itemId);
 
     item.sheet.render(true)
+  }
+
+  async _onItemShow(event) {
+    event.preventDefault;
+    let itemId = event.currentTarget.closest(".item").dataset.itemId;
+    let item = this.actor.items.get(itemId);
+
+    new Dialog({
+      title: item.name,
+      content: `<img src="${item.img}" alt="${item.img}" width="100%" />`,
+      buttons: {}
+    }, {
+      width: 520,
+      resizable: true
+    }).render(true);
   }
 
   async _onItemDelete(event) {
@@ -2547,5 +2686,10 @@ export default class WitcherActorSheet extends ActorSheet {
       totalStats += data.system.stats[element].max;
     }
     return totalStats;
+  }
+
+  /** Do not delete. This method is here to give external modules the possibility to make skill rolls. */
+  async _onSkillRoll(statNum, skillNum) {
+    rollSkillCheck(this.actor, statNum, skillNum);
   }
 }

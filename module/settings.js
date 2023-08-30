@@ -39,4 +39,27 @@ export const registerSettings = function() {
         type: Boolean,
         default: false
       });
+    game.settings.register("TheWitcherTRPG", "loadCustomStatusesFromCompendium", {
+        name: "WITCHER.Settings.loadCustomStatusesFromCompendium",
+        hint: "WITCHER.Settings.loadCustomStatusesFromCompendiumHint",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
+      });
+    game.settings.register("TheWitcherTRPG", "clickableImageItemTypes", {
+        name: "WITCHER.Settings.clickableImageItemTypes",
+        hint: "WITCHER.Settings.clickableImageItemTypesHint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "valuable"
+      });
+    game.settings.register("TheWitcherTRPG", "clickableImageCheckboxForGMOnly", {
+        name: "WITCHER.Settings.clickableImageCheckboxForGMOnly",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true
+      });
 }

@@ -2,16 +2,17 @@
   "id": "TheWitcherTRPG",
   "title": "TheWitcherTRPG - fvtt",
   "description": "The Witcher TRPG System.",
-    "compatibility" : {
-      "minimum" : "10",
-      "verified" : "10.284"
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11",
+    "maximum": "11"
   },
-    "version": 0.96,
-    "authors": {
-      "name": "TechAntho"
-    },
-    "scripts": [
-    ],
+  "version": 0.97,
+  "authors": {
+    "name": "TechAntho"
+  },
+  "scripts": [
+  ],
   "esmodules": [
     "scripts/TheWitcherTRPG.js"
   ],
@@ -23,103 +24,97 @@
       "name": "Character-gen",
       "label": "Character Generator",
       "path": "packs/character-generator.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Character-gen Sub-tables",
       "label": "Character Generator Sub-tables",
       "path": "packs/character-generator-sub-tables.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Witcher Lifepath and BG Sub-tables",
       "label": "Witcher Lifepath and BG Sub-tables",
       "path": "packs/witcher-lifepath.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Combat",
       "label": "Combat",
       "path": "packs/witcher-ttrpg-combat.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Life Event Sub-tables",
       "label": "Life Event Sub-tables",
       "path": "packs/lifepath.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Style and Values Sub-tables",
       "label": "Style and Values Sub-tables",
       "path": "packs/style.db",
-        "type": "RollTable"
+      "type": "RollTable"
     },
     {
       "name": "Component",
       "label": "Component",
       "path": "packs/component.db",
-        "type": "Item"
+      "type": "Item"
     },
     {
       "name": "Valuable",
       "label": "Valuable",
       "path": "packs/valuable.db",
-        "type": "Item"
+      "type": "Item"
     }
   ],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-        "path": "lang/en.json"
+      "path": "lang/en.json"
     },
     {
       "lang": "es",
       "name": "Español",
-        "path": "lang/es.json"
+      "path": "lang/es.json"
     },
     {
       "lang": "pt-BR",
       "name": "Brazilian Portuguese",
-        "path": "lang/ptbr.json"
+      "path": "lang/ptbr.json"
     },
     {
       "lang": "fr",
       "name": "Français",
-        "path": "lang/fr.json"
+      "path": "lang/fr.json"
     },
     {
       "lang": "de",
       "name": "German",
-        "path": "lang/de.json"
+      "path": "lang/de.json"
     },
     {
       "lang": "it",
       "name": "Italian",
-        "path": "lang/it.json"
+      "path": "lang/it.json"
     },
     {
       "lang": "ru",
       "name": "Russian",
-        "path": "lang/ru.json"
+      "path": "lang/ru.json"
     },
     {
       "lang": "pl",
       "name": "Polish",
-        "path": "lang/pl.json"
+      "path": "lang/pl.json"
     }
   ],
   "relationships": {
-    "requires": [
-      {
-        "id": "compendium-folders",
-        "type": "module",
-          "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/master/module.json"
-      }
-    ]
+    "requires": []
   },
-    "socket": false,
+  "socket": false,
   "initiative": "1d10",
   "gridDistance": 2,
   "gridUnits": "m",

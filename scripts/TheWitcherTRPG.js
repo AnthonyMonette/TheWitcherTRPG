@@ -17,6 +17,10 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
         "systems/TheWitcherTRPG/templates/partials/tab-background.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-mounts.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-runes-glyphs.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
@@ -28,6 +32,7 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/monster-skill-display.html",
         "systems/TheWitcherTRPG/templates/partials/loot-item-display.html",
         "systems/TheWitcherTRPG/templates/partials/item-header.html",
+        "systems/TheWitcherTRPG/templates/partials/item-image.html",
         "systems/TheWitcherTRPG/templates/partials/associated-item.html",
         "systems/TheWitcherTRPG/templates/sheets/verbal-combat.html",
         "systems/TheWitcherTRPG/templates/sheets/weapon-attack.html"
@@ -35,9 +40,8 @@ async function preloadHandlebarsTemplates() {
     return loadTemplates(templatePath);
 }
 
-
 Hooks.once("init", function () {
-    console.log("TheWItcherTRPG | init system");
+    console.log("TheWitcherTRPG | init system");
 
     CONFIG.witcher = witcher
     CONFIG.Item.documentClass = WitcherItem;
@@ -72,6 +76,14 @@ Hooks.once("ready", async function () {
         });
         let chat = document.getElementById("chat-log")
         if (chat) { chat.classList.add("witcher-style") }
+    }
+
+    // Override custom effects with HUD effects from the compendium
+    if (game.settings.get("TheWitcherTRPG", "loadCustomStatusesFromCompendium")) {
+        let result = await WitcherItem.prototype.getGameEffects();
+        if (result && result.length > 0) {
+            CONFIG.statusEffects = result;
+        }
     }
 });
 
@@ -232,6 +244,23 @@ actor.rollSpell("${spell._id}")`;
 }
 
 Handlebars.registerHelper("getOwnedComponentCount", function (actor, componentName) {
+    if (!actor) {
+        console.warn("'actor' parameter passed into getOwnedComponentCount is undefined. That might be a problem with one of the selected actors diagrams.");
+        return 0;
+    }
     let ownedComponent = actor.findNeededComponent(componentName);
     return ownedComponent.sum("quantity");
+});
+
+Handlebars.registerHelper("getSetting", function (setting) {
+  return game.settings.get("TheWitcherTRPG", setting);
+});
+
+Handlebars.registerHelper("window", function (...props) {
+  props.pop();
+  return props.reduce((result, prop) => result[prop], window);
+});
+
+Handlebars.registerHelper("includes", function (csv, substr) {
+  return csv.split(",").map(v => v.trim()).includes(substr);
 });
