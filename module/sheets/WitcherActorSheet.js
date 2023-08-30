@@ -80,13 +80,17 @@ export default class WitcherActorSheet extends ActorSheet {
     data.enhancements = items.filter(i => i.type == "enhancement" && i.system.type != "armor" && !i.system.applied);
 
     // Valuables Section
-    data.clothingAndContainers = items.filter(i => i.type == "valuable" && (i.system.type == "clothing" || i.system.type == "containers"));
-    data.general = items.filter(i => i.type == "valuable" && (i.system.type == "genera" || !i.system.type));
-    data.foodAndDrinks = items.filter(i => i.type == "valuable" && i.system.type == "food-drink");
-    data.toolkits = items.filter(i => i.type == "valuable" && i.system.type == "toolkit");
-    data.questItems = items.filter(i => i.type == "valuable" && i.system.type == "quest-item");
+    data.valuables = items.filter(i => i.type == "valuable");
+    data.clothingAndContainers = data.valuables.filter(i => i.system.type == "clothing" || i.system.type == "containers");
+    data.general = data.valuables.filter(i => i.system.type == "genera" || !i.system.type);
+    data.foodAndDrinks = data.valuables.filter(i => i.system.type == "food-drink");
+    data.toolkits = data.valuables.filter(i => i.system.type == "toolkit");
+    data.questItems = data.valuables.filter(i => i.system.type == "quest-item");
     data.mounts = items.filter(i => i.type == "mount");
     data.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
+
+    data.runeItems = data.enhancements.filter(e => e.system.type == "rune");
+    data.glyphItems = data.enhancements.filter(e => e.system.type == "glyph");
 
     // Alchemy section
     data.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
@@ -96,20 +100,21 @@ export default class WitcherActorSheet extends ActorSheet {
     data.mutagens = items.filter(i => i.type == "mutagen");
     
     // Formulae
-    data.alchemicalItemDiagrams = actor.getList("diagrams").filter(d => d.system.type == "alchemical" || !d.system.type).map(sanitizeDescription);
-    data.potionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "potion").map(sanitizeDescription);
-    data.decoctionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "decoction").map(sanitizeDescription);
-    data.oilDiagrams = actor.getList("diagrams").filter(d => d.system.type == "oil").map(sanitizeDescription);
+    data.diagrams = actor.getList("diagrams");
+    data.alchemicalItemDiagrams = data.diagrams.filter(d => d.system.type == "alchemical" || !d.system.type).map(sanitizeDescription);
+    data.potionDiagrams = data.diagrams.filter(d => d.system.type == "potion").map(sanitizeDescription);
+    data.decoctionDiagrams = data.diagrams.filter(d => d.system.type == "decoction").map(sanitizeDescription);
+    data.oilDiagrams = data.diagrams.filter(d => d.system.type == "oil").map(sanitizeDescription);
     
     // Diagrams
-    data.ingredientDiagrams = actor.getList("diagrams").filter(d => d.system.type == "ingredients").map(sanitizeDescription);
-    data.weaponDiagrams = actor.getList("diagrams").filter(d => d.system.type == "weapon").map(sanitizeDescription);
-    data.armorDiagrams = actor.getList("diagrams").filter(d => d.system.type == "armor").map(sanitizeDescription);
-    data.elderfolkWeaponDiagrams = actor.getList("diagrams").filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
-    data.elderfolkArmorDiagrams = actor.getList("diagrams").filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
-    data.ammunitionDiagrams = actor.getList("diagrams").filter(d => d.system.type == "ammunition").map(sanitizeDescription);
-    data.bombDiagrams = actor.getList("diagrams").filter(d => d.system.type == "bomb").map(sanitizeDescription);
-    data.trapDiagrams = actor.getList("diagrams").filter(d => d.system.type == "traps").map(sanitizeDescription);
+    data.ingredientDiagrams = data.diagrams.filter(d => d.system.type == "ingredients").map(sanitizeDescription);
+    data.weaponDiagrams = data.diagrams.filter(d => d.system.type == "weapon").map(sanitizeDescription);
+    data.armorDiagrams = data.diagrams.filter(d => d.system.type == "armor").map(sanitizeDescription);
+    data.elderfolkWeaponDiagrams = data.diagrams.filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
+    data.elderfolkArmorDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
+    data.ammunitionDiagrams = data.diagrams.filter(d => d.system.type == "ammunition").map(sanitizeDescription);
+    data.bombDiagrams = data.diagrams.filter(d => d.system.type == "bomb").map(sanitizeDescription);
+    data.trapDiagrams = data.diagrams.filter(d => d.system.type == "traps").map(sanitizeDescription);
 
     // Others
     data.spells = actor.getList("spell");
@@ -193,11 +198,19 @@ export default class WitcherActorSheet extends ActorSheet {
     data.substancesFulgur = actor.getSubstance("fulgur");
     data.fulgurCount = data.substancesFulgur.sum("quantity");
 
-    data.loots = items.filter(i => i.type == "component" || i.type == "valuable" || i.type == "diagrams" ||
-      i.type == "armor" || i.type == "alchemical" || i.type == "enhancement" || i.type == "mutagen");
+    data.loots = items.filter(i => i.type == "component" ||
+                                   i.type == "crafting-material" ||
+                                   i.type == "enhancement" ||
+                                   i.type == "valuable" ||
+                                   i.type == "animal-parts" ||
+                                   i.type == "diagrams" ||
+                                   i.type == "armor" ||
+                                   i.type == "alchemical" ||
+                                   i.type == "enhancement" ||
+                                   i.type == "mutagen");
     data.notes = actor.getList("note");
 
-    data.activeEffects = actor.getList("effect");
+    data.activeEffects = actor.getList("effect").filter(e => e.system.isActive);
 
     data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
     data.totalCost = data.items.cost();
@@ -377,14 +390,22 @@ export default class WitcherActorSheet extends ActorSheet {
     this.actor.update({ "system.deathSaves": this.actor.system.deathSaves + 1 });
   }
 
-  //todo looks like this is not defined anywhere
   async _onDropItem(event, data) {
     if (!this.actor.isOwner) return false;
     const item = await Item.implementation.fromDropData(data);
     const itemData = item.toObject();
+
+    // Handle item sorting within the same Actor
     if (this.actor.uuid === item.parent?.uuid) return this._onSortItem(event, itemData);
-    let dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
-    if (dragData.type === "itemDrop") {
+
+    // dragData should exist for WitcherActorSheet, WitcherItemSheet.
+    // It is populated during the activateListeners phase
+    let witcherDragData = event.dataTransfer.getData("text/plain")
+    let dragData = witcherDragData ? JSON.parse(witcherDragData) : data;
+
+    // handle itemDrop prepared in WitcherActorSheet, WitcherItemSheet
+    // need this to drop item from actor
+    if (witcherDragData && dragData.type === "itemDrop") {
       let previousActor = game.actors.get(dragData.actor._id)
       let token = previousActor.token ?? previousActor.getActiveTokens()[0]
       if (token) {
@@ -394,6 +415,8 @@ export default class WitcherActorSheet extends ActorSheet {
       if (previousActor == this.actor) {
         return;
       }
+
+      // Calculate the rollable amount of items to be dropped from actors' inventory
       if (typeof (dragData.item.system.quantity) === 'string' && dragData.item.system.quantity.includes("d")) {
         let messageData = {
           speaker: this.actor.getSpeaker(),
@@ -401,12 +424,17 @@ export default class WitcherActorSheet extends ActorSheet {
         }
         let roll = await new Roll(dragData.item.system.quantity).evaluate({ async: true })
         roll.toMessage(messageData)
+
+        // Add items to the recipient actor
         this._addItem(this.actor, dragData.item, Math.floor(roll.total))
+
+        // Remove items from donor actor
         if (previousActor) {
           await previousActor.items.get(dragData.item._id).delete()
         }
         return
       }
+
       if (dragData.item.system.quantity != 0) {
         if (dragData.item.system.quantity > 1) {
           let content = `${game.i18n.localize("WITCHER.Items.transferMany")}: <input type="number" class="small" name="numberOfItem" value=1>/${dragData.item.system.quantity} <br />`
@@ -427,27 +455,40 @@ export default class WitcherActorSheet extends ActorSheet {
             content: content
           }
           await buttonDialog(dialogData)
+
           if (cancel) {
             return
           } else {
+            // Remove items from donor actor
             this._removeItem(previousActor, dragData.item._id, numberOfItem)
             if (numberOfItem > dragData.item.system.quantity) {
               numberOfItem = dragData.item.system.quantity
             }
+            // Add items to the recipient actor
             this._addItem(this.actor, dragData.item, numberOfItem)
           }
         } else {
+          // Add item to the recipient actor
           this._addItem(this.actor, dragData.item, 1)
+          // Remove item from donor actor
           if (previousActor) {
             await previousActor.items.get(dragData.item._id).delete()
           }
         }
       }
-    } else if (dragData.type === "Item") {
-      let dragEventData = TextEditor.getDragEventData(event)
-      let item = await fromUuid(dragEventData.uuid)
-      if (item) {
-        this._addItem(this.actor, item, 1)
+    } else if (dragData && dragData.type === "Item") {
+      // Adding items from compendia
+      // We do not have the same dragData object in compendia as for Actor or Item
+      let itemToAdd = item
+
+      // Somehow previous item from passed data object is empty. Let's try to get item from passed event
+      if (!itemToAdd) {
+        let dragEventData = TextEditor.getDragEventData(event)
+        itemToAdd = await fromUuid(dragEventData.uuid)
+      }
+
+      if (itemToAdd) {
+        this._addItem(this.actor, itemToAdd, 1)
       }
     } else {
       super._onDrop(event, data);

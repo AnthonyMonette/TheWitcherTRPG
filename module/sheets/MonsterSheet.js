@@ -146,19 +146,20 @@ async function exportLoot(actor, extended) {
     if (cancel) {
         return
     } else {
-        let newLoot = await Actor.create(actor);
+        let newLoot = await Actor.create(actor)
         let folder = await getOrCreateFolder(extended)
-
-        //todo render folder list after adding loot sheet to the folder
+        // todo render folder list after adding loot sheet to the folder
+        // can not find method to render folders in the menu list
+        // There is only one workaround for now - refresh the page in order to see all the loot actors in the separate directory
         await newLoot.update({
-            "folder": folder != null ? folder.id : null,
-            "name": newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
-            "type": "loot"
+             "folder": folder != null ? folder.id : null,
+             "name": newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
+             "type": "loot"
         });
 
         newLoot.items.forEach(async item => {
             let newQuantity = item.system.quantity
-            if (typeof (newQuantity) === 'string' && item.system.quantity.includes("d")) {
+            if (typeof (newQuantity) === "string" && item.system.quantity.includes("d")) {
                 let total = 0
                 for (let i = 0; i < multiplier; i++) {
                     let roll = await new Roll(item.system.quantity).evaluate({ async: true })
@@ -169,10 +170,9 @@ async function exportLoot(actor, extended) {
                 newQuantity = Number(newQuantity) * multiplier
             }
 
-
             let itemGeneratedFromRollTable = false
             if (extended) {
-                itemGeneratedFromRollTable = item.checkIfItemHasRollTable(newQuantity)
+                itemGeneratedFromRollTable = await item.checkIfItemHasRollTable(newQuantity)
             }
 
             if (!itemGeneratedFromRollTable) {
@@ -180,7 +180,7 @@ async function exportLoot(actor, extended) {
             }
         });
 
-        newLoot.sheet.render(true)
+        await newLoot.sheet.render(true)
     }
 }
 

@@ -20,6 +20,7 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-mounts.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-inventory-runes-glyphs.html",
         "systems/TheWitcherTRPG/templates/partials/tab-magic.html",
         "systems/TheWitcherTRPG/templates/partials/crit-wounds-table.html",
         "systems/TheWitcherTRPG/templates/partials/substances.html",
@@ -39,9 +40,8 @@ async function preloadHandlebarsTemplates() {
     return loadTemplates(templatePath);
 }
 
-
 Hooks.once("init", function () {
-    console.log("TheWItcherTRPG | init system");
+    console.log("TheWitcherTRPG | init system");
 
     CONFIG.witcher = witcher
     CONFIG.Item.documentClass = WitcherItem;
@@ -76,6 +76,14 @@ Hooks.once("ready", async function () {
         });
         let chat = document.getElementById("chat-log")
         if (chat) { chat.classList.add("witcher-style") }
+    }
+
+    // Override custom effects with HUD effects from the compendium
+    if (game.settings.get("TheWitcherTRPG", "loadCustomStatusesFromCompendium")) {
+        let result = await WitcherItem.prototype.getGameEffects();
+        if (result && result.length > 0) {
+            CONFIG.statusEffects = result;
+        }
     }
 });
 

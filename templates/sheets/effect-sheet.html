@@ -4,8 +4,12 @@
         <div class="flex header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
             <div class="flex">
-                <label>{{localize "WITCHER.effect.isActive"}}</label>
-                <input type="checkbox" name="system.isActive" {{checked item.system.isActive}}/>
+                <label>{{localize "WITCHER.effect.isActive"}}
+                    <input type="checkbox" name="system.isActive" {{checked item.system.isActive}}/>
+                </label>
+                <label>{{localize "WITCHER.effect.isHUD"}}
+                    <input type="checkbox" name="system.isHUD" {{checked item.system.isHUD}}/>
+                </label>
             </div>
         </div>
     </header>
