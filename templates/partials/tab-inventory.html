@@ -491,8 +491,11 @@
         {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html" valuables=mountAccessories}}
         {{/if}}
 
-        <h2>{{localize  "WITCHER.Inventory.Diagrams"}}
-            <a class="add-item" data-itemType="diagrams">
+        <h2><a class="add-item" data-itemType="diagrams">
+                <i class="fas fa-plus"></i>
+            </a>
+            {{localize  "WITCHER.Inventory.Diagrams"}}
+            <a class="add-item" data-itemType="formulae">
                 <i class="fas fa-plus"></i>
             </a>
         </h2>
@@ -534,6 +537,11 @@
         {{#if armorDiagrams}}
         <h3>{{localize "WITCHER.Inventory.ArmorDiagrams"}}</h3>
         {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=armorDiagrams}}
+        {{/if}}
+
+        {{#if armorEnhancementDiagrams}}
+        <h3>{{localize "WITCHER.Inventory.ArmorEnhancementDiagrams"}}</h3>
+        {{> "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html" diagrams=armorEnhancementDiagrams}}
         {{/if}}
 
         {{#if elderfolkWeaponDiagrams}}

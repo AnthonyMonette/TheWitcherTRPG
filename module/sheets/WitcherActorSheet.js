@@ -110,8 +110,9 @@ export default class WitcherActorSheet extends ActorSheet {
     data.ingredientDiagrams = data.diagrams.filter(d => d.system.type == "ingredients").map(sanitizeDescription);
     data.weaponDiagrams = data.diagrams.filter(d => d.system.type == "weapon").map(sanitizeDescription);
     data.armorDiagrams = data.diagrams.filter(d => d.system.type == "armor").map(sanitizeDescription);
-    data.elderfolkWeaponDiagrams = data.diagrams.filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
-    data.elderfolkArmorDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
+    data.armorEnhancementDiagrams = data.diagrams.filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
+    data.elderfolkWeaponDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
+    data.elderfolkArmorDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-armor").map(sanitizeDescription);
     data.ammunitionDiagrams = data.diagrams.filter(d => d.system.type == "ammunition").map(sanitizeDescription);
     data.bombDiagrams = data.diagrams.filter(d => d.system.type == "bomb").map(sanitizeDescription);
     data.trapDiagrams = data.diagrams.filter(d => d.system.type == "traps").map(sanitizeDescription);
@@ -1037,11 +1038,16 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     if (element.dataset.itemtype == "valuable") {
-      itemData.system = { type: "genera" };
+      itemData.system = { type: "general" };
     }
 
-    if (element.dataset.itemtype == "diagram") {
+    if (element.dataset.itemtype == "diagrams") {
+      itemData.system = { type: "ingredients"};
+    }
+
+    if (element.dataset.itemtype == "formulae") {
       itemData.system = { type: "alchemical", level: "novice", isFormulae: true };
+      itemData.type = "diagrams";
     }
 
     await Item.create(itemData, { parent: this.actor })
