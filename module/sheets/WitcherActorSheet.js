@@ -532,7 +532,7 @@ export default class WitcherActorSheet extends ActorSheet {
     if (type == "weapon") {
       enhancements = enhancements.filter(e => e.system.applied == false && (e.system.type == "rune" || e.system.type == "weapon"));
     } else {
-      enhancements = enhancements.filter(e => item.system.applied == false && (e.system.type == "armor" || e.system.type == "glyph"));
+      enhancements = enhancements.filter(e => e.system.applied == false && (e.system.type == "armor" || e.system.type == "glyph"));
     }
 
     let quantity = enhancements.sum("quantity")
