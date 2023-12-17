@@ -150,8 +150,10 @@ export default class WitcherActorSheet extends ActorSheet {
         if (this[i]["system"][prop]) {
           total += Number(this[i]["system"][prop])
         }
-        else if (this[i]["system"]["system"][prop]) {
-          total += Number(this[i]["system"]["system"][prop])
+        else if (this[i]["system"]["system"]) {
+          if(this[i]["system"]["system"][prop]) {
+            total += Number(this[i]["system"]["system"][prop])
+          }
         }
       }
       return total
