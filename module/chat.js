@@ -73,7 +73,7 @@ function onDamage(event) {
     locationFormula = event.currentTarget.getAttribute("data-location-formula")
     strike = event.currentTarget.getAttribute("data-strike")
   } else {
-    let actorName = event.currentTarget.parentElement.parentElement.parentElement.getElementsByClassName("message-sender")[0].getInnerHTML();
+    let actorName = event.currentTarget.closest("header").getElementsByClassName("message-sender")[0].innerHTML;
     let actor = game.actors.getName(actorName) || game.actors[0];
     touchedLocation = actor.getLocationObject("randomHuman");
     locationFormula = touchedLocation.locationFormula;
