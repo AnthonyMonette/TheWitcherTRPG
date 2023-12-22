@@ -682,7 +682,7 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
       Parry: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`,
         callback: async html => {
-          let isExtraDefence = html.find("[name=isExtraDefence]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
@@ -762,7 +762,7 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
       ParryAgainstThrown: {
         label: `${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`,
         callback: async html => {
-          let isExtraDefence = html.find("[name=isExtraDefence]").prop("checked");
+          let isExtraDefence = html.find("[name=isExtraDefense]").prop("checked");
           let customDef = html.find("[name=customDef]")[0].value;
           if (isExtraDefence) {
             let newSta = actor.system.derivedStats.sta.value - 1
