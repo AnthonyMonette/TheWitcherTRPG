@@ -62,15 +62,6 @@ export default class WitcherActor extends Actor {
     }
   }
 
-  getSpeaker() {
-    return {
-      "alias": this.name,
-      "actor": this,
-      "scene": game.scenes.current,
-      "token": this.getControlledToken(),
-    };
-  }
-
   isEnoughThrowableWeapon(item) {
     if (item.system.isThrowable) {
       let throwableItems = this.items.filter(w => w.type == "weapon" && w.name == item.name);

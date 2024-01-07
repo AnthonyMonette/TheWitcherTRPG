@@ -419,7 +419,7 @@ export default class WitcherActorSheet extends ActorSheet {
       // Calculate the rollable amount of items to be dropped from actors' inventory
       if (typeof (dragData.item.system.quantity) === 'string' && dragData.item.system.quantity.includes("d")) {
         let messageData = {
-          speaker: this.actor.getSpeaker(),
+          speaker: ChatMessage.getSpeaker({actor: this.actor}),
           flavor: `<h1>Quantity of ${dragData.item.name}</h1>`,
         }
         let roll = await new Roll(dragData.item.system.quantity).evaluate({ async: true })
@@ -1063,7 +1063,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
     let messageData = {
-      speaker: this.actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `<h1>Crafting</h1>`,
     }
 
@@ -1154,7 +1154,7 @@ export default class WitcherActorSheet extends ActorSheet {
     let content = `<label>${game.i18n.localize("WITCHER.Dialog.Crafting")} ${item.name}</label> <br />`;
 
     let messageData = {
-      speaker: this.actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `<h1>Crafting</h1>`,
     }
 
@@ -1365,7 +1365,7 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     let messageData = {
-      speaker: this.actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flags: spellItem.getSpellFlags(),
       flavor: `<h2><img src="${spellItem.img}" class="item-img" />${spellItem.name}</h2>
           <div><b>${game.i18n.localize("WITCHER.Spell.StaCost")}: </b>${staCostdisplay}</div>
@@ -1478,7 +1478,7 @@ export default class WitcherActorSheet extends ActorSheet {
             }
 
             let messageData = {
-              speaker: this.actor.getSpeaker(),
+              speaker: ChatMessage.getSpeaker({actor: this.actor}),
               flavor: `<h2>${name}</h2>${effet}`
             }
 
@@ -1498,7 +1498,7 @@ export default class WitcherActorSheet extends ActorSheet {
   async _onCritRoll(event) {
     let rollResult = await new Roll("1d10x10").evaluate({ async: true })
     let messageData = {
-      speaker: this.actor.getSpeaker()
+      speaker: ChatMessage.getSpeaker({actor: this.actor})
     }
     rollResult.toMessage(messageData)
   }
@@ -1514,7 +1514,7 @@ export default class WitcherActorSheet extends ActorSheet {
     stunBase -= this.actor.system.deathSaves
 
     let messageData = {
-      speaker: this.actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `
         <h2>${game.i18n.localize("WITCHER.DeathSave")}</h2>
         <div class="roll-summary">
@@ -1558,7 +1558,7 @@ export default class WitcherActorSheet extends ActorSheet {
               }
             });
 
-            let messageData = { speaker: this.actor.getSpeaker() }
+            let messageData = { speaker: ChatMessage.getSpeaker({actor: this.actor}) }
             messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.ReputationTitle")}: ${game.i18n.localize("WITCHER.ReputationSave.Title")}</h2>
               <div class="roll-summary">
@@ -1586,7 +1586,7 @@ export default class WitcherActorSheet extends ActorSheet {
               }
             });
 
-            let messageData = { speaker: this.actor.getSpeaker() }
+            let messageData = { speaker: ChatMessage.getSpeaker({actor: this.actor}) }
             let rollFormula = `1d10 + ${Number(repValue)}[${game.i18n.localize("WITCHER.Reputation")}] + ${Number(this.actor.system.stats.will.current)}[${game.i18n.localize("WITCHER.StWill")}]`
             messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.ReputationTitle")}: ${game.i18n.localize("WITCHER.ReputationFaceDown.Title")}</h2>
@@ -1876,7 +1876,7 @@ export default class WitcherActorSheet extends ActorSheet {
               rollFormula += !displayRollDetails ? `+${customAtt}` : `+${customAtt}[${game.i18n.localize("WITCHER.Settings.Custom")}]`
             }
 
-            let messageData = { speaker: this.actor.getSpeaker() }
+            let messageData = { speaker: ChatMessage.getSpeaker({actor: this.actor}) }
             messageData.flavor = `
               <h2>${game.i18n.localize("WITCHER.verbalCombat.Title")}: ${game.i18n.localize(vcName)}</h2>
               <b>${game.i18n.localize("WITCHER.Weapon.Damage")}</b>: ${vcDmg} <br />
@@ -1942,7 +1942,7 @@ export default class WitcherActorSheet extends ActorSheet {
         break;
     }
 
-    let messageData = { speaker: this.actor.getSpeaker() }
+    let messageData = { speaker: ChatMessage.getSpeaker({actor: this.actor}) }
     messageData.flavor = `
       <h2>${game.i18n.localize(statName)}</h2>
       <div class="roll-summary">
@@ -2178,7 +2178,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
     let attackSkill = item.getItemAttackSkill();
     let messageData = {
-      speaker: this.actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `<h1> ${game.i18n.localize("WITCHER.Dialog.attack")}: ${item.name}</h1>`,
       flags: item.getAttackSkillFlags(),
     }

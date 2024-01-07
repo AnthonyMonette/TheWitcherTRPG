@@ -199,7 +199,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage) {
     let messageData = {
       user: game.user.id,
       content: messageContent,
-      speaker: actor.getSpeaker(),
+      speaker: ChatMessage.getSpeaker({actor: actor}),
       flags: actor.getNoDamageFlags(),
     }
     let rollResult = await new Roll("1").evaluate({ async: true })
@@ -365,7 +365,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage) {
   let messageData = {
     user: game.user.id,
     content: messageContent,
-    speaker: actor.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor: actor}),
     flags: actor.getDamageFlags(),
   }
   let rollResult = await new Roll("1").evaluate({ async: true })
@@ -513,7 +513,7 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
     <label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input type="Number" class="small" name="customDef" value=0></label> <br />`;
 
   let messageData = {
-    speaker: actor.getSpeaker(),
+    speaker: ChatMessage.getSpeaker({actor: actor}),
     flavor: `<h1>${game.i18n.localize("WITCHER.Dialog.Defense")}</h1>`,
   }
 
