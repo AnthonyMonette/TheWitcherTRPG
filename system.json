@@ -11,6 +11,17 @@
   "authors": {
     "name": "TechAntho"
   },
+  "includes": [
+    "./assets/**",
+    "./lang/**",
+    "./module/**",
+    "./packs/**",
+    "./scripts/**",
+    "./styles/**",
+    "./templates/**",
+    "./system.json",
+    "./README.md"
+  ],
   "scripts": [
   ],
   "esmodules": [
@@ -120,7 +131,7 @@
   "gridUnits": "m",
   "primaryTokenAttribute": "resources.health",
   "secondaryTokenAttribute": "resources.power",
-  "url": "https://github.com/AnthonyMonette/TheWitcherTRPG",
-  "manifest": "https://github.com/AnthonyMonette/TheWitcherTRPG/releases/latest/download/system.json",
-  "download": "https://github.com/AnthonyMonette/TheWitcherTRPG/releases/latest/download/system.zip"
+  "url": "URL",
+  "manifest": "MANIFEST",
+  "download": "DOWNLOAD"
 }
