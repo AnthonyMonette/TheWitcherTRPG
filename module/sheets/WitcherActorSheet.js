@@ -146,12 +146,12 @@ export default class WitcherActorSheet extends ActorSheet {
 
     Array.prototype.sum = function (prop) {
       var total = 0
-      for (var i = 0, _len = this.length; i < _len; i++) {
-        if (this[i]["system"][prop]) {
-          total += Number(this[i]["system"][prop])
+      for (var i = 0; i < this.length; i++) {
+        if (this[i].system[prop]) {
+          total += Number(this[i].system[prop])
         }
-        else if (this[i]["system"]["system"][prop]) {
-          total += Number(this[i]["system"]["system"][prop])
+        else if (this[i].system?.system[prop]) {
+          total += Number(this[i].system?.system[prop])
         }
       }
       return total
