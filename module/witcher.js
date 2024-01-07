@@ -327,7 +327,7 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 	skill = array[1];
 	skillName = skillName.replace(" (2)", "");
 	let messageData = {
-		speaker: thisActor.getSpeaker(),
+		speaker: ChatMessage.getSpeaker({actor: thisActor}),
 		flavor: `${parentStat}: ${skillName} Check`,
 	}
 	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]`;
