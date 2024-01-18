@@ -1,5 +1,4 @@
 import { buttonDialog } from "../chat.js";
-import WitcherActor from "./WitcherActorSheet.js";
 
 function onChangeSkillList(actor) {
     let width = 600;
