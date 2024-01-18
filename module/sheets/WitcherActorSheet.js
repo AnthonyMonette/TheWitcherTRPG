@@ -1,10 +1,41 @@
 import { buttonDialog, rollDamage, extendedRoll } from "../chat.js";
 import { witcher } from "../config.js";
-import { getRandomInt, updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
+import { updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
 import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
 import { RollConfig } from "../rollConfig.js";
 
 import { ExecuteDefence } from "../../scripts/actions.js";
+
+Array.prototype.sum = function (prop) {
+  var total = 0
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].system[prop]) {
+      total += Number(this[i].system[prop])
+    }
+    else if (this[i].system?.system[prop]) {
+      total += Number(this[i].system?.system[prop])
+    }
+  }
+  return total
+ }
+Array.prototype.weight = function () {
+  var total = 0
+  for (var i = 0, _len = this.length; i < _len; i++) {
+    if (this[i].system.weight && this[i].system.quantity) {
+      total += Number(this[i].system.quantity) * Number(this[i].system.weight)
+    }
+  }
+  return Math.ceil(total)
+ }
+Array.prototype.cost = function () {
+  var total = 0
+  for (var i = 0, _len = this.length; i < _len; i++) {
+    if (this[i].system.cost && this[i].system.quantity) {
+      total += Number(this[i].system.quantity) * Number(this[i].system.cost)
+    }
+  }
+  return Math.ceil(total)
+ }
 
 export default class WitcherActorSheet extends ActorSheet {
   /** @override */
@@ -20,23 +51,67 @@ export default class WitcherActorSheet extends ActorSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    if (data.data.system) {
-      data.system = data.data.system
+    const context = super.getData();
+
+    context.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
+    context.displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
+    context.useVerbalCombat = game.settings.get("TheWitcherTRPG", "useOptionnalVerbalCombat")
+    context.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
+
+    context.config = CONFIG.witcher;
+    CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current" + context.displayRollDetails ? "[REF]" : "";
+
+    const actorData = this.actor.toObject(false);
+    context.system = actorData.system;
+    this._prepareCharacterData(context)
+    this._prepareItems(context);
+
+    context.isGM = game.user.isGM
+    return context;
+  }
+
+  _prepareCharacterData(context) {
+    let actor = context.actor;
+    context.spells = actor.getList("spell");
+
+    context.noviceSpells = context.spells.filter(s => s.system.level == "novice" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    context.journeymanSpells = context.spells.filter(s => s.system.level == "journeyman" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    context.masterSpells = context.spells.filter(s => s.system.level == "master" &&
+      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
+    context.hexes = context.spells.filter(s => s.system.class == "Hexes");
+    context.rituals = context.spells.filter(s => s.system.class == "Rituals");
+    context.magicalgift = context.spells.filter(s => s.system.class == "MagicalGift");
+
+    context.professions = actor.getList("profession");
+    context.profession = context.professions[0];
+
+    context.races = actor.getList("race");
+    context.race = context.races[0];
+
+    context.totalStats = this.calc_total_stats(context)
+    context.totalSkills = this.calc_total_skills(context)
+    context.totalProfSkills = this.calc_total_skills_profession(context)
+    
+    context.notes = actor.getList("note");
+
+    context.activeEffects = actor.getList("effect");
+
+    if (actor.system.pannels == undefined) {
+      actor.system.pannels = {};
     }
+  }
 
-    data.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
-    data.displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
-    data.useVerbalCombat = game.settings.get("TheWitcherTRPG", "useOptionnalVerbalCombat")
-    data.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
-
-    data.config = CONFIG.witcher;
-    CONFIG.Combat.initiative.formula = !data.displayRollDetails ? "1d10 + @stats.ref.current" : "1d10 + @stats.ref.current[REF]";
-
-    let actor = data.actor;
+   /**
+   * Organize and classify Items for Character sheets.
+   */
+   _prepareItems(context) {
+    let actor = context.actor;
     let items = actor.items;
-    data.weapons = actor.getList("weapon");
-    data.weapons.forEach((weapon) => {
+    
+    context.weapons = actor.getList("weapon");
+    context.weapons.forEach((weapon) => {
       if (weapon.system.enhancements > 0 && weapon.system.enhancements != weapon.system.enhancementItems.length) {
         let newEnhancementList = []
         for (let i = 0; i < weapon.system.enhancements; i++) {
@@ -52,11 +127,11 @@ export default class WitcherActorSheet extends ActorSheet {
       }
     });
 
-    data.armors = items.filter(function (item) {
+    context.armors = items.filter(function (item) {
       return item.type == "armor" ||
         (item.type == "enhancement" && item.system.type == "armor" && item.system.applied == false)
     });
-    data.armors.forEach((armor) => {
+    context.armors.forEach((armor) => {
       if (armor.system.enhancements > 0 && armor.system.enhancements != armor.system.enhancementItems.length) {
         let newEnhancementList = []
         for (let i = 0; i < armor.system.enhancements; i++) {
@@ -73,132 +148,69 @@ export default class WitcherActorSheet extends ActorSheet {
     });
 
     // Crafting section
-    data.allComponents = actor.getList("component");
-    data.craftingMaterials = data.allComponents.filter(i => i.system.type == "crafting-material" || i.system.type == "component");
-    data.ingotsAndMinerals = data.allComponents.filter(i => i.system.type == "minerals");
-    data.hidesAndAnimalParts = data.allComponents.filter(i => i.system.type == "animal-parts");
-    data.enhancements = items.filter(i => i.type == "enhancement" && i.system.type != "armor" && !i.system.applied);
+    context.allComponents = actor.getList("component");
+    context.craftingMaterials = context.allComponents.filter(i => i.system.type == "crafting-material" || i.system.type == "component");
+    context.ingotsAndMinerals = context.allComponents.filter(i => i.system.type == "minerals");
+    context.hidesAndAnimalParts = context.allComponents.filter(i => i.system.type == "animal-parts");
+    context.enhancements = items.filter(i => i.type == "enhancement" && i.system.type != "armor" && !i.system.applied);
 
     // Valuables Section
-    data.valuables = items.filter(i => i.type == "valuable");
-    data.clothingAndContainers = data.valuables.filter(i => i.system.type == "clothing" || i.system.type == "containers");
-    data.general = data.valuables.filter(i => i.system.type == "genera" || !i.system.type);
-    data.foodAndDrinks = data.valuables.filter(i => i.system.type == "food-drink");
-    data.toolkits = data.valuables.filter(i => i.system.type == "toolkit");
-    data.questItems = data.valuables.filter(i => i.system.type == "quest-item");
-    data.mounts = items.filter(i => i.type == "mount");
-    data.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
+    context.valuables = items.filter(i => i.type == "valuable");
+    context.clothingAndContainers = context.valuables.filter(i => i.system.type == "clothing" || i.system.type == "containers");
+    context.general = context.valuables.filter(i => i.system.type == "genera" || !i.system.type);
+    context.foodAndDrinks = context.valuables.filter(i => i.system.type == "food-drink");
+    context.toolkits = context.valuables.filter(i => i.system.type == "toolkit");
+    context.questItems = context.valuables.filter(i => i.system.type == "quest-item");
+    context.mounts = items.filter(i => i.type == "mount");
+    context.mountAccessories = items.filter(i => i.type == "valuable" && i.system.type == "mount-accessories");
 
-    data.runeItems = data.enhancements.filter(e => e.system.type == "rune");
-    data.glyphItems = data.enhancements.filter(e => e.system.type == "glyph");
+    context.runeItems = context.enhancements.filter(e => e.system.type == "rune");
+    context.glyphItems = context.enhancements.filter(e => e.system.type == "glyph");
 
     // Alchemy section
-    data.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
-    data.witcherPotions = items.filter(i => i.type == "alchemical" && (i.system.type == "decoction" || i.system.type == "potion"));
-    data.oils = items.filter(i => i.type == "alchemical" && i.system.type == "oil");
-    data.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
-    data.mutagens = items.filter(i => i.type == "mutagen");
+    context.alchemicalItems = items.filter(i => (i.type == "valuable" && i.system.type == "alchemical-item") || (i.type == "alchemical" && i.system.type == "alchemical"));
+    context.witcherPotions = items.filter(i => i.type == "alchemical" && (i.system.type == "decoction" || i.system.type == "potion"));
+    context.oils = items.filter(i => i.type == "alchemical" && i.system.type == "oil");
+    context.alchemicalTreatments = items.filter(i => i.type == "component" && i.system.type == "alchemical");
+    context.mutagens = items.filter(i => i.type == "mutagen");
     
     // Formulae
-    data.diagrams = actor.getList("diagrams");
-    data.alchemicalItemDiagrams = data.diagrams.filter(d => d.system.type == "alchemical" || !d.system.type).map(sanitizeDescription);
-    data.potionDiagrams = data.diagrams.filter(d => d.system.type == "potion").map(sanitizeDescription);
-    data.decoctionDiagrams = data.diagrams.filter(d => d.system.type == "decoction").map(sanitizeDescription);
-    data.oilDiagrams = data.diagrams.filter(d => d.system.type == "oil").map(sanitizeDescription);
+    context.diagrams = actor.getList("diagrams");
+    context.alchemicalItemDiagrams = context.diagrams.filter(d => d.system.type == "alchemical" || !d.system.type).map(this.sanitizeDescription);
+    context.potionDiagrams = context.diagrams.filter(d => d.system.type == "potion").map(this.sanitizeDescription);
+    context.decoctionDiagrams = context.diagrams.filter(d => d.system.type == "decoction").map(this.sanitizeDescription);
+    context.oilDiagrams = context.diagrams.filter(d => d.system.type == "oil").map(this.sanitizeDescription);
     
     // Diagrams
-    data.ingredientDiagrams = data.diagrams.filter(d => d.system.type == "ingredients").map(sanitizeDescription);
-    data.weaponDiagrams = data.diagrams.filter(d => d.system.type == "weapon").map(sanitizeDescription);
-    data.armorDiagrams = data.diagrams.filter(d => d.system.type == "armor").map(sanitizeDescription);
-    data.elderfolkWeaponDiagrams = data.diagrams.filter(d => d.system.type == "armor-enhancement").map(sanitizeDescription);
-    data.elderfolkArmorDiagrams = data.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(sanitizeDescription);
-    data.ammunitionDiagrams = data.diagrams.filter(d => d.system.type == "ammunition").map(sanitizeDescription);
-    data.bombDiagrams = data.diagrams.filter(d => d.system.type == "bomb").map(sanitizeDescription);
-    data.trapDiagrams = data.diagrams.filter(d => d.system.type == "traps").map(sanitizeDescription);
+    context.ingredientDiagrams = context.diagrams.filter(d => d.system.type == "ingredients").map(this.sanitizeDescription);
+    context.weaponDiagrams = context.diagrams.filter(d => d.system.type == "weapon").map(this.sanitizeDescription);
+    context.armorDiagrams = context.diagrams.filter(d => d.system.type == "armor").map(this.sanitizeDescription);
+    context.elderfolkWeaponDiagrams = context.diagrams.filter(d => d.system.type == "armor-enhancement").map(this.sanitizeDescription);
+    context.elderfolkArmorDiagrams = context.diagrams.filter(d => d.system.type == "elderfolk-weapon").map(this.sanitizeDescription);
+    context.ammunitionDiagrams = context.diagrams.filter(d => d.system.type == "ammunition").map(this.sanitizeDescription);
+    context.bombDiagrams = context.diagrams.filter(d => d.system.type == "bomb").map(this.sanitizeDescription);
+    context.trapDiagrams = context.diagrams.filter(d => d.system.type == "traps").map(this.sanitizeDescription);
 
-    // Others
-    data.spells = actor.getList("spell");
+    context.substancesVitriol = actor.getSubstance("vitriol");
+    context.vitriolCount = context.substancesVitriol.sum("quantity");
+    context.substancesRebis = actor.getSubstance("rebis");
+    context.rebisCount = context.substancesRebis.sum("quantity");
+    context.substancesAether = actor.getSubstance("aether");
+    context.aetherCount = context.substancesAether.sum("quantity");
+    context.substancesQuebrith = actor.getSubstance("quebrith");
+    context.quebrithCount = context.substancesQuebrith.sum("quantity");
+    context.substancesHydragenum = actor.getSubstance("hydragenum");
+    context.hydragenumCount = context.substancesHydragenum.sum("quantity");
+    context.substancesVermilion = actor.getSubstance("vermilion");
+    context.vermilionCount = context.substancesVermilion.sum("quantity");
+    context.substancesSol = actor.getSubstance("sol");
+    context.solCount = context.substancesSol.sum("quantity");
+    context.substancesCaelum = actor.getSubstance("caelum");
+    context.caelumCount = context.substancesCaelum.sum("quantity");
+    context.substancesFulgur = actor.getSubstance("fulgur");
+    context.fulgurCount = context.substancesFulgur.sum("quantity");
 
-    data.professions = actor.getList("profession");
-    data.profession = data.professions[0];
-
-    data.races = actor.getList("race");
-    data.race = data.races[0];
-
-    // Helping functions
-    /** Sanitizes description if it contains forbidden html tags. */
-    function sanitizeDescription(item) {
-      if (!item.system.description) {
-        return item;
-      }
-
-      const regex = /(<.+?>)/g;
-      const whiteList = ["<p>", "</p>"];
-      const tagsInText = item.system.description.match(regex);
-      const itemCopy = JSON.parse(JSON.stringify(item));
-      if (tagsInText.some(i => !whiteList.includes(i))) {
-        const temp = document.createElement('div');
-        temp.textContent = itemCopy.system.description;
-        itemCopy.system.description = temp.innerHTML;
-      }
-      return itemCopy;
-    }
-
-    Array.prototype.sum = function (prop) {
-      var total = 0
-      for (var i = 0; i < this.length; i++) {
-        if (this[i].system[prop]) {
-          total += Number(this[i].system[prop])
-        }
-        else if (this[i].system?.system[prop]) {
-          total += Number(this[i].system?.system[prop])
-        }
-      }
-      return total
-    }
-    Array.prototype.weight = function () {
-      var total = 0
-      for (var i = 0, _len = this.length; i < _len; i++) {
-        if (this[i]["system"]["weight"] && this[i]["system"]["quantity"]) {
-          total += Number(this[i]["system"]["quantity"]) * Number(this[i]["system"]["weight"])
-        }
-      }
-      return Math.ceil(total)
-    }
-    Array.prototype.cost = function () {
-      var total = 0
-      for (var i = 0, _len = this.length; i < _len; i++) {
-        if (this[i]["system"]["cost"] && this[i]["system"]["quantity"]) {
-          total += Number(this[i]["system"]["quantity"]) * Number(this[i]["system"]["cost"])
-        }
-      }
-      return Math.ceil(total)
-    }
-
-    data.totalStats = this.calc_total_stats(data)
-    data.totalSkills = this.calc_total_skills(data)
-    data.totalProfSkills = this.calc_total_skills_profession(data)
-
-    data.substancesVitriol = actor.getSubstance("vitriol");
-    data.vitriolCount = data.substancesVitriol.sum("quantity");
-    data.substancesRebis = actor.getSubstance("rebis");
-    data.rebisCount = data.substancesRebis.sum("quantity");
-    data.substancesAether = actor.getSubstance("aether");
-    data.aetherCount = data.substancesAether.sum("quantity");
-    data.substancesQuebrith = actor.getSubstance("quebrith");
-    data.quebrithCount = data.substancesQuebrith.sum("quantity");
-    data.substancesHydragenum = actor.getSubstance("hydragenum");
-    data.hydragenumCount = data.substancesHydragenum.sum("quantity");
-    data.substancesVermilion = actor.getSubstance("vermilion");
-    data.vermilionCount = data.substancesVermilion.sum("quantity");
-    data.substancesSol = actor.getSubstance("sol");
-    data.solCount = data.substancesSol.sum("quantity");
-    data.substancesCaelum = actor.getSubstance("caelum");
-    data.caelumCount = data.substancesCaelum.sum("quantity");
-    data.substancesFulgur = actor.getSubstance("fulgur");
-    data.fulgurCount = data.substancesFulgur.sum("quantity");
-
-    data.loots = items.filter(i => i.type == "component" ||
+    context.loots = items.filter(i => i.type == "component" ||
                                    i.type == "crafting-material" ||
                                    i.type == "enhancement" ||
                                    i.type == "valuable" ||
@@ -208,28 +220,29 @@ export default class WitcherActorSheet extends ActorSheet {
                                    i.type == "alchemical" ||
                                    i.type == "enhancement" ||
                                    i.type == "mutagen");
-    data.notes = actor.getList("note");
 
-    data.activeEffects = actor.getList("effect").filter(e => e.system.isActive);
+    context.totalWeight = context.items.weight() + calc_currency_weight(context.actor.system.currency);
+    context.totalCost = context.items.cost();
+   }
 
-    data.totalWeight = data.items.weight() + calc_currency_weight(data.system.currency);
-    data.totalCost = data.items.cost();
 
-    data.noviceSpells = data.spells.filter(s => s.system.level == "novice" &&
-      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
-    data.journeymanSpells = data.spells.filter(s => s.system.level == "journeyman" &&
-      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
-    data.masterSpells = data.spells.filter(s => s.system.level == "master" &&
-      (s.system.class == "Spells" || s.system.class == "Invocations" || s.system.class == "Witcher"));
-    data.hexes = data.spells.filter(s => s.system.class == "Hexes");
-    data.rituals = data.spells.filter(s => s.system.class == "Rituals");
-    data.magicalgift = data.spells.filter(s => s.system.class == "MagicalGift");
-
-    if (actor.system.pannels == undefined) {
-      actor.update({ 'system.pannels': {} });
+  // Helping functions
+  /** Sanitizes description if it contains forbidden html tags. */
+  sanitizeDescription(item) {
+    if (!item.system.description) {
+      return item;
     }
-    data.isGM = game.user.isGM
-    return data;
+
+    const regex = /(<.+?>)/g;
+    const whiteList = ["<p>", "</p>"];
+    const tagsInText = item.system.description.match(regex);
+    const itemCopy = JSON.parse(JSON.stringify(item));
+    if (tagsInText.some(i => !whiteList.includes(i))) {
+      const temp = document.createElement('div');
+      temp.textContent = itemCopy.system.description;
+      itemCopy.system.description = temp.innerHTML;
+    }
+    return itemCopy;
   }
 
   activateListeners(html) {
@@ -2653,37 +2666,37 @@ export default class WitcherActorSheet extends ActorSheet {
     }
   }
 
-  calc_total_skills_profession(data) {
+  calc_total_skills_profession(context) {
     let totalSkills = 0;
-    if (data.profession) {
-      totalSkills += Number(data.profession.system.definingSkill.level);
-      totalSkills += Number(data.profession.system.skillPath1.skill1.level) + Number(data.profession.system.skillPath1.skill2.level) + Number(data.profession.system.skillPath1.skill3.level)
-      totalSkills += Number(data.profession.system.skillPath2.skill1.level) + Number(data.profession.system.skillPath2.skill2.level) + Number(data.profession.system.skillPath2.skill3.level)
-      totalSkills += Number(data.profession.system.skillPath3.skill1.level) + Number(data.profession.system.skillPath3.skill2.level) + Number(data.profession.system.skillPath3.skill3.level)
+    if (context.profession) {
+      totalSkills += Number(context.profession.system.definingSkill.level);
+      totalSkills += Number(context.profession.system.skillPath1.skill1.level) + Number(context.profession.system.skillPath1.skill2.level) + Number(context.profession.system.skillPath1.skill3.level)
+      totalSkills += Number(context.profession.system.skillPath2.skill1.level) + Number(context.profession.system.skillPath2.skill2.level) + Number(context.profession.system.skillPath2.skill3.level)
+      totalSkills += Number(context.profession.system.skillPath3.skill1.level) + Number(context.profession.system.skillPath3.skill2.level) + Number(context.profession.system.skillPath3.skill3.level)
     }
     return totalSkills;
   }
 
-  calc_total_skills(data) {
+  calc_total_skills(context) {
     let totalSkills = 0;
-    for (let element in data.system.skills) {
-      for (let skill in data.system.skills[element]) {
-        let skillLabel = game.i18n.localize(data.system.skills[element][skill].label)
+    for (let element in context.system.skills) {
+      for (let skill in context.system.skills[element]) {
+        let skillLabel = game.i18n.localize(context.system.skills[element][skill].label)
         if (skillLabel?.includes("(2)")) {
-          totalSkills += data.system.skills[element][skill].value * 2;
+          totalSkills += context.system.skills[element][skill].value * 2;
         }
         else {
-          totalSkills += data.system.skills[element][skill].value;
+          totalSkills += context.system.skills[element][skill].value;
         }
       }
     }
     return totalSkills;
   }
 
-  calc_total_stats(data) {
+  calc_total_stats(context) {
     let totalStats = 0;
-    for (let element in data.system.stats) {
-      totalStats += data.system.stats[element].max;
+    for (let element in context.system.stats) {
+      totalStats += context.system.stats[element].max;
     }
     return totalStats;
   }
