@@ -330,7 +330,9 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 		speaker: ChatMessage.getSpeaker({actor: thisActor}),
 		flavor: `${parentStat}: ${skillName} Check`,
 	}
+
 	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]`;
+
 	if (thisActor.type == "character") {
 		if (statNum == 4 && (skillNum == 0 || skillNum == 6 || skillNum == 7 || skillNum == 9)) {
 			if (thisActor.system.general.socialStanding == "tolerated" || thisActor.system.general.socialStanding == "toleratedFeared") {
@@ -365,6 +367,7 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")) {
 		rollFormula += !displayRollDetails ? `-${armorEnc}` : `-${armorEnc}[${game.i18n.localize("WITCHER.Armor.EncumbranceValue")}]`
 	}
+	
 	new Dialog({
 		title: `${game.i18n.localize("WITCHER.Dialog.Skill")}: ${skillName}`,
 		content: `<label>${game.i18n.localize("WITCHER.Dialog.attackCustom")}: <input name="customModifiers" value=0></label>`,
