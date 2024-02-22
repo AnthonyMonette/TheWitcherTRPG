@@ -2212,8 +2212,8 @@ export default class WitcherActorSheet extends ActorSheet {
     }
 
     let noThrowable = !this.actor.isEnoughThrowableWeapon(item)
-    let Mymelebonus = this.actor.system.attackStats.meleeBonus
-    let data = { item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, noThrowable, ammunitionOption, ammunitions, Mymelebonus }
+    let meleeBonus = this.actor.system.attackStats.meleeBonus
+    let data = { item, attackSkill, displayDmgFormula, isMeleeAttack, noAmmo, noThrowable, ammunitionOption, ammunitions, meleeBonus: meleeBonus }
     const myDialogOptions = { width: 500 }
     const dialogTemplate = await renderTemplate("systems/TheWitcherTRPG/templates/sheets/weapon-attack.html", data)
 
