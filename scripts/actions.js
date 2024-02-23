@@ -13,13 +13,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage) {
 
   let naturalArmors = armors.filter(n => n.system.type == "Natural")
 
-  let damageTypeloc = ""
-  switch (dmgType) {
-    case "slashing": damageTypeloc = "WITCHER.Armor.Slashing"; break;
-    case "bludgeoning": damageTypeloc = "WITCHER.Armor.Bludgeoning"; break;
-    case "piercing": damageTypeloc = "WITCHER.Armor.Piercing"; break;
-    case "elemental": damageTypeloc = "WITCHER.Armor.Elemental"; break;
-  }
+  let damageTypeloc = `WITCHER.Armor.${dmgType}`;
 
   const locationOptions = `
     <option value="Empty"></option>
@@ -615,46 +609,26 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
           }
           let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill;
-          let skillValue = 0;
-          let skillName = "";
-          let modifiers;
-          let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.Defense")}`;
+          let skill = actor.system.skills.ref[defence.toLowerCase().replace('/', '').replace(' ','')];
+          let skillValue = skill.value;
+          let skillName = skill.label;
+          let modifiers = skill.modifiers
+          let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")}`;
           switch (defence) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling;
-              skillValue = skill.value;
-              skillName = skill.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")}`;
-              modifiers = skill.modifiers
+              displayFormula += `${game.i18n.localize("WITCHER.SkRefBrawling")}`;
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee;
-              skillValue = skill.value;
-              skillName = skill.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")}`;
-              modifiers = skill.modifiers
-              break;
-            case "Small Blades":
-              skill = actor.system.skills.ref.smallblades;
-              skillValue = skill.value;
-              skillName = skill.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")}`;
-              modifiers = skill.modifiers
-              break;
-            case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear;
-              skillValue = skill.value;
-              skillName = skill.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")}`;
-              modifiers = skill.modifiers
+              displayFormula = `${game.i18n.localize("WITCHER.SkRefMelee")}`;
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship;
-              skillValue = skill.value;
-              skillName = skill.label;
-              displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")}`;
-              modifiers = skill.modifiers
+              displayFormula = `${game.i18n.localize("WITCHER.SkRefSwordsmanship")}`;
+              break;
+            case "Small Blades":
+              displayFormula = `${game.i18n.localize("WITCHER.SkRefSmall")}`;
+              break;
+            case "Staff/Spear":
+              displayFormula = `${game.i18n.localize("WITCHER.SkRefStaff")}`;
               break;
           }
 
@@ -695,46 +669,26 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
           }
           let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill;
-          let skillValue = 0;
-          let skillName = "";
-          let modifiers;
+          let skill = actor.system.skills.ref[defence.toLowerCase().replace('/', '').replace(' ','')];
+          let skillValue = skill.value;
+          let skillName = skill.label;
+          let modifiers = skill.modifiers
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParry")}`;
           switch (defence) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 3`;
-              modifiers = skill.modifiers
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 3`;
-              modifiers = skill.modifiers
               break;
             case "Small Blades":
-              skill = actor.system.skills.ref.smallblades;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 3`;
-              modifiers = skill.modifiers
               break;
             case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 3`;
-              modifiers = skill.modifiers
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 3`;
-              modifiers = skill.modifiers
               break;
           }
 
@@ -775,46 +729,26 @@ function ExecuteDefence(actor, attackType, location, totalAttack) {
           }
           let defence = html.find("[name=form]")[0].value;
           let stat = actor.system.stats.ref.current;
-          let skill;
-          let skillValue = 0;
-          let skillName = ""
-          let modifiers
+          let skill = actor.system.skills.ref[defence.toLowerCase().replace('/', '').replace(' ','')];
+          let skillValue = skill.value;
+          let skillName = skill.label;
+          let modifiers = skill.modifiers
           let displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.Dialog.ButtonParryThrown")}`;
           switch (defence) {
             case "Brawling":
-              skill = actor.system.skills.ref.brawling;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefBrawling")} - 5`;
-              modifiers = skill.modifiers
               break;
             case "Melee":
-              skill = actor.system.skills.ref.melee;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefMelee")} - 5`;
-              modifiers = skill.modifiers
               break;
             case "Small Blades":
-              skill = actor.system.skills.ref.smallblades;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSmall")} - 5`;
-              modifiers = skill.modifiers
               break;
             case "Staff/Spear":
-              skill = actor.system.skills.ref.staffspear;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefStaff")} - 5`;
-              modifiers = skill.modifiers
               break;
             case "Swordsmanship":
-              skill = actor.system.skills.ref.swordsmanship;
-              skillValue = skill.value;
-              skillName = skill.label;
               displayFormula = `1d10 + ${game.i18n.localize("WITCHER.Actor.Stat.Ref")} + ${game.i18n.localize("WITCHER.SkRefSwordsmanship")} - 5`;
-              modifiers = skill.modifiers
               break;
           }
 

@@ -49,6 +49,9 @@ export default class WitcherActorSheet extends ActorSheet {
     });
   }
 
+  statMap = witcher.statMap;
+  skillMap = witcher.skillMap;
+
   /** @override */
   getData() {
     const context = super.getData();
@@ -642,111 +645,22 @@ export default class WitcherActorSheet extends ActorSheet {
     }
     newModifierList.push({ id: genId(), name: "Modifier", value: 0 })
 
-    switch (skill) {
-      case "awareness": this.actor.update({ 'system.skills.int.awareness.modifiers': newModifierList }); break;
-      case "business": this.actor.update({ 'system.skills.int.business.modifiers': newModifierList }); break;
-      case "deduction": this.actor.update({ 'system.skills.int.deduction.modifiers': newModifierList }); break;
-      case "education": this.actor.update({ 'system.skills.int.education.modifiers': newModifierList }); break;
-      case "commonsp": this.actor.update({ 'system.skills.int.commonsp.modifiers': newModifierList }); break;
-      case "eldersp": this.actor.update({ 'system.skills.int.eldersp.modifiers': newModifierList }); break;
-      case "dwarven": this.actor.update({ 'system.skills.int.dwarven.modifiers': newModifierList }); break;
-      case "monster": this.actor.update({ 'system.skills.int.monster.modifiers': newModifierList }); break;
-      case "socialetq": this.actor.update({ 'system.skills.int.socialetq.modifiers': newModifierList }); break;
-      case "streetwise": this.actor.update({ 'system.skills.int.streetwise.modifiers': newModifierList }); break;
-      case "tactics": this.actor.update({ 'system.skills.int.tactics.modifiers': newModifierList }); break;
-      case "teaching": this.actor.update({ 'system.skills.int.teaching.modifiers': newModifierList }); break;
-      case "wilderness": this.actor.update({ 'system.skills.int.wilderness.modifiers': newModifierList }); break;
-
-      case "brawling": this.actor.update({ 'system.skills.ref.brawling.modifiers': newModifierList }); break;
-      case "dodge": this.actor.update({ 'system.skills.ref.dodge.modifiers': newModifierList }); break;
-      case "melee": this.actor.update({ 'system.skills.ref.melee.modifiers': newModifierList }); break;
-      case "riding": this.actor.update({ 'system.skills.ref.riding.modifiers': newModifierList }); break;
-      case "sailing": this.actor.update({ 'system.skills.ref.sailing.modifiers': newModifierList }); break;
-      case "smallblades": this.actor.update({ 'system.skills.ref.smallblades.modifiers': newModifierList }); break;
-      case "staffspear": this.actor.update({ 'system.skills.ref.staffspear.modifiers': newModifierList }); break;
-      case "swordsmanship": this.actor.update({ 'system.skills.ref.swordsmanship.modifiers': newModifierList }); break;
-
-      case "courage": this.actor.update({ 'system.skills.will.courage.modifiers': newModifierList }); break;
-      case "hexweave": this.actor.update({ 'system.skills.will.hexweave.modifiers': newModifierList }); break;
-      case "intimidation": this.actor.update({ 'system.skills.will.intimidation.modifiers': newModifierList }); break;
-      case "spellcast": this.actor.update({ 'system.skills.will.spellcast.modifiers': newModifierList }); break;
-      case "resistmagic": this.actor.update({ 'system.skills.will.resistmagic.modifiers': newModifierList }); break;
-      case "resistcoerc": this.actor.update({ 'system.skills.will.resistcoerc.modifiers': newModifierList }); break;
-      case "ritcraft": this.actor.update({ 'system.skills.will.ritcraft.modifiers': newModifierList }); break;
-
-      case "archery": this.actor.update({ 'system.skills.dex.archery.modifiers': newModifierList }); break;
-      case "athletics": this.actor.update({ 'system.skills.dex.athletics.modifiers': newModifierList }); break;
-      case "crossbow": this.actor.update({ 'system.skills.dex.crossbow.modifiers': newModifierList }); break;
-      case "sleight": this.actor.update({ 'system.skills.dex.sleight.modifiers': newModifierList }); break;
-      case "stealth": this.actor.update({ 'system.skills.dex.stealth.modifiers': newModifierList }); break;
-
-      case "alchemy": this.actor.update({ 'system.skills.cra.alchemy.modifiers': newModifierList }); break;
-      case "crafting": this.actor.update({ 'system.skills.cra.crafting.modifiers': newModifierList }); break;
-      case "disguise": this.actor.update({ 'system.skills.cra.disguise.modifiers': newModifierList }); break;
-      case "firstaid": this.actor.update({ 'system.skills.cra.firstaid.modifiers': newModifierList }); break;
-      case "forgery": this.actor.update({ 'system.skills.cra.forgery.modifiers': newModifierList }); break;
-      case "picklock": this.actor.update({ 'system.skills.cra.picklock.modifiers': newModifierList }); break;
-      case "trapcraft": this.actor.update({ 'system.skills.cra.trapcraft.modifiers': newModifierList }); break;
-
-      case "physique": this.actor.update({ 'system.skills.body.physique.modifiers': newModifierList }); break;
-      case "endurance": this.actor.update({ 'system.skills.body.endurance.modifiers': newModifierList }); break;
-
-      case "charisma": this.actor.update({ 'system.skills.emp.charisma.modifiers': newModifierList }); break;
-      case "deceit": this.actor.update({ 'system.skills.emp.deceit.modifiers': newModifierList }); break;
-      case "finearts": this.actor.update({ 'system.skills.emp.finearts.modifiers': newModifierList }); break;
-      case "gambling": this.actor.update({ 'system.skills.emp.gambling.modifiers': newModifierList }); break;
-      case "grooming": this.actor.update({ 'system.skills.emp.grooming.modifiers': newModifierList }); break;
-      case "perception": this.actor.update({ 'system.skills.emp.perception.modifiers': newModifierList }); break;
-      case "leadership": this.actor.update({ 'system.skills.emp.leadership.modifiers': newModifierList }); break;
-      case "persuasion": this.actor.update({ 'system.skills.emp.persuasion.modifiers': newModifierList }); break;
-      case "performance": this.actor.update({ 'system.skills.emp.performance.modifiers': newModifierList }); break;
-      case "seduction": this.actor.update({ 'system.skills.emp.seduction.modifiers': newModifierList }); break;
-    }
+    this.actor.update({ [`system.skills.${this.skillMap[skill].attribute}.${skill}.modifiers`]: newModifierList });
   }
 
   async _onAddModifier(event) {
     event.preventDefault();
     let stat = event.currentTarget.closest(".stat-display").dataset.stat;
-    let type = event.currentTarget.closest(".stat-display").dataset.type;
 
-    let newModifierList = []
-    if (type == "coreStat") {
-      if (this.actor.system.coreStats[stat].modifiers) {
-        newModifierList = this.actor.system.coreStats[stat].modifiers
-      }
-    } else if (type == "derivedStat") {
-      newModifierList = this.actor.system.derivedStats[stat].modifiers
-    } else if (type == "reputation") {
-      newModifierList = this.actor.system.reputation.modifiers
-    } else {
-      if (this.actor.system.stats[stat].modifiers) {
-        newModifierList = this.actor.system.stats[stat].modifiers
-      }
+    if(stat == "reputation") {
+      let newModifierList = this.actor.system.reputation.modifiers
+      newModifierList.push({ id: genId(), name: "Modifier", value: 0 })
+      this.actor.update({ [`system.${stat}.modifiers`]: newModifierList});
     }
-
-    newModifierList.push({ id: genId(), name: "Modifier", value: 0 })
-
-    switch (stat) {
-      case "int": this.actor.update({ 'system.stats.int.modifiers': newModifierList }); break;
-      case "ref": this.actor.update({ 'system.stats.ref.modifiers': newModifierList }); break;
-      case "dex": this.actor.update({ 'system.stats.dex.modifiers': newModifierList }); break;
-      case "body": this.actor.update({ 'system.stats.body.modifiers': newModifierList }); break;
-      case "spd": this.actor.update({ 'system.stats.spd.modifiers': newModifierList }); break;
-      case "emp": this.actor.update({ 'system.stats.emp.modifiers': newModifierList }); break;
-      case "cra": this.actor.update({ 'system.stats.cra.modifiers': newModifierList }); break;
-      case "will": this.actor.update({ 'system.stats.will.modifiers': newModifierList }); break;
-      case "luck": this.actor.update({ 'system.stats.luck.modifiers': newModifierList }); break;
-      case "stun": this.actor.update({ 'system.coreStats.stun.modifiers': newModifierList }); break;
-      case "run": this.actor.update({ 'system.coreStats.run.modifiers': newModifierList }); break;
-      case "leap": this.actor.update({ 'system.coreStats.leap.modifiers': newModifierList }); break;
-      case "enc": this.actor.update({ 'system.coreStats.enc.modifiers': newModifierList }); break;
-      case "rec": this.actor.update({ 'system.coreStats.rec.modifiers': newModifierList }); break;
-      case "woundTreshold": this.actor.update({ 'system.coreStats.woundTreshold.modifiers': newModifierList }); break;
-      case "hp": this.actor.update({ 'system.derivedStats.hp.modifiers': newModifierList }); break;
-      case "sta": this.actor.update({ 'system.derivedStats.sta.modifiers': newModifierList }); break;
-      case "resolve": this.actor.update({ 'system.derivedStats.resolve.modifiers': newModifierList }); break;
-      case "focus": this.actor.update({ 'system.derivedStats.focus.modifiers': newModifierList }); break;
-      case "reputation": this.actor.update({ 'system.reputation.modifiers': newModifierList }); break;
+    else {
+      let newModifierList = this.actor.system[this.statMap[stat].origin][stat].modifiers;
+      newModifierList.push({ id: genId(), name: "Modifier", value: 0 })
+      this.actor.update({ [`system.${this.statMap[stat].origin}.${stat}.modifiers`]: newModifierList }); 
     }
   }
 
@@ -778,72 +692,12 @@ export default class WitcherActorSheet extends ActorSheet {
     let objIndex = modifiers.findIndex((obj => obj.id == itemId));
     modifiers[objIndex][field] = value
 
-    switch (skill) {
-      case "awareness": this.actor.update({ 'system.skills.int.awareness.modifiers': modifiers }); break;
-      case "business": this.actor.update({ 'system.skills.int.business.modifiers': modifiers }); break;
-      case "deduction": this.actor.update({ 'system.skills.int.deduction.modifiers': modifiers }); break;
-      case "education": this.actor.update({ 'system.skills.int.education.modifiers': modifiers }); break;
-      case "commonsp": this.actor.update({ 'system.skills.int.commonsp.modifiers': modifiers }); break;
-      case "eldersp": this.actor.update({ 'system.skills.int.eldersp.modifiers': modifiers }); break;
-      case "dwarven": this.actor.update({ 'system.skills.int.dwarven.modifiers': modifiers }); break;
-      case "monster": this.actor.update({ 'system.skills.int.monster.modifiers': modifiers }); break;
-      case "socialetq": this.actor.update({ 'system.skills.int.socialetq.modifiers': modifiers }); break;
-      case "streetwise": this.actor.update({ 'system.skills.int.streetwise.modifiers': modifiers }); break;
-      case "tactics": this.actor.update({ 'system.skills.int.tactics.modifiers': modifiers }); break;
-      case "teaching": this.actor.update({ 'system.skills.int.teaching.modifiers': modifiers }); break;
-      case "wilderness": this.actor.update({ 'system.skills.int.wilderness.modifiers': modifiers }); break;
-
-      case "brawling": this.actor.update({ 'system.skills.ref.brawling.modifiers': modifiers }); break;
-      case "dodge": this.actor.update({ 'system.skills.ref.dodge.modifiers': modifiers }); break;
-      case "melee": this.actor.update({ 'system.skills.ref.melee.modifiers': modifiers }); break;
-      case "riding": this.actor.update({ 'system.skills.ref.riding.modifiers': modifiers }); break;
-      case "sailing": this.actor.update({ 'system.skills.ref.sailing.modifiers': modifiers }); break;
-      case "smallblades": this.actor.update({ 'system.skills.ref.smallblades.modifiers': modifiers }); break;
-      case "staffspear": this.actor.update({ 'system.skills.ref.staffspear.modifiers': modifiers }); break;
-      case "swordsmanship": this.actor.update({ 'system.skills.ref.swordsmanship.modifiers': modifiers }); break;
-
-      case "courage": this.actor.update({ 'system.skills.will.courage.modifiers': modifiers }); break;
-      case "hexweave": this.actor.update({ 'system.skills.will.hexweave.modifiers': modifiers }); break;
-      case "intimidation": this.actor.update({ 'system.skills.will.intimidation.modifiers': modifiers }); break;
-      case "spellcast": this.actor.update({ 'system.skills.will.spellcast.modifiers': modifiers }); break;
-      case "resistmagic": this.actor.update({ 'system.skills.will.resistmagic.modifiers': modifiers }); break;
-      case "resistcoerc": this.actor.update({ 'system.skills.will.resistcoerc.modifiers': modifiers }); break;
-      case "ritcraft": this.actor.update({ 'system.skills.will.ritcraft.modifiers': modifiers }); break;
-
-      case "archery": this.actor.update({ 'system.skills.dex.archery.modifiers': modifiers }); break;
-      case "athletics": this.actor.update({ 'system.skills.dex.athletics.modifiers': modifiers }); break;
-      case "crossbow": this.actor.update({ 'system.skills.dex.crossbow.modifiers': modifiers }); break;
-      case "sleight": this.actor.update({ 'system.skills.dex.sleight.modifiers': modifiers }); break;
-      case "stealth": this.actor.update({ 'system.skills.dex.stealth.modifiers': modifiers }); break;
-
-      case "alchemy": this.actor.update({ 'system.skills.cra.alchemy.modifiers': modifiers }); break;
-      case "crafting": this.actor.update({ 'system.skills.cra.crafting.modifiers': modifiers }); break;
-      case "disguise": this.actor.update({ 'system.skills.cra.disguise.modifiers': modifiers }); break;
-      case "firstaid": this.actor.update({ 'system.skills.cra.firstaid.modifiers': modifiers }); break;
-      case "forgery": this.actor.update({ 'system.skills.cra.forgery.modifiers': modifiers }); break;
-      case "picklock": this.actor.update({ 'system.skills.cra.picklock.modifiers': modifiers }); break;
-      case "trapcraft": this.actor.update({ 'system.skills.cra.trapcraft.modifiers': modifiers }); break;
-
-      case "physique": this.actor.update({ 'system.skills.body.physique.modifiers': modifiers }); break;
-      case "endurance": this.actor.update({ 'system.skills.body.endurance.modifiers': modifiers }); break;
-
-      case "charisma": this.actor.update({ 'system.skills.emp.charisma.modifiers': modifiers }); break;
-      case "deceit": this.actor.update({ 'system.skills.emp.deceit.modifiers': modifiers }); break;
-      case "finearts": this.actor.update({ 'system.skills.emp.finearts.modifiers': modifiers }); break;
-      case "gambling": this.actor.update({ 'system.skills.emp.gambling.modifiers': modifiers }); break;
-      case "grooming": this.actor.update({ 'system.skills.emp.grooming.modifiers': modifiers }); break;
-      case "perception": this.actor.update({ 'system.skills.emp.perception.modifiers': modifiers }); break;
-      case "leadership": this.actor.update({ 'system.skills.emp.leadership.modifiers': modifiers }); break;
-      case "persuasion": this.actor.update({ 'system.skills.emp.persuasion.modifiers': modifiers }); break;
-      case "performance": this.actor.update({ 'system.skills.emp.performance.modifiers': modifiers }); break;
-      case "seduction": this.actor.update({ 'system.skills.emp.seduction.modifiers': modifiers }); break;
-    }
+    this.actor.update({ [`system.skills.${this.skillMap[skill].attribute}.${skill}.modifiers`]: modifiers });
   }
 
   async _onModifierEdit(event) {
     event.preventDefault();
     let stat = event.currentTarget.closest(".stat-display").dataset.stat;
-    let type = event.currentTarget.closest(".stat-display").dataset.type;
 
     let element = event.currentTarget;
     let itemId = element.closest(".list-modifiers").dataset.id;
@@ -852,40 +706,23 @@ export default class WitcherActorSheet extends ActorSheet {
     let value = element.value
     let modifiers = []
 
-    if (type == "coreStat") {
-      modifiers = this.actor.system.coreStats[stat].modifiers;
-    } else if (type == "derivedStat") {
-      modifiers = this.actor.system.derivedStats[stat].modifiers;
-    } else if (type == "reputation") {
-      modifiers = this.actor.system.reputation.modifiers;
-    } else {
-      modifiers = this.actor.system.stats[stat].modifiers;
+    if(stat == "reputation") {
+      modifiers = this.actor.system.reputation.modifiers
+    }
+    else {
+      modifiers = this.actor.system[this.statMap[stat].origin][stat].modifiers;
     }
 
     let objIndex = modifiers.findIndex((obj => obj.id == itemId));
     modifiers[objIndex][field] = value
-    switch (stat) {
-      case "int": this.actor.update({ 'system.stats.int.modifiers': modifiers }); break;
-      case "ref": this.actor.update({ 'system.stats.ref.modifiers': modifiers }); break;
-      case "dex": this.actor.update({ 'system.stats.dex.modifiers': modifiers }); break;
-      case "body": this.actor.update({ 'system.stats.body.modifiers': modifiers }); break;
-      case "spd": this.actor.update({ 'system.stats.spd.modifiers': modifiers }); break;
-      case "emp": this.actor.update({ 'system.stats.emp.modifiers': modifiers }); break;
-      case "cra": this.actor.update({ 'system.stats.cra.modifiers': modifiers }); break;
-      case "will": this.actor.update({ 'system.stats.will.modifiers': modifiers }); break;
-      case "luck": this.actor.update({ 'system.stats.luck.modifiers': modifiers }); break;
-      case "stun": this.actor.update({ 'system.coreStats.stun.modifiers': modifiers }); break;
-      case "run": this.actor.update({ 'system.coreStats.run.modifiers': modifiers }); break;
-      case "leap": this.actor.update({ 'system.coreStats.leap.modifiers': modifiers }); break;
-      case "enc": this.actor.update({ 'system.coreStats.enc.modifiers': modifiers }); break;
-      case "rec": this.actor.update({ 'system.coreStats.rec.modifiers': modifiers }); break;
-      case "woundTreshold": this.actor.update({ 'system.coreStats.woundTreshold.modifiers': modifiers }); break;
-      case "hp": this.actor.update({ 'system.derivedStats.hp.modifiers': modifiers }); break;
-      case "sta": this.actor.update({ 'system.derivedStats.sta.modifiers': modifiers }); break;
-      case "resolve": this.actor.update({ 'system.derivedStats.resolve.modifiers': modifiers }); break;
-      case "focus": this.actor.update({ 'system.derivedStats.focus.modifiers': modifiers }); break;
-      case "reputation": this.actor.update({ 'system.reputation.modifiers': modifiers }); break;
+
+    if(stat == "reputation") {
+      this.actor.update({ [`system.${stat}.modifiers`]: modifiers});
     }
+    else {
+      this.actor.update({ [`system.${this.statMap[stat].origin}.${stat}.modifiers`]: modifiers }); 
+    }
+
     updateDerived(this.actor);
   }
 
@@ -898,66 +735,7 @@ export default class WitcherActorSheet extends ActorSheet {
     const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
     newModList.splice(idxToRm, 1);
 
-    switch (skill) {
-      case "awareness": this.actor.update({ 'system.skills.int.awareness.modifiers': newModList }); break;
-      case "business": this.actor.update({ 'system.skills.int.business.modifiers': newModList }); break;
-      case "deduction": this.actor.update({ 'system.skills.int.deduction.modifiers': newModList }); break;
-      case "education": this.actor.update({ 'system.skills.int.education.modifiers': newModList }); break;
-      case "commonsp": this.actor.update({ 'system.skills.int.commonsp.modifiers': newModList }); break;
-      case "eldersp": this.actor.update({ 'system.skills.int.eldersp.modifiers': newModList }); break;
-      case "dwarven": this.actor.update({ 'system.skills.int.dwarven.modifiers': newModList }); break;
-      case "monster": this.actor.update({ 'system.skills.int.monster.modifiers': newModList }); break;
-      case "socialetq": this.actor.update({ 'system.skills.int.socialetq.modifiers': newModList }); break;
-      case "streetwise": this.actor.update({ 'system.skills.int.streetwise.modifiers': newModList }); break;
-      case "tactics": this.actor.update({ 'system.skills.int.tactics.modifiers': newModList }); break;
-      case "teaching": this.actor.update({ 'system.skills.int.teaching.modifiers': newModList }); break;
-      case "wilderness": this.actor.update({ 'system.skills.int.wilderness.modifiers': newModList }); break;
-
-      case "brawling": this.actor.update({ 'system.skills.ref.brawling.modifiers': newModList }); break;
-      case "dodge": this.actor.update({ 'system.skills.ref.dodge.modifiers': newModList }); break;
-      case "melee": this.actor.update({ 'system.skills.ref.melee.modifiers': newModList }); break;
-      case "riding": this.actor.update({ 'system.skills.ref.riding.modifiers': newModList }); break;
-      case "sailing": this.actor.update({ 'system.skills.ref.sailing.modifiers': newModList }); break;
-      case "smallblades": this.actor.update({ 'system.skills.ref.smallblades.modifiers': newModList }); break;
-      case "staffspear": this.actor.update({ 'system.skills.ref.staffspear.modifiers': newModList }); break;
-      case "swordsmanship": this.actor.update({ 'system.skills.ref.swordsmanship.modifiers': newModList }); break;
-
-      case "courage": this.actor.update({ 'system.skills.will.courage.modifiers': newModList }); break;
-      case "hexweave": this.actor.update({ 'system.skills.will.hexweave.modifiers': newModList }); break;
-      case "intimidation": this.actor.update({ 'system.skills.will.intimidation.modifiers': newModList }); break;
-      case "spellcast": this.actor.update({ 'system.skills.will.spellcast.modifiers': newModList }); break;
-      case "resistmagic": this.actor.update({ 'system.skills.will.resistmagic.modifiers': newModList }); break;
-      case "resistcoerc": this.actor.update({ 'system.skills.will.resistcoerc.modifiers': newModList }); break;
-      case "ritcraft": this.actor.update({ 'system.skills.will.ritcraft.modifiers': newModList }); break;
-
-      case "archery": this.actor.update({ 'system.skills.dex.archery.modifiers': newModList }); break;
-      case "athletics": this.actor.update({ 'system.skills.dex.athletics.modifiers': newModList }); break;
-      case "crossbow": this.actor.update({ 'system.skills.dex.crossbow.modifiers': newModList }); break;
-      case "sleight": this.actor.update({ 'system.skills.dex.sleight.modifiers': newModList }); break;
-      case "stealth": this.actor.update({ 'system.skills.dex.stealth.modifiers': newModList }); break;
-
-      case "alchemy": this.actor.update({ 'system.skills.cra.alchemy.modifiers': newModList }); break;
-      case "crafting": this.actor.update({ 'system.skills.cra.crafting.modifiers': newModList }); break;
-      case "disguise": this.actor.update({ 'system.skills.cra.disguise.modifiers': newModList }); break;
-      case "firstaid": this.actor.update({ 'system.skills.cra.firstaid.modifiers': newModList }); break;
-      case "forgery": this.actor.update({ 'system.skills.cra.forgery.modifiers': newModList }); break;
-      case "picklock": this.actor.update({ 'system.skills.cra.picklock.modifiers': newModList }); break;
-      case "trapcraft": this.actor.update({ 'system.skills.cra.trapcraft.modifiers': newModList }); break;
-
-      case "physique": this.actor.update({ 'system.skills.body.physique.modifiers': newModList }); break;
-      case "endurance": this.actor.update({ 'system.skills.body.endurance.modifiers': newModList }); break;
-
-      case "charisma": this.actor.update({ 'system.skills.emp.charisma.modifiers': newModList }); break;
-      case "deceit": this.actor.update({ 'system.skills.emp.deceit.modifiers': newModList }); break;
-      case "finearts": this.actor.update({ 'system.skills.emp.finearts.modifiers': newModList }); break;
-      case "gambling": this.actor.update({ 'system.skills.emp.gambling.modifiers': newModList }); break;
-      case "grooming": this.actor.update({ 'system.skills.emp.grooming.modifiers': newModList }); break;
-      case "perception": this.actor.update({ 'system.skills.emp.perception.modifiers': newModList }); break;
-      case "leadership": this.actor.update({ 'system.skills.emp.leadership.modifiers': newModList }); break;
-      case "persuasion": this.actor.update({ 'system.skills.emp.persuasion.modifiers': newModList }); break;
-      case "performance": this.actor.update({ 'system.skills.emp.performance.modifiers': newModList }); break;
-      case "seduction": this.actor.update({ 'system.skills.emp.seduction.modifiers': newModList }); break;
-    }
+    this.actor.update({ [`system.skills.${this.skillMap[skill].attribute}.${skill}.modifiers`]: newModList });
   }
 
   async _onModifierRemove(event) {
@@ -977,28 +755,14 @@ export default class WitcherActorSheet extends ActorSheet {
     const newModList = Object.values(prevModList).map((details) => details);
     const idxToRm = newModList.findIndex((v) => v.id === event.target.dataset.id);
     newModList.splice(idxToRm, 1);
-    switch (stat) {
-      case "int": this.actor.update({ 'system.stats.int.modifiers': newModList }); break;
-      case "ref": this.actor.update({ 'system.stats.ref.modifiers': newModList }); break;
-      case "dex": this.actor.update({ 'system.stats.dex.modifiers': newModList }); break;
-      case "body": this.actor.update({ 'system.stats.body.modifiers': newModList }); break;
-      case "spd": this.actor.update({ 'system.stats.spd.modifiers': newModList }); break;
-      case "emp": this.actor.update({ 'system.stats.emp.modifiers': newModList }); break;
-      case "cra": this.actor.update({ 'system.stats.cra.modifiers': newModList }); break;
-      case "will": this.actor.update({ 'system.stats.will.modifiers': newModList }); break;
-      case "luck": this.actor.update({ 'system.stats.luck.modifiers': newModList }); break;
-      case "stun": this.actor.update({ 'system.coreStats.stun.modifiers': newModList }); break;
-      case "run": this.actor.update({ 'system.coreStats.run.modifiers': newModList }); break;
-      case "leap": this.actor.update({ 'system.coreStats.leap.modifiers': newModList }); break;
-      case "enc": this.actor.update({ 'system.coreStats.enc.modifiers': newModList }); break;
-      case "rec": this.actor.update({ 'system.coreStats.rec.modifiers': newModList }); break;
-      case "woundTreshold": this.actor.update({ 'system.coreStats.woundTreshold.modifiers': newModList }); break;
-      case "hp": this.actor.update({ 'system.derivedStats.hp.modifiers': newModList }); break;
-      case "sta": this.actor.update({ 'system.derivedStats.sta.modifiers': newModList }); break;
-      case "resolve": this.actor.update({ 'system.derivedStats.resolve.modifiers': newModList }); break;
-      case "focus": this.actor.update({ 'system.derivedStats.focus.modifiers': newModList }); break;
-      case "reputation": this.actor.update({ 'system.reputation.modifiers': newModList }); break;
+
+    if(stat == "reputation") {
+      this.actor.update({ [`system.${stat}.modifiers`]: newModList});
     }
+    else {
+      this.actor.update({ [`system.${this.statMap[stat].origin}.${stat}.modifiers`]: newModList }); 
+    }
+    
     updateDerived(this.actor);
   }
 
@@ -1434,46 +1198,9 @@ export default class WitcherActorSheet extends ActorSheet {
     let level = event.currentTarget.closest(".profession-display").dataset.level;
     let name = event.currentTarget.closest(".profession-display").dataset.name;
     let effet = event.currentTarget.closest(".profession-display").dataset.effet;
-    let statValue = 0
-    let statName = 0
-    switch (stat) {
-      case "int":
-        statValue = this.actor.system.stats.int.current;
-        statName = "WITCHER.StInt";
-        break;
-      case "ref":
-        statValue = this.actor.system.stats.ref.current;
-        statName = "WITCHER.StRef";
-        break;
-      case "dex":
-        statValue = this.actor.system.stats.dex.current;
-        statName = "WITCHER.StDex";
-        break;
-      case "body":
-        statValue = this.actor.system.stats.body.current;
-        statName = "WITCHER.StBody";
-        break;
-      case "spd":
-        statValue = this.actor.system.stats.spd.current;
-        statName = "WITCHER.StSpd";
-        break;
-      case "emp":
-        statValue = this.actor.system.stats.emp.current;
-        statName = "WITCHER.StEmp";
-        break;
-      case "cra":
-        statValue = this.actor.system.stats.cra.current;
-        statName = "WITCHER.StCra";
-        break;
-      case "will":
-        statValue = this.actor.system.stats.will.current;
-        statName = "WITCHER.StWill";
-        break;
-      case "luck":
-        statValue = this.actor.system.stats.int.current;
-        statName = "WITCHER.StLuck";
-        break;
-    }
+    let statValue = this.actor.system.stats[stat].current;
+    let statName = `WITCHER.St${stat.charAt(0).toUpperCase()+ stat.slice(1)}`;
+
     let rollFormula = !displayRollDetails ? `1d10+${statValue}+${level}` : `1d10+${statValue}[${game.i18n.localize(statName)}]+${level}[${name}]`;
     new Dialog({
       title: `${game.i18n.localize("WITCHER.Dialog.profession.skill")}: ${name}`,
@@ -1910,50 +1637,8 @@ export default class WitcherActorSheet extends ActorSheet {
 
   async _onStatSaveRoll(event) {
     let stat = event.currentTarget.closest(".stat-display").dataset.stat;
-    let statValue = 0
-    let statName = 0
-    switch (stat) {
-      case "int":
-        statValue = this.actor.system.stats.int.current;
-        statName = "WITCHER.StInt";
-        break;
-      case "ref":
-        statValue = this.actor.system.stats.ref.current;
-        statName = "WITCHER.StRef";
-        break;
-      case "dex":
-        statValue = this.actor.system.stats.dex.current;
-        statName = "WITCHER.StDex";
-        break;
-      case "body":
-        statValue = this.actor.system.stats.body.current;
-        statName = "WITCHER.StBody";
-        break;
-      case "spd":
-        statValue = this.actor.system.stats.spd.current;
-        statName = "WITCHER.StSpd";
-        break;
-      case "emp":
-        statValue = this.actor.system.stats.emp.current;
-        statName = "WITCHER.StEmp";
-        break;
-      case "cra":
-        statValue = this.actor.system.stats.cra.current;
-        statName = "WITCHER.StCra";
-        break;
-      case "will":
-        statValue = this.actor.system.stats.will.current;
-        statName = "WITCHER.StWill";
-        break;
-      case "luck":
-        statValue = this.actor.system.stats.luck.current;
-        statName = "WITCHER.StLuck";
-        break;
-      case "reputation":
-        statValue = this.actor.system.reputation.max;
-        statName = "WITCHER.StReputation";
-        break;
-    }
+    let statValue = this.actor.system.stats[stat].current;
+    let statName = `WITCHER.St${stat.charAt(0).toUpperCase()+ stat.slice(1)}`;
 
     let messageData = { speaker: ChatMessage.getSpeaker({actor: this.actor}) }
     messageData.flavor = `
@@ -2120,32 +1805,10 @@ export default class WitcherActorSheet extends ActorSheet {
         this._addItem(buyerActor, item, numberOfItem)
       }
 
-      switch (coinType) {
-        case "crown":
-          if (buyerActor) { buyerActor.update({ 'system.currency.crown': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-        case "bizant":
-          if (buyerActor) { buyerActor.update({ 'system.currency.bizant': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-        case "ducat":
-          if (buyerActor) { buyerActor.update({ 'system.currency.ducat': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-        case "lintar":
-          if (buyerActor) { buyerActor.update({ 'system.currency.lintar': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-        case "floren":
-          if (buyerActor) { buyerActor.update({ 'system.currency.floren': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-        case "oren":
-          if (buyerActor) { buyerActor.update({ 'system.currency.oren': buyerActor.system.currency[coinType] - totalCost }) }
-          this.actor.update({ 'system.currency.crown': Number(this.actor.system.currency[coinType]) + Number(totalCost) })
-          break;
-      }
+      if (buyerActor) {
+        buyerActor.update({ [`system.currency.${coinType}`]: buyerActor.system.currency[coinType] - totalCost }) 
+       }
+      this.actor.update({ [`system.currency.${coinType}`]: Number(this.actor.system.currency[coinType]) + Number(totalCost) })
     }
   }
 
@@ -2462,208 +2125,49 @@ export default class WitcherActorSheet extends ActorSheet {
   _onSpellDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".spell");
-    switch (section.dataset.spelltype) {
-      case "noviceSpell":
-        this.actor.update({ 'system.pannels.noviceSpellIsOpen': this.actor.system.pannels.noviceSpellIsOpen ? false : true });
-        break;
-      case "journeymanSpell":
-        this.actor.update({ 'system.pannels.journeymanSpellIsOpen': this.actor.system.pannels.journeymanSpellIsOpen ? false : true });
-        break;
-      case "masterSpell":
-        this.actor.update({ 'system.pannels.masterSpellIsOpen': this.actor.system.pannels.masterSpellIsOpen ? false : true });
-        break;
-      case "ritual":
-        this.actor.update({ 'system.pannels.ritualIsOpen': this.actor.system.pannels.ritualIsOpen ? false : true });
-        break;
-      case "hex":
-        this.actor.update({ 'system.pannels.hexIsOpen': this.actor.system.pannels.hexIsOpen ? false : true });
-        break;
-      case "magicalgift":
-        this.actor.update({ 'system.pannels.magicalgiftIsOpen': this.actor.system.pannels.magicalgiftIsOpen ? false : true });
-        break;
-    }
+    this.actor.update({ [`system.pannels.'+section.dataset.${spelltype}IsOpen`]: !this.actor.system.pannels[section.dataset.spelltype+'IsOpen']});
   }
 
   _onLifeEventDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".lifeEvents");
-    switch (section.dataset.event) {
-      case "10": this.actor.update({ 'system.general.lifeEvents.10.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "20": this.actor.update({ 'system.general.lifeEvents.20.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "30": this.actor.update({ 'system.general.lifeEvents.30.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "40": this.actor.update({ 'system.general.lifeEvents.40.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "50": this.actor.update({ 'system.general.lifeEvents.50.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "60": this.actor.update({ 'system.general.lifeEvents.60.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "70": this.actor.update({ 'system.general.lifeEvents.70.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "80": this.actor.update({ 'system.general.lifeEvents.80.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "90": this.actor.update({ 'system.general.lifeEvents.90.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "100": this.actor.update({ 'system.general.lifeEvents.100.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "110": this.actor.update({ 'system.general.lifeEvents.110.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "120": this.actor.update({ 'system.general.lifeEvents.120.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "130": this.actor.update({ 'system.general.lifeEvents.130.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "140": this.actor.update({ 'system.general.lifeEvents.140.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "150": this.actor.update({ 'system.general.lifeEvents.150.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "160": this.actor.update({ 'system.general.lifeEvents.160.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "170": this.actor.update({ 'system.general.lifeEvents.170.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "180": this.actor.update({ 'system.general.lifeEvents.180.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "190": this.actor.update({ 'system.general.lifeEvents.190.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-      case "200": this.actor.update({ 'system.general.lifeEvents.200.isOpened': this.actor.system.general.lifeEvents[section.dataset.event].isOpened ? false : true }); break;
-    }
+    this.actor.update({ [`system.general.lifeEvents.${section.dataset.event}.isOpened`]: !this.actor.system.general.lifeEvents[section.dataset.event].isOpened});
   }
 
   _onStatModifierDisplay(event) {
     event.preventDefault();
     let stat = event.currentTarget.closest(".stat-display").dataset.stat;
-    switch (stat) {
-      case "int": this.actor.update({ 'system.stats.int.isOpened': this.actor.system.stats.int.isOpened ? false : true }); break;
-      case "ref": this.actor.update({ 'system.stats.ref.isOpened': this.actor.system.stats.ref.isOpened ? false : true }); break;
-      case "dex": this.actor.update({ 'system.stats.dex.isOpened': this.actor.system.stats.dex.isOpened ? false : true }); break;
-      case "body": this.actor.update({ 'system.stats.body.isOpened': this.actor.system.stats.body.isOpened ? false : true }); break;
-      case "spd": this.actor.update({ 'system.stats.spd.isOpened': this.actor.system.stats.spd.isOpened ? false : true }); break;
-      case "emp": this.actor.update({ 'system.stats.emp.isOpened': this.actor.system.stats.emp.isOpened ? false : true }); break;
-      case "cra": this.actor.update({ 'system.stats.cra.isOpened': this.actor.system.stats.cra.isOpened ? false : true }); break;
-      case "will": this.actor.update({ 'system.stats.will.isOpened': this.actor.system.stats.will.isOpened ? false : true }); break;
-      case "luck": this.actor.update({ 'system.stats.luck.isOpened': this.actor.system.stats.luck.isOpened ? false : true }); break;
-      case "stun": this.actor.update({ 'system.coreStats.stun.isOpened': this.actor.system.coreStats.stun.isOpened ? false : true }); break;
-      case "run": this.actor.update({ 'system.coreStats.run.isOpened': this.actor.system.coreStats.run.isOpened ? false : true }); break;
-      case "leap": this.actor.update({ 'system.coreStats.leap.isOpened': this.actor.system.coreStats.leap.isOpened ? false : true }); break;
-      case "enc": this.actor.update({ 'system.coreStats.enc.isOpened': this.actor.system.coreStats.enc.isOpened ? false : true }); break;
-      case "rec": this.actor.update({ 'system.coreStats.rec.isOpened': this.actor.system.coreStats.rec.isOpened ? false : true }); break;
-      case "woundTreshold": this.actor.update({ 'system.coreStats.woundTreshold.isOpened': this.actor.system.coreStats.woundTreshold.isOpened ? false : true }); break;
-      case "reputation": this.actor.update({ 'system.reputation.isOpened': this.actor.system.reputation.isOpened ? false : true }); break;
+
+    if(stat == "reputation") {
+      this.actor.update({ [`system.${stat}.isOpened`]: !this.actor.system[stat].isOpened});
     }
+    else {
+      this.actor.update({ [`system.${this.statMap[stat].origin}.${stat}.isOpened`]: !this.actor.system[this.statMap[stat].origin][stat].isOpened});
+    }
+    
   }
 
   _onDerivedModifierDisplay(event) {
-    this.actor.update({ 'system.derivedStats.modifiersIsOpened': this.actor.system.derivedStats.modifiersIsOpened ? false : true });
+    this.actor.update({ 'system.derivedStats.modifiersIsOpened': !this.actor.system.derivedStats.modifiersIsOpened});
   }
 
   _onSkillModifierDisplay(event) {
     event.preventDefault();
     let skill = event.currentTarget.closest(".skill").dataset.skill;
-    switch (skill) {
-      case "awareness": this.actor.update({ 'system.skills.int.awareness.isOpened': this.actor.system.skills.int.awareness.isOpened ? false : true }); break;
-      case "business": this.actor.update({ 'system.skills.int.business.isOpened': this.actor.system.skills.int.business.isOpened ? false : true }); break;
-      case "deduction": this.actor.update({ 'system.skills.int.deduction.isOpened': this.actor.system.skills.int.deduction.isOpened ? false : true }); break;
-      case "education": this.actor.update({ 'system.skills.int.education.isOpened': this.actor.system.skills.int.education.isOpened ? false : true }); break;
-      case "commonsp": this.actor.update({ 'system.skills.int.commonsp.isOpened': this.actor.system.skills.int.commonsp.isOpened ? false : true }); break;
-      case "eldersp": this.actor.update({ 'system.skills.int.eldersp.isOpened': this.actor.system.skills.int.eldersp.isOpened ? false : true }); break;
-      case "dwarven": this.actor.update({ 'system.skills.int.dwarven.isOpened': this.actor.system.skills.int.dwarven.isOpened ? false : true }); break;
-      case "monster": this.actor.update({ 'system.skills.int.monster.isOpened': this.actor.system.skills.int.monster.isOpened ? false : true }); break;
-      case "socialetq": this.actor.update({ 'system.skills.int.socialetq.isOpened': this.actor.system.skills.int.socialetq.isOpened ? false : true }); break;
-      case "streetwise": this.actor.update({ 'system.skills.int.streetwise.isOpened': this.actor.system.skills.int.streetwise.isOpened ? false : true }); break;
-      case "tactics": this.actor.update({ 'system.skills.int.tactics.isOpened': this.actor.system.skills.int.tactics.isOpened ? false : true }); break;
-      case "teaching": this.actor.update({ 'system.skills.int.teaching.isOpened': this.actor.system.skills.int.teaching.isOpened ? false : true }); break;
-      case "wilderness": this.actor.update({ 'system.skills.int.wilderness.isOpened': this.actor.system.skills.int.wilderness.isOpened ? false : true }); break;
 
-      case "brawling": this.actor.update({ 'system.skills.ref.brawling.isOpened': this.actor.system.skills.ref.brawling.isOpened ? false : true }); break;
-      case "dodge": this.actor.update({ 'system.skills.ref.dodge.isOpened': this.actor.system.skills.ref.dodge.isOpened ? false : true }); break;
-      case "melee": this.actor.update({ 'system.skills.ref.melee.isOpened': this.actor.system.skills.ref.melee.isOpened ? false : true }); break;
-      case "riding": this.actor.update({ 'system.skills.ref.riding.isOpened': this.actor.system.skills.ref.riding.isOpened ? false : true }); break;
-      case "sailing": this.actor.update({ 'system.skills.ref.sailing.isOpened': this.actor.system.skills.ref.sailing.isOpened ? false : true }); break;
-      case "smallblades": this.actor.update({ 'system.skills.ref.smallblades.isOpened': this.actor.system.skills.ref.smallblades.isOpened ? false : true }); break;
-      case "staffspear": this.actor.update({ 'system.skills.ref.staffspear.isOpened': this.actor.system.skills.ref.staffspear.isOpened ? false : true }); break;
-      case "swordsmanship": this.actor.update({ 'system.skills.ref.swordsmanship.isOpened': this.actor.system.skills.ref.swordsmanship.isOpened ? false : true }); break;
-
-      case "courage": this.actor.update({ 'system.skills.will.courage.isOpened': this.actor.system.skills.will.courage.isOpened ? false : true }); break;
-      case "hexweave": this.actor.update({ 'system.skills.will.hexweave.isOpened': this.actor.system.skills.will.hexweave.isOpened ? false : true }); break;
-      case "intimidation": this.actor.update({ 'system.skills.will.intimidation.isOpened': this.actor.system.skills.will.intimidation.isOpened ? false : true }); break;
-      case "spellcast": this.actor.update({ 'system.skills.will.spellcast.isOpened': this.actor.system.skills.will.spellcast.isOpened ? false : true }); break;
-      case "resistmagic": this.actor.update({ 'system.skills.will.resistmagic.isOpened': this.actor.system.skills.will.resistmagic.isOpened ? false : true }); break;
-      case "resistcoerc": this.actor.update({ 'system.skills.will.resistcoerc.isOpened': this.actor.system.skills.will.resistcoerc.isOpened ? false : true }); break;
-      case "ritcraft": this.actor.update({ 'system.skills.will.ritcraft.isOpened': this.actor.system.skills.will.ritcraft.isOpened ? false : true }); break;
-
-      case "archery": this.actor.update({ 'system.skills.dex.archery.isOpened': this.actor.system.skills.dex.archery.isOpened ? false : true }); break;
-      case "athletics": this.actor.update({ 'system.skills.dex.athletics.isOpened': this.actor.system.skills.dex.athletics.isOpened ? false : true }); break;
-      case "crossbow": this.actor.update({ 'system.skills.dex.crossbow.isOpened': this.actor.system.skills.dex.crossbow.isOpened ? false : true }); break;
-      case "sleight": this.actor.update({ 'system.skills.dex.sleight.isOpened': this.actor.system.skills.dex.sleight.isOpened ? false : true }); break;
-      case "stealth": this.actor.update({ 'system.skills.dex.stealth.isOpened': this.actor.system.skills.dex.stealth.isOpened ? false : true }); break;
-
-      case "alchemy": this.actor.update({ 'system.skills.cra.alchemy.isOpened': this.actor.system.skills.cra.alchemy.isOpened ? false : true }); break;
-      case "crafting": this.actor.update({ 'system.skills.cra.crafting.isOpened': this.actor.system.skills.cra.crafting.isOpened ? false : true }); break;
-      case "disguise": this.actor.update({ 'system.skills.cra.disguise.isOpened': this.actor.system.skills.cra.disguise.isOpened ? false : true }); break;
-      case "firstaid": this.actor.update({ 'system.skills.cra.firstaid.isOpened': this.actor.system.skills.cra.firstaid.isOpened ? false : true }); break;
-      case "forgery": this.actor.update({ 'system.skills.cra.forgery.isOpened': this.actor.system.skills.cra.forgery.isOpened ? false : true }); break;
-      case "picklock": this.actor.update({ 'system.skills.cra.picklock.isOpened': this.actor.system.skills.cra.picklock.isOpened ? false : true }); break;
-      case "trapcraft": this.actor.update({ 'system.skills.cra.trapcraft.isOpened': this.actor.system.skills.cra.trapcraft.isOpened ? false : true }); break;
-
-      case "physique": this.actor.update({ 'system.skills.body.physique.isOpened': this.actor.system.skills.body.physique.isOpened ? false : true }); break;
-      case "endurance": this.actor.update({ 'system.skills.body.endurance.isOpened': this.actor.system.skills.body.endurance.isOpened ? false : true }); break;
-
-      case "charisma": this.actor.update({ 'system.skills.emp.charisma.isOpened': this.actor.system.skills.emp.charisma.isOpened ? false : true }); break;
-      case "deceit": this.actor.update({ 'system.skills.emp.deceit.isOpened': this.actor.system.skills.emp.deceit.isOpened ? false : true }); break;
-      case "finearts": this.actor.update({ 'system.skills.emp.finearts.isOpened': this.actor.system.skills.emp.finearts.isOpened ? false : true }); break;
-      case "gambling": this.actor.update({ 'system.skills.emp.gambling.isOpened': this.actor.system.skills.emp.gambling.isOpened ? false : true }); break;
-      case "grooming": this.actor.update({ 'system.skills.emp.grooming.isOpened': this.actor.system.skills.emp.grooming.isOpened ? false : true }); break;
-      case "perception": this.actor.update({ 'system.skills.emp.perception.isOpened': this.actor.system.skills.emp.perception.isOpened ? false : true }); break;
-      case "leadership": this.actor.update({ 'system.skills.emp.leadership.isOpened': this.actor.system.skills.emp.leadership.isOpened ? false : true }); break;
-      case "persuasion": this.actor.update({ 'system.skills.emp.persuasion.isOpened': this.actor.system.skills.emp.persuasion.isOpened ? false : true }); break;
-      case "performance": this.actor.update({ 'system.skills.emp.performance.isOpened': this.actor.system.skills.emp.performance.isOpened ? false : true }); break;
-      case "seduction": this.actor.update({ 'system.skills.emp.seduction.isOpened': this.actor.system.skills.emp.seduction.isOpened ? false : true }); break;
-    }
+    this.actor.update({ [`system.skills.${this.skillMap[skill].attribute}.${skill}.isOpened`]: !this.actor.system.skills[this.skillMap[skill].attribute][skill].isOpened});
   }
 
   _onSkillDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".skill");
-    switch (section.dataset.skilltype) {
-      case "int":
-        this.actor.update({ 'system.pannels.intIsOpen': this.actor.system.pannels.intIsOpen ? false : true });
-        break;
-      case "ref":
-        this.actor.update({ 'system.pannels.refIsOpen': this.actor.system.pannels.refIsOpen ? false : true });
-        break;
-      case "dex":
-        this.actor.update({ 'system.pannels.dexIsOpen': this.actor.system.pannels.dexIsOpen ? false : true });
-        break;
-      case "body":
-        this.actor.update({ 'system.pannels.bodyIsOpen': this.actor.system.pannels.bodyIsOpen ? false : true });
-        break;
-      case "emp":
-        this.actor.update({ 'system.pannels.empIsOpen': this.actor.system.pannels.empIsOpen ? false : true });
-        break;
-      case "cra":
-        this.actor.update({ 'system.pannels.craIsOpen': this.actor.system.pannels.craIsOpen ? false : true });
-        break;
-      case "will":
-        this.actor.update({ 'system.pannels.willIsOpen': this.actor.system.pannels.willIsOpen ? false : true });
-        break;
-    }
+    this.actor.update({ [`system.pannels.'+section.dataset.${skilltype}IsOpen`]: !this.actor.system.pannels[section.dataset.skilltype+'IsOpen']});
   }
 
   _onSubstanceDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".substance");
-
-    switch (section.dataset.subtype) {
-      case "vitriol":
-        this.actor.update({ 'system.pannels.vitriolIsOpen': this.actor.system.pannels.vitriolIsOpen ? false : true });
-        break;
-      case "rebis":
-        this.actor.update({ 'system.pannels.rebisIsOpen': this.actor.system.pannels.rebisIsOpen ? false : true });
-        break;
-      case "aether":
-        this.actor.update({ 'system.pannels.aetherIsOpen': this.actor.system.pannels.aetherIsOpen ? false : true });
-        break;
-      case "quebrith":
-        this.actor.update({ 'system.pannels.quebrithIsOpen': this.actor.system.pannels.quebrithIsOpen ? false : true });
-        break;
-      case "hydragenum":
-        this.actor.update({ 'system.pannels.hydragenumIsOpen': this.actor.system.pannels.hydragenumIsOpen ? false : true });
-        break;
-      case "vermilion":
-        this.actor.update({ 'system.pannels.vermilionIsOpen': this.actor.system.pannels.vermilionIsOpen ? false : true });
-        break;
-      case "sol":
-        this.actor.update({ 'system.pannels.solIsOpen': this.actor.system.pannels.solIsOpen ? false : true });
-        break;
-      case "caelum":
-        this.actor.update({ 'system.pannels.caelumIsOpen': this.actor.system.pannels.caelumIsOpen ? false : true });
-        break;
-      case "fulgur":
-        this.actor.update({ 'system.pannels.fulgurIsOpen': this.actor.system.pannels.fulgurIsOpen ? false : true });
-        break;
-    }
+    this.actor.update({ [`system.pannels.${section.dataset.subtype}IsOpen`]: !this.actor.system.pannels[section.dataset.subtype+'IsOpen']});
   }
 
   calc_total_skills_profession(context) {
