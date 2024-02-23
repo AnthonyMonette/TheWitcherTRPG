@@ -2263,6 +2263,32 @@ export default class WitcherActorSheet extends ActorSheet {
               });
             }
 
+            let allEffects = []
+            if (ammunition) {
+              let item = this.actor.items.get(ammunition);
+              let newQuantity = item.system.quantity - 1;
+              item.update({ "system.quantity": newQuantity })
+              allEffects.push(...item.system.effects)
+            }
+
+            if (item.isWeaponThrowable()) {
+              let newQuantity = item.system.quantity - 1;
+              if (newQuantity < 0) {
+                return
+              }
+              item.update({ "system.quantity": newQuantity })
+              allEffects.push(...item.system.effects)
+            }
+
+            if (item.system.enhancementItems) {
+              item.system.enhancementItems.forEach(element => {
+                if (element && JSON.stringify(element) != '{}') {
+                  let enhancement = this.actor.items.get(element._id);
+                  allEffects.push(...enhancement.system.effects)
+                }
+              });
+            }
+
             if (strike == "fast") {
               attacknumber = 2;
             }
@@ -2410,33 +2436,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
               attFormula = addModifiers(modifiers, attFormula)
 
-              let allEffects = item.system.effects
-              if (ammunition) {
-                let item = this.actor.items.get(ammunition);
-                let newQuantity = item.system.quantity - 1;
-                item.update({ "system.quantity": newQuantity })
-                allEffects.push(...item.system.effects)
-              }
-
-              if (item.isWeaponThrowable()) {
-                let newQuantity = item.system.quantity - 1;
-                if (newQuantity < 0) {
-                  return
-                }
-                item.update({ "system.quantity": newQuantity })
-                allEffects.push(...item.system.effects)
-              }
-
-              if (item.system.enhancementItems) {
-                item.system.enhancementItems.forEach(element => {
-                  if (element && JSON.stringify(element) != '{}') {
-                    let enhancement = this.actor.items.get(element._id);
-                    allEffects.push(...enhancement.system.effects)
-                  }
-                });
-              }
-
-              let effects = JSON.stringify(item.system.effects)
+              let effects = JSON.stringify(allEffects)
               messageData.flavor = `<div class="attack-message"><h1><img src="${item.img}" class="item-img" />${game.i18n.localize("WITCHER.Attack")}: ${item.name}</h1>`;
               messageData.flavor += `<span>  ${game.i18n.localize("WITCHER.Armor.Location")}: ${touchedLocation.alias} = ${LocationFormula} </span>`;
 
@@ -2448,7 +2448,7 @@ export default class WitcherActorSheet extends ActorSheet {
               let roll = await extendedRoll(attFormula, messageData, config)
 
               if (item.system.rollOnlyDmg) {
-                rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, item.system.effects, damageType)
+                rollDamage(item.img, item.name, damageFormula, touchedLocation, LocationFormula, strike, allEffects, damageType)
               } else {
                 roll.toMessage(messageData);
               }

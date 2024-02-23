@@ -49,7 +49,7 @@ async function onCritRoll(event) {
   }
   let isSuccess = event.currentTarget.getElementsByClassName("dice-sucess")
   let totalValue = Number(current[0].innerText)
-  let rollResult = await new Roll("1d10x10").evaluate({ async: true })
+  let rollResult = await new Roll("1d10x10").evaluate()
   if (isSuccess.length) {
     totalValue += Number(rollResult.total)
   } else {
@@ -117,7 +117,7 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
       messageData.flavor += `</div>`;
     });
   }
-  (await new Roll(damageFormula).evaluate({ async: true })).toMessage(messageData)
+  (await new Roll(damageFormula).evaluate()).toMessage(messageData)
 }
 
 /**
@@ -126,7 +126,7 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
  * @param {RollConfig} config Configuration for Extended roll
  */
 export async function extendedRoll(rollFormula, messageData, config) {
-  let roll = await new Roll(rollFormula).evaluate({ async: true })
+  let roll = await new Roll(rollFormula).evaluate()
   let rollTotal = Number(roll.total);
 
   //crit/fumble calculation
@@ -143,7 +143,7 @@ export async function extendedRoll(rollFormula, messageData, config) {
 
     //print crit/fumble roll
     let extraRollFormula = `1d10x10[${extraRollDescription}]`;
-    let extraRoll = await new Roll(extraRollFormula).evaluate({ async: true });
+    let extraRoll = await new Roll(extraRollFormula).evaluate();
     let extraRollTotal = Number(extraRoll.total);
     messageData.flavor += `<div>${extraRollFormula} = <b>${extraRollTotal}</b></div>`;
 
@@ -161,7 +161,7 @@ export async function extendedRoll(rollFormula, messageData, config) {
     }
 
     //print add/subtract roll info
-    extraRoll = await new Roll(extraRollFormula).evaluate({ async: true });
+    extraRoll = await new Roll(extraRollFormula).evaluate();
     roll = extraRoll;
   }
 
