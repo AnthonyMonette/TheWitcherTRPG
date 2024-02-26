@@ -166,3 +166,234 @@ witcher.CritDeadly = {
 
 witcher.meleeSkills = ["Brawling", "Melee", "Small Blades", "Staff/Spear", "Swordsmanship", "Athletics"];
 witcher.rangedSkills = ["Athletics", "Archery", "Crossbow"];
+
+witcher.statMap = {
+    int: {
+        origin: "stats"
+    },
+    ref: {
+        origin: "stats"
+    },
+    dex: {
+        origin: "stats"
+    },
+    body: {
+        origin: "stats"
+    },
+    spd: {
+        origin: "stats"
+    },
+    emp: {
+        origin: "stats"
+    },
+    cra: {
+        origin: "stats"
+    },
+    will: {
+        origin: "stats"
+    },
+    luck: {
+        origin: "stats"
+    }, 
+
+    stun: {
+        origin: "coreStats"
+    },
+    run: {
+        origin: "coreStats"
+    },
+    leap: {
+        origin: "coreStats"
+    },
+    enc: {
+        origin: "coreStats"
+    },
+    rec: {
+        origin: "coreStats"
+    },
+    woundTreshold: {
+        origin: "coreStats"
+    },
+
+    hp: {
+        origin: "derivedStats"
+    },
+    sta: {
+        origin: "derivedStats"
+    },
+    resolve: {
+        origin: "derivedStats"
+    },
+    focus: {
+        origin: "derivedStats"
+    },
+
+    reputation: {
+        origin: ""
+    }
+}
+
+witcher.skillMap = {
+    awareness: {
+       attribute: "int" 
+    },
+    business: {
+        attribute: "int" 
+    },
+    deduction: {
+        attribute: "int" 
+    },
+    education: {
+        attribute: "int" 
+    },
+    commonsp: {
+        attribute: "int" 
+    },
+    eldersp: {
+        attribute: "int" 
+    },
+    dwarven: {
+        attribute: "int" 
+    },
+    monster: {
+        attribute: "int" 
+    },
+    socialetq: {
+        attribute: "int" 
+    },
+    streetwise: {
+        attribute: "int" 
+    },
+    tactics: {
+        attribute: "int" 
+    },
+    teaching: {
+        attribute: "int" 
+    },
+    wilderness: {
+        attribute: "int" 
+    },
+
+    brawling: {
+        attribute: "ref"
+    },
+    dodge: {
+        attribute: "ref"
+    },
+    melee: {
+        attribute: "ref"
+    },
+    riding: {
+        attribute: "ref"
+    },
+    sailing: {
+        attribute: "ref"
+    },
+    smallblades: {
+        attribute: "ref"
+    },
+    staffspear: {
+        attribute: "ref"
+    },
+    swordsmanship: {
+        attribute: "ref"
+    },
+
+    courage: {
+        attribute: "will"
+    },
+    hexweave: {
+        attribute: "will"
+    },
+    intimidation: {
+        attribute: "will"
+    },
+    spellcast: {
+        attribute: "will"
+    },
+    resistmagic: {
+        attribute: "will"
+    },
+    resistcoerc: {
+        attribute: "will"
+    },
+    ritcraft: {
+        attribute: "will"
+    },
+
+    archery: {
+        attribute: "dex"
+    },
+    athletics: {
+        attribute: "dex"
+    },
+    crossbow: {
+        attribute: "dex"
+    },
+    sleight: {
+        attribute: "dex"
+    },
+    stealth: {
+        attribute: "dex"
+    },
+
+    alchemy: {
+        attribute: "cra"
+    },
+    crafting: {
+        attribute: "cra"
+    },
+    disguise: {
+        attribute: "cra"
+    },
+    firstaid: {
+        attribute: "cra"
+    },
+    forgery: {
+        attribute: "cra"
+    },
+    picklock: {
+        attribute: "cra"
+    },
+    trapcraft: {
+        attribute: "cra"
+    },
+
+    physique: {
+        attribute: "body"
+    },
+    endurance: {
+        attribute: "body"
+    },
+
+    charisma: {
+        attribute: "emp"
+    },
+    deceit: {
+        attribute: "emp"
+    },
+    finearts: {
+        attribute: "emp"
+    },
+    gambling: {
+        attribute: "emp"
+    },
+    grooming: {
+        attribute: "emp"
+    },
+    perception: {
+        attribute: "emp"
+    },
+    leadership: {
+        attribute: "emp"
+    },
+    persuasion: {
+        attribute: "emp"
+    },
+    performance: {
+        attribute: "emp"
+    },
+    seduction: {
+        attribute: "emp"
+    },
+}
