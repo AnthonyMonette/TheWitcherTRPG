@@ -17,16 +17,16 @@
                 <td>
                     <select name="damageType">
                         {{#if item.system.type.slashing}}
-                            <option value="slashing">{{localize "WITCHER.Armor.Slashing"}}</option>
+                            <option value="slashing">{{localize "WITCHER.Armor.slashing"}}</option>
                         {{/if}}
                         {{#if item.system.type.piercing}}
-                            <option value="piercing">{{localize "WITCHER.Armor.Piercing"}}</option>
+                            <option value="piercing">{{localize "WITCHER.Armor.piercing"}}</option>
                         {{/if}}
                         {{#if item.system.type.bludgeoning}}
-                            <option value="bludgeoning">{{localize "WITCHER.Armor.Bludgeoning"}}</option>
+                            <option value="bludgeoning">{{localize "WITCHER.Armor.bludgeoning"}}</option>
                         {{/if}}
                         {{#if item.system.type.elemental}}
-                            <option value="elemental">{{localize "WITCHER.Armor.Elemental"}}</option>
+                            <option value="elemental">{{localize "WITCHER.Armor.elemental"}}</option>
                         {{/if}}
                         {{#if (or (eq item.system.type.elemental)(eq false item.system.type.piercing)(eq item.system.type.bludgeoning)(eq item.system.type.elemental))}}
                             <option value="unavailable">{{localize "WITCHER.context.unavailable"}}</option>

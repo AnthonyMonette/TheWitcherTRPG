@@ -80,25 +80,7 @@ export default class WitcherActor extends Actor {
   }
 
   getList(name) {
-    switch (name) {
-      case "alchemical":
-      case "armor":
-      case "component":
-      case "diagrams":
-      case "effect":
-      case "enhancement":
-      case "mount":
-      case "mutagen":
-      case "note":
-      case "profession":
-      case "race":
-      case "spell":
-      case "valuable":
-      case "weapon":
-        return this.items.filter(i => i.type == name)
-      default:
-        return ui.notifications.error(game.i18n.localize("WITCHER.err.NoItemsOfSpecificType"));
-    }
+      return this.items.filter(i => i.type == name)
   }
 
   // Find needed component in the items list based on the component name or based on the exact name of the substance in the players compendium

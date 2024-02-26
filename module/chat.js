@@ -97,13 +97,7 @@ export async function rollDamage(img, name, damageFormula, location, locationFor
     messageData.flavor += `<div>${game.i18n.localize("WITCHER.Dialog.strikeStrong")}</div>`;
   }
   messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.attackLocation")}:</b> ${location.alias} = ${locationFormula} </div>`;
-  let damageTypeloc = ""
-  switch (damageType) {
-    case "slashing": damageTypeloc = "WITCHER.Armor.Slashing"; break;
-    case "bludgeoning": damageTypeloc = "WITCHER.Armor.Bludgeoning"; break;
-    case "piercing": damageTypeloc = "WITCHER.Armor.Piercing"; break;
-    case "elemental": damageTypeloc = "WITCHER.Armor.Elemental"; break;
-  }
+  let damageTypeloc ="WITCHER.Armor." + damageType
   messageData.flavor += `<div><b>${game.i18n.localize("WITCHER.Dialog.damageType")}:</b> ${game.i18n.localize(damageTypeloc)} </div>`;
   messageData.flavor += `<div>${game.i18n.localize("WITCHER.Damage.RemoveSP")}</div>`;
   if (effects && effects.length > 0) {
