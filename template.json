@@ -1180,7 +1180,7 @@
         "base"
       ],
       "type": "",
-      "applied": "",
+      "applied": false,
       "avail": "",
       "effects": [
         {
