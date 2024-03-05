@@ -62,7 +62,7 @@ export default class WitcherActorSheet extends ActorSheet {
     context.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
 
     context.config = CONFIG.witcher;
-    CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current" + context.displayRollDetails ? "[REF]" : "";
+    CONFIG.Combat.initiative.formula = "1d10 + @stats.ref.current" + (context.displayRollDetails ? "[REF]" : "");
 
     const actorData = this.actor.toObject(false);
     context.system = actorData.system;
