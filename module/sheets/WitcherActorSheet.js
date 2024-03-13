@@ -1087,7 +1087,9 @@ export default class WitcherActorSheet extends ActorSheet {
       title: game.i18n.localize("WITCHER.Spell.MagicCost"),
       content: content
     }
+
     await buttonDialog(dialogData)
+
     if (cancel) {
       return
     }
@@ -1179,6 +1181,13 @@ export default class WitcherActorSheet extends ActorSheet {
       let locationJSON = JSON.stringify(this.actor.getLocationObject("randomSpell"))
 
       let dmg = spellItem.system.damage || "0"
+      if(spellItem.system.staminaIsVar && spellItem.system.damage) {
+        let staminaMulti = parseInt(origStaCost)
+        let diceAmount = spellItem.system.damage.split('d')[0];
+        let diceType = "d" + spellItem.system.damage.split('d')[1]
+        dmg = (staminaMulti * diceAmount) + diceType;
+      }
+
       messageData.flavor += `<button class="damage" data-img="${spellItem.img}" data-name="${spellItem.name}" data-dmg="${dmg}" data-location='${locationJSON}' data-effects='${effects}'>${game.i18n.localize("WITCHER.table.Damage")}</button>`;
     }
 
