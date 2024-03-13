@@ -1126,13 +1126,7 @@
       "hands": 0,
       "range": "",
       "equiped": false,
-      "effects": [
-        {
-          "id": "first",
-          "name": "",
-          "percentage": ""
-        }
-      ],
+      "effects": [],
       "conceal": "",
       "enhancements": 0,
       "enhancementItems": [],
@@ -1162,12 +1156,7 @@
       "avail": "",
       "enhancements": 0,
       "enhancementItems": [],
-      "effects": [
-        {
-          "id": "first",
-          "name": ""
-        }
-      ],
+      "effects": [],
       "encumb": 0,
       "location": "Head",
       "equiped": false,
@@ -1182,12 +1171,7 @@
       "type": "",
       "applied": false,
       "avail": "",
-      "effects": [
-        {
-          "id": "first",
-          "name": ""
-        }
-      ],
+      "effects": [],
       "stopping": 0,
       "bludgeoning": false,
       "slashing": false,
@@ -1234,13 +1218,7 @@
       "alchemyDC": 0,
       "craftingTime": "",
       "components": "",
-      "craftingComponents": [
-        {
-          "id": "first",
-          "quantity": "",
-          "name": ""
-        }
-      ],
+      "craftingComponents": [],
       "investment": 0,
       "learned": false,
       "alchemyComponents": {
@@ -1289,12 +1267,7 @@
       "templateType": "",
       "causeDamages": false,
       "damage": "",
-      "effects": [
-        {
-          "id": "first",
-          "name": ""
-        }
-      ]
+      "effects": []
     },
     "profession": {
       "notes": "",
@@ -1400,27 +1373,9 @@
     "effect": {
       "description": "",
       "isActive": true,
-      "stats": [
-        {
-          "id": "first",
-          "stat": "",
-          "modifier": 0
-        }
-      ],
-      "derived": [
-        {
-          "id": "first",
-          "derivedStat": "",
-          "modifier": 0
-        }
-      ],
-      "skills": [
-        {
-          "id": "first",
-          "skill": "",
-          "modifier": 0
-        }
-      ]
+      "stats": [],
+      "derived": [],
+      "skills": []
     }
   }
 }
