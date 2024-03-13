@@ -593,7 +593,7 @@ export default class WitcherActorSheet extends ActorSheet {
               else {
                 let allEffects = item.system.effects
                 allEffects.push(...choosedEnhancement.system.effects)
-                if (choosedEnhancement.system.type == "armor") {
+                if (choosedEnhancement.system.type == "armor" || choosedEnhancement.system.type == "glyph") {
                   item.update({
                     'system.enhancementItems': newEnhancementList,
                     "system.headStopping": item.system.headStopping + choosedEnhancement.system.stopping,
