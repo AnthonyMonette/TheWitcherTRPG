@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
-        <div class="item-collum">
+        <div class="item-column">
             <label>{{localize "WITCHER.Type"}}</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
@@ -13,7 +13,7 @@
                 {{/select}}
             </select>
         </div>
-        <div class="item-collum">
+        <div class="item-column">
             {{#if (eq item.system.type "substances")}}
                 <label>{{localize "WITCHER.Inventory.Substance"}}:</label>
                 <select name="system.substanceType" id="substanceType-select">

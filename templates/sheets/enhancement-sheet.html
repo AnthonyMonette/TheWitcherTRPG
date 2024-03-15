@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
-        <div class="item-collum">
+        <div class="item-column">
             <label>{{localize "WITCHER.Type"}}:</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
@@ -50,7 +50,7 @@
     {{#each item.system.effects as |effect name|}}
         <div class="flex list-item" data-id="{{effect.id}}">
             <a class="remove-effect"><i class="fas fa-minus"></i></a>
-            <textarea class="list-edit" rows=3 data-field="name" value="{{effect.name}}">{{effect.name}}</textarea>
+            <textarea class="list-edit" rows=3 data-field="name">{{effect.name}}</textarea>
             <div class="flex">
                 <label>{{localize "WITCHER.Percentage"}}:</label>
                 <input class="list-edit" data-field="percentage" type="text" value="{{effect.percentage}}"

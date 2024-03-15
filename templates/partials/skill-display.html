@@ -1,14 +1,14 @@
 <tbody class="skill" data-skill="{{name}}" data-stat={{stat}}>
 <tr>
-    {{#if (or skill.isProffession skill.isPickup)}}
+    {{#if (or skill.isProfession skill.isPickup)}}
     <td class="{{name}} char-skill" class="{{name}}" id="{{name}}-rollable">
     {{/if}}
     {{#if skill.isLearned}}
-        {{#unless (or skill.isProffession skill.isPickup)}}
+        {{#unless (or skill.isProfession skill.isPickup)}}
         <td class="{{name}} char-skill learned-skilled" class="{{name}}" id="{{name}}-rollable">
         {{/unless}}
     {{/if}}
-    {{#unless (or skill.isProffession skill.isPickup skill.isLearned)}}
+    {{#unless (or skill.isProfession skill.isPickup skill.isLearned)}}
     <td class="{{name}} char-skill not-skilled" class="{{name}}" id="{{name}}-rollable">
     {{/unless}}
     <a><span>{{localize skill.label}}</span></a>
@@ -29,7 +29,7 @@
         <td colspan="3">
             <label>{{localize "WITCHER.SKill.profession"}}:
                 <input class="skill-checkbox" type="checkbox"
-                       name="system.skills.{{stat}}.{{name}}.isProffession" {{checked skill.isProffession}}/>
+                       name="system.skills.{{stat}}.{{name}}.isProfession" {{checked skill.isProfession}}/>
             </label>
             <label>{{localize "WITCHER.SKill.pickup"}}:
                 <input class="skill-checkbox" type="checkbox"

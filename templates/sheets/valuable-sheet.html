@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     {{>"systems/TheWitcherTRPG/templates/partials/item-header.html"}}
     <div class="item-options">
-        <div class="item-collum item-selector">
+        <div class="item-column item-selector">
             <label>{{localize "WITCHER.Type"}}</label>
             <select name="system.type" id="type-select">
                 {{#select item.system.type}}
@@ -18,11 +18,11 @@
                 {{/select}}
             </select>
         </div>
-        <div class="item-collum">
+        <div class="item-column">
             <div class="item-row">
-                <div class="item-second-collum">
+                <div class="item-second-column">
                     <label>{{localize "WITCHER.Item.Short.Availability"}}</label>
-                    <select name="system.avail" id="avail-select">
+                    <select name="system.avail">
                         {{#select item.system.avail}}
                             {{#each config.Availability as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>
@@ -30,9 +30,9 @@
                         {{/select}}
                     </select>
                 </div>
-                <div class="item-second-collum">
+                <div class="item-second-column">
                     <div>{{localize "WITCHER.Valuable.Conceal"}}</div>
-                    <select name="system.conceal" id="avail-select">
+                    <select name="system.conceal">
                         {{#select item.system.conceal}}
                             {{#each config.Concealment as |name value|}}
                                 <option value="{{value}}">{{localize name}}</option>

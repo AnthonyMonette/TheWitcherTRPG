@@ -92,11 +92,11 @@
   align-items: center;
 }
 
-.preffesion-notes {
+.profession-notes {
   width: 90%;
 }
 
-.preffesion-notes .editor {
+.profession-notes .editor {
   height: 200px;
 }
 
@@ -363,7 +363,7 @@ input.focus {
   margin-left: 20px;
 }
 
-.dice-sucess {
+.dice-success {
   background-color: lightgreen;
   text-align: center;
 }
@@ -389,7 +389,7 @@ input.medium {
   width: 100px;
 }
 
-input#custumCost {
+input#customCost {
   width: 40px;
 }
 

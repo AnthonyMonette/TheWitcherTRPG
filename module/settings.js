@@ -1,6 +1,6 @@
 export const registerSettings = function() {
     // Register any custom system settings here
-    game.settings.register("TheWitcherTRPG", "useOptionnalAdrenaline", {
+    game.settings.register("TheWitcherTRPG", "useOptionalAdrenaline", {
         name: "WITCHER.Settings.Adrenaline",
         hint: "WITCHER.Settings.AdrenalineDetails",
         scope: "world",
@@ -31,7 +31,7 @@ export const registerSettings = function() {
         type: Boolean,
         default: false
       });
-    game.settings.register("TheWitcherTRPG", "useOptionnalVerbalCombat", {
+    game.settings.register("TheWitcherTRPG", "useOptionalVerbalCombat", {
         name: "WITCHER.Settings.useVerbalCombatRule",
         hint: "WITCHER.Settings.useVerbalCombatRuleHint",
         scope: "world",
