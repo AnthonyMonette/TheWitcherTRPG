@@ -576,13 +576,13 @@ export default class WitcherActorSheet extends ActorSheet {
             if (html.find("[name=enhancement]")[0]) {
               enhancementId = html.find("[name=enhancement]")[0].value;
             }
-            let choosedEnhancement = this.actor.items.get(enhancementId)
-            if (item && choosedEnhancement) {
+            let choosenEnhancement = this.actor.items.get(enhancementId)
+            if (item && choosenEnhancement) {
               let newEnhancementList = []
               let added = false
               item.system.enhancementItems.forEach(element => {
                 if ((JSON.stringify(element) === '{}' || !element) && !added) {
-                  element = choosedEnhancement
+                  element = choosenEnhancement
                   added = true
                 }
                 newEnhancementList.push(element)
@@ -592,25 +592,25 @@ export default class WitcherActorSheet extends ActorSheet {
               }
               else {
                 let allEffects = item.system.effects
-                allEffects.push(...choosedEnhancement.system.effects)
-                if (choosedEnhancement.system.type == "armor" || choosedEnhancement.system.type == "glyph") {
+                allEffects.push(...choosenEnhancement.system.effects)
+                if (choosenEnhancement.system.type == "armor" || choosenEnhancement.system.type == "glyph") {
                   item.update({
                     'system.enhancementItems': newEnhancementList,
-                    "system.headStopping": item.system.headStopping + choosedEnhancement.system.stopping,
-                    "system.headMaxStopping": item.system.headMaxStopping + choosedEnhancement.system.stopping,
-                    "system.torsoStopping": item.system.torsoStopping + choosedEnhancement.system.stopping,
-                    "system.torsoMaxStopping": item.system.torsoMaxStopping + choosedEnhancement.system.stopping,
-                    "system.leftArmStopping": item.system.leftArmStopping + choosedEnhancement.system.stopping,
-                    "system.leftArmMaxStopping": item.system.leftArmMaxStopping + choosedEnhancement.system.stopping,
-                    "system.rightArmStopping": item.system.rightArmStopping + choosedEnhancement.system.stopping,
-                    "system.rightArmMaxStopping": item.system.rightArmMaxStopping + choosedEnhancement.system.stopping,
-                    "system.leftLegStopping": item.system.leftLegStopping + choosedEnhancement.system.stopping,
-                    "system.leftLegMaxStopping": item.system.leftLegMaxStopping + choosedEnhancement.system.stopping,
-                    "system.rightLegStopping": item.system.rightLegStopping + choosedEnhancement.system.stopping,
-                    "system.rightLegMaxStopping": item.system.rightLegMaxStopping + choosedEnhancement.system.stopping,
-                    'system.bludgeoning': choosedEnhancement.system.bludgeoning,
-                    'system.slashing': choosedEnhancement.system.slashing,
-                    'system.piercing': choosedEnhancement.system.piercing,
+                    "system.headStopping": item.system.headStopping + choosenEnhancement.system.stopping,
+                    "system.headMaxStopping": item.system.headMaxStopping + choosenEnhancement.system.stopping,
+                    "system.torsoStopping": item.system.torsoStopping + choosenEnhancement.system.stopping,
+                    "system.torsoMaxStopping": item.system.torsoMaxStopping + choosenEnhancement.system.stopping,
+                    "system.leftArmStopping": item.system.leftArmStopping + choosenEnhancement.system.stopping,
+                    "system.leftArmMaxStopping": item.system.leftArmMaxStopping + choosenEnhancement.system.stopping,
+                    "system.rightArmStopping": item.system.rightArmStopping + choosenEnhancement.system.stopping,
+                    "system.rightArmMaxStopping": item.system.rightArmMaxStopping + choosenEnhancement.system.stopping,
+                    "system.leftLegStopping": item.system.leftLegStopping + choosenEnhancement.system.stopping,
+                    "system.leftLegMaxStopping": item.system.leftLegMaxStopping + choosenEnhancement.system.stopping,
+                    "system.rightLegStopping": item.system.rightLegStopping + choosenEnhancement.system.stopping,
+                    "system.rightLegMaxStopping": item.system.rightLegMaxStopping + choosenEnhancement.system.stopping,
+                    'system.bludgeoning': choosenEnhancement.system.bludgeoning,
+                    'system.slashing': choosenEnhancement.system.slashing,
+                    'system.piercing': choosenEnhancement.system.piercing,
                     'system.effects': allEffects
                   })
                 }
@@ -618,16 +618,16 @@ export default class WitcherActorSheet extends ActorSheet {
                   item.update({ 'system.effects': allEffects })
                 }
               }
-              let newName = choosedEnhancement.name + "(Applied)"
-              let newQuantity = choosedEnhancement.system.quantity
-              choosedEnhancement.update({
+              let newName = choosenEnhancement.name + "(Applied)"
+              let newQuantity = choosenEnhancement.system.quantity
+              choosenEnhancement.update({
                 'name': newName,
                 'system.applied': true,
                 'system.quantity': 1
               })
               if (newQuantity > 1) {
                 newQuantity -= 1
-                this._addItem(this.actor, choosedEnhancement, newQuantity, true)
+                this._addItem(this.actor, choosenEnhancement, newQuantity, true)
               }
             }
           }

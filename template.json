@@ -1031,6 +1031,8 @@
       "organization": "",
       "common": "",
       "commonSkillValue": "",
+      "academicKnowledge": "",
+      "academicKnowledgeSkillValue": "",
       "monsterLore": "",
       "monsterLoreSkillValue": "",
       "customStat": false,

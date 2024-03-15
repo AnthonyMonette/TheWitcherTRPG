@@ -8,9 +8,16 @@
     "maximum": "11"
   },
   "version": 0.105,
-  "authors": {
-    "name": "TechAntho"
-  },
+  "authors": [
+    {
+      "name": "Stexinator",
+      "discord": "Stexinator",
+      "flags": {}
+    },
+    {
+      "name": "TechAntho"
+    }
+  ],
   "includes": [
     "./assets/**",
     "./lang/**",

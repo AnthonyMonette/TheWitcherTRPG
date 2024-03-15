@@ -150,6 +150,7 @@
                     <label>{{localize "WITCHER.Monster.Bounty"}}</label>
                     <input name="system.bounty" type="text" value="{{system.bounty}}"/>
                 </div>
+                <a class="change-skill-list"><i class="fas fa-list"></i></a>
             </div>
             <div class="img-view">
                 {{#if (eq system.category "Humanoid")}}
@@ -348,6 +349,14 @@
                        data-dtype="Number"/>
             </label>
             {{editor system.common target="system.common" button=true editable=editable}}
+            <label>{{localize "WITCHER.Monster.AcademicKnowledge"}}
+                <input class="skill-value"
+                       name="system.academicKnowledgeSkillValue"
+                       type="number"
+                       value="{{system.academicSkillValue}}"
+                       data-dtype="Number"/>
+            </label>
+            {{editor system.academicKnowledge target="system.academicKnowledge" button=true editable=editable}}
             <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}
                 <input class="skill-value"
                        name="system.monsterLoreSkillValue"
