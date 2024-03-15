@@ -2134,7 +2134,7 @@ export default class WitcherActorSheet extends ActorSheet {
   _onSpellDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".spell");
-    this.actor.update({ [`system.pannels.'+section.dataset.${spelltype}IsOpen`]: !this.actor.system.pannels[section.dataset.spelltype+'IsOpen']});
+    this.actor.update({ [`system.pannels.${section.dataset.spelltype}IsOpen`]: !this.actor.system.pannels[section.dataset.spelltype+'IsOpen']});
   }
 
   _onLifeEventDisplay(event) {
@@ -2170,7 +2170,7 @@ export default class WitcherActorSheet extends ActorSheet {
   _onSkillDisplay(event) {
     event.preventDefault();
     let section = event.currentTarget.closest(".skill");
-    this.actor.update({ [`system.pannels.'+section.dataset.${skilltype}IsOpen`]: !this.actor.system.pannels[section.dataset.skilltype+'IsOpen']});
+    this.actor.update({ [`system.pannels.${section.dataset.skilltype}IsOpen`]: !this.actor.system.pannels[section.dataset.skilltype+'IsOpen']});
   }
 
   _onSubstanceDisplay(event) {
