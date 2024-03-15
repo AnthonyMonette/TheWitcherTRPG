@@ -27,6 +27,19 @@ function onChangeSkillList(actor) {
     let rightPanel = `<div class="skill-column">${rightPanelSkills}</div>`
     content += `<div class="flex" width="${width}">${rightPanel}${middlePanel}${leftPanel}</div>`
 
+    let knowledgeConfig = 
+    `<hr>`+
+    `<input type="checkbox" name="showCommonerSuperstition" ${actor.system.showCommonerSuperstition ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.CommonerSuperstition')}<br />`+
+    `<input type="checkbox" name="showAcademicKnowledge" ${actor.system.showAcademicKnowledge ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.AcademicKnowledge')}<br />` +
+    `<input type="checkbox" name="showMonsterLore" ${actor.system.showMonsterLore ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.WitcherKnowledge')}<br />`
+    content += knowledgeConfig
+
+    let skillConfig =
+    `<hr>`+
+    `<input type="checkbox" name="dontAddAttr" ${actor.system.dontAddAttr ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.DontAddAttr')}<br />`
+    content += skillConfig
+    
+
     new Dialog({
         title: `${game.i18n.localize("WITCHER.Monster.SkillList")}`,
         content,
@@ -91,6 +104,12 @@ function onChangeSkillList(actor) {
                         'system.skills.emp.persuasion.isVisible': html.find("[name=displaypersuasion]").prop("checked"),
                         'system.skills.emp.performance.isVisible': html.find("[name=displayperformance]").prop("checked"),
                         'system.skills.emp.seduction.isVisible': html.find("[name=displayseduction]").prop("checked"),
+
+                        'system.showCommonerSuperstition' : html.find("[name=showCommonerSuperstition]").prop("checked"),
+                        'system.showAcademicKnowledge' : html.find("[name=showAcademicKnowledge]").prop("checked"),
+                        'system.showMonsterLore' : html.find("[name=showMonsterLore]").prop("checked"),
+
+                        'system.dontAddAttr' : html.find("[name=dontAddAttr]").prop("checked")
                     })
                 }
             }

@@ -553,6 +553,7 @@
       "CommonerSuperstition": "Commoner Superstition (Education DC): ",
       "AcademicKnowledge": "Academic Knowledge (Education DC): ",
       "WitcherKnowledge": "Witcher Knowledge (Monster Lore DC): ",
+      "DontAddAttr": "Do not add attributes to skill value",
       "SkillTab": "Skills",
       "InventoryTab": "Att/Loot",
       "DetailsTab": "Details",

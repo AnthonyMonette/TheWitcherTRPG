@@ -341,6 +341,7 @@
         </div>
         <div class="break"></div>
         <div class="monster-knowledge">
+            {{#if system.showCommonerSuperstition}}
             <label>{{localize "WITCHER.Monster.CommonerSuperstition"}}
                 <input class="skill-value"
                        name="system.commonSkillValue"
@@ -349,6 +350,8 @@
                        data-dtype="Number"/>
             </label>
             {{editor system.common target="system.common" button=true editable=editable}}
+            {{/if}}
+            {{#if system.showAcademicKnowledge}}
             <label>{{localize "WITCHER.Monster.AcademicKnowledge"}}
                 <input class="skill-value"
                        name="system.academicKnowledgeSkillValue"
@@ -357,6 +360,8 @@
                        data-dtype="Number"/>
             </label>
             {{editor system.academicKnowledge target="system.academicKnowledge" button=true editable=editable}}
+            {{/if}}
+            {{#if system.showMonsterLore}}
             <label>{{localize "WITCHER.Monster.WitcherKnowledge"}}
                 <input class="skill-value"
                        name="system.monsterLoreSkillValue"
@@ -365,6 +370,7 @@
                        data-dtype="Number"/>
             </label>
             {{editor system.monsterLore target="system.monsterLore" button=true editable=editable}}
+            {{/if}}
         </div>
     </div>
 </div>

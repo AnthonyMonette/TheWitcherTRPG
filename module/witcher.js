@@ -277,7 +277,7 @@ function getArmorEcumbrance(actor) {
 	return encumbranceModifier
 }
 
-function rollSkillCheck(thisActor, statNum, skillNum) {
+function rollSkillCheck(actor, statNum, skillNum) {
 	let parentStat = "";
 	let skillName = "";
 	let stat = 0;
@@ -287,38 +287,38 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 	switch (statNum) {
 		case 0:
 			parentStat = game.i18n.localize("WITCHER.StInt");
-			array = getIntSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.int.current;
+			array = getIntSkillMod(actor, skillNum);
+			stat = actor.system.stats.int.current;
 			break;
 		case 1:
 			parentStat = game.i18n.localize("WITCHER.StRef");
-			array = getRefSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.ref.current;
+			array = getRefSkillMod(actor, skillNum);
+			stat = actor.system.stats.ref.current;
 			break;
 		case 2:
 			parentStat = game.i18n.localize("WITCHER.StDex");
-			array = getDexSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.dex.current;
+			array = getDexSkillMod(actor, skillNum);
+			stat = actor.system.stats.dex.current;
 			break;
 		case 3:
 			parentStat = game.i18n.localize("WITCHER.StBody");
-			array = getBodySkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.body.current;
+			array = getBodySkillMod(actor, skillNum);
+			stat = actor.system.stats.body.current;
 			break;
 		case 4:
 			parentStat = game.i18n.localize("WITCHER.StEmp");
-			array = getEmpSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.emp.current;
+			array = getEmpSkillMod(actor, skillNum);
+			stat = actor.system.stats.emp.current;
 			break;
 		case 5:
 			parentStat = game.i18n.localize("WITCHER.StCra");
-			array = getCraSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.cra.current;
+			array = getCraSkillMod(actor, skillNum);
+			stat = actor.system.stats.cra.current;
 			break;
 		case 6:
 			parentStat = game.i18n.localize("WITCHER.StWill");
-			array = getWillSkillMod(thisActor, skillNum);
-			stat = thisActor.system.stats.will.current;
+			array = getWillSkillMod(actor, skillNum);
+			stat = actor.system.stats.will.current;
 			break;
 	}
 	let displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
@@ -327,24 +327,31 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 	skill = array[1];
 	skillName = skillName.replace(" (2)", "");
 	let messageData = {
-		speaker: ChatMessage.getSpeaker({actor: thisActor}),
+		speaker: ChatMessage.getSpeaker({actor: actor}),
 		flavor: `${parentStat}: ${skillName} Check`,
 	}
 
-	let rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]`;
+	let rollFormula;
 
-	if (thisActor.type == "character") {
+	if(actor.system.dontAddAttr) {
+		rollFormula = !displayRollDetails ? `1d10+${skill}` : `1d10+${skill}[${skillName}]`;
+	}
+	else {
+		rollFormula = !displayRollDetails ? `1d10+${stat}+${skill}` : `1d10+${stat}[${parentStat}]+${skill}[${skillName}]`;
+	}
+
+	if (actor.type == "character") {
 		if (statNum == 4 && (skillNum == 0 || skillNum == 6 || skillNum == 7 || skillNum == 9)) {
-			if (thisActor.system.general.socialStanding == "tolerated" || thisActor.system.general.socialStanding == "toleratedFeared") {
+			if (actor.system.general.socialStanding == "tolerated" || actor.system.general.socialStanding == "toleratedFeared") {
 				rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.tolerated")}]`;
-			} else if (thisActor.system.general.socialStanding == "hated" || thisActor.system.general.socialStanding == "hatedFeared") {
+			} else if (actor.system.general.socialStanding == "hated" || actor.system.general.socialStanding == "hatedFeared") {
 				rollFormula += !displayRollDetails ? `-2` : `-2[${game.i18n.localize("WITCHER.socialStanding.hated")}]`;
 			}
 		}
-		if (statNum == 4 && skillNum == 0 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared" || thisActor.system.general.socialStanding == "toleratedFeared")) {
+		if (statNum == 4 && skillNum == 0 && (actor.system.general.socialStanding == "feared" || actor.system.general.socialStanding == "hatedFeared" || actor.system.general.socialStanding == "toleratedFeared")) {
 			rollFormula += !displayRollDetails ? `-1` : `-1[${game.i18n.localize("WITCHER.socialStanding.feared")}]`;
 		}
-		if (statNum == 6 && skillNum == 2 && (thisActor.system.general.socialStanding == "feared" || thisActor.system.general.socialStanding == "hatedFeared" || thisActor.system.general.socialStanding == "toleratedFeared")) {
+		if (statNum == 6 && skillNum == 2 && (actor.system.general.socialStanding == "feared" || actor.system.general.socialStanding == "hatedFeared" || actor.system.general.socialStanding == "toleratedFeared")) {
 			rollFormula += !displayRollDetails ? `+1` : `+1[${game.i18n.localize("WITCHER.socialStanding.feared")}]`;
 		}
 	}
@@ -353,7 +360,7 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 		rollFormula = addModifiers(array[2], rollFormula)
 	}
 
-	let activeEffects = thisActor.getList("effect").filter(e => e.system.isActive);
+	let activeEffects = actor.getList("effect").filter(e => e.system.isActive);
 	activeEffects.forEach(item => {
 		item.system.skills.forEach(skill => {
 			if (skillName == game.i18n.localize(skill.skill)) {
@@ -363,7 +370,7 @@ function rollSkillCheck(thisActor, statNum, skillNum) {
 		})
 	});
 
-	let armorEnc = getArmorEcumbrance(thisActor)
+	let armorEnc = getArmorEcumbrance(actor)
 	if (armorEnc > 0 && (skillName == "Hex Weaving" || skillName == "Ritual Crafting" || skillName == "Spell Casting")) {
 		rollFormula += !displayRollDetails ? `-${armorEnc}` : `-${armorEnc}[${game.i18n.localize("WITCHER.Armor.EncumbranceValue")}]`
 	}
