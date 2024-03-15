@@ -4,7 +4,7 @@ import { addModifiers } from "../module/witcher.js";
 import { RollConfig } from "../module/rollConfig.js";
 
 async function ApplyDamage(actor, dmgType, location, totalDamage) {
-  //todo fix compendiums and use equipped field rather than equiped which has incorrect spelling
+  //todo fix compendiums and use equipped field rather than equipped which has incorrect spelling
   let armors = actor.getList("armor").filter(a => a.system.equipped || a.system.equiped);
 
   let headArmors = armors.filter(h => h.system.location == "Head" || h.system.location == "FullCover")
@@ -217,7 +217,7 @@ async function ApplyDamage(actor, dmgType, location, totalDamage) {
         totalDamage *= 0.5
       }
       break;
-    case "Blundgeoning":
+    case "Bludgeoning":
       if (armorSet["lightArmor"]?.system.bludgeoning || armorSet["mediumArmor"]?.system.bludgeoning || armorSet["heavyArmor"]?.system.bludgeoning) {
         totalDamage *= 0.5
       }

@@ -36,23 +36,23 @@
     height: 64px;
 }
 
-.item-header-first-collum {
+.item-header-first-column {
     width: 400px;
     margin-left: 5px;
 }
 
-.item-header-second-collum {
+.item-header-second-column {
     margin: auto;
 }
 
-.item-header-second-collum input {
+.item-header-second-column input {
     display: block;
     width: 75px;
     height: 27px;
     margin: auto;
 }
 
-.item-header-second-collum select {
+.item-header-second-column select {
     display: block;
     margin: auto;
 }
@@ -73,12 +73,12 @@
     padding: 0 5px;
 }
 
-.item-collum {
+.item-column {
     text-align: center;
     width: 168px;
 }
 
-.item-collum label{
+.item-column label{
     display: block;
 }
 
@@ -87,12 +87,12 @@
     text-align: center;
 }
 
-.item-second-collum{
+.item-second-column{
     text-align: center;
     width: 50%;
 }
 
-.item-second-collum label{
+.item-second-column label{
     display: block;
     width: 100%;
 }

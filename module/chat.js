@@ -47,7 +47,7 @@ async function onCritRoll(event) {
   if (!current.length) {
     current = event.currentTarget.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("dice-total")
   }
-  let isSuccess = event.currentTarget.getElementsByClassName("dice-sucess")
+  let isSuccess = event.currentTarget.getElementsByClassName("dice-success")
   let totalValue = Number(current[0].innerText)
   let rollResult = await new Roll("1d10x10").evaluate()
   if (isSuccess.length) {
@@ -127,8 +127,8 @@ export async function extendedRoll(rollFormula, messageData, config) {
   if (config.showCrit && (isCrit(roll) || isFumble(roll))) {
     let extraRollDescription = isCrit(roll) ? `${game.i18n.localize("WITCHER.Crit")}` : `${game.i18n.localize("WITCHER.Fumble")}`;
 
-    let critClass = config.reversal ? "dice-fail" : "dice-sucess"
-    let fumbleClass = config.reversal ? "dice-sucess" : "dice-fail"
+    let critClass = config.reversal ? "dice-fail" : "dice-success"
+    let fumbleClass = config.reversal ? "dice-success" : "dice-fail"
     messageData.flavor += isCrit(roll)
       ? `<div class="${critClass}"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Crit")}</div>`
       : `<div class="${fumbleClass}"><i class="fas fa-dice-d6"></i>${game.i18n.localize("WITCHER.Fumble")}</div>`;
@@ -170,7 +170,7 @@ export async function extendedRoll(rollFormula, messageData, config) {
 
     let successHeader = config.thresholdDesc ? `: ${game.i18n.localize(config.thresholdDesc)}` : ""
     messageData.flavor += success
-      ? `<div class="dice-sucess"><i>${game.i18n.localize("WITCHER.Chat.Success")}${successHeader}</i></br>${config.messageOnSuccess}</div>`
+      ? `<div class="dice-success"><i>${game.i18n.localize("WITCHER.Chat.Success")}${successHeader}</i></br>${config.messageOnSuccess}</div>`
       : `<div class="dice-fail"><i>${game.i18n.localize("WITCHER.Chat.Fail")}${successHeader}</i></br>${config.messageOnFailure}</div>`;
 
     messageData.flags = success

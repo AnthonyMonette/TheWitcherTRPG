@@ -56,9 +56,9 @@ export default class WitcherActorSheet extends ActorSheet {
   getData() {
     const context = super.getData();
 
-    context.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionnalAdrenaline")
+    context.useAdrenaline = game.settings.get("TheWitcherTRPG", "useOptionalAdrenaline")
     context.displayRollDetails = game.settings.get("TheWitcherTRPG", "displayRollsDetails")
-    context.useVerbalCombat = game.settings.get("TheWitcherTRPG", "useOptionnalVerbalCombat")
+    context.useVerbalCombat = game.settings.get("TheWitcherTRPG", "useOptionalVerbalCombat")
     context.displayRep = game.settings.get("TheWitcherTRPG", "displayRep")
 
     context.config = CONFIG.witcher;
@@ -1742,14 +1742,14 @@ export default class WitcherActorSheet extends ActorSheet {
       <script>
         function calcTotalCost() {
           var qtyInput = document.getElementById("itemQty");
-          var ItemCostInput = document.getElementById("custumCost");
+          var ItemCostInput = document.getElementById("customCost");
           var costTotalInput = document.getElementById("costTotal");
           costTotalInput.value = ItemCostInput.value * qtyInput.value
         }
         function applyPercentage() {
           var qtyInput = document.getElementById("itemQty");
           var percentage = document.getElementById("percent");
-          var ItemCostInput = document.getElementById("custumCost");
+          var ItemCostInput = document.getElementById("customCost");
           ItemCostInput.value = Math.ceil(${item.system.cost} * (percentage.value / 100))
 
           var costTotalInput = document.getElementById("costTotal");
@@ -1759,7 +1759,7 @@ export default class WitcherActorSheet extends ActorSheet {
 
       <label>${game.i18n.localize("WITCHER.Loot.InitialCost")}: ${item.system.cost}</label><br />
       <label>${game.i18n.localize("WITCHER.Loot.HowMany")}: <input id="itemQty" onChange="calcTotalCost()" type="number" class="small" name="itemQty" value=1> /${item.system.quantity}</label> <br />
-      <label>${game.i18n.localize("WITCHER.Loot.ItemCost")}</label> <input id="custumCost" onChange="calcTotalCost()" type="number" name="costPerItemValue" value=${item.system.cost}>${game.i18n.localize("WITCHER.Loot.Percent")}<select id="percent" onChange="applyPercentage()" name="percentage">${percentOptions}</select><br /><br />
+      <label>${game.i18n.localize("WITCHER.Loot.ItemCost")}</label> <input id="customCost" onChange="calcTotalCost()" type="number" name="costPerItemValue" value=${item.system.cost}>${game.i18n.localize("WITCHER.Loot.Percent")}<select id="percent" onChange="applyPercentage()" name="percentage">${percentOptions}</select><br /><br />
       <label>${game.i18n.localize("WITCHER.Loot.TotalCost")}</label> <input id="costTotal" type="number" class="small" name="costTotalValue" value=${item.system.cost}> <select name="coinType">${coinOptions}</select><br />
       `
     let Characteroptions = `<option value="">other</option>`

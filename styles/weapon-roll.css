@@ -1,19 +1,19 @@
-.wepon_roll_sheet input {
+.weapon_roll_sheet input {
     text-align: center !important;
     margin: 0px 5px;
     width: 30px;
     float: right;
 }
 
-.wepon_roll_sheet td {
+.weapon_roll_sheet td {
     height: 35px;
 }
 
-.wepon_roll_sheet select {
+.weapon_roll_sheet select {
     margin: 0px 5px;
     float: right;
 }
 
-.wepon_roll_sheet label {
+.weapon_roll_sheet label {
     vertical-align: middle;
 }

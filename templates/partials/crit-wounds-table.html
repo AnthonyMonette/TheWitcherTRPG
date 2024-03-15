@@ -1,10 +1,11 @@
+<!--suppress SpellCheckingInspection -->
 <table class="crit-wounds-table">
     <tbody>
     {{#each system.critWounds as |critWound i| }}
         <tr>
             <td class="flex">
                 <div class="critwound-left">
-                    <input type="hidden" name="system.critWounds.{{i}}.id" type="text" value="{{critWound.id}}"/>
+                    <input hidden name="system.critWounds.{{i}}.id" type="text" value="{{critWound.id}}"/>
                     <select name="system.critWounds.{{i}}.effect">
                         {{#select (lookup this "effect") }}
                             {{#each (lookup ../config "CritSimple") as |critEffect j|}}

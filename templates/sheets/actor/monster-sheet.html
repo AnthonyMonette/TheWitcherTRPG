@@ -132,7 +132,7 @@
                             <option value="easy">{{localize "WITCHER.Monster.Easy"}}</option>
                             <option value="medium">{{localize "WITCHER.Monster.Normal"}}</option>
                             <option value="hard">{{localize "WITCHER.Monster.Hard"}}</option>
-                            <option value="exeptional">{{localize "WITCHER.Monster.Exeptional"}}</option>
+                            <option value="exceptional">{{localize "WITCHER.Monster.Exceptional"}}</option>
                         {{/select}}
                     </select>
                 </div>
@@ -206,11 +206,11 @@
         <div class="monster-right-sidebar">
             <div class="monster-right-top">
                 <div class="monster-right-buttons">
-                    <div class="monster-button-collum">
+                    <div class="monster-button-column">
                         <a class="button-roll init-roll">{{localize "WITCHER.Actor.Initiative"}}</a>
                         <a class="button-roll death-roll">{{localize "WITCHER.Actor.SavingThrow"}}</a>
                     </div>
-                    <div class="monster-button-collum">
+                    <div class="monster-button-column">
                         <a class="button-roll crit-roll">{{localize "WITCHER.Actor.Crit/Fumble"}}</a>
                         <a class="button-roll defence-roll">{{localize "WITCHER.Actor.Defense"}}</a>
                         {{#if useVerbalCombat}}
@@ -220,7 +220,7 @@
                 </div>
                 <div class="monster-right-attributes">
                     <div class="monster-right-row">
-                        <div class="right-element" title="{{localize "WITCHER.Actor.Hp"}}">
+                        <div class="right-element" title="{{localize 'WITCHER.Actor.Hp'}}">
                             {{#if system.deathStateApplied}}
                                 <img class="right-image" src="systems/TheWitcherTRPG/assets/images/health-dead.png"/>
                             {{/if}}
@@ -239,7 +239,7 @@
                                    value="{{system.derivedStats.hp.value}}"
                                    max="99" placeholder="0" data-dtype="Number" disabled readonly/>
                         </div>
-                        <div class="right-element" title="{{localize "WITCHER.Actor.Stamina"}}">
+                        <div class="right-element" title="{{localize 'WITCHER.Actor.Stamina'}}">
                             <img class="right-image" src="systems/TheWitcherTRPG/assets/images/stamina.png"/>
                             <input class="right-value"
                                    type="number"
@@ -247,7 +247,7 @@
                                    max="99" placeholder="0" data-dtype="Number" disabled readonly/>
                         </div>
                         {{#if useVerbalCombat}}
-                            <div class="right-element" title="{{localize "WITCHER.Actor.DerStat.Resolve"}}">
+                            <div class="right-element" title="{{localize 'WITCHER.Actor.DerStat.Resolve'}}">
                                 <img class="right-image" src="systems/TheWitcherTRPG/assets/images/resolve.png"/>
                                 <input class="right-value"
                                        type="number"
@@ -255,7 +255,7 @@
                                        data-dtype="Number" disabled readonly/>
                             </div>
                         {{/if}}
-                        <div class="right-element" title="{{localize "WITCHER.Actor.DerStat.Vigor"}}">
+                        <div class="right-element" title="{{localize 'WITCHER.Actor.DerStat.Vigor'}}">
                             <img class="right-image" src="systems/TheWitcherTRPG/assets/images/focus.png"/>
                             <input class="right-value"
                                    type="number"
