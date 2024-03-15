@@ -1031,10 +1031,13 @@
       "organization": "",
       "common": "",
       "commonSkillValue": "",
+      "showCommonerSuperstition": true,
       "academicKnowledge": "",
       "academicKnowledgeSkillValue": "",
+      "showAcademicKnowledge": true,
       "monsterLore": "",
       "monsterLoreSkillValue": "",
+      "showMonsterLore": true,
       "customStat": false,
       "focus1": {
         "name": "",
