@@ -1039,6 +1039,7 @@
       "monsterLoreSkillValue": "",
       "showMonsterLore": true,
       "customStat": false,
+      "dontAddAttr": true,
       "focus1": {
         "name": "",
         "value": 0
