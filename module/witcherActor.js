@@ -1,4 +1,3 @@
-import { witcher } from "./config.js";
 import { getRandomInt } from "./witcher.js";
 
 export default class WitcherActor extends Actor {
