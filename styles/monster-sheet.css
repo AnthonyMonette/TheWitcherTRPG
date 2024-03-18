@@ -15,7 +15,7 @@
 
 .monster-main {
   display: flex;
-  height: 630px;
+  min-height: 630px;
   flex-wrap: wrap;
 }
 

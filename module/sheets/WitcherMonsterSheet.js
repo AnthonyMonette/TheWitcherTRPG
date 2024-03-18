@@ -1,13 +1,35 @@
+import WitcherActorSheet from "./WitcherActorSheet.js";
 import { buttonDialog } from "../chat.js";
 
-function onChangeSkillList(actor) {
+export default class WitcherMonsterSheet extends WitcherActorSheet {
+  /** @override */
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      classes: ["witcher", "sheet", "actor"],
+      width: 1120,
+      height: 600,
+      template: "systems/TheWitcherTRPG/templates/sheets/actor/actor-sheet.html",
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
+    });
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html)
+
+    html.find(".export-loot").on("click", this.exportLootNormal.bind(this));
+    html.find(".export-loot-ext").on("click", this.exportLootExtended.bind(this));
+
+    html.find(".change-skill-list").on("click", this.onChangeSkillList.bind(this));
+  }
+
+  onChangeSkillList() {
     let width = 600;
     let content = ``
     let leftPanelSkills = ``
     let middlePanelSkills = ``
     let rightPanelSkills = ``
-    Object.keys(actor.system.skills).forEach((parent, index) => {
-        let skills = actor.system.skills[parent]
+    Object.keys(this.actor.system.skills).forEach((parent, index) => {
+        let skills = this.actor.system.skills[parent]
         let skillBox = `<h2>${parent}</h2>`
         Object.keys(skills).forEach((skill) => {
             skillBox += `<input type="checkbox" name="display${skill}" ${skills[skill].isVisible ? "checked" : "unchecked"}> ${game.i18n.localize(skills[skill].label)}<br />`
@@ -29,14 +51,14 @@ function onChangeSkillList(actor) {
 
     let knowledgeConfig = 
     `<hr>`+
-    `<input type="checkbox" name="showCommonerSuperstition" ${actor.system.showCommonerSuperstition ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.CommonerSuperstition')}<br />`+
-    `<input type="checkbox" name="showAcademicKnowledge" ${actor.system.showAcademicKnowledge ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.AcademicKnowledge')}<br />` +
-    `<input type="checkbox" name="showMonsterLore" ${actor.system.showMonsterLore ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.WitcherKnowledge')}<br />`
+    `<input type="checkbox" name="showCommonerSuperstition" ${this.actor.system.showCommonerSuperstition ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.CommonerSuperstition')}<br />`+
+    `<input type="checkbox" name="showAcademicKnowledge" ${this.actor.system.showAcademicKnowledge ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.AcademicKnowledge')}<br />` +
+    `<input type="checkbox" name="showMonsterLore" ${this.actor.system.showMonsterLore ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.WitcherKnowledge')}<br />`
     content += knowledgeConfig
 
     let skillConfig =
     `<hr>`+
-    `<input type="checkbox" name="dontAddAttr" ${actor.system.dontAddAttr ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.DontAddAttr')}<br />`
+    `<input type="checkbox" name="dontAddAttr" ${this.actor.system.dontAddAttr ? "checked" : "unchecked"}> ${game.i18n.localize('WITCHER.Monster.DontAddAttr')}<br />`
     content += skillConfig
     
 
@@ -51,7 +73,7 @@ function onChangeSkillList(actor) {
             Apply: {
                 label: `${game.i18n.localize("WITCHER.Dialog.Apply")}`,
                 callback: (html) => {
-                    actor.update({
+                    this.actor.update({
                         'system.skills.int.awareness.isVisible': html.find("[name=displayawareness]").prop("checked"),
                         'system.skills.int.business.isVisible': html.find("[name=displaybusiness]").prop("checked"),
                         'system.skills.int.deduction.isVisible': html.find("[name=displaydeduction]").prop("checked"),
@@ -118,33 +140,37 @@ function onChangeSkillList(actor) {
 }
 
 
-async function getOrCreateFolder(extended) {
-    if (extended) {
-        let folderName = `${game.i18n.localize("WITCHER.Loot.Name")}`
-        let type = "Actor"
-        let f = game.folders.filter(f => f.type = type && f.name === folderName)
-        if (!f || f.length == 0) {
-            f = await Folder.create({
-                name: folderName,
-                sorting: "a",
-                content: [],
-                type: type,
-                parent: null
-            })
-        }
-        return f ? (f[0] ? f[0]: f) : null
-    } else {
-        return null
+async getOrCreateFolder() {
+    let folderName = `${game.i18n.localize("WITCHER.Loot.Name")}`
+    let type = "Actor"
+    let folder = game.folders.filter(folder => folder.type = type && folder.name === folderName)
+    if (!folder || folder.length == 0) {
+        folder = await Folder.create({
+            name: folderName,
+            sorting: "a",
+            content: [],
+            type: type,
+            parent: null
+        })
     }
+    return folder ? (folder[0] ? folder[0]: folder) : null
 }
 
-/**
- * 
- * @param WitcherActor actor 
- * @param Boolean extended 
- * @returns 
- */
-async function exportLoot(actor, extended) {
+async exportLootExtended() {
+    this.exportLoot(true)
+  }
+
+  /**
+   * 
+   * @param WitcherActor actor 
+   * @param Boolean extended 
+   * @returns 
+   */
+  async exportLootNormal() {
+    this.exportLoot(false, null);
+  }
+
+  async exportLoot(rollItems) {
     let content = `${game.i18n.localize("WITCHER.Loot.MultipleExport")} <input type="number" class="small" name="multiple" value=1><br />`
     let cancel = true
     let multiplier = 0
@@ -164,13 +190,13 @@ async function exportLoot(actor, extended) {
     if (cancel) {
         return
     } else {
-        let newLoot = await Actor.create(actor)
-        let folder = await getOrCreateFolder(extended)
+        let newLoot = await Actor.create(this.actor)
+        let folder = await this.getOrCreateFolder()
         // todo render folder list after adding loot sheet to the folder
         // can not find method to render folders in the menu list
         // There is only one workaround for now - refresh the page in order to see all the loot actors in the separate directory
         await newLoot.update({
-             "folder": folder != null ? folder.id : null,
+             "folder": folder?.id,
              "name": newLoot.name + "--" + `${game.i18n.localize("WITCHER.Loot.Name")}`,
              "type": "loot"
         });
@@ -189,7 +215,7 @@ async function exportLoot(actor, extended) {
             }
 
             let itemGeneratedFromRollTable = false
-            if (extended) {
+            if (rollItems) {
                 itemGeneratedFromRollTable = await item.checkIfItemHasRollTable(newQuantity)
             }
 
@@ -200,6 +226,5 @@ async function exportLoot(actor, extended) {
 
         await newLoot.sheet.render(true)
     }
+  }
 }
-
-export { onChangeSkillList, exportLoot };

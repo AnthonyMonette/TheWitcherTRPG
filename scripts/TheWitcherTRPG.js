@@ -1,10 +1,11 @@
 import { witcher } from "../module/config.js";
 import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
-import WitcherActorSheet from "../module/sheets/WitcherActorSheet.js";
 import WitcherItem from "../module/witcherItem.js";
 import WitcherActor from "../module/witcherActor.js";
 import * as Chat from "../module/chat.js";
 import { registerSettings } from "../module/settings.js";
+import WitcherCharacterSheet from "../module/sheets/WitcherCharacterSheet.js";
+import WitcherMonsterSheet from "../module/sheets/WitcherMonsterSheet.js";
 
 
 async function preloadHandlebarsTemplates() {
@@ -51,7 +52,14 @@ Hooks.once("init", function () {
     Items.registerSheet("witcher", WitcherItemSheet, { makeDefault: true });
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("witcher", WitcherActorSheet, { makeDefault: true });
+    Actors.registerSheet("witcher", WitcherCharacterSheet, { 
+        makeDefault: true,
+        types: ['character']
+    });
+    Actors.registerSheet("witcher", WitcherMonsterSheet, { 
+        makeDefault: true,
+        types: ['monster', 'loot']
+    });
 
     preloadHandlebarsTemplates();
     registerSettings();

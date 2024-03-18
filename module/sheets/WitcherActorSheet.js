@@ -1,7 +1,6 @@
 import { buttonDialog, rollDamage, extendedRoll } from "../chat.js";
 import { witcher } from "../config.js";
 import { updateDerived, rollSkillCheck, genId, calc_currency_weight, addModifiers } from "../witcher.js";
-import { exportLoot, onChangeSkillList } from "./MonsterSheet.js";
 import { RollConfig } from "../rollConfig.js";
 
 import { ExecuteDefence } from "../../scripts/actions.js";
@@ -38,16 +37,6 @@ Array.prototype.cost = function () {
  }
 
 export default class WitcherActorSheet extends ActorSheet {
-  /** @override */
-  static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: ["witcher", "sheet", "actor"],
-      width: 1120,
-      height: 600,
-      template: "systems/TheWitcherTRPG/templates/sheets/actor/actor-sheet.html",
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
-    });
-  }
 
   statMap = witcher.statMap;
   skillMap = witcher.skillMap;
@@ -276,9 +265,6 @@ export default class WitcherActorSheet extends ActorSheet {
     html.find(".skill-modifier-display").on("click", this._onSkillModifierDisplay.bind(this));
     html.find(".derived-modifier-display").on("click", this._onDerivedModifierDisplay.bind(this));
 
-    html.find(".export-loot").on("click", function () { exportLoot(thisActor, false) });
-    html.find(".export-loot-ext").on("click", function () { exportLoot(thisActor, true) });
-
     html.find(".init-roll").on("click", this._onInitRoll.bind(this));
     html.find(".crit-roll").on("click", this._onCritRoll.bind(this));
     html.find(".death-roll").on("click", this._onDeathSaveRoll.bind(this));
@@ -304,8 +290,6 @@ export default class WitcherActorSheet extends ActorSheet {
 
     html.find(".list-mod-edit").on("blur", this._onModifierEdit.bind(this));
     html.find(".skill-mod-edit").on("blur", this._onSkillModifierEdit.bind(this));
-
-    html.find(".change-skill-list").on("click", function () { onChangeSkillList(thisActor) });
 
     html.find(".enhancement-weapon-slot").on("click", this._chooseEnhancement.bind(this));
     html.find(".enhancement-armor-slot").on("click", this._chooseEnhancement.bind(this));
