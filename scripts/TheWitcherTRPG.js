@@ -1,11 +1,11 @@
 import { witcher } from "../module/config.js";
-import WitcherItemSheet from "../module/sheets/WitcherItemSheet.js";
+import WitcherItemSheet from "../module/items/WitcherItemSheet.js";
 import WitcherItem from "../module/witcherItem.js";
 import WitcherActor from "../module/witcherActor.js";
 import * as Chat from "../module/chat.js";
 import { registerSettings } from "../module/settings.js";
-import WitcherCharacterSheet from "../module/sheets/WitcherCharacterSheet.js";
-import WitcherMonsterSheet from "../module/sheets/WitcherMonsterSheet.js";
+import WitcherCharacterSheet from "../module/actors/WitcherCharacterSheet.js";
+import WitcherMonsterSheet from "../module/actors/WitcherMonsterSheet.js";
 
 
 async function preloadHandlebarsTemplates() {
@@ -16,7 +16,7 @@ async function preloadHandlebarsTemplates() {
         "systems/TheWitcherTRPG/templates/partials/character-header.html",
         "systems/TheWitcherTRPG/templates/partials/tab-skills.html",
         "systems/TheWitcherTRPG/templates/partials/tab-profession.html",
-        "systems/TheWitcherTRPG/templates/partials/tab-background.html",
+        "systems/TheWitcherTRPG/templates/partials/tab-background.hbs",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-diagrams.html",
         "systems/TheWitcherTRPG/templates/partials/tab-inventory-valuables.html",

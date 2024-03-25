@@ -115,7 +115,7 @@ export default class WitcherActorSheet extends ActorSheet {
           }
         }
         let item = actor.items.get(weapon._id);
-        item.update({ 'system.enhancementItems': newEnhancementList })
+        item.system.enhancementItems = newEnhancementList
       }
     });
 
@@ -135,7 +135,7 @@ export default class WitcherActorSheet extends ActorSheet {
           }
         }
         let item = actor.items.get(armor._id);
-        item.update({ 'system.enhancementItems': newEnhancementList })
+        item.system.enhancementItems = newEnhancementList
       }
     });
 

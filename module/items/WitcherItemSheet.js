@@ -39,7 +39,7 @@ export default class WitcherItemSheet extends ItemSheet {
         }
       });
       if (appliedId) {
-        this.item.update({ 'system.effects': this.item.system.effects });
+        this.item.system.effects = this.item.system.effects;
       }
     }
     return data;
