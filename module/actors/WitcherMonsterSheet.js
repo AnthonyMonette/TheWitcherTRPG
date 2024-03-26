@@ -13,6 +13,12 @@ export default class WitcherMonsterSheet extends WitcherActorSheet {
     });
   }
 
+   /** @override */
+   getData() {
+    let context = super.getData();
+    return context;
+  }
+
   activateListeners(html) {
     super.activateListeners(html)
 

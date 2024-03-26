@@ -7,15 +7,18 @@
     "verified": "11",
     "maximum": "11"
   },
-  "version": 0.109,
+  "version": 1.000,
   "authors": [
     {
       "name": "Stexinator",
-      "discord": "Stexinator",
-      "flags": {}
+      "discord": "Stexinator"
     },
     {
       "name": "TechAntho"
+    },
+    {
+      "name": "Siryphas",
+      "url": "https://startplaying.games/gm/siryphas"
     }
   ],
   "includes": [
@@ -57,12 +60,6 @@
       "type": "RollTable"
     },
     {
-      "name": "Combat",
-      "label": "Combat",
-      "path": "packs/witcher-ttrpg-combat.db",
-      "type": "RollTable"
-    },
-    {
       "name": "Life Event Sub-tables",
       "label": "Life Event Sub-tables",
       "path": "packs/lifepath.db",
@@ -75,16 +72,92 @@
       "type": "RollTable"
     },
     {
-      "name": "Component",
-      "label": "Component",
-      "path": "packs/component.db",
-      "type": "Item"
+      "name": "races",
+      "label": "Races",
+      "path": "packs/races",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
     },
     {
-      "name": "Valuable",
-      "label": "Valuable",
-      "path": "packs/valuable.db",
-      "type": "Item"
+      "name": "professions",
+      "label": "Professions",
+      "path": "packs/professions",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "gear",
+      "label": "Gear",
+      "path": "packs/gear",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "crafting",
+      "label": "Crafting",
+      "path": "packs/crafting",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "magic",
+      "label": "Magic",
+      "path": "packs/magic",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "bestiary",
+      "label": "Bestiary",
+      "path": "packs/bestiary",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "combat",
+      "label": "Combat",
+      "path": "packs/combat",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "loot",
+      "label": "Loot",
+      "path": "packs/loot",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "TheWitcherTRPG"
     }
   ],
   "languages": [

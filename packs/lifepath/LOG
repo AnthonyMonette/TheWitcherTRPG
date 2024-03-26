@@ -1,7 +1,1 @@
-2023/08/29-19:52:39.678 6e94 Recovering log #17
-2023/08/29-19:52:39.681 6e94 Delete type=0 #17
-2023/08/29-19:52:39.681 6e94 Delete type=3 #16
-2023/08/29-20:51:56.564 5898 Level-0 table #21: started
-2023/08/29-20:51:56.564 5898 Level-0 table #21: 0 bytes OK
-2023/08/29-20:51:56.566 5898 Delete type=0 #19
-2023/08/29-20:51:56.568 5898 Manual compaction at level-0 from '!tables!5sroduMneFqG9INx' @ 72057594037927935 : 1 .. '!tables.results!sH1XIFHObBFdbjTI.tfUjaxwfTwqW98vG' @ 0 : 0; will stop at (end)
+2024/03/27-19:40:48.472 5bc Delete type=3 #1
