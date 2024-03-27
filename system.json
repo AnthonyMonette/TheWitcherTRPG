@@ -7,7 +7,7 @@
     "verified": "11",
     "maximum": "11"
   },
-  "version": 1.000,
+  "version": 1.001,
   "authors": [
     {
       "name": "Stexinator",
@@ -158,6 +158,39 @@
         "ASSISTANT": "OWNER"
       },
       "system": "TheWitcherTRPG"
+    },
+    {
+      "name": "journal-entries",
+      "label": "Journal Entries",
+      "path": "packs/journal-entries",
+      "type": "JournalEntry",
+      "system": "TheWitcherTRPG",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "scenes",
+      "label": "Scenes",
+      "path": "packs/scenes",
+      "type": "Scene",
+      "system": "TheWitcherTRPG",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "adventures",
+      "label": "Adventures",
+      "path": "packs/adventures",
+      "type": "Adventure",
+      "system": "TheWitcherTRPG",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "languages": [
