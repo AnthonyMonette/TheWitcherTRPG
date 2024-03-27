@@ -1,5 +1,13 @@
 # FoundryVTT system - The witcher TRPG#
 
+Original System by TechAntho
+
+Current Maintainers: Stexinator
+
+Compendium by Siryphas
+
+The system uses art by CD Project Red and R. Talsorian Games
+
 ## Character Sheet ##
 This Sheet represent a Player character with all of it's stats
 
@@ -24,26 +32,9 @@ At the bottom of the sheet you can see the total carrying weight
 
 ### Magic Tab ### 
 This tab is used to organize your Spell, invocations, witcher signs, rituals and hexes.
-It also keep tracks of your current stamina and Focuses
+It also keeps tracks of your current stamina and Focuses
 
 ### Background Tab ### 
 This tab is used to choose your origin and create your background. 
-You can keep tracks of your life events and also you can add multiple notes for your characters.  
-Those could be anything, maybe notes on specific NPC that they encounters, your critical wounds, short stories in your backgrouds, etc. 
-
-## Monster Sheet ##
-### Skill Tab ###
-### Attacks/Loot ###
-### Details Tab ###
-### Spells Tab ###
-
-## Item Sheet ##
-Race
-Profession
-Weapon
-Armor
-Valuables
-Components
-Diagrams
-Spells
-Notes
+You can keep tracks of your life events, and also you can add multiple notes for your characters.  
+Those could be anything, maybe notes on specific NPC that they encounter, your critical wounds, short stories in your backgrounds, etc. 

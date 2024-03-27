@@ -1,3 +1,5 @@
-2023/08/29-19:46:54.750 1b30 Recovering log #15
-2023/08/29-19:46:54.753 1b30 Delete type=0 #15
-2023/08/29-19:46:54.754 1b30 Delete type=3 #14
+2024/03/27-19:40:47.277 2214 Log #20: 0 ops saved to Table #21 OK
+2024/03/27-19:40:47.278 2214 Archiving D:\Tools\FoundryVTT\FoundryVTT\Data\systems\TheWitcherTRPG\packs\character-generator/000020.log: OK
+2024/03/27-19:40:47.283 2214 Table #9: 99 entries OK
+2024/03/27-19:40:47.332 2214 Archiving D:\Tools\FoundryVTT\FoundryVTT\Data\systems\TheWitcherTRPG\packs\character-generator/MANIFEST-000018: OK
+2024/03/27-19:40:47.388 2214 **** Repaired leveldb D:\Tools\FoundryVTT\FoundryVTT\Data\systems\TheWitcherTRPG\packs\character-generator; recovered 1 files; 12968 bytes. Some data may have been lost. ****
